@@ -25,7 +25,7 @@ const Proyects = () => {
   return (
     <section className="hidden md:flex w-full  flex-col bg-whitelight items-center gap-20 py-20">
       <h1 className="font-bold text-5xl md:text-7xl">
-        <span className="text-green ">STRING</span> <span className="bg-green px-4">PROYECTS</span>
+        <span className="text-green ">STRING</span> <span className="bg-green px-4">PROYECTOS</span>
       </h1>
 
       <div className="relative w-full flex flex-col gap-10  md:flex-row md:gap-20 md:overflow-x-auto scrollbar-hide md:p-20">
