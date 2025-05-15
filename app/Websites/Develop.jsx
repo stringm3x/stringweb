@@ -1,4 +1,6 @@
 import Image from "next/image";
+import { IoLogoJavascript } from "react-icons/io";
+import { MdOutlineCss, MdOutlineHtml } from "react-icons/md";
 import React from "react";
 
 const Develop = () => {
@@ -6,7 +8,8 @@ const Develop = () => {
     <section className="py-20 justify-items-center">
       <div className="justify-self-end p-10">
         <h1 className="text-7xl font-bold">
-          <span className="text-green">Páginas</span> hechas en <span className="bg-green">código</span>
+          <span className="text-green">Páginas</span> hechas en{" "}
+          <span className="bg-green">código</span>
         </h1>
       </div>
 
@@ -20,14 +23,10 @@ const Develop = () => {
             Utilizamos tecnologías modernas y potentes para garantizar el éxito
             de tu proyecto
           </p>
-          <div className="bg-gray w-full h-48 flex justify-center items-center rounded-lg">
-            <Image
-              src="/images/tecnologias.png"
-              alt="Imagen de tecnologías"
-              width={300}
-              height={100}
-              className="object-contain"
-            />
+          <div className="w-full h-52 flex flex-row gap-5 justify-center items-center rounded-lg">
+            <IoLogoJavascript className="w-16 h-16" />
+            <MdOutlineCss className="w-20 h-20 2xl:w-32 2xl:h-32" />
+            <MdOutlineHtml className="w-20 h-20  2xl:w-32 2xl:h-32" />
           </div>
         </div>
 

@@ -35,7 +35,7 @@ const prices = [
 
 const Prices = () => {
   return (
-    <section className="lg:h-screen flex flex-col gap-20 py-20">
+    <section id="precios" className="lg:h-screen flex flex-col gap-20 py-20">
       <div className="flex flex-col gap-3 lg:w-1/4 lg:ml-5 px-10 lg:px-0">
         <h1 className="text-7xl text-center mx-10 font-bold text-green bg-white">
           Precios
