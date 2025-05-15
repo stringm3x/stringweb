@@ -33,7 +33,7 @@ const items = [
 const Browser = () => {
   const [selected, setSelected] = useState(items[0]);
   return (
-    <section className="h-screen py-20">
+    <section className="md:h-screen py-20">
       <div className="pb-10 pl-4">
         <h1 className="text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold">
           ¡ <span className="w-full bg-green">Mantenimiento</span> después de tu{" "}
@@ -41,7 +41,7 @@ const Browser = () => {
         </h1>
       </div>
 
-      <div className="gap-24 flex flex-col items-center justify-center py-20  lg:flex-row lg:gap-6">
+      <div className="gap-24 flex flex-col-reverse items-center justify-center py-20 lg:flex-row lg:gap-6">
         <motion.div
           key={selected.id}
           className="flex-2 p-6 w-full h-full content-center lg:w-1/2 lg:p-8 "
@@ -61,7 +61,7 @@ const Browser = () => {
               onClick={() => setSelected(item)}
               className={`text-2xl lg:text-4xl transition-all duration-300 ${
                 selected.id === item.id
-                  ? "text-white bg-green md:px-4 md:py-2 shadow-lg"
+                  ? "text-white bg-green md:px-4 md:py-2 shadow-lg rounded-2xl"
                   : "text-gray hover:text-white"
               }`}
             >

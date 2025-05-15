@@ -74,7 +74,7 @@ const Nav = () => {
             <NavbarMenuItem key={`${href}-${index}`}>
               <Link
                 href={href}
-                className="block w-full rounded-lg transition-all duration-300 hover:bg-blue"
+                className="block w-full rounded-lg transition-all duration-300 hover:bg-green"
               >
                 <div className="p-6 border border-gray rounded-lg shadow-sm hover:shadow-lg transition-all duration-300">
                   <p className="text-xl text-gray">{label || ""}</p>

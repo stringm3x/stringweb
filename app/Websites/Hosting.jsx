@@ -32,9 +32,9 @@ const Hosting = () => {
         {items.map((item) => (
           <div
             key={item.id}
-            className="relative w-64 md:w-72 xl:w-80 h-64 bg-bg content-center rounded-lg group overflow-hidden cursor-pointer"
+            className="relative w-64 md:w-72 xl:w-80 h-64 bg-bg flex flex-col content-center justify-center rounded-lg group overflow-hidden cursor-pointer"
           >
-            <h1 className="object-cover text-8xl text-green justify-self-center self-center transition-opacity duration-300 group-hover:opacity-0">
+            <h1 className="object-cover text-8xl text-green self-center transition-opacity duration-300 group-hover:opacity-0">
               {item.img}
             </h1>
 

@@ -7,7 +7,7 @@ const Develop = () => {
   return (
     <section className="py-20 justify-items-center">
       <div className="justify-self-end p-10">
-        <h1 className="text-7xl font-bold">
+        <h1 className="text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold">
           <span className="text-green">Páginas</span> hechas en{" "}
           <span className="bg-green">código</span>
         </h1>

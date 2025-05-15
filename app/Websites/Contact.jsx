@@ -28,12 +28,12 @@ const Contact = () => {
   };
   return (
     <div id="contacto" className="h-screen flex flex-col gap-20 py-10">
-      <h1 className="text-7xl font-bold text-center pl-5">
+      <h1 className="text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold text-center pl-5">
         <span className="bg-green mr-3">CONTÁCTANOS</span>y trabaja con{" "}
         <span className="text-green">nostros</span>
       </h1>
 
-      <div className="justify-items-center">
+      <div className="flex flex-col items-center">
         <Form
           ref={form}
           onSubmit={sendEmail}

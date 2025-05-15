@@ -34,7 +34,7 @@ const CardSlider = () => {
         {cards.map((card, index) => (
           <div key={index} className="relative h-40 w-full max-w-4xl">
             <motion.div
-              animate={{ x: selectedIndex === index ? -220 : 0 }}
+              animate={{ x: selectedIndex === index ? -220 : -40 }}
               transition={{ type: "spring", stiffness: 70 }}
               className="absolute left-0 top-0 w-64 h-40 rounded-xl flex items-center justify-center cursor-pointer z-10"
               onClick={() => handleClick(index)}

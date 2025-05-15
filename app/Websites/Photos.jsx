@@ -31,7 +31,7 @@ const Photos = () => {
       </h1>
 
       <div className="relative overflow-hidden w-full py-20">
-        <div className="flex w-max animate-scroll gap-8 md:gap-16">
+        <div className="flex w-max animate-scroll gap-4 lg:gap-8 md:gap-16">
           {[...items, ...items].map((item, index) => (
             <div
               key={index}
