@@ -8,7 +8,7 @@ const Intro = () => {
         <h1 className="text-3xl md:text-5xl xl:text-7xl">
           Tu <span className="text-green">presentación</span> formal al
         </h1>
-        <h1 className="text-3xl md:text-5xl xl:text-7xl">mundo del INTERNET</h1>
+        <h1 className="text-3xl md:text-5xl xl:text-7xl">mundo del INTERNET.</h1>
       </div>
 
       <div className="flex flex-col-reverse lg:flex-row">

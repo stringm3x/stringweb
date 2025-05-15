@@ -7,26 +7,32 @@ const items = [
   {
     id: 1,
     title: "Seguridad y respaldo",
-    content:
-      "Cuando programas desde cero, tienes control total sobre el diseño, la funcionalidad y la experiencia del usuario, sin limitaciones impuestas por plantillas predefinidas.",
+    content: [
+      "Copias de seguridad semanales para evitar pérdidas de datos. ",
+      "Monitoreo constante para prevenir ataques y vulnerabilidades. ",
+    ],
   },
   {
     id: 2,
     title: "Correcion de errores",
-    content:
-      "Las páginas hechas con código suelen ser más rápidas y ligeras, ya que puedes optimizar el código y evitar el exceso de scripts o plugins innecesarios.",
+    content: [
+      "Solución de enlaces rotos, formularios que no funcionan, imágenes que no cargan, etc.",
+    ],
   },
   {
     id: 3,
     title: "Actualización de contenido",
-    content:
-      "Los sitios creados con código propio son menos vulnerables a ataques comunes en plataformas populares, como los exploits en WordPress o Joomla.",
+    content: [
+      "Modificaciones en textos o imágenes según lo solicite el cliente.",
+    ],
   },
   {
     id: 4,
     title: "Optimizcón del Rendimiento",
-    content:
-      "Si necesitas agregar nuevas funcionalidades, puedes hacerlo sin depender de plugins o actualizaciones de terceros, permitiendo que tu web crezca de manera eficiente.",
+    content: [
+      "Limpieza de caché y optimización de base de datos.  ",
+      "Mejoras en la velocidad de carga y rendimiento general. ",
+    ],
   },
 ];
 
@@ -49,8 +55,17 @@ const Browser = () => {
           animate={{ opacity: 1, x: 0 }}
           transition={{ duration: 0.4 }}
         >
-          <motion.div className="text-xl text-whitelight w-full  text-center lg:text-left md:text-xl lg:text-2xl">
-            {selected.content}
+          <motion.div className="text-2xl text-whitelight w-full  text-center lg:text-left md:text-xl lg:text-2xl">
+            {selected.content.map((line, i) => (
+              <motion.li
+                key={i}
+                initial={{ opacity: 0, y: 10 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: i * 0.1 }}
+              >
+                {line}
+              </motion.li>
+            ))}
           </motion.div>
         </motion.div>
 

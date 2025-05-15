@@ -35,14 +35,14 @@ const Proyects = () => {
   return (
     <section
       id="proyectos"
-      className="hidden md:flex w-full  flex-col bg-whitelight items-center gap-20 py-20"
+      className="flex w-full flex-col bg-whitelight items-center gap-20 py-20"
     >
-      <h1 className="font-bold text-5xl md:text-7xl">
+      <h1 className="font-bold text-4xl md:text-5xl lg:text-6xl xl:text-7xl">
         <span className="text-green ">STRING</span>{" "}
-        <span className="bg-green px-4">PROYECTOS</span>
+        <span className="bg-green px-4">PROYECTOS</span>.
       </h1>
 
-      <div className="relative w-full flex flex-col gap-10  md:flex-row md:gap-20 md:overflow-x-auto scrollbar-hide md:p-20">
+      <div className="relative w-full flex flex-col gap-20  md:flex-row md:gap-20 md:overflow-x-auto scrollbar-hide md:p-20">
         {images.map((item, index) => (
           <a
             key={item.title}
@@ -67,6 +67,10 @@ const Proyects = () => {
             />
           </a>
         ))}
+      </div>
+
+      <div>
+        
       </div>
     </section>
   );

@@ -8,7 +8,7 @@ const Animations = () => {
         <h1 >
           No hay limites para soñar en
         </h1>
-        <h1><span className="text-green">LA WEBSITE</span> de tus <span className="w-full bg-green">sueños</span></h1>
+        <h1><span className="text-green">LA WEBSITE</span> de tus <span className="w-full bg-green">sueños</span>.</h1>
       </div>
 
       <div>

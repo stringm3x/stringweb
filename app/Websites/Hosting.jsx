@@ -24,7 +24,7 @@ const Hosting = () => {
       <div className="flex flex-col gap-4 text-left lg:text-center md:w-4/5 xl:w-2/3 px-5 md:px-0 md:pl-10">
         <h1 className="font-bold text-green text-4xl md:text-5xl lg:text-6xl xl:text-7xl">
           <span className="cw-full bg-white ml-2">Hosting y dominio</span>{" "}
-          incluidos
+          incluidos.
         </h1>
       </div>
 
