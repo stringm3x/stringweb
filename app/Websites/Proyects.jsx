@@ -37,7 +37,7 @@ const Proyects = () => {
       id="proyectos"
       className="flex w-full flex-col bg-whitelight items-center gap-20 py-20"
     >
-      <h1 className="font-bold text-4xl md:text-5xl lg:text-6xl xl:text-7xl">
+      <h1 className="font-bold text-5xl md:text-5xl lg:text-6xl xl:text-7xl">
         <span className="text-green ">STRING</span>{" "}
         <span className="bg-green px-4">PROYECTOS</span>.
       </h1>

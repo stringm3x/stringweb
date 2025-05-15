@@ -25,7 +25,7 @@ const CardSlider = () => {
 
   return (
     <section className="h-screen bg-black flex flex-col items-center justify-center gap-12 p-4">
-      <h1 className="text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold text-white text-center">
+      <h1 className="text-5xl md:text-5xl lg:text-6xl xl:text-7xl font-bold text-white text-center">
         Diseño <span className="text-green">UX</span> &{" "}
         <span className="text-green">UI</span>.
       </h1>

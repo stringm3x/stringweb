@@ -4,7 +4,7 @@ import TextPressure from "../UI/TextPressure";
 const Animations = () => {
   return (
     <div className="h-auto py-20 flex flex-col gap-5">
-      <div className="text-3xl md:text-5xl lg:text-6xl xl:text-7xl font-bold text-center">
+      <div className="text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold text-center">
         <h1 >
           No hay limites para soñar en
         </h1>

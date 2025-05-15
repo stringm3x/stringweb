@@ -41,7 +41,7 @@ const Browser = () => {
   return (
     <section className="md:h-screen py-20">
       <div className="pb-10 pl-4">
-        <h1 className="text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold">
+        <h1 className="text-5xl md:text-5xl lg:text-6xl xl:text-7xl font-bold">
           ¡ <span className="w-full bg-green">Mantenimiento</span> después de tu{" "}
           <span className="text-green">entrega</span>!
         </h1>

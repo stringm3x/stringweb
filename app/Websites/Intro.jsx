@@ -5,10 +5,10 @@ const Intro = () => {
   return (
     <section className="flex flex-col gap-10 justify-center py-20 md:pl-5 xl:pl-10">
       <div className="font-bold text-center md:w-3/4 lg:w-2/3 xl:w-3/5 px-4 md:px-0">
-        <h1 className="text-3xl md:text-5xl xl:text-7xl">
+        <h1 className="text-4xl md:text-5xl xl:text-7xl">
           Tu <span className="text-green">presentación</span> formal al
         </h1>
-        <h1 className="text-3xl md:text-5xl xl:text-7xl">mundo del INTERNET.</h1>
+        <h1 className="text-4xl md:text-5xl xl:text-7xl">mundo del INTERNET.</h1>
       </div>
 
       <div className="flex flex-col-reverse lg:flex-row">

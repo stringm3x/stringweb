@@ -11,7 +11,7 @@ const Responsive = () => {
   return (
     <section className="content-center w-full py-20 md:px-10">
       <div className="flex flex-col gap-2 justify-self-end px-4 md:px-0">
-        <h1 className="text-center text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold">
+        <h1 className="text-center text-5xl md:text-5xl lg:text-6xl xl:text-7xl font-bold">
           <span className="bg-green">Completamente</span>{" "}
           <span className="text-green">responsivo</span>.
         </h1>

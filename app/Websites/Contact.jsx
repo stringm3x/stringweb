@@ -13,8 +13,8 @@ const Contact = () => {
     e.preventDefault();
 
     emailjs
-      .sendForm("service_c9bbkif", "template_83cfzjb", form.current, {
-        publicKey: "zOrFRLhr_LVG9BBET",
+      .sendForm("service_g7ikcrb", "template_x5736kv", form.current, {
+        publicKey: "oAMxLOr_PKDOIxuO8",
       })
       .then(
         () => {
@@ -28,7 +28,7 @@ const Contact = () => {
   };
   return (
     <div id="contacto" className="h-screen flex flex-col gap-20 py-10">
-      <h1 className="text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold text-center pl-5">
+      <h1 className="text-5xl md:text-5xl lg:text-6xl xl:text-7xl font-bold text-center pl-5">
         <span className="bg-green mr-3">CONTÁCTANOS</span>y trabaja con{" "}
         <span className="text-green">nostros</span>.
       </h1>
