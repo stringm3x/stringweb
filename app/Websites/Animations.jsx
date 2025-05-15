@@ -6,7 +6,7 @@ const Animations = () => {
     <div className="h-auto py-20 flex flex-col gap-5">
       <div className="text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold text-center">
         <h1 >
-          No hay limites para soñar en
+          No hay límites para soñar en
         </h1>
         <h1><span className="text-green">LA WEBSITE</span> de tus <span className="w-full bg-green">sueños</span>.</h1>
       </div>

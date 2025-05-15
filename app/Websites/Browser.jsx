@@ -14,7 +14,7 @@ const items = [
   },
   {
     id: 2,
-    title: "Correcion de errores",
+    title: "Correción de errores",
     content: [
       "Solución de enlaces rotos, formularios que no funcionan, imágenes que no cargan, etc.",
     ],
@@ -28,7 +28,7 @@ const items = [
   },
   {
     id: 4,
-    title: "Optimizcón del Rendimiento",
+    title: "Optimización del Rendimiento",
     content: [
       "Limpieza de caché y optimización de base de datos.  ",
       "Mejoras en la velocidad de carga y rendimiento general. ",
