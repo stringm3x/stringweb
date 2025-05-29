@@ -1,5 +1,10 @@
-import React from "react";
+"use client";
+import React, { useEffect, useRef } from "react";
 import Image from "next/image";
+import { gsap } from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+gsap.registerPlugin(ScrollTrigger);
 
 const items = [
   {
@@ -19,6 +24,28 @@ const items = [
 ];
 
 const Hosting = () => {
+  const cardsRef = useRef([]);
+
+  useEffect(() => {
+    const ctx = gsap.context(() => {
+      cardsRef.current.forEach((card, index) => {
+        gsap.from(card, {
+          opacity: 0,
+          y: 50,
+          duration: 1,
+          delay: index * 0.2,
+          scrollTrigger: {
+            trigger: card,
+            start: "top 85%",
+            toggleActions: "play none none reverse",
+          },
+        });
+      });
+    });
+
+    return () => ctx.revert();
+  }, []);
+
   return (
     <section className="lg:h-screen flex flex-col gap-20 py-20">
       <div className="flex flex-col gap-4 text-left lg:text-center md:w-4/5 xl:w-2/3 px-5 md:px-0 md:pl-10">
@@ -29,9 +56,10 @@ const Hosting = () => {
       </div>
 
       <div className="flex flex-row justify-evenly flex-wrap gap-6">
-        {items.map((item) => (
+        {items.map((item, index) => (
           <div
             key={item.id}
+            ref={(el) => (cardsRef.current[index] = el)}
             className="relative w-64 md:w-72 xl:w-80 h-64 bg-bg flex flex-col content-center justify-center rounded-lg group overflow-hidden cursor-pointer"
           >
             <h1 className="object-cover text-8xl text-green self-center transition-opacity duration-300 group-hover:opacity-0">

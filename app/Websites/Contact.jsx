@@ -1,13 +1,50 @@
 "use client";
-import React, { useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import emailjs from "@emailjs/browser";
 import { Button } from "@heroui/button";
 import { Form } from "@heroui/form";
 import { Input, Textarea } from "@heroui/input";
+import { gsap } from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+gsap.registerPlugin(ScrollTrigger);
 
 const Contact = () => {
   const form = useRef();
+  const sectionRef = useRef();
+  const inputRefs = useRef([]);
   const [success, setSuccess] = useState(false);
+
+  useEffect(() => {
+    const ctx = gsap.context(() => {
+      gsap.from(".contact-title", {
+        opacity: 0,
+        y: 50,
+        duration: 1,
+        ease: "power2.out",
+        scrollTrigger: {
+          trigger: sectionRef.current,
+          start: "top 80%",
+        },
+      });
+
+      inputRefs.current.forEach((el, i) => {
+        gsap.from(el, {
+          opacity: 0,
+          y: 30,
+          duration: 0.5,
+          delay: i * 0.15,
+          ease: "power2.out",
+          scrollTrigger: {
+            trigger: el,
+            start: "top 90%",
+          },
+        });
+      });
+    }, sectionRef);
+
+    return () => ctx.revert();
+  }, []);
 
   const sendEmail = (e) => {
     e.preventDefault();
@@ -26,9 +63,14 @@ const Contact = () => {
         }
       );
   };
+
   return (
-    <div id="contacto" className="h-screen flex flex-col gap-20 py-10">
-      <h1 className="text-5xl md:text-5xl lg:text-6xl xl:text-7xl font-bold text-center pl-5">
+    <div
+      ref={sectionRef}
+      id="contacto"
+      className="h-screen flex flex-col gap-20 py-10"
+    >
+      <h1 className="contact-title text-5xl md:text-5xl lg:text-6xl xl:text-7xl font-bold text-center pl-5">
         <span className="bg-green mr-3">CONTÁCTANOS</span>y trabaja con{" "}
         <span className="text-green">nostros</span>.
       </h1>
@@ -48,6 +90,7 @@ const Contact = () => {
             name="from_name"
             placeholder="Escribe tu nombre."
             type="text"
+            ref={(el) => (inputRefs.current[0] = el)}
           />
 
           <Input
@@ -58,6 +101,7 @@ const Contact = () => {
             name="number"
             placeholder="Escribe tu número."
             type="tel"
+            ref={(el) => (inputRefs.current[1] = el)}
           />
 
           <Textarea
@@ -69,8 +113,13 @@ const Contact = () => {
             name="message"
             placeholder="Describe tu negocio y tus intereses."
             type="text"
+            ref={(el) => (inputRefs.current[2] = el)}
           />
-          <div className="flex gap-2 self-center ">
+
+          <div
+            className="flex gap-2 self-center"
+            ref={(el) => (inputRefs.current[3] = el)}
+          >
             <Button color="primary" type="submit">
               Enviar
             </Button>

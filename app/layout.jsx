@@ -16,7 +16,7 @@ const anton = Anton({
 });
 
 export const metadata = {
-  title: "Spring",
+  title: "String",
   description: "El marketing que necesitas.",
   icons: {
     icon: "/ico.png",
