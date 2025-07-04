@@ -1,7 +1,7 @@
 import { Geist, Anton, Ubuntu } from "next/font/google";
 import { Providers } from "./provider";
 import "./globals.css";
-import Footer from "./footer";
+import Footer from "./Footer";
 import Header from "./header";
 
 const geistSans = Geist({
