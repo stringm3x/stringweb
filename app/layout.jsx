@@ -1,8 +1,8 @@
-import { Geist, Anton } from "next/font/google";
+import { Geist, Anton, Ubuntu } from "next/font/google";
 import { Providers } from "./provider";
 import "./globals.css";
-import Nav from "./Navbar";
-import Footer from "./Footer";
+import Footer from "./footer";
+import Header from "./header";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -12,6 +12,12 @@ const geistSans = Geist({
 const anton = Anton({
   variable: "--font-anton-sans",
   weight: "400",
+  subsets: ["latin"],
+});
+
+const ubuntu = Ubuntu({
+  variable: "--font-ubuntu-sans",
+  weight: "500",
   subsets: ["latin"],
 });
 
@@ -26,9 +32,11 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en" className="dark">
-      <body className={`${geistSans.variable} ${anton.variable}`}>
+      <body
+        className={`${geistSans.variable} ${anton.variable} ${ubuntu.variable}`}
+      >
         <Providers>
-          <Nav />
+          <Header />
           {children}
           <Footer />
         </Providers>

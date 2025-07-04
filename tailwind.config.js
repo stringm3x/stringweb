@@ -34,8 +34,8 @@ module.exports = {
       green: "#50ff05",
       yellow: "#F5A524",
       gold: "#f6c75e",
-      black: "#0000",
-      bg: "#131313",
+      black: "#000000",
+      bg: "#000000",
       gray: "#A1A1AA",
     },
     spacing: {
@@ -78,6 +78,7 @@ module.exports = {
     extend: {
       fontFamily: {
         anton: ["var(--font-anton-sans)"],
+        ubuntu: ["var(--font-ubuntu-sans)"],
       },
       animation: {
         scroll: "scroll 20s linear infinite",

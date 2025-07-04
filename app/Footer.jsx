@@ -1,45 +1,86 @@
-import { FaFacebook, FaInstagram, FaTiktok } from "react-icons/fa";
+import React from "react";
 import Image from "next/image";
+import Link from "next/link";
 
-const Footer = () => {
+const pages = [
+  { id: "1", title: "Inicio", link: "/" },
+  { id: "2", title: "Servicios", link: "/services" },
+  { id: "3", title: "Proyectos", link: "/projects" },
+  { id: "4", title: "Conócenos", link: "/about" },
+  { id: "5", title: "Cotizador", link: "/quote" },
+];
+
+export default function Footer() {
   return (
-    <div className="md:h-52 bg-green flex flex-col md:flex-row px-5 md:px-0 py-8 items-center gap-5 md:justify-around ">
-      <div className="md:w-1/3 justify-items-center">
-        <Image
-          src="/assets/strinnobgblack.png"
-          width={160}
-          height={500}
-          alt="string"
-        />
-      </div>
-
-      <div className="h-1 w-full md:h-full md:w-1 bg-bg"></div>
-
-      <div className="md:w-1/3 flex flex-col gap-7 items-center">
-        <div className="flex flex-row gap-5">
-          <a href="https://www.facebook.com/profile.php?id=61576042750915">
-            <FaFacebook className="text-bg w-6 h-6" />
-          </a>
-          <a href="https://www.instagram.com/stringwebmx/">
-            <FaInstagram className="text-bg w-6 h-6" />
-          </a>
-          <a href="https://www.tiktok.com/@stringmx">
-            <FaTiktok className="text-bg w-6 h-6" />
-          </a>
+    <footer className="bg-black text-white py-12 px-6 md:px-12">
+      <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-8 items-start">
+        {/* Columna izquierda: redes, web, email */}
+        <div className="flex flex-col items-center md:items-start space-y-6">
+          <div className="flex space-x-4">
+            <Link
+              href="https://facebook.com"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <Image
+                src="/facebook.svg"
+                alt="Facebook"
+                width={24}
+                height={24}
+              />
+            </Link>
+            <Link
+              href="https://instagram.com"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <Image
+                src="/instagram.svg"
+                alt="Instagram"
+                width={24}
+                height={24}
+              />
+            </Link>
+          </div>
+          <Link
+            href="https://wa.me/1234567890"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="mt-2"
+          >
+            <Image src="/whatsapp.svg" alt="WhatsApp" width={32} height={32} />
+          </Link>
+          <p className="text-sm">stringweb.mx</p>
+          <p className="text-sm">stringweb.mx@outlook.com</p>
         </div>
-        <h1 className="text-lg text-bg font-bold">Cel. 2222000418</h1>
-      </div>
 
-      <div className="h-1 w-full md:h-full md:w-1 bg-bg"></div>
+        {/* Centro: logo STRING */}
+        <div className="flex justify-center md:justify-center items-center">
+          <h1 className="font-anton text-6xl sm:text-7xl md:text-8xl lg:text-9xl text-green">
+            STRING
+          </h1>
+        </div>
 
-      <div className="md:w-1/3 text-center">
-        <h1 className="text-xl text-bg font-bold">
-          © 2025. All rights reserved.
-        </h1>
-        <h1 className="text-xl text-bg font-bold">Philippians 4:13.</h1>
+        {/* Columna derecha: menú de páginas y aviso */}
+        <div className="flex flex-col items-center md:items-end space-y-4">
+          <h2 className="text-lg font-semibold uppercase">Páginas</h2>
+          <nav className="space-y-2 flex flex-col">
+            {pages.map((item) => (
+              <Link key={item.id} href={item.link}>
+                <span className="text-base sm:text-lg hover:text-green transition-colors">
+                  {item.title}
+                </span>
+              </Link>
+            ))}
+          </nav>
+          <Link
+            href="/privacy-policy"
+            className="mt-4 underline hover:text-green"
+          >
+            Aviso de privacidad
+          </Link>
+        </div>
       </div>
-    </div>
+    </footer>
   );
-};
-
-export default Footer;
+}
