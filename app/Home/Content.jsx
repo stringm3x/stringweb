@@ -12,7 +12,7 @@ const Content = () => {
         className="absolute pointer-events-none left-[-100] bottom-[600]  md:bottom-[320] md:left-[-150] 2xl:bottom-[400]"
       />
       <div className="relative flex flex-col gap-20 xl:gap-32 justify-center pt-24 p-5 xl:p-20">
-        <div className="text-green font-ubuntu font-extrabold tracking-tight text-6xl leading-[50px] md:text-8xl md:leading-[75px] lg:pl-10 lg:text-9xl lg:leading-[85px] 2xl:text-[200px] 2xl:leading-[140px] ">
+        <div className="text-green font-ubuntu font-extrabold tracking-tight text-5xl leading-[50px] md:text-8xl md:leading-[75px] lg:pl-10 lg:text-9xl lg:leading-[85px] 2xl:text-[200px] 2xl:leading-[140px] ">
           <h1>DESARROLLO</h1>
           <h1>
             DISEÑO <span className="font-light font-sans">&</span>
