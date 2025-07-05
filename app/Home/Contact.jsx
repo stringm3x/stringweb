@@ -14,11 +14,7 @@ const Contact = () => {
       <div className="flex flex-col gap-10">
         <h1 className="text-center text-5xl md:text-7xl">¡Trabajemos Juntos!</h1>
 
-        <motion.div
-          initial={{ opacity: 0, x: -30 }}
-          whileInView={{ opacity: 1, x: 0 }}
-          transition={{ duration: 0.8 }}
-          viewport={{ once: true, amount: 0.3 }}
+        <div
           className="w-{90px} p-5 flex flex-col gap-5 bg-beige2 rounded-2xl"
         >
           <div className="flex flex-row gap-2">
@@ -53,7 +49,7 @@ const Contact = () => {
             labelPlacement="outside"
             placeholder="Describe lo que necesitas."
           />
-        </motion.div>
+        </div>
 
         <Button className="lg:w-52 py-8 px-8 lg:py-7 bg-green text-xl text-black self-center rounded-3xl">
           Enviar

@@ -7,6 +7,14 @@ const items = [
     src: "/tecno/css.png",
     title: "css",
   },
+  {
+    src: "/tecno/html.png",
+    title: "css",
+  },
+  {
+    src: "/tecno/javascript.png",
+    title: "css",
+  },
 ];
 
 const Proyects = () => {
@@ -24,7 +32,7 @@ const Proyects = () => {
                 alt={item.title}
                 width={500}
                 height={300}
-                className="w-[200px] h-[100px] lg:w-[200px] lg:h-[100px] object-cover"
+                className="w-[200px] h-[100px] lg:w-[280px] lg:h-[100px] object-cover"
               />
             </div>
           ))}
@@ -39,7 +47,7 @@ const Proyects = () => {
           <h1 className="text-6xl md:text-8xl lg:text-9xl font-ubuntu font-bold text-green tracking-tight ">
             RECIENTES
           </h1>
-          <p className="md:text-xl lg:text-2xl text-left lg:px-32 xl:px-20 tracking-tight ">
+          <p className="md:text-xl lg:text-2xl text-center lg:px-32 xl:px-20 tracking-tight ">
             Así es como transformamos tu visión en un diseño y una estrategia
             bien desarrollada.
           </p>

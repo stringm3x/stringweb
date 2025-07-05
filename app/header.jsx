@@ -7,10 +7,10 @@ import { FaBars, FaTimes, FaWhatsapp } from "react-icons/fa";
 
 const menuItems = [
   { label: "Inicio", href: "/" },
-  { label: "Servicios", href: "/services" },
-  { label: "Proyectos", href: "/projects" },
-  { label: "Conócenos", href: "/about" },
-  { label: "Cotizador", href: "/quote" },
+  { label: "Servicios", href: "/Services" },
+  { label: "Proyectos", href: "/Proyects" },
+  { label: "Conócenos", href: "/Us" },
+  { label: "Cotizador", href: "/Contact" },
 ];
 
 export default function Header() {
@@ -40,7 +40,7 @@ export default function Header() {
       </div>
 
       <div
-        className={`fixed inset-0 bg-black text-center transform ${
+        className={`fixed inset-0 bg-black text-right transform ${
           isOpen ? "translate-x-0" : "translate-x-full"
         } transition-transform duration-300 ease-in-out`}
       >
@@ -54,7 +54,7 @@ export default function Header() {
           </button>
         </div>
 
-        <nav className="mt-12 flex flex-col items-center space-y-8">
+        <nav className="mt-12 flex flex-col items-end space-y-8 pr-10">
           {menuItems.map(({ label, href }) => {
             const active = pathname === href;
             return (
@@ -62,8 +62,8 @@ export default function Header() {
                 key={href}
                 href={href}
                 onClick={() => setIsOpen(false)}
-                className={`uppercase font-bold text-4xl transition-colors ${
-                  active ? "text-green" : "text-white hover:text-green"
+                className={`uppercase font-bold text-5xl md:text-6xl transition-colors ${
+                  active ? "text-green" : "text-white hover:text-green hover:text-8xl"
                 }`}
               >
                 {label}
