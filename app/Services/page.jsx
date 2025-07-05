@@ -15,7 +15,7 @@ const pageServices = () => {
   };
 
   return (
-    <section className="relative overflow-hidden">
+    <section className="relative overflow-hidden flex flex-col">
       <div className="relative content-center h-80">
         <Image
           src="/hero.png"
