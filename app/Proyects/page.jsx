@@ -12,12 +12,12 @@ const proyects = [
   {
     id: "2",
     href: "/",
-    img: "/proyects/alba&aguilar.png",
+    img: "/proyects/yuma.png",
   },
   {
     id: "3",
     href: "/",
-    img: "/proyects/alba&aguilar.png",
+    img: "/proyects/KLA.png",
   },
 ];
 
@@ -40,7 +40,7 @@ const pageProyects = () => {
                   src={item.img}
                   alt="proyect"
                   fill
-                  className="object-cover absolute brightness-75"
+                  className="object-cover absolute"
                 />
               </div>
             </Link>
