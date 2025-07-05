@@ -23,7 +23,7 @@ const proyects = [
 
 const pageProyects = () => {
   return (
-    <section className="bg-white flex flex-col gap-10 items-center py-20">
+    <section className="bg-white overflow-hidden flex flex-col gap-10 items-center py-20">
       <div className="text-bg font-ubuntu font-extrabold tracking-tight text-6xl md:text-8xl md:leading-[70px]">
         <h1>NUESTROS</h1>
         <h1>PROYECTOS</h1>

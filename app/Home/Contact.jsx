@@ -12,7 +12,7 @@ const Contact = () => {
       <Image src="/logo-s.png" alt="logo" width={100} height={200} />
 
       <div className="flex flex-col gap-10">
-        <h1 className="text-center text-5xl md:text-7xl">¡Trabajemos Juntos!</h1>
+        <h1 className="text-center text-4xl md:text-7xl">¡Trabajemos Juntos!</h1>
 
         <div
           className="w-{90px} p-5 flex flex-col gap-5 bg-beige2 rounded-2xl"

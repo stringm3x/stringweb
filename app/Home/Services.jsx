@@ -49,7 +49,7 @@ const Services = () => {
         Conoce nuestro servicios
       </Button>
 
-      <div className="w-full space-y-10 pb-20">
+      <div className="w-full max-h-min space-y-10 pb-20">
         {items.map((item, index) => {
           const isOpen = openIndex === index;
           return (
@@ -64,7 +64,7 @@ const Services = () => {
                 transition={{ duration: 0.25, ease: "easeInOut" }}
               >
                 <span
-                  className={`text-2xl md:text-4xl font-bold ${isOpen ? "text-green" : ""}`}
+                  className={`text-xl md:text-4xl font-bold ${isOpen ? "text-green" : ""}`}
                 >
                   {item.title}
                 </span>

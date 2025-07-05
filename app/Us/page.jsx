@@ -18,10 +18,10 @@ const msvs = [
 
 const pageUs = () => {
   return (
-    <section className="relative p-10 md:p-20 justify-items-center">
+    <section className="relative p-10 md:p-20 justify-items-center overflow-hidden">
       <div className="relative flex flex-col leading-[160px] lg:leading-[250px] pb-20">
         <h1 className="text-6xl md:text-8xl lg:text-[100px] font-bold">Somos</h1>
-        <h1 className="text-[150px] md:text-[200px] lg:text-[300px] font-anton text-green">STRING</h1>
+        <h1 className="text-[130px] md:text-[200px] lg:text-[300px] font-anton text-green">STRING</h1>
       </div>
 
       <div className="relative flex flex-col items-center justify-center overflow-hidden">

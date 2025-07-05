@@ -1,6 +1,7 @@
 import React from "react";
 import Image from "next/image";
 import { Button } from "@heroui/button";
+import Link from "next/link";
 
 const items = [
   {
@@ -32,7 +33,7 @@ const Proyects = () => {
                 alt={item.title}
                 width={500}
                 height={300}
-                className="w-[200px] h-[100px] lg:w-[280px] lg:h-[100px] object-cover"
+                className="w-[270px] h-[100px] lg:w-[280px] lg:h-[100px] object-cover"
               />
             </div>
           ))}
@@ -81,9 +82,11 @@ const Proyects = () => {
           </div>
         </div>
 
-        <Button className="bg-green text-bg text-xl font-bold w-40 lg:w-42 p-8 self-center rounded-full">
-          Ver Proyectos
-        </Button>
+        <Link href="/Proyects" className="self-center">
+          <Button className="bg-green text-bg text-xl font-bold w-40 lg:w-42 p-8 self-center rounded-full">
+            Ver Proyectos
+          </Button>
+        </Link>
       </section>
     </section>
   );

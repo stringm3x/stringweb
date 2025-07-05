@@ -3,7 +3,7 @@ import Contact from "../Home/Contact";
 
 const pageContact = () => {
   return (
-    <section className="">
+    <section className="overflow-hidden">
       <Contact />
     </section>
   );

@@ -14,7 +14,7 @@ export default function ServicioPage({ params: paramsPromise }) {
   if (!servicio) return notFound();
 
   return (
-    <section className="p-2 md:p-10 xl:p-20 space-y-20">
+    <section className="p-2 md:p-10 xl:p-20 space-y-20 overflow-hidden">
       <div className="bg-white w-full h-full rounded-2xl text-bg flex flex-col gap-5 items-center p-5 lg:p-10">
         <h1 className="text-xl lg:text-3xl text-gray">Servicio</h1>
         <h1 className="text-5xl sm:text-7xl lg:text-8xl xl:text-9xl font-bold mb-4">{servicio.service}</h1>
