@@ -42,11 +42,11 @@ export default function ServicioPage({ params: paramsPromise }) {
             {servicio.p}
           </p>
           <Image
-            src={servicio.img2}
+            src={servicio.img}
             alt={servicio.service}
             width={400}
             height={200}
-            className="sm:w-1/2 border-1 border-bg"
+            className="sm:w-1/2"
           />
         </div>
 
@@ -63,14 +63,7 @@ export default function ServicioPage({ params: paramsPromise }) {
                 key={idx}
                 className="flex flex-col items-center text-center px-4"
               >
-                <Image
-                  src={`/icons/feature-${idx + 1}.svg`}
-                  alt=""
-                  width={64}
-                  height={64}
-                  className="mb-4"
-                />
-                <p className="text-lg">{texto}</p>
+                <li className="md:text-xl">{texto}</li>
               </div>
             ))}
           </div>
@@ -80,13 +73,12 @@ export default function ServicioPage({ params: paramsPromise }) {
       {/* Botón volver */}
       <div>
         <Link href="/Services">
-          <Button className="bg-green text-bg text-xl py-7 px-10 hover:text-white hover:bg-black">
+          <Button className="bg-green text-bg text-xl md:py-7 md:px-10 hover:text-white hover:bg-black">
             Volver a Servicios
           </Button>
         </Link>
       </div>
 
-      {/* Acordeón dinámico */}
       <div className="w-full max-h-min space-y-10 pb-20">
         {items.map((item, index) => {
           const isOpen = openIndex === index;
@@ -96,14 +88,14 @@ export default function ServicioPage({ params: paramsPromise }) {
                 onClick={() => toggle(index)}
                 layout
                 transition={{ duration: 0.25, ease: "easeInOut" }}
-                className={`w-full flex items-center justify-between px-6 py-5 rounded-t-2xl transition-all duration-300 ${
+                className={`w-full flex items-center justify-between px-3 py-5 rounded-t-2xl transition-all duration-300 ${
                   isOpen
                     ? "bg-white text-white"
                     : "bg-black text-gray hover:text-white"
                 }`}
               >
                 <span
-                  className={`text-xl md:text-4xl font-bold ${
+                  className={`text-xl text-left md:text-4xl font-bold ${
                     isOpen ? "text-green" : ""
                   }`}
                 >
@@ -115,7 +107,7 @@ export default function ServicioPage({ params: paramsPromise }) {
                   transition={{ duration: 0.2 }}
                 >
                   {isOpen ? (
-                    <FaMinus className="text-sm" />
+                    <FaMinus className="text-sm text-bg" />
                   ) : (
                     <FaPlus className="text-sm" />
                   )}
@@ -132,9 +124,11 @@ export default function ServicioPage({ params: paramsPromise }) {
                     exit="collapsed"
                     transition={{ duration: 0.3, ease: "easeInOut" }}
                     style={{ originY: 0 }}
-                    className="overflow-hidden bg-white px-6 pb-6 rounded-b-2xl"
+                    className="overflow-hidden bg-white px-2 pb-6 rounded-b-2xl"
                   >
-                    <p className="text-bg md:text-xl pt-2">{item.content}</p>
+                    <p className="text-bg md:text-xl text-left pt-2">
+                      {item.content}
+                    </p>
                   </motion.div>
                 )}
               </AnimatePresence>

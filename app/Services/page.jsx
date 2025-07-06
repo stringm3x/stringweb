@@ -16,7 +16,7 @@ const pageServices = () => {
 
   return (
     <section className="relative overflow-hidden flex flex-col py-10">
-      <div className="relative content-center h-80">
+      <div className="relative content-center h-72 lg:h-80 xl:h-96">
         <Image
           src="/hero.png"
           alt="string"
@@ -41,19 +41,19 @@ const pageServices = () => {
       <div className="relative px-5 md:px-20 flex flex-col gap-10">
         {servicios.map(({ id, service, img }) => (
           <div
-            className="bg-white md:h-72 w-full rounded-2xl p-4 md:p-10 flex flex-col md:flex-row"
+            className="bg-white md:h-72 lg:h-80 w-full rounded-2xl p-4 md:p-10 flex flex-col md:flex-row"
             key={id}
           >
-            <div className="md:w-1/2 h-full">
+            <div className="md:w-2/3 h-full">
               <h1 className=" text-bg font-ubuntu font-extrabold tracking-tight text-left text-4xl md:text-6xl lg:text-8xl leading-[70px]">
                 {service}
               </h1>
-              <Image src="/" alt={service} width={500} height={500} />
+              <Image src={img} alt={service} width={900} height={500} className="object-cover" />
             </div>
 
-            <div className="md:w-1/2 h-full content-end">
+            <div className="md:w-1/3 h-full content-end">
               <Link href={`/Services/${id}`} className="">
-                <Button className="md:w-60 p-7 md:p-10 text-2xl rounded-full text-green bg-bg hover:text-bg hover:bg-green">Ver Servicio</Button>
+                <Button className="xl:w-60 p-7 md:p-10 text-2xl rounded-full text-green bg-bg hover:text-bg hover:bg-green">Ver Servicio</Button>
               </Link>
             </div>
           </div>

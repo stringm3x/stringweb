@@ -25,17 +25,17 @@ export default function Header() {
           className="text-green text-2xl"
           aria-label="Abrir menú"
         >
-          <FaBars />
+          <FaBars size={30} />
         </button>
 
         <Link
-          href="https://wa.me/1234567890"
+          href="https://wa.me/522222000418?text=¡Hola!%20Quiero%20más%20info%20sobre%20STRING"
           target="_blank"
           rel="noopener noreferrer"
           className="text-gray hover:text-white text-2xl"
           aria-label="WhatsApp"
         >
-          <FaWhatsapp />
+          <FaWhatsapp size={30}  />
         </Link>
       </div>
 
@@ -63,7 +63,9 @@ export default function Header() {
                 href={href}
                 onClick={() => setIsOpen(false)}
                 className={`uppercase font-bold text-5xl md:text-6xl transition-colors ${
-                  active ? "text-green" : "text-white hover:text-green hover:text-8xl"
+                  active
+                    ? "text-green"
+                    : "text-white hover:text-green hover:text-8xl"
                 }`}
               >
                 {label}

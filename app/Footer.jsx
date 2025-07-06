@@ -20,14 +20,14 @@ export default function Footer() {
         <div className="flex flex-col items-center md:items-start space-y-10">
           <div className="flex space-x-4">
             <Link
-              href="https://facebook.com"
+              href="https://www.facebook.com/profile.php?id=61576042750915"
               target="_blank"
               rel="noopener noreferrer"
             >
               <FaFacebookF className="text-2xl hover:text-green transition-colors" />
             </Link>
             <Link
-              href="https://instagram.com"
+              href="https://www.instagram.com/stringwebmx/"
               target="_blank"
               rel="noopener noreferrer"
             >
@@ -35,7 +35,7 @@ export default function Footer() {
             </Link>
           </div>
           <Link
-            href="https://wa.me/1234567890"
+            href="https://wa.me/522222000418?text=¡Hola!%20Quiero%20más%20info%20sobre%20STRING"
             target="_blank"
             rel="noopener noreferrer"
           >
@@ -53,7 +53,9 @@ export default function Footer() {
 
         {/* Columna derecha: menú de páginas y aviso */}
         <div className="flex flex-col items-center md:items-end space-y-4">
-          <h2 className="text-lg font-semibold uppercase text-green">Páginas</h2>
+          <h2 className="text-lg font-semibold uppercase text-green">
+            Páginas
+          </h2>
           <nav className="space-y-2 flex flex-col">
             {pages.map((item) => (
               <Link key={item.id} href={item.link}>

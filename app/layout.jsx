@@ -23,7 +23,7 @@ const ubuntu = Ubuntu({
 
 export const metadata = {
   title: "String",
-  description: "El marketing que necesitas.",
+  description: "L página web que necesitas.",
   icons: {
     icon: "/ico.png",
   },
