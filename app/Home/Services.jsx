@@ -46,7 +46,7 @@ const Services = () => {
       </div>
 
       <Button className="bg-green text-bg text-2xl font-bold p-8 rounded-full">
-        Conoce nuestro servicios
+        Conoce nuestros servicios
       </Button>
 
       <div className="w-full max-h-min space-y-10 pb-20">
@@ -64,7 +64,9 @@ const Services = () => {
                 transition={{ duration: 0.25, ease: "easeInOut" }}
               >
                 <span
-                  className={`text-xl md:text-4xl font-bold ${isOpen ? "text-green" : ""}`}
+                  className={`text-xl md:text-4xl font-bold ${
+                    isOpen ? "text-green" : ""
+                  }`}
                 >
                   {item.title}
                 </span>

@@ -14,13 +14,10 @@ const contentVariants = {
 };
 
 export default function ServicioPage({ params: paramsPromise }) {
-  // Desempaqueta params Promise
   const params = React.use(paramsPromise);
-  // Busca el servicio por id
   const servicio = servicios.find((p) => p.id === params.id);
   if (!servicio) return notFound();
 
-  // Usa el array dinámico de FAQs
   const items = servicio.faqs || [];
   const [openIndex, setOpenIndex] = useState(null);
   const toggle = (idx) => setOpenIndex(openIndex === idx ? null : idx);
@@ -29,7 +26,7 @@ export default function ServicioPage({ params: paramsPromise }) {
     <section className="p-2 md:p-10 xl:p-20 space-y-20 overflow-hidden">
       {/* Contenido principal */}
       <div className="bg-white w-full h-full rounded-2xl text-bg flex flex-col gap-5 items-center p-5 lg:p-10">
-        <h1 className="text-xl lg:text-3xl text-gray">Servicio</h1>
+        <h1 className="text-xl lg:text-3xl text-green">Servicio</h1>
         <h1 className="text-5xl sm:text-7xl lg:text-8xl xl:text-9xl font-bold mb-4">
           {servicio.service}
         </h1>
@@ -63,7 +60,7 @@ export default function ServicioPage({ params: paramsPromise }) {
                 key={idx}
                 className="flex flex-col items-center text-center px-4"
               >
-                <li className="md:text-xl">{texto}</li>
+                <li className="md:text-xl hover:text-green">{texto}</li>
               </div>
             ))}
           </div>

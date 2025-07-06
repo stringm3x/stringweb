@@ -28,7 +28,7 @@ const Contact = () => {
             <Textarea
               isRequired
               className="w-1/2"
-              label="Numero"
+              label="Número"
               labelPlacement="outside"
               placeholder="Número"
             />

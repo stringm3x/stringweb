@@ -7,7 +7,7 @@ import { FaFacebookF, FaInstagram, FaWhatsapp } from "react-icons/fa";
 const pages = [
   { id: "1", title: "Inicio", link: "/" },
   { id: "2", title: "Servicios", link: "/Services" },
-  { id: "3", title: "Proyectos", link: "/Projects" },
+  { id: "3", title: "Proyectos", link: "/Proyects" },
   { id: "4", title: "Conócenos", link: "/Us" },
   { id: "5", title: "Cotizador", link: "/Contact" },
 ];

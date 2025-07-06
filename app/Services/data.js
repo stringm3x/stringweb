@@ -2,7 +2,7 @@
 const servicios = [
   {
     id: "1",
-    service: "Diseño Web UI/UX",
+    service: "DISEÑO WEB UI/UX",
     img: "/serv/design.png",
     intro:
       "En STRING sabemos que el diseño web no solo es apariencia; es una estrategia clave para potenciar el éxito de un negocio en el entorno digital.",
@@ -33,7 +33,7 @@ const servicios = [
   },
   {
     id: "2",
-    service: "Desarrollo Web",
+    service: "DESARROLLO WEB",
     img: "/serv/dev.png",
     intro:
       "Construimos sitios web robustos y escalables, optimizados para rendimiento y SEO.",
@@ -64,7 +64,7 @@ const servicios = [
   },
   {
     id: "3",
-    service: "Optimización",
+    service: "OPTIMIZACIÓN",
     img: "/serv/seo.png",
     intro: "Aceleramos tu sitio y mejoramos su visibilidad en buscadores.",
     p: "Revisamos todos los puntos críticos de rendimiento, desde imágenes hasta código, y aplicamos prácticas de SEO On-Page.",
@@ -94,7 +94,7 @@ const servicios = [
   },
   {
     id: "4",
-    service: "Mantenimiento",
+    service: "MANTENIMIENTO",
     img: "/serv/mante.png",
     intro: "Nos encargamos de mantener tu sitio siempre actualizado y seguro.",
     p: "Realizamos backups, actualizaciones de dependencias, monitoreo y soporte técnico continuo.",

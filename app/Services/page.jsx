@@ -16,16 +16,16 @@ const pageServices = () => {
 
   return (
     <section className="relative overflow-hidden flex flex-col py-10">
-      <div className="relative content-center h-72 lg:h-80 xl:h-96">
+      <div className="relative flex flex-col justify-center h-72 lg:h-80 xl:h-96">
         <Image
           src="/hero.png"
           alt="string"
           width={500}
           height={1000}
-          className="absolute md:w-2/3 top-[-30] md:top-[-50] lg:top-[-100] xl:top-[-150]"
+          className="absolute md:w-2/3 top-[-30] md:top-[-50] lg:top-[-100] xl:top-[-150] brightness-50"
         />
 
-        <h1 className="relative text-6xl md:text-9xl font-ubuntu font-bold pl-5 md:pl-20 self-center">
+        <h1 className="relative text-6xl md:text-9xl font-ubuntu font-bold pl-5 md:pl-20 justify-self-center">
           SERVICIOS
         </h1>
 
@@ -34,7 +34,7 @@ const pageServices = () => {
           alt="string"
           width={500}
           height={1000}
-          className="absolute md:w-2/3 right-[-50]  bottom-[-10] md:right-[-100] md:bottom-[-50] lg:bottom-[-100]  xl:bottom-[-150] self-end"
+          className="absolute md:w-2/3 right-[-50]  bottom-[-10] md:right-[-100] md:bottom-[-50] lg:bottom-[-100]  xl:bottom-[-150] self-end brightness-50"
         />
       </div>
 
@@ -45,7 +45,7 @@ const pageServices = () => {
             key={id}
           >
             <div className="md:w-2/3 h-full">
-              <h1 className=" text-bg font-ubuntu font-extrabold tracking-tight text-left text-4xl md:text-6xl lg:text-8xl leading-[70px]">
+              <h1 className=" text-green font-ubuntu font-extrabold tracking-tight text-left text-4xl md:text-6xl lg:text-8xl leading-[70px]">
                 {service}
               </h1>
               <Image src={img} alt={service} width={900} height={500} className="object-cover" />

@@ -62,12 +62,12 @@ const pageUs = () => {
 
           <div className="bg-white w-60 h-24 p-4 rounded-2xl content-center">
             <p className="text-4xl text-green font-bold">85%</p>
-            <p className="font-bold text-bg">Proyectos entregados</p>
+            <p className="font-bold text-bg">Retención de clientes</p>
           </div>
 
           <div className="bg-white w-60 h-24 p-4 rounded-2xl content-center">
             <p className="text-4xl text-green font-bold">+4</p>
-            <p className="font-bold text-bg">Proyectos entregados</p>
+            <p className="font-bold text-bg">Años de experiencia</p>
           </div>
         </div>
 

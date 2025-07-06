@@ -17,14 +17,14 @@ const Content = () => {
           <h1>
             DISEÑO <span className="font-light font-sans">&</span>
           </h1>
-          <h1 className="font-light font-sans">OPTIMIZACION</h1>
+          <h1 className="font-light font-sans">OPTIMIZACIÓN</h1>
         </div>
 
         <div className="text-xl md:text-2xl lg:w-3/6 lg:text-3xl font-sans text-gray self-center">
           <p>
-            En STRING, nuestra experiencia radica en el diseño web, UI/UX,SEO,
-            la creación de una identidad de marca y la mejora de su visibilidad
-            en línea.
+            En STRING, nuestra experiencia radica en el diseño web, UI/UX, SEO,
+            la creación de identidad de marca y la mejora de la visibilidad en
+            línea.
           </p>
         </div>
 
@@ -36,12 +36,12 @@ const Content = () => {
 
           <div className="bg-white w-56 h-24 p-4 rounded-2xl content-center">
             <p className="text-4xl text-green font-bold">85%</p>
-            <p className="font-bold text-bg">Proyectos entregados</p>
+            <p className="font-bold text-bg">Retención de clientes</p>
           </div>
 
           <div className="bg-white w-56 h-24 p-4 rounded-2xl content-center">
             <p className="text-4xl text-green font-bold">+4</p>
-            <p className="font-bold text-bg">Proyectos entregados</p>
+            <p className="font-bold text-bg">Años de experiencia</p>
           </div>
         </div>
       </div>
