@@ -39,21 +39,32 @@ const pageServices = () => {
       </div>
 
       <div className="relative px-5 md:px-20 flex flex-col gap-10">
-        {servicios.map(({ id, service, img }) => (
+        {servicios.map(({ id, service, img, title2 }) => (
           <div
-            className="bg-white md:h-72 lg:h-80 w-full rounded-2xl p-4 md:p-10 flex flex-col md:flex-row"
+            className="bg-white md:h-72 lg:h-80 w-full rounded-2xl  flex flex-col md:flex-row py-10 pr-3"
             key={id}
           >
             <div className="md:w-2/3 h-full">
-              <h1 className=" text-green font-ubuntu font-extrabold tracking-tight text-left text-4xl md:text-6xl lg:text-8xl leading-[70px]">
+              <h1 className="text-bg font-ubuntu font-extrabold tracking-tight text-left text-4xl md:text-6xl lg:text-7xl leading-[70px] px-4 md:px-10">
                 {service}
               </h1>
-              <Image src={img} alt={service} width={900} height={500} className="object-cover" />
+              <h1 className="text-green font-ubuntu font-extrabold tracking-tight text-left text-4xl md:text-6xl lg:text-7xl leading-[70px] px-4 md:px-10">
+                {title2}
+              </h1>
+              <Image
+                src={img}
+                alt={service}
+                width={600}
+                height={500}
+                className="object-cover"
+              />
             </div>
 
             <div className="md:w-1/3 h-full content-end">
               <Link href={`/Services/${id}`} className="">
-                <Button className="xl:w-60 p-7 md:p-10 text-2xl rounded-full text-green bg-bg hover:text-bg hover:bg-green">Ver Servicio</Button>
+                <Button className="xl:w-60 p-7 md:p-10 text-2xl rounded-full text-green bg-bg hover:text-bg hover:bg-green">
+                  Ver Servicio
+                </Button>
               </Link>
             </div>
           </div>

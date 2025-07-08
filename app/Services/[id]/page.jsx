@@ -30,12 +30,12 @@ export default function ServicioPage({ params: paramsPromise }) {
         <h1 className="text-5xl sm:text-7xl lg:text-8xl xl:text-9xl font-bold mb-4">
           {servicio.service}
         </h1>
-        <p className="text-xl lg:text-2xl text-center lg:w-1/2 text-gray">
+        <p className="text-xl lg:text-2xl text-center lg:w-1/2 text-bg">
           {servicio.intro}
         </p>
 
         <div className="flex flex-col sm:flex-row gap-5 py-20">
-          <p className="sm:w-1/2 lg:text-xl xl:text-2xl self-center text-center sm:text-left">
+          <p className="sm:w-1/2 lg:text-xl xl:text-2xl self-center text-center sm:text-left text-gray">
             {servicio.p}
           </p>
           <Image
@@ -60,7 +60,7 @@ export default function ServicioPage({ params: paramsPromise }) {
                 key={idx}
                 className="flex flex-col items-center text-center px-4"
               >
-                <li className="md:text-xl hover:text-green">{texto}</li>
+                <li className="md:text-2xl hover:text-green text-left">{texto}</li>
               </div>
             ))}
           </div>
