@@ -19,7 +19,7 @@ const msvs = [
 const pageUs = () => {
   return (
     <section className="relative p-10 md:p-20 justify-items-center overflow-hidden">
-      <div className="relative flex flex-col leading-[160px] lg:leading-[250px] pb-20">
+      <div className="relative flex flex-col leading-[110px] md:leading-[160px] lg:leading-[250px] pb-20">
         <h1 className="text-6xl md:text-8xl lg:text-[100px] font-bold">Somos</h1>
         <h1 className="text-[130px] md:text-[200px] lg:text-[300px] font-anton text-green">STRING</h1>
       </div>
@@ -44,7 +44,7 @@ const pageUs = () => {
         <div className="relative flex flex-col lg:flex-row gap-10 py-10">
           {msvs.map((item) => (
             <div
-              className="md:w-72 h-64 bg-white rounded-2xl p-8 text-bg"
+              className="md:w-72 md:h-64 bg-white rounded-2xl p-8 text-bg"
               key={item.id}
             >
               <h1 className="text-4xl">NUESTRA</h1>
@@ -72,8 +72,8 @@ const pageUs = () => {
         </div>
 
         <div className="relative flex flex-col w-full items-start py-10">
-          <h1 className="text-6xl lg:text-7xl font-bold">Nuestros</h1>
-          <h1 className="text-6xl lg:text-7xl text-green font-bold">OBJETIVOS</h1>
+          <h1 className="text-5xl lg:text-7xl font-bold">Nuestros</h1>
+          <h1 className="text-5xl lg:text-7xl text-green font-bold">OBJETIVOS</h1>
 
           <p className="lg:text-xl mt-10">
             Crear sitios web que transmitan la esencia de cada marca, combinando
