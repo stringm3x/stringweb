@@ -23,10 +23,10 @@ export default function ServicioPage({ params: paramsPromise }) {
   const toggle = (idx) => setOpenIndex(openIndex === idx ? null : idx);
 
   return (
-    <section className="p-2 md:p-10 xl:p-20 space-y-20 overflow-hidden">
+    <section className="py-3 md:p-10 xl:p-20 space-y-20 overflow-hidden">
       {/* Contenido principal */}
-      <div className="bg-white w-full h-full rounded-2xl text-bg flex flex-col gap-5 items-center p-5 lg:p-10">
-        <h1 className="text-xl lg:text-3xl text-green">Servicio</h1>
+      <div className="bg-white w-full h-full rounded-2xl text-bg flex flex-col gap-5 items-center p-7 lg:p-10">
+        <h1 className="text-2xl lg:text-5xl text-green">Servicio</h1>
         <h1 className="text-5xl sm:text-7xl lg:text-8xl xl:text-9xl font-bold mb-4">
           {servicio.service}
         </h1>
@@ -35,7 +35,7 @@ export default function ServicioPage({ params: paramsPromise }) {
         </p>
 
         <div className="flex flex-col sm:flex-row gap-5 py-20">
-          <p className="sm:w-1/2 lg:text-xl xl:text-2xl self-center text-center sm:text-left text-gray">
+          <p className="sm:w-1/2 lg:text-2xl xl:text-3xl self-center text-center sm:text-left text-gray">
             {servicio.p}
           </p>
           <Image
@@ -60,7 +60,7 @@ export default function ServicioPage({ params: paramsPromise }) {
                 key={idx}
                 className="flex flex-col items-center text-center px-4"
               >
-                <li className="md:text-2xl hover:text-green text-left">{texto}</li>
+                <li className="lg:text-2xl hover:text-green text-left">{texto}</li>
               </div>
             ))}
           </div>
@@ -68,7 +68,7 @@ export default function ServicioPage({ params: paramsPromise }) {
       </div>
 
       {/* Botón volver */}
-      <div>
+      <div className="pl-5">
         <Link href="/Services">
           <Button className="bg-green text-bg text-xl md:py-7 md:px-10 hover:text-white hover:bg-black">
             Volver a Servicios

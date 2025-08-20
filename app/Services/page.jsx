@@ -41,7 +41,7 @@ const pageServices = () => {
       <div className="relative px-5 md:px-20 flex flex-col gap-10">
         {servicios.map(({ id, service, img, title2 }) => (
           <div
-            className="bg-white md:h-72 lg:h-80 w-full rounded-2xl  flex flex-col md:flex-row py-10 pr-3"
+            className="bg-white md:h-80 w-full rounded-2xl  flex flex-col md:flex-row py-10 pr-3"
             key={id}
           >
             <div className="md:w-2/3 h-full">

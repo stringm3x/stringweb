@@ -15,7 +15,7 @@ const pages = [
 export default function Footer() {
   return (
     <footer className="bg-black text-white py-12 px-6 md:px-12 border-t-[1px]">
-      <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-8 items-start">
+      <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-8 items-center">
         {/* Columna izquierda: redes y contacto */}
         <div className="flex flex-col items-center md:items-start space-y-10">
           <div className="flex space-x-4">
@@ -41,7 +41,7 @@ export default function Footer() {
           >
             <FaWhatsapp className="text-3xl hover:text-green transition-colors" />
           </Link>
-          <p className="text-lg">stringweb.mx@outlook.com</p>
+          <p className="text-lg">stringwebmx@gmail.com</p>
         </div>
 
         {/* Centro: logo STRING */}

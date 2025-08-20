@@ -11,12 +11,12 @@ const proyects = [
   },
   {
     id: "2",
-    href: "/",
+    href: "https://yuma-three.vercel.app/",
     img: "/proyects/yuma.png",
   },
   {
     id: "3",
-    href: "/",
+    href: "https://www.clementinajewelry.com/",
     img: "/proyects/KLA.png",
   },
 ];
