@@ -55,7 +55,7 @@ const pageServices = () => {
                 src={img}
                 alt={service}
                 width={600}
-                height={550}
+                height={500}
                 className="object-cover"
               />
             </div>
