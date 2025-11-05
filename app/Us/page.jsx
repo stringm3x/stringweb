@@ -1,5 +1,7 @@
+"use client";
+import React, { useEffect } from "react";
 import Image from "next/image";
-import React from "react";
+import gsap from "gsap";
 
 const msvs = [
   {
@@ -17,11 +19,38 @@ const msvs = [
 ];
 
 const pageUs = () => {
+  useEffect(() => {
+    const cards = document.querySelectorAll(".card");
+
+    cards.forEach((card) => {
+      const tl = gsap.timeline({ paused: true });
+      tl.to(card, {
+        scale: 1.06,
+        duration: 0.3,
+        ease: "power2.out",
+      });
+
+      card.addEventListener("mouseenter", () => tl.play());
+      card.addEventListener("mouseleave", () => tl.reverse());
+    });
+
+    return () => {
+      cards.forEach((card) => {
+        card.removeEventListener("mouseenter", () => tl.play());
+        card.removeEventListener("mouseleave", () => tl.reverse());
+      });
+    };
+  }, []);
+
   return (
     <section className="relative p-10 md:p-20 justify-items-center overflow-hidden">
       <div className="relative flex flex-col leading-[110px] md:leading-[160px] lg:leading-[250px] pb-20">
-        <h1 className="text-6xl md:text-8xl lg:text-[100px] font-bold">Somos</h1>
-        <h1 className="text-[130px] md:text-[200px] lg:text-[300px] font-anton text-green">STRING</h1>
+        <h1 className="text-6xl md:text-8xl lg:text-[100px] font-bold">
+          Somos
+        </h1>
+        <h1 className="text-[130px] md:text-[200px] lg:text-[300px] font-anton text-green">
+          STRING
+        </h1>
       </div>
 
       <div className="relative flex flex-col items-center justify-center overflow-hidden">
@@ -44,7 +73,7 @@ const pageUs = () => {
         <div className="relative flex flex-col lg:flex-row gap-10 py-10">
           {msvs.map((item) => (
             <div
-              className="md:w-72 md:h-64 bg-white rounded-2xl p-8 text-bg"
+              className="card md:w-72 md:h-64 bg-white rounded-2xl p-8 text-bg"
               key={item.id}
             >
               <h1 className="text-4xl">NUESTRA</h1>
@@ -55,27 +84,41 @@ const pageUs = () => {
         </div>
 
         <div className="relative flex flex-col items-end md:flex-row md:justify-end gap-5">
-          <div className="bg-gray w-60 h-24 p-4 rounded-2xl content-center justify-items-center">
-            <p className="text-3xl font-bold">MÁS DE 25</p>
-            <p className="font-bold">Proyectos entregados</p>
+          <div className="bg-white group hover:bg-gray w-60 h-24 p-4 rounded-2xl content-center justify-items-center">
+            <p className="text-3xl font-bold text-green group-hover:text-white">
+              MÁS DE 25
+            </p>
+            <p className="font-bold text-bg group-hover:text-white">
+              Proyectos entregados
+            </p>
           </div>
 
-          <div className="bg-white w-60 h-24 p-4 rounded-2xl content-center">
-            <p className="text-4xl text-green font-bold">85%</p>
-            <p className="font-bold text-bg">Retención de clientes</p>
+          <div className="bg-white group hover:bg-gray w-60 h-24 p-4 rounded-2xl content-center">
+            <p className="text-4xl text-green  group-hover:text-white font-bold">
+              85%
+            </p>
+            <p className="font-bold text-bg group-hover:text-white">
+              Retención de clientes
+            </p>
           </div>
 
-          <div className="bg-white w-60 h-24 p-4 rounded-2xl content-center">
-            <p className="text-4xl text-green font-bold">+4</p>
-            <p className="font-bold text-bg">Años de experiencia</p>
+          <div className="bg-white group hover:bg-gray w-60 h-24 p-4 rounded-2xl content-center">
+            <p className="text-4xl text-green  group-hover:text-white font-bold">
+              +4
+            </p>
+            <p className="font-bold text-bg group-hover:text-white">
+              Años de experiencia
+            </p>
           </div>
         </div>
 
         <div className="relative flex flex-col w-full items-start py-10">
           <h1 className="text-5xl lg:text-7xl font-bold">Nuestros</h1>
-          <h1 className="text-5xl lg:text-7xl text-green font-bold">OBJETIVOS</h1>
+          <h1 className="text-5xl lg:text-7xl text-green font-bold">
+            OBJETIVOS
+          </h1>
 
-          <p className="lg:text-xl mt-10">
+          <p className="lg:text-xl mt-10 font-bold">
             Crear sitios web que transmitan la esencia de cada marca, combinando
             diseño estratégico, funcionalidad y experiencia de usuario para
             generar conexiones reales y resultados medibles. En STRING,

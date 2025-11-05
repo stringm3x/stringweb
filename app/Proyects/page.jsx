@@ -1,6 +1,8 @@
+"use client";
+import React, { useEffect } from "react";
 import Image from "next/image";
+import gsap from "gsap";
 import Link from "next/link";
-import React from "react";
 import Contact from "../Home/Contact";
 
 const proyects = [
@@ -22,6 +24,29 @@ const proyects = [
 ];
 
 const pageProyects = () => {
+  useEffect(() => {
+    const cards = document.querySelectorAll(".card");
+
+    cards.forEach((card) => {
+      const tl = gsap.timeline({ paused: true });
+      tl.to(card, {
+        scale: 1.06,
+        duration: 0.3,
+        ease: "power2.out",
+      });
+
+      card.addEventListener("mouseenter", () => tl.play());
+      card.addEventListener("mouseleave", () => tl.reverse());
+    });
+
+    return () => {
+      cards.forEach((card) => {
+        card.removeEventListener("mouseenter", () => tl.play());
+        card.removeEventListener("mouseleave", () => tl.reverse());
+      });
+    };
+  }, []);
+
   return (
     <section className="bg-white overflow-hidden flex flex-col gap-10 items-center py-20">
       <div className="text-bg font-ubuntu font-extrabold tracking-tight text-6xl leading-[45px] md:text-8xl md:leading-[70px]">
@@ -30,12 +55,14 @@ const pageProyects = () => {
       </div>
 
       <div className="flex flex-col gap-5 items-center">
-        <h1 className="text-2xl lg:text-3xl xl:text-4xl text-gray">Ellos confiarón en nostros</h1>
+        <h1 className="text-2xl lg:text-3xl xl:text-4xl text-gray">
+          Ellos confiarón en nostros
+        </h1>
 
         <div className="w-full flex flex-col lg:flex-row gap-5">
           {proyects.map((item) => (
             <Link href={item.href} key={item.id} className="">
-              <div className="relative w-[350px] md:w-72 lg:w-[300px] xl:w-72 h-80">
+              <div className="card relative w-[350px] md:w-72 lg:w-[300px] xl:w-72 h-80">
                 <Image
                   src={item.img}
                   alt="proyect"
@@ -47,7 +74,9 @@ const pageProyects = () => {
           ))}
         </div>
 
-        <h1 className="text-2xl lg:text-3xl xl:text-4xl text-gray">Y tú ¿Estas listo?</h1>
+        <h1 className="text-2xl lg:text-3xl xl:text-4xl text-gray">
+          Y tú ¿Estas listo?
+        </h1>
       </div>
 
       <div className="w-full text-bg">

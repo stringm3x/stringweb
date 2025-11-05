@@ -1,7 +1,24 @@
-import React from "react";
+"use client";
 import Image from "next/image";
+import React, { useEffect, useRef } from "react";
+import gsap from "gsap";
+import SplitType from "split-type";
 
 const Hero = () => {
+  const textRef = useRef(null);
+
+  useEffect(() => {
+    const text = new SplitType(textRef.current, { types: "chars" });
+
+    gsap.from(text.chars, {
+      y: 100,
+      opacity: 0,
+      stagger: 0.05,
+      duration: 1,
+      ease: "power4.out",
+    });
+  }, []);
+
   return (
     <section className="relative bg-white h-screen flex flex-col justify-center overflow-hidden">
       <Image
@@ -21,7 +38,10 @@ const Hero = () => {
       />
 
       <div className="relative flex flex-col sm:flex-row-reverse justify-items-end 2xl:justify-center items-center h-[300px] w-full">
-        <div className="relative text-bg font-ubuntu font-extrabold tracking-tight text-left sm:pr-5 text-5xl leading-[40px] sm:text-7xl sm:leading-[50px] lg:text-8xl lg:leading-[75px] xl:text-9xl xl:leading-[95px] ">
+        <div
+          ref={textRef}
+          className="relative text-bg font-ubuntu font-extrabold tracking-tight text-left sm:pr-5 text-5xl leading-[35px] sm:text-7xl sm:leading-[50px] lg:text-8xl lg:leading-[75px] xl:text-9xl xl:leading-[95px] "
+        >
           <h1>CREAMOS</h1>
           <h1>EXPERIENCIAS</h1>
           <h1>DIGITALES</h1>

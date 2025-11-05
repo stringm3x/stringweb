@@ -26,7 +26,9 @@ export default function ServicioPage({ params: paramsPromise }) {
     <section className="py-3 md:p-10 xl:p-20 space-y-20 overflow-hidden">
       {/* Contenido principal */}
       <div className="bg-white w-full h-full rounded-2xl text-bg flex flex-col gap-5 items-center p-7 lg:p-10">
-        <h1 className="text-2xl lg:text-5xl text-green">Servicio</h1>
+        <h1 className="text-2xl lg:text-5xl text-green font-semibold">
+          Servicio
+        </h1>
         <h1 className="text-5xl sm:text-7xl lg:text-8xl xl:text-9xl font-bold mb-4">
           {servicio.service}
         </h1>
@@ -34,7 +36,7 @@ export default function ServicioPage({ params: paramsPromise }) {
           {servicio.intro}
         </p>
 
-        <div className="flex flex-col sm:flex-row gap-5 py-20">
+        <div className="flex flex-col sm:flex-row gap-5 py-10">
           <p className="sm:w-1/2 lg:text-2xl xl:text-3xl self-center text-center sm:text-left text-gray">
             {servicio.p}
           </p>
@@ -60,20 +62,13 @@ export default function ServicioPage({ params: paramsPromise }) {
                 key={idx}
                 className="flex flex-col items-center text-center px-4"
               >
-                <li className="lg:text-2xl hover:text-green text-left">{texto}</li>
+                <li className="lg:text-2xl hover:text-green text-left">
+                  {texto}
+                </li>
               </div>
             ))}
           </div>
         </div>
-      </div>
-
-      {/* Botón volver */}
-      <div className="pl-5">
-        <Link href="/Services">
-          <Button className="bg-green text-bg text-xl md:py-7 md:px-10 hover:text-white hover:bg-black">
-            Volver a Servicios
-          </Button>
-        </Link>
       </div>
 
       <div className="w-full max-h-min space-y-10 pb-20">
@@ -132,6 +127,15 @@ export default function ServicioPage({ params: paramsPromise }) {
             </div>
           );
         })}
+      </div>
+
+      {/* Botón volver */}
+      <div className="pl-5">
+        <Link href="/Services">
+          <Button className="bg-green text-bg text-xl md:py-7 md:px-10 hover:text-white hover:bg-black">
+            Volver a Servicios
+          </Button>
+        </Link>
       </div>
     </section>
   );

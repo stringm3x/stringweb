@@ -62,10 +62,10 @@ export default function Header() {
                 key={href}
                 href={href}
                 onClick={() => setIsOpen(false)}
-                className={`uppercase font-bold text-5xl md:text-6xl transition-colors ${
+                className={`uppercase font-bold text-3xl md:text-6xl transition-colors ${
                   active
                     ? "text-green"
-                    : "text-white hover:text-green hover:text-8xl"
+                    : "text-white hover:text-green hover:text-5xl hover:md:text-8xl"
                 }`}
               >
                 {label}

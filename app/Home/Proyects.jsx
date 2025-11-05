@@ -1,5 +1,7 @@
-import React from "react";
+"use client";
+import React, { useEffect } from "react";
 import Image from "next/image";
+import gsap from "gsap";
 import { Button } from "@heroui/button";
 import Link from "next/link";
 
@@ -19,6 +21,29 @@ const items = [
 ];
 
 const Proyects = () => {
+  useEffect(() => {
+    const cards = document.querySelectorAll(".card");
+
+    cards.forEach((card) => {
+      const tl = gsap.timeline({ paused: true });
+      tl.to(card, {
+        scale: 1.06,
+        duration: 0.3,
+        ease: "power2.out",
+      });
+
+      card.addEventListener("mouseenter", () => tl.play());
+      card.addEventListener("mouseleave", () => tl.reverse());
+    });
+
+    return () => {
+      cards.forEach((card) => {
+        card.removeEventListener("mouseenter", () => tl.play());
+        card.removeEventListener("mouseleave", () => tl.reverse());
+      });
+    };
+  }, []);
+
   return (
     <section className="bg-white p-5 md:p-10">
       <div className="relative overflow-hidden w-full py-10">
@@ -41,7 +66,7 @@ const Proyects = () => {
       </div>
 
       <section className="flex flex-col gap-20 bg-bg w-full h-full rounded-2xl p-5 py-20 md:p-10 md:py-32">
-        <div className="xl:w-3/5 self-end text-center">
+        <div className="xl:w-3/5 self-center text-center">
           <h1 className="text-3xl md:text-5xl lg:text-6xl text-gray tracking-tight ">
             NUESTROS PROYECTOS
           </h1>
@@ -55,7 +80,7 @@ const Proyects = () => {
         </div>
 
         <div className="grid lg:grid-rows-8 lg:grid-cols-2 gap-5 h-96 ">
-          <div className="relative bg-white row-span-8 col-span-1 rounded-2xl">
+          <div className="card relative row-span-8 col-span-1 rounded-2xl">
             <Image
               src="/proyects/alba&aguilar.png"
               alt="yuma"
@@ -64,7 +89,7 @@ const Proyects = () => {
             />
           </div>
 
-          <div className="relative bg-white row-span-4 col-span-1 rounded-2xl">
+          <div className="card relative row-span-4 col-span-1 rounded-2xl">
             <Image
               src="/proyects/yuma.png"
               alt="yuma"
@@ -72,7 +97,7 @@ const Proyects = () => {
               className="object-cover absolute rounded-2xl"
             />
           </div>
-          <div className="relative bg-white row-span-4 col-span-1 rounded-2xl">
+          <div className="card relative row-span-4 col-span-1 rounded-2xl">
             <Image
               src="/proyects/KLA.png"
               alt="yuma"
