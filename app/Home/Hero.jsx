@@ -39,8 +39,7 @@ const Hero = () => {
 
       <div className="relative flex flex-col sm:flex-row-reverse justify-items-end 2xl:justify-center items-center h-[300px] w-full">
         <div
-          ref={textRef}
-          className="relative text-bg font-ubuntu font-extrabold tracking-tight text-left sm:pr-5 text-5xl leading-[35px] sm:text-7xl sm:leading-[50px] lg:text-8xl lg:leading-[75px] xl:text-9xl xl:leading-[95px] "
+          className="relative text-bg font-ubuntu font-extrabold tracking-tight text-left sm:pr-5 text-6xl leading-[45px] sm:text-7xl sm:leading-[50px] lg:text-8xl lg:leading-[75px] xl:text-9xl xl:leading-[95px] "
         >
           <h1>CREAMOS</h1>
           <h1>EXPERIENCIAS</h1>

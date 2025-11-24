@@ -68,7 +68,7 @@ const Proyects = () => {
       <section className="flex flex-col gap-20 bg-bg w-full h-full rounded-2xl p-5 py-20 md:p-10 md:py-32">
         <div className="xl:w-3/5 self-center text-center">
           <h1 className="text-3xl md:text-5xl lg:text-6xl text-gray tracking-tight ">
-            NUESTROS PROYECTOS
+            NUESTROS DISEÑOS
           </h1>
           <h1 className="text-6xl md:text-8xl lg:text-9xl font-ubuntu font-bold text-green tracking-tight ">
             RECIENTES
@@ -82,8 +82,8 @@ const Proyects = () => {
         <div className="grid lg:grid-rows-8 lg:grid-cols-2 gap-5 h-96 ">
           <div className="card relative row-span-8 col-span-1 rounded-2xl">
             <Image
-              src="/proyects/alba&aguilar.png"
-              alt="yuma"
+              src="/design/joyeria.png"
+              alt="joyeria"
               fill
               className="object-cover absolute rounded-2xl brightness-75"
             />
@@ -91,25 +91,25 @@ const Proyects = () => {
 
           <div className="card relative row-span-4 col-span-1 rounded-2xl">
             <Image
-              src="/proyects/yuma.png"
-              alt="yuma"
+              src="/design/restuarante.png"
+              alt="restuarante"
               fill
               className="object-cover absolute rounded-2xl"
             />
           </div>
           <div className="card relative row-span-4 col-span-1 rounded-2xl">
             <Image
-              src="/proyects/KLA.png"
-              alt="yuma"
+              src="/design/ropa.png"
+              alt="ropa"
               fill
               className="object-cover absolute rounded-2xl"
             />
           </div>
         </div>
 
-        <Link href="/Proyects" className="self-center">
-          <Button className="bg-green text-bg text-xl font-bold w-40 lg:w-42 p-8 self-center rounded-full">
-            Ver Proyectos
+        <Link href="/Design" className="self-center">
+          <Button className="bg-green text-bg text-lg font-bold w-40 lg:w-42 p-8 self-center rounded-full">
+            Ver Diseños
           </Button>
         </Link>
       </section>
