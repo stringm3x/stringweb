@@ -12,11 +12,11 @@ const items = [
   },
   {
     src: "/tecno/html.png",
-    title: "css",
+    title: "html",
   },
   {
     src: "/tecno/javascript.png",
-    title: "css",
+    title: "javascript",
   },
 ];
 

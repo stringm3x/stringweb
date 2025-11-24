@@ -32,7 +32,7 @@ export default function Contact() {
   };
 
   return (
-    <section className="h-screen flex flex-col gap-10 items-center p-10 md:p-20">
+    <section className="md:h-screen flex flex-col gap-10 items-center p-10 md:p-20">
       <Image src="/logo-s.png" alt="logo" width={100} height={200} />
 
       <form

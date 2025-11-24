@@ -8,7 +8,8 @@ import { FaBars, FaTimes, FaWhatsapp } from "react-icons/fa";
 const menuItems = [
   { label: "Inicio", href: "/" },
   { label: "Servicios", href: "/Services" },
-  { label: "Proyectos", href: "/Proyects" },
+  //{ label: "Proyectos", href: "/Proyects" },
+  { label: "Diseños", href: "/Design" },
   { label: "Conócenos", href: "/Us" },
   { label: "Cotizador", href: "/Contact" },
 ];
@@ -35,7 +36,7 @@ export default function Header() {
           className="text-gray hover:text-white text-2xl"
           aria-label="WhatsApp"
         >
-          <FaWhatsapp size={30}  />
+          <FaWhatsapp size={30} />
         </Link>
       </div>
 
