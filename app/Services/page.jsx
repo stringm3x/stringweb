@@ -88,7 +88,7 @@ const pageServices = () => {
 
             <div className="md:w-1/3 md:h-full self-end md:content-end">
               <Link href={`/Services/${id}`} className="">
-                <Button className="xl:w-56 p-7 md:p-10 text-2xl rounded-full text-green bg-bg hover:text-bg hover:bg-green">
+                <Button className="xl:w-56 p-7 md:p-10 text-xl md:text-2xl rounded-full text-green bg-bg hover:text-bg hover:bg-green">
                   Ver Servicio
                 </Button>
               </Link>

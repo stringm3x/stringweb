@@ -132,7 +132,7 @@ export default function ServicioPage({ params: paramsPromise }) {
       {/* Botón volver */}
       <div className="pl-5">
         <Link href="/Services">
-          <Button className="bg-green text-bg text-xl md:py-7 md:px-10 hover:text-white hover:bg-black">
+          <Button className="bg-green text-bg text-md md:text-xl md:py-7 md:px-10 hover:text-white hover:bg-black">
             Volver a Servicios
           </Button>
         </Link>

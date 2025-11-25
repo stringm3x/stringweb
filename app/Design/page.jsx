@@ -85,14 +85,14 @@ const pageProyects = () => {
             <Link
               href={item.href}
               key={item.id}
-              className="w-full flex justify-center"
+              className="w-full flex justify-center content-end"
             >
-              <div className="card relative w-[300px] md:w-[280px] lg:w-[260px] xl:w-[430px] h-80 rounded-xl overflow-hidden shadow-lg hover:scale-105 transition-transform">
+              <div className="card group relative m-5 w-[300px] md:w-[280px] lg:w-[260px] xl:w-[430px] h-80 rounded-xl overflow-hidden shadow-lg hover:scale-105 transition-transform">
                 <Image
                   src={item.img}
                   alt="proyect"
                   fill
-                  className="object-cover absolute"
+                  className="object-cover absolute group-hover:brightness-75"
                 />
               </div>
             </Link>

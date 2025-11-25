@@ -39,13 +39,13 @@ const Services = () => {
 
   return (
     <section className="flex flex-col gap-20 bg-white p-8 md:p-10">
-      <div className="xl:w-2/3 text-bg font-ubuntu tracking-tight font-bold leading-[40px] text-5xl md:leading-[60px] md:text-7xl lg:leading-[75px] lg:text-8xl">
+      <div className="xl:w-2/3 text-bg font-ubuntu tracking-tight font-bold leading-[37px] text-5xl md:leading-[60px] md:text-7xl lg:leading-[75px] lg:text-8xl">
         <h1>POTENCIA TUS</h1>
         <h1>RESULTADOS</h1>
         <h1>COMERCIALES.</h1>
       </div>
 
-      <Button className="bg-green text-bg text-2xl font-bold p-8 rounded-full">
+      <Button className="bg-green text-bg text-xl md:text-2xl font-bold p-8 rounded-full">
         Conoce nuestros servicios
       </Button>
 
