@@ -35,7 +35,7 @@ export default function Footer() {
             </Link>
           </div>
           <Link
-            href="https://wa.me/522222000418?text=¡Hola!%20Quiero%20más%20info%20sobre%20STRING"
+            href="https://wa.me/525545524847?text=¡Hola!%20Quiero%20más%20info%20sobre%20STRING"
             target="_blank"
             rel="noopener noreferrer"
           >
