@@ -3,7 +3,7 @@ import Image from "next/image";
 
 const Content = () => {
   return (
-    <section className="relative overflow-hidden content-center  mx-auto xl:max-w-[1280px] 2xl:max-w-[1280px]">
+    <section className="relative overflow-hidden content-center  mx-auto 2xl:max-w-[1280px]">
       <div className="relative flex flex-col gap-20 xl:gap-32 justify-center pt-24 p-5 xl:p-20">
         <div className="font-ubuntu font-extrabold tracking-tight text-[45px] leading-[34px] pl-10 md:text-[60px] md:leading-[50px] lg:pl-10 xl:text-[100px] xl:leading-[80px]">
           <h1>DESARROLLO</h1>

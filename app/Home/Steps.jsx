@@ -26,7 +26,7 @@ const Circle = ({ number, title, items, className }) => {
 
 const Steps = () => {
   return (
-    <section className="relative min-h-screen overflow-hidden py-20 mx-auto xl:max-w-[1280px] 2xl:max-w-[1280px]">
+    <section className="relative min-h-screen overflow-hidden py-20 mx-auto 2xl:max-w-[1280px]">
       {/* TÍTULO */}
       <div className="relative z-10 max-w-xl mb-16 px-10">
         <h2 className="text-4xl md:text-5xl font-bold leading-tight">

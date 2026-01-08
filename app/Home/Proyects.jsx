@@ -65,7 +65,7 @@ const Proyects = () => {
         </div>
       </div>
 
-      <section className="flex flex-col gap-20 bg-bg w-full h-full rounded-2xl p-5 py-20 md:p-10 md:py-32  mx-auto xl:max-w-[1280px] 2xl:max-w-[1280px]">
+      <section className="flex flex-col gap-20 bg-bg w-full h-full rounded-2xl p-5 py-20 md:p-10 md:py-32  mx-auto 2xl:max-w-[1280px]">
         <div className="xl:w-3/5 self-center text-center">
           <h1 className="text-3xl md:text-5xl lg:text-6xl text-gray tracking-tight ">
             NUESTROS DISEÑOS

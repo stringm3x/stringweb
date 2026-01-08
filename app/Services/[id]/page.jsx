@@ -23,21 +23,21 @@ export default function ServicioPage({ params: paramsPromise }) {
   const toggle = (idx) => setOpenIndex(openIndex === idx ? null : idx);
 
   return (
-    <section className="py-3 md:p-10 xl:p-20 space-y-20 overflow-hidden">
+    <section className="mx-auto 2xl:max-w-[1280px] p-3 md:p-10 xl:p-20 space-y-10 overflow-hidden">
       {/* Contenido principal */}
-      <div className="bg-white w-full h-full rounded-2xl text-bg flex flex-col gap-5 items-center p-7 lg:p-10">
-        <h1 className="text-2xl lg:text-5xl text-green font-semibold">
+      <div className="bg-white w-full h-full rounded-3xl text-bg flex flex-col gap-5 items-center p-5 sm:p-7 lg:p-10">
+        <h1 className="sm:text-2xl lg:text-3xl text-gray font-semibold">
           Servicio
         </h1>
-        <h1 className="text-5xl sm:text-7xl lg:text-8xl xl:text-9xl font-bold mb-4">
+        <h1 className="text-5xl sm:text-7xl lg:text-8xl xl:text-9xl font-extrabold">
           {servicio.service}
         </h1>
         <p className="text-xl lg:text-2xl text-center lg:w-1/2 text-bg">
           {servicio.intro}
         </p>
 
-        <div className="flex flex-col sm:flex-row gap-5 py-10">
-          <p className="sm:w-1/2 lg:text-2xl xl:text-3xl self-center text-center sm:text-left text-gray">
+        <div className="flex flex-col sm:flex-row gap-5 py-5">
+          <p className="sm:w-1/2 lg:text-lg xl:text-2xl self-center text-center sm:text-left text-gray">
             {servicio.p}
           </p>
           <Image
@@ -49,8 +49,8 @@ export default function ServicioPage({ params: paramsPromise }) {
           />
         </div>
 
-        <div className="w-full flex flex-col gap-10">
-          <div className="text-left font-ubuntu font-bold tracking-tight text-5xl leading-[40px] sm:text-6xl lg:text-7xl xl:text-8xl sm:leading-[60px] xl:leading-[74px]">
+        <div className="w-full flex flex-col">
+          <div className="text-left font-ubuntu font-bold tracking-tight text-4xl leading-[30px] sm:text-5xl lg:text-6xl xl:text-8xl sm:leading-[50px] xl:leading-[74px]">
             <h1>LO QUE</h1>
             <h1>LO HACEMOS</h1>
             <h1 className="font-sans font-light text-green">POR TI:</h1>
@@ -71,7 +71,7 @@ export default function ServicioPage({ params: paramsPromise }) {
         </div>
       </div>
 
-      <div className="w-full max-h-min space-y-10 pb-20">
+      <div className="w-full max-h-min space-y-10">
         {items.map((item, index) => {
           const isOpen = openIndex === index;
           return (
@@ -87,7 +87,7 @@ export default function ServicioPage({ params: paramsPromise }) {
                 }`}
               >
                 <span
-                  className={`text-xl text-left md:text-4xl font-bold ${
+                  className={`text-lg text-left md:text-2xl font-bold ${
                     isOpen ? "text-green" : ""
                   }`}
                 >
@@ -118,7 +118,7 @@ export default function ServicioPage({ params: paramsPromise }) {
                     style={{ originY: 0 }}
                     className="overflow-hidden bg-white px-2 pb-6 rounded-b-2xl"
                   >
-                    <p className="text-bg md:text-xl text-left pt-2">
+                    <p className="text-bg md:text-lg text-left pt-2">
                       {item.content}
                     </p>
                   </motion.div>
@@ -130,7 +130,7 @@ export default function ServicioPage({ params: paramsPromise }) {
       </div>
 
       {/* Botón volver */}
-      <div className="pl-5">
+      <div className="justify-self-center py-10">
         <Link href="/Services">
           <Button className="bg-green text-bg text-md md:text-xl md:py-7 md:px-10 hover:text-white hover:bg-black">
             Volver a Servicios

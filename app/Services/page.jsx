@@ -41,16 +41,35 @@ const pageServices = () => {
   }, []);
 
   return (
-    <section className="relative overflow-hidden flex flex-col py-10 mx-auto 2xl:max-w-[1280px]">
-      <div className="relative flex flex-col justify-center py-20 ">
-        <h1 className="relative text-6xl md:text-9xl font-ubuntu font-bold pl-5 md:pl-20 justify-self-center">
+    <section className="overflow-hidden min-h-screen mx-auto  flex flex-col justify-center py-10">
+      <div className="flex flex-col justify-center py-16 ">
+        <h1 className="text-5xl md:text-7xl lg:text-8xl font-ubuntu font-bold pl-5 md:pl-20 justify-self-center">
           SERVICIOS
         </h1>
       </div>
 
-      <div className="relative px-5 md:px-20 flex flex-col gap-10">
+      <div className="flex flex-wrap gap-5 justify-center xl:gap-0 xl:flex-row xl:justify-around">
         {servicios.map(({ id, service, img, title2 }) => (
-          <div key={id}></div>
+          <Link href={`/Services/${id}`} key={id}>
+            <div className="card w-[330px] h-[400px] 2xl:w-[410px] rounded-3xl flex flex-col justify-center bg-white group hover:bg-black hover:border-green border-2 py-5">
+              <div className=" tracking-tigh font-ubuntu font-extrabold px-5 2xl:px-2">
+                <h1 className="text-bg group-hover:text-white text-3xl leading-[30px] lg:leading-[10px]">
+                  {service}
+                </h1>
+                <h1 className="text-green text-3xl leading-[30px] lg:leading-[40px]">
+                  {title2}
+                </h1>
+              </div>
+
+              <Image
+                src={img}
+                alt={service}
+                width={500}
+                height={500}
+                className="object-cover"
+              />
+            </div>
+          </Link>
         ))}
       </div>
     </section>
