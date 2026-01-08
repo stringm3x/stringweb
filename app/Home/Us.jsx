@@ -6,7 +6,7 @@ import Link from "next/link";
 const Us = () => {
   return (
     <div className="h-screen p-6 sm:p-20  mx-auto xl:max-w-[1280px] 2xl:max-w-[1280px]">
-      <div className="relative h-full w-full p-3 sm:p-10">
+      <div className="relative flex flex-col gap-3 justify-center h-full w-full p-3 sm:p-10">
         <Image
           src="/sonido.png"
           alt="us"

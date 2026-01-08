@@ -8,7 +8,7 @@ import { FaBars, FaTimes, FaWhatsapp } from "react-icons/fa";
 const menuItems = [
   { label: "Inicio", href: "/" },
   { label: "Servicios", href: "/Services" },
-  //{ label: "Proyectos", href: "/Proyects" },
+  { label: "Proyectos", href: "/Proyects" },
   { label: "Diseños", href: "/Design" },
   { label: "Conócenos", href: "/Us" },
   { label: "Cotizador", href: "/Contact" },

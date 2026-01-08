@@ -42,7 +42,7 @@ const Content = () => {
 
           <div className="bg-white group hover:bg-gray w-56 h-24 p-4 rounded-2xl content-center">
             <p className="text-4xl text-green  group-hover:text-white font-bold">
-              +4
+              +2
             </p>
             <p className="font-bold text-bg group-hover:text-white">
               Años de experiencia

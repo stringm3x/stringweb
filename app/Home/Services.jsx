@@ -38,8 +38,8 @@ const Services = () => {
   const toggle = (idx) => setOpenIndex(openIndex === idx ? null : idx);
 
   return (
-    <section className="flex flex-col gap-20 bg-white p-8 md:p-10">
-      <div className="mx-auto 2xl:max-w-[1280px] xl:w-2/3 text-bg font-ubuntu tracking-tight font-bold leading-[37px] text-5xl md:leading-[60px] md:text-7xl lg:leading-[75px] lg:text-8xl">
+    <section className="flex flex-col gap-10 bg-white p-8 md:p-10">
+      <div className="xl:w-2/3 text-bg font-ubuntu tracking-tight font-bold leading-[37px] text-5xl md:leading-[60px] md:text-7xl lg:leading-[75px] lg:text-8xl">
         <h1>POTENCIA TUS</h1>
         <h1>RESULTADOS</h1>
         <h1>COMERCIALES.</h1>
