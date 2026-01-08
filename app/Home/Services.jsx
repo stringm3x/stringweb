@@ -39,7 +39,7 @@ const Services = () => {
 
   return (
     <section className="flex flex-col gap-20 bg-white p-8 md:p-10">
-      <div className="xl:w-2/3 text-bg font-ubuntu tracking-tight font-bold leading-[37px] text-5xl md:leading-[60px] md:text-7xl lg:leading-[75px] lg:text-8xl">
+      <div className="mx-auto xl:max-w-[1280px] 2xl:max-w-[1280px] xl:w-2/3 text-bg font-ubuntu tracking-tight font-bold leading-[37px] text-5xl md:leading-[60px] md:text-7xl lg:leading-[75px] lg:text-8xl">
         <h1>POTENCIA TUS</h1>
         <h1>RESULTADOS</h1>
         <h1>COMERCIALES.</h1>
@@ -49,7 +49,7 @@ const Services = () => {
         Conoce nuestros servicios
       </Button>
 
-      <div className="w-full max-h-min space-y-10 pb-20">
+      <div className=" mx-auto xl:max-w-[1280px] 2xl:max-w-[1280px] w-full max-h-min space-y-10 pb-20">
         {items.map((item, index) => {
           const isOpen = openIndex === index;
           return (
