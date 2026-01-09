@@ -3,7 +3,7 @@ const servicios = [
     id: "1",
     service: "DISEÑO WEB",
     title2: "UI/UX",
-    img: "/serv/design.png",
+    img: "/serv/design4.png",
     intro:
       "En STRING sabemos que el diseño web no solo es apariencia; es una estrategia clave para potenciar el éxito de un negocio en el entorno digital.",
     p: "Nos encargamos de crear sitios visualmente impactantes con un enfoque funcional y emocional. Aplicamos principios de UX (User Experience) y UI (User Interface) para asegurar que cada usuario disfrute una navegación fluida, intuitiva y coherente con tu marca.",
@@ -35,7 +35,7 @@ const servicios = [
     id: "2",
     service: "DESARROLLO WEB",
     title2: "& PROGRAMACIÓN",
-    img: "/serv/dev.png",
+    img: "/serv/computadora.png",
     intro:
       "Construimos sitios web robustos y escalables, optimizados para rendimiento y SEO.",
     p: "Nuestro equipo emplea las últimas tecnologías (React, Next.js, Node.js) para garantizar rapidez, accesibilidad y mantenimiento sencillo.",
@@ -65,32 +65,33 @@ const servicios = [
   },
   {
     id: "3",
-    service: "OPTIMIZACIÓN",
-    title2: "& MOBILE",
-    img: "/serv/seo.png",
-    intro: "Aceleramos tu sitio y mejoramos su visibilidad en buscadores.",
-    p: "Revisamos todos los puntos críticos de rendimiento, desde imágenes hasta código, y aplicamos prácticas de SEO On-Page.",
+    service: "IMAGEN",
+    title2: "& FOTOGRAFÍA",
+    img: "/serv/imagen.png",
+    intro:
+      "Capturamos la esencia de tu marca con imágenes profesionales y atractivas.",
+    p: "Ofrecemos fotografía de productos, branding y contenidos visuales, asegurando que cada imagen refleje la identidad de tu negocio y conecte con tu audiencia.",
     content: [
-      "Lazy-loading de imágenes y assets",
-      "Minificación y concatenación de recursos",
-      "Uso de CDN y caching inteligente",
-      "Auditorías SEO con recomendaciones prácticas",
+      "Fotografía profesional de productos y servicios",
+      "Sesiones de branding para redes sociales y web",
+      "Edición y retoque de imágenes de alta calidad",
+      "Creación de contenido visual coherente con tu marca",
     ],
     faqs: [
       {
-        title: "¿Qué es Web Vitals?",
+        title: "¿Qué tipo de fotografía ofrecen?",
         content:
-          "Métricas clave de Google que miden la experiencia de usuario (LCP, FID, CLS).",
+          "Realizamos fotografía de producto, lifestyle, branding y marketing digital según las necesidades de tu marca.",
       },
       {
-        title: "¿Afecta al posicionamiento?",
+        title: "¿Entregan las imágenes editadas?",
         content:
-          "Un mejor rendimiento y experiencia reduce rebote y ayuda al SEO.",
+          "Sí, todas las imágenes se entregan retocadas, listas para usar en tu sitio web, redes sociales o publicidad.",
       },
       {
-        title: "¿Cada cuánto revisar?",
+        title: "¿Cada cuánto hacer nuevas fotos?",
         content:
-          "Recomendamos auditorías trimestrales o tras cambios mayores en el sitio.",
+          "Recomendamos actualizar imágenes periódicamente, especialmente si lanzas productos nuevos o campañas de marketing.",
       },
     ],
   },
@@ -98,7 +99,7 @@ const servicios = [
     id: "4",
     service: "SOPORTE",
     title2: "& MANTENIMIENTO",
-    img: "/serv/mante.png",
+    img: "/serv/mantenimiento.png",
     intro: "Nos encargamos de mantener tu sitio siempre actualizado y seguro.",
     p: "Realizamos backups, actualizaciones de dependencias, monitoreo y soporte técnico continuo.",
     content: [

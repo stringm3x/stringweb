@@ -47,7 +47,7 @@ const pageUs = () => {
         {/* Imagen, Descripción.*/}
         <div className="flex flex-col gap-10">
           <Image
-            src="/logo-s-white.png"
+            src="/"
             alt="Logo STRING"
             width={220}
             height={220}

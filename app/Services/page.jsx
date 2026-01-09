@@ -51,8 +51,8 @@ const pageServices = () => {
       <div className="flex flex-wrap gap-5 justify-center xl:gap-0 xl:flex-row xl:justify-around">
         {servicios.map(({ id, service, img, title2 }) => (
           <Link href={`/Services/${id}`} key={id}>
-            <div className="card w-[330px] h-[400px] 2xl:w-[410px] rounded-3xl flex flex-col justify-center bg-white group hover:bg-black hover:border-green border-2 py-5">
-              <div className=" tracking-tigh font-ubuntu font-extrabold px-5 2xl:px-2">
+            <div className="card w-[330px] h-[400px] 2xl:w-[410px] rounded-3xl flex flex-col bg-white group hover:bg-black hover:border-green border-2 pt-4">
+              <div className="tracking-tigh font-ubuntu font-extrabold px-5 2xl:px-2">
                 <h1 className="text-bg group-hover:text-white text-3xl leading-[30px] lg:leading-[10px]">
                   {service}
                 </h1>
@@ -64,9 +64,9 @@ const pageServices = () => {
               <Image
                 src={img}
                 alt={service}
-                width={500}
-                height={500}
-                className="object-cover"
+                width={400}
+                height={400}
+                className="object-cover items-end"
               />
             </div>
           </Link>

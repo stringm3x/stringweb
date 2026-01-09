@@ -80,7 +80,7 @@ const pageProyects = () => {
           El mejor diseño para tu negocio.
         </h1>
 
-        <div className="w-full grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3 gap-8 place-items-center">
+        <div className="w-full grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3 gao-5 xl:gap-8 place-items-center">
           {proyects.map((item) => (
             <Link href={item.href} key={item.id} className="w-full ">
               <div className="card group relative flex flex-col justify-end p-5 w-[320px] md:w-[350px] lg:w-[400px] xl:w-[430px] h-80 rounded-xl overflow-hidden shadow-lg hover:scale-105 transition-transform">
