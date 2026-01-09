@@ -41,17 +41,17 @@ const pageServices = () => {
   }, []);
 
   return (
-    <section className="overflow-hidden min-h-screen mx-auto  flex flex-col justify-center py-10">
+    <section className="overflow-hidden min-h-screen mx-auto 2xl:max-w-[1280px] flex flex-col justify-center py-10">
       <div className="flex flex-col justify-center py-16 ">
         <h1 className="text-5xl md:text-7xl lg:text-8xl font-ubuntu font-bold pl-5 md:pl-20 justify-self-center">
           SERVICIOS
         </h1>
       </div>
 
-      <div className="flex flex-wrap gap-5 justify-center xl:gap-0 xl:flex-row xl:justify-around">
+      <div className="flex flex-wrap gap-5 justify-center xl:gap-5 xl:flex-row xl:justify-around 2xl:justify-evenly">
         {servicios.map(({ id, service, img, title2 }) => (
           <Link href={`/Services/${id}`} key={id}>
-            <div className="card w-[330px] h-[400px] 2xl:w-[410px] rounded-3xl flex flex-col bg-white group hover:bg-black hover:border-green border-2 pt-4">
+            <div className="card w-[330px] h-[400px] rounded-3xl flex flex-col bg-white group hover:bg-black hover:border-green border-2 pt-4">
               <div className="tracking-tigh font-ubuntu font-extrabold px-5 2xl:px-2">
                 <h1 className="text-bg group-hover:text-white text-3xl leading-[30px] lg:leading-[10px]">
                   {service}

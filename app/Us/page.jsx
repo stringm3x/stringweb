@@ -47,11 +47,11 @@ const pageUs = () => {
         {/* Imagen, Descripción.*/}
         <div className="flex flex-col gap-10">
           <Image
-            src="/"
+            src="/us2.png"
             alt="Logo STRING"
-            width={220}
-            height={220}
-            className="object-contain h-72 w-full border-1 border-white"
+            width={820}
+            height={420}
+            className="object-contain rounded-3xl"
             priority
           />
 
@@ -86,7 +86,7 @@ const pageUs = () => {
                 : "border-white text-white"
             }`}
           >
-            Mission
+            Misión
           </button>
 
           <button
@@ -98,7 +98,7 @@ const pageUs = () => {
                 : "border border-white text-white"
             }`}
           >
-            Vision
+            Visión
           </button>
         </div>
 
@@ -106,26 +106,38 @@ const pageUs = () => {
         <div className="flex flex-col-reverse lg:flex-row gap-5 xl:gap-10 items-center">
           {/* IMAGEN MISION */}
           <div
-            className={`rounded-2xl bg-black border border-white transition-all duration-500
+            className={`relative rounded-2xl bg-black border border-white transition-all duration-500
             ${
               active === "mission"
                 ? "w-[320px] h-[320px] xl:w-[420px] xl:h-[420px]"
                 : "w-[180px] h-[180px] xl:w-[280px] xl:h-[280px] opacity-50"
             }`}
           >
-            {/* Aquí va la imagen */}
+            <Image
+              src="/mision2.png"
+              alt="Logo STRING"
+              fill
+              className="absolute object-cover rounded-3xl"
+              priority
+            />
           </div>
 
           {/* IMAGEN VISION */}
           <div
-            className={`rounded-2xl bg-black border border-white transition-all duration-500
+            className={`relative rounded-2xl bg-black border border-white transition-all duration-500
             ${
               active === "vision"
                 ? "w-[320px] h-[320px] xl:w-[420px] xl:h-[420px]"
                 : "w-[180px] h-[180px] xl:w-[280px] xl:h-[280px] opacity-50"
             }`}
           >
-            {/* Aquí va la imagen */}
+            <Image
+              src="/vision.png"
+              alt="Logo STRING"
+              fill
+              className="absolut object-cover rounded-3xl"
+              priority
+            />
           </div>
 
           {/* CAJA BLANCA */}
@@ -160,7 +172,8 @@ const pageUs = () => {
       <section className="flex flex-col gap-10 sm:gap-0 lg:flex-row py-10">
         <div className="sm:w-1/2 flex flex-col gap-5">
           <h1 className="text-5xl lg:text-6xl font-semibold leading-10">
-            NUESTRA <span className="text-green">FORMA</span><br />
+            NUESTRA <span className="text-green">FORMA</span>
+            <br />
             DE <span className="text-green">TRABAJO</span>
           </h1>
           <div className="flex flex-col gap-3 text-md lg:text-lg">
