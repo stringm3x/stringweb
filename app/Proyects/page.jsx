@@ -14,7 +14,7 @@ const proyects = [
   {
     id: "YUMA",
     href: "https://yuma-three.vercel.app/",
-    img: "/proyects/YUMA.png",
+    img: "/proyects/yuma.png",
   },
   {
     id: "Clementina Jewlery",
