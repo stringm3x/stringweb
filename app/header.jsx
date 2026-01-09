@@ -48,14 +48,14 @@ export default function Header() {
         <div className="flex justify-end p-4">
           <button
             onClick={() => setIsOpen(false)}
-            className="text-white text-3xl"
+            className="text-white text-4xl"
             aria-label="Cerrar menú"
           >
             <FaTimes />
           </button>
         </div>
 
-        <nav className="mt-12 flex flex-col items-end space-y-8 pr-10">
+        <nav className="mt-12 flex flex-col items-end space-y-8 pr-5 sm:pr-10">
           {menuItems.map(({ label, href }) => {
             const active = pathname === href;
             return (
@@ -63,10 +63,10 @@ export default function Header() {
                 key={href}
                 href={href}
                 onClick={() => setIsOpen(false)}
-                className={`uppercase font-bold text-3xl md:text-6xl transition-colors ${
+                className={`uppercase font-bold text-4xl md:text-6xl transition-colors ${
                   active
                     ? "text-green"
-                    : "text-white hover:text-green hover:text-5xl hover:md:text-8xl"
+                    : "text-white hover:text-green hover:text-6xl hover:md:text-8xl"
                 }`}
               >
                 {label}

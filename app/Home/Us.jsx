@@ -14,7 +14,7 @@ const Us = () => {
           className="object-cover absolute brightness-75 rounded-2xl"
         />
 
-        <div className="relative font-bold tracking-tight text-4xl leading-[30px] sm:text-5xl sm:leading-[45px] lg:text-7xl  xl:text-8xl lg:leading-[55px] xl:leading-[65px] ">
+        <div className="relative font-bold tracking-tight text-4xl leading-[25px] sm:text-5xl sm:leading-[45px] lg:text-7xl  xl:text-8xl lg:leading-[55px] xl:leading-[65px] ">
           <h1>Hemos ayudado a las</h1>
           <h1>marcas a crecer con</h1>
           <h1>claridad y confianza.</h1>

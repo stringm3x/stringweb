@@ -23,7 +23,7 @@ export default function ServicioPage({ params: paramsPromise }) {
   const toggle = (idx) => setOpenIndex(openIndex === idx ? null : idx);
 
   return (
-    <section className="mx-auto 2xl:max-w-[1280px] p-3 md:p-10 xl:p-20 space-y-10 overflow-hidden">
+    <section className="flex flex-col mx-auto 2xl:max-w-[1280px] p-3 md:p-10 xl:p-20 space-y-10 overflow-hidden">
       {/* Contenido principal */}
       <div className="bg-white w-full h-full rounded-3xl text-bg flex flex-col gap-5 items-center p-5 sm:p-7 lg:p-10">
         <h1 className="sm:text-2xl lg:text-3xl text-gray font-semibold">
@@ -130,7 +130,7 @@ export default function ServicioPage({ params: paramsPromise }) {
       </div>
 
       {/* Botón volver */}
-      <div className="justify-self-center py-10">
+      <div className="self-center py-10">
         <Link href="/Services">
           <Button className="bg-green text-bg text-md md:text-xl md:py-7 md:px-10 hover:text-white hover:bg-black">
             Volver a Servicios

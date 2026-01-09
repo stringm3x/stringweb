@@ -8,7 +8,7 @@ import Contact from "../Home/Contact";
 const proyects = [
   {
     id: "1",
-    title: "Ropa",
+    title: "E-Commerce",
     href: "https://garm.framer.website/",
     img: "/design/ropa.png",
   },
@@ -20,13 +20,13 @@ const proyects = [
   },
   {
     id: "3",
-    title: "Carros",
+    title: "E-Commerce",
     href: "https://drivoxe.framer.website/",
     img: "/design/carros.png",
   },
   {
     id: "4",
-    title: "Restuarante",
+    title: "Menu",
     href: "https://qitchen-template.framer.website/?via=pawelgola",
     img: "/design/restuarante.png",
   },
@@ -80,20 +80,19 @@ const pageProyects = () => {
           El mejor diseño para tu negocio.
         </h1>
 
-        <div className="w-full grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 place-items-center">
+        <div className="w-full grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3 gap-8 place-items-center">
           {proyects.map((item) => (
-            <Link
-              href={item.href}
-              key={item.id}
-              className="w-full flex justify-center content-end"
-            >
-              <div className="card group relative m-5 w-[300px] md:w-[280px] lg:w-[260px] xl:w-[430px] h-80 rounded-xl overflow-hidden shadow-lg hover:scale-105 transition-transform">
+            <Link href={item.href} key={item.id} className="w-full ">
+              <div className="card group relative flex flex-col justify-end p-5 w-[320px] md:w-[350px] lg:w-[400px] xl:w-[430px] h-80 rounded-xl overflow-hidden shadow-lg hover:scale-105 transition-transform">
                 <Image
                   src={item.img}
                   alt="proyect"
                   fill
-                  className="object-cover absolute group-hover:brightness-75"
+                  className="object-cover absolute group-hover:brightness-50"
                 />
+                <h1 className="hidden group-hover:flex absolute font-ubuntu text-4xl text-white">
+                  {item.title}{" "}
+                </h1>
               </div>
             </Link>
           ))}
