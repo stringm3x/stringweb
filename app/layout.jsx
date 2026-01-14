@@ -1,4 +1,4 @@
-import { Geist, Anton, Ubuntu } from "next/font/google";
+import { Geist, Anton, Ubuntu} from "next/font/google";
 import { Providers } from "./provider";
 import "./globals.css";
 import Footer from "./Footer";

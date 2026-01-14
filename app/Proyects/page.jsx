@@ -27,9 +27,9 @@ const proyects = [
     img: "/proyects/incode.png",
   },
   {
-    id: "MULBET",
-    href: "https://mulbet.vercel.app/",
-    img: "/proyects/mulbet.png",
+    id: "Pecado de Canela",
+    href: "https://www.pecadodecanela.com/",
+    img: "/proyects/pecadodecanela.png",
   },
   {
     id: "Barrio Bravo",
