@@ -40,8 +40,8 @@ export default function Contact() {
         onSubmit={handleSubmit}
         className="w-full max-w-2xl flex flex-col gap-10"
       >
-        <h1 className="text-center text-4xl md:text-7xl">
-          ¡Trabajemos Juntos!
+        <h1 className="text-center tracking-tight font-bold  text-4xl md:text-7xl">
+          SOLICITA TU <span className="">PROPUESTA</span> VISUAL <span className="text-green">GRATUITA</span>
         </h1>
 
         <div className="p-5 flex flex-col gap-5 bg-beige2 rounded-2xl">
@@ -99,6 +99,14 @@ export default function Contact() {
           </p>
         )}
       </form>
+
+      <a
+        href="https://wa.me/525545524847?text=Hola,%20quiero%20una%20propuesta%20web%20para%20mi%20negocio"
+        target="_blank"
+        className="bg-white text-black text-xl py-5 px-8 rounded-3xl text-center hover:border-2 hover:border-green"
+      >
+        Escribir por WhatsApp
+      </a>
     </section>
   );
 }

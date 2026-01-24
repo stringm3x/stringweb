@@ -6,10 +6,10 @@ import { FaFacebookF, FaInstagram, FaWhatsapp } from "react-icons/fa";
 
 const pages = [
   { id: "1", title: "Inicio", link: "/" },
-  { id: "2", title: "Servicios", link: "/Services" },
-  { id: "3", title: "Proyectos", link: "/Proyects" },
+  { id: "2", title: "¿Cómo te ayudamos?", link: "/Services" },
+  { id: "3", title: "Trabajos", link: "/Proyects" },
   { id: "4", title: "Conócenos", link: "/Us" },
-  { id: "5", title: "Cotizador", link: "/Contact" },
+  { id: "5", title: "Contacto", link: "/Contact" },
 ];
 
 export default function Footer() {
@@ -18,29 +18,24 @@ export default function Footer() {
       <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-8 items-center">
         {/* Columna izquierda: redes y contacto */}
         <div className="flex flex-col items-center md:items-start space-y-10">
-          <div className="flex space-x-4">
-            <Link
-              href="https://www.facebook.com/profile.php?id=61576042750915"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              <FaFacebookF className="text-2xl hover:text-green transition-colors" />
-            </Link>
+          <div className="flex space-x-6">
             <Link
               href="https://www.instagram.com/stringwebmx/"
               target="_blank"
               rel="noopener noreferrer"
             >
-              <FaInstagram className="text-2xl hover:text-green transition-colors" />
+              <FaInstagram className="text-3xl hover:text-green transition-colors" />
+            </Link>
+
+            <Link
+              href="https://wa.me/525545524847?text=¡Hola!%20Quiero%20más%20info%20sobre%20STRING"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <FaWhatsapp className="text-3xl hover:text-green transition-colors" />
             </Link>
           </div>
-          <Link
-            href="https://wa.me/525545524847?text=¡Hola!%20Quiero%20más%20info%20sobre%20STRING"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <FaWhatsapp className="text-3xl hover:text-green transition-colors" />
-          </Link>
+
           <p className="text-lg">stringwebmx@gmail.com</p>
         </div>
 

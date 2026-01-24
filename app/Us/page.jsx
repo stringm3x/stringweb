@@ -117,7 +117,7 @@ const pageUs = () => {
               src="/mision2.png"
               alt="Logo STRING"
               fill
-              className="absolute object-cover rounded-3xl"
+              className="absolute object-cover rounded-2xl"
               priority
             />
           </div>
@@ -135,7 +135,7 @@ const pageUs = () => {
               src="/vision.png"
               alt="Logo STRING"
               fill
-              className="absolut object-cover rounded-3xl"
+              className="absolut object-cover rounded-2xl"
               priority
             />
           </div>

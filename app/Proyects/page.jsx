@@ -12,14 +12,21 @@ const proyects = [
     img: "/proyects/alba&aguilar.png",
   },
   {
+    id: "GARM",
+    title: "E-Commerce",
+    href: "https://garm.framer.website/",
+    img: "/design/ropa.png",
+  },
+  {
     id: "YUMA",
     href: "https://yuma-three.vercel.app/",
     img: "/proyects/yuma.png",
   },
   {
-    id: "Clementina Jewlery",
-    href: "https://clementinajewelry.com/?utm_source=ig&utm_medium=social&utm_content=link_in_bio&fbclid=PAZXh0bgNhZW0CMTEAc3J0YwZhcHBfaWQMMjU2MjgxMDQwNTU4AAGnXhdBmzH_xOxRlRZEzy8TUvSFxte6DLnTF4_bxoit-vrF8CXmMDrW11StBPo_aem_drcE83mHkJmX2j1DYoaAIA",
-    img: "/proyects/clementina.png",
+    id: "DRIVOXE",
+    title: "E-Commerce",
+    href: "https://drivoxe.framer.website/",
+    img: "/design/carros.png",
   },
   {
     id: "INCODE",
@@ -27,14 +34,38 @@ const proyects = [
     img: "/proyects/incode.png",
   },
   {
+    id: "CAELORA",
+    title: "Joyeria",
+    href: "https://caelora.framer.website/",
+    img: "/design/joyeria.png",
+  },
+  {
     id: "Pecado de Canela",
     href: "https://www.pecadodecanela.com/",
     img: "/proyects/pecadodecanela.png",
   },
   {
+    id: "SUSHI SENSATION",
+    title: "Menu",
+    href: "https://qitchen-template.framer.website/?via=pawelgola",
+    img: "/design/restuarante.png",
+  },
+  {
     id: "Barrio Bravo",
     href: "https://brarriobravo.myshopify.com/",
     img: "/proyects/barriobravo.png",
+  },
+  {
+    id: "CONSULT",
+    title: "Landing Page",
+    href: "https://agevia.framer.website/",
+    img: "/design/landing.png",
+  },
+  {
+    id: "VERDANT",
+    title: "Portafolio",
+    href: "https://architects.framer.website/",
+    img: "/design/portafolio.png",
   },
 ];
 
@@ -84,7 +115,7 @@ const pageProyects = () => {
                   fill
                   className="object-cover absolute group-hover:brightness-75"
                 />
-                <h1 className="hidden group-hover:flex absolute font-ubuntu text-4xl text-white">
+                <h1 className="hidden group-hover:flex absolute leading-relaxed font-ubuntu text-4xl text-green">
                   {item.id}{" "}
                 </h1>
               </div>

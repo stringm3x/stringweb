@@ -7,11 +7,10 @@ import { FaBars, FaTimes, FaWhatsapp } from "react-icons/fa";
 
 const menuItems = [
   { label: "Inicio", href: "/" },
-  { label: "Servicios", href: "/Services" },
-  { label: "Proyectos", href: "/Proyects" },
-  { label: "Diseños", href: "/Design" },
-  { label: "Conócenos", href: "/Us" },
-  { label: "Cotizador", href: "/Contact" },
+  { label: "¿Comó te ayudamos?", href: "/Services" },
+  { label: "Trabajos", href: "/Proyects" },
+  { label: "Proceso", href: "/Us" },
+  { label: "Contacto", href: "/Contact" },
 ];
 
 export default function Header() {
@@ -33,7 +32,7 @@ export default function Header() {
           href="https://wa.me/525545524847?text=¡Hola!%20Quiero%20más%20info%20sobre%20STRING"
           target="_blank"
           rel="noopener noreferrer"
-          className="text-gray hover:text-white text-2xl"
+          className="text-gray hover:text-green text-2xl"
           aria-label="WhatsApp"
         >
           <FaWhatsapp size={30} />

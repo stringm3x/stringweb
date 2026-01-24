@@ -68,7 +68,7 @@ const Proyects = () => {
       <section className="flex flex-col gap-20 bg-bg w-full h-full rounded-2xl p-5 py-20 md:p-10 md:py-32  mx-auto 2xl:max-w-[1280px]">
         <div className="xl:w-3/5 self-center text-center">
           <h1 className="text-3xl md:text-5xl lg:text-6xl text-gray tracking-tight ">
-            NUESTROS DISEÑOS
+            NUESTROS PROYECTOS
           </h1>
           <h1 className="text-6xl md:text-8xl lg:text-9xl font-ubuntu font-bold text-green tracking-tight ">
             RECIENTES
@@ -109,7 +109,7 @@ const Proyects = () => {
 
         <Link href="/Design" className="self-center">
           <Button className="bg-green text-bg text-lg font-bold w-40 lg:w-42 p-8 self-center rounded-full">
-            Ver Diseños
+            Ver Proyectos
           </Button>
         </Link>
       </section>
