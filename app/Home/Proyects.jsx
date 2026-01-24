@@ -107,7 +107,7 @@ const Proyects = () => {
           </div>
         </div>
 
-        <Link href="/Design" className="self-center">
+        <Link href="/Proyects" className="self-center">
           <Button className="bg-green text-bg text-lg font-bold w-40 lg:w-42 p-8 self-center rounded-full">
             Ver Proyectos
           </Button>
