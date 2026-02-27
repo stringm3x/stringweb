@@ -161,14 +161,14 @@ const ServicePage = ({ params: paramsPromise }) => {
 
           <h1
             ref={titleRef}
-            className="text-5xl md:text-7xl lg:text-8xl font-ubuntu font-black tracking-tight"
+            className="text-5xl md:text-7xl lg:text-8xl font-ubuntu font-black tracking-tighter"
           >
             <span className="bg-clip-text text-transparent">
               {servicio.service}
             </span>
           </h1>
 
-          <p className="text-xl md:text-2xl text-gray max-w-3xl mx-auto leading-relaxed">
+          <p className="text-xl lg:text-2xl text-gray max-w-3xl mx-auto leading-relaxed">
             {servicio.intro}
           </p>
         </div>
@@ -177,7 +177,7 @@ const ServicePage = ({ params: paramsPromise }) => {
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center mb-20">
           {/* Texto */}
           <div ref={contentRef} className="space-y-6">
-            <h2 className="text-3xl md:text-4xl font-ubuntu font-bold">
+            <h2 className="text-3xl lg:text-4xl font-ubuntu font-bold">
               Transformamos tu visión en realidad digital
             </h2>
 
@@ -208,7 +208,7 @@ const ServicePage = ({ params: paramsPromise }) => {
           {/* Imagen */}
           <div
             ref={imageRef}
-            className="relative h-[400px] lg:h-[500px] rounded-2xl overflow-hidden shadow-2xl"
+            className="relative h-[500px] rounded-2xl overflow-hidden shadow-2xl"
           >
             <Image
               src={servicio.img}
@@ -217,7 +217,6 @@ const ServicePage = ({ params: paramsPromise }) => {
               className="object-cover hover:scale-105 transition-transform duration-700"
               priority
             />
-            <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent" />
           </div>
         </div>
 
@@ -267,7 +266,7 @@ const ServicePage = ({ params: paramsPromise }) => {
         {servicio.faqs && servicio.faqs.length > 0 && (
           <div ref={faqRef} className="scroll-animate max-w-3xl mx-auto">
             <div className="text-center mb-10">
-              <h3 className="text-3xl md:text-4xl font-ubuntu font-bold text-gray-900 mb-2">
+              <h3 className="text-3xl md:text-4xl font-ubuntu font-bold text-green mb-2">
                 Preguntas Frecuentes
               </h3>
               <p className="text-gray">
@@ -349,8 +348,8 @@ const ServicePage = ({ params: paramsPromise }) => {
               <FiArrowLeft className="ml-2 rotate-180" />
             </Link>
             <Link
-              href="/portfolio"
-              className="inline-flex items-center px-8 py-4 border-2 border-white text-white font-semibold rounded-full hover:bg-white hover:text-green-600 transition-all duration-300"
+              href="/proyects"
+              className="inline-flex items-center px-8 py-4 border-2 border-white text-white font-semibold rounded-full hover:bg-white hover:text-green transition-all duration-300"
             >
               Ver proyectos
             </Link>

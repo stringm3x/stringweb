@@ -7,7 +7,7 @@ import servicios from "./data";
 
 const PageServices = () => {
   return (
-    <section className="min-h-screen bg-white py-20 px-4">
+    <section className="min-h-screen bg-white py-20 px-10">
       <div className="max-w-7xl mx-auto">
         {/* Header */}
         <div className="text-center mb-16">
@@ -15,7 +15,7 @@ const PageServices = () => {
             ✦ Lo que hacemos
           </span>
 
-          <h1 className="text-5xl md:text-7xl font-ubuntu font-extrabold text-black mb-4">
+          <h1 className="text-[85px] md:text-9xl tracking-tighter font-ubuntu font-extrabold text-black mb-4">
             Servicios
           </h1>
 
@@ -26,14 +26,14 @@ const PageServices = () => {
         </div>
 
         {/* Grid de servicios - Versión simplificada */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-6">
           {servicios.map((servicio, index) => (
             <Link
               href={`/Services/${servicio.id}`}
               key={servicio.id}
               className="block"
             >
-              <div className="bg-white rounded-2xl overflow-hidden shadow-lg hover:shadow-xl transition-shadow">
+              <div className="bg-white border-1 rounded-2xl overflow-hidden shadow-lg hover:shadow-xl transition-shadow">
                 {/* Imagen */}
                 <div className="relative h-48 w-full">
                   <Image
@@ -45,8 +45,8 @@ const PageServices = () => {
                 </div>
 
                 {/* Contenido */}
-                <div className="p-6">
-                  <h2 className="text-2xl font-ubuntu font-bold text-black mb-1">
+                <div className="p-6 tracking-tighter">
+                  <h2 className="text-2xl sm:text-3xl 2xl:text-2xl leading-3 2xl:leading-[20px] font-ubuntu font-bold text-black mb-1">
                     {servicio.service}
                   </h2>
 
