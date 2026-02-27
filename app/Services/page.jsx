@@ -116,7 +116,7 @@ const PageServices = () => {
           </p>
 
           <Link
-            href="/Quote"
+            href="/quote"
             className="inline-flex items-center px-6 py-3 bg-green text-white font-semibold rounded-full transition-colors"
           >
             Hablemos de tu proyecto

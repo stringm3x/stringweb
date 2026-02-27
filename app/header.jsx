@@ -10,7 +10,7 @@ const menuItems = [
   { label: "Servicios", href: "/Services" },
   { label: "Proyectos", href: "/Proyects" },
   { label: "Nostros", href: "/Us" },
-  { label: "Cotización", href: "/Quote" },
+  { label: "Cotización", href: "/quote" },
 ];
 
 export default function Header() {

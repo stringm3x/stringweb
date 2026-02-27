@@ -19,7 +19,7 @@ const pages = [
   { id: "2", title: "Servicios", link: "/Services" },
   { id: "3", title: "Proyectos", link: "/Proyects" },
   { id: "4", title: "Nosotros", link: "/Us" },
-  { id: "5", title: "Cotización", link: "/Quote" },
+  { id: "5", title: "Cotización", link: "/quote" },
 ];
 
 const socialLinks = [

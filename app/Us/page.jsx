@@ -491,7 +491,7 @@ const PageUs = () => {
                 className="lg:flex lg:justify-end pt-4"
               >
                 <a
-                  href="/Quote"
+                  href="/quote"
                   className="inline-flex items-center px-8 py-4 bg-gradient-to-r from-green-500 to-green-600 text-white font-semibold rounded-full shadow-lg hover:shadow-xl transition-all duration-300"
                 >
                   Hablemos de tu proyecto

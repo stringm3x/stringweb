@@ -341,7 +341,7 @@ const ServicePage = ({ params: paramsPromise }) => {
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Link
-              href="/Quote"
+              href="/quote"
               className="inline-flex items-center px-8 py-4 bg-white text-green font-semibold rounded-full hover:shadow-xl hover:scale-105 transition-all duration-300"
             >
               Solicitar cotización
