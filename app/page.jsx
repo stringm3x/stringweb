@@ -1,10 +1,12 @@
 import React from "react";
-import Hero from "./home/Hero";
-import Content from "./home/Content";
-import Proyects from "./home/Proyects";
-import Services from "./home/Services";
-import Us from "./home/Us";
-import Steps from "./home/Steps";
+
+// ✅ Usa rutas absolutas con @
+import Hero from "@/app/home/Hero";
+import Content from "@/app/home/Content";
+import Proyects from "@/app/home/Proyects";
+import Services from "@/app/home/Services";
+import Us from "@/app/home/Us";
+import Steps from "@/app/home/Steps";
 
 const Home = () => {
   return (
@@ -13,7 +15,7 @@ const Home = () => {
       <Content />
       <Proyects />
       <Services />
-      <Steps/>
+      <Steps />
       <Us />
     </div>
   );
