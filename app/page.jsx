@@ -6,7 +6,7 @@ import Services from "./home/Services";
 import Us from "./home/Us";
 import Steps from "./home/Steps";
 
-const Home = () => {
+const page = () => {
   return (
     <div className="overflow-hidden">
       <Hero />
@@ -19,4 +19,4 @@ const Home = () => {
   );
 };
 
-export default Home;
+export default page;
