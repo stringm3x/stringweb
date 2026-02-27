@@ -79,7 +79,7 @@ const Proyects = () => {
           </p>
         </div>
 
-        <div className="grid lg:grid-rows-8 lg:grid-cols-2 gap-5 h-96 ">
+        <div className="grid lg:grid-rows-8 lg:grid-cols-2 gap-5 h-80 ">
           <div className="card relative row-span-8 col-span-1 rounded-2xl">
             <Image
               src="/design/joyeria.png"

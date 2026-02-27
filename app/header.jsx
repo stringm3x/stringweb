@@ -7,10 +7,10 @@ import { FaBars, FaTimes, FaWhatsapp } from "react-icons/fa";
 
 const menuItems = [
   { label: "Inicio", href: "/" },
-  { label: "¿Comó te ayudamos?", href: "/Services" },
-  { label: "Trabajos", href: "/Proyects" },
-  { label: "Proceso", href: "/Us" },
-  { label: "Contacto", href: "/Contact" },
+  { label: "Servicios", href: "/services" },
+  { label: "Proyectos", href: "/proyects" },
+  { label: "Nostros", href: "/us" },
+  { label: "Cotización", href: "/quote" },
 ];
 
 export default function Header() {

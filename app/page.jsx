@@ -1,11 +1,10 @@
 import React from "react";
-import Hero from "./Home/Hero";
-import Content from "./Home/Content";
-import Proyects from "./Home/Proyects";
-import Services from "./Home/Services";
-import Contact from "./Home/Contact";
-import Us from "./Home/Us";
-import Steps from "./Home/Steps";
+import Hero from "./home/Hero";
+import Content from "./home/Content";
+import Proyects from "./home/Proyects";
+import Services from "./home/Services";
+import Us from "./home/Us";
+import Steps from "./home/Steps";
 
 const Home = () => {
   return (

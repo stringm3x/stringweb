@@ -6,10 +6,10 @@ import { FaFacebookF, FaInstagram, FaWhatsapp } from "react-icons/fa";
 
 const pages = [
   { id: "1", title: "Inicio", link: "/" },
-  { id: "2", title: "¿Cómo te ayudamos?", link: "/Services" },
-  { id: "3", title: "Trabajos", link: "/Proyects" },
-  { id: "4", title: "Conócenos", link: "/Us" },
-  { id: "5", title: "Contacto", link: "/Contact" },
+  { id: "2", title: "Servicios", link: "/services" },
+  { id: "3", title: "Proyectos", link: "/proyects" },
+  { id: "4", title: "Nosotros", link: "/us" },
+  { id: "5", title: "Cotización", link: "/quote" },
 ];
 
 export default function Footer() {
