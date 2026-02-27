@@ -1,79 +1,102 @@
 "use client";
 
-import React, { useState, useEffect } from "react";
-import gsap from "gsap";
+import React, { useState, useEffect, useRef } from "react";
 import Image from "next/image";
-import servicios from "./data";
 import Link from "next/link";
-import { Button } from "@heroui/button";
+import servicios from "./data";
 
-const pageServices = () => {
-  const [openId, setOpenId] = useState(null);
-
-  const toggle = (id) => {
-    setOpenId(openId === id ? null : id);
-  };
-
-  useEffect(() => {
-    const cards = document.querySelectorAll(".card");
-
-    cards.forEach((card) => {
-      const tl = gsap.timeline({ paused: true });
-
-      tl.to(card, {
-        scale: 1.05,
-        x: window.innerWidth >= 1024 ? 15 : 0,
-        duration: 0.3,
-        ease: "power2.out",
-      });
-
-      const enter = () => tl.play();
-      const leave = () => tl.reverse();
-
-      card.addEventListener("mouseenter", enter);
-      card.addEventListener("mouseleave", leave);
-
-      return () => {
-        card.removeEventListener("mouseenter", enter);
-        card.removeEventListener("mouseleave", leave);
-      };
-    });
-  }, []);
-
+const PageServices = () => {
   return (
-    <section className="overflow-hidden min-h-screen mx-auto 2xl:max-w-[1280px] flex flex-col justify-center py-10">
-      <div className="flex flex-col justify-center py-16 ">
-        <h1 className="text-5xl md:text-7xl lg:text-8xl font-ubuntu font-bold pl-5  justify-self-center tracking-tight">
-          ¿CÓMO TE <span className="text-green">AYUDAMOS?</span>
-        </h1>
-      </div>
+    <section className="min-h-screen bg-white py-20 px-4">
+      <div className="max-w-7xl mx-auto">
+        {/* Header */}
+        <div className="text-center mb-16">
+          <span className="inline-block px-4 py-2 bg-green rounded-full text-sm font-semibold mb-4">
+            ✦ Lo que hacemos
+          </span>
 
-      <div className="flex flex-wrap gap-5 justify-center xl:gap-5 xl:flex-row xl:justify-around 2xl:justify-evenly">
-        {servicios.map(({ id, service, img, title2 }) => (
-          <Link href={`/services/${id}`} key={id}>
-            <div className="card w-[330px] h-[400px] rounded-3xl flex flex-col bg-white group hover:bg-black hover:border-green border-2 pt-6 pl-2">
-              <div className="tracking-tigh font-ubuntu font-extrabold px-5 2xl:px-2">
-                <h1 className="text-bg group-hover:text-white text-3xl leading-[30px] lg:leading-[10px]">
-                  {service}
-                </h1>
-                <h1 className="text-green text-3xl leading-[30px] lg:leading-[40px]">
-                  {title2}
-                </h1>
+          <h1 className="text-5xl md:text-7xl font-ubuntu font-extrabold text-black mb-4">
+            Servicios
+          </h1>
+
+          <p className="text-gray max-w-2xl mx-auto text-lg">
+            Soluciones digitales personalizadas para llevar tu negocio al
+            siguiente nivel.
+          </p>
+        </div>
+
+        {/* Grid de servicios - Versión simplificada */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+          {servicios.map((servicio, index) => (
+            <Link
+              href={`/Services/${servicio.id}`}
+              key={servicio.id}
+              className="block"
+            >
+              <div className="bg-white rounded-2xl overflow-hidden shadow-lg hover:shadow-xl transition-shadow">
+                {/* Imagen */}
+                <div className="relative h-48 w-full">
+                  <Image
+                    src={servicio.img}
+                    alt={servicio.service}
+                    fill
+                    className="object-cover"
+                  />
+                </div>
+
+                {/* Contenido */}
+                <div className="p-6">
+                  <h2 className="text-2xl font-ubuntu font-bold text-black mb-1">
+                    {servicio.service}
+                  </h2>
+
+                  <h3 className="text-lg font-ubuntu text-green mb-3">
+                    {servicio.title2}
+                  </h3>
+
+                  <p className="text-gray text-sm line-clamp-2">
+                    {servicio.intro}
+                  </p>
+
+                  <div className="mt-4 flex items-center text-green font-medium">
+                    Ver detalles
+                    <svg
+                      className="w-4 h-4 ml-1"
+                      fill="none"
+                      stroke="currentColor"
+                      viewBox="0 0 24 24"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth={2}
+                        d="M9 5l7 7-7 7"
+                      />
+                    </svg>
+                  </div>
+                </div>
               </div>
+            </Link>
+          ))}
+        </div>
 
-              <Image
-                src={img}
-                alt={service}
-                width={400}
-                height={400}
-                className="object-cover items-end"
-              />
-            </div>
+        {/* Footer */}
+        <div className="text-center mt-16">
+          <p className="text-gray mb-6">
+            ¿No encuentras lo que buscas? Todos los proyectos son
+            personalizados.
+          </p>
+
+          <Link
+            href="/Quote"
+            className="inline-flex items-center px-6 py-3 bg-green text-white font-semibold rounded-full hover:bg-green-700 transition-colors"
+          >
+            Hablemos de tu proyecto
           </Link>
-        ))}
+        </div>
       </div>
     </section>
   );
 };
 
-export default pageServices;
+export default PageServices;
