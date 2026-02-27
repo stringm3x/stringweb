@@ -50,7 +50,7 @@ const pageServices = () => {
 
       <div className="flex flex-wrap gap-5 justify-center xl:gap-5 xl:flex-row xl:justify-around 2xl:justify-evenly">
         {servicios.map(({ id, service, img, title2 }) => (
-          <Link href={`/services/${id}`} key={id}>
+          <Link href={`/Services/${id}`} key={id}>
             <div className="card w-[330px] h-[400px] rounded-3xl flex flex-col bg-white group hover:bg-black hover:border-green border-2 pt-6 pl-2">
               <div className="tracking-tigh font-ubuntu font-extrabold px-5 2xl:px-2">
                 <h1 className="text-bg group-hover:text-white text-3xl leading-[30px] lg:leading-[10px]">

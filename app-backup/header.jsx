@@ -7,10 +7,10 @@ import { FaBars, FaTimes, FaWhatsapp } from "react-icons/fa";
 
 const menuItems = [
   { label: "Inicio", href: "/" },
-  { label: "Servicios", href: "/Services" },
-  { label: "Proyectos", href: "/Proyects" },
-  { label: "Nostros", href: "/Us" },
-  { label: "Cotización", href: "/Quote" },
+  { label: "Servicios", href: "/services" },
+  { label: "Proyectos", href: "/proyects" },
+  { label: "Nostros", href: "/us" },
+  { label: "Cotización", href: "/quote" },
 ];
 
 export default function Header() {
@@ -59,7 +59,7 @@ export default function Header() {
             const active = pathname === href;
             return (
               <Link
-                key={label}
+                key={href}
                 href={href}
                 onClick={() => setIsOpen(false)}
                 className={`uppercase font-bold text-4xl md:text-6xl transition-colors ${
