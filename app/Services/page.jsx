@@ -6,6 +6,34 @@ import Link from "next/link";
 import servicios from "./data";
 
 const PageServices = () => {
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
+  // Mientras no esté montado en cliente, renderiza versión estática
+  if (!mounted) {
+    return (
+      <section className="min-h-screen bg-white py-20 px-10">
+        <div className="max-w-7xl mx-auto">
+          <div className="text-center mb-16">
+            <span className="inline-block px-4 py-2 bg-green rounded-full text-sm font-semibold mb-4">
+              ✦ Lo que hacemos
+            </span>
+            <h1 className="text-[85px] md:text-9xl tracking-tighter font-ubuntu font-extrabold text-black mb-4">
+              Servicios
+            </h1>
+            <p className="text-gray max-w-2xl mx-auto text-lg">
+              Soluciones digitales personalizadas para llevar tu negocio al
+              siguiente nivel.
+            </p>
+          </div>
+        </div>
+      </section>
+    );
+  }
+
   return (
     <section className="min-h-screen bg-white py-20 px-10">
       <div className="max-w-7xl mx-auto">
@@ -25,7 +53,7 @@ const PageServices = () => {
           </p>
         </div>
 
-        {/* Grid de servicios - Versión simplificada */}
+        {/* Grid de servicios */}
         <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-6">
           {servicios.map((servicio, index) => (
             <Link
@@ -89,7 +117,7 @@ const PageServices = () => {
 
           <Link
             href="/Quote"
-            className="inline-flex items-center px-6 py-3 bg-green text-white font-semibold rounded-full hover:bg-green-700 transition-colors"
+            className="inline-flex items-center px-6 py-3 bg-green text-white font-semibold rounded-full transition-colors"
           >
             Hablemos de tu proyecto
           </Link>

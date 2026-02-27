@@ -6,20 +6,6 @@ import SplitType from "split-type";
 
 const proyects = [
   {
-    id: "ALBA AGUILAR",
-    title: "Landing Page",
-    href: "https://www.albaaguilar.com.mx/",
-    img: "/proyects/alba&aguilar.png",
-    info: "Empresa de construcción especializada en desarrollos residenciales y proyectos arquitectónicos de alto nivel en México.",
-  },
-  {
-    id: "GARM",
-    title: "E-Commerce",
-    href: "https://garm.framer.website/",
-    img: "/design/ropa.png",
-    info: "Marca de moda con enfoque moderno, tienda en línea optimizada para experiencia de compra rápida y elegante.",
-  },
-  {
     id: "YUMA",
     title: "E-Commerce",
     href: "https://yuma-three.vercel.app/",
@@ -27,11 +13,11 @@ const proyects = [
     info: "Proyecto digital enfocado en diseño minimalista y experiencia de usuario moderna para marca emergente.",
   },
   {
-    id: "DRIVOXE",
-    title: "E-Commerce",
-    href: "https://drivoxe.framer.website/",
-    img: "/design/carros.png",
-    info: "Plataforma digital enfocada en la venta de vehículos con experiencia visual potente y conversión optimizada.",
+    id: "ALBA AGUILAR",
+    title: "Landing Page",
+    href: "https://www.albaaguilar.com.mx/",
+    img: "/proyects/alba&aguilar.png",
+    info: "Empresa de construcción especializada en desarrollos residenciales y proyectos arquitectónicos de alto nivel en México.",
   },
   {
     id: "INCODE",
@@ -39,13 +25,6 @@ const proyects = [
     href: "https://incode-ten.vercel.app/",
     img: "/proyects/incode.png",
     info: "Landing corporativa moderna enfocada en tecnología y soluciones digitales empresariales.",
-  },
-  {
-    id: "CAELORA",
-    title: "E-commerce",
-    href: "https://caelora.framer.website/",
-    img: "/design/joyeria.png",
-    info: "E-commerce de joyería con estética premium y experiencia visual enfocada en lujo y detalle.",
   },
   {
     id: "Pecado de Canela",
@@ -62,18 +41,25 @@ const proyects = [
     info: "Menú digital interactivo con diseño moderno para restaurante especializado en cocina japonesa.",
   },
   {
+    id: "GARM",
+    title: "E-Commerce",
+    href: "https://garm.framer.website/",
+    img: "/design/ropa.png",
+    info: "Marca de moda con enfoque moderno, tienda en línea optimizada para experiencia de compra rápida y elegante.",
+  },
+  {
+    id: "CAELORA",
+    title: "E-commerce",
+    href: "https://caelora.framer.website/",
+    img: "/design/joyeria.png",
+    info: "E-commerce de joyería con estética premium y experiencia visual enfocada en lujo y detalle.",
+  },
+  {
     id: "Barrio Bravo",
     title: "E-commerce",
     href: "https://brarriobravo.myshopify.com/",
     img: "/proyects/barriobravo.png",
     info: "Tienda online en Shopify con enfoque urbano y estrategia visual enfocada en cultura street.",
-  },
-  {
-    id: "CONSULT",
-    title: "Landing Page",
-    href: "https://agevia.framer.website/",
-    img: "/design/landing.png",
-    info: "Landing corporativa optimizada para conversión y captación de clientes empresariales.",
   },
   {
     id: "VERDANT",

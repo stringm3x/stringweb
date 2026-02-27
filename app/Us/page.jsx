@@ -25,7 +25,7 @@ const msvs = [
 
 const PageUs = () => {
   const [active, setActive] = useState("vision");
-  const [isVisible, setIsVisible] = useState({});
+  const [mounted, setMounted] = useState(false);
 
   // Refs para animaciones
   const sectionRef = useRef(null);
@@ -40,8 +40,14 @@ const PageUs = () => {
   const commitmentRef = useRef(null);
   const cardsRef = useRef([]);
 
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
   // Animaciones de entrada
   useEffect(() => {
+    if (!mounted) return;
+
     const ctx = gsap.context(() => {
       // Timeline principal
       const tl = gsap.timeline({
@@ -141,10 +147,12 @@ const PageUs = () => {
     }, sectionRef);
 
     return () => ctx.revert();
-  }, []);
+  }, [mounted]);
 
   // Animación de cambio entre misión/visión
   useEffect(() => {
+    if (!mounted) return;
+
     gsap.to(missionVisionRef.current, {
       scale: 1.02,
       duration: 0.3,
@@ -152,7 +160,55 @@ const PageUs = () => {
       repeat: 1,
       ease: "power2.inOut",
     });
-  }, [active]);
+  }, [active, mounted]);
+
+  // Versión estática para SSR
+  if (!mounted) {
+    return (
+      <main className="min-h-screen bg-black text-white overflow-hidden">
+        <section className="relative min-h-screen flex items-center justify-center py-20 px-4 md:px-6 lg:px-8">
+          <div className="max-w-7xl mx-auto relative z-10">
+            <div className="flex flex-col md:flex-row items-center justify-center gap-6 md:gap-12 mb-16">
+              <div className="relative w-[180px] h-[180px] md:w-[220px] md:h-[220px]">
+                <Image
+                  src="/logo-s-white.png"
+                  alt="Logo STRING"
+                  fill
+                  className="object-contain drop-shadow-2xl"
+                  priority
+                />
+              </div>
+              <h2 className="font-anton text-7xl md:text-8xl lg:text-9xl text-green leading-none">
+                STRING
+              </h2>
+            </div>
+            <div className="relative w-full max-w-4xl mx-auto h-[400px] md:h-[500px] rounded-3xl overflow-hidden shadow-2xl mb-12">
+              <Image
+                src="/us2.png"
+                alt="Equipo STRING"
+                fill
+                className="object-cover"
+                priority
+              />
+            </div>
+            <div className="max-w-3xl mx-auto space-y-6 text-center">
+              <p className="text-lg md:text-xl text-gray leading-relaxed">
+                En <span className="text-green-400 font-semibold">STRING</span>{" "}
+                desarrollamos páginas web profesionales enfocadas en brindar una
+                presencia digital sólida, clara y funcional para marcas y
+                negocios.
+              </p>
+              <p className="text-lg md:text-xl text-gray leading-relaxed">
+                STRING es un proyecto independiente liderado por un diseñador y
+                desarrollador web que se encarga personalmente de cada etapa del
+                proceso.
+              </p>
+            </div>
+          </div>
+        </section>
+      </main>
+    );
+  }
 
   return (
     <main
@@ -164,17 +220,18 @@ const PageUs = () => {
         ref={heroRef}
         className="relative min-h-screen flex items-center justify-center py-20 px-4 md:px-6 lg:px-8"
       >
-        {/* Fondo con gradiente */}
+        {/* Fondo con gradiente - Versión consistente */}
         <div className="absolute inset-0 pointer-events-none" />
 
         <div className="max-w-7xl mx-auto relative z-10">
           {/* Título principal */}
           <div ref={titleRef} className="text-center mb-12">
             <h1 className="text-7xl md:text-8xl lg:text-9xl font-ubuntu font-black tracking-tight">
-              <span className="bg-clip-text text-transparent">
+              <span className="bg-gradient-to-r from-green-400 via-green-500 to-green-600 bg-clip-text text-transparent">
                 NOSOTROS
               </span>
             </h1>
+            <div className="w-24 h-1 bg-gradient-to-r from-green-400 to-green-600 mx-auto mt-4" />
           </div>
 
           {/* Logo y marca */}
@@ -217,31 +274,27 @@ const PageUs = () => {
               className="object-cover"
               priority
             />
-            <div className="absolute inset-0" />
+            <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
           </motion.div>
 
           {/* Descripción */}
-          <motion.div
-            ref={descriptionRef}
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.8 }}
+          <div
             className="max-w-3xl mx-auto space-y-6 text-center"
           >
-            <p className="text-lg md:text-xl text-gray leading-relaxed">
+            <p className="text-lg md:text-xl text-white leading-relaxed">
               En <span className="text-green-400 font-semibold">STRING</span>{" "}
               desarrollamos páginas web profesionales enfocadas en brindar una
               presencia digital sólida, clara y funcional para marcas y
               negocios.
             </p>
 
-            <p className="text-lg md:text-xl text-gray leading-relaxed">
+            <p className="text-lg md:text-xl text-white leading-relaxed">
               STRING es un proyecto independiente liderado por un diseñador y
               desarrollador web que se encarga personalmente de cada etapa del
               proceso: desde el análisis inicial y el diseño, hasta el
               desarrollo y la entrega final.
             </p>
-          </motion.div>
+          </div>
         </div>
       </section>
 
@@ -328,7 +381,7 @@ const PageUs = () => {
               transition={{ duration: 0.5, delay: 0.2 }}
               className="hidden lg:block bg-white/5 backdrop-blur-sm rounded-2xl p-8 border border-white/10"
             >
-              <h3 className="text-3xl font-bold text-green-400 mb-4">
+              <h3 className="text-3xl font-bold text-green mb-4">
                 {active === "mission" ? "Nuestra Misión" : "Nuestra Visión"}
               </h3>
               <p className="text-lg text-gray-300 leading-relaxed">
@@ -439,7 +492,7 @@ const PageUs = () => {
               >
                 <a
                   href="/Quote"
-                  className="inline-flex items-center px-8 py-4 text-white font-semibold rounded-full shadow-lg hover:shadow-xl transition-all duration-300"
+                  className="inline-flex items-center px-8 py-4 bg-gradient-to-r from-green-500 to-green-600 text-white font-semibold rounded-full shadow-lg hover:shadow-xl transition-all duration-300"
                 >
                   Hablemos de tu proyecto
                   <svg
