@@ -334,7 +334,7 @@ const PageUs = () => {
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
                   onClick={() => setActiveTab(item.id)}
-                  className={`relative flex-shrink-0 px-4 sm:px-6 lg:px-8 py-2 sm:py-3 lg:py-4 rounded-full font-semibold transition-all overflow-hidden ${
+                  className={`relative flex-shrink-0 px-4 sm:px-6 lg:px-8 py-2 sm:py-3 lg:py-4 rounded-full font-semibold transition-all overflow-hidden bg-white ${
                     isActive
                       ? "text-black"
                       : "text-white bg-white/10 hover:bg-white/20"
@@ -376,7 +376,7 @@ const PageUs = () => {
                 <h3 className="text-2xl sm:text-3xl lg:text-4xl font-ubuntu font-bold text-center lg:text-left">
                   {msvs.find((m) => m.id === activeTab)?.title}
                 </h3>
-                <p className="text-sm sm:text-base lg:text-lg text-gray-300 leading-relaxed text-center lg:text-left">
+                <p className="text-sm sm:text-base lg:text-lg text-gray leading-relaxed text-center lg:text-left">
                   {msvs.find((m) => m.id === activeTab)?.content}
                 </p>
 
@@ -388,7 +388,7 @@ const PageUs = () => {
                         <p className="text-lg sm:text-xl lg:text-2xl font-bold text-green">
                           {stat.value}
                         </p>
-                        <p className="text-xs sm:text-sm text-gray-400">
+                        <p className="text-xs sm:text-sm text-gray">
                           {stat.label}
                         </p>
                       </div>
@@ -438,7 +438,7 @@ const PageUs = () => {
             <h2 className="text-3xl sm:text-4xl md:text-5xl font-ubuntu font-bold">
               Nuestros <span className="text-green">Valores</span>
             </h2>
-            <p className="text-sm sm:text-base text-gray-400 mt-3 sm:mt-4">
+            <p className="text-sm sm:text-base text-gray mt-3 sm:mt-4">
               Lo que nos guía en cada proyecto
             </p>
           </div>
@@ -457,7 +457,7 @@ const PageUs = () => {
                   <h3 className="text-lg sm:text-xl font-bold text-white mb-1 sm:mb-2">
                     {value.title}
                   </h3>
-                  <p className="text-xs sm:text-sm text-gray-400">
+                  <p className="text-xs sm:text-sm text-gray">
                     {value.desc}
                   </p>
                 </motion.div>
@@ -503,7 +503,7 @@ const PageUs = () => {
                       <h3 className="text-base sm:text-lg font-bold text-white mb-1 sm:mb-2">
                         {item.title}
                       </h3>
-                      <p className="text-xs text-gray-400">{item.desc}</p>
+                      <p className="text-xs text-gray">{item.desc}</p>
 
                       <div className="absolute bottom-0 left-0 right-0 h-0.5 bg-gradient-to-r from-green to-transparent scale-x-0 group-hover:scale-x-100 transition-transform origin-left" />
                     </div>
