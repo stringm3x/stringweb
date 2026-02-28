@@ -2,516 +2,546 @@
 
 import React, { useEffect, useRef, useState } from "react";
 import Image from "next/image";
+import Link from "next/link";
+import { motion, AnimatePresence } from "framer-motion";
+import {
+  FiArrowRight,
+  FiTarget,
+  FiEye,
+  FiHeart,
+  FiUsers,
+  FiAward,
+  FiClock,
+  FiCheckCircle,
+  FiCode,
+  FiTrendingUp,
+  FiShield,
+  FiStar,
+  FiZap,
+  FiGrid, // ← Para diseño
+  FiLayers, // ← Para proceso
+  FiPackage, // ← Para desarrollo
+  FiCompass, // ← Para descubrimiento
+} from "react-icons/fi";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { motion, AnimatePresence } from "framer-motion";
 
 gsap.registerPlugin(ScrollTrigger);
 
 const msvs = [
   {
-    id: "1",
+    id: "mission",
     title: "Misión",
+    icon: FiTarget,
     content:
-      "Es transformar ideas en sitios web funcionales, visualmente impactantes y alineados con la esencia de cada negocio, ayudando a nuestros clientes a crecer en el mundo digital. Creemos que cada marca tiene una historia única que merece ser contada con autenticidad y creatividad.",
+      "Transformar ideas en sitios web funcionales, visualmente impactantes y alineados con la esencia de cada negocio, ayudando a nuestros clientes a crecer en el mundo digital. Creemos que cada marca tiene una historia única que merece ser contada con autenticidad y creatividad.",
+    color: "from-green-500 to-green-600",
+    stats: [
+      { label: "Proyectos", value: "50+" },
+      { label: "Satisfacción", value: "98%" },
+      { label: "Equipo", value: "5+" },
+    ],
   },
   {
-    id: "2",
+    id: "vision",
     title: "Visión",
+    icon: FiEye,
     content:
-      "Queremos inspirar y evolucionar junto a quienes confían en nosotros. Soñamos con un entorno digital donde cada marca tenga una voz auténtica y poderosa. Visualizamos ser una empresa líder en diseño y desarrollo web en Latinoamérica, reconocida por nuestro enfoque humano, innovación constante y compromiso con el éxito de nuestros clientes.",
+      "Inspirar y evolucionar junto a quienes confían en nosotros. Soñamos con un entorno digital donde cada marca tenga una voz auténtica y poderosa. Visualizamos ser una empresa líder en diseño y desarrollo web en Latinoamérica, reconocida por nuestro enfoque humano, innovación constante y compromiso con el éxito de nuestros clientes.",
+    color: "from-green-600 to-green-700",
+    stats: [
+      { label: "Metas 2025", value: "10+" },
+      { label: "Innovación", value: "100%" },
+      { label: "Expansión", value: "3x" },
+    ],
   },
 ];
 
+const values = [
+  { icon: FiHeart, title: "Pasión", desc: "Amamos lo que hacemos" },
+  { icon: FiUsers, title: "Colaboración", desc: "Trabajo en equipo" },
+  { icon: FiAward, title: "Excelencia", desc: "Calidad en cada detalle" },
+  { icon: FiClock, title: "Compromiso", desc: "Cumplimos lo prometido" },
+  { icon: FiStar, title: "Innovación", desc: "Siempre actualizados" },
+  { icon: FiZap, title: "Eficiencia", desc: "Resultados rápidos" },
+];
+
+const process = [
+  {
+    step: "01",
+    title: "Descubrimiento",
+    icon: FiCompass,
+    desc: "Entendemos tu negocio, objetivos y audiencia",
+  },
+  {
+    step: "02",
+    title: "Estrategia",
+    icon: FiTrendingUp,
+    desc: "Planificamos la mejor solución digital",
+  },
+  {
+    step: "03",
+    title: "Diseño",
+    icon: FiGrid,
+    desc: "Creamos experiencias visuales únicas",
+  },
+  {
+    step: "04",
+    title: "Desarrollo",
+    icon: FiPackage,
+    desc: "Construimos con tecnologías modernas",
+  },
+  {
+    step: "05",
+    title: "Lanzamiento",
+    icon: FiShield,
+    desc: "Publicamos y monitoreamos el éxito",
+  },
+];
+
+const stats = [
+  { value: "50+", label: "Proyectos", icon: FiCode },
+  { value: "5+", label: "Años", icon: FiClock },
+  { value: "98%", label: "Clientes felices", icon: FiHeart },
+  { value: "10+", label: "Expertos", icon: FiUsers },
+];
+
 const PageUs = () => {
-  const [active, setActive] = useState("vision");
+  const [activeTab, setActiveTab] = useState("mission");
   const [mounted, setMounted] = useState(false);
 
   // Refs para animaciones
-  const sectionRef = useRef(null);
   const heroRef = useRef(null);
-  const titleRef = useRef(null);
-  const logoRef = useRef(null);
-  const brandRef = useRef(null);
-  const imageRef = useRef(null);
-  const descriptionRef = useRef(null);
   const missionVisionRef = useRef(null);
-  const workRef = useRef(null);
-  const commitmentRef = useRef(null);
-  const cardsRef = useRef([]);
+  const valuesRef = useRef(null);
+  const processRef = useRef(null);
+  const ctaRef = useRef(null);
 
   useEffect(() => {
     setMounted(true);
   }, []);
 
-  // Animaciones de entrada
   useEffect(() => {
     if (!mounted) return;
 
     const ctx = gsap.context(() => {
-      // Timeline principal
-      const tl = gsap.timeline({
-        defaults: {
-          ease: "power3.out",
-          duration: 1,
-        },
-      });
-
-      // Hero animations
-      tl.from(heroRef.current, {
-        opacity: 0,
-        y: 50,
-      })
-        .from(
-          titleRef.current,
-          {
-            opacity: 0,
-            x: -50,
-            duration: 0.8,
-          },
-          "-=0.6"
-        )
-        .from(
-          logoRef.current,
-          {
-            opacity: 0,
-            scale: 0.8,
-            duration: 0.8,
-          },
-          "-=0.4"
-        )
-        .from(
-          brandRef.current,
-          {
-            opacity: 0,
-            x: 50,
-            duration: 0.8,
-          },
-          "-=0.6"
-        )
-        .from(
-          imageRef.current,
-          {
-            opacity: 0,
-            scale: 1.1,
-            duration: 1.2,
-          },
-          "-=0.4"
-        )
-        .from(
-          descriptionRef.current,
-          {
-            opacity: 0,
-            y: 30,
-            duration: 0.8,
-          },
-          "-=0.6"
-        );
-
-      // Scroll animations
-      gsap.from(missionVisionRef.current, {
+      // Hero animation
+      gsap.from(".hero-title", {
         scrollTrigger: {
-          trigger: missionVisionRef.current,
+          trigger: heroRef.current,
           start: "top 80%",
-          end: "bottom 20%",
-          toggleActions: "play none none reverse",
+          toggleActions: "play none none none",
         },
         opacity: 0,
         y: 50,
         duration: 1,
+        ease: "power3.out",
       });
 
-      gsap.from(workRef.current, {
+      gsap.from(".hero-image", {
         scrollTrigger: {
-          trigger: workRef.current,
+          trigger: heroRef.current,
           start: "top 80%",
-          end: "bottom 20%",
-          toggleActions: "play none none reverse",
+          toggleActions: "play none none none",
         },
         opacity: 0,
-        x: -50,
-        duration: 1,
+        scale: 0.9,
+        duration: 1.2,
+        ease: "power3.out",
       });
 
-      gsap.from(commitmentRef.current, {
+      // Values animation
+      gsap.from(".value-card", {
         scrollTrigger: {
-          trigger: commitmentRef.current,
+          trigger: valuesRef.current,
           start: "top 80%",
-          end: "bottom 20%",
-          toggleActions: "play none none reverse",
+          toggleActions: "play none none none",
         },
         opacity: 0,
-        x: 50,
-        duration: 1,
+        y: 30,
+        stagger: 0.15,
+        duration: 0.8,
+        ease: "back.out(1.2)",
       });
-    }, sectionRef);
+
+      // Process animation
+      gsap.from(".process-item", {
+        scrollTrigger: {
+          trigger: processRef.current,
+          start: "top 80%",
+          toggleActions: "play none none none",
+        },
+        opacity: 0,
+        x: -30,
+        stagger: 0.1,
+        duration: 0.8,
+        ease: "power3.out",
+      });
+
+      // CTA animation
+      gsap.from(ctaRef.current, {
+        scrollTrigger: {
+          trigger: ctaRef.current,
+          start: "top 90%",
+          toggleActions: "play none none none",
+        },
+        opacity: 0,
+        y: 30,
+        duration: 0.8,
+        ease: "power3.out",
+      });
+    }, [heroRef, valuesRef, processRef, ctaRef]);
 
     return () => ctx.revert();
   }, [mounted]);
 
-  // Animación de cambio entre misión/visión
-  useEffect(() => {
-    if (!mounted) return;
-
-    gsap.to(missionVisionRef.current, {
-      scale: 1.02,
-      duration: 0.3,
-      yoyo: true,
-      repeat: 1,
-      ease: "power2.inOut",
-    });
-  }, [active, mounted]);
-
-  // Versión estática para SSR
   if (!mounted) {
     return (
-      <main className="min-h-screen bg-black text-white overflow-hidden">
-        <section className="relative min-h-screen flex items-center justify-center py-20 px-4 md:px-6 lg:px-8">
-          <div className="max-w-7xl mx-auto relative z-10">
-            <div className="flex flex-col md:flex-row items-center justify-center gap-6 md:gap-12 mb-16">
-              <div className="relative w-[180px] h-[180px] md:w-[220px] md:h-[220px]">
-                <Image
-                  src="/logo-s-white.png"
-                  alt="Logo STRING"
-                  fill
-                  className="object-contain drop-shadow-2xl"
-                  priority
-                />
-              </div>
-              <h2 className="font-anton text-7xl md:text-8xl lg:text-9xl text-green leading-none">
-                STRING
-              </h2>
-            </div>
-            <div className="relative w-full max-w-4xl mx-auto h-[400px] md:h-[500px] rounded-3xl overflow-hidden shadow-2xl mb-12">
-              <Image
-                src="/us2.png"
-                alt="Equipo STRING"
-                fill
-                className="object-cover"
-                priority
-              />
-            </div>
-            <div className="max-w-3xl mx-auto space-y-6 text-center">
-              <p className="text-lg md:text-xl text-gray leading-relaxed">
-                En <span className="text-green-400 font-semibold">STRING</span>{" "}
-                desarrollamos páginas web profesionales enfocadas en brindar una
-                presencia digital sólida, clara y funcional para marcas y
-                negocios.
-              </p>
-              <p className="text-lg md:text-xl text-gray leading-relaxed">
-                STRING es un proyecto independiente liderado por un diseñador y
-                desarrollador web que se encarga personalmente de cada etapa del
-                proceso.
-              </p>
-            </div>
+      <main className="min-h-screen bg-black text-white">
+        <div className="h-screen flex items-center justify-center">
+          <div className="text-center">
+            <div className="w-20 h-20 border-4 border-green border-t-transparent rounded-full animate-spin mx-auto" />
           </div>
-        </section>
+        </div>
       </main>
     );
   }
 
   return (
-    <main
-      ref={sectionRef}
-      className="min-h-screen bg-black text-white overflow-hidden"
-    >
+    <main className="bg-black text-white overflow-hidden">
       {/* Hero Section */}
       <section
         ref={heroRef}
-        className="relative min-h-screen flex items-center justify-center py-20 px-4 md:px-6 lg:px-8"
+        className="relative min-h-screen flex items-center"
       >
-        {/* Fondo con gradiente - Versión consistente */}
-        <div className="absolute inset-0 pointer-events-none" />
+        {/* Background gradient */}
+        <div className="absolute inset-0 bg-gradient-to-br from-green-900/20 via-black to-black" />
 
-        <div className="max-w-7xl mx-auto relative z-10">
-          {/* Título principal */}
-          <div ref={titleRef} className="text-center mb-12">
-            <h1 className="text-7xl md:text-8xl lg:text-9xl font-ubuntu font-black tracking-tight">
-              <span className="bg-gradient-to-r from-green-400 via-green-500 to-green-600 bg-clip-text text-transparent">
-                NOSOTROS
-              </span>
-            </h1>
-            <div className="w-24 h-1 bg-gradient-to-r from-green-400 to-green-600 mx-auto mt-4" />
-          </div>
-
-          {/* Logo y marca */}
-          <div className="flex flex-col md:flex-row items-center justify-center gap-6 md:gap-12 mb-16">
+        {/* Animated particles - CORREGIDO */}
+        <div className="absolute inset-0 overflow-hidden">
+          {[...Array(20)].map((_, i) => (
             <motion.div
-              ref={logoRef}
-              whileHover={{ scale: 1.05, rotate: 2 }}
-              transition={{ type: "spring", stiffness: 300 }}
-              className="relative w-[180px] h-[180px] md:w-[220px] md:h-[220px]"
-            >
-              <Image
-                src="/logo-s-white.png"
-                alt="Logo STRING"
-                fill
-                className="object-contain drop-shadow-2xl"
-                priority
-              />
-            </motion.div>
-
-            <motion.h2
-              ref={brandRef}
-              whileHover={{ scale: 1.02 }}
-              className="font-anton text-7xl md:text-8xl lg:text-9xl text-green leading-none"
-            >
-              STRING
-            </motion.h2>
-          </div>
-
-          {/* Imagen principal */}
-          <motion.div
-            ref={imageRef}
-            whileHover={{ scale: 1.02 }}
-            transition={{ type: "spring", stiffness: 300 }}
-            className="relative w-full max-w-4xl mx-auto h-[400px] md:h-[500px] rounded-3xl overflow-hidden shadow-2xl mb-12"
-          >
-            <Image
-              src="/us2.png"
-              alt="Equipo STRING"
-              fill
-              className="object-cover"
-              priority
+              key={i}
+              className="absolute w-1 h-1 bg-green/20 rounded-full"
+              style={{
+                left: `${Math.random() * 100}%`,
+                top: `${Math.random() * 100}%`,
+              }}
+              animate={{
+                y: [0, -100],
+                opacity: [0, 1, 0],
+              }}
+              transition={{
+                duration: Math.random() * 5 + 3,
+                repeat: Infinity,
+                ease: "linear",
+              }}
             />
-            <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
-          </motion.div>
-
-          {/* Descripción */}
-          <div
-            className="max-w-3xl mx-auto space-y-6 text-center"
-          >
-            <p className="text-lg md:text-xl text-white leading-relaxed">
-              En <span className="text-green-400 font-semibold">STRING</span>{" "}
-              desarrollamos páginas web profesionales enfocadas en brindar una
-              presencia digital sólida, clara y funcional para marcas y
-              negocios.
-            </p>
-
-            <p className="text-lg md:text-xl text-white leading-relaxed">
-              STRING es un proyecto independiente liderado por un diseñador y
-              desarrollador web que se encarga personalmente de cada etapa del
-              proceso: desde el análisis inicial y el diseño, hasta el
-              desarrollo y la entrega final.
-            </p>
-          </div>
+          ))}
         </div>
-      </section>
 
-      {/* Misión y Visión Section */}
-      <section ref={missionVisionRef} className="py-20 px-4 md:px-6 lg:px-8">
-        <div className="max-w-7xl mx-auto">
-          {/* Título de sección */}
-          <div className="text-center mb-12">
-            <h2 className="text-4xl md:text-5xl font-ubuntu font-bold">
-              Nuestra <span className="text-green">Esencia</span>
-            </h2>
-            <p className="text-gray mt-4">
-              Lo que nos define y hacia dónde vamos
-            </p>
-          </div>
-
-          {/* Botones de selección */}
-          <div className="flex justify-center gap-4 mb-12">
-            <motion.button
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-              onClick={() => setActive("mission")}
-              className={`px-8 py-3 rounded-full font-semibold transition-all duration-300 ${
-                active === "mission"
-                  ? "bg-green text-white shadow-lg shadow-green-500/30"
-                  : "bg-white/10 text-white hover:bg-white/20 border border-white/20"
-              }`}
-            >
-              Misión
-            </motion.button>
-
-            <motion.button
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-              onClick={() => setActive("vision")}
-              className={`px-8 py-3 rounded-full font-semibold transition-all duration-300 ${
-                active === "vision"
-                  ? "bg-green text-white shadow-lg shadow-green-500/30"
-                  : "bg-white/10 text-white hover:bg-white/20 border border-white/20"
-              }`}
-            >
-              Visión
-            </motion.button>
-          </div>
-
-          {/* Contenido con animación */}
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
-            {/* Imagen */}
+        <div className="relative max-w-7xl mx-auto px-6 lg:px-8 py-20">
+          <div className="grid lg:grid-cols-2 gap-12 items-center">
+            {/* Left content */}
             <motion.div
-              key={active}
               initial={{ opacity: 0, x: -50 }}
               animate={{ opacity: 1, x: 0 }}
-              exit={{ opacity: 0, x: 50 }}
-              transition={{ duration: 0.5 }}
-              className="relative h-[400px] lg:h-[500px] rounded-2xl overflow-hidden shadow-xl"
+              transition={{ duration: 0.8 }}
             >
-              <Image
-                src={active === "mission" ? "/mision2.png" : "/vision.png"}
-                alt={active === "mission" ? "Misión STRING" : "Visión STRING"}
-                fill
-                className="object-cover"
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent" />
+              <span className="inline-block px-4 py-2 bg-green/10 text-green rounded-full text-sm font-semibold mb-6 border border-green/20">
+                ✦ Sobre STRING
+              </span>
 
-              {/* Texto superpuesto para móvil */}
-              <div className="absolute bottom-0 left-0 right-0 p-6 lg:hidden">
-                <h3 className="text-2xl font-bold text-green mb-2">
-                  {active === "mission" ? "Nuestra Misión" : "Nuestra Visión"}
-                </h3>
-                <p className="text-white text-sm">
-                  {active === "mission"
-                    ? msvs[0].content.substring(0, 100) + "..."
-                    : msvs[1].content.substring(0, 100) + "..."}
-                </p>
+              <h1 className="hero-title text-6xl md:text-7xl lg:text-8xl font-ubuntu font-black tracking-tight leading-tight mb-6">
+                <span className="bg-gradient-to-r from-green via-green-400 to-green-600 bg-clip-text text-transparent">
+                  CREANDO
+                </span>
+                <br />
+                <span className="text-white">EXPERIENCIAS</span>
+                <br />
+                <span className="text-white">DIGITALES</span>
+              </h1>
+
+              <p className="text-xl text-gray-300 mb-8 max-w-lg leading-relaxed">
+                Somos un equipo apasionado por transformar ideas en realidades
+                digitales. Cada proyecto es único y recibe la atención
+                personalizada que merece.
+              </p>
+
+              <div className="flex flex-wrap gap-4">
+                <Link href="/quote">
+                  <button className="group relative px-8 py-4 bg-gradient-to-r from-green to-green-600 text-black font-bold rounded-full overflow-hidden hover:shadow-xl hover:shadow-green/30 transition-all">
+                    <span className="relative z-10">Comenzar proyecto</span>
+                    <div className="absolute inset-0 bg-white/20 translate-y-full group-hover:translate-y-0 transition-transform" />
+                  </button>
+                </Link>
+
+                <Link href="/Proyects">
+                  <button className="px-8 py-4 border border-white/20 text-white font-bold rounded-full hover:bg-white/10 transition-colors">
+                    Ver trabajo
+                  </button>
+                </Link>
               </div>
             </motion.div>
 
-            {/* Texto para desktop */}
+            {/* Right content - Stats */}
             <motion.div
-              key={`text-${active}`}
               initial={{ opacity: 0, x: 50 }}
               animate={{ opacity: 1, x: 0 }}
-              exit={{ opacity: 0, x: -50 }}
-              transition={{ duration: 0.5, delay: 0.2 }}
-              className="hidden lg:block bg-white/5 backdrop-blur-sm rounded-2xl p-8 border border-white/10"
+              transition={{ duration: 0.8, delay: 0.2 }}
+              className="grid grid-cols-2 gap-6"
             >
-              <h3 className="text-3xl font-bold text-green mb-4">
-                {active === "mission" ? "Nuestra Misión" : "Nuestra Visión"}
-              </h3>
-              <p className="text-lg text-gray-300 leading-relaxed">
-                {active === "mission" ? msvs[0].content : msvs[1].content}
-              </p>
-
-              {/* Stats decorativas */}
-              <div className="grid grid-cols-3 gap-4 mt-8 pt-8 border-t border-white/10">
-                <div>
-                  <p className="text-2xl font-bold text-green">5+</p>
-                  <p className="text-sm text-gray">Años</p>
-                </div>
-                <div>
-                  <p className="text-2xl font-bold text-green">50+</p>
-                  <p className="text-sm text-gray">Proyectos</p>
-                </div>
-                <div>
-                  <p className="text-2xl font-bold text-green">100%</p>
-                  <p className="text-sm text-gray">Dedicación</p>
-                </div>
-              </div>
+              {stats.map((stat, i) => {
+                const Icon = stat.icon;
+                return (
+                  <motion.div
+                    key={i}
+                    whileHover={{ scale: 1.05, y: -5 }}
+                    className="bg-white/5 backdrop-blur-sm rounded-2xl p-6 border border-white/10"
+                  >
+                    <Icon className="text-3xl text-green mb-3" />
+                    <p className="text-3xl font-bold text-white">
+                      {stat.value}
+                    </p>
+                    <p className="text-sm text-gray-400">{stat.label}</p>
+                  </motion.div>
+                );
+              })}
             </motion.div>
           </div>
         </div>
       </section>
 
-      {/* Nuestra Forma de Trabajo */}
-      <section ref={workRef} className="py-20 px-4 md:px-6 lg:px-8">
+      {/* Misión y Visión con Tabs */}
+      <section ref={missionVisionRef} className="py-32 px-6 lg:px-8">
         <div className="max-w-7xl mx-auto">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-            {/* Contenido izquierdo */}
-            <motion.div
-              initial={{ opacity: 0, x: -30 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.6 }}
-              className="space-y-6"
-            >
-              <h2 className="text-4xl md:text-5xl font-ubuntu font-bold leading-tight">
-                NUESTRA <span className="text-green">FORMA</span>
-                <br />
-                DE <span className="text-green">TRABAJO</span>
-              </h2>
+          <div className="text-center mb-16">
+            <span className="text-green font-semibold tracking-wider">
+              NUESTRA ESENCIA
+            </span>
+            <h2 className="text-5xl md:text-6xl font-ubuntu font-bold mt-4 mb-6">
+              Lo que nos <span className="text-green">define</span>
+            </h2>
+            <div className="w-24 h-1 bg-gradient-to-r from-green to-green-600 mx-auto" />
+          </div>
 
-              <div className="space-y-4 text-gray">
-                <p className="text-lg leading-relaxed">
-                  Cada proyecto inicia con el entendimiento del negocio, sus
-                  objetivos y su público. A partir de esta información, se
-                  desarrolla una solución a la medida, cuidando tanto la
-                  estética como la funcionalidad del sitio.
-                </p>
-                <p className="text-lg leading-relaxed">
-                  El enfoque es crear páginas web que no solo se vean bien, sino
-                  que transmitan confianza y aporten valor real al negocio.
-                </p>
-              </div>
-
-              {/* Features */}
-              <div className="grid grid-cols-2 gap-4 pt-4">
-                {["Análisis", "Diseño", "Desarrollo", "Lanzamiento"].map(
-                  (item, i) => (
-                    <motion.div
-                      key={i}
-                      whileHover={{ scale: 1.05 }}
-                      className="flex items-center space-x-2"
-                    >
-                      <div className="w-2 h-2 bg-green rounded-full" />
-                      <span className="text-white">{item}</span>
-                    </motion.div>
-                  )
-                )}
-              </div>
-            </motion.div>
-
-            {/* Contenido derecho */}
-            <motion.div
-              initial={{ opacity: 0, x: 30 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.6 }}
-              className="space-y-6 lg:text-right"
-            >
-              <h2 className="text-4xl md:text-5xl font-ubuntu font-bold leading-tight">
-                NUESTRO
-                <br />
-                <span className="text-green">COMPROMISO</span>
-              </h2>
-
-              <div className="space-y-4 text-gray">
-                <p className="text-lg leading-relaxed">
-                  En STRING trabajamos con responsabilidad, claridad y atención
-                  al detalle. El objetivo es entregar soluciones digitales bien
-                  estructuradas, duraderas y alineadas a las necesidades de cada
-                  cliente.
-                </p>
-                <p className="text-lg leading-relaxed">
-                  Si buscas una página web profesional que represente
-                  correctamente tu marca y fortalezca tu presencia digital,
-                  STRING puede ayudarte.
-                </p>
-              </div>
-
-              {/* CTA Button */}
-              <motion.div
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-                className="lg:flex lg:justify-end pt-4"
-              >
-                <a
-                  href="/quote"
-                  className="inline-flex items-center px-8 py-4 bg-gradient-to-r from-green-500 to-green-600 text-white font-semibold rounded-full shadow-lg hover:shadow-xl transition-all duration-300"
+          {/* Tabs */}
+          <div className="flex flex-wrap justify-center gap-4 mb-12">
+            {msvs.map((item) => {
+              const Icon = item.icon;
+              const isActive = activeTab === item.id;
+              return (
+                <motion.button
+                  key={item.id}
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
+                  onClick={() => setActiveTab(item.id)}
+                  className={`relative px-8 py-4 rounded-full font-semibold transition-all overflow-hidden bg-white ${
+                    isActive
+                      ? "text-black"
+                      : "text-white bg-white/10 hover:bg-white/20"
+                  }`}
                 >
-                  Hablemos de tu proyecto
-                  <svg
-                    className="w-5 h-5 ml-2"
-                    fill="none"
-                    stroke="currentColor"
-                    viewBox="0 0 24 24"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth={2}
-                      d="M17 8l4 4m0 0l-4 4m4-4H3"
+                  {isActive && (
+                    <motion.div
+                      layoutId="activeTab"
+                      className={`absolute inset-0 bg-gradient-to-r ${item.color}`}
+                      transition={{
+                        type: "spring",
+                        bounce: 0.2,
+                        duration: 0.6,
+                      }}
                     />
-                  </svg>
-                </a>
+                  )}
+                  <span className="relative z-10 flex items-center gap-2">
+                    <Icon className="text-xl" />
+                    {item.title}
+                  </span>
+                </motion.button>
+              );
+            })}
+          </div>
+
+          {/* Content */}
+          <AnimatePresence mode="wait">
+            <motion.div
+              key={activeTab}
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -20 }}
+              transition={{ duration: 0.5 }}
+              className="grid lg:grid-cols-2 gap-12 items-center"
+            >
+              {/* Texto */}
+              <div className="space-y-6">
+                <h3 className="text-4xl font-ubuntu font-bold">
+                  {msvs.find((m) => m.id === activeTab)?.title}
+                </h3>
+                <p className="text-lg text-gray-300 leading-relaxed">
+                  {msvs.find((m) => m.id === activeTab)?.content}
+                </p>
+
+                {/* Stats de misión/visión */}
+                <div className="grid grid-cols-3 gap-4 pt-6">
+                  {msvs
+                    .find((m) => m.id === activeTab)
+                    ?.stats.map((stat, i) => (
+                      <div key={i} className="text-center">
+                        <p className="text-2xl font-bold text-green">
+                          {stat.value}
+                        </p>
+                        <p className="text-sm text-gray-400">{stat.label}</p>
+                      </div>
+                    ))}
+                </div>
+              </div>
+
+              {/* Imagen */}
+              <motion.div
+                initial={{ opacity: 0, scale: 0.9 }}
+                animate={{ opacity: 1, scale: 1 }}
+                transition={{ delay: 0.2 }}
+                className="relative h-[500px] rounded-2xl overflow-hidden"
+              >
+                <Image
+                  src={activeTab === "mission" ? "/mision2.png" : "/vision.png"}
+                  alt={activeTab === "mission" ? "Misión" : "Visión"}
+                  fill
+                  className="object-cover"
+                />
+                <div
+                  className={`absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent`}
+                />
+
+                {/* Quote flotante */}
+                <motion.div
+                  animate={{ y: [0, -10, 0] }}
+                  transition={{ repeat: Infinity, duration: 4 }}
+                  className="absolute bottom-8 left-8 right-8 bg-white/10 backdrop-blur-md rounded-xl p-4 border border-white/20"
+                >
+                  <p className="text-white/90 text-sm italic">
+                    {activeTab === "mission"
+                      ? "Cada marca tiene una historia única que merece ser contada"
+                      : "Innovación constante y compromiso con el éxito de nuestros clientes"}
+                  </p>
+                </motion.div>
               </motion.div>
             </motion.div>
+          </AnimatePresence>
+        </div>
+      </section>
+
+      {/* Valores */}
+      <section
+        ref={valuesRef}
+        className="py-20 px-6 lg:px-8 bg-gradient-to-b from-black to-green-950/20"
+      >
+        <div className="max-w-7xl mx-auto">
+          <div className="text-center mb-16">
+            <h2 className="text-4xl md:text-5xl font-ubuntu font-bold">
+              Nuestros <span className="text-green">Valores</span>
+            </h2>
+            <p className="text-gray-400 mt-4">
+              Lo que nos guía en cada proyecto
+            </p>
           </div>
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+            {values.map((value, i) => {
+              const Icon = value.icon;
+              return (
+                <motion.div
+                  key={i}
+                  className="value-card group relative bg-white/5 backdrop-blur-sm rounded-2xl p-8 text-center border border-white/10 hover:border-green/50 transition-colors"
+                  whileHover={{ y: -10 }}
+                >
+                  <div className="absolute inset-0 bg-gradient-to-br from-green/5 to-transparent rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity" />
+                  <Icon className="text-4xl text-green mx-auto mb-4 group-hover:scale-110 transition-transform" />
+                  <h3 className="text-xl font-bold text-white mb-2">
+                    {value.title}
+                  </h3>
+                  <p className="text-sm text-gray-400">{value.desc}</p>
+                </motion.div>
+              );
+            })}
+          </div>
+        </div>
+      </section>
+
+      {/* Proceso */}
+      <section ref={processRef} className="py-32 px-6 lg:px-8">
+        <div className="max-w-7xl mx-auto">
+          <div className="text-center mb-20">
+            <span className="text-green font-semibold tracking-wider">
+              CÓMO TRABAJAMOS
+            </span>
+            <h2 className="text-5xl md:text-6xl font-ubuntu font-bold mt-4">
+              Nuestro <span className="text-green">Proceso</span>
+            </h2>
+          </div>
+
+          <div className="relative">
+            {/* Línea de conexión */}
+            <div className="absolute top-1/2 left-0 right-0 h-0.5 bg-gradient-to-r from-transparent via-green/30 to-transparent hidden lg:block" />
+
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-8">
+              {process.map((item, i) => {
+                const Icon = item.icon;
+                return (
+                  <motion.div
+                    key={i}
+                    className="process-item relative group"
+                    whileHover={{ scale: 1.05 }}
+                  >
+                    <div className="relative bg-white/5 backdrop-blur-sm rounded-2xl p-6 border border-white/10 hover:border-green/50 transition-all">
+                      <div className="absolute -top-4 left-4 w-8 h-8 bg-green rounded-full flex items-center justify-center text-black font-bold text-sm">
+                        {i + 1}
+                      </div>
+
+                      <Icon className="text-3xl text-green mb-4" />
+                      <h3 className="text-lg font-bold text-white mb-2">
+                        {item.title}
+                      </h3>
+                      <p className="text-xs text-gray-400">{item.desc}</p>
+
+                      <div className="absolute bottom-0 left-0 right-0 h-0.5 bg-gradient-to-r from-green to-transparent scale-x-0 group-hover:scale-x-100 transition-transform origin-left" />
+                    </div>
+                  </motion.div>
+                );
+              })}
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* CTA Final */}
+      <section ref={ctaRef} className="py-20 px-6 lg:px-8">
+        <div className="max-w-4xl mx-auto text-center">
+          <motion.div
+            initial={{ opacity: 0, scale: 0.9 }}
+            whileInView={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 0.6 }}
+            className="bg-gradient-to-br from-green-900/30 to-green-950/30 rounded-3xl p-12 border border-green-500/20 backdrop-blur-sm"
+          >
+            <h2 className="text-4xl md:text-5xl font-ubuntu font-bold mb-6">
+              ¿Listo para <span className="text-green">transformar</span> tu
+              idea?
+            </h2>
+            <p className="text-xl text-gray-300 mb-8 max-w-2xl mx-auto">
+              Hagamos realidad tu proyecto con la calidad y dedicación que
+              merece
+            </p>
+
+            <Link href="/quote">
+              <button className="group relative px-10 py-5 bg-gradient-to-r from-green to-green-600 text-black font-bold rounded-full text-lg overflow-hidden hover:shadow-2xl hover:shadow-green/30 transition-all">
+                <span className="relative z-10 flex items-center gap-2">
+                  Comenzamos?
+                  <FiArrowRight className="group-hover:translate-x-2 transition-transform" />
+                </span>
+                <div className="absolute inset-0 bg-white/20 translate-y-full group-hover:translate-y-0 transition-transform" />
+              </button>
+            </Link>
+          </motion.div>
         </div>
       </section>
     </main>

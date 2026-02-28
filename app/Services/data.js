@@ -33,7 +33,7 @@ const servicios = [
   },
   {
     id: "2",
-    service: "DESARROLLO WEB",
+    service: "DESARROLLO",
     title2: "& PROGRAMACIÓN",
     img: "/serv/computadora.png",
     intro:

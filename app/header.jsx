@@ -9,7 +9,7 @@ const menuItems = [
   { label: "Inicio", href: "/" },
   { label: "Servicios", href: "/Services" },
   { label: "Proyectos", href: "/Proyects" },
-  { label: "Nostros", href: "/Us" },
+  { label: "Nosotros", href: "/Us" },
   { label: "Cotización", href: "/quote" },
 ];
 
