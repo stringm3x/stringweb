@@ -237,7 +237,7 @@ const PageProyects = () => {
           <div className="lg:hidden flex justify-center mb-4">
             <button
               onClick={() => setIsFilterOpen(!isFilterOpen)}
-              className="flex items-center gap-2 px-6 py-3 bg-white rounded-full shadow-md border border-gray-200"
+              className="flex items-center gap-2 px-6 py-3 bg-white rounded-full shadow-md border border-gray text-gray"
             >
               <FiFilter className="text-green" />
               <span>Filtrar por categoría</span>
