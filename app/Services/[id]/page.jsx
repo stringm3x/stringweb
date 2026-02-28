@@ -348,7 +348,7 @@ const ServicePage = ({ params: paramsPromise }) => {
               <FiArrowLeft className="ml-2 rotate-180" />
             </Link>
             <Link
-              href="/proyects"
+              href="/Proyects"
               className="inline-flex items-center px-8 py-4 border-2 border-white text-white font-semibold rounded-full hover:bg-white hover:text-green transition-all duration-300"
             >
               Ver proyectos

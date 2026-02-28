@@ -213,7 +213,7 @@ const PageServices = () => {
             ref={titleRef}
             className="text-5xl md:text-7xl lg:text-8xl xl:text-9xl tracking-tighter font-ubuntu font-extrabold"
           >
-            <span className="bg-gradient-to-r from-gray-900 via-gray-800 to-green bg-clip-text text-transparent">
+            <span className="text-black">
               Servicios
             </span>
           </h1>
