@@ -1,82 +1,79 @@
 "use client";
 import React, { useEffect, useRef, useState } from "react";
 import Image from "next/image";
+import Link from "next/link";
 import gsap from "gsap";
 import SplitType from "split-type";
+import { motion, AnimatePresence } from "framer-motion";
+import { FiX, FiExternalLink, FiFilter } from "react-icons/fi";
 
-const proyects = [
-  {
-    id: "YUMA",
-    title: "E-Commerce",
-    href: "https://yuma-three.vercel.app/",
-    img: "/proyects/yuma1.png",
-    info: "Proyecto digital enfocado en diseño minimalista y experiencia de usuario moderna para marca emergente.",
-  },
-  {
-    id: "ALBA AGUILAR",
-    title: "Landing Page",
-    href: "https://www.albaaguilar.com.mx/",
-    img: "/proyects/alba&aguilar.png",
-    info: "Empresa de construcción especializada en desarrollos residenciales y proyectos arquitectónicos de alto nivel en México.",
-  },
-  {
-    id: "INCODE",
-    title: "Landing Page",
-    href: "https://incode-ten.vercel.app/",
-    img: "/proyects/incode.png",
-    info: "Landing corporativa moderna enfocada en tecnología y soluciones digitales empresariales.",
-  },
-  {
-    id: "Pecado de Canela",
-    title: "Menú Digital",
-    href: "https://www.pecadodecanela.com/",
-    img: "/proyects/pecadodecanela.png",
-    info: "Panadería artesanal con presencia digital enfocada en branding cálido y experiencia gastronómica.",
-  },
-  {
-    id: "SUSHI SENSATION",
-    title: "Menú Digital",
-    href: "https://qitchen-template.framer.website/?via=pawelgola",
-    img: "/design/restuarante.png",
-    info: "Menú digital interactivo con diseño moderno para restaurante especializado en cocina japonesa.",
-  },
-  {
-    id: "GARM",
-    title: "E-Commerce",
-    href: "https://garm.framer.website/",
-    img: "/design/ropa.png",
-    info: "Marca de moda con enfoque moderno, tienda en línea optimizada para experiencia de compra rápida y elegante.",
-  },
-  {
-    id: "CAELORA",
-    title: "E-commerce",
-    href: "https://caelora.framer.website/",
-    img: "/design/joyeria.png",
-    info: "E-commerce de joyería con estética premium y experiencia visual enfocada en lujo y detalle.",
-  },
-  {
-    id: "Barrio Bravo",
-    title: "E-commerce",
-    href: "https://brarriobravo.myshopify.com/",
-    img: "/proyects/barriobravo.png",
-    info: "Tienda online en Shopify con enfoque urbano y estrategia visual enfocada en cultura street.",
-  },
-  {
-    id: "VERDANT",
-    title: "Portafolio",
-    href: "https://architects.framer.website/",
-    img: "/design/portafolio.png",
-    info: "Portafolio arquitectónico con enfoque minimalista y experiencia visual tipo estudio premium.",
-  },
-];
+// Importar datos
+import { proyects, categories, getProjectsByCategory } from "./data";
 
 const PageProyects = () => {
   const [activeProject, setActiveProject] = useState(null);
   const [selectedCard, setSelectedCard] = useState(null);
+  const [activeCategory, setActiveCategory] = useState("all");
+  const [filteredProjects, setFilteredProjects] = useState(proyects);
+  const [isFilterOpen, setIsFilterOpen] = useState(false);
+  const [mounted, setMounted] = useState(false);
+  
   const cardRefs = useRef([]);
   const expandedRef = useRef(null);
   const textRef = useRef(null);
   const overlayRef = useRef(null);
+  const sectionRef = useRef(null);
+  const titleRef = useRef(null);
+  const filterRef = useRef(null);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
+  // Filtrar proyectos por categoría
+  useEffect(() => {
+    setFilteredProjects(getProjectsByCategory(activeCategory));
+  }, [activeCategory]);
+
+  // Animación de entrada
+  useEffect(() => {
+    if (!mounted) return;
+
+    const ctx = gsap.context(() => {
+      // Aseguramos que todo sea visible
+      gsap.set([titleRef.current, filterRef.current, ...cardRefs.current.filter(Boolean)], {
+        opacity: 1,
+        y: 0,
+        visibility: "visible"
+      });
+
+      // Animación de entrada
+      const tl = gsap.timeline({
+        defaults: { ease: "power3.out" }
+      });
+
+      tl.from(titleRef.current, {
+        opacity: 0,
+        y: 30,
+        duration: 0.8
+      })
+      .from(filterRef.current, {
+        opacity: 0,
+        y: 20,
+        duration: 0.6
+      }, "-=0.4")
+      .from(cardRefs.current.filter(Boolean), {
+        opacity: 0,
+        y: 40,
+        stagger: 0.1,
+        duration: 0.7,
+        ease: "back.out(1.2)"
+      }, "-=0.3");
+
+    }, sectionRef);
+
+    return () => ctx.revert();
+  }, [mounted]);
 
   useEffect(() => {
     if (
@@ -89,7 +86,6 @@ const PageProyects = () => {
 
     const cardElement = cardRefs.current[selectedCard];
 
-    // Verificar que el elemento existe
     if (!cardElement) {
       console.error("Card element not found for index:", selectedCard);
       return;
@@ -97,7 +93,6 @@ const PageProyects = () => {
 
     const rect = cardElement.getBoundingClientRect();
 
-    // Configurar estilos iniciales para la expansión
     gsap.set(expandedRef.current, {
       position: "fixed",
       top: rect.top,
@@ -110,7 +105,6 @@ const PageProyects = () => {
 
     gsap.set(overlayRef.current, { opacity: 0 });
 
-    // Animación de expansión
     const tl = gsap.timeline();
 
     tl.to(expandedRef.current, {
@@ -126,13 +120,12 @@ const PageProyects = () => {
     tl.to(
       overlayRef.current,
       {
-        opacity: 0.8,
+        opacity: 0.9,
         duration: 0.5,
       },
       "-=0.4"
     );
 
-    // Animación del texto
     if (textRef.current) {
       const split = new SplitType(textRef.current, { types: "lines" });
 
@@ -153,9 +146,6 @@ const PageProyects = () => {
   }, [activeProject, selectedCard]);
 
   const handleProjectClick = (item, index) => {
-    console.log("Click en proyecto:", item.id, "índice:", index); // Para debugging
-    console.log("Elemento de tarjeta:", cardRefs.current[index]); // Para debugging
-
     setActiveProject(item);
     setSelectedCard(index);
   };
@@ -202,45 +192,159 @@ const PageProyects = () => {
     );
   };
 
+  if (!mounted) {
+    return (
+      <section className="bg-white flex flex-col gap-16 md:gap-32 px-4 md:px-10 py-10 md:py-20">
+        <div className="text-center">
+          <h1 className="text-6xl md:text-8xl font-ubuntu font-extrabold">NUESTROS PROYECTOS</h1>
+        </div>
+      </section>
+    );
+  }
+
   return (
-    <section className="bg-white flex flex-col gap-16 md:gap-32 px-4 md:px-10 py-10 md:py-20 relative">
-      <div className="text-center text-bg font-ubuntu font-extrabold tracking-tight text-6xl leading-[45px] md:text-8xl md:leading-[70px]">
-        <h1>NUESTROS</h1>
-        <h1>PROYECTOS</h1>
+    <section
+      ref={sectionRef}
+      className="bg-white flex flex-col gap-16 md:gap-32 px-4 md:px-10 py-10 md:py-20 relative min-h-screen"
+    >
+      {/* Elementos decorativos */}
+      <div className="absolute inset-0 pointer-events-none">
+        <div className="absolute top-40 left-20 w-72 h-72 bg-green/5 rounded-full filter blur-3xl" />
+        <div className="absolute bottom-40 right-20 w-96 h-96 bg-blue-500/5 rounded-full filter blur-3xl" />
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-10 place-items-center relative">
-        {proyects.map((item, index) => (
-          <div
-            key={`${item.id}-${index}`} // Key más único
-            ref={(el) => {
-              cardRefs.current[index] = el;
-            }}
-            onClick={() => handleProjectClick(item, index)}
-            className="relative cursor-pointer w-full max-w-[440px] h-[350px] md:h-[500px] rounded-xl overflow-hidden shadow-lg hover:scale-105 transition-transform duration-300"
-          >
-            <Image
-              src={item.img}
-              alt={item.id}
-              fill
-              className="object-cover"
-              sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 440px"
-              onError={(e) => {
-                console.error("Error cargando imagen:", item.img);
-              }}
-            />
-            <div className="absolute inset-0 bg-black bg-opacity-0 hover:bg-opacity-20 transition-opacity duration-300" />
+      <div className="relative z-10">
+        {/* Header */}
+        <div ref={titleRef} className="text-center mb-12">
+          <span className="inline-block px-4 py-2 bg-green/10 text-green rounded-full text-sm font-semibold tracking-wider mb-4 border border-green/20">
+            ✦ Portafolio
+          </span>
+          
+          <h1 className="text-6xl md:text-8xl font-ubuntu font-extrabold tracking-tight leading-[45px] md:leading-[70px]">
+            <span className="text-black">
+              NUESTROS
+            </span>
+            <br />
+            <span className="text-black">
+              PROYECTOS
+            </span>
+          </h1>
+        </div>
 
-            <div className="absolute bottom-0 left-0 right-0 p-4 md:p-6 bg-gradient-to-t from-black/70 to-transparent">
-              <h3 className="text-white text-xl md:text-2xl font-bold">
-                {item.id}
-              </h3>
-              {item.title && (
-                <p className="text-green text-xs md:text-sm">{item.title}</p>
-              )}
-            </div>
+        {/* Filtros */}
+        <div ref={filterRef} className="mb-12">
+          {/* Mobile filter button */}
+          <div className="lg:hidden flex justify-center mb-4">
+            <button
+              onClick={() => setIsFilterOpen(!isFilterOpen)}
+              className="flex items-center gap-2 px-6 py-3 bg-white rounded-full shadow-md border border-gray-200"
+            >
+              <FiFilter className="text-green" />
+              <span>Filtrar por categoría</span>
+            </button>
           </div>
-        ))}
+
+          {/* Filter tabs - desktop */}
+          <div className="hidden lg:flex justify-center flex-wrap gap-3">
+            {categories.map((cat) => (
+              <button
+                key={cat.id}
+                onClick={() => setActiveCategory(cat.id)}
+                className={`px-6 py-3 rounded-full font-medium transition-all duration-300 ${
+                  activeCategory === cat.id
+                    ? "bg-green text-black shadow-lg shadow-green/30"
+                    : "bg-white text-gray hover:bg-gray-100 border border-gray-200"
+                }`}
+              >
+                {cat.label}
+              </button>
+            ))}
+          </div>
+
+          {/* Filter dropdown - mobile */}
+          <AnimatePresence>
+            {isFilterOpen && (
+              <motion.div
+                initial={{ opacity: 0, y: -20 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -20 }}
+                className="lg:hidden flex flex-col items-center gap-2 mt-2"
+              >
+                {categories.map((cat) => (
+                  <button
+                    key={cat.id}
+                    onClick={() => {
+                      setActiveCategory(cat.id);
+                      setIsFilterOpen(false);
+                    }}
+                    className={`w-64 px-6 py-3 rounded-full font-medium transition-all duration-300 ${
+                      activeCategory === cat.id
+                        ? "bg-green text-black"
+                        : "bg-white text-gray border border-gray-200"
+                    }`}
+                  >
+                    {cat.label}
+                  </button>
+                ))}
+              </motion.div>
+            )}
+          </AnimatePresence>
+
+          {/* Result count */}
+          <p className="text-center text-gray mt-4">
+            Mostrando {filteredProjects.length} proyectos
+          </p>
+        </div>
+
+        {/* Grid de proyectos */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-10 place-items-center relative">
+          {filteredProjects.map((item, index) => (
+            <div
+              key={`${item.id}-${index}`}
+              ref={(el) => {
+                cardRefs.current[index] = el;
+              }}
+              onClick={() => handleProjectClick(item, index)}
+              className="relative cursor-pointer w-full max-w-[440px] h-[350px] md:h-[500px] rounded-xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 group"
+            >
+              <Image
+                src={item.img}
+                alt={item.id}
+                fill
+                className="object-cover transition-transform duration-700 group-hover:scale-110"
+                sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 440px"
+              />
+              
+              {/* Overlay en hover */}
+              <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+              
+              {/* Badge de categoría */}
+              <div className="absolute top-4 right-4 px-3 py-1 bg-green text-black text-xs font-bold rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-500">
+                {item.category === "landing" && "Landing"}
+                {item.category === "ecommerce" && "E-commerce"}
+                {item.category === "menu" && "Menú Digital"}
+                {item.category === "portfolio" && "Portafolio"}
+              </div>
+
+              {/* Badge de año */}
+              <div className="absolute top-4 left-4 px-3 py-1 bg-white/20 backdrop-blur-sm text-white text-xs rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-500 border border-white/30">
+                {item.year}
+              </div>
+
+              {/* Títulos */}
+              <div className="absolute bottom-0 left-0 right-0 p-4 md:p-6 bg-gradient-to-t from-black/70 to-transparent">
+                <h3 className="text-white text-xl md:text-2xl font-bold transform group-hover:translate-y-[-5px] transition-transform duration-300">
+                  {item.id}
+                </h3>
+                {item.title && (
+                  <p className="text-green text-xs md:text-sm transform group-hover:translate-y-[-5px] transition-transform duration-300">
+                    {item.title}
+                  </p>
+                )}
+              </div>
+            </div>
+          ))}
+        </div> 
       </div>
 
       {/* Expanded Card */}
@@ -256,12 +360,6 @@ const PageProyects = () => {
             fill
             className="object-cover"
             priority
-            onError={(e) => {
-              console.error(
-                "Error cargando imagen expandida:",
-                activeProject.img
-              );
-            }}
           />
 
           <div
@@ -284,7 +382,7 @@ const PageProyects = () => {
               </p>
             )}
 
-            <p className="max-w-2xl text-sm md:text-base lg:text-lg text-gray px-2">
+            <p className="max-w-2xl text-sm md:text-base lg:text-lg text-gray-200 px-2">
               {activeProject.info}
             </p>
 
@@ -292,9 +390,10 @@ const PageProyects = () => {
               href={activeProject.href}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-block mt-4 md:mt-6 px-6 md:px-8 py-2 md:py-3 bg-white text-black rounded-full hover:bg-green transition-colors duration-500 font-semibold text-sm md:text-base"
+              className="group inline-flex items-center gap-2 mt-4 md:mt-6 px-6 md:px-8 py-2 md:py-3 bg-white text-black rounded-full hover:bg-green transition-all duration-500 font-semibold text-sm md:text-base hover:pr-10"
             >
-              Visitar sitio
+              <span>Visitar sitio</span>
+              <FiExternalLink className="opacity-0 group-hover:opacity-100 group-hover:translate-x-1 transition-all" />
             </a>
           </div>
 
@@ -302,7 +401,7 @@ const PageProyects = () => {
             onClick={closeCard}
             className="absolute top-4 right-4 md:top-8 md:right-8 w-10 h-10 md:w-12 md:h-12 flex items-center justify-center bg-white/20 backdrop-blur-sm rounded-full hover:bg-white/30 transition-colors duration-300 text-white text-2xl md:text-3xl z-20"
           >
-            ×
+            <FiX />
           </button>
         </div>
       )}

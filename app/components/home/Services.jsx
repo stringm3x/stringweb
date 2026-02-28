@@ -190,7 +190,7 @@ const Services = () => {
           </div>
 
           {/* Descripción */}
-          <p className="description-text text-lg md:text-xl text-gray max-w-2xl mx-auto">
+          <p className="description-text text-lg md:text-xl text-black max-w-2xl mx-auto">
             Soluciones integrales diseñadas para llevar tu negocio al siguiente
             nivel
           </p>

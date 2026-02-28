@@ -8,22 +8,78 @@ import { FormSelect } from "./FormSelect";
 import { FormSuccess } from "./FormSuccess";
 import { useRef, useEffect, useState, useCallback } from "react";
 import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { motion } from "framer-motion";
 import toast from "react-hot-toast";
+import {
+  FiArrowRight,
+  FiCheckCircle,
+  FiDollarSign,
+  FiMail,
+  FiUser,
+  FiPhone,
+  FiTarget,
+  FiCalendar,
+  FiClock,
+  FiShield,
+  FiZap,
+} from "react-icons/fi";
+
+gsap.registerPlugin(ScrollTrigger);
+
+const projectTypes = [
+  { value: "basica", label: "Básica - Landing page o sitio institucional" },
+  { value: "intermedia", label: "Intermedia - Tienda online o web app simple" },
+  { value: "avanzada", label: "Avanzada - Plataforma compleja o marketplace" },
+];
+
+const benefits = [
+  {
+    icon: FiZap,
+    text: "Respuesta en 24h",
+    color: "from-yellow to-orange-500",
+  },
+  {
+    icon: FiCheckCircle,
+    text: "Código 100% personalizado",
+    color: "from-green to-green-600",
+  },
+  {
+    icon: FiShield,
+    text: "Sin plantillas",
+    color: "from-blue to-indigo-500",
+  },
+  {
+    icon: FiClock,
+    text: "Soporte 30 días",
+    color: "from-purple to-pink-500",
+  },
+];
+
+const stats = [
+  { value: "50+", label: "Proyectos" },
+  { value: "100%", label: "Personalizado" },
+  { value: "24h", label: "Respuesta" },
+  { value: "⭐ 5.0", label: "Valorado" },
+];
 
 export const QuoteForm = () => {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [successData, setSuccessData] = useState(null);
+  const [focusedField, setFocusedField] = useState(null);
+
   const formRef = useRef(null);
   const buttonRef = useRef(null);
   const titleRef = useRef(null);
   const subtitleRef = useRef(null);
+  const benefitsRef = useRef([]);
+  const sectionRef = useRef(null);
 
   const {
     register,
     handleSubmit,
     formState: { errors },
     reset,
-    watch,
   } = useForm({
     resolver: zodResolver(quoteSchema),
     defaultValues: {
@@ -37,35 +93,75 @@ export const QuoteForm = () => {
     },
   });
 
-  // Animación de entrada mejorada
+  // Animación de entrada mejorada - SOLO UNA VEZ
   useEffect(() => {
     const ctx = gsap.context(() => {
-      // Timeline para animación secuencial
-      const tl = gsap.timeline();
-
-      tl.fromTo(
-        titleRef.current,
-        { y: 50, opacity: 0 },
-        { y: 0, opacity: 1, duration: 0.6, ease: "power3.out" }
-      )
-        .fromTo(
+      // Aseguramos que todo sea visible primero
+      gsap.set(
+        [
+          titleRef.current,
           subtitleRef.current,
-          { y: 30, opacity: 0 },
-          { y: 0, opacity: 1, duration: 0.5, ease: "power3.out" },
+          formRef.current,
+          ...benefitsRef.current.filter(Boolean),
+        ],
+        {
+          opacity: 1,
+          y: 0,
+          visibility: "visible",
+        }
+      );
+
+      const tl = gsap.timeline({
+        scrollTrigger: {
+          trigger: sectionRef.current,
+          start: "top 80%",
+          toggleActions: "play none none none",
+        },
+      });
+
+      tl.from(titleRef.current, {
+        opacity: 0,
+        y: 50,
+        duration: 0.8,
+        ease: "power3.out",
+      })
+        .from(
+          subtitleRef.current,
+          {
+            opacity: 0,
+            y: 30,
+            duration: 0.6,
+            ease: "power2.out",
+          },
+          "-=0.4"
+        )
+        .from(
+          benefitsRef.current.filter(Boolean),
+          {
+            opacity: 0,
+            x: -20,
+            stagger: 0.1,
+            duration: 0.6,
+            ease: "power2.out",
+          },
           "-=0.3"
         )
-        .fromTo(
+        .from(
           formRef.current,
-          { y: 50, opacity: 0 },
-          { y: 0, opacity: 1, duration: 0.8, ease: "back.out(1.2)" },
+          {
+            opacity: 0,
+            y: 50,
+            duration: 0.8,
+            ease: "back.out(1.2)",
+          },
           "-=0.2"
         );
-    });
+    }, sectionRef);
 
     return () => ctx.revert();
   }, []);
 
-  // Animación de error en tiempo real
+  // Animación de error
   useEffect(() => {
     if (Object.keys(errors).length > 0) {
       gsap.to(formRef.current, {
@@ -73,18 +169,6 @@ export const QuoteForm = () => {
         duration: 0.4,
         ease: "power2.inOut",
       });
-
-      // Animación sutil en el primer campo con error
-      const firstErrorField = document.querySelector(".error-field");
-      if (firstErrorField) {
-        gsap.to(firstErrorField, {
-          backgroundColor: "rgba(239, 68, 68, 0.05)",
-          borderColor: "#ef4444",
-          duration: 0.3,
-          yoyo: true,
-          repeat: 1,
-        });
-      }
     }
   }, [errors]);
 
@@ -92,14 +176,9 @@ export const QuoteForm = () => {
     setIsSubmitting(true);
 
     try {
-      // Animación del botón mejorada
       gsap
         .timeline()
-        .to(buttonRef.current, {
-          scale: 0.95,
-          duration: 0.1,
-          ease: "power2.in",
-        })
+        .to(buttonRef.current, { scale: 0.95, duration: 0.1 })
         .to(buttonRef.current, {
           scale: 1,
           duration: 0.2,
@@ -118,45 +197,38 @@ export const QuoteForm = () => {
         throw new Error(result.message || "Error al enviar");
       }
 
-      // Éxito - Animación elegante
       setSuccessData(data);
-      toast.success("¡Cotización enviada! Revisa tu email", {
+
+      toast.success("¡Cotización enviada! Te contactaré en 24h", {
         duration: 5000,
         icon: "🎉",
         style: {
-          borderRadius: "10px",
+          borderRadius: "12px",
           background: "#10b981",
           color: "#fff",
+          padding: "16px",
         },
       });
 
-      // Animación de éxito del formulario
       gsap
         .timeline()
-        .to(formRef.current, {
-          scale: 0.98,
-          opacity: 0.7,
-          duration: 0.3,
-          ease: "power2.in",
-        })
+        .to(formRef.current, { scale: 0.98, opacity: 0.7, duration: 0.3 })
         .to(formRef.current, {
           scale: 1,
           opacity: 1,
           duration: 0.4,
           ease: "back.out(1.2)",
-          clearProps: "all",
         });
     } catch (error) {
-      toast.error(error.message || "Error al enviar. Intenta de nuevo.", {
-        duration: 4000,
+      toast.error(error.message || "Error al enviar", {
         icon: "❌",
         style: {
-          borderRadius: "10px",
+          borderRadius: "12px",
           background: "#ef4444",
           color: "#fff",
+          padding: "16px",
         },
       });
-      console.error("Error:", error);
     } finally {
       setIsSubmitting(false);
     }
@@ -165,17 +237,11 @@ export const QuoteForm = () => {
   const handleReset = useCallback(() => {
     setSuccessData(null);
     reset();
-
     gsap.fromTo(
       formRef.current,
       { scale: 0.95, opacity: 0, y: 20 },
       { scale: 1, opacity: 1, y: 0, duration: 0.6, ease: "back.out(1.4)" }
     );
-
-    toast("Nueva cotización", {
-      icon: "📝",
-      duration: 2000,
-    });
   }, [reset]);
 
   if (successData) {
@@ -183,157 +249,225 @@ export const QuoteForm = () => {
   }
 
   return (
-    <div className="min-h-screen flex items-center justify-center px-4 py-12 sm:px-6 lg:px-8">
-      <div className="w-full max-w-4xl mx-auto flex flex-col items-center">
-        {/* Header con animación */}
-        <div className="text-center mb-12 space-y-4">
-          <h2
-            ref={titleRef}
-            className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl tracking-tight font-ubuntu font-extrabold text-bg leading-none"
-          >
-            COTIZA TU{" "}
-            <span className="text-green relative inline-block">
-              WEB
-              <span className="absolute -bottom-2 left-0 w-full h-1 bg-green/30 rounded-full"></span>
+    <section
+      ref={sectionRef}
+      className="relative min-h-screen bg-gradient-to-br from-gray-50 via-white to-gray-50 py-20 overflow-hidden"
+    >
+      <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        {/* Header con stats */}
+        <div className="text-center mb-12">
+          <motion.div ref={titleRef} className="space-y-4">
+            <span className="inline-block px-4 py-2 bg-green text-white rounded-full text-sm font-semibold tracking-wider shadow-lg shadow-green/30">
+              ✦ Comienza tu proyecto
             </span>
-          </h2>
-          <p
+
+            <h1 className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-ubuntu font-black tracking-tight leading-none">
+              <span className="text-black">COTIZA TU</span>
+              <br />
+              <span className="text-black relative">
+                WEB
+                <span className="absolute -bottom-3 left-0 w-full h-1 bg-green rounded-full" />
+              </span>
+            </h1>
+          </motion.div>
+
+          <motion.p
             ref={subtitleRef}
-            className="text-base sm:text-lg md:text-xl text-bg/90 max-w-2xl mx-auto px-4"
+            className="text-lg md:text-xl text-gray max-w-2xl mx-auto mt-6 leading-relaxed"
           >
             Cuéntame tu idea y te prepararé una propuesta personalizada en
             código, no plantillas.
-          </p>
+          </motion.p>
+        </div>
+
+        {/* Beneficios - AHORA SIEMPRE VISIBLES */}
+        <div className="flex flex-wrap justify-center gap-4 mb-12">
+          {benefits.map((benefit, index) => {
+            const Icon = benefit.icon;
+            return (
+              <motion.div
+                key={index}
+                ref={(el) => (benefitsRef.current[index] = el)}
+                whileHover={{ y: -4, scale: 1.02 }}
+                className="flex items-center gap-3 px-5 py-2.5 bg-white rounded-full shadow-lg border border-gray hover:shadow-xl transition-all"
+                style={{ opacity: 1, visibility: "visible" }}
+              >
+                <div
+                  className={`w-8 h-8 rounded-full bg-gradient-to-br ${benefit.color} flex items-center justify-center`}
+                >
+                  <Icon className="text-white text-sm" />
+                </div>
+                <span className="text-sm font-medium text-gray">
+                  {benefit.text}
+                </span>
+              </motion.div>
+            );
+          })}
         </div>
 
         {/* Formulario */}
-        <form
-          ref={formRef}
-          onSubmit={handleSubmit(onSubmit)}
-          className="w-full max-w-3xl bg-white/95 backdrop-blur-sm rounded-2xl shadow-2xl p-6 sm:p-8 border border-gray/20"
-          noValidate
-        >
-          <div className="grid md:grid-cols-2 gap-6">
-            <FormField
-              label="Nombre completo"
-              name="name"
-              register={register}
-              error={errors.name?.message}
-              placeholder="Juan Pérez"
-              required
-            />
+        <motion.div ref={formRef} className="max-w-3xl mx-auto">
+          <form
+            onSubmit={handleSubmit(onSubmit)}
+            className="bg-white/90 backdrop-blur-xl rounded-3xl shadow-2xl p-8 md:p-10 border border-gray-200/50"
+            noValidate
+          >
+            <div className="grid md:grid-cols-2 gap-6">
+              <FormField
+                label="Nombre completo"
+                name="name"
+                register={register}
+                error={errors.name?.message}
+                placeholder="Juan Pérez"
+                icon={FiUser}
+                onFocus={() => setFocusedField("name")}
+                onBlur={() => setFocusedField(null)}
+                isFocused={focusedField === "name"}
+                required
+              />
 
-            <FormField
-              label="Email"
-              name="email"
-              type="email"
-              register={register}
-              error={errors.email?.message}
-              placeholder="juan@email.com"
-              required
-            />
+              <FormField
+                label="Email"
+                name="email"
+                type="email"
+                register={register}
+                error={errors.email?.message}
+                placeholder="juan@email.com"
+                icon={FiMail}
+                onFocus={() => setFocusedField("email")}
+                onBlur={() => setFocusedField(null)}
+                isFocused={focusedField === "email"}
+                required
+              />
 
-            <FormField
-              label="WhatsApp"
-              name="whatsapp"
-              type="tel"
-              register={register}
-              error={errors.whatsapp?.message}
-              placeholder="521234567890"
-              required
-            />
+              <FormField
+                label="WhatsApp"
+                name="whatsapp"
+                type="tel"
+                register={register}
+                error={errors.whatsapp?.message}
+                placeholder="521234567890"
+                icon={FiPhone}
+                onFocus={() => setFocusedField("whatsapp")}
+                onBlur={() => setFocusedField(null)}
+                isFocused={focusedField === "whatsapp"}
+                required
+              />
 
-            <FormSelect
-              label="Tipo de proyecto"
-              name="projectType"
-              register={register}
-              error={errors.projectType?.message}
-              required
-            />
-          </div>
+              <FormSelect
+                label="Tipo de proyecto"
+                name="projectType"
+                register={register}
+                error={errors.projectType?.message}
+                options={projectTypes}
+                icon={FiTarget}
+                onFocus={() => setFocusedField("projectType")}
+                onBlur={() => setFocusedField(null)}
+                isFocused={focusedField === "projectType"}
+                required
+              />
+            </div>
 
-          <div className="mt-6">
-            <FormField
-              label="Objetivo del sitio web"
-              name="objective"
-              type="textarea"
-              register={register}
-              error={errors.objective?.message}
-              placeholder="Describe el objetivo principal de tu proyecto..."
-              required
-            />
-          </div>
+            <div className="mt-6">
+              <FormField
+                label="Objetivo del sitio web"
+                name="objective"
+                type="textarea"
+                register={register}
+                error={errors.objective?.message}
+                placeholder="Describe el objetivo principal de tu proyecto, funcionalidades deseadas y cualquier detalle relevante..."
+                rows={4}
+                icon={FiTarget}
+                onFocus={() => setFocusedField("objective")}
+                onBlur={() => setFocusedField(null)}
+                isFocused={focusedField === "objective"}
+                required
+              />
+            </div>
 
-          <div className="grid md:grid-cols-2 gap-6 mt-6">
-            <FormField
-              label="Fecha ideal de entrega"
-              name="idealDate"
-              type="date"
-              register={register}
-              error={errors.idealDate?.message}
-              required
-            />
+            <div className="grid md:grid-cols-2 gap-6 mt-6">
+              <FormField
+                label="Fecha ideal de entrega"
+                name="idealDate"
+                type="date"
+                register={register}
+                error={errors.idealDate?.message}
+                icon={FiCalendar}
+                onFocus={() => setFocusedField("idealDate")}
+                onBlur={() => setFocusedField(null)}
+                isFocused={focusedField === "idealDate"}
+                required
+              />
 
-            <FormField
-              label="Presupuesto estimado (MXN)"
-              name="budget"
-              type="number"
-              register={register}
-              error={errors.budget?.message}
-              placeholder="7,000"
-              required
-            />
-          </div>
+              <FormField
+                label="Presupuesto estimado (MXN)"
+                name="budget"
+                type="number"
+                register={register}
+                error={errors.budget?.message}
+                placeholder="70,000"
+                icon={FiDollarSign}
+                onFocus={() => setFocusedField("budget")}
+                onBlur={() => setFocusedField(null)}
+                isFocused={focusedField === "budget"}
+                required
+              />
+            </div>
 
-          {/* Botón de envío */}
-          <div className="mt-8 flex flex-col items-center">
-            <button
-              ref={buttonRef}
-              type="submit"
-              disabled={isSubmitting}
-              className={`
-                w-full sm:w-auto min-w-[240px] px-8 py-4 rounded-xl font-medium
-                transition-all duration-200 transform
-                focus:outline-none focus:ring-2 focus:ring-green/50 focus:ring-offset-2
-                disabled:cursor-not-allowed disabled:opacity-70
-                ${
-                  isSubmitting
-                    ? "bg-gray-300 text-gray-600 cursor-not-allowed"
-                    : "bg-green text-black hover:bg-green/90 hover:shadow-xl hover:scale-[1.02] active:scale-[0.98]"
-                }
-              `}
-            >
-              {isSubmitting ? (
-                <span className="flex items-center justify-center gap-3">
-                  <svg className="animate-spin h-5 w-5" viewBox="0 0 24 24">
-                    <circle
-                      className="opacity-25"
-                      cx="12"
-                      cy="12"
-                      r="10"
-                      stroke="currentColor"
-                      strokeWidth="4"
-                      fill="none"
-                    />
-                    <path
-                      className="opacity-75"
-                      fill="currentColor"
-                      d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
-                    />
-                  </svg>
-                  <span>Enviando cotización...</span>
+            {/* Botón de envío */}
+            <div className="mt-10">
+              <motion.button
+                ref={buttonRef}
+                type="submit"
+                disabled={isSubmitting}
+                className="group relative w-full overflow-hidden rounded-2xl bg-green px-8 py-5 text-lg font-bold text-white transition-all hover:shadow-2xl hover:shadow-green/30 disabled:cursor-not-allowed disabled:opacity-70"
+                whileHover={{ scale: 1.02 }}
+                whileTap={{ scale: 0.98 }}
+              >
+                <span className="relative z-10 flex items-center justify-center gap-2">
+                  {isSubmitting ? (
+                    <>
+                      <svg className="animate-spin h-5 w-5" viewBox="0 0 24 24">
+                        <circle
+                          className="opacity-25"
+                          cx="12"
+                          cy="12"
+                          r="10"
+                          stroke="currentColor"
+                          strokeWidth="4"
+                          fill="none"
+                        />
+                        <path
+                          className="opacity-75"
+                          fill="currentColor"
+                          d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
+                        />
+                      </svg>
+                      <span>Enviando cotización...</span>
+                    </>
+                  ) : (
+                    <>
+                      <span>Obtener cotización</span>
+                      <FiArrowRight className="group-hover:translate-x-2 transition-transform" />
+                    </>
+                  )}
                 </span>
-              ) : (
-                "Obtener Cotización"
-              )}
-            </button>
+                <div className="absolute inset-0 -translate-x-full group-hover:translate-x-0 bg-gradient-to-r from-white/20 to-transparent transition-transform duration-700" />
+              </motion.button>
 
-            <p className="text-xs sm:text-sm text-gray/80 text-center mt-4 max-w-xs">
-              Los precios son aproximados, nos comunicaremos contigo.
-            </p>
-          </div>
-        </form>
+              <p className="text-sm text-gray-600 text-center mt-4">
+                Los precios son aproximados. Te contactaremos en menos de 24
+                horas.
+              </p>
+            </div>
+
+            {/* Campos requeridos */}
+            <div className="mt-6 text-xs text-gray-500 text-center border-t border-gray-100 pt-6">
+              * Todos los campos son requeridos
+            </div>
+          </form>
+        </motion.div>
       </div>
-    </div>
+    </section>
   );
 };

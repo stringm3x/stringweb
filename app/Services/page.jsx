@@ -221,7 +221,7 @@ const PageServices = () => {
           {/* Descripción */}
           <p
             ref={descriptionRef}
-            className="text-gray max-w-2xl mx-auto text-lg md:text-xl leading-relaxed"
+            className="text-black max-w-2xl mx-auto text-lg md:text-xl leading-relaxed"
           >
             Soluciones digitales personalizadas para llevar tu negocio al
             siguiente nivel. Cada proyecto es único y recibe atención especial.
