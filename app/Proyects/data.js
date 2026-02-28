@@ -8,7 +8,7 @@ export const proyects = [
     img: "/proyects/yuma1.png",
     info: "Proyecto digital enfocado en diseño minimalista y experiencia de usuario moderna para marca emergente.",
     category: "ecommerce",
-    year: "2024",
+    year: "2025",
   },
   {
     id: "ALBA AGUILAR",
@@ -17,7 +17,7 @@ export const proyects = [
     img: "/proyects/alba&aguilar.png",
     info: "Empresa de construcción especializada en desarrollos residenciales y proyectos arquitectónicos de alto nivel en México.",
     category: "landing",
-    year: "2024",
+    year: "2025",
   },
   {
     id: "INCODE",
@@ -26,7 +26,7 @@ export const proyects = [
     img: "/proyects/incode.png",
     info: "Landing corporativa moderna enfocada en tecnología y soluciones digitales empresariales.",
     category: "landing",
-    year: "2023",
+    year: "2025",
   },
   {
     id: "Pecado de Canela",
@@ -35,7 +35,7 @@ export const proyects = [
     img: "/proyects/pecadodecanela.png",
     info: "Panadería artesanal con presencia digital enfocada en branding cálido y experiencia gastronómica.",
     category: "menu",
-    year: "2024",
+    year: "2026",
   },
   {
     id: "SUSHI SENSATION",
@@ -44,7 +44,7 @@ export const proyects = [
     img: "/design/restuarante.png",
     info: "Menú digital interactivo con diseño moderno para restaurante especializado en cocina japonesa.",
     category: "menu",
-    year: "2024",
+    year: "2026",
   },
   {
     id: "GARM",
@@ -53,7 +53,7 @@ export const proyects = [
     img: "/design/ropa.png",
     info: "Marca de moda con enfoque moderno, tienda en línea optimizada para experiencia de compra rápida y elegante.",
     category: "ecommerce",
-    year: "2023",
+    year: "2026",
   },
   {
     id: "CAELORA",
@@ -62,7 +62,7 @@ export const proyects = [
     img: "/design/joyeria.png",
     info: "E-commerce de joyería con estética premium y experiencia visual enfocada en lujo y detalle.",
     category: "ecommerce",
-    year: "2024",
+    year: "2026",
   },
   {
     id: "Barrio Bravo",
@@ -71,7 +71,7 @@ export const proyects = [
     img: "/proyects/barriobravo.png",
     info: "Tienda online en Shopify con enfoque urbano y estrategia visual enfocada en cultura street.",
     category: "ecommerce",
-    year: "2023",
+    year: "2026",
   },
   {
     id: "VERDANT",
@@ -80,7 +80,7 @@ export const proyects = [
     img: "/design/portafolio.png",
     info: "Portafolio arquitectónico con enfoque minimalista y experiencia visual tipo estudio premium.",
     category: "portfolio",
-    year: "2024",
+    year: "2025",
   },
 ];
 

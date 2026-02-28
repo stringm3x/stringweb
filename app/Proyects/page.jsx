@@ -194,7 +194,7 @@ const PageProyects = () => {
 
   if (!mounted) {
     return (
-      <section className="bg-white flex flex-col gap-16 md:gap-32 px-4 md:px-10 py-10 md:py-20">
+      <section className="bg-white flex flex-col gap-16 md:gap-32 px-4 md:px-10 py-10 md:py-20 overflow-hidden">
         <div className="text-center">
           <h1 className="text-6xl md:text-8xl font-ubuntu font-extrabold">NUESTROS PROYECTOS</h1>
         </div>
