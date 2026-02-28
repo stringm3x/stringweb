@@ -4,6 +4,7 @@ import { useState, useEffect, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { FiPlus, FiMinus, FiArrowRight, FiCheckCircle } from "react-icons/fi";
 import gsap from "gsap";
+import Link from "next/link";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 
 gsap.registerPlugin(ScrollTrigger);
@@ -54,7 +55,7 @@ const items = [
       "Actualizaciones regulares",
       "Soporte 24/7",
     ],
-    gradient: "from-orange-500 to-red-500",
+    gradient: "from-orange to-red",
     icon: "🔧",
   },
   {
@@ -198,11 +199,13 @@ const Services = () => {
 
         {/* CTA Button */}
         <div ref={buttonRef} className="text-center mb-20">
-          <button className="group relative inline-flex items-center px-8 py-4 bg-gradient-to-r from-green to-green2 text-white font-bold rounded-full overflow-hidden transition-all duration-300 hover:pr-12 hover:shadow-xl">
-            <span className="relative z-10">Conoce nuestros servicios</span>
-            <FiArrowRight className="absolute right-4 opacity-0 group-hover:opacity-100 group-hover:right-6 transition-all duration-300" />
-            <div className="absolute inset-0 bg-white/20 translate-y-full group-hover:translate-y-0 transition-transform duration-300" />
-          </button>
+          <Link href="/Services">
+            <button className="group relative inline-flex items-center px-8 py-4 bg-gradient-to-r from-green to-green2 text-white font-bold rounded-full overflow-hidden transition-all duration-300 hover:pr-12 hover:shadow-xl">
+              <span className="relative z-10">Conoce nuestros servicios</span>
+              <FiArrowRight className="absolute right-4 opacity-0 group-hover:opacity-100 group-hover:right-6 transition-all duration-300" />
+              <div className="absolute inset-0 bg-white/20 translate-y-full group-hover:translate-y-0 transition-transform duration-300" />
+            </button>
+          </Link>
         </div>
 
         {/* Accordion - SIN ANIMACIÓN DE ENTRADA, SOLO ANIMACIÓN AL ABRIR */}
@@ -309,7 +312,7 @@ const Services = () => {
         {/* Footer Stats */}
         <div className="grid grid-cols-2 md:grid-cols-4 gap-6 mt-20 pt-12 border-t border-gray-200">
           {[
-            { value: "50+", label: "Proyectos completados" },
+            { value: "10+", label: "Proyectos completados" },
             { value: "95%", label: "Clientes satisfechos" },
             { value: "24/7", label: "Soporte continuo" },
             { value: "5+", label: "Años de experiencia" },

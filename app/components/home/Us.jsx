@@ -16,8 +16,8 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 gsap.registerPlugin(ScrollTrigger);
 
 const stats = [
-  { icon: FiUsers, value: "50+", label: "Clientes satisfechos" },
-  { icon: FiAward, value: "5+", label: "Años de experiencia" },
+  { icon: FiUsers, value: "15+", label: "Clientes satisfechos" },
+  { icon: FiAward, value: "3+", label: "Años de experiencia" },
   { icon: FiHeart, value: "95%", label: "Tasa de retención" },
   { icon: FiStar, value: "4.9", label: "Calificación promedio" },
 ];
@@ -176,7 +176,7 @@ const Us = () => {
                     <p className="text-white font-semibold text-base">
                       Ana García
                     </p>
-                    <p className="text-gray-400 text-sm">CEO, Marca XYZ</p>
+                    <p className="text-gray-400 text-sm">CEO, Marca Incode</p>
                   </div>
                 </div>
 
@@ -190,20 +190,6 @@ const Us = () => {
                   <span className="text-gray-400 text-sm ml-2">5.0</span>
                 </div>
               </div>
-            </div>
-
-            {/* Texto adicional */}
-            <div className="mt-8 text-center lg:text-left">
-              <h3 className="text-xl sm:text-2xl font-bold text-white mb-2">
-                Unlock your business potential
-              </h3>
-              <p className="text-sm sm:text-base text-gray-400 max-w-md">
-                Partner with us to drive growth, innovation, and create
-                connections that elevate your business to the next level.
-              </p>
-              <p className="text-green text-sm sm:text-base mt-2 font-semibold">
-                Linking your business to innovation.
-              </p>
             </div>
           </div>
         </div>

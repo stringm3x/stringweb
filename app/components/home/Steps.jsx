@@ -252,7 +252,7 @@ const Steps = () => {
 
             <h2
               ref={subtitleRef}
-              className="text-5xl md:text-6xl lg:text-7xl font-ubuntu font-black tracking-tight leading-tight text-bg"
+              className="text-5xl md:text-6xl lg:text-7xl font-ubuntu font-black tracking-tight leading-tight text-white"
             >
               EL ÉXITO DE TU
               <br />

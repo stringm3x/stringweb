@@ -34,7 +34,7 @@ const projects = [
     category: "Moda",
     description: "Tienda online con enfoque en experiencia de compra rápida",
     gradient: "from-green-500 to-emerald-500",
-    tags: ["E-commerce", "Shopify", "Custom"],
+    tags: ["E-commerce", "Node.js", "Custom"],
   },
 ];
 
