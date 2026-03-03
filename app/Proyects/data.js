@@ -8,7 +8,16 @@ export const proyects = [
     img: "/proyects/yuma1.png",
     info: "Proyecto digital enfocado en diseño minimalista y experiencia de usuario moderna para marca emergente.",
     category: "ecommerce",
-    year: "2025",
+    year: "En desarrollo",
+  },
+  {
+    id: "TheZerug",
+    title: "Portafolio",
+    href: "https://zerug.vercel.app/",
+    img: "/proyects/zerug.png",
+    info: "Editor de videos profesionales para youtubers y tiktokers.",
+    category: "portfolio",
+    year: "2026",
   },
   {
     id: "ALBA AGUILAR",
@@ -63,15 +72,6 @@ export const proyects = [
     info: "Marca de moda con enfoque moderno, tienda en línea optimizada para experiencia de compra rápida y elegante.",
     category: "ecommerce",
     year: "2026",
-  },
-  {
-    id: "INCODE",
-    title: "Landing Page",
-    href: "https://incode-ten.vercel.app/",
-    img: "/proyects/incode.png",
-    info: "Landing corporativa moderna enfocada en tecnología y soluciones digitales empresariales.",
-    category: "landing",
-    year: "2025",
   },
   {
     id: "VERDANT",
