@@ -2,73 +2,138 @@
 
 import { useState, useEffect, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { FiPlus, FiMinus, FiArrowRight, FiCheckCircle } from "react-icons/fi";
+import {
+  FiPlus,
+  FiMinus,
+  FiArrowRight,
+  FiCheckCircle,
+  FiTarget,
+  FiTrendingUp,
+  FiZap,
+  FiUsers,
+  FiClock,
+  FiAward,
+} from "react-icons/fi";
+import {
+  MdOutlineSpeed,
+  MdOutlineAnalytics,
+  MdOutlineRocketLaunch,
+} from "react-icons/md";
+import { RiTeamLine, RiLightbulbLine, RiLineChartLine } from "react-icons/ri";
 import gsap from "gsap";
 import Link from "next/link";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 
 gsap.registerPlugin(ScrollTrigger);
 
+// Servicios alineados con el documento estratégico
 const items = [
   {
-    title: "Diseño UI/UX",
-    content: "Interfaz amigable y moderna para tus usuarios.",
+    title: "SISTEMA DE CONVERSIÓN",
+    subtitle: "Diagnóstico y Estructura",
+    content:
+      "Transformamos tu presencia digital en un sistema que genera clientes reales de manera consistente.",
     benefits: [
-      "Experiencia de usuario intuitiva",
-      "Diseño responsive",
-      "Prototipos interactivos",
-      "Pruebas de usabilidad",
+      "Diagnóstico completo de presencia digital",
+      "Estructura estratégica de oferta",
+      "Optimización de flujo de captación",
+      "Claridad en llamados a la acción",
     ],
-    gradient: "from-purple-500 to-pink-500",
-    icon: "🎨",
+    gradient: "from-green to-green2",
+    icon: FiTarget,
+    metric: "+85% conversión",
+    color: "green",
   },
   {
-    title: "Desarrollo Web",
-    content: "Sitios rápidos, accesibles y funcionales.",
+    title: "LANDING PAGE ESTRATÉGICA",
+    subtitle: "Diseño con propósito",
+    content:
+      "Páginas diseñadas para convertir, no solo para verse bien. Cada elemento tiene un propósito.",
     benefits: [
-      "Código optimizado",
-      "Arquitectura escalable",
-      "Integración con APIs",
-      "SEO-friendly",
+      "Landing page enfocada en conversión",
+      "Redacción estratégica",
+      "Diseño UI/UX optimizado",
+      "Integración con WhatsApp",
     ],
-    gradient: "from-blue-500 to-cyan-500",
-    icon: "💻",
+    gradient: "from-green2 to-green3",
+    icon: FiTrendingUp,
+    metric: "100% personalizado",
+    color: "green2",
   },
   {
-    title: "Optimización SEO",
-    content: "Haz que te encuentren en Google.",
+    title: "OPTIMIZACIÓN CONTINUA",
+    subtitle: "Mejora constante",
+    content:
+      "Tu sistema evoluciona con los datos. Ajustamos y mejoramos para maximizar resultados.",
     benefits: [
-      "Palabras clave estratégicas",
-      "Optimización on-page",
-      "Link building",
-      "Análisis de competencia",
+      "Análisis de métricas de conversión",
+      "A/B testing de flujos",
+      "Optimización UX recurrente",
+      "Ajustes estratégicos mensuales",
     ],
-    gradient: "from-green-500 to-emerald-500",
-    icon: "🚀",
+    gradient: "from-green3 to-green4",
+    icon: MdOutlineAnalytics,
+    metric: "Mejora mensual",
+    color: "green3",
   },
   {
-    title: "Pruebas y mantenimiento",
-    content: "Nos aseguramos de que todo funcione bien.",
+    title: "SISTEMA E-COMMERCE",
+    subtitle: "Ventas automatizadas",
+    content:
+      "Plataformas de venta diseñadas para maximizar conversión y minimizar fricción.",
     benefits: [
-      "Testing continuo",
-      "Backups automáticos",
-      "Actualizaciones regulares",
-      "Soporte 24/7",
+      "Tienda online optimizada",
+      "Checkout de alta conversión",
+      "Integración con métodos de pago",
+      "Sistema de carritos abandonados",
     ],
-    gradient: "from-orange to-red",
-    icon: "🔧",
+    gradient: "from-green4 to-green",
+    icon: MdOutlineRocketLaunch,
+    metric: "Ventas 24/7",
+    color: "green4",
   },
   {
-    title: "Adaptabilidad Mobile",
-    content: "Diseño responsivo para todos los dispositivos.",
+    title: "AUTOMATIZACIÓN Y SOPORTE",
+    subtitle: "Sistema vivo",
+    content:
+      "Tu negocio funciona sin ti. Automatizamos procesos y te acompañamos en el camino.",
     benefits: [
-      "Mobile-first approach",
-      "Optimización de velocidad",
-      "Touch-friendly interfaces",
-      "Cross-device testing",
+      "Automatización de respuestas",
+      "Soporte técnico prioritario",
+      "Backups y seguridad",
+      "Actualizaciones continuas",
     ],
-    gradient: "from-indigo-500 to-purple-500",
-    icon: "📱",
+    gradient: "from-green to-green2",
+    icon: FiZap,
+    metric: "24/7 disponible",
+    color: "green",
+  },
+];
+
+const stats = [
+  {
+    value: "50+",
+    label: "Sistemas implementados",
+    icon: RiTeamLine,
+    desc: "Negocios transformados",
+  },
+  {
+    value: "85%",
+    label: "Aumento en conversión",
+    icon: MdOutlineAnalytics,
+    desc: "Promedio en clientes",
+  },
+  {
+    value: "24h",
+    label: "Respuesta inicial",
+    icon: FiClock,
+    desc: "Diagnóstico exprés",
+  },
+  {
+    value: "100%",
+    label: "Personalizado",
+    icon: FiAward,
+    desc: "Sin plantillas",
   },
 ];
 
@@ -76,7 +141,6 @@ const Services = () => {
   const [openIndex, setOpenIndex] = useState(null);
   const [hoveredIndex, setHoveredIndex] = useState(null);
 
-  // Refs para animaciones de entrada
   const sectionRef = useRef(null);
   const titleRef = useRef(null);
   const badgeRef = useRef(null);
@@ -85,7 +149,6 @@ const Services = () => {
 
   const toggle = (idx) => setOpenIndex(openIndex === idx ? null : idx);
 
-  // Animaciones de entrada SOLO para elementos que NO son el acordeón
   useEffect(() => {
     const ctx = gsap.context(() => {
       const tl = gsap.timeline({
@@ -97,14 +160,12 @@ const Services = () => {
         },
       });
 
-      // Badge
       tl.from(badgeRef.current, {
         opacity: 0,
         y: 30,
         duration: 0.6,
         ease: "power2.out",
       })
-        // Título principal (animación por partes)
         .from(
           titleRef.current?.children || [],
           {
@@ -116,7 +177,6 @@ const Services = () => {
           },
           "-=0.3"
         )
-        // Descripción
         .from(
           ".description-text",
           {
@@ -127,7 +187,6 @@ const Services = () => {
           },
           "-=0.4"
         )
-        // Botón CTA
         .from(
           buttonRef.current,
           {
@@ -138,7 +197,6 @@ const Services = () => {
           },
           "-=0.3"
         )
-        // Stats
         .from(
           statsRef.current.filter(Boolean),
           {
@@ -158,31 +216,30 @@ const Services = () => {
   return (
     <section
       ref={sectionRef}
-      className="relative bg-gradient-to-b from-white to-gray-50 py-24 md:py-32 overflow-hidden"
+      className="relative bg-gradient-to-b from-white via-gray-50 to-white py-24 md:py-32 overflow-hidden"
     >
       {/* Elementos decorativos */}
       <div className="absolute inset-0 pointer-events-none">
-        <div className="absolute top-0 left-0 w-96 h-96 bg-green/5 rounded-full filter blur-3xl" />
-        <div className="absolute bottom-0 right-0 w-96 h-96 bg-blue-500/5 rounded-full filter blur-3xl" />
+        <div className="absolute top-0 left-0 w-96 h-96 bg-green/10 rounded-full filter blur-3xl" />
+        <div className="absolute bottom-0 right-0 w-96 h-96 bg-green2/10 rounded-full filter blur-3xl" />
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-gradient-to-r from-green/5 to-transparent rounded-full blur-3xl" />
       </div>
 
       <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
         <div className="text-center mb-16 space-y-4">
-          {/* Badge */}
-          <span
+          <motion.span
             ref={badgeRef}
-            className="inline-block px-4 py-2 bg-green/10 text-green rounded-full text-sm font-semibold uppercase tracking-wider"
+            className="inline-block px-4 py-2 bg-green/10 text-green rounded-full text-sm font-mono border border-green/30"
           >
-            Nuestros Servicios
-          </span>
+            ✦ SISTEMAS DE CONVERSIÓN
+          </motion.span>
 
-          {/* Título */}
           <div ref={titleRef} className="space-y-2">
             <h1 className="text-5xl md:text-7xl lg:text-8xl font-ubuntu font-black tracking-tight text-bg">
               POTENCIA TUS
             </h1>
-            <h1 className="text-5xl md:text-7xl lg:text-8xl font-ubuntu font-black tracking-tight bg-gradient-to-r from-green to-green2 bg-clip-text text-transparent">
+            <h1 className="text-5xl md:text-7xl lg:text-8xl font-ubuntu font-black tracking-tight text-gray">
               RESULTADOS
             </h1>
             <h1 className="text-5xl md:text-7xl lg:text-8xl font-ubuntu font-black tracking-tight text-bg">
@@ -190,29 +247,18 @@ const Services = () => {
             </h1>
           </div>
 
-          {/* Descripción */}
-          <p className="description-text text-lg md:text-xl text-black max-w-2xl mx-auto">
-            Soluciones integrales diseñadas para llevar tu negocio al siguiente
-            nivel
+          <p className="description-text text-lg md:text-xl text-gray max-w-2xl mx-auto">
+            Implementamos sistemas digitales diseñados para convertir visitas en
+            clientes reales, no páginas que solo se ven bien.
           </p>
         </div>
 
-        {/* CTA Button */}
-        <div ref={buttonRef} className="text-center mb-20">
-          <Link href="/Services">
-            <button className="group relative inline-flex items-center px-8 py-4 bg-gradient-to-r from-green to-green2 text-white font-bold rounded-full overflow-hidden transition-all duration-300 hover:pr-12 hover:shadow-xl">
-              <span className="relative z-10">Conoce nuestros servicios</span>
-              <FiArrowRight className="absolute right-4 opacity-0 group-hover:opacity-100 group-hover:right-6 transition-all duration-300" />
-              <div className="absolute inset-0 bg-white/20 translate-y-full group-hover:translate-y-0 transition-transform duration-300" />
-            </button>
-          </Link>
-        </div>
-
-        {/* Accordion - SIN ANIMACIÓN DE ENTRADA, SOLO ANIMACIÓN AL ABRIR */}
+        {/* Accordion - Rediseñado */}
         <div className="max-w-4xl mx-auto space-y-4">
           {items.map((item, index) => {
             const isOpen = openIndex === index;
             const isHovered = hoveredIndex === index;
+            const Icon = item.icon;
 
             return (
               <div
@@ -221,7 +267,7 @@ const Services = () => {
                 onMouseEnter={() => setHoveredIndex(index)}
                 onMouseLeave={() => setHoveredIndex(null)}
               >
-                {/* Gradient border on hover */}
+                {/* Borde con gradiente en hover */}
                 <div
                   className={`absolute inset-0 bg-gradient-to-r ${
                     item.gradient
@@ -231,22 +277,36 @@ const Services = () => {
                   style={{ padding: "2px" }}
                 />
 
-                <div className="relative bg-white rounded-2xl shadow-lg hover:shadow-xl transition-shadow duration-300">
+                <div className="relative bg-white rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300">
                   {/* Header */}
                   <button
                     onClick={() => toggle(index)}
                     className="w-full flex items-center justify-between p-6 md:p-8 text-left"
                   >
                     <div className="flex items-center gap-4">
+                      {/* Icono con gradiente */}
+                      <div
+                        className={`w-12 h-12 rounded-xl bg-gradient-to-br ${item.gradient} flex items-center justify-center shadow-lg`}
+                      >
+                        <Icon className="text-xl text-white" />
+                      </div>
+
                       <div>
-                        <h3
-                          className={`text-xl md:text-3xl font-bold transition-colors duration-300 ${
-                            isOpen ? "text-green" : "text-bg"
-                          }`}
-                        >
-                          {item.title}
-                        </h3>
-                        <p className="text-gray text-sm md:text-base mt-1">
+                        <div className="flex items-center gap-2 mb-1">
+                          <h3
+                            className={`text-xl md:text-2xl font-ubuntu font-bold transition-colors duration-300 ${
+                              isOpen ? `text-green` : "text-bg"
+                            }`}
+                          >
+                            {item.title}
+                          </h3>
+                          <span
+                            className={`text-xs font-mono text-green bg-green/10 px-2 py-1 rounded-full`}
+                          >
+                            {item.metric}
+                          </span>
+                        </div>
+                        <p className="text-gray text-sm md:text-base">
                           {item.content}
                         </p>
                       </div>
@@ -255,17 +315,17 @@ const Services = () => {
                     <motion.div
                       animate={{ rotate: isOpen ? 45 : 0 }}
                       transition={{ duration: 0.3, ease: "easeInOut" }}
-                      className={`w-10 h-10 rounded-full flex items-center justify-center transition-colors duration-300 ${
+                      className={`w-10 h-10 rounded-full flex items-center justify-center transition-all duration-300 ${
                         isOpen
-                          ? "bg-gradient-to-r from-green to-green2 text-white"
-                          : "bg-gray text-white"
+                          ? `bg-gradient-to-r ${item.gradient} text-white shadow-lg`
+                          : "bg-gray/10 text-gray hover:bg-gray/20"
                       }`}
                     >
                       {isOpen ? <FiMinus /> : <FiPlus />}
                     </motion.div>
                   </button>
 
-                  {/* Content - SOLO ANIMACIÓN AL ABRIR */}
+                  {/* Content - Animación al abrir */}
                   <AnimatePresence>
                     {isOpen && (
                       <motion.div
@@ -275,30 +335,41 @@ const Services = () => {
                         transition={{ duration: 0.3, ease: "easeInOut" }}
                         className="overflow-hidden"
                       >
-                        <div className="px-6 md:px-8 pb-6 md:pb-8 pt-2 border-t border-gray-100">
+                        <div className="px-6 md:px-8 pb-6 md:pb-8 pt-2 border-t border-gray">
                           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                             {item.benefits.map((benefit, i) => (
-                              <div key={i} className="flex items-center gap-2">
+                              <motion.div
+                                key={i}
+                                initial={{ opacity: 0, x: -10 }}
+                                animate={{ opacity: 1, x: 0 }}
+                                transition={{ delay: i * 0.1 }}
+                                className="flex items-center gap-2"
+                              >
                                 <FiCheckCircle
                                   className={`text-green text-sm md:text-base flex-shrink-0`}
                                 />
-                                <span className="text-black text-sm md:text-base">
+                                <span className="text-bg text-sm md:text-base">
                                   {benefit}
                                 </span>
-                              </div>
+                              </motion.div>
                             ))}
                           </div>
 
                           {/* CTA dentro del acordeón */}
-                          <div className="mt-6 pt-4 border-t border-gray-100">
-                            <a
+                          <motion.div
+                            initial={{ opacity: 0 }}
+                            animate={{ opacity: 1 }}
+                            transition={{ delay: 0.3 }}
+                            className="mt-6 pt-4 border-t border-gray-100"
+                          >
+                            <Link
                               href="/quote"
-                              className={`inline-flex items-center text-sm font-medium text-gray t hover:opacity-80 transition-opacity`}
+                              className={`inline-flex items-center text-sm font-medium text-green hover:opacity-80 transition-opacity group`}
                             >
-                              Más información sobre {item.title}
-                              <FiArrowRight className="ml-2" />
-                            </a>
-                          </div>
+                              Solicitar diagnóstico
+                              <FiArrowRight className="ml-2 group-hover:translate-x-2 transition-transform" />
+                            </Link>
+                          </motion.div>
                         </div>
                       </motion.div>
                     )}
@@ -309,25 +380,27 @@ const Services = () => {
           })}
         </div>
 
-        {/* Footer Stats */}
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-6 mt-20 pt-12 border-t border-gray-200">
-          {[
-            { value: "10+", label: "Proyectos completados" },
-            { value: "95%", label: "Clientes satisfechos" },
-            { value: "24/7", label: "Soporte continuo" },
-            { value: "5+", label: "Años de experiencia" },
-          ].map((stat, index) => (
-            <div
-              key={index}
-              ref={(el) => (statsRef.current[index] = el)}
-              className="text-center"
-            >
-              <p className="text-2xl md:text-3xl font-black text-green">
-                {stat.value}
-              </p>
-              <p className="text-xs md:text-sm text-gray">{stat.label}</p>
-            </div>
-          ))}
+        {/* CTA Principal */}
+        <div ref={buttonRef} className="text-center mt-20">
+          <Link href="/quote">
+            <button className="group relative inline-flex items-center px-8 py-4 bg-gradient-to-r from-green to-green2 text-black font-bold rounded-full overflow-hidden transition-all duration-300 hover:pr-12 hover:shadow-2xl hover:shadow-green/30">
+              <span className="relative z-10">Diagnosticar mi negocio</span>
+              <FiArrowRight className="absolute right-4 opacity-0 group-hover:opacity-100 group-hover:right-6 transition-all duration-300" />
+              <div className="absolute inset-0 bg-white/20 translate-y-full group-hover:translate-y-0 transition-transform duration-300" />
+            </button>
+          </Link>
+          <p className="text-sm text-gray mt-4">
+            Diagnóstico gratuito · Respuesta en 24h
+          </p>
+        </div>
+
+        {/* Mensaje final */}
+        <div className="text-center mt-12 text-sm text-gray">
+          <p className="flex items-center justify-center gap-2">
+            <FiTarget className="text-green" />
+            Sistemas que convierten, no páginas que decoran
+            <FiTarget className="text-green" />
+          </p>
         </div>
       </div>
     </section>

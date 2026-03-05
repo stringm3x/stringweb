@@ -56,12 +56,6 @@ const benefits = [
   },
 ];
 
-const stats = [
-  { value: "50+", label: "Proyectos" },
-  { value: "100%", label: "Personalizado" },
-  { value: "24h", label: "Respuesta" },
-  { value: "⭐ 5.0", label: "Valorado" },
-];
 
 export const QuoteForm = () => {
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -405,7 +399,7 @@ export const QuoteForm = () => {
                 type="number"
                 register={register}
                 error={errors.budget?.message}
-                placeholder="70,000"
+                placeholder="20,000"
                 icon={FiDollarSign}
                 onFocus={() => setFocusedField("budget")}
                 onBlur={() => setFocusedField(null)}

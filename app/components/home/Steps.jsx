@@ -1,172 +1,265 @@
-"use client"
-import React, { useEffect, useRef } from "react";
+"use client";
+import React, { useEffect, useRef, useState } from "react";
 import { motion, useInView } from "framer-motion";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import Link from "next/link";
+import {
+  FiArrowRight,
+  FiTarget,
+  FiTrendingUp,
+  FiZap,
+  FiUsers,
+  FiCheckCircle,
+  FiBarChart2,
+  FiClock,
+  FiAward,
+  FiSearch,
+  FiLayers,
+  FiCode,
+} from "react-icons/fi";
+import {
+  MdOutlineSpeed,
+  MdOutlineAnalytics,
+  MdOutlineRocketLaunch,
+} from "react-icons/md";
 
 gsap.registerPlugin(ScrollTrigger);
 
 const stepsData = [
   {
-    number: "1",
-    title: "PLANIFICACIÓN",
+    number: "01",
+    title: "DIAGNÓSTICO",
+    description: "Análisis profundo de tu presencia digital",
     items: [
-      "Definición de objetivos y alcance del proyecto",
-      "Creación del prototipo visual y mapa del sitio",
-      "Investigación de mercado y competencia",
-      "Estrategia de contenido",
+      "Evaluación de claridad de oferta",
+      "Identificación de fricciones en el contacto",
+      "Revisión de flujo de captación",
+      "Análisis de redes sociales",
     ],
-    gradient: "from-blue-500 to-cyan-500",
-    icon: "📋",
-    size: "w-[250px] h-[250px] xl:w-[300px] xl:h-[300px]",
-    position: "md:absolute md:bottom-10 xl:left-0",
-    zIndex: "z-10",
+    gradient: "from-green to-green2",
+    icon: FiSearch,
+    metric: "24h respuesta",
+    color: "green",
   },
   {
-    number: "2",
+    number: "02",
+    title: "ESTRUCTURA",
+    description: "Diseño del sistema de conversión",
+    items: [
+      "Ajuste de propuesta de valor",
+      "Flujo de conversión estratégico",
+      "Redacción con enfoque en conversión",
+      "Llamados a la acción claros",
+    ],
+    gradient: "from-green2 to-green3",
+    icon: FiLayers,
+    metric: "100% personalizado",
+    color: "green2",
+  },
+  {
+    number: "03",
     title: "DESARROLLO",
+    description: "Implementación del sistema",
     items: [
-      "Implementación de funcionalidades",
-      "Programación con tecnologías modernas",
-      "Integración de bases de datos",
-      "Optimización de rendimiento",
+      "Landing page optimizada",
+      "Integración de WhatsApp",
+      "Optimización mobile",
+      "Implementación técnica",
     ],
-    gradient: "from-green-500 to-emerald-500",
-    icon: "💻",
-    size: "w-[300px] h-[300px] xl:w-[400px] xl:h-[400px]",
-    position:
-      "md:absolute bottom-8 md:bottom-40 xl:bottom-32 md:left-36 lg:left-48 xl:left-56",
-    zIndex: "z-20",
+    gradient: "from-green3 to-green4",
+    icon: FiCode,
+    metric: "Sistema vivo",
+    color: "green3",
   },
   {
-    number: "3",
-    title: "PRUEBAS",
+    number: "04",
+    title: "AJUSTE",
+    description: "Optimización continua",
     items: [
-      "Testeo en diferentes dispositivos",
-      "Pruebas de usabilidad",
-      "Corrección de bugs",
-      "Validación con usuarios",
+      "Pruebas de flujo",
+      "Ajustes de claridad",
+      "Optimización UX",
+      "Verificación completa",
     ],
-    gradient: "from-orange-500 to-red-500",
-    icon: "🔍",
-    size: "w-[350px] h-[350px] xl:w-[500px] xl:h-[500px]",
-    position:
-      "md:absolute bottom-12 md:top-[10%] lg:top-[8%] md:left-[38%] lg:left-[35%]",
-    zIndex: "z-30",
-  },
-  {
-    number: "4",
-    title: "LANZAMIENTO",
-    items: [
-      "Publicación del sitio web",
-      "Monitoreo inicial",
-      "Configuración de analytics",
-      "Plan de mantenimiento",
-    ],
-    gradient: "from-purple-500 to-pink-500",
-    icon: "🚀",
-    size: "w-[400px] h-[400px] xl:w-[550px] xl:h-[550px]",
-    position:
-      "md:absolute bottom-20 md:top-[-25%] lg:top-[-27%] xl:top-[-20%] md:right-[-32] lg:right-2",
-    zIndex: "z-40",
+    gradient: "from-green4 to-green",
+    icon: MdOutlineRocketLaunch,
+    metric: "Mejora continua",
+    color: "green4",
   },
 ];
 
-const StepCircle = ({
-  number,
-  title,
-  items,
-  gradient,
-  icon,
-  size,
-  position,
-  zIndex,
-  index,
-}) => {
+const StepCircle = ({ step, index, isActive, onHover }) => {
   const circleRef = useRef(null);
   const isInView = useInView(circleRef, { once: true, amount: 0.3 });
 
   return (
     <motion.div
       ref={circleRef}
-      initial={{ opacity: 0, scale: 0.8, y: 50 }}
-      animate={isInView ? { opacity: 1, scale: 1, y: 0 } : {}}
-      transition={{
-        duration: 0.8,
-        delay: index * 0.2,
-        type: "spring",
-        stiffness: 100,
-      }}
-      whileHover={{
-        scale: 1.05,
-        transition: { duration: 0.3 },
-      }}
-      className={`
-        relative rounded-full
-        flex flex-col items-center justify-center
-        p-6 md:p-8
-        transition-all duration-500
-        cursor-pointer
-        ${size} ${position} ${zIndex}
-        bg-gradient-to-br ${gradient}
-        shadow-2xl hover:shadow-3xl
-        border-4 border-white/20
-        backdrop-blur-sm
-      `}
-      style={{
-        boxShadow: "0 25px 50px -12px rgba(0, 0, 0, 0.25)",
-      }}
+      initial={{ opacity: 0, scale: 0.5 }}
+      animate={isInView ? { opacity: 1, scale: 1 } : {}}
+      transition={{ duration: 0.6, delay: index * 0.15 }}
+      onHoverStart={() => onHover(index)}
+      onHoverEnd={() => onHover(null)}
+      className="relative"
     >
-      {/* Número decorativo de fondo */}
-      <span className="absolute text-8xl md:text-9xl font-black text-white/10 select-none -z-0">
-        {number}
-      </span>
+      {/* Círculo principal */}
+      <motion.div
+        whileHover={{ scale: 1.1 }}
+        transition={{ duration: 0.3 }}
+        className={`
+          relative w-[220px] h-[220px] md:w-[260px] md:h-[260px] 
+          rounded-full bg-gradient-to-br ${step.gradient}
+          flex items-center justify-center
+          shadow-2xl cursor-pointer
+          border-4 border-white/10
+          ${isActive ? "ring-4 ring-white/30" : ""}
+        `}
+      >
+        {/* Círculo interior con blur */}
+        <div className="absolute inset-2 rounded-full bg-black/20 backdrop-blur-sm" />
 
-      {/* Número */}
-      <span className="text-2xl md:text-3xl font-black text-white mb-2 relative z-10">
-        PASO {number}
-      </span>
+        {/* Contenido */}
+        <div className="relative z-10 text-center p-6">
+          <span className="text-3xl md:text-4xl font-black text-white mb-2 block">
+            {step.number}
+          </span>
+          <step.icon className="text-3xl md:text-4xl text-white mx-auto mb-2" />
+          <h3 className="text-lg md:text-xl font-ubuntu font-bold text-white">
+            {step.title}
+          </h3>
+        </div>
 
-      {/* Título */}
-      <h3 className="text-xl md:text-2xl font-bold text-white mb-3 text-center relative z-10">
-        {title}
-      </h3>
+        {/* Partículas animadas alrededor */}
+        <div className="absolute -inset-4">
+          {[...Array(3)].map((_, i) => (
+            <motion.div
+              key={i}
+              className="absolute w-2 h-2 bg-white/30 rounded-full"
+              animate={{
+                scale: [1, 1.5, 1],
+                opacity: [0.3, 0.8, 0.3],
+                x: [0, Math.sin(i * 120) * 40, 0],
+                y: [0, Math.cos(i * 120) * 40, 0],
+              }}
+              transition={{
+                duration: 3,
+                delay: i * 0.5,
+                repeat: Infinity,
+              }}
+            />
+          ))}
+        </div>
+      </motion.div>
 
-      {/* Lista de items */}
-      <ul className="text-xs md:text-[15px] text-white/90 space-y-1 px-4 relative z-10">
-        {items.map((item, i) => (
+      {/* Línea conectora (excepto el último) */}
+      {index < stepsData.length - 1 && (
+        <div className="hidden lg:block absolute top-1/2 -right-16 w-16 h-0.5">
+          <motion.div
+            initial={{ scaleX: 0 }}
+            animate={isInView ? { scaleX: 1 } : {}}
+            transition={{ duration: 0.8, delay: index * 0.2 }}
+            className="w-full h-full bg-gradient-to-r from-green/50 to-transparent origin-left"
+          />
+          <motion.div
+            animate={{ rotate: 360 }}
+            transition={{ duration: 3, repeat: Infinity, ease: "linear" }}
+            className="absolute -right-2 -top-2 w-4 h-4"
+          >
+            <div className="w-2 h-2 bg-green rounded-full" />
+          </motion.div>
+        </div>
+      )}
+    </motion.div>
+  );
+};
+
+const InfoPanel = ({ step, isVisible }) => {
+  if (!step || !isVisible) return null;
+
+  return (
+    <motion.div
+      initial={{ opacity: 0, y: 20 }}
+      animate={{ opacity: 1, y: 0 }}
+      exit={{ opacity: 0, y: -20 }}
+      transition={{ duration: 0.4 }}
+      className="bg-white/5 backdrop-blur-lg rounded-2xl p-8 border border-white/10"
+    >
+      <div className="flex items-center gap-4 mb-6">
+        <div
+          className={`w-12 h-12 rounded-xl bg-gradient-to-br ${step.gradient} flex items-center justify-center`}
+        >
+          <step.icon className="text-2xl text-white" />
+        </div>
+        <div>
+          <span className={`text-sm font-mono text-${step.color} mb-1 block`}>
+            PASO {step.number} · {step.metric}
+          </span>
+          <h3 className="text-2xl font-ubuntu font-bold text-white">
+            {step.title}
+          </h3>
+        </div>
+      </div>
+
+      <p className="text-gray mb-6 text-lg">{step.description}</p>
+
+      <ul className="space-y-3">
+        {step.items.map((item, i) => (
           <motion.li
             key={i}
             initial={{ opacity: 0, x: -10 }}
-            animate={isInView ? { opacity: 1, x: 0 } : {}}
-            transition={{ delay: 0.5 + i * 0.1 }}
-            className="flex items-start gap-2"
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ delay: i * 0.1 }}
+            className="flex items-start gap-3 text-gray"
           >
-            <span className="text-white mt-1">•</span>
+            <FiCheckCircle
+              className={`text-${step.color} mt-1 flex-shrink-0`}
+            />
             <span>{item}</span>
           </motion.li>
         ))}
       </ul>
 
-      {/* Efecto de brillo en hover */}
-      <div className="absolute inset-0 rounded-full bg-white/0 hover:bg-white/10 transition-colors duration-300" />
+      {/* Barra de progreso decorativa */}
+      <div className="mt-6 h-1 w-full bg-white/10 rounded-full overflow-hidden">
+        <motion.div
+          initial={{ width: "0%" }}
+          animate={{ width: "100%" }}
+          transition={{ duration: 1, delay: 0.3 }}
+          className={`h-full bg-gradient-to-r ${step.gradient}`}
+        />
+      </div>
     </motion.div>
   );
 };
 
 const Steps = () => {
+  const [mounted, setMounted] = useState(false);
+  const [activeStep, setActiveStep] = useState(0);
   const sectionRef = useRef(null);
   const titleRef = useRef(null);
   const subtitleRef = useRef(null);
 
   useEffect(() => {
+    setMounted(true);
+  }, []);
+
+  useEffect(() => {
+    if (!mounted) return;
+
     const ctx = gsap.context(() => {
+      gsap.set([titleRef.current, subtitleRef.current], {
+        opacity: 1,
+        y: 0,
+        visibility: "visible",
+      });
+
       const tl = gsap.timeline({
         scrollTrigger: {
           trigger: sectionRef.current,
           start: "top 80%",
           end: "bottom 20%",
-          toggleActions: "play none none reverse",
+          toggleActions: "play none none none",
         },
       });
 
@@ -188,149 +281,144 @@ const Steps = () => {
     }, sectionRef);
 
     return () => ctx.revert();
-  }, []);
+  }, [mounted]);
+
+  if (!mounted) {
+    return (
+      <section className="relative bg-black py-20">
+        <div className="max-w-7xl mx-auto px-4">
+          <div className="h-96 bg-gray-900 animate-pulse rounded-2xl" />
+        </div>
+      </section>
+    );
+  }
 
   return (
     <section
       ref={sectionRef}
-      className="relative min-h-screen overflow-hidden py-20 bg-gradient-to-b from-gray-50 to-white"
+      className="relative bg-black py-20 overflow-hidden"
     >
-      {/* Fondo decorativo */}
-      <div className="absolute inset-0 pointer-events-none">
-        <div className="absolute top-20 left-20 w-72 h-72 bg-green-500/5 rounded-full filter blur-3xl" />
-        <div className="absolute bottom-20 right-20 w-96 h-96 bg-blue-500/5 rounded-full filter blur-3xl" />
+      {/* Fondo con partículas */}
+      <div className="absolute inset-0">
+        <div className="absolute inset-0 bg-gradient-to-b from-green-900/10 via-black to-black" />
 
-        {/* Líneas de conexión entre círculos */}
-        <svg
-          className="absolute inset-0 w-full h-full pointer-events-none"
-          style={{ opacity: 0.1 }}
-        >
-          <line
-            x1="15%"
-            y1="30%"
-            x2="35%"
-            y2="50%"
-            stroke="#10b981"
-            strokeWidth="2"
-            strokeDasharray="5,5"
+        {/* Estrellas/partículas */}
+        {[...Array(50)].map((_, i) => (
+          <motion.div
+            key={i}
+            className="absolute w-1 h-1 bg-white/30 rounded-full"
+            style={{
+              left: `${Math.random() * 100}%`,
+              top: `${Math.random() * 100}%`,
+            }}
+            animate={{
+              opacity: [0.2, 0.8, 0.2],
+              scale: [1, 1.5, 1],
+            }}
+            transition={{
+              duration: Math.random() * 3 + 2,
+              repeat: Infinity,
+            }}
           />
-          <line
-            x1="35%"
-            y1="50%"
-            x2="55%"
-            y2="35%"
-            stroke="#10b981"
-            strokeWidth="2"
-            strokeDasharray="5,5"
+        ))}
+
+        {/* Líneas orbitales */}
+        <svg className="absolute inset-0 w-full h-full pointer-events-none opacity-20">
+          <circle
+            cx="50%"
+            cy="50%"
+            r="300"
+            fill="none"
+            stroke="url(#grad)"
+            strokeWidth="1"
+            strokeDasharray="10,10"
           />
-          <line
-            x1="55%"
-            y1="35%"
-            x2="80%"
-            y2="15%"
-            stroke="#10b981"
-            strokeWidth="2"
-            strokeDasharray="5,5"
-          />
+          <defs>
+            <linearGradient id="grad" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" stopColor="#50ff05" />
+              <stop offset="100%" stopColor="#28a624" />
+            </linearGradient>
+          </defs>
         </svg>
       </div>
 
       <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        {/* Título */}
-        <div className="relative z-10 max-w-2xl mb-20">
-          <motion.div ref={titleRef} className="space-y-2">
-            <span className="inline-block px-4 py-2 bg-green/10 text-green rounded-full text-sm font-semibold uppercase tracking-wider mb-4">
-              Nuestro Proceso
+        {/* Header */}
+        <div className="text-center mb-16">
+          <motion.div ref={titleRef} className="space-y-4">
+            <span className="inline-block px-4 py-2 bg-green/10 text-green rounded-full text-sm font-mono border border-green/30">
+              ✦ METODOLOGÍA STRING
             </span>
 
             <h2 className="text-5xl md:text-6xl lg:text-7xl font-ubuntu font-black tracking-tight leading-tight">
-              ASÍ{" "}
+              <span className="text-white">NUESTRO</span>
+              <br />
               <span className="bg-gradient-to-r from-green to-green2 bg-clip-text text-transparent">
-                POTENCIAMOS
+                SISTEMA
               </span>
             </h2>
 
             <h2
               ref={subtitleRef}
-              className="text-5xl md:text-6xl lg:text-7xl font-ubuntu font-black tracking-tight leading-tight text-white"
+              className="text-4xl md:text-5xl lg:text-6xl font-ubuntu font-bold tracking-tight leading-tight text-white"
             >
-              EL ÉXITO DE TU
-              <br />
-              NEGOCIO
+              DE CONVERSIÓN
             </h2>
           </motion.div>
-
-          {/* Descripción corta */}
-          <p className="text-lg text-gray mt-6 max-w-md">
-            Un proceso meticuloso y probado para garantizar resultados
-            excepcionales en cada proyecto.
-          </p>
         </div>
 
-        {/* Contenedor de círculos */}
-        <div className="relative min-h-[1000px] flex flex-col items-center md:gap-16 md:block">
+        {/* Círculos en fila */}
+        <div className="flex flex-col md:flex-row justify-center items-center gap-12 md:gap-8 lg:gap-16 mb-16">
           {stepsData.map((step, index) => (
             <StepCircle
               key={index}
+              step={step}
               index={index}
-              number={step.number}
-              title={step.title}
-              items={step.items}
-              gradient={step.gradient}
-              icon={step.icon}
-              size={step.size}
-              position={step.position}
-              zIndex={step.zIndex}
+              isActive={activeStep === index}
+              onHover={setActiveStep}
             />
           ))}
         </div>
 
-        {/* Llamada a la acción */}
+        {/* Panel de información dinámico */}
+        <div className="max-w-2xl mx-auto">
+          <InfoPanel step={stepsData[activeStep]} isVisible={true} />
+        </div>
+
+        {/* Indicadores de paso */}
+        <div className="flex justify-center gap-3 mt-8">
+          {stepsData.map((_, index) => (
+            <button
+              key={index}
+              onClick={() => setActiveStep(index)}
+              className={`w-2 h-2 rounded-full transition-all duration-300 ${
+                activeStep === index
+                  ? "w-8 bg-green"
+                  : "bg-white/20 hover:bg-white/40"
+              }`}
+            />
+          ))}
+        </div>
+
+        {/* CTA */}
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          transition={{ duration: 0.6, delay: 0.8 }}
+          transition={{ duration: 0.6 }}
           className="text-center mt-20"
         >
-          <a
-            href="/quote"
-            className="group inline-flex items-center px-8 py-4 bg-gradient-to-r from-green to-green2 text-white font-bold rounded-full shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105"
-          >
-            <span>Comienza tu proyecto</span>
-            <svg
-              className="w-5 h-5 ml-2 group-hover:translate-x-2 transition-transform"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth={2}
-                d="M17 8l4 4m0 0l-4 4m4-4H3"
-              />
-            </svg>
-          </a>
+          <Link href="/quote">
+            <button className="group relative px-8 py-4 bg-gradient-to-r from-green to-green2 text-black font-bold rounded-full overflow-hidden hover:shadow-2xl hover:shadow-green/30 transition-all">
+              <span className="relative z-10 flex items-center gap-2">
+                Comenzar diagnóstico
+                <FiArrowRight className="group-hover:translate-x-2 transition-transform" />
+              </span>
+              <div className="absolute inset-0 bg-white/20 translate-y-full group-hover:translate-y-0 transition-transform duration-500" />
+            </button>
+          </Link>
         </motion.div>
       </div>
-
-      {/* Estilos personalizados */}
-      <style jsx>{`
-        @keyframes float {
-          0%,
-          100% {
-            transform: translateY(0px);
-          }
-          50% {
-            transform: translateY(-20px);
-          }
-        }
-
-        .hover\\:shadow-3xl:hover {
-          box-shadow: 0 35px 60px -15px rgba(0, 0, 0, 0.3);
-        }
-      `}</style>
     </section>
   );
 };

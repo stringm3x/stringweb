@@ -50,7 +50,7 @@ export const FormSelect = ({ register, error, name, label, required }) => {
         <option value="">Selecciona un tipo de proyecto</option>
         {PROJECT_TYPES.map((type) => (
           <option key={type.id} value={type.id}>
-            {type.label} - {type.price} MXN
+            {type.description} 
           </option>
         ))}
       </select>

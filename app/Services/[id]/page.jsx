@@ -6,12 +6,20 @@ import servicios from "../data";
 import { notFound } from "next/navigation";
 import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
-import { FiPlus, FiMinus, FiArrowLeft } from "react-icons/fi";
+import {
+  FiPlus,
+  FiMinus,
+  FiArrowLeft,
+  FiArrowRight,
+  FiCheckCircle,
+  FiTarget,
+  FiClock,
+  FiAward,
+} from "react-icons/fi";
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 
-// Registrar plugins de GSAP
 gsap.registerPlugin(ScrollTrigger);
 
 const ServicePage = ({ params: paramsPromise }) => {
@@ -21,122 +29,121 @@ const ServicePage = ({ params: paramsPromise }) => {
   if (!servicio) return notFound();
 
   const [openIndex, setOpenIndex] = useState(null);
+  const [activeTab, setActiveTab] = useState("beneficios");
+  const [mounted, setMounted] = useState(false);
 
   // Refs para GSAP
   const sectionRef = useRef(null);
   const headerRef = useRef(null);
+  const badgeRef = useRef(null);
   const titleRef = useRef(null);
   const imageRef = useRef(null);
   const contentRef = useRef(null);
-  const featuresRef = useRef([]);
-  const faqRef = useRef(null);
+  const ctaRef = useRef(null);
 
-  // ANIMACIONES CON USE-GSAP (más confiable)
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
   useGSAP(
     () => {
-      // Timeline principal
-      const tl = gsap.timeline({
-        defaults: {
-          ease: "power3.out",
-          duration: 0.8,
-        },
-      });
+      if (!mounted) return;
 
-      // Header animation
-      tl.from(headerRef.current, {
-        opacity: 0,
-        y: 50,
-      })
-        // Title animation
-        .from(
+      gsap.set(
+        [
+          badgeRef.current,
           titleRef.current,
-          {
-            opacity: 0,
-            y: 30,
-            duration: 0.6,
-          },
-          "-=0.4"
-        )
-        // Image animation
-        .from(
+          headerRef.current,
           imageRef.current,
-          {
-            opacity: 0,
-            x: 50,
-            duration: 0.8,
-          },
-          "-=0.3"
-        )
-        // Content animation
-        .from(
           contentRef.current,
-          {
-            opacity: 0,
-            y: 30,
-            duration: 0.6,
-          },
-          "-=0.4"
-        )
-        // Features animation (stagger)
-        .from(
-          featuresRef.current.filter(Boolean),
-          {
-            opacity: 0,
-            y: 20,
-            stagger: 0.1,
-            duration: 0.5,
-            ease: "back.out(1.2)",
-          },
-          "-=0.2"
-        );
+          ctaRef.current,
+        ],
+        { opacity: 1, y: 0, visibility: "visible" }
+      );
 
-      // Scroll animations para elementos que aparecen al hacer scroll
-      gsap.from(".scroll-animate", {
+      const tl = gsap.timeline({
+        defaults: { ease: "power3.out", duration: 0.8 },
         scrollTrigger: {
-          trigger: ".scroll-animate",
+          trigger: sectionRef.current,
           start: "top 80%",
-          end: "bottom 20%",
-          toggleActions: "play none none reverse",
+          toggleActions: "play none none none",
         },
-        opacity: 0,
-        y: 50,
-        duration: 0.8,
-        stagger: 0.2,
       });
+
+      tl.from(badgeRef.current, { opacity: 0, y: 30 })
+        .from(titleRef.current, { opacity: 0, y: 40 }, "-=0.4")
+        .from(headerRef.current, { opacity: 0, y: 30 }, "-=0.3")
+        .from(imageRef.current, { opacity: 0, x: 50 }, "-=0.3")
+        .from(contentRef.current, { opacity: 0, y: 30 }, "-=0.4")
+        .from(ctaRef.current, { opacity: 0, y: 30 }, "-=0.1");
     },
-    { scope: sectionRef }
+    { scope: sectionRef, dependencies: [mounted] }
   );
 
-  const toggle = (idx) => {
-    setOpenIndex(openIndex === idx ? null : idx);
+  const toggle = (idx) => setOpenIndex(openIndex === idx ? null : idx);
+
+  const getIcon = (idx) => {
+    const icons = ["🎯", "⚡", "🎨", "🚀", "💡", "🔧"];
+    return icons[idx] || "✅";
   };
 
-  // Variants para Framer Motion (solo para interacciones)
-  const fadeInUp = {
-    initial: { opacity: 0, y: 20 },
-    animate: { opacity: 1, y: 0 },
-    exit: { opacity: 0, y: -20 },
+  // Variants para animación de contenido
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.1,
+        delayChildren: 0.1,
+      },
+    },
+    exit: {
+      opacity: 0,
+      transition: {
+        staggerChildren: 0.05,
+        staggerDirection: -1,
+      },
+    },
+  };
+
+  const itemVariants = {
+    hidden: { opacity: 0, y: 30, scale: 0.9 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      scale: 1,
+      transition: { type: "spring", stiffness: 100, damping: 10 },
+    },
+    exit: { opacity: 0, y: -20, scale: 0.9 },
   };
 
   const faqVariants = {
-    open: {
-      height: "auto",
-      opacity: 1,
-      transition: { duration: 0.4, ease: [0.4, 0, 0.2, 1] },
-    },
-    collapsed: {
-      height: 0,
-      opacity: 0,
-      transition: { duration: 0.3, ease: [0.4, 0, 0.2, 1] },
-    },
+    open: { height: "auto", opacity: 1, transition: { duration: 0.4 } },
+    collapsed: { height: 0, opacity: 0, transition: { duration: 0.3 } },
   };
+
+  if (!mounted) {
+    return (
+      <section className="min-h-screen bg-white py-12 px-4">
+        <div className="max-w-7xl mx-auto">
+          <div className="h-96 bg-gray-100 animate-pulse rounded-2xl" />
+        </div>
+      </section>
+    );
+  }
 
   return (
     <section
       ref={sectionRef}
-      className="min-h-screen bg-gradient-to-b from-gray-50 to-white py-12 px-4 md:px-6 lg:px-8"
+      className="min-h-screen bg-white py-12 px-4 md:px-6 lg:px-8 relative"
     >
-      <div className="max-w-7xl mx-auto">
+      {/* Elementos decorativos */}
+      <div className="absolute inset-0 pointer-events-none">
+        <div className="absolute top-40 right-20 w-96 h-96 bg-green/5 rounded-full filter blur-3xl" />
+        <div className="absolute bottom-40 left-20 w-96 h-96 bg-green/5 rounded-full filter blur-3xl" />
+      </div>
+
+      <div className="relative max-w-7xl mx-auto">
         {/* Botón volver */}
         <motion.div
           initial={{ opacity: 0, x: -20 }}
@@ -148,67 +155,58 @@ const ServicePage = ({ params: paramsPromise }) => {
             href="/Services"
             className="inline-flex items-center text-gray hover:text-green transition-colors duration-300 group"
           >
-            <FiArrowLeft className="mr-2 group-hover:-translate-x-1 transition-transform duration-300" />
+            <FiArrowLeft className="mr-2 group-hover:-translate-x-1 transition-transform" />
             <span>Volver a Servicios</span>
           </Link>
         </motion.div>
 
-        {/* Header */}
-        <div ref={headerRef} className="text-center mb-12 space-y-4">
-          <span className="inline-block px-4 py-2 bg-green rounded-full text-sm font-semibold uppercase tracking-wider">
-            Servicio Profesional
+        {/* Badge */}
+        <div ref={badgeRef} className="mb-6">
+          <span className="inline-block px-4 py-2 bg-green/10 text-green rounded-full text-sm font-mono border border-green/30">
+            ✦ SISTEMA DE CONVERSIÓN
           </span>
-
-          <h1
-            ref={titleRef}
-            className="text-5xl md:text-7xl lg:text-8xl font-ubuntu font-black tracking-tighter"
-          >
-            <span className="bg-clip-text text-transparent">
-              {servicio.service}
-            </span>
-          </h1>
-
-          <p className="text-xl lg:text-2xl text-gray max-w-3xl mx-auto leading-relaxed">
-            {servicio.intro}
-          </p>
         </div>
 
-        {/* Contenido principal */}
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center mb-20">
-          {/* Texto */}
-          <div ref={contentRef} className="space-y-6">
-            <h2 className="text-3xl lg:text-4xl font-ubuntu font-bold">
-              Transformamos tu visión en realidad digital
+        {/* Header */}
+        <div className="grid lg:grid-cols-2 gap-12 items-center mb-16">
+          <div>
+            <h1
+              ref={titleRef}
+              className="text-5xl md:text-6xl lg:text-7xl font-ubuntu font-black tracking-tight text-bg mb-4"
+            >
+              {servicio.service}
+            </h1>
+            <h2
+              ref={headerRef}
+              className="text-2xl md:text-3xl text-green font-light mb-6"
+            >
+              {servicio.title2}
             </h2>
+            <p className="text-lg text-black leading-relaxed">
+              {servicio.intro}
+            </p>
 
-            <div className="space-y-4 text-gray leading-relaxed">
-              <p className="text-lg">{servicio.p}</p>
-            </div>
-
-            {/* Features con refs para animación */}
-            <div className="grid grid-cols-2 gap-4 pt-4">
-              {[
-                "Metodología ágil",
-                "Diseño personalizado",
-                "Optimización SEO",
-                "Soporte continuo",
-              ].map((feature, i) => (
-                <div
-                  key={i}
-                  ref={(el) => (featuresRef.current[i] = el)}
-                  className="flex items-center space-x-2"
-                >
-                  <div className="w-2 h-2 bg-green rounded-full" />
-                  <span className="text-sm">{feature}</span>
-                </div>
-              ))}
+            {/* Stats rápidas */}
+            <div className="flex flex-wrap gap-6 mt-8">
+              <div className="flex items-center gap-2">
+                <FiTarget className="text-green text-xl" />
+                <span className="text-sm text-bg">+85% conversión</span>
+              </div>
+              <div className="flex items-center gap-2">
+                <FiClock className="text-green text-xl" />
+                <span className="text-sm text-bg">24h respuesta</span>
+              </div>
+              <div className="flex items-center gap-2">
+                <FiAward className="text-green text-xl" />
+                <span className="text-sm text-bg">100% personalizado</span>
+              </div>
             </div>
           </div>
 
           {/* Imagen */}
           <div
             ref={imageRef}
-            className="relative h-[500px] rounded-2xl overflow-hidden shadow-2xl"
+            className="relative h-[400px] rounded-2xl overflow-hidden shadow-2xl"
           >
             <Image
               src={servicio.img}
@@ -217,143 +215,174 @@ const ServicePage = ({ params: paramsPromise }) => {
               className="object-cover hover:scale-105 transition-transform duration-700"
               priority
             />
+            <div className="absolute inset-0 bg-gradient-to-t from-black/20 via-transparent to-transparent" />
           </div>
         </div>
 
-        {/* LO QUE HACEMOS POR TI - con clase para scroll animation */}
-        <div className="scroll-animate mb-20">
-          <div className="text-center mb-12">
-            <h2 className="text-4xl md:text-5xl lg:text-6xl font-ubuntu font-bold tracking-tight">
-              <span className="bg-clip-text text-transparent">
-                Lo que hacemos por ti
-              </span>
-            </h2>
-            <div className="w-24 h-1 bg-green mx-auto mt-4" />
+        {/* Descripción detallada */}
+        <div ref={contentRef} className="max-w-3xl mx-auto text-center mb-16">
+          <p className="text-xl md:text-2xl text-black leading-relaxed">
+            {servicio.p}
+          </p>
+        </div>
+
+        {/* Tabs: Beneficios / FAQ */}
+        <div className="mb-16">
+          <div className="flex justify-center gap-4 mb-8">
+            <button
+              onClick={() => setActiveTab("beneficios")}
+              className={`px-6 py-3 rounded-full font-medium transition-all ${
+                activeTab === "beneficios"
+                  ? "bg-green text-black shadow-lg shadow-green/30"
+                  : "bg-white text-gray border border-gray/20 hover:border-green"
+              }`}
+            >
+              Beneficios
+            </button>
+            <button
+              onClick={() => setActiveTab("faqs")}
+              className={`px-6 py-3 rounded-full font-medium transition-all ${
+                activeTab === "faqs"
+                  ? "bg-green text-black shadow-lg shadow-green/30"
+                  : "bg-white text-gray border border-gray/20 hover:border-green"
+              }`}
+            >
+              Preguntas Frecuentes
+            </button>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-            {servicio.content.map((texto, idx) => (
+          <AnimatePresence mode="wait">
+            {/* Beneficios - CON ANIMACIÓN DE CONTENIDO */}
+            {activeTab === "beneficios" && (
               <motion.div
-                key={idx}
-                whileHover={{
-                  y: -8,
-                  transition: { duration: 0.3 },
-                }}
-                className="group relative bg-white p-6 rounded-xl shadow-lg hover:shadow-2xl transition-all duration-300"
+                key="beneficios"
+                variants={containerVariants}
+                initial="hidden"
+                animate="visible"
+                exit="exit"
+                className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6"
               >
-                <div className="absolute -top-3 -right-3 w-12 h-12 bg-green rounded-full flex items-center justify-center text-white font-bold text-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                  {idx + 1}
-                </div>
-
-                <div className="text-4xl mb-4">
-                  {idx === 0 && "🎯"}
-                  {idx === 1 && "⚡"}
-                  {idx === 2 && "🎨"}
-                  {idx === 3 && "🚀"}
-                </div>
-
-                <p className="text-gray text-lg font-medium leading-relaxed">
-                  {texto}
-                </p>
-
-                <div className="absolute bottom-0 left-0 w-0 h-1 bg-green group-hover:w-full transition-all duration-300" />
-              </motion.div>
-            ))}
-          </div>
-        </div>
-
-        {/* FAQ Section */}
-        {servicio.faqs && servicio.faqs.length > 0 && (
-          <div ref={faqRef} className="scroll-animate max-w-3xl mx-auto">
-            <div className="text-center mb-10">
-              <h3 className="text-3xl md:text-4xl font-ubuntu font-bold text-green mb-2">
-                Preguntas Frecuentes
-              </h3>
-              <p className="text-gray">
-                Todo lo que necesitas saber sobre este servicio
-              </p>
-            </div>
-
-            <div className="space-y-4">
-              {servicio.faqs.map((item, index) => {
-                const isOpen = openIndex === index;
-                return (
+                {servicio.content.map((texto, idx) => (
                   <motion.div
-                    key={index}
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ delay: index * 0.1 }}
-                    className="border border-gray rounded-xl overflow-hidden bg-white shadow-sm hover:shadow-md transition-shadow"
+                    key={idx}
+                    variants={itemVariants}
+                    whileHover={{ y: -8 }}
+                    className="group relative bg-white p-6 rounded-xl shadow-lg hover:shadow-2xl transition-all duration-300 border border-gray/10"
                   >
-                    <button
-                      onClick={() => toggle(index)}
-                      className="w-full flex items-center justify-between p-6 text-left hover:bg-black transition-colors duration-300"
-                    >
-                      <span
-                        className={`text-lg md:text-xl font-semibold pr-8 ${
-                          isOpen ? "text-green" : "text-gray"
-                        }`}
-                      >
-                        {item.title}
-                      </span>
-                      <motion.div
-                        animate={{ rotate: isOpen ? 45 : 0 }}
-                        transition={{ duration: 0.3 }}
-                        className={`w-8 h-8 rounded-full flex items-center justify-center ${
-                          isOpen
-                            ? "bg-green text-white"
-                            : "bg-gray-100 text-gray"
-                        }`}
-                      >
-                        {isOpen ? <FiMinus /> : <FiPlus />}
-                      </motion.div>
-                    </button>
-
-                    <AnimatePresence>
-                      {isOpen && (
-                        <motion.div
-                          variants={faqVariants}
-                          initial="collapsed"
-                          animate="open"
-                          exit="collapsed"
-                          className="overflow-hidden"
-                        >
-                          <div className="p-6 pt-0 text-black leading-relaxed border-t border-gray-100">
-                            {item.content}
-                          </div>
-                        </motion.div>
-                      )}
-                    </AnimatePresence>
+                    <div className="absolute -top-3 -right-3 w-10 h-10 bg-green rounded-full flex items-center justify-center text-black font-bold text-lg opacity-0 group-hover:opacity-100 transition-opacity">
+                      {idx + 1}
+                    </div>
+                    <div className="text-4xl mb-4">{getIcon(idx)}</div>
+                    <p className="text-bg text-base font-medium leading-relaxed">
+                      {texto}
+                    </p>
+                    <div className="absolute bottom-0 left-0 w-0 h-1 bg-green group-hover:w-full transition-all duration-300" />
                   </motion.div>
-                );
-              })}
-            </div>
-          </div>
-        )}
+                ))}
+              </motion.div>
+            )}
+
+            {/* FAQs - CON ANIMACIÓN DE CONTENIDO */}
+            {activeTab === "faqs" && servicio.faqs && (
+              <motion.div
+                key="faqs"
+                variants={containerVariants}
+                initial="hidden"
+                animate="visible"
+                exit="exit"
+                className="max-w-3xl mx-auto space-y-4"
+              >
+                {servicio.faqs.map((item, index) => {
+                  const isOpen = openIndex === index;
+                  return (
+                    <motion.div
+                      key={index}
+                      variants={itemVariants}
+                      className="border border-gray/20 rounded-xl overflow-hidden bg-white"
+                    >
+                      <button
+                        onClick={() => toggle(index)}
+                        className="w-full flex items-center justify-between p-6 text-left hover:bg-white transition-colors"
+                      >
+                        <span
+                          className={`text-lg font-semibold pr-8 ${
+                            isOpen ? "text-green" : "text-bg"
+                          }`}
+                        >
+                          {item.title}
+                        </span>
+                        <motion.div
+                          animate={{ rotate: isOpen ? 45 : 0 }}
+                          className={`w-8 h-8 rounded-full flex items-center justify-center ${
+                            isOpen
+                              ? "bg-green text-black"
+                              : "bg-gray text-green"
+                          }`}
+                        >
+                          {isOpen ? <FiMinus /> : <FiPlus />}
+                        </motion.div>
+                      </button>
+
+                      <AnimatePresence>
+                        {isOpen && (
+                          <motion.div
+                            variants={faqVariants}
+                            initial="collapsed"
+                            animate="open"
+                            exit="collapsed"
+                            className="overflow-hidden"
+                          >
+                            <div className="p-6 pt-0 text-gray border-t border-gray-100">
+                              {item.content}
+                            </div>
+                          </motion.div>
+                        )}
+                      </AnimatePresence>
+                    </motion.div>
+                  );
+                })}
+              </motion.div>
+            )}
+          </AnimatePresence>
+        </div>
 
         {/* CTA Section */}
-        <div className="scroll-animate text-center mt-20 p-12 rounded-3xl text-white">
-          <h3 className="text-3xl md:text-4xl font-ubuntu font-bold mb-4">
-            ¿Listo para empezar?
+        <div
+          ref={ctaRef}
+          className="text-center mt-20 p-12 bg-gradient-to-r from-green/5 to-green2/5 rounded-3xl border border-green/20"
+        >
+          <h3 className="text-3xl md:text-4xl font-ubuntu font-bold text-bg mb-4">
+            ¿Listo para <span className="text-green">transformar</span> tu
+            negocio?
           </h3>
-          <p className="text-xl mb-8 opacity-90 max-w-2xl mx-auto">
-            Transformemos tu idea en un proyecto exitoso. Contáctame hoy mismo.
+          <p className="text-gray max-w-2xl mx-auto mb-8 text-lg">
+            Implementa este sistema de conversión y comienza a generar
+            resultados reales.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Link
-              href="/quote"
-              className="inline-flex items-center px-8 py-4 bg-white text-green font-semibold rounded-full hover:shadow-xl hover:scale-105 transition-all duration-300"
-            >
-              Solicitar cotización
-              <FiArrowLeft className="ml-2 rotate-180" />
+            <Link href="/quote">
+              <button className="group relative px-8 py-4 bg-gradient-to-r from-green to-green2 text-black font-bold rounded-full overflow-hidden hover:shadow-2xl hover:shadow-green/30 transition-all">
+                <span className="relative z-10 flex items-center gap-2">
+                  Diagnosticar mi negocio
+                  <FiArrowRight className="group-hover:translate-x-2 transition-transform" />
+                </span>
+                <div className="absolute inset-0 bg-white/20 translate-y-full group-hover:translate-y-0 transition-transform duration-500" />
+              </button>
             </Link>
-            <Link
-              href="/Proyects"
-              className="inline-flex items-center px-8 py-4 border-2 border-white text-white font-semibold rounded-full hover:bg-white hover:text-green transition-all duration-300"
-            >
-              Ver proyectos
+            <Link href="/Proyects">
+              <button className="px-8 py-4 border-2 border-green/30 text-bg font-bold rounded-full hover:bg-green/5 transition-colors">
+                Ver casos de éxito
+              </button>
             </Link>
           </div>
+          <p className="text-sm text-gray mt-4">
+            Diagnóstico gratuito · Respuesta en 24h
+          </p>
+        </div>
+
+        {/* Mensaje final */}
+        <div className="text-center mt-8 text-sm text-gray">
+          <p>Este es un sistema de conversión, no solo una página.</p>
         </div>
       </div>
     </section>
