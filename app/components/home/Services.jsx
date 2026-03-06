@@ -252,7 +252,6 @@ const Services = () => {
             clientes reales, no páginas que solo se ven bien.
           </p>
         </div>
-
         {/* Accordion - Rediseñado */}
         <div className="max-w-4xl mx-auto space-y-4">
           {items.map((item, index) => {
@@ -379,7 +378,6 @@ const Services = () => {
             );
           })}
         </div>
-
         {/* CTA Principal */}
         <div ref={buttonRef} className="text-center mt-20">
           <Link href="/quote">
@@ -391,15 +389,6 @@ const Services = () => {
           </Link>
           <p className="text-sm text-gray mt-4">
             Diagnóstico gratuito · Respuesta en 24h
-          </p>
-        </div>
-
-        {/* Mensaje final */}
-        <div className="text-center mt-12 text-sm text-gray">
-          <p className="flex items-center justify-center gap-2">
-            <FiTarget className="text-green" />
-            Sistemas que convierten, no páginas que decoran
-            <FiTarget className="text-green" />
           </p>
         </div>
       </div>

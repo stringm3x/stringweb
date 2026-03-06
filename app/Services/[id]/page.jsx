@@ -172,7 +172,7 @@ const ServicePage = ({ params: paramsPromise }) => {
           <div>
             <h1
               ref={titleRef}
-              className="text-5xl md:text-6xl lg:text-7xl font-ubuntu font-black tracking-tight text-bg mb-4"
+              className="text-4xl md:text-6xl lg:text-7xl font-ubuntu font-black tracking-tight text-bg mb-4"
             >
               {servicio.service}
             </h1>

@@ -65,12 +65,35 @@ const Hero = () => {
     if (!mounted) return;
 
     const ctx = gsap.context(() => {
-      // Timeline principal - MÁS DRAMÁTICO
+      // PRIMERO: Aseguramos que todos los elementos sean visibles
+      gsap.set(
+        [
+          badgeRef.current,
+          stringRef.current,
+          titleLine1Ref.current,
+          titleLine2Ref.current,
+          titleLine3Ref.current,
+          descriptionRef.current,
+          ctaRef.current,
+          testimonialRef.current,
+          graphicRef.current,
+          ...statsRef.current.filter(Boolean),
+        ],
+        {
+          opacity: 1,
+          y: 0,
+          x: 0,
+          scale: 1,
+          visibility: "visible",
+        }
+      );
+
+      // Timeline principal
       const tl = gsap.timeline({
         defaults: { ease: "power3.out" },
       });
 
-      // 1. Overlay de entrada con efecto cinematográfico
+      // 1. Overlay de entrada
       tl.fromTo(
         overlayRef.current,
         { scaleX: 1 },
@@ -82,7 +105,7 @@ const Hero = () => {
         }
       );
 
-      // 2. Nombre STRING con entrada especial
+      // 2. Nombre STRING
       tl.from(
         stringRef.current,
         {
@@ -106,7 +129,7 @@ const Hero = () => {
         "-=0.8"
       );
 
-      // 4. Título con SplitType - MÁS DINÁMICO
+      // 4. Título con SplitType
       const split1 = new SplitType(titleLine1Ref.current, { types: "chars" });
       const split2 = new SplitType(titleLine2Ref.current, { types: "chars" });
       const split3 = new SplitType(titleLine3Ref.current, { types: "chars" });
@@ -186,7 +209,7 @@ const Hero = () => {
         "-=1.2"
       );
 
-      // Animación flotante continua más dinámica
+      // Animación flotante continua
       gsap.to(graphicRef.current, {
         y: -20,
         rotation: 5,
@@ -194,15 +217,6 @@ const Hero = () => {
         repeat: -1,
         yoyo: true,
         ease: "sine.inOut",
-      });
-
-      // Animación del nombre STRING en hover
-      gsap.to(lettersRef.current, {
-        color: "#50ff05",
-        stagger: 0.05,
-        duration: 0.3,
-        paused: true,
-        ease: "power2.out",
       });
 
       return () => {
@@ -215,7 +229,7 @@ const Hero = () => {
     return () => ctx.revert();
   }, [mounted]);
 
-  // Stats con más impacto
+  // Stats
   const stats = [
     {
       value: "50+",
@@ -243,7 +257,6 @@ const Hero = () => {
     },
   ];
 
-  // Letras para animación hover
   const stringLetters = "STRING".split("");
 
   if (!mounted) {
@@ -266,14 +279,14 @@ const Hero = () => {
       ref={containerRef}
       className="relative bg-black min-h-screen flex items-center overflow-hidden"
     >
-      {/* Overlay de entrada con gradiente */}
+      {/* Overlay de entrada */}
       <div
         ref={overlayRef}
         className="absolute inset-0 bg-gradient-to-r from-green to-green-600 z-50"
         style={{ transformOrigin: "left center" }}
       />
 
-      {/* Fondo con partículas dinámicas */}
+      {/* Fondo */}
       <div className="absolute inset-0">
         <div className="absolute inset-0 bg-gradient-to-br from-green-900/30 via-black to-black" />
         <div
@@ -285,7 +298,7 @@ const Hero = () => {
         />
       </div>
 
-      {/* Elementos decorativos animados */}
+      {/* Elementos decorativos */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
         {[...Array(12)].map((_, i) => (
           <motion.div
@@ -310,7 +323,7 @@ const Hero = () => {
       </div>
 
       <div className="relative w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 sm:py-16 md:py-20">
-        {/* Nombre STRING gigante al fondo (efecto visual) */}
+        {/* STRING gigante al fondo */}
         <div className="absolute top-0 right-0 text-[200px] md:text-[300px] lg:text-[400px] font-anton text-white/5 select-none pointer-events-none">
           STRING
         </div>
@@ -318,13 +331,11 @@ const Hero = () => {
         <div className="grid lg:grid-cols-2 gap-8 lg:gap-16 items-center">
           {/* Left Column */}
           <div className="space-y-6 sm:space-y-8 w-full relative z-10">
-            {/* Badge con ícono */}
+            {/* Badge */}
             <motion.div
               ref={badgeRef}
               className="inline-block"
-              initial={{ opacity: 0, y: 30 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8 }}
+              style={{ opacity: 1, visibility: "visible" }}
             >
               <span className="px-4 py-2 bg-green/10 text-green rounded-full text-xs sm:text-sm font-mono border border-green/30 inline-flex items-center gap-2 backdrop-blur-sm">
                 <FiZap className="text-green animate-pulse" />
@@ -333,10 +344,11 @@ const Hero = () => {
               </span>
             </motion.div>
 
-            {/* Nombre STRING con animación hover */}
+            {/* Nombre STRING */}
             <div
               ref={stringRef}
               className="flex gap-1 text-6xl sm:text-7xl md:text-8xl lg:text-9xl font-anton text-white mb-2"
+              style={{ opacity: 1, visibility: "visible" }}
             >
               {stringLetters.map((letter, index) => (
                 <motion.span
@@ -355,17 +367,19 @@ const Hero = () => {
               ))}
             </div>
 
-            {/* Título principal - MÁS IMPACTANTE */}
+            {/* Título */}
             <div ref={titleRef} className="space-y-1">
               <h1
                 ref={titleLine1Ref}
                 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-ubuntu font-black text-white leading-tight"
+                style={{ opacity: 1, visibility: "visible" }}
               >
                 NO NECESITAS
               </h1>
               <h1
                 ref={titleLine2Ref}
                 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-ubuntu font-black text-white leading-tight"
+                style={{ opacity: 1, visibility: "visible" }}
               >
                 MÁS{" "}
                 <span className="text-green relative">
@@ -376,6 +390,7 @@ const Hero = () => {
               <h1
                 ref={titleLine3Ref}
                 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-ubuntu font-black text-white leading-tight"
+                style={{ opacity: 1, visibility: "visible" }}
               >
                 NECESITAS UN{" "}
                 <span className="relative inline-block">
@@ -389,8 +404,12 @@ const Hero = () => {
               </h1>
             </div>
 
-            {/* Descripción con íconos */}
-            <div ref={descriptionRef} className="space-y-3">
+            {/* Descripción */}
+            <div
+              ref={descriptionRef}
+              className="space-y-3"
+              style={{ opacity: 1, visibility: "visible" }}
+            >
               <p className="text-sm sm:text-base md:text-lg text-gray-300 leading-relaxed">
                 Transformamos presencia digital en{" "}
                 <span className="text-green font-semibold">
@@ -406,10 +425,11 @@ const Hero = () => {
               </div>
             </div>
 
-            {/* CTA Buttons con efecto */}
+            {/* CTA Buttons */}
             <div
               ref={ctaRef}
               className="flex flex-col sm:flex-row gap-3 sm:gap-4"
+              style={{ opacity: 1, visibility: "visible" }}
             >
               <Link href="/quote" className="w-full sm:w-auto">
                 <motion.button
@@ -436,7 +456,7 @@ const Hero = () => {
               </Link>
             </div>
 
-            {/* Stats con diseño mejorado */}
+            {/* Stats */}
             <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 sm:gap-4 pt-6">
               {stats.map((stat, index) => {
                 const Icon = stat.icon;
@@ -446,6 +466,7 @@ const Hero = () => {
                     ref={(el) => (statsRef.current[index] = el)}
                     whileHover={{ y: -5 }}
                     className="text-center p-3 rounded-xl bg-white/5 backdrop-blur-sm border border-white/10 hover:border-green/30 transition-all group"
+                    style={{ opacity: 1, visibility: "visible" }}
                   >
                     <div className="flex justify-center mb-2">
                       <Icon className="text-xl sm:text-2xl text-green group-hover:scale-110 transition-transform" />
@@ -463,24 +484,24 @@ const Hero = () => {
             </div>
           </div>
 
-          {/* Right Column - Gráfico + Testimonial */}
+          {/* Right Column */}
           <div className="space-y-6">
-            {/* Elemento gráfico principal */}
-            <div ref={graphicRef} className="relative hidden lg:block">
+            {/* Elemento gráfico */}
+            <div
+              ref={graphicRef}
+              className="relative hidden lg:block"
+              style={{ opacity: 1, visibility: "visible" }}
+            >
               <div className="relative h-[450px] w-full">
-                {/* Círculo central */}
                 <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[300px] h-[300px]">
                   <div className="absolute inset-0 border-4 border-green/30 rounded-full animate-ping opacity-20" />
                   <div className="absolute inset-[10%] border-2 border-green/40 rounded-full" />
                   <div className="absolute inset-[20%] bg-gradient-to-br from-green/20 to-transparent rounded-full blur-xl" />
-
-                  {/* Logo STRING centrado */}
                   <div className="absolute inset-0 flex items-center justify-center">
                     <span className="text-4xl font-anton text-green">S</span>
                   </div>
                 </div>
 
-                {/* Elementos orbitales con íconos */}
                 {[
                   { icon: FiTarget, angle: 0, label: "Conversión" },
                   { icon: FiZap, angle: 90, label: "Velocidad" },
@@ -503,9 +524,7 @@ const Hero = () => {
                       }%`,
                       transform: "translate(-50%, -50%)",
                     }}
-                    animate={{
-                      scale: [1, 1.1, 1],
-                    }}
+                    animate={{ scale: [1, 1.1, 1] }}
                     transition={{
                       duration: 2,
                       delay: i * 0.5,
@@ -521,13 +540,11 @@ const Hero = () => {
               </div>
             </div>
 
-            {/* Testimonial flotante */}
+            {/* Testimonial */}
             <motion.div
               ref={testimonialRef}
-              initial={{ opacity: 0, x: 50 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.8, delay: 1 }}
               className="bg-white/5 backdrop-blur-md rounded-2xl p-6 border border-white/10 relative"
+              style={{ opacity: 1, visibility: "visible" }}
             >
               <FaQuoteRight className="absolute top-4 right-4 text-green/20 text-3xl" />
               <p className="text-sm text-gray-300 italic mb-4">
@@ -573,7 +590,7 @@ const Hero = () => {
         </div>
       </div>
 
-      {/* Scroll Indicator mejorado */}
+      {/* Scroll Indicator */}
       <motion.div
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
