@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useState, useEffect, useRef } from "react";
+import { useRouter } from "next/navigation";
 import Link from "next/link";
 import servicios from "../data";
 import { notFound } from "next/navigation";
@@ -23,6 +24,7 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 gsap.registerPlugin(ScrollTrigger);
 
 const ServicePage = ({ params: paramsPromise }) => {
+  const router = useRouter();
   const params = React.use(paramsPromise);
   const servicio = servicios.find((p) => p.id === params.id);
 
@@ -135,7 +137,7 @@ const ServicePage = ({ params: paramsPromise }) => {
   return (
     <section
       ref={sectionRef}
-      className="min-h-screen bg-white py-12 px-4 md:px-6 lg:px-8 relative"
+      className="min-h-screen bg-white py-12 px-4 md:px-6 lg:px-8 relative overflow-hidden"
     >
       {/* Elementos decorativos */}
       <div className="absolute inset-0 pointer-events-none">
@@ -151,13 +153,16 @@ const ServicePage = ({ params: paramsPromise }) => {
           transition={{ duration: 0.5 }}
           className="mb-8"
         >
-          <Link
-            href="/Services"
+          <button
+            onClick={() => {
+              console.log("Navegando a /Services");
+              router.push("/Services");
+            }}
             className="inline-flex items-center text-gray hover:text-green transition-colors duration-300 group"
           >
             <FiArrowLeft className="mr-2 group-hover:-translate-x-1 transition-transform" />
             <span>Volver a Servicios</span>
-          </Link>
+          </button>
         </motion.div>
 
         {/* Badge */}

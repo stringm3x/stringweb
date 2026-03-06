@@ -3,7 +3,7 @@ const servicios = [
     id: "1",
     service: "SISTEMA DE CONVERSIÓN",
     title2: "Diagnóstico + Estructura",
-    img: "/serv/design4.png",
+    img: "/serv/conversion.png",
     intro:
       "Transformamos tu presencia digital en un sistema que genera clientes reales de manera consistente.",
     p: "No se trata de tener una página bonita. Se trata de tener una estructura clara que guíe a tus visitantes a convertirse en clientes. Analizamos tu negocio, identificamos fricciones y diseñamos un flujo de conversión optimizado.",
@@ -35,7 +35,7 @@ const servicios = [
     id: "2",
     service: "LANDING PAGE",
     title2: "Estratégica",
-    img: "/serv/computadora.png",
+    img: "/serv/landingpage.png",
     intro:
       "Páginas diseñadas para convertir, no solo para verse bien. Cada elemento tiene un propósito.",
     p: "Diseñamos landing pages con un objetivo claro: convertir visitantes en leads o clientes. Cada palabra, cada imagen, cada botón está estratégicamente pensado para maximizar resultados.",
@@ -67,7 +67,7 @@ const servicios = [
     id: "3",
     service: "OPTIMIZACIÓN CONTINUA",
     title2: "Mejora constante",
-    img: "/serv/imagen.png",
+    img: "/serv/optimizacion.png",
     intro:
       "Tu sistema evoluciona con los datos. Ajustamos y mejoramos para maximizar resultados.",
     p: "El mercado cambia, tu audiencia cambia. Nosotros nos adaptamos. Analizamos métricas, probamos variantes y optimizamos tu sistema de conversión de manera continua.",
@@ -99,7 +99,7 @@ const servicios = [
     id: "4",
     service: "SISTEMA E-COMMERCE",
     title2: "Ventas automatizadas",
-    img: "/serv/mantenimiento.png",
+    img: "/serv/ecommerce.png",
     intro:
       "Plataformas de venta diseñadas para maximizar conversión y minimizar fricción.",
     p: "Vender online no es solo tener un catálogo. Es tener un sistema que guíe al usuario, reduzca la fricción y facilite la compra. Diseñamos e-commerce que convierten.",
@@ -131,7 +131,7 @@ const servicios = [
     id: "5",
     service: "AUTOMATIZACIÓN",
     title2: "Y Soporte 24/7",
-    img: "/serv/mantenimiento.png",
+    img: "/serv/automatizacion.png",
     intro:
       "Tu negocio funciona sin ti. Automatizamos procesos y te acompañamos en el camino.",
     p: "Libera tiempo. Automatizamos respuestas, seguimientos y procesos. Y si algo falla, estamos ahí. Soporte técnico prioritario para que tú solo te preocupes de vender. Tu sistema siempre activo, siempre actualizado.",
