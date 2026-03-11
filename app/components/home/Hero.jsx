@@ -515,30 +515,6 @@ const Hero = () => {
                 </motion.button>
               </Link>
             </div>
-
-            {/* Stats */}
-            <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 sm:gap-4 pt-6">
-              {stats.map((stat, index) => {
-                const Icon = stat.icon;
-                return (
-                  <motion.div
-                    key={index}
-                    ref={(el) => (statsRef.current[index] = el)}
-                    whileHover={{ y: -5 }}
-                    className="text-center p-3 rounded-xl bg-white/5 backdrop-blur-sm border border-white/10 hover:border-green/30 transition-all group"
-                    style={{ opacity: 1, visibility: "visible" }}
-                  >
-                    <div className="flex justify-center mb-2">
-                      <Icon className="text-xl sm:text-2xl text-green group-hover:scale-110 transition-transform" />
-                    </div>
-                    <p className="text-lg sm:text-xl font-bold text-white">
-                      {stat.value}
-                    </p>
-                    <p className="text-xs text-gray-400">{stat.label}</p>
-                  </motion.div>
-                );
-              })}
-            </div>
           </div>
 
           {/* Right Column */}
