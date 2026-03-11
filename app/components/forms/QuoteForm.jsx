@@ -9,7 +9,7 @@ import { FormSuccess } from "./FormSuccess";
 import { useRef, useEffect, useState, useCallback } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 import toast from "react-hot-toast";
 import {
   FiArrowRight,
@@ -23,25 +23,30 @@ import {
   FiClock,
   FiShield,
   FiZap,
+  FiTrendingUp,
+  FiAward,
+  FiBarChart2,
+  FiInfo,
 } from "react-icons/fi";
+import { MdOutlineRocketLaunch, MdOutlineAnalytics } from "react-icons/md";
+
+// Importar constantes
+import {
+  PROJECT_TYPES,
+  MONTHLY_PLANS,
+} from "../../lib/constants/project-types";
 
 gsap.registerPlugin(ScrollTrigger);
-
-const projectTypes = [
-  { value: "basica", label: "Básica - Landing page o sitio institucional" },
-  { value: "intermedia", label: "Intermedia - Tienda online o web app simple" },
-  { value: "avanzada", label: "Avanzada - Plataforma compleja o marketplace" },
-];
 
 const benefits = [
   {
     icon: FiZap,
-    text: "Respuesta en 24h",
-    color: "from-yellow to-orange-500",
+    text: "Diagnóstico en 24h",
+    color: "from-yellow to-orange",
   },
   {
     icon: FiCheckCircle,
-    text: "Código 100% personalizado",
+    text: "Sistema 100% personalizado",
     color: "from-green to-green-600",
   },
   {
@@ -51,16 +56,25 @@ const benefits = [
   },
   {
     icon: FiClock,
-    text: "Soporte 30 días",
+    text: "Soporte continuo",
     color: "from-purple to-pink-500",
   },
 ];
 
+// Mapeo de iconos por nivel
+const levelIcons = {
+  nivel1: FiTarget,
+  nivel2: FiTrendingUp,
+  nivel3: FiZap,
+  nivel4: MdOutlineRocketLaunch,
+};
 
 export const QuoteForm = () => {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [successData, setSuccessData] = useState(null);
   const [focusedField, setFocusedField] = useState(null);
+  const [selectedLevel, setSelectedLevel] = useState(null);
+  const [showLevelInfo, setShowLevelInfo] = useState(false);
 
   const formRef = useRef(null);
   const buttonRef = useRef(null);
@@ -68,12 +82,15 @@ export const QuoteForm = () => {
   const subtitleRef = useRef(null);
   const benefitsRef = useRef([]);
   const sectionRef = useRef(null);
+  const infoRef = useRef(null);
 
   const {
     register,
     handleSubmit,
     formState: { errors },
     reset,
+    watch,
+    setValue,
   } = useForm({
     resolver: zodResolver(quoteSchema),
     defaultValues: {
@@ -87,10 +104,26 @@ export const QuoteForm = () => {
     },
   });
 
-  // Animación de entrada mejorada - SOLO UNA VEZ
+  const selectedSystem = watch("projectType");
+
+  // Actualizar nivel seleccionado y sugerir presupuesto
+  useEffect(() => {
+    if (selectedSystem) {
+      setSelectedLevel(selectedSystem);
+      const level = PROJECT_TYPES.find((l) => l.id === selectedSystem);
+      if (level) {
+        // Extraer presupuesto mínimo del rango
+        const minBudget = parseInt(
+          level.price.split(" - ")[0].replace(",", "")
+        );
+        setValue("budget", minBudget.toString());
+      }
+    }
+  }, [selectedSystem, setValue]);
+
+  // Animación de entrada
   useEffect(() => {
     const ctx = gsap.context(() => {
-      // Aseguramos que todo sea visible primero
       gsap.set(
         [
           titleRef.current,
@@ -242,24 +275,33 @@ export const QuoteForm = () => {
     return <FormSuccess data={successData} onReset={handleReset} />;
   }
 
+  // Encontrar el nivel seleccionado para mostrar información
+  const selectedLevelData = PROJECT_TYPES.find((l) => l.id === selectedSystem);
+
   return (
     <section
       ref={sectionRef}
       className="relative min-h-screen bg-gradient-to-br from-gray-50 via-white to-gray-50 py-20 overflow-hidden"
     >
+      {/* Elementos decorativos */}
+      <div className="absolute inset-0 pointer-events-none">
+        <div className="absolute top-40 left-20 w-72 h-72 bg-green/5 rounded-full filter blur-3xl" />
+        <div className="absolute bottom-40 right-20 w-96 h-96 bg-green2/5 rounded-full filter blur-3xl" />
+      </div>
+
       <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        {/* Header con stats */}
+        {/* Header */}
         <div className="text-center mb-12">
           <motion.div ref={titleRef} className="space-y-4">
-            <span className="inline-block px-4 py-2 bg-green text-white rounded-full text-sm font-semibold tracking-wider shadow-lg shadow-green/30">
-              ✦ Comienza tu proyecto
+            <span className="inline-block px-4 py-2 bg-green/10 text-green rounded-full text-sm font-mono border border-green/30">
+              ✦ SISTEMAS DE CONVERSIÓN
             </span>
 
             <h1 className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-ubuntu font-black tracking-tight leading-none">
-              <span className="text-black">COTIZA TU</span>
+              <span className="text-black">DIAGNOSTICA</span>
               <br />
-              <span className="text-black relative">
-                WEB
+              <span className="text-gray relative">
+                TU NEGOCIO
                 <span className="absolute -bottom-3 left-0 w-full h-1 bg-green rounded-full" />
               </span>
             </h1>
@@ -269,12 +311,12 @@ export const QuoteForm = () => {
             ref={subtitleRef}
             className="text-lg md:text-xl text-gray max-w-2xl mx-auto mt-6 leading-relaxed"
           >
-            Cuéntame tu idea y te prepararé una propuesta personalizada en
-            código, no plantillas.
+            Descubre qué nivel del Sistema STRING necesita tu negocio para
+            convertir visitas en clientes reales.
           </motion.p>
         </div>
 
-        {/* Beneficios - AHORA SIEMPRE VISIBLES */}
+        {/* Beneficios */}
         <div className="flex flex-wrap justify-center gap-4 mb-12">
           {benefits.map((benefit, index) => {
             const Icon = benefit.icon;
@@ -284,7 +326,6 @@ export const QuoteForm = () => {
                 ref={(el) => (benefitsRef.current[index] = el)}
                 whileHover={{ y: -4, scale: 1.02 }}
                 className="flex items-center gap-3 px-5 py-2.5 bg-white rounded-full shadow-lg border border-gray hover:shadow-xl transition-all"
-                style={{ opacity: 1, visibility: "visible" }}
               >
                 <div
                   className={`w-8 h-8 rounded-full bg-gradient-to-br ${benefit.color} flex items-center justify-center`}
@@ -348,28 +389,81 @@ export const QuoteForm = () => {
                 required
               />
 
-              <FormSelect
-                label="Tipo de proyecto"
-                name="projectType"
-                register={register}
-                error={errors.projectType?.message}
-                options={projectTypes}
-                icon={FiTarget}
-                onFocus={() => setFocusedField("projectType")}
-                onBlur={() => setFocusedField(null)}
-                isFocused={focusedField === "projectType"}
-                required
-              />
+              {/* Selector de nivel con información */}
+              <div className="relative">
+                <FormSelect
+                  label="Nivel del Sistema STRING"
+                  name="projectType"
+                  register={register}
+                  error={errors.projectType?.message}
+                  options={PROJECT_TYPES.map((p) => ({
+                    value: p.id,
+                    label: `${p.label} - ${p.price}`,
+                  }))}
+                  icon={FiTarget}
+                  onFocus={() => setFocusedField("projectType")}
+                  onBlur={() => setFocusedField(null)}
+                  isFocused={focusedField === "projectType"}
+                  required
+                />
+
+                {/* Botón de información del nivel */}
+                {selectedLevel && (
+                  <button
+                    type="button"
+                    onClick={() => setShowLevelInfo(!showLevelInfo)}
+                    className="absolute right-10 top-9 text-green hover:text-green2 transition-colors"
+                  >
+                    <FiInfo className="text-lg" />
+                  </button>
+                )}
+              </div>
             </div>
+
+            {/* Información del nivel seleccionado */}
+            <AnimatePresence>
+              {showLevelInfo && selectedLevelData && (
+                <motion.div
+                  initial={{ opacity: 0, height: 0 }}
+                  animate={{ opacity: 1, height: "auto" }}
+                  exit={{ opacity: 0, height: 0 }}
+                  transition={{ duration: 0.3 }}
+                  className="overflow-hidden mt-4"
+                >
+                  <div className="bg-green/5 rounded-xl p-4 border border-green/20">
+                    <h4 className="font-bold text-green mb-2">
+                      {selectedLevelData.label}
+                    </h4>
+                    <p className="text-sm text-gray-600 mb-2">
+                      {selectedLevelData.description}
+                    </p>
+                    <p className="text-xs text-gray-500 mb-2">
+                      Precio estimado: {selectedLevelData.price}
+                    </p>
+                    <div className="grid grid-cols-2 gap-2 mt-2">
+                      {selectedLevelData.features.map((feature, i) => (
+                        <div
+                          key={i}
+                          className="flex items-center gap-1 text-xs"
+                        >
+                          <FiCheckCircle className="text-green flex-shrink-0" />
+                          <span className="text-gray-600">{feature}</span>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                </motion.div>
+              )}
+            </AnimatePresence>
 
             <div className="mt-6">
               <FormField
-                label="Objetivo del sitio web"
+                label="Objetivo del proyecto"
                 name="objective"
                 type="textarea"
                 register={register}
                 error={errors.objective?.message}
-                placeholder="Describe el objetivo principal de tu proyecto, funcionalidades deseadas y cualquier detalle relevante..."
+                placeholder="Cuéntanos qué necesitas, cuál es tu negocio y qué esperas lograr..."
                 rows={4}
                 icon={FiTarget}
                 onFocus={() => setFocusedField("objective")}
@@ -414,7 +508,7 @@ export const QuoteForm = () => {
                 ref={buttonRef}
                 type="submit"
                 disabled={isSubmitting}
-                className="group relative w-full overflow-hidden rounded-2xl bg-green px-8 py-5 text-lg font-bold text-white transition-all hover:shadow-2xl hover:shadow-green/30 disabled:cursor-not-allowed disabled:opacity-70"
+                className="group relative w-full overflow-hidden rounded-2xl bg-gradient-to-r from-green to-green2 text-black font-bold px-8 py-5 text-lg transition-all hover:shadow-2xl hover:shadow-green/30 disabled:cursor-not-allowed disabled:opacity-70"
                 whileHover={{ scale: 1.02 }}
                 whileTap={{ scale: 0.98 }}
               >
@@ -437,11 +531,11 @@ export const QuoteForm = () => {
                           d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
                         />
                       </svg>
-                      <span>Enviando cotización...</span>
+                      <span>Enviando diagnóstico...</span>
                     </>
                   ) : (
                     <>
-                      <span>Obtener cotización</span>
+                      <span>Solicitar diagnóstico gratuito</span>
                       <FiArrowRight className="group-hover:translate-x-2 transition-transform" />
                     </>
                   )}
@@ -449,15 +543,10 @@ export const QuoteForm = () => {
                 <div className="absolute inset-0 -translate-x-full group-hover:translate-x-0 bg-gradient-to-r from-white/20 to-transparent transition-transform duration-700" />
               </motion.button>
 
-              <p className="text-sm text-gray-600 text-center mt-4">
-                Los precios son aproximados. Te contactaremos en menos de 24
-                horas.
+              <p className="text-sm text-gray text-center mt-4">
+                Te contactaremos en menos de 24 horas con un diagnóstico
+                preliminar.
               </p>
-            </div>
-
-            {/* Campos requeridos */}
-            <div className="mt-6 text-xs text-gray-500 text-center border-t border-gray-100 pt-6">
-              * Todos los campos son requeridos
             </div>
           </form>
         </motion.div>
