@@ -33,7 +33,7 @@ import {
 
 gsap.registerPlugin(ScrollTrigger);
 
-// Datos alineados con el documento estratégico
+// Datos actualizados según el documento estratégico
 const stats = [
   {
     value: "10+",
@@ -41,7 +41,7 @@ const stats = [
     description: "Negocios transformados con estructura digital",
     gradient: "from-green to-green2",
     icon: RiTeamLine,
-    metric: "+85% conversión",
+    metric: "Clientes recurrentes",
   },
   {
     value: "85%",
@@ -65,22 +65,22 @@ const principios = [
   {
     icon: FiTarget,
     title: "Enfoque en conversión",
-    desc: "No diseñamos páginas, construimos sistemas que convierten visitas en clientes.",
+    desc: "No diseñamos páginas, construimos sistemas que convierten visitas en clientes potenciales organizados.",
   },
   {
     icon: FiTrendingUp,
     title: "Estructura clara",
-    desc: "Cada elemento tiene un propósito estratégico, no decorativo.",
+    desc: "Cada elemento tiene un propósito estratégico: guiar al visitante hacia el contacto.",
   },
   {
     icon: FiZap,
     title: "Optimización continua",
-    desc: "Mejoramos constantemente la claridad y el flujo de captación.",
+    desc: "Mejoramos constantemente la claridad y el flujo de captación basado en datos.",
   },
   {
     icon: FiUsers,
     title: "Enfoque humano",
-    desc: "Tecnología al servicio de personas, no al revés.",
+    desc: "Automatizamos procesos, no relaciones. La tecnología al servicio de las personas.",
   },
 ];
 
@@ -103,7 +103,6 @@ const Content = () => {
     if (!mounted) return;
 
     const ctx = gsap.context(() => {
-      // PRIMERO: Aseguramos que todo sea visible
       gsap.set(
         [
           titleRef.current,
@@ -121,13 +120,12 @@ const Content = () => {
         }
       );
 
-      // Timeline de animación - SOLO ANIMA, NO OCULTA
       const tl = gsap.timeline({
         scrollTrigger: {
           trigger: sectionRef.current,
           start: "top 70%",
           end: "bottom 20%",
-          toggleActions: "play none none none", // Cambiado a "none" para que no se reverse
+          toggleActions: "play none none none",
         },
       });
 
@@ -190,7 +188,6 @@ const Content = () => {
           "-=0.2"
         );
 
-      // Animación de línea decorativa
       gsap.to(lineRef.current, {
         width: "100%",
         scrollTrigger: {
@@ -266,13 +263,13 @@ const Content = () => {
               <p className="text-lg md:text-xl text-gray leading-relaxed">
                 En <span className="font-bold text-green">STRING</span>{" "}
                 transformamos presencia digital en clientes reales mediante
-                sistemas claros de conversión. Cada elemento tiene un propósito
-                estratégico.
+                sistemas claros de conversión. No vendemos páginas, vendemos
+                <span className="font-semibold text-bg"> estructura</span>.
               </p>
             </div>
           </div>
 
-          {/* Principios estratégicos - AHORA SIEMPRE VISIBLES */}
+          {/* Principios estratégicos */}
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
             {principios.map((principio, index) => {
               const Icon = principio.icon;
@@ -387,20 +384,20 @@ const Content = () => {
                 </h3>
                 <p className="text-gray max-w-xl">
                   Obtén un diagnóstico gratuito de tu presencia digital y
-                  descubre cómo un sistema estructurado puede aumentar tus
-                  conversiones.
+                  descubre cómo un sistema estructurado puede organizar tu
+                  captación de clientes.
                 </p>
 
                 {/* Trust badges */}
                 <div className="flex flex-wrap justify-center lg:justify-start gap-4 pt-4">
                   <span className="flex items-center gap-1 text-xs text-gray">
-                    <FiClock /> Respuesta en 24h
+                    <FiClock /> Diagnóstico 24h
                   </span>
                   <span className="flex items-center gap-1 text-xs text-gray">
                     <FiAward /> Sin compromiso
                   </span>
                   <span className="flex items-center gap-1 text-xs text-gray">
-                    <FiUsers /> 50+ clientes
+                    <FiUsers /> 50+ sistemas
                   </span>
                 </div>
               </div>
@@ -416,13 +413,22 @@ const Content = () => {
                   </button>
                 </Link>
 
-                <Link href="/Proyects">
+                <Link href="/Services">
                   <button className="px-8 py-4 border-2 border-green/30 text-bg font-bold rounded-full hover:bg-green/5 transition-colors whitespace-nowrap">
-                    Ver casos reales
+                    Ver sistemas
                   </button>
                 </Link>
               </div>
             </div>
+          </div>
+
+          {/* Mensaje final del documento */}
+          <div className="text-center text-sm text-gray">
+            <p className="flex items-center justify-center gap-2">
+              <FiTarget className="text-green" />
+              STRING: Sistemas que convierten, no páginas que decoran
+              <FiTarget className="text-green" />
+            </p>
           </div>
         </div>
       </div>

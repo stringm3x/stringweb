@@ -17,6 +17,7 @@ import {
   FiSearch,
   FiLayers,
   FiCode,
+  FiShield,
 } from "react-icons/fi";
 import {
   MdOutlineSpeed,
@@ -26,66 +27,71 @@ import {
 
 gsap.registerPlugin(ScrollTrigger);
 
+// LAS 4 FASES DE LA METODOLOGÍA STRING (según documento)
 const stepsData = [
   {
     number: "01",
     title: "DIAGNÓSTICO",
-    description: "Análisis profundo de tu presencia digital",
+    description: "Análisis profundo de tu presencia digital actual",
     items: [
-      "Evaluación de claridad de oferta",
-      "Identificación de fricciones en el contacto",
-      "Revisión de flujo de captación",
-      "Análisis de redes sociales",
+      "Análisis de redes sociales actuales",
+      "Evaluación de claridad de servicios",
+      "Revisión de proceso actual de contacto",
+      "Identificación de fricciones en la captación",
     ],
     gradient: "from-green to-green2",
     icon: FiSearch,
-    metric: "24h respuesta",
+    metric: "24h",
     color: "green",
+    fase: "Fase 1",
   },
   {
     number: "02",
-    title: "ESTRUCTURA",
-    description: "Diseño del sistema de conversión",
+    title: "ESTRUCTURACIÓN",
+    description: "Definición de la estrategia del sistema digital",
     items: [
-      "Ajuste de propuesta de valor",
-      "Flujo de conversión estratégico",
-      "Redacción con enfoque en conversión",
+      "Definición de propuesta de valor",
+      "Diseño de flujo de conversión",
+      "Estructura de la página",
       "Llamados a la acción claros",
     ],
     gradient: "from-green2 to-green3",
     icon: FiLayers,
-    metric: "100% personalizado",
+    metric: "Estratégico",
     color: "green2",
+    fase: "Fase 2",
   },
   {
     number: "03",
     title: "DESARROLLO",
-    description: "Implementación del sistema",
+    description: "Implementación del sistema digital",
     items: [
-      "Landing page optimizada",
-      "Integración de WhatsApp",
-      "Optimización mobile",
-      "Implementación técnica",
+      "Desarrollo de landing page",
+      "Optimización para celular",
+      "Integración con WhatsApp",
+      "Implementación de automatizaciones",
     ],
     gradient: "from-green3 to-green4",
     icon: FiCode,
-    metric: "Sistema vivo",
+    metric: "Técnico",
     color: "green3",
+    fase: "Fase 3",
   },
   {
     number: "04",
-    title: "AJUSTE",
-    description: "Optimización continua",
+    title: "AJUSTE INICIAL",
+    description: "Pruebas y verificación del sistema",
     items: [
-      "Pruebas de flujo",
+      "Pruebas de funcionamiento",
+      "Revisión del flujo de contacto",
       "Ajustes de claridad",
-      "Optimización UX",
-      "Verificación completa",
+      "Verificación técnica completa",
     ],
     gradient: "from-green4 to-green",
-    icon: MdOutlineRocketLaunch,
-    metric: "Mejora continua",
+    icon: FiShield,
+    metric: "Garantizado",
     color: "green4",
+    fase: "Fase 4",
   },
 ];
 
@@ -121,6 +127,9 @@ const StepCircle = ({ step, index, isActive, onHover }) => {
 
         {/* Contenido */}
         <div className="relative z-10 text-center p-6">
+          <span className="text-xs font-mono text-white/80 mb-1 block">
+            {step.fase}
+          </span>
           <span className="text-3xl md:text-4xl font-black text-white mb-2 block">
             {step.number}
           </span>
@@ -128,6 +137,9 @@ const StepCircle = ({ step, index, isActive, onHover }) => {
           <h3 className="text-lg md:text-xl font-ubuntu font-bold text-white">
             {step.title}
           </h3>
+          <span className={`text-xs font-mono text-${step.color} mt-2 block`}>
+            {step.metric}
+          </span>
         </div>
 
         {/* Partículas animadas alrededor */}
@@ -187,13 +199,13 @@ const InfoPanel = ({ step, isVisible }) => {
     >
       <div className="flex items-center gap-4 mb-6">
         <div
-          className={`w-12 h-12 rounded-xl bg-gradient-to-br ${step.gradient} flex items-center justify-center`}
+          className={`w-14 h-14 rounded-xl bg-gradient-to-br ${step.gradient} flex items-center justify-center`}
         >
-          <step.icon className="text-2xl text-white" />
+          <step.icon className="text-3xl text-white" />
         </div>
         <div>
           <span className={`text-sm font-mono text-${step.color} mb-1 block`}>
-            PASO {step.number} · {step.metric}
+            {step.fase} · PASO {step.number}
           </span>
           <h3 className="text-2xl font-ubuntu font-bold text-white">
             {step.title}
@@ -201,27 +213,40 @@ const InfoPanel = ({ step, isVisible }) => {
         </div>
       </div>
 
-      <p className="text-gray mb-6 text-lg">{step.description}</p>
+      <p className="text-gray-300 mb-6 text-lg leading-relaxed">
+        {step.description}
+      </p>
 
-      <ul className="space-y-3">
-        {step.items.map((item, i) => (
-          <motion.li
-            key={i}
-            initial={{ opacity: 0, x: -10 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ delay: i * 0.1 }}
-            className="flex items-start gap-3 text-gray"
-          >
-            <FiCheckCircle
-              className={`text-${step.color} mt-1 flex-shrink-0`}
-            />
-            <span>{item}</span>
-          </motion.li>
-        ))}
-      </ul>
+      <div className="bg-black/30 rounded-xl p-4 mb-6">
+        <p className="text-sm text-green font-mono mb-2">
+          OBJETIVO DE ESTA FASE:
+        </p>
+        <ul className="space-y-3">
+          {step.items.map((item, i) => (
+            <motion.li
+              key={i}
+              initial={{ opacity: 0, x: -10 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ delay: i * 0.1 }}
+              className="flex items-start gap-3 text-gray-300"
+            >
+              <FiCheckCircle
+                className={`text-${step.color} mt-1 flex-shrink-0`}
+              />
+              <span>{item}</span>
+            </motion.li>
+          ))}
+        </ul>
+      </div>
+
+      {/* Mensaje clave del documento */}
+      <p className="text-sm text-gray-400 italic border-t border-white/10 pt-4">
+        "STRING no entrega páginas web. Entrega sistemas funcionales de
+        captación de clientes."
+      </p>
 
       {/* Barra de progreso decorativa */}
-      <div className="mt-6 h-1 w-full bg-white/10 rounded-full overflow-hidden">
+      <div className="mt-4 h-1 w-full bg-white/10 rounded-full overflow-hidden">
         <motion.div
           initial={{ width: "0%" }}
           animate={{ width: "100%" }}
@@ -239,6 +264,7 @@ const Steps = () => {
   const sectionRef = useRef(null);
   const titleRef = useRef(null);
   const subtitleRef = useRef(null);
+  const descriptionRef = useRef(null);
 
   useEffect(() => {
     setMounted(true);
@@ -248,11 +274,14 @@ const Steps = () => {
     if (!mounted) return;
 
     const ctx = gsap.context(() => {
-      gsap.set([titleRef.current, subtitleRef.current], {
-        opacity: 1,
-        y: 0,
-        visibility: "visible",
-      });
+      gsap.set(
+        [titleRef.current, subtitleRef.current, descriptionRef.current],
+        {
+          opacity: 1,
+          y: 0,
+          visibility: "visible",
+        }
+      );
 
       const tl = gsap.timeline({
         scrollTrigger: {
@@ -268,16 +297,27 @@ const Steps = () => {
         x: -50,
         duration: 0.8,
         ease: "power3.out",
-      }).from(
-        subtitleRef.current,
-        {
-          opacity: 0,
-          x: -30,
-          duration: 0.6,
-          ease: "power2.out",
-        },
-        "-=0.4"
-      );
+      })
+        .from(
+          subtitleRef.current,
+          {
+            opacity: 0,
+            x: -30,
+            duration: 0.6,
+            ease: "power2.out",
+          },
+          "-=0.4"
+        )
+        .from(
+          descriptionRef.current,
+          {
+            opacity: 0,
+            y: 30,
+            duration: 0.6,
+            ease: "power2.out",
+          },
+          "-=0.2"
+        );
     }, sectionRef);
 
     return () => ctx.revert();
@@ -365,6 +405,14 @@ const Steps = () => {
               DE CONVERSIÓN
             </h2>
           </motion.div>
+
+          <motion.p
+            ref={descriptionRef}
+            className="text-lg text-gray-400 max-w-2xl mx-auto mt-6"
+          >
+            Cuatro fases para transformar tu presencia digital en un sistema que
+            convierte visitas en clientes potenciales organizados.
+          </motion.p>
         </div>
 
         {/* Círculos en fila */}
@@ -381,7 +429,7 @@ const Steps = () => {
         </div>
 
         {/* Panel de información dinámico */}
-        <div className="max-w-2xl mx-auto">
+        <div className="max-w-3xl mx-auto">
           <InfoPanel step={stepsData[activeStep]} isVisible={true} />
         </div>
 
@@ -417,7 +465,18 @@ const Steps = () => {
               <div className="absolute inset-0 bg-white/20 translate-y-full group-hover:translate-y-0 transition-transform duration-500" />
             </button>
           </Link>
+          <p className="text-sm text-gray-500 mt-4">
+            Diagnóstico gratuito · Respuesta en 24h
+          </p>
         </motion.div>
+
+        {/* Mensaje final del documento */}
+        <div className="text-center mt-12 text-sm text-gray-600">
+          <p>
+            STRING no entrega páginas. Entrega sistemas funcionales de
+            captación.
+          </p>
+        </div>
       </div>
     </section>
   );

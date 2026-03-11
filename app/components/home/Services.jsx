@@ -13,6 +13,7 @@ import {
   FiUsers,
   FiClock,
   FiAward,
+  FiDollarSign,
 } from "react-icons/fi";
 import {
   MdOutlineSpeed,
@@ -26,87 +27,98 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 
 gsap.registerPlugin(ScrollTrigger);
 
-// Servicios alineados con el documento estratégico
+// LOS 4 NIVELES DEL SISTEMA STRING (según documento)
 const items = [
   {
     title: "SISTEMA DE CONVERSIÓN",
-    subtitle: "Diagnóstico y Estructura",
+    subtitle: "Nivel 1 · $8,000–12,000",
     content:
-      "Transformamos tu presencia digital en un sistema que genera clientes reales de manera consistente.",
+      "Crea una presencia digital clara que convierta visitas en mensajes de clientes interesados.",
     benefits: [
-      "Diagnóstico completo de presencia digital",
+      "Diagnóstico digital inicial",
       "Estructura estratégica de oferta",
-      "Optimización de flujo de captación",
-      "Claridad en llamados a la acción",
+      "Landing page optimizada",
+      "Integración con WhatsApp",
+      "Formulario básico de contacto",
+      "Mensaje automático preconfigurado",
     ],
     gradient: "from-green to-green2",
     icon: FiTarget,
-    metric: "+85% conversión",
+    metric: "Desde $8,000",
     color: "green",
+    ideal: "Negocios que dependen de Instagram, WhatsApp y recomendaciones",
   },
   {
-    title: "LANDING PAGE ESTRATÉGICA",
-    subtitle: "Diseño con propósito",
+    title: "SISTEMA DE CAPTACIÓN",
+    subtitle: "Nivel 2 · $18,000–28,000",
     content:
-      "Páginas diseñadas para convertir, no solo para verse bien. Cada elemento tiene un propósito.",
+      "Evita que los clientes interesados se pierdan y organiza tus prospectos automáticamente.",
     benefits: [
-      "Landing page enfocada en conversión",
-      "Redacción estratégica",
-      "Diseño UI/UX optimizado",
-      "Integración con WhatsApp",
+      "Todo el Nivel 1",
+      "Captura automática de leads",
+      "Registro organizado de prospectos",
+      "Calificación inicial por preguntas",
+      "Notificaciones por correo",
+      "Integración con Notion / Sheets / Airtable",
     ],
     gradient: "from-green2 to-green3",
     icon: FiTrendingUp,
-    metric: "100% personalizado",
+    metric: "Desde $18,000",
     color: "green2",
+    ideal: "Negocios con volumen creciente de consultas",
   },
   {
-    title: "OPTIMIZACIÓN CONTINUA",
-    subtitle: "Mejora constante",
+    title: "SISTEMA AUTOMATIZADO",
+    subtitle: "Nivel 3 · $22,000–40,000",
     content:
-      "Tu sistema evoluciona con los datos. Ajustamos y mejoramos para maximizar resultados.",
+      "Crea un sistema digital que trabaja incluso cuando tu negocio no está disponible.",
     benefits: [
-      "Análisis de métricas de conversión",
-      "A/B testing de flujos",
-      "Optimización UX recurrente",
-      "Ajustes estratégicos mensuales",
+      "Todo el Nivel 2",
+      "Respuesta automática inmediata",
+      "Agenda de citas automatizada",
+      "Seguimiento automático post-contacto",
+      "Recordatorios de citas",
+      "Panel de gestión de prospectos",
     ],
     gradient: "from-green3 to-green4",
-    icon: MdOutlineAnalytics,
-    metric: "Mejora mensual",
+    icon: FiZap,
+    metric: "Desde $22,000",
     color: "green3",
+    ideal: "Negocios con alto volumen de consultas o que trabajan con citas",
   },
   {
-    title: "SISTEMA E-COMMERCE",
-    subtitle: "Ventas automatizadas",
+    title: "SISTEMA ESPECIALIZADO",
+    subtitle: "Nivel 4 · $40,000–90,000+",
     content:
-      "Plataformas de venta diseñadas para maximizar conversión y minimizar fricción.",
+      "Desarrollamos sistemas digitales personalizados para negocios que necesitan algo más avanzado.",
     benefits: [
-      "Tienda online optimizada",
-      "Checkout de alta conversión",
-      "Integración con métodos de pago",
-      "Sistema de carritos abandonados",
+      "Todo el Nivel 3",
+      "Desarrollo a medida según negocio",
+      "CRM personalizado",
+      "Automatizaciones avanzadas",
+      "Paneles de control internos",
+      "Integraciones con APIs externas",
     ],
     gradient: "from-green4 to-green",
     icon: MdOutlineRocketLaunch,
-    metric: "Ventas 24/7",
+    metric: "Desde $40,000",
     color: "green4",
+    ideal: "Empresas con procesos complejos o necesidades específicas",
   },
   {
-    title: "AUTOMATIZACIÓN Y SOPORTE",
-    subtitle: "Sistema vivo",
-    content:
-      "Tu negocio funciona sin ti. Automatizamos procesos y te acompañamos en el camino.",
+    title: "PLANES DE CONTINUIDAD",
+    subtitle: "Soporte mensual",
+    content: "Mantenimiento y optimización continua para tu sistema digital.",
     benefits: [
-      "Automatización de respuestas",
-      "Soporte técnico prioritario",
-      "Backups y seguridad",
-      "Actualizaciones continuas",
+      "Plan Base: $1,800–2,500/mes - Hosting, mantenimiento, soporte",
+      "Plan Crecimiento: $3,000–4,500/mes - Optimización mensual, ajustes",
+      "Plan Escalamiento: $5,000–8,000/mes - Análisis, soporte prioritario",
     ],
     gradient: "from-green to-green2",
-    icon: FiZap,
-    metric: "24/7 disponible",
+    icon: FiClock,
+    metric: "Desde $1,800/mes",
     color: "green",
+    ideal: "Todos los clientes STRING",
   },
 ];
 
@@ -151,12 +163,27 @@ const Services = () => {
 
   useEffect(() => {
     const ctx = gsap.context(() => {
+      // Aseguramos visibilidad inicial
+      gsap.set(
+        [
+          badgeRef.current,
+          titleRef.current,
+          buttonRef.current,
+          ...statsRef.current.filter(Boolean),
+        ],
+        {
+          opacity: 1,
+          y: 0,
+          visibility: "visible",
+        }
+      );
+
       const tl = gsap.timeline({
         scrollTrigger: {
           trigger: sectionRef.current,
           start: "top 80%",
           end: "bottom 20%",
-          toggleActions: "play none none reverse",
+          toggleActions: "play none none none",
         },
       });
 
@@ -239,7 +266,7 @@ const Services = () => {
             <h1 className="text-5xl md:text-7xl lg:text-8xl font-ubuntu font-black tracking-tight text-bg">
               POTENCIA TUS
             </h1>
-            <h1 className="text-5xl md:text-7xl lg:text-8xl font-ubuntu font-black tracking-tight text-gray">
+            <h1 className="text-5xl md:text-7xl lg:text-8xl font-ubuntu font-black tracking-tight bg-gradient-to-r from-green to-green2 bg-clip-text text-transparent">
               RESULTADOS
             </h1>
             <h1 className="text-5xl md:text-7xl lg:text-8xl font-ubuntu font-black tracking-tight text-bg">
@@ -248,11 +275,31 @@ const Services = () => {
           </div>
 
           <p className="description-text text-lg md:text-xl text-gray max-w-2xl mx-auto">
-            Implementamos sistemas digitales diseñados para convertir visitas en
-            clientes reales, no páginas que solo se ven bien.
+            Cuatro niveles de automatización para cada etapa de tu negocio.
+            Implementamos sistemas digitales que convierten visitas en clientes
+            reales.
           </p>
         </div>
-        {/* Accordion - Rediseñado */}
+
+        {/* Stats rápidas */}
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-4 max-w-3xl mx-auto mb-12">
+          {stats.map((stat, index) => {
+            const Icon = stat.icon;
+            return (
+              <div
+                key={index}
+                ref={(el) => (statsRef.current[index] = el)}
+                className="text-center p-4 bg-white/50 backdrop-blur-sm rounded-xl border border-gray/20"
+              >
+                <Icon className="text-2xl text-green mx-auto mb-2" />
+                <p className="text-xl font-bold text-black">{stat.value}</p>
+                <p className="text-xs text-gray">{stat.label}</p>
+              </div>
+            );
+          })}
+        </div>
+
+        {/* Accordion con los 4 niveles */}
         <div className="max-w-4xl mx-auto space-y-4">
           {items.map((item, index) => {
             const isOpen = openIndex === index;
@@ -285,13 +332,13 @@ const Services = () => {
                     <div className="flex items-center gap-4">
                       {/* Icono con gradiente */}
                       <div
-                        className={`w-12 h-12 rounded-xl bg-gradient-to-br ${item.gradient} flex items-center justify-center shadow-lg`}
+                        className={`w-14 h-14 rounded-xl bg-gradient-to-br ${item.gradient} flex items-center justify-center shadow-lg`}
                       >
-                        <Icon className="text-xl text-white" />
+                        <Icon className="text-2xl text-white" />
                       </div>
 
                       <div>
-                        <div className="flex items-center gap-2 mb-1">
+                        <div className="flex items-center gap-2 mb-1 flex-wrap">
                           <h3
                             className={`text-xl md:text-2xl font-ubuntu font-bold transition-colors duration-300 ${
                               isOpen ? `text-green` : "text-bg"
@@ -300,11 +347,14 @@ const Services = () => {
                             {item.title}
                           </h3>
                           <span
-                            className={`text-xs font-mono text-green bg-green/10 px-2 py-1 rounded-full`}
+                            className={`text-xs font-mono text-green bg-green/10 px-3 py-1 rounded-full border border-green/30`}
                           >
                             {item.metric}
                           </span>
                         </div>
+                        <p className="text-sm text-green font-mono mb-1">
+                          {item.subtitle}
+                        </p>
                         <p className="text-gray text-sm md:text-base">
                           {item.content}
                         </p>
@@ -334,7 +384,16 @@ const Services = () => {
                         transition={{ duration: 0.3, ease: "easeInOut" }}
                         className="overflow-hidden"
                       >
-                        <div className="px-6 md:px-8 pb-6 md:pb-8 pt-2 border-t border-gray">
+                        <div className="px-6 md:px-8 pb-6 md:pb-8 pt-2 border-t border-gray/20">
+                          {/* Ideal para */}
+                          <p className="text-xs text-gray mb-3 italic">
+                            <span className="font-semibold text-green">
+                              Ideal para:
+                            </span>{" "}
+                            {item.ideal}
+                          </p>
+
+                          {/* Beneficios */}
                           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                             {item.benefits.map((benefit, i) => (
                               <motion.div
@@ -342,12 +401,12 @@ const Services = () => {
                                 initial={{ opacity: 0, x: -10 }}
                                 animate={{ opacity: 1, x: 0 }}
                                 transition={{ delay: i * 0.1 }}
-                                className="flex items-center gap-2"
+                                className="flex items-start gap-2"
                               >
                                 <FiCheckCircle
-                                  className={`text-green text-sm md:text-base flex-shrink-0`}
+                                  className={`text-green text-sm mt-0.5 flex-shrink-0`}
                                 />
-                                <span className="text-bg text-sm md:text-base">
+                                <span className="text-bg text-sm">
                                   {benefit}
                                 </span>
                               </motion.div>
@@ -359,13 +418,13 @@ const Services = () => {
                             initial={{ opacity: 0 }}
                             animate={{ opacity: 1 }}
                             transition={{ delay: 0.3 }}
-                            className="mt-6 pt-4 border-t border-gray-100"
+                            className="mt-6 pt-4 border-t border-gray/20"
                           >
                             <Link
                               href="/quote"
                               className={`inline-flex items-center text-sm font-medium text-green hover:opacity-80 transition-opacity group`}
                             >
-                              Solicitar diagnóstico
+                              Solicitar diagnóstico para este nivel
                               <FiArrowRight className="ml-2 group-hover:translate-x-2 transition-transform" />
                             </Link>
                           </motion.div>
@@ -378,6 +437,7 @@ const Services = () => {
             );
           })}
         </div>
+
         {/* CTA Principal */}
         <div ref={buttonRef} className="text-center mt-20">
           <Link href="/quote">
@@ -388,7 +448,7 @@ const Services = () => {
             </button>
           </Link>
           <p className="text-sm text-gray mt-4">
-            Diagnóstico gratuito · Respuesta en 24h
+            Descubre qué nivel necesita tu negocio · Respuesta en 24h
           </p>
         </div>
       </div>
