@@ -16,133 +16,35 @@ import {
   FiCheckCircle,
   FiUsers,
   FiBarChart2,
+  FiDollarSign,
+  FiCalendar,
+  FiRefreshCw, // ← Para planes de continuidad
+  FiShield, // ← Para soporte
 } from "react-icons/fi";
 import { MdOutlineRocketLaunch, MdOutlineAnalytics } from "react-icons/md";
+import { RiTeamLine, RiRobotLine } from "react-icons/ri";
 
 gsap.registerPlugin(ScrollTrigger);
-const servicios = [
-  {
-    id: "1",
-    service: "SISTEMA DE CONVERSIÓN",
-    title2: "Diagnóstico + Estructura",
-    img: "/serv/design4.png",
-    intro:
-      "Transformamos tu presencia digital en un sistema que genera clientes reales de manera consistente.",
-    p: "No se trata de tener una página bonita. Se trata de tener una estructura clara que guíe a tus visitantes a convertirse en clientes. Analizamos tu negocio, identificamos fricciones y diseñamos un flujo de conversión optimizado.",
-    content: [
-      "Diagnóstico completo de presencia digital",
-      "Estructura estratégica de oferta",
-      "Optimización de flujo de captación",
-      "Claridad en llamados a la acción",
-    ],
-    metric: "+85% conversión",
-    gradient: "from-green to-black",
-    icon: FiTarget,
-    color: "green",
-    stats: [
-      { value: "24h", label: "Diagnóstico" },
-      { value: "100%", label: "Personalizado" },
-    ],
-  },
-  {
-    id: "2",
-    service: "LANDING PAGE",
-    title2: "Estratégica",
-    img: "/serv/computadora.png",
-    intro:
-      "Páginas diseñadas para convertir, no solo para verse bien. Cada elemento tiene un propósito.",
-    p: "Diseñamos landing pages con un objetivo claro: convertir visitantes en leads o clientes. Cada palabra, cada imagen, cada botón está estratégicamente pensado para maximizar resultados.",
-    content: [
-      "Landing page enfocada en conversión",
-      "Redacción estratégica (copywriting)",
-      "Diseño UI/UX optimizado",
-      "Integración con WhatsApp",
-    ],
-    metric: "100% personalizado",
-    gradient: "from-green2 to-green3",
-    icon: FiTrendingUp,
-    color: "green",
-    stats: [
-      { value: "2-3x", label: "Más conversión" },
-      { value: "Mobile", label: "Optimizado" },
-    ],
-  },
-  {
-    id: "3",
-    service: "OPTIMIZACIÓN CONTINUA",
-    title2: "Mejora constante",
-    img: "/serv/imagen.png",
-    intro:
-      "Tu sistema evoluciona con los datos. Ajustamos y mejoramos para maximizar resultados.",
-    p: "El mercado cambia, tu audiencia cambia. Nosotros nos adaptamos. Analizamos métricas, probamos variantes y optimizamos tu sistema de conversión de manera continua.",
-    content: [
-      "Análisis de métricas de conversión",
-      "A/B testing de flujos",
-      "Optimización UX recurrente",
-      "Ajustes estratégicos mensuales",
-    ],
-    metric: "Mejora mensual",
-    gradient: "from-green3 to-green4",
-    icon: MdOutlineAnalytics,
-    color: "green",
-    stats: [
-      { value: "+85%", label: "Mejora promedio" },
-      { value: "30 días", label: "Ciclo" },
-    ],
-  },
-  {
-    id: "4",
-    service: "SISTEMA E-COMMERCE",
-    title2: "Ventas automatizadas",
-    img: "/serv/mantenimiento.png",
-    intro:
-      "Plataformas de venta diseñadas para maximizar conversión y minimizar fricción.",
-    p: "Vender online no es solo tener un catálogo. Es tener un sistema que guíe al usuario, reduzca la fricción y facilite la compra. Diseñamos e-commerce que convierten.",
-    content: [
-      "Tienda online optimizada",
-      "Checkout de alta conversión",
-      "Integración con métodos de pago",
-      "Sistema de carritos abandonados",
-    ],
-    metric: "Ventas 24/7",
-    gradient: "from-green4 to-green",
-    icon: MdOutlineRocketLaunch,
-    color: "green",
-    stats: [
-      { value: "30%", label: "Más conversión" },
-      { value: "Seguro", label: "SSL incluido" },
-    ],
-  },
-  {
-    id: "5",
-    service: "AUTOMATIZACIÓN",
-    title2: "Y Soporte",
-    img: "/serv/mantenimiento.png",
-    intro:
-      "Tu negocio funciona sin ti. Automatizamos procesos y te acompañamos en el camino.",
-    p: "Libera tiempo. Automatizamos respuestas, seguimientos y procesos. Y si algo falla, estamos ahí. Soporte técnico prioritario para que tú solo te preocupes de vender.",
-    content: [
-      "Automatización de respuestas",
-      "Soporte técnico prioritario",
-      "Backups y seguridad",
-      "Actualizaciones continuas",
-    ],
-    metric: "24/7 disponible",
-    gradient: "from-green to-green2",
-    icon: FiZap,
-    color: "green",
-    stats: [
-      { value: "24/7", label: "Soporte" },
-      { value: "99.9%", label: "Uptime" },
-    ],
-  },
-];
+
+// Importar datos
+import servicios from "./data";
 
 const statsPrincipales = [
   { value: "50+", label: "Sistemas implementados", icon: FiUsers },
   { value: "85%", label: "Aumento en conversión", icon: FiBarChart2 },
   { value: "24h", label: "Respuesta inicial", icon: FiClock },
   { value: "100%", label: "Personalizado", icon: FiAward },
+];
+
+const niveles = [
+  { nivel: "Nivel 1", precio: "$8,000–12,000", desc: "Sistema de Conversión" },
+  { nivel: "Nivel 2", precio: "$18,000–28,000", desc: "Sistema de Captación" },
+  { nivel: "Nivel 3", precio: "$22,000–40,000", desc: "Sistema Automatizado" },
+  {
+    nivel: "Nivel 4",
+    precio: "$40,000–90,000+",
+    desc: "Sistema Especializado",
+  },
 ];
 
 const PageServices = () => {
@@ -157,6 +59,7 @@ const PageServices = () => {
   const statsRef = useRef([]);
   const cardsRef = useRef([]);
   const footerRef = useRef(null);
+  const nivelesRef = useRef([]);
 
   useEffect(() => {
     setMounted(true);
@@ -172,6 +75,7 @@ const PageServices = () => {
           titleRef.current,
           descriptionRef.current,
           ...statsRef.current.filter(Boolean),
+          ...nivelesRef.current.filter(Boolean),
           ...cardsRef.current.filter(Boolean),
           footerRef.current,
         ],
@@ -196,6 +100,11 @@ const PageServices = () => {
         )
         .from(
           statsRef.current.filter(Boolean),
+          { opacity: 0, y: 30, stagger: 0.1, duration: 0.6 },
+          "-=0.2"
+        )
+        .from(
+          nivelesRef.current.filter(Boolean),
           { opacity: 0, y: 30, stagger: 0.1, duration: 0.6 },
           "-=0.2"
         )
@@ -249,7 +158,7 @@ const PageServices = () => {
 
           <h1
             ref={titleRef}
-            className="text-3xl md:text-6xl lg:text-7xl xl:text-8xl font-ubuntu font-black tracking-tight"
+            className="text-4xl md:text-6xl lg:text-7xl xl:text-8xl font-ubuntu font-black tracking-tight"
           >
             <span className="text-black">SERVICIOS</span>
             <span className="text-green ml-4">ESTRATÉGICOS</span>
@@ -260,15 +169,50 @@ const PageServices = () => {
             className="text-black/70 max-w-2xl mx-auto text-lg md:text-xl leading-relaxed"
           >
             No vendemos páginas. Implementamos sistemas digitales diseñados para
-            convertir visitas en clientes reales.
+            convertir visitas en clientes reales. Cuatro niveles de
+            automatización para cada etapa de tu negocio.
           </p>
+        </div>
+
+        {/* Tabla de niveles rápida */}
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-12">
+          {niveles.map((nivel, index) => (
+            <div
+              key={index}
+              ref={(el) => (nivelesRef.current[index] = el)}
+              className="text-center p-4 bg-gradient-to-br from-green/5 to-green2/5 rounded-xl border border-green/20"
+            >
+              <p className="text-sm font-mono text-green mb-1">{nivel.nivel}</p>
+              <p className="text-lg font-bold text-black">{nivel.precio}</p>
+              <p className="text-xs text-gray">{nivel.desc}</p>
+            </div>
+          ))}
         </div>
 
         {/* Grid de servicios */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {servicios.map((servicio, index) => {
-            const Icon = servicio.icon;
             const isHovered = hoveredCard === index;
+
+            // Asignar icono según el servicio (reemplazo de emojis)
+            const getIcon = () => {
+              switch (index) {
+                case 0:
+                  return <FiTarget className="text-2xl text-white" />;
+                case 1:
+                  return <FiTrendingUp className="text-2xl text-white" />;
+                case 2:
+                  return <MdOutlineAnalytics className="text-2xl text-white" />;
+                case 3:
+                  return (
+                    <MdOutlineRocketLaunch className="text-2xl text-white" />
+                  );
+                case 4:
+                  return <FiRefreshCw className="text-2xl text-white" />;
+                default:
+                  return <FiTarget className="text-2xl text-white" />;
+              }
+            };
 
             return (
               <Link
@@ -280,7 +224,7 @@ const PageServices = () => {
               >
                 <div
                   ref={(el) => (cardsRef.current[index] = el)}
-                  className="relative bg-white rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-500 h-full"
+                  className="relative bg-white rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-500 h-full border border-gray/10"
                 >
                   {/* Borde con gradiente animado */}
                   <div
@@ -292,13 +236,11 @@ const PageServices = () => {
                     {/* Header con icono y métrica */}
                     <div className="flex items-start justify-between mb-4">
                       <div
-                        className={`w-12 h-12 rounded-xl bg-gradient-to-br ${servicio.gradient} flex items-center justify-center shadow-lg`}
+                        className={`w-14 h-14 rounded-xl bg-gradient-to-br ${servicio.gradient} flex items-center justify-center shadow-lg`}
                       >
-                        <Icon className="text-xl text-white" />
+                        {getIcon()}
                       </div>
-                      <span
-                        className={`text-xs font-mono text-${servicio.color} bg-${servicio.color}/10 px-2 py-1 rounded-full`}
-                      >
+                      <span className="text-xs font-mono bg-green/10 text-green px-3 py-1 rounded-full border border-green/30">
                         {servicio.metric}
                       </span>
                     </div>
@@ -307,7 +249,7 @@ const PageServices = () => {
                     <h2 className="text-2xl font-ubuntu font-bold text-black mb-1">
                       {servicio.service}
                     </h2>
-                    <h3 className="text-lg text-green mb-3 font-semibold">
+                    <h3 className="text-sm text-green mb-3 font-mono">
                       {servicio.title2}
                     </h3>
 
@@ -329,11 +271,9 @@ const PageServices = () => {
                     </div>
 
                     {/* Línea decorativa */}
-                    <div
-                      className={`w-12 h-0.5 bg-${servicio.color}/30 rounded-full mb-4 group-hover:w-20 group-hover:bg-${servicio.color} transition-all duration-300`}
-                    />
+                    <div className="w-12 h-0.5 bg-green/30 rounded-full mb-4 group-hover:w-20 group-hover:bg-green transition-all duration-300" />
 
-                    {/* Beneficios en hover */}
+                    {/* Objetivo en hover */}
                     <motion.div
                       initial={{ height: 0, opacity: 0 }}
                       animate={{
@@ -343,18 +283,13 @@ const PageServices = () => {
                       transition={{ duration: 0.3 }}
                       className="overflow-hidden"
                     >
-                      <div className="space-y-2 pt-2 border-t border-gray">
-                        {servicio.content.map((item, i) => (
-                          <div
-                            key={i}
-                            className="flex items-start gap-2 text-xs text-gray"
-                          >
-                            <FiCheckCircle
-                              className={`text-${servicio.color} mt-0.5 flex-shrink-0`}
-                            />
-                            <span>{item}</span>
-                          </div>
-                        ))}
+                      <div className="space-y-2 pt-2 border-t border-gray/20">
+                        <p className="text-xs text-gray font-medium">
+                          {servicio.objetivo}
+                        </p>
+                        <p className="text-xs text-gray">
+                          Ideal: {servicio.ideal}
+                        </p>
                       </div>
                     </motion.div>
 
@@ -363,12 +298,8 @@ const PageServices = () => {
                       <span className="text-sm font-medium text-gray group-hover:text-green transition-colors">
                         Ver detalles
                       </span>
-                      <div
-                        className={`w-8 h-8 rounded-full bg-${servicio.color}/10 flex items-center justify-center group-hover:bg-${servicio.color} transition-colors`}
-                      >
-                        <FiArrowRight
-                          className={`text-${servicio.color} group-hover:text-white transition-colors`}
-                        />
+                      <div className="w-8 h-8 rounded-full bg-green/10 flex items-center justify-center group-hover:bg-green transition-colors">
+                        <FiArrowRight className="text-green group-hover:text-white transition-colors" />
                       </div>
                     </div>
                   </div>
@@ -381,8 +312,8 @@ const PageServices = () => {
         {/* Footer CTA */}
         <div ref={footerRef} className="text-center mt-20">
           <p className="text-gray mb-6 text-lg">
-            ¿No encuentras lo que buscas? Todos los proyectos son 100%
-            personalizados.
+            ¿No encuentras lo que buscas? Todos los sistemas son 100%
+            personalizables.
           </p>
 
           <Link href="/quote">
@@ -395,6 +326,11 @@ const PageServices = () => {
           <p className="text-sm text-gray mt-4">
             Diagnóstico gratuito · Respuesta en 24h
           </p>
+        </div>
+
+        {/* Mensaje final */}
+        <div className="text-center mt-8 text-sm text-gray">
+          <p>Cuatro niveles. Un objetivo: convertir visitas en clientes.</p>
         </div>
       </div>
     </section>

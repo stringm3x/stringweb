@@ -2,7 +2,7 @@ const servicios = [
   {
     id: "1",
     service: "SISTEMA DE CONVERSIÓN",
-    title2: "Diagnóstico + Estructura",
+    title2: "Nivel 1 · $8,000–12,000",
     img: "/serv/conversion.png",
     intro:
       "Transformamos tu presencia digital en un sistema que genera clientes reales de manera consistente.",
@@ -10,8 +10,28 @@ const servicios = [
     content: [
       "Diagnóstico completo de presencia digital",
       "Estructura estratégica de oferta",
-      "Optimización de flujo de captación",
-      "Claridad en llamados a la acción",
+      "Landing page optimizada",
+      "Integración con WhatsApp",
+      "Formulario básico de contacto",
+      "Mensaje preconfigurado de WhatsApp",
+    ],
+    objetivo: "Crear una presencia digital clara que convierta visitas en mensajes de clientes interesados.",
+    ideal: "Negocios que dependen de Instagram, WhatsApp y recomendaciones",
+    metric: "Desde $8,000",
+    gradient: "from-green to-green2",
+    icon: "🎯",
+    color: "green",
+    incluye: [
+      "Diagnóstico digital inicial",
+      "Estructura estratégica de página",
+      "Landing page optimizada para celular",
+      "Integración con WhatsApp",
+      "Formulario básico de contacto",
+      "Mensaje automático preconfigurado",
+    ],
+    stats: [
+      { value: "24h", label: "Diagnóstico" },
+      { value: "100%", label: "Personalizado" },
     ],
     faqs: [
       {
@@ -33,135 +53,196 @@ const servicios = [
   },
   {
     id: "2",
-    service: "LANDING PAGE",
-    title2: "Estratégica",
+    service: "SISTEMA DE CAPTACIÓN",
+    title2: "Nivel 2 · $18,000–28,000",
     img: "/serv/landingpage.png",
     intro:
-      "Páginas diseñadas para convertir, no solo para verse bien. Cada elemento tiene un propósito.",
-    p: "Diseñamos landing pages con un objetivo claro: convertir visitantes en leads o clientes. Cada palabra, cada imagen, cada botón está estratégicamente pensado para maximizar resultados.",
+      "Evita que los clientes interesados se pierdan y organiza tus prospectos automáticamente.",
+    p: "No basta con recibir mensajes. Hay que organizarlos. Este nivel añade herramientas de captación que registran, clasifican y notifican cada nuevo prospecto, para que no se pierda ninguna oportunidad.",
     content: [
-      "Landing page enfocada en conversión",
-      "Redacción estratégica (copywriting)",
-      "Diseño UI/UX optimizado",
-      "Integración con WhatsApp",
+      "Captura automática de leads",
+      "Registro automático en base de datos",
+      "Calificación inicial de prospectos",
+      "Notificaciones automáticas",
+      "Integración con Notion / Sheets / Airtable",
+    ],
+    objetivo: "Organizar los prospectos y evitar la pérdida de clientes interesados.",
+    ideal: "Negocios con volumen creciente de consultas",
+    metric: "Desde $18,000",
+    gradient: "from-green2 to-green3",
+    icon: "📊",
+    color: "green",
+    incluye: [
+      "Todo el Sistema de Conversión",
+      "Captura automática de leads",
+      "Registro organizado de prospectos",
+      "Calificación inicial por preguntas",
+      "Notificaciones por correo",
+      "Integración con herramientas externas",
+    ],
+    stats: [
+      { value: "100%", label: "Captación" },
+      { value: "Auto", label: "Organizado" },
     ],
     faqs: [
       {
-        title: "¿Qué diferencia una landing page de una página web normal?",
+        title: "¿Qué es la captura automática de leads?",
         content:
-          "Una landing page está diseñada con un único objetivo: convertir. No tiene distracciones, todo lleva al llamado a la acción.",
+          "Cuando un visitante completa un formulario, el sistema guarda automáticamente sus datos en una base organizada y notifica al negocio.",
       },
       {
-        title: "¿Cuánto tiempo toma el desarrollo?",
+        title: "¿Con qué herramientas se integra?",
         content:
-          "Entre 1 y 2 semanas, dependiendo de la complejidad y la definición de la estrategia.",
+          "Podemos integrar con Notion, Airtable, Google Sheets o un CRM simple, según tu preferencia.",
       },
       {
-        title: "¿Puedo actualizarla yo mismo?",
+        title: "¿Cómo funciona la calificación de prospectos?",
         content:
-          "Sí, entregamos un panel de administración sencillo para que puedas hacer cambios básicos.",
+          "Los formularios incluyen preguntas estratégicas (tipo de servicio, presupuesto) que ayudan a priorizar clientes.",
       },
     ],
   },
   {
     id: "3",
-    service: "OPTIMIZACIÓN CONTINUA",
-    title2: "Mejora constante",
+    service: "SISTEMA AUTOMATIZADO",
+    title2: "Nivel 3 · $22,000–40,000",
     img: "/serv/optimizacion.png",
     intro:
-      "Tu sistema evoluciona con los datos. Ajustamos y mejoramos para maximizar resultados.",
-    p: "El mercado cambia, tu audiencia cambia. Nosotros nos adaptamos. Analizamos métricas, probamos variantes y optimizamos tu sistema de conversión de manera continua.",
+      "Crea un sistema digital que trabaja incluso cuando tu negocio no está disponible.",
+    p: "Imagina un sistema que recibe, organiza y responde clientes mientras tú duermes. Este nivel añade automatizaciones avanzadas que mejoran la percepción de atención y aumentan conversiones.",
     content: [
-      "Análisis de métricas de conversión",
-      "A/B testing de flujos",
-      "Optimización UX recurrente",
-      "Ajustes estratégicos mensuales",
+      "Respuesta automática inicial",
+      "Agenda automática de citas",
+      "Seguimiento automático de prospectos",
+      "Recordatorios de citas",
+      "Panel de gestión de prospectos",
+    ],
+    objetivo: "Automatizar la atención y seguimiento para escalar sin aumentar carga operativa.",
+    ideal: "Negocios con alto volumen de consultas o que trabajan con citas",
+    metric: "Desde $22,000",
+    gradient: "from-green3 to-green4",
+    icon: "⚡",
+    color: "green",
+    incluye: [
+      "Todo el Sistema de Captación",
+      "Respuesta automática inmediata",
+      "Agenda de citas automatizada",
+      "Seguimiento automático post-contacto",
+      "Recordatorios de citas",
+      "Panel de gestión de prospectos",
+    ],
+    stats: [
+      { value: "24/7", label: "Automático" },
+      { value: "30%", label: "Más conversión" },
     ],
     faqs: [
       {
-        title: "¿Qué métricas analizan?",
+        title: "¿Qué es la respuesta automática inicial?",
         content:
-          "Tasa de conversión, tiempo en página, clics en CTAs, porcentaje de rebote y flujo de usuarios.",
+          "Cuando un cliente solicita información, el sistema envía automáticamente: 'Gracias por tu mensaje. Hemos recibido tu solicitud y pronto te contactaremos.'",
       },
       {
-        title: "¿Cada cuánto se hacen optimizaciones?",
+        title: "¿Cómo funciona la agenda de citas?",
         content:
-          "Mensualmente realizamos ajustes estratégicos basados en datos. También podemos hacer cambios urgentes cuando sea necesario.",
+          "Los clientes pueden revisar disponibilidad, solicitar horario y registrar sus datos automáticamente, sin intervención manual.",
       },
       {
-        title: "¿Qué es A/B testing?",
+        title: "¿Qué seguimiento automático incluye?",
         content:
-          "Es probar dos versiones de un mismo elemento para ver cuál funciona mejor. Por ejemplo, dos botones diferentes para ver cuál genera más clics.",
+          "Después del contacto inicial, el sistema puede enviar mensajes de seguimiento para aumentar conversiones.",
       },
     ],
   },
   {
     id: "4",
-    service: "SISTEMA E-COMMERCE",
-    title2: "Ventas automatizadas",
+    service: "SISTEMA ESPECIALIZADO",
+    title2: "Nivel 4 · $40,000–90,000+",
     img: "/serv/ecommerce.png",
     intro:
-      "Plataformas de venta diseñadas para maximizar conversión y minimizar fricción.",
-    p: "Vender online no es solo tener un catálogo. Es tener un sistema que guíe al usuario, reduzca la fricción y facilite la compra. Diseñamos e-commerce que convierten.",
+      "Desarrollamos sistemas digitales personalizados para negocios que necesitan algo más avanzado.",
+    p: "Este nivel está pensado para empresas que necesitan procesos digitales completos que integren captación, seguimiento, ventas y gestión interna. Infraestructura digital diseñada específicamente para tu operación.",
     content: [
-      "Tienda online optimizada",
-      "Checkout de alta conversión",
-      "Integración con métodos de pago",
-      "Sistema de carritos abandonados",
+      "CRM personalizado",
+      "Automatización avanzada de ventas",
+      "Paneles de control internos",
+      "Catálogos dinámicos",
+      "Sistemas de reservas complejos",
+    ],
+    objetivo: "Crear infraestructura digital a medida para tu negocio.",
+    ideal: "Empresas con procesos complejos o necesidades específicas",
+    metric: "Desde $40,000",
+    gradient: "from-green4 to-green",
+    icon: "🚀",
+    color: "green",
+    incluye: [
+      "Todo el Sistema Automatizado",
+      "Desarrollo a medida según negocio",
+      "CRM personalizado",
+      "Automatizaciones avanzadas",
+      "Paneles de control internos",
+      "Integraciones con APIs externas",
+    ],
+    stats: [
+      { value: "100%", label: "A medida" },
+      { value: "Escalable", label: "Infraestructura" },
     ],
     faqs: [
       {
-        title: "¿Qué plataforma utilizan?",
+        title: "¿Qué tipo de sistemas especializados desarrollan?",
         content:
-          "Depende de tus necesidades. Podemos usar Shopify, WooCommerce o desarrollar una solución a medida.",
+          "Catálogos dinámicos para autos, agendas médicas avanzadas, paneles de clientes, sistemas de reservas complejos, etc.",
       },
       {
-        title: "¿Incluye pasarela de pagos?",
+        title: "¿Qué tecnologías utilizan?",
         content:
-          "Sí, integramos con las principales pasarelas de pago en México y Latinoamérica.",
+          "Next.js, React, Node.js, Supabase/Firebase, APIs externas, automatización con Make/Zapier, integración con CRMs.",
       },
       {
-        title: "¿Cómo manejan los carritos abandonados?",
+        title: "¿Cuánto tiempo toma el desarrollo?",
         content:
-          "Implementamos un sistema de recuperación automática con emails y WhatsApp para recuperar ventas perdidas.",
+          "Depende de la complejidad, pero siempre definimos plazos claros antes de comenzar.",
       },
     ],
   },
   {
     id: "5",
-    service: "AUTOMATIZACIÓN",
-    title2: "Y Soporte 24/7",
+    service: "PLANES DE CONTINUIDAD",
+    title2: "Soporte mensual",
     img: "/serv/automatizacion.png",
     intro:
-      "Tu negocio funciona sin ti. Automatizamos procesos y te acompañamos en el camino.",
-    p: "Libera tiempo. Automatizamos respuestas, seguimientos y procesos. Y si algo falla, estamos ahí. Soporte técnico prioritario para que tú solo te preocupes de vender. Tu sistema siempre activo, siempre actualizado.",
+      "Mantenimiento y optimización continua para tu sistema digital.",
+    p: "Los sistemas digitales requieren mantenimiento y optimización constante. Ofrecemos planes mensuales para garantizar que tu sistema siempre funcione al máximo.",
     content: [
-      "Automatización de respuestas por WhatsApp",
-      "Soporte técnico prioritario 24/7",
-      "Backups automáticos y seguridad",
-      "Actualizaciones continuas de seguridad",
-      "Monitoreo proactivo de tu sistema",
+      "Hosting incluido",
+      "Mantenimiento técnico",
+      "Cambios menores",
+      "Soporte prioritario",
+    ],
+    objetivo: "Asegurar la continuidad y mejora constante de tu sistema.",
+    ideal: "Todos los clientes STRING",
+    metric: "Desde $1,800/mes",
+    gradient: "from-green to-green2",
+    icon: "🔄",
+    color: "green",
+    incluye: [
+      "Plan Base: $1,800–2,500/mes - Hosting, mantenimiento, soporte",
+      "Plan Crecimiento: $3,000–4,500/mes - Optimización mensual, ajustes",
+      "Plan Escalamiento: $5,000–8,000/mes - Análisis, soporte prioritario",
+    ],
+    stats: [
+      { value: "24/7", label: "Soporte" },
+      { value: "100%", label: "Uptime" },
     ],
     faqs: [
       {
-        title: "¿Qué procesos se pueden automatizar?",
+        title: "¿Qué incluye el mantenimiento?",
         content:
-          "Respuestas de WhatsApp, seguimiento de leads, recordatorios de carritos abandonados, emails de bienvenida, y más. Analizamos tu negocio y automatizamos lo que tenga sentido.",
+          "Backups automáticos, actualizaciones de seguridad, monitoreo 24/7 y soporte técnico.",
       },
       {
-        title: "¿Cómo funciona el soporte 24/7?",
+        title: "¿Puedo cambiar de plan después?",
         content:
-          "Tienes un canal directo por WhatsApp para emergencias. Respondemos en menos de 1 hora. Para incidencias graves, activamos protocolos inmediatos.",
-      },
-      {
-        title: "¿Cada cuánto hacen backups?",
-        content:
-          "Backups automáticos diarios con retención de 30 días. En caso de cualquier problema, podemos restaurar tu sistema en minutos.",
-      },
-      {
-        title: "¿Qué incluye el monitoreo?",
-        content:
-          "Monitoreamos tu sistema 24/7: tiempo de actividad, velocidad, errores. Si algo falla, recibes alerta y actuamos antes de que afecte a tus clientes.",
+          "Sí, puedes escalar de plan en cualquier momento según tus necesidades.",
       },
     ],
   },

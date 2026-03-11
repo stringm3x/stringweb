@@ -16,6 +16,9 @@ import {
   FiTarget,
   FiClock,
   FiAward,
+  FiDollarSign,
+  FiUsers,
+  FiCalendar,
 } from "react-icons/fi";
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
@@ -42,6 +45,7 @@ const ServicePage = ({ params: paramsPromise }) => {
   const imageRef = useRef(null);
   const contentRef = useRef(null);
   const ctaRef = useRef(null);
+  const incluyeRef = useRef([]);
 
   useEffect(() => {
     setMounted(true);
@@ -59,6 +63,7 @@ const ServicePage = ({ params: paramsPromise }) => {
           imageRef.current,
           contentRef.current,
           ctaRef.current,
+          ...incluyeRef.current.filter(Boolean),
         ],
         { opacity: 1, y: 0, visibility: "visible" }
       );
@@ -77,6 +82,17 @@ const ServicePage = ({ params: paramsPromise }) => {
         .from(headerRef.current, { opacity: 0, y: 30 }, "-=0.3")
         .from(imageRef.current, { opacity: 0, x: 50 }, "-=0.3")
         .from(contentRef.current, { opacity: 0, y: 30 }, "-=0.4")
+        .from(
+          incluyeRef.current.filter(Boolean),
+          {
+            opacity: 0,
+            x: -20,
+            stagger: 0.1,
+            duration: 0.6,
+            ease: "back.out(1.2)",
+          },
+          "-=0.3"
+        )
         .from(ctaRef.current, { opacity: 0, y: 30 }, "-=0.1");
     },
     { scope: sectionRef, dependencies: [mounted] }
@@ -85,7 +101,7 @@ const ServicePage = ({ params: paramsPromise }) => {
   const toggle = (idx) => setOpenIndex(openIndex === idx ? null : idx);
 
   const getIcon = (idx) => {
-    const icons = ["🎯", "⚡", "🎨", "🚀", "💡", "🔧"];
+    const icons = ["🎯", "⚡", "🎨", "🚀", "💡", "🔧", "🔄", "📊"];
     return icons[idx] || "✅";
   };
 
@@ -154,10 +170,7 @@ const ServicePage = ({ params: paramsPromise }) => {
           className="mb-8"
         >
           <button
-            onClick={() => {
-              console.log("Navegando a /Services");
-              router.push("/Services");
-            }}
+            onClick={() => router.push("/Services")}
             className="inline-flex items-center text-gray hover:text-green transition-colors duration-300 group"
           >
             <FiArrowLeft className="mr-2 group-hover:-translate-x-1 transition-transform" />
@@ -165,14 +178,17 @@ const ServicePage = ({ params: paramsPromise }) => {
           </button>
         </motion.div>
 
-        {/* Badge */}
-        <div ref={badgeRef} className="mb-6">
+        {/* Badge con precio */}
+        <div ref={badgeRef} className="mb-6 flex items-center gap-3">
           <span className="inline-block px-4 py-2 bg-green/10 text-green rounded-full text-sm font-mono border border-green/30">
-            ✦ SISTEMA DE CONVERSIÓN
+            ✦ {servicio.service}
+          </span>
+          <span className="inline-block px-4 py-2 bg-green text-black rounded-full text-sm font-bold">
+            {servicio.title2}
           </span>
         </div>
 
-        {/* Header */}
+        {/* Header con título y precio */}
         <div className="grid lg:grid-cols-2 gap-12 items-center mb-16">
           <div>
             <h1
@@ -181,30 +197,43 @@ const ServicePage = ({ params: paramsPromise }) => {
             >
               {servicio.service}
             </h1>
-            <h2
-              ref={headerRef}
-              className="text-2xl md:text-3xl text-green font-light mb-6"
-            >
-              {servicio.title2}
-            </h2>
-            <p className="text-lg text-black leading-relaxed">
+
+            {/* Precio destacado */}
+            <div className="flex items-center gap-2 mb-4">
+              <FiDollarSign className="text-green text-2xl" />
+              <span className="text-3xl font-bold text-green">
+                {servicio.metric}
+              </span>
+            </div>
+
+            <p className="text-lg text-black/80 leading-relaxed mb-6">
               {servicio.intro}
             </p>
 
+            {/* Objetivo e ideal */}
+            <div className="bg-green/5 p-4 rounded-xl border border-green/20 mb-6">
+              <p className="text-sm font-mono text-green mb-1">OBJETIVO</p>
+              <p className="text-black mb-3">{servicio.objetivo}</p>
+              <p className="text-sm text-gray">
+                <span className="font-semibold">Ideal para:</span>{" "}
+                {servicio.ideal}
+              </p>
+            </div>
+
             {/* Stats rápidas */}
-            <div className="flex flex-wrap gap-6 mt-8">
-              <div className="flex items-center gap-2">
-                <FiTarget className="text-green text-xl" />
-                <span className="text-sm text-bg">+85% conversión</span>
-              </div>
-              <div className="flex items-center gap-2">
-                <FiClock className="text-green text-xl" />
-                <span className="text-sm text-bg">24h respuesta</span>
-              </div>
-              <div className="flex items-center gap-2">
-                <FiAward className="text-green text-xl" />
-                <span className="text-sm text-bg">100% personalizado</span>
-              </div>
+            <div className="flex flex-wrap gap-6">
+              {servicio.stats.map((stat, i) => (
+                <div key={i} className="flex items-center gap-2">
+                  <div className="w-8 h-8 bg-green/10 rounded-full flex items-center justify-center">
+                    {i === 0 && <FiClock className="text-green text-sm" />}
+                    {i === 1 && <FiUsers className="text-green text-sm" />}
+                  </div>
+                  <div>
+                    <p className="text-sm font-bold text-black">{stat.value}</p>
+                    <p className="text-xs text-gray">{stat.label}</p>
+                  </div>
+                </div>
+              ))}
             </div>
           </div>
 
@@ -229,6 +258,25 @@ const ServicePage = ({ params: paramsPromise }) => {
           <p className="text-xl md:text-2xl text-black leading-relaxed">
             {servicio.p}
           </p>
+        </div>
+
+        {/* Qué incluye - Lista destacada */}
+        <div className="mb-16">
+          <h2 className="text-3xl text-black font-ubuntu font-bold text-center mb-8">
+            Qué <span className="text-green">incluye</span> este sistema
+          </h2>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 max-w-3xl mx-auto">
+            {servicio.incluye.map((item, index) => (
+              <div
+                key={index}
+                ref={(el) => (incluyeRef.current[index] = el)}
+                className="flex items-start gap-3 p-4 bg-white rounded-xl shadow-sm border border-gray/10"
+              >
+                <FiCheckCircle className="text-green text-xl mt-0.5 flex-shrink-0" />
+                <span className="text-black">{item}</span>
+              </div>
+            ))}
+          </div>
         </div>
 
         {/* Tabs: Beneficios / FAQ */}
@@ -257,7 +305,7 @@ const ServicePage = ({ params: paramsPromise }) => {
           </div>
 
           <AnimatePresence mode="wait">
-            {/* Beneficios - CON ANIMACIÓN DE CONTENIDO */}
+            {/* Beneficios */}
             {activeTab === "beneficios" && (
               <motion.div
                 key="beneficios"
@@ -287,7 +335,7 @@ const ServicePage = ({ params: paramsPromise }) => {
               </motion.div>
             )}
 
-            {/* FAQs - CON ANIMACIÓN DE CONTENIDO */}
+            {/* FAQs */}
             {activeTab === "faqs" && servicio.faqs && (
               <motion.div
                 key="faqs"
@@ -307,7 +355,7 @@ const ServicePage = ({ params: paramsPromise }) => {
                     >
                       <button
                         onClick={() => toggle(index)}
-                        className="w-full flex items-center justify-between p-6 text-left hover:bg-white transition-colors"
+                        className="w-full flex items-center justify-between p-6 text-left  transition-colors"
                       >
                         <span
                           className={`text-lg font-semibold pr-8 ${
@@ -321,7 +369,7 @@ const ServicePage = ({ params: paramsPromise }) => {
                           className={`w-8 h-8 rounded-full flex items-center justify-center ${
                             isOpen
                               ? "bg-green text-black"
-                              : "bg-gray text-green"
+                              : "bg-white text-black"
                           }`}
                         >
                           {isOpen ? <FiMinus /> : <FiPlus />}
@@ -337,7 +385,7 @@ const ServicePage = ({ params: paramsPromise }) => {
                             exit="collapsed"
                             className="overflow-hidden"
                           >
-                            <div className="p-6 pt-0 text-gray border-t border-gray-100">
+                            <div className="p-6 pt-0 text-gray border-t border-gray">
                               {item.content}
                             </div>
                           </motion.div>
@@ -357,12 +405,12 @@ const ServicePage = ({ params: paramsPromise }) => {
           className="text-center mt-20 p-12 bg-gradient-to-r from-green/5 to-green2/5 rounded-3xl border border-green/20"
         >
           <h3 className="text-3xl md:text-4xl font-ubuntu font-bold text-bg mb-4">
-            ¿Listo para <span className="text-green">transformar</span> tu
-            negocio?
+            ¿Listo para <span className="text-green">implementar</span> este
+            sistema?
           </h3>
           <p className="text-gray max-w-2xl mx-auto mb-8 text-lg">
-            Implementa este sistema de conversión y comienza a generar
-            resultados reales.
+            Agenda un diagnóstico gratuito y descubre cómo este nivel puede
+            transformar tu negocio.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Link href="/quote">
