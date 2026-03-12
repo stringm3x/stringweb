@@ -31,7 +31,7 @@ export const FormSelect = ({ register, error, name, label, required }) => {
           selectRef.current = e;
         }}
         className={`
-          w-full px-4 py-3 rounded-lg border bg-black
+          w-full px-4 py-3 rounded-lg border bg-gray
           transition-all duration-200 appearance-none
           focus:outline-none focus:ring-2 focus:ring-green
           ${
@@ -50,7 +50,7 @@ export const FormSelect = ({ register, error, name, label, required }) => {
         <option value="">Selecciona un tipo de proyecto</option>
         {PROJECT_TYPES.map((type) => (
           <option key={type.id} value={type.id}>
-            {type.description} 
+            {type.label} 
           </option>
         ))}
       </select>

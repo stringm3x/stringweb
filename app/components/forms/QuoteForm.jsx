@@ -300,7 +300,7 @@ export const QuoteForm = () => {
             <h1 className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-ubuntu font-black tracking-tight leading-none">
               <span className="text-black">DIAGNOSTICA</span>
               <br />
-              <span className="text-gray relative">
+              <span className="text-green relative">
                 TU NEGOCIO
                 <span className="absolute -bottom-3 left-0 w-full h-1 bg-green rounded-full" />
               </span>
@@ -398,7 +398,7 @@ export const QuoteForm = () => {
                   error={errors.projectType?.message}
                   options={PROJECT_TYPES.map((p) => ({
                     value: p.id,
-                    label: `${p.label} - ${p.price}`,
+                    label: `${p.label}`,
                   }))}
                   icon={FiTarget}
                   onFocus={() => setFocusedField("projectType")}
@@ -434,23 +434,13 @@ export const QuoteForm = () => {
                     <h4 className="font-bold text-green mb-2">
                       {selectedLevelData.label}
                     </h4>
-                    <p className="text-sm text-gray-600 mb-2">
+                    <p className="text-sm text-gray mb-2">
                       {selectedLevelData.description}
                     </p>
                     <p className="text-xs text-gray-500 mb-2">
                       Precio estimado: {selectedLevelData.price}
                     </p>
-                    <div className="grid grid-cols-2 gap-2 mt-2">
-                      {selectedLevelData.features.map((feature, i) => (
-                        <div
-                          key={i}
-                          className="flex items-center gap-1 text-xs"
-                        >
-                          <FiCheckCircle className="text-green flex-shrink-0" />
-                          <span className="text-gray-600">{feature}</span>
-                        </div>
-                      ))}
-                    </div>
+                    <div className="grid grid-cols-2 gap-2 mt-2"></div>
                   </div>
                 </motion.div>
               )}

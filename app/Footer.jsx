@@ -50,11 +50,10 @@ const socialLinks = [
 ];
 
 const services = [
-  "Diseño Web",
-  "Desarrollo Web",
-  "SEO",
-  "Mantenimiento",
-  "Branding",
+  "Sistema Conversión",
+  "Sistema Captación",
+  "Sistema Automatizado",
+  "Sistema Especializado",
 ];
 
 const Footer = () => {

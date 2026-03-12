@@ -29,20 +29,13 @@ gsap.registerPlugin(ScrollTrigger);
 // Importar datos
 import servicios from "./data";
 
-const statsPrincipales = [
-  { value: "50+", label: "Sistemas implementados", icon: FiUsers },
-  { value: "85%", label: "Aumento en conversión", icon: FiBarChart2 },
-  { value: "24h", label: "Respuesta inicial", icon: FiClock },
-  { value: "100%", label: "Personalizado", icon: FiAward },
-];
-
 const niveles = [
-  { nivel: "Nivel 1", precio: "$8,000–12,000", desc: "Sistema de Conversión" },
-  { nivel: "Nivel 2", precio: "$18,000–28,000", desc: "Sistema de Captación" },
-  { nivel: "Nivel 3", precio: "$22,000–40,000", desc: "Sistema Automatizado" },
+  { nivel: "Nivel 1", precio: "$8,000", desc: "Sistema de Conversión" },
+  { nivel: "Nivel 2", precio: "$18,000", desc: "Sistema de Captación" },
+  { nivel: "Nivel 3", precio: "$28,000", desc: "Sistema Automatizado" },
   {
     nivel: "Nivel 4",
-    precio: "$40,000–90,000+",
+    precio: "$40,000",
     desc: "Sistema Especializado",
   },
 ];
@@ -158,7 +151,7 @@ const PageServices = () => {
 
           <h1
             ref={titleRef}
-            className="text-4xl md:text-6xl lg:text-7xl xl:text-8xl font-ubuntu font-black tracking-tight"
+            className="text-[28px] md:text-6xl lg:text-7xl xl:text-8xl font-ubuntu font-black tracking-tight"
           >
             <span className="text-black">SERVICIOS</span>
             <span className="text-green ml-4">ESTRATÉGICOS</span>

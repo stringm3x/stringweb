@@ -2,8 +2,8 @@ const servicios = [
   {
     id: "1",
     service: "SISTEMA DE CONVERSIÓN",
-    title2: "Nivel 1 · $8,000–12,000",
-    img: "/serv/conversion.png",
+    title2: "Nivel 1 · $8,000",
+    img: "/serv/conversion1.png",
     intro:
       "Transformamos tu presencia digital en un sistema que genera clientes reales de manera consistente.",
     p: "No se trata de tener una página bonita. Se trata de tener una estructura clara que guíe a tus visitantes a convertirse en clientes. Analizamos tu negocio, identificamos fricciones y diseñamos un flujo de conversión optimizado.",
@@ -15,7 +15,8 @@ const servicios = [
       "Formulario básico de contacto",
       "Mensaje preconfigurado de WhatsApp",
     ],
-    objetivo: "Crear una presencia digital clara que convierta visitas en mensajes de clientes interesados.",
+    objetivo:
+      "Crear una presencia digital clara que convierta visitas en mensajes de clientes interesados.",
     ideal: "Negocios que dependen de Instagram, WhatsApp y recomendaciones",
     metric: "Desde $8,000",
     gradient: "from-green to-green2",
@@ -54,8 +55,8 @@ const servicios = [
   {
     id: "2",
     service: "SISTEMA DE CAPTACIÓN",
-    title2: "Nivel 2 · $18,000–28,000",
-    img: "/serv/landingpage.png",
+    title2: "Nivel 2 · $18,000",
+    img: "/serv/captacion.png",
     intro:
       "Evita que los clientes interesados se pierdan y organiza tus prospectos automáticamente.",
     p: "No basta con recibir mensajes. Hay que organizarlos. Este nivel añade herramientas de captación que registran, clasifican y notifican cada nuevo prospecto, para que no se pierda ninguna oportunidad.",
@@ -66,7 +67,8 @@ const servicios = [
       "Notificaciones automáticas",
       "Integración con Notion / Sheets / Airtable",
     ],
-    objetivo: "Organizar los prospectos y evitar la pérdida de clientes interesados.",
+    objetivo:
+      "Organizar los prospectos y evitar la pérdida de clientes interesados.",
     ideal: "Negocios con volumen creciente de consultas",
     metric: "Desde $18,000",
     gradient: "from-green2 to-green3",
@@ -105,8 +107,8 @@ const servicios = [
   {
     id: "3",
     service: "SISTEMA AUTOMATIZADO",
-    title2: "Nivel 3 · $22,000–40,000",
-    img: "/serv/optimizacion.png",
+    title2: "Nivel 3 · $28,000",
+    img: "/serv/auto.png",
     intro:
       "Crea un sistema digital que trabaja incluso cuando tu negocio no está disponible.",
     p: "Imagina un sistema que recibe, organiza y responde clientes mientras tú duermes. Este nivel añade automatizaciones avanzadas que mejoran la percepción de atención y aumentan conversiones.",
@@ -117,9 +119,10 @@ const servicios = [
       "Recordatorios de citas",
       "Panel de gestión de prospectos",
     ],
-    objetivo: "Automatizar la atención y seguimiento para escalar sin aumentar carga operativa.",
+    objetivo:
+      "Automatizar la atención y seguimiento para escalar sin aumentar carga operativa.",
     ideal: "Negocios con alto volumen de consultas o que trabajan con citas",
-    metric: "Desde $22,000",
+    metric: "Desde $28,000",
     gradient: "from-green3 to-green4",
     icon: "⚡",
     color: "green",
@@ -156,8 +159,8 @@ const servicios = [
   {
     id: "4",
     service: "SISTEMA ESPECIALIZADO",
-    title2: "Nivel 4 · $40,000–90,000+",
-    img: "/serv/ecommerce.png",
+    title2: "Nivel 4 · $40,000",
+    img: "/serv/especial.png",
     intro:
       "Desarrollamos sistemas digitales personalizados para negocios que necesitan algo más avanzado.",
     p: "Este nivel está pensado para empresas que necesitan procesos digitales completos que integren captación, seguimiento, ventas y gestión interna. Infraestructura digital diseñada específicamente para tu operación.",
@@ -201,48 +204,6 @@ const servicios = [
         title: "¿Cuánto tiempo toma el desarrollo?",
         content:
           "Depende de la complejidad, pero siempre definimos plazos claros antes de comenzar.",
-      },
-    ],
-  },
-  {
-    id: "5",
-    service: "PLANES DE CONTINUIDAD",
-    title2: "Soporte mensual",
-    img: "/serv/automatizacion.png",
-    intro:
-      "Mantenimiento y optimización continua para tu sistema digital.",
-    p: "Los sistemas digitales requieren mantenimiento y optimización constante. Ofrecemos planes mensuales para garantizar que tu sistema siempre funcione al máximo.",
-    content: [
-      "Hosting incluido",
-      "Mantenimiento técnico",
-      "Cambios menores",
-      "Soporte prioritario",
-    ],
-    objetivo: "Asegurar la continuidad y mejora constante de tu sistema.",
-    ideal: "Todos los clientes STRING",
-    metric: "Desde $1,800/mes",
-    gradient: "from-green to-green2",
-    icon: "🔄",
-    color: "green",
-    incluye: [
-      "Plan Base: $1,800–2,500/mes - Hosting, mantenimiento, soporte",
-      "Plan Crecimiento: $3,000–4,500/mes - Optimización mensual, ajustes",
-      "Plan Escalamiento: $5,000–8,000/mes - Análisis, soporte prioritario",
-    ],
-    stats: [
-      { value: "24/7", label: "Soporte" },
-      { value: "100%", label: "Uptime" },
-    ],
-    faqs: [
-      {
-        title: "¿Qué incluye el mantenimiento?",
-        content:
-          "Backups automáticos, actualizaciones de seguridad, monitoreo 24/7 y soporte técnico.",
-      },
-      {
-        title: "¿Puedo cambiar de plan después?",
-        content:
-          "Sí, puedes escalar de plan en cualquier momento según tus necesidades.",
       },
     ],
   },

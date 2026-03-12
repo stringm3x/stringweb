@@ -170,7 +170,7 @@ const ServicePage = ({ params: paramsPromise }) => {
           className="mb-8"
         >
           <button
-            onClick={() => router.push("/Services")}
+            onClick={() => (window.location.href = "/Services")}
             className="inline-flex items-center text-gray hover:text-green transition-colors duration-300 group"
           >
             <FiArrowLeft className="mr-2 group-hover:-translate-x-1 transition-transform" />

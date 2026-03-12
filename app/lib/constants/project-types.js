@@ -8,7 +8,7 @@ export const PROJECT_TYPES = [
       "Diagnóstico digital inicial",
       "Estructura estratégica de oferta",
       "Landing page optimizada",
-      "Integración con WhatsApp",
+      "Integración con WhatsApp", 
       "Formulario básico de contacto",
       "Mensaje automático preconfigurado",
     ],

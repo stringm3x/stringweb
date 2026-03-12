@@ -26,10 +26,11 @@ export const quoteSchema = z.object({
     .transform((whatsapp) => whatsapp.trim()),
 
   // Tipo de proyecto - Solo valores permitidos
-  projectType: z.enum(["basica", "intermedia", "avanzada"], {
-    errorMap: () => ({ message: "Selecciona un tipo de proyecto válido" }),
+  projectType: z.enum(["nivel1", "nivel2", "nivel3", "nivel4"], {
+    errorMap: () => ({
+      message: "Selecciona un nivel del sistema STRING válido",
+    }),
   }),
-
   // Objetivo - Texto descriptivo con mínimo de caracteres
   objective: z
     .string()
@@ -77,7 +78,6 @@ export const quoteSchema = z.object({
       }
     ),
 });
-
 
 // Función de validación reutilizable (para backend/frontend)
 export const validateQuote = (data) => {
