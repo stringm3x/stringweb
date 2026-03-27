@@ -21,7 +21,6 @@ const ubuntu = Ubuntu({
   subsets: ["latin"],
 });
 
-// SEO Metadata mejorado
 export const metadata = {
   // Título y descripción principal
   title: {

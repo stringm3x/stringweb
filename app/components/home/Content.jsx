@@ -207,7 +207,7 @@ const Content = () => {
     return (
       <section className="relative overflow-hidden bg-white py-24 md:py-32">
         <div className="max-w-7xl mx-auto px-4">
-          <div className="h-96 bg-gray-100 animate-pulse rounded-2xl" />
+          <div className="h-96 bg-gray animate-pulse rounded-2xl" />
         </div>
       </section>
     );
