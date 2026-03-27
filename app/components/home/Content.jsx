@@ -23,7 +23,7 @@ gsap.registerPlugin(ScrollTrigger);
 // Datos actualizados
 const stats = [
   {
-    value: "50+",
+    value: "10+",
     label: "Sistemas implementados",
     description: "Negocios transformados con estructura digital",
     gradient: "from-green to-green2",
@@ -85,7 +85,6 @@ const Content = () => {
     setMounted(true);
   }, []);
 
-  // Animación de entrada con ScrollTrigger - MÁS LIVIANA
   useEffect(() => {
     if (!mounted) return;
 
@@ -181,7 +180,7 @@ const Content = () => {
     return (
       <section className="relative overflow-hidden bg-white py-24 md:py-32">
         <div className="max-w-7xl mx-auto px-4">
-          <div className="h-96 bg-gray-100 animate-pulse rounded-2xl" />
+          <div className="h-96 bg-gray animate-pulse rounded-2xl" />
         </div>
       </section>
     );
@@ -211,7 +210,7 @@ const Content = () => {
           <div className="text-center space-y-4">
             <div ref={titleRef} className="inline-block">
               <span className="px-4 py-2 bg-green/10 text-green rounded-full text-sm font-mono border border-green/30">
-                ✦ SISTEMAS DE CONVERSIÓN
+                SISTEMAS DE CONVERSIÓN
               </span>
             </div>
 
@@ -372,15 +371,6 @@ const Content = () => {
                 </Link>
               </div>
             </div>
-          </div>
-
-          {/* Mensaje final */}
-          <div className="text-center text-sm text-gray">
-            <p className="flex items-center justify-center gap-2">
-              <FiTarget className="text-green" />
-              STRING: Sistemas que convierten, no páginas que decoran
-              <FiTarget className="text-green" />
-            </p>
           </div>
         </div>
       </div>

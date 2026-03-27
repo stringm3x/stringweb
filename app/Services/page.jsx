@@ -23,7 +23,7 @@ gsap.registerPlugin(ScrollTrigger);
 
 // Stats principales con React Icons
 const statsPrincipales = [
-  { value: "50+", label: "Sistemas implementados", icon: FiUsers },
+  { value: "10+", label: "Sistemas implementados", icon: FiUsers },
   { value: "85%", label: "Aumento en conversión", icon: FiBarChart2 },
   { value: "24h", label: "Respuesta inicial", icon: FiClock },
   { value: "100%", label: "Personalizado", icon: FiAward },
@@ -131,14 +131,14 @@ const PageServices = () => {
   return (
     <section
       ref={sectionRef}
-      className="min-h-screen bg-white py-20 px-4 md:px-6 lg:px-8"
+      className="min-h-screen bg-white py-20 px-4 md:px-6 lg:px-8 overflow-hidden"
     >
       {/* Header */}
       <div ref={headerRef} className="text-center mb-16 space-y-4">
         <span className="inline-block px-4 py-2 bg-green/10 text-green rounded-full text-sm font-mono border border-green/30">
-          ✦ SISTEMAS DE CONVERSIÓN
+          SISTEMAS DE CONVERSIÓN
         </span>
-        <h1 className="text-4xl md:text-6xl lg:text-7xl font-ubuntu font-black tracking-tight">
+        <h1 className="text-3xl md:text-6xl lg:text-7xl font-ubuntu font-black tracking-tight">
           <span className="text-black">SERVICIOS</span>
           <span className="text-green ml-4">ESTRATÉGICOS</span>
         </h1>
@@ -146,23 +146,6 @@ const PageServices = () => {
           No vendemos páginas. Implementamos sistemas digitales diseñados para
           convertir visitas en clientes reales.
         </p>
-      </div>
-
-      {/* Stats principales */}
-      <div className="grid grid-cols-2 md:grid-cols-4 gap-4 max-w-3xl mx-auto mb-12">
-        {statsPrincipales.map((stat, index) => {
-          const Icon = stat.icon;
-          return (
-            <div
-              key={index}
-              className="text-center p-4 bg-white/50 rounded-xl border border-gray/20"
-            >
-              <Icon className="text-2xl text-green mx-auto mb-2" />
-              <p className="text-xl font-bold text-black">{stat.value}</p>
-              <p className="text-xs text-gray">{stat.label}</p>
-            </div>
-          );
-        })}
       </div>
 
       {/* Grid de servicios */}

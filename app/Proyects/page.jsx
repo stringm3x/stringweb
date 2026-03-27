@@ -205,7 +205,7 @@ const PageProyects = () => {
   return (
     <section
       ref={sectionRef}
-      className="bg-white flex flex-col gap-16 md:gap-32 px-4 md:px-10 py-10 md:py-20 relative min-h-screen"
+      className="bg-white flex flex-col gap-16 md:gap-32 px-4 md:px-10 py-10 md:py-20 relative min-h-screen overflow-hidden"
     >
       {/* Elementos decorativos */}
       <div className="absolute inset-0 pointer-events-none">
@@ -217,7 +217,7 @@ const PageProyects = () => {
         {/* Header */}
         <div ref={titleRef} className="text-center mb-12">
           <span className="inline-block px-4 py-2 bg-green/10 text-green rounded-full text-sm font-semibold tracking-wider mb-4 border border-green/20">
-            ✦ Portafolio
+            Portafolio
           </span>
           
           <h1 className="text-6xl md:text-8xl font-ubuntu font-extrabold tracking-tight leading-[45px] md:leading-[70px]">

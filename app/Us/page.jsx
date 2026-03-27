@@ -157,7 +157,7 @@ const PageUs = () => {
               transition={{ duration: 0.8 }}
             >
               <span className="inline-block px-4 py-2 bg-green/10 text-green rounded-full text-sm font-mono border border-green/30 mb-6">
-                ✦ AGENCIA DE SISTEMAS DIGITALES ESTRATÉGICOS
+                AGENCIA DE SISTEMAS DIGITALES ESTRATÉGICOS
               </span>
 
               <h1 className="hero-title text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-ubuntu font-black tracking-tight leading-tight mb-6">

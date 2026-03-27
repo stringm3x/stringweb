@@ -20,7 +20,6 @@ import { RiTeamLine } from "react-icons/ri";
 
 gsap.registerPlugin(ScrollTrigger);
 
-// Los mismos items...
 const items = [
   {
     title: "SISTEMA DE CONVERSIÓN",
@@ -111,7 +110,7 @@ const items = [
 ];
 
 const stats = [
-  { value: "50+", label: "Sistemas implementados", icon: RiTeamLine },
+  { value: "10+", label: "Sistemas implementados", icon: RiTeamLine },
   { value: "85%", label: "Aumento en conversión", icon: MdOutlineAnalytics },
   { value: "24h", label: "Respuesta inicial", icon: FiClock },
   { value: "100%", label: "Personalizado", icon: FiAward },
@@ -202,7 +201,7 @@ const Services = () => {
     return (
       <section className="bg-white py-24">
         <div className="max-w-7xl mx-auto px-4">
-          <div className="h-96 bg-gray-100 animate-pulse rounded-2xl" />
+          <div className="h-96 bg-gray animate-pulse rounded-2xl" />
         </div>
       </section>
     );
@@ -292,9 +291,6 @@ const Services = () => {
                         >
                           {item.title}
                         </h3>
-                        <span className="text-xs font-mono text-green bg-green/10 px-3 py-1 rounded-full border border-green/30">
-                          {item.metric}
-                        </span>
                       </div>
                       <p className="text-sm text-green font-mono mb-1">
                         {item.subtitle}

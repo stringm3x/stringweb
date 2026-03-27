@@ -114,7 +114,7 @@ const Hero = () => {
   }, []);
 
   const stats = [
-    { value: "50+", label: "Sistemas", icon: FiTarget },
+    { value: "10+", label: "Sistemas", icon: FiTarget },
     { value: "85%", label: "Conversión", icon: FiTrendingUp },
     { value: "24h", label: "Respuesta", icon: FiClock },
     { value: "100%", label: "Personalizado", icon: FiAward },
@@ -154,7 +154,6 @@ const Hero = () => {
             {/* Badge */}
             <div ref={badgeRef}>
               <span className="inline-flex items-center gap-2 px-4 py-2 bg-green/10 text-green rounded-full text-sm font-mono border border-green/30 backdrop-blur-sm">
-                <FiZap className="w-4 h-4" />
                 SISTEMAS DE CONVERSIÓN
               </span>
             </div>

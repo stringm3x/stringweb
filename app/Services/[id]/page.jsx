@@ -177,9 +177,12 @@ const ServicePage = ({ params: paramsPromise }) => {
         </div>
 
         {/* Badge */}
-        <div ref={badgeRef} className="mb-6 flex items-center gap-3">
+        <div
+          ref={badgeRef}
+          className="mb-6 flex flex-col sm:flex-row items-center gap-3"
+        >
           <span className="inline-block px-4 py-2 bg-green/10 text-green rounded-full text-sm font-mono border border-green/30">
-            ✦ {servicio.service}
+            {servicio.service}
           </span>
           <span className="inline-block px-4 py-2 bg-green text-black rounded-full text-sm font-bold">
             {servicio.title2}
@@ -365,7 +368,7 @@ const ServicePage = ({ params: paramsPromise }) => {
                         className={`w-8 h-8 rounded-full flex items-center justify-center transition-all duration-300 ${
                           isOpen
                             ? "bg-green text-black"
-                            : "bg-gray-100 text-gray"
+                            : "bg-gray/40 text-gray"
                         }`}
                       >
                         {isOpen ? <FiMinus /> : <FiPlus />}
@@ -373,13 +376,13 @@ const ServicePage = ({ params: paramsPromise }) => {
                     </button>
 
                     <div
-                      className={`overflow-hidden transition-all duration-300 ease-in-out ${
+                      className={` overflow-hidden transition-all duration-300 ease-in-out ${
                         isOpen
                           ? "max-h-[300px] opacity-100"
                           : "max-h-0 opacity-0"
                       }`}
                     >
-                      <div className="p-6 pt-0 text-gray border-t border-gray-100">
+                      <div className="p-6 pt-0 text-gray border-t border-gray">
                         {item.content}
                       </div>
                     </div>
@@ -422,10 +425,6 @@ const ServicePage = ({ params: paramsPromise }) => {
           <p className="text-sm text-gray mt-4">
             Diagnóstico gratuito · Respuesta en 24h
           </p>
-        </div>
-
-        <div className="text-center mt-8 text-sm text-gray">
-          <p>Este es un sistema de conversión, no solo una página.</p>
         </div>
       </div>
     </section>

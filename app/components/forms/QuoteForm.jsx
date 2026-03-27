@@ -294,7 +294,7 @@ export const QuoteForm = () => {
         <div className="text-center mb-12">
           <motion.div ref={titleRef} className="space-y-4">
             <span className="inline-block px-4 py-2 bg-green/10 text-green rounded-full text-sm font-mono border border-green/30">
-              ✦ SISTEMAS DE CONVERSIÓN
+               SISTEMAS DE CONVERSIÓN
             </span>
 
             <h1 className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-ubuntu font-black tracking-tight leading-none">
