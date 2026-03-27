@@ -1,3 +1,15 @@
+import {
+  FiTarget,
+  FiTrendingUp,
+  FiZap,
+  FiClock,
+  FiAward,
+  FiBarChart2,
+  FiUsers,
+} from "react-icons/fi";
+import { MdOutlineAnalytics, MdOutlineRocketLaunch } from "react-icons/md";
+import { RiTeamLine } from "react-icons/ri";
+
 const servicios = [
   {
     id: "1",
@@ -20,7 +32,7 @@ const servicios = [
     ideal: "Negocios que dependen de Instagram, WhatsApp y recomendaciones",
     metric: "Desde $8,000",
     gradient: "from-green to-green2",
-    icon: "🎯",
+    icon: FiTarget,
     color: "green",
     incluye: [
       "Diagnóstico digital inicial",
@@ -72,7 +84,7 @@ const servicios = [
     ideal: "Negocios con volumen creciente de consultas",
     metric: "Desde $18,000",
     gradient: "from-green2 to-green3",
-    icon: "📊",
+    icon: FiTrendingUp,
     color: "green",
     incluye: [
       "Todo el Sistema de Conversión",
@@ -124,7 +136,7 @@ const servicios = [
     ideal: "Negocios con alto volumen de consultas o que trabajan con citas",
     metric: "Desde $28,000",
     gradient: "from-green3 to-green4",
-    icon: "⚡",
+    icon: FiZap,
     color: "green",
     incluye: [
       "Todo el Sistema de Captación",
@@ -175,7 +187,7 @@ const servicios = [
     ideal: "Empresas con procesos complejos o necesidades específicas",
     metric: "Desde $40,000",
     gradient: "from-green4 to-green",
-    icon: "🚀",
+    icon: MdOutlineRocketLaunch,
     color: "green",
     incluye: [
       "Todo el Sistema Automatizado",

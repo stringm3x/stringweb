@@ -6,7 +6,6 @@ import Link from "next/link";
 import servicios from "../data";
 import { notFound } from "next/navigation";
 import Image from "next/image";
-import { motion, AnimatePresence } from "framer-motion";
 import {
   FiPlus,
   FiMinus,
@@ -20,7 +19,6 @@ import {
   FiUsers,
   FiCalendar,
 } from "react-icons/fi";
-import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 
@@ -36,6 +34,7 @@ const ServicePage = ({ params: paramsPromise }) => {
   const [openIndex, setOpenIndex] = useState(null);
   const [activeTab, setActiveTab] = useState("beneficios");
   const [mounted, setMounted] = useState(false);
+  const [imagesLoaded, setImagesLoaded] = useState(false);
 
   // Refs para GSAP
   const sectionRef = useRef(null);
@@ -51,10 +50,12 @@ const ServicePage = ({ params: paramsPromise }) => {
     setMounted(true);
   }, []);
 
-  useGSAP(
-    () => {
-      if (!mounted) return;
+  // Animación con ScrollTrigger
+  useEffect(() => {
+    if (!mounted) return;
 
+    const ctx = gsap.context(() => {
+      // Estado inicial
       gsap.set(
         [
           badgeRef.current,
@@ -65,79 +66,81 @@ const ServicePage = ({ params: paramsPromise }) => {
           ctaRef.current,
           ...incluyeRef.current.filter(Boolean),
         ],
-        { opacity: 1, y: 0, visibility: "visible" }
+        { opacity: 0, y: 30 }
       );
 
       const tl = gsap.timeline({
-        defaults: { ease: "power3.out", duration: 0.8 },
         scrollTrigger: {
           trigger: sectionRef.current,
-          start: "top 80%",
+          start: "top 85%",
           toggleActions: "play none none none",
         },
+        defaults: { duration: 0.5, ease: "power2.out" },
       });
 
-      tl.from(badgeRef.current, { opacity: 0, y: 30 })
-        .from(titleRef.current, { opacity: 0, y: 40 }, "-=0.4")
-        .from(headerRef.current, { opacity: 0, y: 30 }, "-=0.3")
-        .from(imageRef.current, { opacity: 0, x: 50 }, "-=0.3")
-        .from(contentRef.current, { opacity: 0, y: 30 }, "-=0.4")
-        .from(
+      tl.to(badgeRef.current, { opacity: 1, y: 0 })
+        .to(titleRef.current, { opacity: 1, y: 0 }, "-=0.3")
+        .to(headerRef.current, { opacity: 1, y: 0 }, "-=0.2")
+        .to(imageRef.current, { opacity: 1, y: 0, duration: 0.6 }, "-=0.2")
+        .to(contentRef.current, { opacity: 1, y: 0 }, "-=0.2")
+        .to(
           incluyeRef.current.filter(Boolean),
           {
-            opacity: 0,
-            x: -20,
-            stagger: 0.1,
-            duration: 0.6,
-            ease: "back.out(1.2)",
+            opacity: 1,
+            y: 0,
+            stagger: 0.05,
+            duration: 0.4,
           },
-          "-=0.3"
+          "-=0.2"
         )
-        .from(ctaRef.current, { opacity: 0, y: 30 }, "-=0.1");
-    },
-    { scope: sectionRef, dependencies: [mounted] }
-  );
+        .to(ctaRef.current, { opacity: 1, y: 0 }, "-=0.1");
+    }, sectionRef);
 
-  const toggle = (idx) => setOpenIndex(openIndex === idx ? null : idx);
+    return () => ctx.revert();
+  }, [mounted]);
+
+  const toggle = (idx) => {
+    setOpenIndex(openIndex === idx ? null : idx);
+  };
 
   const getIcon = (idx) => {
     const icons = ["🎯", "⚡", "🎨", "🚀", "💡", "🔧", "🔄", "📊"];
     return icons[idx] || "✅";
   };
 
-  // Variants para animación de contenido
   const containerVariants = {
     hidden: { opacity: 0 },
     visible: {
       opacity: 1,
-      transition: {
-        staggerChildren: 0.1,
-        delayChildren: 0.1,
-      },
+      transition: { staggerChildren: 0.08, delayChildren: 0.05 },
     },
     exit: {
       opacity: 0,
-      transition: {
-        staggerChildren: 0.05,
-        staggerDirection: -1,
-      },
+      transition: { staggerChildren: 0.03, staggerDirection: -1 },
     },
   };
 
   const itemVariants = {
-    hidden: { opacity: 0, y: 30, scale: 0.9 },
+    hidden: { opacity: 0, y: 20 },
     visible: {
       opacity: 1,
       y: 0,
-      scale: 1,
-      transition: { type: "spring", stiffness: 100, damping: 10 },
+      transition: { duration: 0.3, ease: "easeOut" },
     },
-    exit: { opacity: 0, y: -20, scale: 0.9 },
+    exit: { opacity: 0, y: -10 },
   };
 
   const faqVariants = {
-    open: { height: "auto", opacity: 1, transition: { duration: 0.4 } },
-    collapsed: { height: 0, opacity: 0, transition: { duration: 0.3 } },
+    open: {
+      height: "auto",
+      opacity: 1,
+      transition: { duration: 0.3, ease: "easeOut" },
+    },
+    collapsed: {
+      height: 0,
+      opacity: 0,
+      transition: { duration: 0.2, ease: "easeIn" },
+    },
   };
 
   if (!mounted) {
@@ -163,12 +166,7 @@ const ServicePage = ({ params: paramsPromise }) => {
 
       <div className="relative max-w-7xl mx-auto">
         {/* Botón volver */}
-        <motion.div
-          initial={{ opacity: 0, x: -20 }}
-          animate={{ opacity: 1, x: 0 }}
-          transition={{ duration: 0.5 }}
-          className="mb-8"
-        >
+        <div className="mb-8">
           <button
             onClick={() => (window.location.href = "/Services")}
             className="inline-flex items-center text-gray hover:text-green transition-colors duration-300 group"
@@ -176,9 +174,9 @@ const ServicePage = ({ params: paramsPromise }) => {
             <FiArrowLeft className="mr-2 group-hover:-translate-x-1 transition-transform" />
             <span>Volver a Servicios</span>
           </button>
-        </motion.div>
+        </div>
 
-        {/* Badge con precio */}
+        {/* Badge */}
         <div ref={badgeRef} className="mb-6 flex items-center gap-3">
           <span className="inline-block px-4 py-2 bg-green/10 text-green rounded-full text-sm font-mono border border-green/30">
             ✦ {servicio.service}
@@ -188,7 +186,7 @@ const ServicePage = ({ params: paramsPromise }) => {
           </span>
         </div>
 
-        {/* Header con título y precio */}
+        {/* Header */}
         <div className="grid lg:grid-cols-2 gap-12 items-center mb-16">
           <div>
             <h1
@@ -198,7 +196,6 @@ const ServicePage = ({ params: paramsPromise }) => {
               {servicio.service}
             </h1>
 
-            {/* Precio destacado */}
             <div className="flex items-center gap-2 mb-4">
               <FiDollarSign className="text-green text-2xl" />
               <span className="text-3xl font-bold text-green">
@@ -210,7 +207,6 @@ const ServicePage = ({ params: paramsPromise }) => {
               {servicio.intro}
             </p>
 
-            {/* Objetivo e ideal */}
             <div className="bg-green/5 p-4 rounded-xl border border-green/20 mb-6">
               <p className="text-sm font-mono text-green mb-1">OBJETIVO</p>
               <p className="text-black mb-3">{servicio.objetivo}</p>
@@ -220,7 +216,6 @@ const ServicePage = ({ params: paramsPromise }) => {
               </p>
             </div>
 
-            {/* Stats rápidas */}
             <div className="flex flex-wrap gap-6">
               {servicio.stats.map((stat, i) => (
                 <div key={i} className="flex items-center gap-2">
@@ -237,30 +232,38 @@ const ServicePage = ({ params: paramsPromise }) => {
             </div>
           </div>
 
-          {/* Imagen */}
+          {/* Imagen optimizada */}
           <div
             ref={imageRef}
-            className="relative h-[400px] rounded-2xl overflow-hidden shadow-2xl"
+            className="relative h-[400px] rounded-2xl overflow-hidden shadow-2xl bg-gray-100"
           >
+            {!imagesLoaded && (
+              <div className="absolute inset-0 bg-gradient-to-r from-gray-200 to-gray-300 animate-pulse" />
+            )}
             <Image
               src={servicio.img}
               alt={servicio.service}
               fill
-              className="object-cover hover:scale-105 transition-transform duration-700"
+              className={`object-cover transition-opacity duration-500 ${
+                imagesLoaded ? "opacity-100" : "opacity-0"
+              }`}
+              onLoad={() => setImagesLoaded(true)}
               priority
+              sizes="(max-width: 768px) 100vw, 50vw"
+              quality={75}
             />
             <div className="absolute inset-0 bg-gradient-to-t from-black/20 via-transparent to-transparent" />
           </div>
         </div>
 
-        {/* Descripción detallada */}
+        {/* Descripción */}
         <div ref={contentRef} className="max-w-3xl mx-auto text-center mb-16">
           <p className="text-xl md:text-2xl text-black leading-relaxed">
             {servicio.p}
           </p>
         </div>
 
-        {/* Qué incluye - Lista destacada */}
+        {/* Qué incluye */}
         <div className="mb-16">
           <h2 className="text-3xl text-black font-ubuntu font-bold text-center mb-8">
             Qué <span className="text-green">incluye</span> este sistema
@@ -279,12 +282,12 @@ const ServicePage = ({ params: paramsPromise }) => {
           </div>
         </div>
 
-        {/* Tabs: Beneficios / FAQ */}
+        {/* Tabs - CSS transitions en lugar de Framer Motion */}
         <div className="mb-16">
           <div className="flex justify-center gap-4 mb-8">
             <button
               onClick={() => setActiveTab("beneficios")}
-              className={`px-6 py-3 rounded-full font-medium transition-all ${
+              className={`px-6 py-3 rounded-full font-medium transition-all duration-300 ${
                 activeTab === "beneficios"
                   ? "bg-green text-black shadow-lg shadow-green/30"
                   : "bg-white text-gray border border-gray/20 hover:border-green"
@@ -294,7 +297,7 @@ const ServicePage = ({ params: paramsPromise }) => {
             </button>
             <button
               onClick={() => setActiveTab("faqs")}
-              className={`px-6 py-3 rounded-full font-medium transition-all ${
+              className={`px-6 py-3 rounded-full font-medium transition-all duration-300 ${
                 activeTab === "faqs"
                   ? "bg-green text-black shadow-lg shadow-green/30"
                   : "bg-white text-gray border border-gray/20 hover:border-green"
@@ -304,99 +307,87 @@ const ServicePage = ({ params: paramsPromise }) => {
             </button>
           </div>
 
-          <AnimatePresence mode="wait">
-            {/* Beneficios */}
-            {activeTab === "beneficios" && (
-              <motion.div
-                key="beneficios"
-                variants={containerVariants}
-                initial="hidden"
-                animate="visible"
-                exit="exit"
-                className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6"
-              >
-                {servicio.content.map((texto, idx) => (
-                  <motion.div
-                    key={idx}
-                    variants={itemVariants}
-                    whileHover={{ y: -8 }}
-                    className="group relative bg-white p-6 rounded-xl shadow-lg hover:shadow-2xl transition-all duration-300 border border-gray/10"
+          {/* Beneficios - usando CSS transition para mejor rendimiento */}
+          <div
+            className={`transition-all duration-300 ${
+              activeTab === "beneficios"
+                ? "opacity-100 visible"
+                : "opacity-0 invisible absolute"
+            }`}
+          >
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+              {servicio.content.map((texto, idx) => (
+                <div
+                  key={idx}
+                  className="group relative bg-white p-6 rounded-xl shadow-lg hover:shadow-2xl transition-all duration-300 border border-gray/10 hover:-translate-y-2"
+                >
+                  <div className="absolute -top-3 -right-3 w-10 h-10 bg-green rounded-full flex items-center justify-center text-black font-bold text-lg opacity-0 group-hover:opacity-100 transition-opacity">
+                    {idx + 1}
+                  </div>
+                  <div className="text-4xl mb-4">{getIcon(idx)}</div>
+                  <p className="text-bg text-base font-medium leading-relaxed">
+                    {texto}
+                  </p>
+                  <div className="absolute bottom-0 left-0 w-0 h-1 bg-green group-hover:w-full transition-all duration-300" />
+                </div>
+              ))}
+            </div>
+          </div>
+
+          {/* FAQs */}
+          <div
+            className={`transition-all duration-300 ${
+              activeTab === "faqs"
+                ? "opacity-100 visible"
+                : "opacity-0 invisible absolute"
+            }`}
+          >
+            <div className="max-w-3xl mx-auto space-y-4">
+              {servicio.faqs?.map((item, index) => {
+                const isOpen = openIndex === index;
+                return (
+                  <div
+                    key={index}
+                    className="border border-gray/20 rounded-xl overflow-hidden bg-white"
                   >
-                    <div className="absolute -top-3 -right-3 w-10 h-10 bg-green rounded-full flex items-center justify-center text-black font-bold text-lg opacity-0 group-hover:opacity-100 transition-opacity">
-                      {idx + 1}
-                    </div>
-                    <div className="text-4xl mb-4">{getIcon(idx)}</div>
-                    <p className="text-bg text-base font-medium leading-relaxed">
-                      {texto}
-                    </p>
-                    <div className="absolute bottom-0 left-0 w-0 h-1 bg-green group-hover:w-full transition-all duration-300" />
-                  </motion.div>
-                ))}
-              </motion.div>
-            )}
-
-            {/* FAQs */}
-            {activeTab === "faqs" && servicio.faqs && (
-              <motion.div
-                key="faqs"
-                variants={containerVariants}
-                initial="hidden"
-                animate="visible"
-                exit="exit"
-                className="max-w-3xl mx-auto space-y-4"
-              >
-                {servicio.faqs.map((item, index) => {
-                  const isOpen = openIndex === index;
-                  return (
-                    <motion.div
-                      key={index}
-                      variants={itemVariants}
-                      className="border border-gray/20 rounded-xl overflow-hidden bg-white"
+                    <button
+                      onClick={() => toggle(index)}
+                      className="w-full flex items-center justify-between p-6 text-left transition-colors hover:bg-gray-50"
                     >
-                      <button
-                        onClick={() => toggle(index)}
-                        className="w-full flex items-center justify-between p-6 text-left  transition-colors"
+                      <span
+                        className={`text-lg font-semibold pr-8 ${
+                          isOpen ? "text-green" : "text-bg"
+                        }`}
                       >
-                        <span
-                          className={`text-lg font-semibold pr-8 ${
-                            isOpen ? "text-green" : "text-bg"
-                          }`}
-                        >
-                          {item.title}
-                        </span>
-                        <motion.div
-                          animate={{ rotate: isOpen ? 45 : 0 }}
-                          className={`w-8 h-8 rounded-full flex items-center justify-center ${
-                            isOpen
-                              ? "bg-green text-black"
-                              : "bg-white text-black"
-                          }`}
-                        >
-                          {isOpen ? <FiMinus /> : <FiPlus />}
-                        </motion.div>
-                      </button>
+                        {item.title}
+                      </span>
+                      <div
+                        className={`w-8 h-8 rounded-full flex items-center justify-center transition-all duration-300 ${
+                          isOpen
+                            ? "bg-green text-black"
+                            : "bg-gray-100 text-gray"
+                        }`}
+                      >
+                        {isOpen ? <FiMinus /> : <FiPlus />}
+                      </div>
+                    </button>
 
-                      <AnimatePresence>
-                        {isOpen && (
-                          <motion.div
-                            variants={faqVariants}
-                            initial="collapsed"
-                            animate="open"
-                            exit="collapsed"
-                            className="overflow-hidden"
-                          >
-                            <div className="p-6 pt-0 text-gray border-t border-gray">
-                              {item.content}
-                            </div>
-                          </motion.div>
-                        )}
-                      </AnimatePresence>
-                    </motion.div>
-                  );
-                })}
-              </motion.div>
-            )}
-          </AnimatePresence>
+                    <div
+                      className={`overflow-hidden transition-all duration-300 ease-in-out ${
+                        isOpen
+                          ? "max-h-[300px] opacity-100"
+                          : "max-h-0 opacity-0"
+                      }`}
+                    >
+                      <div className="p-6 pt-0 text-gray border-t border-gray-100">
+                        {item.content}
+                      </div>
+                    </div>
+                  </div>
+                );
+              })}
+            </div>
+          </div>
         </div>
 
         {/* CTA Section */}
@@ -433,7 +424,6 @@ const ServicePage = ({ params: paramsPromise }) => {
           </p>
         </div>
 
-        {/* Mensaje final */}
         <div className="text-center mt-8 text-sm text-gray">
           <p>Este es un sistema de conversión, no solo una página.</p>
         </div>
