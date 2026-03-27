@@ -1,4 +1,5 @@
 "use client";
+
 import React, { useEffect, useRef, useState } from "react";
 import { motion, useInView } from "framer-motion";
 import gsap from "gsap";
@@ -27,7 +28,7 @@ import {
 
 gsap.registerPlugin(ScrollTrigger);
 
-// LAS 4 FASES DE LA METODOLOGÍA STRING (según documento)
+// Las 4 fases de la metodología STRING
 const stepsData = [
   {
     number: "01",
@@ -105,28 +106,27 @@ const StepCircle = ({ step, index, isActive, onHover }) => {
       initial={{ opacity: 0, scale: 0.5 }}
       animate={isInView ? { opacity: 1, scale: 1 } : {}}
       transition={{ duration: 0.6, delay: index * 0.15 }}
-      onHoverStart={() => onHover(index)}
-      onHoverEnd={() => onHover(null)}
-      className="relative"
+      onMouseEnter={() => onHover(index)}
+      onMouseLeave={() => onHover(null)}
+      className="relative cursor-pointer"
     >
       {/* Círculo principal */}
-      <motion.div
-        whileHover={{ scale: 1.1 }}
-        transition={{ duration: 0.3 }}
+      <div
         className={`
-          relative w-[220px] h-[220px] md:w-[260px] md:h-[260px] 
+          relative w-[200px] h-[200px] md:w-[240px] md:h-[240px] 
           rounded-full bg-gradient-to-br ${step.gradient}
           flex items-center justify-center
-          shadow-2xl cursor-pointer
+          shadow-2xl
           border-4 border-white/10
-          ${isActive ? "ring-4 ring-white/30" : ""}
+          transition-all duration-300
+          ${isActive ? "scale-110 ring-4 ring-white/30" : "hover:scale-105"}
         `}
       >
         {/* Círculo interior con blur */}
         <div className="absolute inset-2 rounded-full bg-black/20 backdrop-blur-sm" />
 
         {/* Contenido */}
-        <div className="relative z-10 text-center p-6">
+        <div className="relative z-10 text-center p-4">
           <span className="text-xs font-mono text-white/80 mb-1 block">
             {step.fase}
           </span>
@@ -134,54 +134,14 @@ const StepCircle = ({ step, index, isActive, onHover }) => {
             {step.number}
           </span>
           <step.icon className="text-3xl md:text-4xl text-white mx-auto mb-2" />
-          <h3 className="text-lg md:text-xl font-ubuntu font-bold text-white">
+          <h3 className="text-base md:text-lg font-ubuntu font-bold text-white">
             {step.title}
           </h3>
           <span className={`text-xs font-mono text-${step.color} mt-2 block`}>
             {step.metric}
           </span>
         </div>
-
-        {/* Partículas animadas alrededor */}
-        <div className="absolute -inset-4">
-          {[...Array(3)].map((_, i) => (
-            <motion.div
-              key={i}
-              className="absolute w-2 h-2 bg-white/30 rounded-full"
-              animate={{
-                scale: [1, 1.5, 1],
-                opacity: [0.3, 0.8, 0.3],
-                x: [0, Math.sin(i * 120) * 40, 0],
-                y: [0, Math.cos(i * 120) * 40, 0],
-              }}
-              transition={{
-                duration: 3,
-                delay: i * 0.5,
-                repeat: Infinity,
-              }}
-            />
-          ))}
-        </div>
-      </motion.div>
-
-      {/* Línea conectora (excepto el último) */}
-      {index < stepsData.length - 1 && (
-        <div className="hidden lg:block absolute top-1/2 -right-16 w-16 h-0.5">
-          <motion.div
-            initial={{ scaleX: 0 }}
-            animate={isInView ? { scaleX: 1 } : {}}
-            transition={{ duration: 0.8, delay: index * 0.2 }}
-            className="w-full h-full bg-gradient-to-r from-green/50 to-transparent origin-left"
-          />
-          <motion.div
-            animate={{ rotate: 360 }}
-            transition={{ duration: 3, repeat: Infinity, ease: "linear" }}
-            className="absolute -right-2 -top-2 w-4 h-4"
-          >
-            <div className="w-2 h-2 bg-green rounded-full" />
-          </motion.div>
-        </div>
-      )}
+      </div>
     </motion.div>
   );
 };
@@ -195,30 +155,30 @@ const InfoPanel = ({ step, isVisible }) => {
       animate={{ opacity: 1, y: 0 }}
       exit={{ opacity: 0, y: -20 }}
       transition={{ duration: 0.4 }}
-      className="bg-white/5 backdrop-blur-lg rounded-2xl p-8 border border-white/10"
+      className="bg-white/5 backdrop-blur-lg rounded-2xl p-6 md:p-8 border border-white/10"
     >
       <div className="flex items-center gap-4 mb-6">
         <div
-          className={`w-14 h-14 rounded-xl bg-gradient-to-br ${step.gradient} flex items-center justify-center`}
+          className={`w-12 h-12 rounded-xl bg-gradient-to-br ${step.gradient} flex items-center justify-center`}
         >
-          <step.icon className="text-3xl text-white" />
+          <step.icon className="text-2xl text-white" />
         </div>
         <div>
           <span className={`text-sm font-mono text-${step.color} mb-1 block`}>
             {step.fase} · PASO {step.number}
           </span>
-          <h3 className="text-2xl font-ubuntu font-bold text-white">
+          <h3 className="text-xl md:text-2xl font-ubuntu font-bold text-white">
             {step.title}
           </h3>
         </div>
       </div>
 
-      <p className="text-gray-300 mb-6 text-lg leading-relaxed">
+      <p className="text-gray-300 mb-6 text-base md:text-lg leading-relaxed">
         {step.description}
       </p>
 
       <div className="bg-black/30 rounded-xl p-4 mb-6">
-        <p className="text-sm text-green font-mono mb-2">
+        <p className="text-sm text-green font-mono mb-3">
           OBJETIVO DE ESTA FASE:
         </p>
         <ul className="space-y-3">
@@ -228,7 +188,7 @@ const InfoPanel = ({ step, isVisible }) => {
               initial={{ opacity: 0, x: -10 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ delay: i * 0.1 }}
-              className="flex items-start gap-3 text-gray-300"
+              className="flex items-start gap-3 text-gray-300 text-sm"
             >
               <FiCheckCircle
                 className={`text-${step.color} mt-1 flex-shrink-0`}
@@ -239,7 +199,6 @@ const InfoPanel = ({ step, isVisible }) => {
         </ul>
       </div>
 
-      {/* Mensaje clave del documento */}
       <p className="text-sm text-gray-400 italic border-t border-white/10 pt-4">
         "STRING no entrega páginas web. Entrega sistemas funcionales de
         captación de clientes."
@@ -270,53 +229,54 @@ const Steps = () => {
     setMounted(true);
   }, []);
 
+  // Animación de entrada con ScrollTrigger
   useEffect(() => {
     if (!mounted) return;
 
     const ctx = gsap.context(() => {
+      // Configurar estado inicial
       gsap.set(
         [titleRef.current, subtitleRef.current, descriptionRef.current],
         {
-          opacity: 1,
-          y: 0,
-          visibility: "visible",
+          opacity: 0,
+          y: 30,
         }
       );
 
+      // Timeline con ScrollTrigger
       const tl = gsap.timeline({
         scrollTrigger: {
           trigger: sectionRef.current,
           start: "top 80%",
-          end: "bottom 20%",
           toggleActions: "play none none none",
         },
       });
 
-      tl.from(titleRef.current, {
-        opacity: 0,
-        x: -50,
-        duration: 0.8,
-        ease: "power3.out",
+      tl.to(titleRef.current, {
+        opacity: 1,
+        y: 0,
+        duration: 0.7,
+        ease: "power2.out",
       })
-        .from(
+        .to(
           subtitleRef.current,
           {
-            opacity: 0,
-            x: -30,
+            opacity: 1,
+            y: 0,
             duration: 0.6,
             ease: "power2.out",
           },
           "-=0.4"
         )
-        .from(
+        .to(
           descriptionRef.current,
           {
-            opacity: 0,
-            y: 30,
+            opacity: 1,
+            y: 0,
             duration: 0.6,
             ease: "power2.out",
           },
-          "-=0.2"
+          "-=0.3"
         );
     }, sectionRef);
 
@@ -342,28 +302,19 @@ const Steps = () => {
       <div className="absolute inset-0">
         <div className="absolute inset-0 bg-gradient-to-b from-green-900/10 via-black to-black" />
 
-        {/* Estrellas/partículas */}
-        {[...Array(50)].map((_, i) => (
-          <motion.div
-            key={i}
-            className="absolute w-1 h-1 bg-white/30 rounded-full"
+        {/* Estrellas/partículas estáticas (sin animación para mejor rendimiento) */}
+        <div className="absolute inset-0 opacity-30">
+          <div
+            className="absolute inset-0"
             style={{
-              left: `${Math.random() * 100}%`,
-              top: `${Math.random() * 100}%`,
-            }}
-            animate={{
-              opacity: [0.2, 0.8, 0.2],
-              scale: [1, 1.5, 1],
-            }}
-            transition={{
-              duration: Math.random() * 3 + 2,
-              repeat: Infinity,
+              backgroundImage: `radial-gradient(circle at 1px 1px, rgba(80, 255, 5, 0.2) 1px, transparent 0)`,
+              backgroundSize: "40px 40px",
             }}
           />
-        ))}
+        </div>
 
-        {/* Líneas orbitales */}
-        <svg className="absolute inset-0 w-full h-full pointer-events-none opacity-20">
+        {/* Líneas orbitales decorativas */}
+        <svg className="absolute inset-0 w-full h-full pointer-events-none opacity-10">
           <circle
             cx="50%"
             cy="50%"
@@ -385,7 +336,7 @@ const Steps = () => {
       <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
         <div className="text-center mb-16">
-          <motion.div ref={titleRef} className="space-y-4">
+          <div ref={titleRef} className="space-y-4">
             <span className="inline-block px-4 py-2 bg-green/10 text-green rounded-full text-sm font-mono border border-green/30">
               ✦ METODOLOGÍA STRING
             </span>
@@ -404,19 +355,19 @@ const Steps = () => {
             >
               DE CONVERSIÓN
             </h2>
-          </motion.div>
+          </div>
 
-          <motion.p
+          <p
             ref={descriptionRef}
-            className="text-lg text-gray-400 max-w-2xl mx-auto mt-6"
+            className="text-base md:text-lg text-gray-400 max-w-2xl mx-auto mt-6"
           >
             Cuatro fases para transformar tu presencia digital en un sistema que
             convierte visitas en clientes potenciales organizados.
-          </motion.p>
+          </p>
         </div>
 
         {/* Círculos en fila */}
-        <div className="flex flex-col md:flex-row justify-center items-center gap-12 md:gap-8 lg:gap-16 mb-16">
+        <div className="flex flex-wrap justify-center items-center gap-8 md:gap-12 lg:gap-16 mb-16">
           {stepsData.map((step, index) => (
             <StepCircle
               key={index}
@@ -449,13 +400,7 @@ const Steps = () => {
         </div>
 
         {/* CTA */}
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
-          className="text-center mt-20"
-        >
+        <div className="text-center mt-20">
           <Link href="/quote">
             <button className="group relative px-8 py-4 bg-gradient-to-r from-green to-green2 text-black font-bold rounded-full overflow-hidden hover:shadow-2xl hover:shadow-green/30 transition-all">
               <span className="relative z-10 flex items-center gap-2">
@@ -468,10 +413,10 @@ const Steps = () => {
           <p className="text-sm text-gray-500 mt-4">
             Diagnóstico gratuito · Respuesta en 24h
           </p>
-        </motion.div>
+        </div>
 
-        {/* Mensaje final del documento */}
-        <div className="text-center mt-12 text-sm text-gray-600">
+        {/* Mensaje final */}
+        <div className="text-center mt-12 text-sm text-gray">
           <p>
             STRING no entrega páginas. Entrega sistemas funcionales de
             captación.

@@ -1,7 +1,9 @@
 "use client";
 
 import { useState, useEffect, useRef } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import Link from "next/link";
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
 import {
   FiPlus,
   FiMinus,
@@ -10,32 +12,23 @@ import {
   FiTarget,
   FiTrendingUp,
   FiZap,
-  FiUsers,
   FiClock,
   FiAward,
-  FiDollarSign,
 } from "react-icons/fi";
-import {
-  MdOutlineSpeed,
-  MdOutlineAnalytics,
-  MdOutlineRocketLaunch,
-} from "react-icons/md";
-import { RiTeamLine, RiLightbulbLine, RiLineChartLine } from "react-icons/ri";
-import gsap from "gsap";
-import Link from "next/link";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { MdOutlineAnalytics, MdOutlineRocketLaunch } from "react-icons/md";
+import { RiTeamLine } from "react-icons/ri";
 
 gsap.registerPlugin(ScrollTrigger);
 
-// LOS 4 NIVELES DEL SISTEMA STRING (según documento)
+// Los mismos items...
 const items = [
   {
     title: "SISTEMA DE CONVERSIÓN",
     subtitle: "Nivel 1 · $8,000–12,000",
     content:
-      "Crea una presencia digital clara que convierta visitas en mensajes de clientes interesados.",
+      "Transformamos tu presencia digital en un sistema que genera clientes reales de manera consistente.",
     benefits: [
-      "Diagnóstico digital inicial",
+      "Diagnóstico completo de presencia digital",
       "Estructura estratégica de oferta",
       "Landing page optimizada",
       "Integración con WhatsApp",
@@ -46,7 +39,6 @@ const items = [
     icon: FiTarget,
     metric: "Desde $8,000",
     color: "green",
-    ideal: "Negocios que dependen de Instagram, WhatsApp y recomendaciones",
   },
   {
     title: "SISTEMA DE CAPTACIÓN",
@@ -65,7 +57,6 @@ const items = [
     icon: FiTrendingUp,
     metric: "Desde $18,000",
     color: "green2",
-    ideal: "Negocios con volumen creciente de consultas",
   },
   {
     title: "SISTEMA AUTOMATIZADO",
@@ -84,7 +75,6 @@ const items = [
     icon: FiZap,
     metric: "Desde $22,000",
     color: "green3",
-    ideal: "Negocios con alto volumen de consultas o que trabajan con citas",
   },
   {
     title: "SISTEMA ESPECIALIZADO",
@@ -103,7 +93,6 @@ const items = [
     icon: MdOutlineRocketLaunch,
     metric: "Desde $40,000",
     color: "green4",
-    ideal: "Empresas con procesos complejos o necesidades específicas",
   },
   {
     title: "PLANES DE CONTINUIDAD",
@@ -118,163 +107,134 @@ const items = [
     icon: FiClock,
     metric: "Desde $1,800/mes",
     color: "green",
-    ideal: "Todos los clientes STRING",
   },
 ];
 
 const stats = [
-  {
-    value: "50+",
-    label: "Sistemas implementados",
-    icon: RiTeamLine,
-    desc: "Negocios transformados",
-  },
-  {
-    value: "85%",
-    label: "Aumento en conversión",
-    icon: MdOutlineAnalytics,
-    desc: "Promedio en clientes",
-  },
-  {
-    value: "24h",
-    label: "Respuesta inicial",
-    icon: FiClock,
-    desc: "Diagnóstico exprés",
-  },
-  {
-    value: "100%",
-    label: "Personalizado",
-    icon: FiAward,
-    desc: "Sin plantillas",
-  },
+  { value: "50+", label: "Sistemas implementados", icon: RiTeamLine },
+  { value: "85%", label: "Aumento en conversión", icon: MdOutlineAnalytics },
+  { value: "24h", label: "Respuesta inicial", icon: FiClock },
+  { value: "100%", label: "Personalizado", icon: FiAward },
 ];
 
 const Services = () => {
   const [openIndex, setOpenIndex] = useState(null);
-  const [hoveredIndex, setHoveredIndex] = useState(null);
+  const [mounted, setMounted] = useState(false);
 
-  const sectionRef = useRef(null);
-  const titleRef = useRef(null);
-  const badgeRef = useRef(null);
-  const buttonRef = useRef(null);
+  const containerRef = useRef(null);
+  const headerRef = useRef(null);
   const statsRef = useRef([]);
-
-  const toggle = (idx) => setOpenIndex(openIndex === idx ? null : idx);
+  const cardsRef = useRef([]);
+  const ctaRef = useRef(null);
 
   useEffect(() => {
-    const ctx = gsap.context(() => {
-      // Aseguramos visibilidad inicial
-      gsap.set(
-        [
-          badgeRef.current,
-          titleRef.current,
-          buttonRef.current,
-          ...statsRef.current.filter(Boolean),
-        ],
-        {
-          opacity: 1,
-          y: 0,
-          visibility: "visible",
-        }
-      );
+    setMounted(true);
+  }, []);
 
-      const tl = gsap.timeline({
+  // Animaciones con ScrollTrigger - se activan cuando la sección entra en vista
+  useEffect(() => {
+    if (!mounted) return;
+
+    const ctx = gsap.context(() => {
+      // Header se anima al entrar
+      gsap.from(headerRef.current, {
         scrollTrigger: {
-          trigger: sectionRef.current,
-          start: "top 80%",
-          end: "bottom 20%",
+          trigger: headerRef.current,
+          start: "top 85%",
           toggleActions: "play none none none",
         },
+        opacity: 0,
+        y: 40,
+        duration: 0.7,
+        ease: "power2.out",
       });
 
-      tl.from(badgeRef.current, {
+      // Stats con stagger
+      gsap.from(statsRef.current.filter(Boolean), {
+        scrollTrigger: {
+          trigger: statsRef.current[0],
+          start: "top 85%",
+          toggleActions: "play none none none",
+        },
         opacity: 0,
-        y: 30,
+        y: 25,
+        stagger: 0.1,
         duration: 0.6,
         ease: "power2.out",
-      })
-        .from(
-          titleRef.current?.children || [],
-          {
-            opacity: 0,
-            y: 40,
-            stagger: 0.15,
-            duration: 0.8,
-            ease: "power3.out",
-          },
-          "-=0.3"
-        )
-        .from(
-          ".description-text",
-          {
-            opacity: 0,
-            y: 30,
-            duration: 0.6,
-            ease: "power2.out",
-          },
-          "-=0.4"
-        )
-        .from(
-          buttonRef.current,
-          {
-            opacity: 0,
-            y: 30,
-            duration: 0.6,
-            ease: "power2.out",
-          },
-          "-=0.3"
-        )
-        .from(
-          statsRef.current.filter(Boolean),
-          {
-            opacity: 0,
-            y: 30,
-            stagger: 0.1,
-            duration: 0.6,
-            ease: "power2.out",
-          },
-          "-=0.2"
-        );
-    }, sectionRef);
+      });
+
+      // Cards con stagger
+      gsap.from(cardsRef.current.filter(Boolean), {
+        scrollTrigger: {
+          trigger: cardsRef.current[0],
+          start: "top 85%",
+          toggleActions: "play none none none",
+        },
+        opacity: 0,
+        y: 35,
+        stagger: 0.12,
+        duration: 0.7,
+        ease: "back.out(1)",
+      });
+
+      // CTA
+      gsap.from(ctaRef.current, {
+        scrollTrigger: {
+          trigger: ctaRef.current,
+          start: "top 85%",
+          toggleActions: "play none none none",
+        },
+        opacity: 0,
+        y: 25,
+        duration: 0.6,
+        ease: "power2.out",
+      });
+    }, containerRef);
 
     return () => ctx.revert();
-  }, []);
+  }, [mounted]);
+
+  const toggle = (idx) => {
+    setOpenIndex(openIndex === idx ? null : idx);
+  };
+
+  if (!mounted) {
+    return (
+      <section className="bg-white py-24">
+        <div className="max-w-7xl mx-auto px-4">
+          <div className="h-96 bg-gray-100 animate-pulse rounded-2xl" />
+        </div>
+      </section>
+    );
+  }
 
   return (
     <section
-      ref={sectionRef}
+      ref={containerRef}
       className="relative bg-gradient-to-b from-white via-gray-50 to-white py-24 md:py-32 overflow-hidden"
     >
       {/* Elementos decorativos */}
       <div className="absolute inset-0 pointer-events-none">
-        <div className="absolute top-0 left-0 w-96 h-96 bg-green/10 rounded-full filter blur-3xl" />
-        <div className="absolute bottom-0 right-0 w-96 h-96 bg-green2/10 rounded-full filter blur-3xl" />
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-gradient-to-r from-green/5 to-transparent rounded-full blur-3xl" />
+        <div className="absolute top-0 left-0 w-96 h-96 bg-green/5 rounded-full filter blur-3xl" />
+        <div className="absolute bottom-0 right-0 w-96 h-96 bg-green2/5 rounded-full filter blur-3xl" />
       </div>
 
       <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
-        <div className="text-center mb-16 space-y-4">
-          <motion.span
-            ref={badgeRef}
-            className="inline-block px-4 py-2 bg-green/10 text-green rounded-full text-sm font-mono border border-green/30"
-          >
+        <div ref={headerRef} className="text-center mb-16 space-y-4">
+          <span className="inline-block px-4 py-2 bg-green/10 text-green rounded-full text-sm font-mono border border-green/30">
             ✦ SISTEMAS DE CONVERSIÓN
-          </motion.span>
+          </span>
 
-          <div ref={titleRef} className="space-y-2">
-            <h1 className="text-5xl md:text-7xl lg:text-8xl font-ubuntu font-black tracking-tight text-bg">
-              POTENCIA TUS
-            </h1>
-            <h1 className="text-5xl md:text-7xl lg:text-8xl font-ubuntu font-black tracking-tight bg-gradient-to-r from-green to-green2 bg-clip-text text-transparent">
+          <h1 className="text-5xl md:text-7xl lg:text-8xl font-ubuntu font-black tracking-tight">
+            <span className="text-black">POTENCIA TUS</span>
+            <br />
+            <span className="bg-gradient-to-r from-green to-green2 bg-clip-text text-transparent">
               RESULTADOS
-            </h1>
-            <h1 className="text-5xl md:text-7xl lg:text-8xl font-ubuntu font-black tracking-tight text-bg">
-              COMERCIALES.
-            </h1>
-          </div>
+            </span>
+          </h1>
 
-          <p className="description-text text-lg md:text-xl text-gray max-w-2xl mx-auto">
+          <p className="text-lg md:text-xl text-gray max-w-2xl mx-auto">
             Cuatro niveles de automatización para cada etapa de tu negocio.
             Implementamos sistemas digitales que convierten visitas en clientes
             reales.
@@ -289,7 +249,7 @@ const Services = () => {
               <div
                 key={index}
                 ref={(el) => (statsRef.current[index] = el)}
-                className="text-center p-4 bg-white/50 backdrop-blur-sm rounded-xl border border-gray/20"
+                className="text-center p-4 bg-white/50 backdrop-blur-sm rounded-xl border border-gray/20 hover:scale-105 transition-transform duration-300 cursor-pointer"
               >
                 <Icon className="text-2xl text-green mx-auto mb-2" />
                 <p className="text-xl font-bold text-black">{stat.value}</p>
@@ -299,139 +259,92 @@ const Services = () => {
           })}
         </div>
 
-        {/* Accordion con los 4 niveles */}
+        {/* Acordeones */}
         <div className="max-w-4xl mx-auto space-y-4">
           {items.map((item, index) => {
             const isOpen = openIndex === index;
-            const isHovered = hoveredIndex === index;
             const Icon = item.icon;
 
             return (
               <div
                 key={index}
-                className="relative"
-                onMouseEnter={() => setHoveredIndex(index)}
-                onMouseLeave={() => setHoveredIndex(null)}
+                ref={(el) => (cardsRef.current[index] = el)}
+                className="relative bg-white rounded-2xl shadow-lg hover:shadow-xl transition-shadow duration-300"
               >
-                {/* Borde con gradiente en hover */}
-                <div
-                  className={`absolute inset-0 bg-gradient-to-r ${
-                    item.gradient
-                  } rounded-2xl transition-opacity duration-300 ${
-                    isHovered ? "opacity-100" : "opacity-0"
-                  }`}
-                  style={{ padding: "2px" }}
-                />
-
-                <div className="relative bg-white rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300">
-                  {/* Header */}
-                  <button
-                    onClick={() => toggle(index)}
-                    className="w-full flex items-center justify-between p-6 md:p-8 text-left"
-                  >
-                    <div className="flex items-center gap-4">
-                      {/* Icono con gradiente */}
-                      <div
-                        className={`w-14 h-14 rounded-xl bg-gradient-to-br ${item.gradient} flex items-center justify-center shadow-lg`}
-                      >
-                        <Icon className="text-2xl text-white" />
-                      </div>
-
-                      <div>
-                        <div className="flex items-center gap-2 mb-1 flex-wrap">
-                          <h3
-                            className={`text-xl md:text-2xl font-ubuntu font-bold transition-colors duration-300 ${
-                              isOpen ? `text-green` : "text-bg"
-                            }`}
-                          >
-                            {item.title}
-                          </h3>
-                          <span
-                            className={`text-xs font-mono text-green bg-green/10 px-3 py-1 rounded-full border border-green/30`}
-                          >
-                            {item.metric}
-                          </span>
-                        </div>
-                        <p className="text-sm text-green font-mono mb-1">
-                          {item.subtitle}
-                        </p>
-                        <p className="text-gray text-sm md:text-base">
-                          {item.content}
-                        </p>
-                      </div>
+                {/* Header */}
+                <button
+                  onClick={() => toggle(index)}
+                  className="w-full flex items-center justify-between p-6 md:p-8 text-left group"
+                >
+                  <div className="flex items-center gap-4">
+                    <div
+                      className={`w-14 h-14 rounded-xl bg-gradient-to-br ${item.gradient} flex items-center justify-center shadow-lg transition-transform duration-300 group-hover:scale-110`}
+                    >
+                      <Icon className="text-2xl text-white" />
                     </div>
 
-                    <motion.div
-                      animate={{ rotate: isOpen ? 45 : 0 }}
-                      transition={{ duration: 0.3, ease: "easeInOut" }}
-                      className={`w-10 h-10 rounded-full flex items-center justify-center transition-all duration-300 ${
-                        isOpen
-                          ? `bg-gradient-to-r ${item.gradient} text-white shadow-lg`
-                          : "bg-gray/10 text-gray hover:bg-gray/20"
-                      }`}
-                    >
-                      {isOpen ? <FiMinus /> : <FiPlus />}
-                    </motion.div>
-                  </button>
+                    <div>
+                      <div className="flex items-center gap-2 mb-1 flex-wrap">
+                        <h3
+                          className={`text-xl md:text-2xl font-ubuntu font-bold transition-colors duration-300 ${
+                            isOpen ? "text-green" : "text-black"
+                          }`}
+                        >
+                          {item.title}
+                        </h3>
+                        <span className="text-xs font-mono text-green bg-green/10 px-3 py-1 rounded-full border border-green/30">
+                          {item.metric}
+                        </span>
+                      </div>
+                      <p className="text-sm text-green font-mono mb-1">
+                        {item.subtitle}
+                      </p>
+                      <p className="text-gray text-sm md:text-base">
+                        {item.content}
+                      </p>
+                    </div>
+                  </div>
 
-                  {/* Content - Animación al abrir */}
-                  <AnimatePresence>
-                    {isOpen && (
-                      <motion.div
-                        initial={{ height: 0, opacity: 0 }}
-                        animate={{ height: "auto", opacity: 1 }}
-                        exit={{ height: 0, opacity: 0 }}
-                        transition={{ duration: 0.3, ease: "easeInOut" }}
-                        className="overflow-hidden"
-                      >
-                        <div className="px-6 md:px-8 pb-6 md:pb-8 pt-2 border-t border-gray/20">
-                          {/* Ideal para */}
-                          <p className="text-xs text-gray mb-3 italic">
-                            <span className="font-semibold text-green">
-                              Ideal para:
-                            </span>{" "}
-                            {item.ideal}
-                          </p>
+                  <div
+                    className={`w-10 h-10 rounded-full flex items-center justify-center transition-all duration-300 ${
+                      isOpen
+                        ? "bg-gradient-to-r from-green to-green2 text-white shadow-lg"
+                        : "bg-gray/10 text-gray group-hover:bg-gray/20"
+                    }`}
+                  >
+                    {isOpen ? <FiMinus /> : <FiPlus />}
+                  </div>
+                </button>
 
-                          {/* Beneficios */}
-                          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                            {item.benefits.map((benefit, i) => (
-                              <motion.div
-                                key={i}
-                                initial={{ opacity: 0, x: -10 }}
-                                animate={{ opacity: 1, x: 0 }}
-                                transition={{ delay: i * 0.1 }}
-                                className="flex items-start gap-2"
-                              >
-                                <FiCheckCircle
-                                  className={`text-green text-sm mt-0.5 flex-shrink-0`}
-                                />
-                                <span className="text-bg text-sm">
-                                  {benefit}
-                                </span>
-                              </motion.div>
-                            ))}
-                          </div>
-
-                          {/* CTA dentro del acordeón */}
-                          <motion.div
-                            initial={{ opacity: 0 }}
-                            animate={{ opacity: 1 }}
-                            transition={{ delay: 0.3 }}
-                            className="mt-6 pt-4 border-t border-gray/20"
-                          >
-                            <Link
-                              href="/quote"
-                              className={`inline-flex items-center text-sm font-medium text-green hover:opacity-80 transition-opacity group`}
-                            >
-                              Solicitar diagnóstico para este nivel
-                              <FiArrowRight className="ml-2 group-hover:translate-x-2 transition-transform" />
-                            </Link>
-                          </motion.div>
+                {/* Content - CSS transition */}
+                <div
+                  className={`overflow-hidden transition-all duration-300 ease-in-out ${
+                    isOpen ? "max-h-[500px] opacity-100" : "max-h-0 opacity-0"
+                  }`}
+                >
+                  <div className="px-6 md:px-8 pb-6 md:pb-8 pt-2 border-t border-gray/20">
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                      {item.benefits.map((benefit, i) => (
+                        <div
+                          key={i}
+                          className="flex items-start gap-2 hover:translate-x-1 transition-transform duration-200"
+                        >
+                          <FiCheckCircle className="text-green text-sm mt-0.5 flex-shrink-0" />
+                          <span className="text-black text-sm">{benefit}</span>
                         </div>
-                      </motion.div>
-                    )}
-                  </AnimatePresence>
+                      ))}
+                    </div>
+
+                    <div className="mt-6 pt-4 border-t border-gray/20">
+                      <Link
+                        href="/quote"
+                        className="inline-flex items-center text-sm font-medium text-green hover:opacity-80 transition-all group"
+                      >
+                        Solicitar diagnóstico
+                        <FiArrowRight className="ml-2 group-hover:translate-x-2 transition-transform" />
+                      </Link>
+                    </div>
+                  </div>
                 </div>
               </div>
             );
@@ -439,7 +352,7 @@ const Services = () => {
         </div>
 
         {/* CTA Principal */}
-        <div ref={buttonRef} className="text-center mt-20">
+        <div ref={ctaRef} className="text-center mt-20">
           <Link href="/quote">
             <button className="group relative inline-flex items-center px-8 py-4 bg-gradient-to-r from-green to-green2 text-black font-bold rounded-full overflow-hidden transition-all duration-300 hover:pr-12 hover:shadow-2xl hover:shadow-green/30">
               <span className="relative z-10">Diagnosticar mi negocio</span>

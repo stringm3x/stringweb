@@ -1,6 +1,5 @@
 "use client";
 import React, { useEffect, useRef, useState } from "react";
-import Image from "next/image";
 import { motion, useInView } from "framer-motion";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
@@ -11,32 +10,20 @@ import {
   FiTrendingUp,
   FiZap,
   FiUsers,
-  FiMessageCircle,
-  FiShoppingBag,
   FiCheckCircle,
   FiBarChart2,
   FiClock,
   FiAward,
 } from "react-icons/fi";
-import {
-  MdOutlineSpeed,
-  MdOutlineAnalytics,
-  MdOutlineDesignServices,
-  MdOutlineRocketLaunch,
-} from "react-icons/md";
-import {
-  RiTeamLine,
-  RiCustomerServiceLine,
-  RiLightbulbLine,
-  RiLineChartLine,
-} from "react-icons/ri";
+import { MdOutlineAnalytics } from "react-icons/md";
+import { RiTeamLine } from "react-icons/ri";
 
 gsap.registerPlugin(ScrollTrigger);
 
-// Datos actualizados según el documento estratégico
+// Datos actualizados
 const stats = [
   {
-    value: "10+",
+    value: "50+",
     label: "Sistemas implementados",
     description: "Negocios transformados con estructura digital",
     gradient: "from-green to-green2",
@@ -90,7 +77,6 @@ const Content = () => {
   const titleRef = useRef(null);
   const subtitleRef = useRef(null);
   const descriptionRef = useRef(null);
-  const statsRef = useRef([]);
   const principiosRef = useRef([]);
   const ctaRef = useRef(null);
   const lineRef = useRef(null);
@@ -99,95 +85,83 @@ const Content = () => {
     setMounted(true);
   }, []);
 
+  // Animación de entrada con ScrollTrigger - MÁS LIVIANA
   useEffect(() => {
     if (!mounted) return;
 
     const ctx = gsap.context(() => {
+      // Configurar estado inicial
       gsap.set(
-        [
-          titleRef.current,
-          subtitleRef.current,
-          descriptionRef.current,
-          ...principiosRef.current.filter(Boolean),
-          ...statsRef.current.filter(Boolean),
-          ctaRef.current,
-        ],
+        [titleRef.current, subtitleRef.current, descriptionRef.current],
         {
-          opacity: 1,
-          y: 0,
-          scale: 1,
-          visibility: "visible",
+          opacity: 0,
+          y: 30,
         }
       );
 
+      gsap.set(principiosRef.current.filter(Boolean), {
+        opacity: 0,
+        y: 25,
+      });
+
+      // Timeline con ScrollTrigger
       const tl = gsap.timeline({
         scrollTrigger: {
           trigger: sectionRef.current,
-          start: "top 70%",
-          end: "bottom 20%",
+          start: "top 75%",
           toggleActions: "play none none none",
         },
       });
 
-      tl.from(titleRef.current, {
-        opacity: 0,
-        y: 50,
-        duration: 1,
-        ease: "power3.out",
+      tl.to(titleRef.current, {
+        opacity: 1,
+        y: 0,
+        duration: 0.6,
+        ease: "power2.out",
       })
-        .from(
+        .to(
           subtitleRef.current,
           {
-            opacity: 0,
-            y: 30,
-            duration: 0.8,
+            opacity: 1,
+            y: 0,
+            duration: 0.5,
             ease: "power2.out",
-          },
-          "-=0.6"
-        )
-        .from(
-          descriptionRef.current,
-          {
-            opacity: 0,
-            y: 30,
-            duration: 0.8,
-            ease: "power2.out",
-          },
-          "-=0.4"
-        )
-        .from(
-          principiosRef.current.filter(Boolean),
-          {
-            opacity: 0,
-            y: 30,
-            stagger: 0.15,
-            duration: 0.8,
-            ease: "back.out(1.2)",
           },
           "-=0.3"
         )
-        .from(
-          statsRef.current.filter(Boolean),
+        .to(
+          descriptionRef.current,
           {
-            opacity: 0,
-            y: 40,
-            scale: 0.9,
-            stagger: 0.15,
-            duration: 0.9,
-            ease: "elastic.out(1, 0.3)",
+            opacity: 1,
+            y: 0,
+            duration: 0.5,
+            ease: "power2.out",
           },
           "-=0.2"
         )
-        .from(
-          ctaRef.current,
+        .to(
+          principiosRef.current.filter(Boolean),
           {
-            opacity: 0,
-            y: 30,
-            duration: 0.6,
+            opacity: 1,
+            y: 0,
+            stagger: 0.1,
+            duration: 0.5,
+            ease: "power2.out",
           },
           "-=0.2"
+        )
+        .to(
+          ctaRef.current,
+          {
+            opacity: 1,
+            y: 0,
+            duration: 0.5,
+            ease: "power2.out",
+          },
+          "-=0.1"
         );
 
+      // Línea decorativa
       gsap.to(lineRef.current, {
         width: "100%",
         scrollTrigger: {
@@ -207,7 +181,7 @@ const Content = () => {
     return (
       <section className="relative overflow-hidden bg-white py-24 md:py-32">
         <div className="max-w-7xl mx-auto px-4">
-          <div className="h-96 bg-gray animate-pulse rounded-2xl" />
+          <div className="h-96 bg-gray-100 animate-pulse rounded-2xl" />
         </div>
       </section>
     );
@@ -218,12 +192,12 @@ const Content = () => {
       ref={sectionRef}
       className="relative overflow-hidden bg-white py-24 md:py-32"
     >
-      {/* Elementos decorativos de fondo con tus colores */}
+      {/* Elementos decorativos */}
       <div className="absolute inset-0 pointer-events-none">
-        <div className="absolute top-40 right-20 w-96 h-96 bg-green/10 rounded-full filter blur-3xl" />
-        <div className="absolute bottom-40 left-20 w-96 h-96 bg-green2/10 rounded-full filter blur-3xl" />
+        <div className="absolute top-40 right-20 w-96 h-96 bg-green/5 rounded-full filter blur-3xl" />
+        <div className="absolute bottom-40 left-20 w-96 h-96 bg-green2/5 rounded-full filter blur-3xl" />
 
-        {/* Línea de progreso decorativa */}
+        {/* Línea de progreso */}
         <div
           ref={lineRef}
           className="absolute top-0 left-0 h-1 bg-gradient-to-r from-green via-green2 to-green3"
@@ -233,38 +207,29 @@ const Content = () => {
 
       <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex flex-col gap-20 lg:gap-24">
-          {/* Header con mensaje estratégico */}
+          {/* Header */}
           <div className="text-center space-y-4">
-            <motion.div
-              ref={titleRef}
-              className="inline-block"
-              style={{ opacity: 1, visibility: "visible" }}
-            >
+            <div ref={titleRef} className="inline-block">
               <span className="px-4 py-2 bg-green/10 text-green rounded-full text-sm font-mono border border-green/30">
                 ✦ SISTEMAS DE CONVERSIÓN
               </span>
-            </motion.div>
+            </div>
 
             <h2
               ref={subtitleRef}
               className="text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-ubuntu font-black tracking-tight leading-tight"
-              style={{ opacity: 1, visibility: "visible" }}
             >
-              <span className="text-bg">NO ES DISEÑO,</span>
+              <span className="text-black">NO ES DISEÑO,</span>
               <br />
               <span className="text-green">ES ESTRUCTURA</span>
             </h2>
 
-            <div
-              ref={descriptionRef}
-              className="max-w-2xl mx-auto"
-              style={{ opacity: 1, visibility: "visible" }}
-            >
+            <div ref={descriptionRef} className="max-w-2xl mx-auto">
               <p className="text-lg md:text-xl text-gray leading-relaxed">
                 En <span className="font-bold text-green">STRING</span>{" "}
                 transformamos presencia digital en clientes reales mediante
                 sistemas claros de conversión. No vendemos páginas, vendemos
-                <span className="font-semibold text-bg"> estructura</span>.
+                <span className="font-semibold text-black"> estructura</span>.
               </p>
             </div>
           </div>
@@ -274,12 +239,10 @@ const Content = () => {
             {principios.map((principio, index) => {
               const Icon = principio.icon;
               return (
-                <motion.div
+                <div
                   key={index}
                   ref={(el) => (principiosRef.current[index] = el)}
-                  whileHover={{ y: -8, scale: 1.02 }}
                   className="group relative bg-white rounded-2xl p-6 shadow-lg hover:shadow-2xl transition-all duration-300 border border-gray/20"
-                  style={{ opacity: 1, visibility: "visible" }}
                 >
                   <div className="absolute inset-0 bg-gradient-to-br from-green/5 to-transparent rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity" />
 
@@ -288,7 +251,7 @@ const Content = () => {
                       <Icon className="text-2xl text-green" />
                     </div>
 
-                    <h3 className="text-lg font-bold text-bg mb-2">
+                    <h3 className="text-lg font-bold text-black mb-2">
                       {principio.title}
                     </h3>
 
@@ -299,7 +262,7 @@ const Content = () => {
                     {/* Barra decorativa */}
                     <div className="absolute bottom-0 left-0 w-0 h-0.5 bg-gradient-to-r from-green to-green2 group-hover:w-full transition-all duration-500" />
                   </div>
-                </motion.div>
+                </div>
               );
             })}
           </div>
@@ -309,26 +272,20 @@ const Content = () => {
             {stats.map((stat, index) => {
               const Icon = stat.icon;
               return (
-                <motion.div
+                <div
                   key={index}
-                  ref={(el) => (statsRef.current[index] = el)}
-                  whileHover={{ y: -10, scale: 1.02 }}
-                  className="group relative bg-white rounded-2xl shadow-xl border-2 border-green/20 p-8 overflow-hidden"
-                  style={{ opacity: 1, visibility: "visible" }}
+                  className="group relative bg-white rounded-2xl shadow-xl border-2 border-green/20 p-8 overflow-hidden hover:scale-[1.02] transition-transform duration-300"
                 >
-                  {/* Número de fondo decorativo */}
                   <span className="absolute -bottom-4 -right-4 text-8xl font-black text-green/5 select-none">
                     {index + 1}
                   </span>
 
-                  {/* Icono */}
                   <div className="relative z-10 mb-4">
                     <div className="w-16 h-16 bg-gradient-to-br from-green to-green2 rounded-2xl flex items-center justify-center shadow-lg group-hover:scale-110 transition-transform">
                       <Icon className="text-3xl text-white" />
                     </div>
                   </div>
 
-                  {/* Valor principal */}
                   <div className="relative z-10">
                     <p
                       className={`text-4xl lg:text-5xl font-black mb-2 bg-gradient-to-r ${stat.gradient} bg-clip-text text-transparent`}
@@ -336,13 +293,12 @@ const Content = () => {
                       {stat.value}
                     </p>
 
-                    <h3 className="text-xl font-bold text-bg mb-2">
+                    <h3 className="text-xl font-bold text-black mb-2">
                       {stat.label}
                     </h3>
 
                     <p className="text-sm text-gray mb-3">{stat.description}</p>
 
-                    {/* Métrica adicional */}
                     <div className="flex items-center gap-2 text-xs text-green font-mono">
                       <FiCheckCircle />
                       <span>{stat.metric}</span>
@@ -351,15 +307,14 @@ const Content = () => {
 
                   {/* Barra de progreso animada */}
                   <div className="absolute bottom-0 left-0 w-full h-1 bg-gray/20">
-                    <motion.div
-                      className={`h-full bg-gradient-to-r ${stat.gradient}`}
-                      initial={{ width: "0%" }}
-                      whileInView={{ width: "100%" }}
-                      transition={{ duration: 1, delay: index * 0.2 }}
-                      viewport={{ once: true }}
+                    <div
+                      className={`h-full bg-gradient-to-r ${
+                        stat.gradient
+                      } transition-all duration-1000 delay-${index * 200}`}
+                      style={{ width: "100%" }}
                     />
                   </div>
-                </motion.div>
+                </div>
               );
             })}
           </div>
@@ -368,9 +323,7 @@ const Content = () => {
           <div
             ref={ctaRef}
             className="relative bg-gradient-to-r from-green/5 to-green2/5 rounded-3xl p-8 md:p-12 border border-green/20 overflow-hidden"
-            style={{ opacity: 1, visibility: "visible" }}
           >
-            {/* Fondo decorativo */}
             <div className="absolute inset-0 opacity-10">
               <div className="absolute top-0 right-0 w-64 h-64 bg-green rounded-full filter blur-3xl" />
               <div className="absolute bottom-0 left-0 w-64 h-64 bg-green2 rounded-full filter blur-3xl" />
@@ -378,7 +331,7 @@ const Content = () => {
 
             <div className="relative z-10 flex flex-col lg:flex-row items-center justify-between gap-8">
               <div className="text-center lg:text-left space-y-3">
-                <h3 className="text-3xl md:text-4xl font-ubuntu font-bold text-bg">
+                <h3 className="text-3xl md:text-4xl font-ubuntu font-bold text-black">
                   ¿Listo para <span className="text-green">transformar</span> tu
                   negocio?
                 </h3>
@@ -388,7 +341,6 @@ const Content = () => {
                   captación de clientes.
                 </p>
 
-                {/* Trust badges */}
                 <div className="flex flex-wrap justify-center lg:justify-start gap-4 pt-4">
                   <span className="flex items-center gap-1 text-xs text-gray">
                     <FiClock /> Diagnóstico 24h
@@ -414,7 +366,7 @@ const Content = () => {
                 </Link>
 
                 <Link href="/Services">
-                  <button className="px-8 py-4 border-2 border-green/30 text-bg font-bold rounded-full hover:bg-green/5 transition-colors whitespace-nowrap">
+                  <button className="px-8 py-4 border-2 border-green/30 text-black font-bold rounded-full hover:bg-green/5 transition-colors whitespace-nowrap">
                     Ver sistemas
                   </button>
                 </Link>
@@ -422,7 +374,7 @@ const Content = () => {
             </div>
           </div>
 
-          {/* Mensaje final del documento */}
+          {/* Mensaje final */}
           <div className="text-center text-sm text-gray">
             <p className="flex items-center justify-center gap-2">
               <FiTarget className="text-green" />
