@@ -1,87 +1,84 @@
 "use client";
+
 import React, { useEffect, useRef } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { motion } from "framer-motion";
 import {
   FiArrowRight,
   FiUsers,
   FiAward,
-  FiHeart,
-  FiStar,
+  FiTarget,
+  FiClock,
 } from "react-icons/fi";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 
 gsap.registerPlugin(ScrollTrigger);
 
+// ─── Datos reales ─────────────────────────────────────────────────────────────
 const stats = [
-  { icon: FiUsers, value: "15+", label: "Clientes satisfechos" },
-  { icon: FiAward, value: "3+", label: "Años de experiencia" },
-  { icon: FiHeart, value: "95%", label: "Tasa de retención" },
-  { icon: FiStar, value: "4.9", label: "Calificación promedio" },
+  { icon: FiUsers, value: "10+", label: "Clientes con sistema" },
+  { icon: FiAward, value: "2+", label: "Años de experiencia" },
+  { icon: FiTarget, value: "4", label: "Sistemas activos" },
+  { icon: FiClock, value: "24h", label: "Diagnóstico inicial" },
 ];
 
+// ─── Componente ───────────────────────────────────────────────────────────────
 const Us = () => {
   const sectionRef = useRef(null);
+  const tagRef = useRef(null);
   const contentRef = useRef(null);
+  const cardRef = useRef(null);
   const statsRef = useRef([]);
-  const testimonialRef = useRef(null);
 
   useEffect(() => {
     const ctx = gsap.context(() => {
-      // Aseguramos que todo sea visible primero
-      gsap.set(
-        [
-          contentRef.current,
-          testimonialRef.current,
-          ...statsRef.current.filter(Boolean),
-        ],
-        {
-          opacity: 1,
-          y: 0,
-          visibility: "visible",
-        }
-      );
+      // ── Estado inicial ──────────────────────────────────────────────────────
+      gsap.set([tagRef.current, contentRef.current, cardRef.current], {
+        opacity: 0,
+        y: 24,
+      });
+      gsap.set(statsRef.current.filter(Boolean), { opacity: 0, y: 16 });
 
-      // Timeline de animación
+      // ── Contenido ───────────────────────────────────────────────────────────
       const tl = gsap.timeline({
         scrollTrigger: {
           trigger: sectionRef.current,
           start: "top 80%",
-          end: "bottom 20%",
-          toggleActions: "play none none none", // Cambiado a "none" para que no se reverse
+          once: true,
         },
       });
 
-      // Animamos desde opacidad 0 a 1, pero dejamos en 1 al final
-      tl.from(contentRef.current, {
-        opacity: 0,
-        y: 30,
-        duration: 0.8,
+      tl.to(tagRef.current, {
+        opacity: 1,
+        y: 0,
+        duration: 0.5,
         ease: "power3.out",
       })
-        .from(
-          testimonialRef.current,
-          {
-            opacity: 0,
-            y: 30,
-            duration: 0.8,
-            ease: "power3.out",
-          },
-          "-=0.4"
+        .to(
+          contentRef.current,
+          { opacity: 1, y: 0, duration: 0.6, ease: "power3.out" },
+          "-=0.3"
         )
-        .from(
-          statsRef.current.filter(Boolean),
-          {
-            opacity: 0,
-            y: 20,
-            stagger: 0.1,
-            duration: 0.6,
-            ease: "power2.out",
-          },
+        .to(
+          cardRef.current,
+          { opacity: 1, y: 0, duration: 0.6, ease: "power3.out" },
           "-=0.3"
         );
+
+      // ── Stats ───────────────────────────────────────────────────────────────
+      gsap.to(statsRef.current.filter(Boolean), {
+        opacity: 1,
+        y: 0,
+        stagger: 0.08,
+        duration: 0.45,
+        ease: "power3.out",
+        scrollTrigger: {
+          trigger: statsRef.current[0],
+          start: "top 86%",
+          once: true,
+        },
+      });
     }, sectionRef);
 
     return () => ctx.revert();
@@ -90,9 +87,9 @@ const Us = () => {
   return (
     <section
       ref={sectionRef}
-      className="relative min-h-screen flex items-center justify-center overflow-hidden bg-black py-20"
+      className="relative min-h-screen flex items-center justify-center overflow-hidden bg-black py-24"
     >
-      {/* Imagen de fondo */}
+      {/* ── Imagen de fondo ───────────────────────────────────────────────── */}
       <div className="absolute inset-0">
         <Image
           src="/sonido.png"
@@ -100,117 +97,120 @@ const Us = () => {
           fill
           className="object-cover"
           priority
-          quality={100}
+          quality={85}
         />
-        <div className="absolute inset-0 bg-gradient-to-r from-black/95 via-black/80 to-black/60" />
+        <div className="absolute inset-0 bg-gradient-to-r from-black/95 via-black/85 to-black/70" />
       </div>
 
-      {/* Elementos decorativos */}
+      {/* ── Decorativo ────────────────────────────────────────────────────── */}
       <div className="absolute inset-0 pointer-events-none">
-        <div className="absolute top-20 left-20 w-64 h-64 bg-green/5 rounded-full filter blur-3xl" />
-        <div className="absolute bottom-20 right-20 w-96 h-96 bg-blue-500/5 rounded-full filter blur-3xl" />
+        <div className="absolute top-20 left-20 w-64 h-64 bg-green/5 rounded-full blur-[80px]" />
       </div>
 
-      <div className="relative w-full max-w-7xl mx-auto px-6 lg:px-8">
-        <div className="flex flex-col lg:grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
-          {/* Columna izquierda */}
-          <div ref={contentRef} className="space-y-8 w-full">
-            {/* Badge */}
-            <span className="inline-flex items-center px-4 py-2 bg-green/20 text-green rounded-full text-sm font-semibold tracking-wider backdrop-blur-sm border border-green/30">
-              <span className="w-2 h-2 bg-green rounded-full mr-2 animate-pulse" />
-              STRING STUDIO
-            </span>
-
-            {/* Texto principal */}
-            <div className="space-y-4">
-              <h1 className="text-4xl sm:text-5xl lg:text-6xl xl:text-7xl font-ubuntu font-black tracking-tight leading-tight">
-                <span className="text-white">Hemos ayudado a las</span>
-                <br />
-                <span className="bg-gradient-to-r from-green to-green2 bg-clip-text text-transparent">
-                  marcas a crecer
-                </span>
-                <br />
-                <span className="text-white">con claridad y confianza.</span>
-              </h1>
+      <div className="relative w-full max-w-7xl mx-auto px-6 sm:px-8 lg:px-12">
+        <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
+          {/* ── Columna izquierda ─────────────────────────────────────────── */}
+          <div className="space-y-8">
+            {/* Tag */}
+            <div ref={tagRef}>
+              <span className="inline-flex items-center gap-2.5 px-3 py-1.5 border border-green/30 text-green text-xs font-mono uppercase tracking-[0.2em] rounded-sm">
+                <span className="w-1.5 h-1.5 rounded-full bg-green animate-pulse" />
+                STRING Studio
+              </span>
             </div>
 
-            {/* Descripción */}
-            <p className="text-base sm:text-lg text-gray-300 max-w-xl leading-relaxed">
-              En STRING, transformamos visiones en realidades digitales. Cada
-              proyecto es único y recibe la atención personalizada que merece
-              para destacar en el entorno digital actual.
-            </p>
+            {/* Texto */}
+            <div ref={contentRef} className="space-y-6">
+              <h2 className="font-anton text-5xl sm:text-6xl lg:text-7xl xl:text-8xl leading-[0.9] tracking-tighter uppercase">
+                <span className="text-white">Hemos ayudado</span>
+                <br />
+                <span className="text-white">a las marcas a</span>
+                <br />
+                <span className="text-green">crecer con</span>
+                <br />
+                <span className="text-green">claridad.</span>
+              </h2>
 
-            {/* Botón CTA */}
-            <Link href="/Us">
-              <button className="group relative inline-flex items-center px-6 sm:px-8 py-3 sm:py-4 bg-gradient-to-r from-green to-green2 text-black font-bold rounded-full overflow-hidden transition-all duration-300 hover:pr-10 sm:hover:pr-12 hover:shadow-xl hover:shadow-green/30">
-                <span className="relative z-10">Acerca de STRING</span>
-                <FiArrowRight className="absolute right-3 sm:right-4 opacity-0 group-hover:opacity-100 group-hover:right-4 sm:group-hover:right-6 transition-all duration-300" />
-                <div className="absolute inset-0 bg-white/20 translate-y-full group-hover:translate-y-0 transition-transform duration-300" />
-              </button>
-            </Link>
+              <p className="text-gray text-base sm:text-lg leading-relaxed max-w-md">
+                En STRING transformamos presencia digital en clientes reales.
+                Cada sistema es único, construido a medida, sin plantillas ni
+                atajos.
+              </p>
+
+              <Link
+                href="/Us"
+                className="group inline-flex items-center gap-2 px-7 py-3.5 bg-green text-black font-bold text-sm uppercase tracking-wide rounded-sm hover:bg-white transition-colors duration-200"
+              >
+                Acerca de STRING
+                <FiArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform duration-200" />
+              </Link>
+            </div>
           </div>
 
-          {/* Columna derecha */}
-          <div ref={testimonialRef} className="w-full mt-10 lg:mt-0">
-            {/* Testimonial Card */}
-            <div className="relative bg-white/10 backdrop-blur-md rounded-2xl p-6 sm:p-8 border border-white/20 max-w-md mx-auto lg:mx-0">
-              <div className="absolute -top-10 -right-10 w-32 h-32 bg-gradient-to-br from-green/20 to-green2/20 rounded-full filter blur-2xl" />
-              <div className="absolute -bottom-10 -left-10 w-40 h-40 bg-gradient-to-br from-blue-500/20 to-purple-500/20 rounded-full filter blur-2xl" />
-
-              <div className="relative z-10">
-                <span className="text-6xl text-green/30 font-serif absolute -top-2 -left-2">
-                  "
-                </span>
-
-                <p className="text-white/90 text-sm sm:text-base italic leading-relaxed mt-4">
-                  "STRING transformó completamente nuestra presencia digital. El
-                  equipo entiende realmente las necesidades del negocio."
+          {/* ── Columna derecha — card de propuesta ───────────────────────── */}
+          <div ref={cardRef} className="w-full lg:flex lg:justify-end">
+            <div className="border border-white/10 bg-black/60 backdrop-blur-md p-8 max-w-md w-full">
+              {/* Header card */}
+              <div className="border-b border-white/10 pb-6 mb-6">
+                <p className="text-xs font-mono text-green uppercase tracking-[0.2em] mb-3">
+                  Por qué STRING
                 </p>
+                <p className="text-white text-lg leading-relaxed font-medium">
+                  No vendemos páginas web. Vendemos sistemas que trabajan por tu
+                  negocio mientras tú haces lo tuyo.
+                </p>
+              </div>
 
-                <div className="mt-6 flex items-center gap-3">
-                  <div className="w-12 h-12 bg-gradient-to-br from-green to-green2 rounded-full flex items-center justify-center text-black font-bold text-xl">
-                    AG
+              {/* Puntos clave */}
+              <div className="space-y-4">
+                {[
+                  "Diagnóstico real antes de cualquier propuesta",
+                  "Sin plantillas — cada sistema es construido desde cero",
+                  "Entregamos en 24h el análisis inicial",
+                  "Soporte continuo después de la entrega",
+                ].map((item, i) => (
+                  <div key={i} className="flex items-start gap-3">
+                    <span className="w-1 h-1 rounded-full bg-green mt-2 flex-shrink-0" />
+                    <span className="text-gray text-sm leading-relaxed">
+                      {item}
+                    </span>
                   </div>
-                  <div>
-                    <p className="text-white font-semibold text-base">
-                      Ana García
-                    </p>
-                    <p className="text-gray-400 text-sm">CEO, Marca Incode</p>
-                  </div>
+                ))}
+              </div>
+
+              {/* Firma */}
+              <div className="mt-8 pt-6 border-t border-white/10 flex items-center gap-3">
+                <div className="w-8 h-8 bg-green flex items-center justify-center flex-shrink-0">
+                  <span className="font-anton text-black text-sm">S</span>
                 </div>
-
-                <div className="flex items-center gap-1 mt-4">
-                  {[1, 2, 3, 4, 5].map((star) => (
-                    <FiStar
-                      key={star}
-                      className="text-yellow-500 fill-yellow-500"
-                    />
-                  ))}
-                  <span className="text-gray-400 text-sm ml-2">5.0</span>
+                <div>
+                  <p className="text-white text-sm font-semibold">STRING</p>
+                  <p className="text-gray text-xs font-mono">
+                    Sistemas digitales estratégicos · CDMX
+                  </p>
                 </div>
               </div>
             </div>
           </div>
         </div>
 
-        {/* Stats - SIEMPRE VISIBLES */}
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-4 sm:gap-6 mt-16">
-          {stats.map((stat, index) => {
+        {/* ── Stats ─────────────────────────────────────────────────────────── */}
+        <div className="grid grid-cols-4 gap-px bg-white/5 mt-16">
+          {stats.map((stat, i) => {
             const Icon = stat.icon;
             return (
               <div
-                key={index}
-                ref={(el) => (statsRef.current[index] = el)}
-                className="text-center"
+                key={i}
+                ref={(el) => (statsRef.current[i] = el)}
+                className="bg-black/80 backdrop-blur-sm px-4 py-6 text-center hover:bg-black/60 transition-colors duration-200"
               >
-                <div className="inline-flex items-center justify-center w-10 h-10 sm:w-12 sm:h-12 bg-white/10 rounded-full backdrop-blur-sm border border-white/20 mb-2 mx-auto">
-                  <Icon className="text-green text-lg sm:text-xl" />
-                </div>
-                <p className="text-xl sm:text-2xl font-bold text-white">
+                <Icon className="text-green text-xl mx-auto mb-2" />
+                <p className="font-anton text-2xl text-green leading-none mb-1">
                   {stat.value}
                 </p>
-                <p className="text-xs text-gray-400">{stat.label}</p>
+                <p className="text-[10px] text-gray uppercase tracking-wider">
+                  {stat.label}
+                </p>
               </div>
             );
           })}

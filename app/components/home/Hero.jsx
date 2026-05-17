@@ -4,315 +4,299 @@ import React, { useEffect, useRef } from "react";
 import Link from "next/link";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import {
-  FiArrowRight,
-  FiZap,
-  FiClock,
-  FiAward,
-  FiCheckCircle,
-  FiTrendingUp,
-  FiTarget,
-} from "react-icons/fi";
-import { FaWhatsapp, FaInstagram, FaLinkedinIn } from "react-icons/fa";
+import { FiArrowRight, FiArrowUpRight } from "react-icons/fi";
 
 gsap.registerPlugin(ScrollTrigger);
 
+// ─── Datos ────────────────────────────────────────────────────────────────────
+const stats = [
+  { value: "4", label: "Sistemas\nimplementados" },
+  { value: "85%", label: "Aumento en\nconversión" },
+  { value: "24h", label: "Diagnóstico\ninicial" },
+  { value: "100%", label: "Sin\nplantillas" },
+];
+
+// ─── Componente ───────────────────────────────────────────────────────────────
 const Hero = () => {
   const containerRef = useRef(null);
-  const badgeRef = useRef(null);
-  const brandRef = useRef(null);
-  const titleRef = useRef(null);
+  const overlayRef = useRef(null);
+  const lineTopRef = useRef(null);
+  const tagRef = useRef(null);
+  const line1Ref = useRef(null);
+  const line2Ref = useRef(null);
+  const line3Ref = useRef(null);
   const descRef = useRef(null);
-  const taglineRef = useRef(null);
   const ctaRef = useRef(null);
   const statsRef = useRef([]);
-  const graphicRef = useRef(null);
-  const socialRef = useRef(null);
-  const overlayRef = useRef(null);
+  const accentRef = useRef(null);
+  const scrollRef = useRef(null);
 
   useEffect(() => {
     const ctx = gsap.context(() => {
-      // Estado inicial
+      // ── Estado inicial ──────────────────────────────────────────────────────
       gsap.set(
         [
-          badgeRef.current,
-          brandRef.current,
-          titleRef.current,
+          tagRef.current,
+          line1Ref.current,
+          line2Ref.current,
+          line3Ref.current,
           descRef.current,
-          taglineRef.current,
           ctaRef.current,
+          accentRef.current,
+          scrollRef.current,
           ...statsRef.current.filter(Boolean),
-          graphicRef.current,
-          socialRef.current,
         ],
-        { opacity: 0, y: 30 }
+        { opacity: 0 }
       );
 
-      // Overlay de entrada
+      gsap.set([line1Ref.current, line2Ref.current, line3Ref.current], {
+        y: 60,
+        skewY: 3,
+      });
+
+      gsap.set([tagRef.current, descRef.current, ctaRef.current], { y: 20 });
+      gsap.set(statsRef.current.filter(Boolean), { y: 16 });
+      gsap.set(accentRef.current, {
+        scaleX: 0,
+        transformOrigin: "left center",
+      });
+
+      // ── Overlay de entrada ──────────────────────────────────────────────────
       gsap.fromTo(
         overlayRef.current,
-        { scaleX: 1 },
+        { scaleX: 1, transformOrigin: "right center" },
         {
           scaleX: 0,
-          duration: 1.4,
-          ease: "power3.inOut",
-          transformOrigin: "right center",
+          duration: 1.2,
+          ease: "expo.inOut",
         }
       );
 
-      // Timeline principal
-      const tl = gsap.timeline({
-        delay: 0.2,
-        defaults: { duration: 0.6, ease: "power3.out" },
-      });
+      // ── Línea superior ──────────────────────────────────────────────────────
+      gsap.fromTo(
+        lineTopRef.current,
+        { scaleX: 0, transformOrigin: "left center" },
+        { scaleX: 1, duration: 1, ease: "expo.out", delay: 0.3 }
+      );
 
-      tl.to(badgeRef.current, { opacity: 1, y: 0, duration: 0.5 })
-        .to(brandRef.current, { opacity: 1, y: 0, duration: 0.6 }, "-=0.2")
-        .to(titleRef.current, { opacity: 1, y: 0, duration: 0.6 }, "-=0.3")
-        .to(descRef.current, { opacity: 1, y: 0, duration: 0.5 }, "-=0.4")
-        .to(taglineRef.current, { opacity: 1, y: 0, duration: 0.4 }, "-=0.3")
-        .to(ctaRef.current, { opacity: 1, y: 0, duration: 0.5 }, "-=0.3")
+      // ── Timeline principal ──────────────────────────────────────────────────
+      const tl = gsap.timeline({ delay: 0.5 });
+
+      tl.to(tagRef.current, {
+        opacity: 1,
+        y: 0,
+        duration: 0.5,
+        ease: "power3.out",
+      })
+        .to(
+          [line1Ref.current, line2Ref.current, line3Ref.current],
+          {
+            opacity: 1,
+            y: 0,
+            skewY: 0,
+            stagger: 0.1,
+            duration: 0.7,
+            ease: "power4.out",
+          },
+          "-=0.2"
+        )
+        .to(
+          accentRef.current,
+          { scaleX: 1, duration: 0.6, ease: "expo.out" },
+          "-=0.3"
+        )
+        .to(
+          descRef.current,
+          { opacity: 1, y: 0, duration: 0.5, ease: "power3.out" },
+          "-=0.2"
+        )
+        .to(
+          ctaRef.current,
+          { opacity: 1, y: 0, duration: 0.5, ease: "power3.out" },
+          "-=0.3"
+        )
         .to(
           statsRef.current.filter(Boolean),
           {
             opacity: 1,
             y: 0,
-            stagger: 0.08,
-            duration: 0.5,
+            stagger: 0.07,
+            duration: 0.45,
+            ease: "power3.out",
           },
           "-=0.2"
         )
         .to(
-          graphicRef.current,
-          { opacity: 1, y: 0, duration: 0.7, ease: "back.out(1.2)" },
-          "-=0.4"
-        )
-        .to(socialRef.current, { opacity: 1, y: 0, duration: 0.4 }, "-=0.2");
-
-      // Animación flotante sutil para el gráfico
-      gsap.to(graphicRef.current, {
-        y: -8,
-        duration: 3,
-        repeat: -1,
-        yoyo: true,
-        ease: "sine.inOut",
-      });
-
-      // Hover animación para stats
-      statsRef.current.forEach((stat) => {
-        if (!stat) return;
-        stat.addEventListener("mouseenter", () => {
-          gsap.to(stat, { scale: 1.08, duration: 0.2, ease: "back.out(0.8)" });
-        });
-        stat.addEventListener("mouseleave", () => {
-          gsap.to(stat, { scale: 1, duration: 0.2 });
-        });
-      });
+          scrollRef.current,
+          { opacity: 1, duration: 0.4, ease: "power2.out" },
+          "-=0.1"
+        );
     }, containerRef);
 
     return () => ctx.revert();
   }, []);
 
-  const stats = [
-    { value: "10+", label: "Sistemas", icon: FiTarget },
-    { value: "85%", label: "Conversión", icon: FiTrendingUp },
-    { value: "24h", label: "Respuesta", icon: FiClock },
-    { value: "100%", label: "Personalizado", icon: FiAward },
-  ];
-
   return (
     <section
       ref={containerRef}
-      className="relative min-h-screen bg-black flex items-center overflow-hidden"
+      className="relative min-h-screen bg-black flex flex-col justify-center overflow-hidden"
     >
-      {/* Overlay de entrada */}
+      {/* ── Overlay de entrada ─────────────────────────────────────────────── */}
       <div
         ref={overlayRef}
-        className="absolute inset-0 bg-gradient-to-r from-green to-green2 z-50"
+        className="absolute inset-0 bg-green z-50 pointer-events-none"
+      />
+
+      {/* ── Fondo: grid de puntos ──────────────────────────────────────────── */}
+      <div
+        className="absolute inset-0 opacity-[0.04]"
+        style={{
+          backgroundImage:
+            "radial-gradient(circle at 1px 1px, #50ff05 1px, transparent 0)",
+          backgroundSize: "40px 40px",
+        }}
+      />
+
+      {/* ── Glow ambiental ────────────────────────────────────────────────── */}
+      <div className="absolute top-1/2 left-1/4 -translate-y-1/2 w-[600px] h-[600px] bg-green/5 rounded-full blur-[120px] pointer-events-none" />
+
+      {/* ── Línea superior ────────────────────────────────────────────────── */}
+      <div
+        ref={lineTopRef}
+        className="absolute top-0 left-0 right-0 h-px bg-green/40"
         style={{ transformOrigin: "left center" }}
       />
 
-      {/* Fondo */}
-      <div className="absolute inset-0">
-        <div className="absolute inset-0 bg-gradient-to-br from-green-900/20 via-black to-black" />
-        <div
-          className="absolute inset-0 opacity-5"
-          style={{
-            backgroundImage: `radial-gradient(circle at 1px 1px, #50ff05 1px, transparent 0)`,
-            backgroundSize: "48px 48px",
-          }}
-        />
+      {/* ── Número decorativo de fondo ────────────────────────────────────── */}
+      <div className="absolute right-0 top-1/2 -translate-y-1/2 font-anton text-[28vw] leading-none text-white/[0.02] select-none pointer-events-none pr-4 hidden lg:block">
+        S
       </div>
 
-      {/* Línea decorativa superior */}
-      <div className="absolute top-0 left-0 right-0 h-0.5 bg-gradient-to-r from-transparent via-green/50 to-transparent" />
-
-      <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 sm:py-20">
-        <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
-          {/* Columna Izquierda */}
-          <div className="space-y-6 md:space-y-8">
-            {/* Badge */}
-            <div ref={badgeRef}>
-              <span className="inline-flex items-center gap-2 px-4 py-2 bg-green/10 text-green rounded-full text-sm font-mono border border-green/30 backdrop-blur-sm">
-                SISTEMAS DE CONVERSIÓN
+      {/* ── Contenido principal ───────────────────────────────────────────── */}
+      <div className="relative max-w-7xl mx-auto w-full px-6 sm:px-8 lg:px-12 pt-32 pb-24">
+        <div className="grid lg:grid-cols-[1fr_320px] gap-16 lg:gap-24 items-end">
+          {/* Columna izquierda */}
+          <div className="space-y-10">
+            {/* Tag */}
+            <div ref={tagRef}>
+              <span className="inline-flex items-center gap-2.5 px-3 py-1.5 border border-green/30 text-green text-xs font-mono uppercase tracking-[0.2em] rounded-sm">
+                <span className="w-1.5 h-1.5 rounded-full bg-green animate-pulse" />
+                Sistemas de conversión · CDMX
               </span>
             </div>
 
-            {/* Marca */}
-            <div ref={brandRef}>
-              <h1 className="text-6xl sm:text-7xl md:text-8xl lg:text-9xl font-anton tracking-tighter text-white leading-none">
-                STRING
-              </h1>
-            </div>
-
-            {/* Mensaje principal */}
-            <div ref={titleRef} className="space-y-2">
-              <p className="text-3xl sm:text-4xl md:text-5xl font-ubuntu font-black text-white leading-tight">
-                No necesitas más
-              </p>
-              <p className="text-3xl sm:text-4xl md:text-5xl font-ubuntu font-black text-green leading-tight">
-                seguidores
-              </p>
-              <p className="text-3xl sm:text-4xl md:text-5xl font-ubuntu font-black text-white leading-tight">
-                Necesitas un{" "}
-                <span className="underline decoration-green decoration-4">
-                  sistema
-                </span>
-              </p>
+            {/* Headline — tipografía masiva */}
+            <div className="overflow-hidden">
+              <div className="space-y-1">
+                <div ref={line1Ref} className="overflow-hidden">
+                  <p className="font-anton text-[13vw] sm:text-[10vw] lg:text-[9vw] leading-[0.88] text-white uppercase tracking-tighter">
+                    No necesitas
+                  </p>
+                </div>
+                <div
+                  ref={line2Ref}
+                  className="overflow-hidden flex items-end gap-4"
+                >
+                  <p className="font-anton text-[13vw] sm:text-[10vw] lg:text-[9vw] leading-[0.88] text-green uppercase tracking-tighter">
+                    más likes.
+                  </p>
+                </div>
+                <div ref={line3Ref} className="overflow-hidden">
+                  <p className="font-anton text-[13vw] sm:text-[10vw] lg:text-[9vw] leading-[0.88] text-white uppercase tracking-tighter">
+                    Necesitas un{" "}
+                    <span className="relative inline-block">
+                      sistema
+                      <span
+                        ref={accentRef}
+                        className="absolute bottom-1 left-0 right-0 h-[4px] bg-green"
+                      />
+                    </span>
+                    .
+                  </p>
+                </div>
+              </div>
             </div>
 
             {/* Descripción */}
-            <div ref={descRef}>
-              <p className="text-base sm:text-lg text-gray-300 max-w-md leading-relaxed">
-                Transformamos presencia digital en clientes reales mediante
-                sistemas claros de conversión.
+            <div ref={descRef} className="max-w-lg">
+              <p className="text-gray text-base sm:text-lg leading-relaxed">
+                Transformamos tu presencia digital en un sistema que genera
+                clientes reales. Diagnóstico, estrategia y ejecución —{" "}
+                <span className="text-white">sin plantillas, sin excusas.</span>
               </p>
             </div>
 
-            {/* Tagline */}
-            <div
-              ref={taglineRef}
-              className="flex items-center gap-2 text-green text-sm"
-            >
-              <FiCheckCircle className="w-4 h-4" />
-              <span className="font-mono">Diseñamos sistemas, no páginas</span>
-            </div>
-
-            {/* CTA */}
-            <div ref={ctaRef} className="flex flex-wrap gap-4 pt-2">
-              <Link href="/quote">
-                <button className="group px-6 sm:px-8 py-3 bg-green text-black font-bold rounded-full hover:shadow-xl hover:shadow-green/30 transition-all flex items-center gap-2">
-                  Diagnosticar negocio
-                  <FiArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
-                </button>
+            {/* CTAs */}
+            <div ref={ctaRef} className="flex flex-wrap items-center gap-4">
+              <Link
+                href="/quote"
+                className="group inline-flex items-center gap-2 px-7 py-3.5 bg-green text-black font-bold text-sm uppercase tracking-wide rounded-sm hover:bg-white transition-colors duration-200"
+              >
+                Solicitar diagnóstico
+                <FiArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform duration-200" />
               </Link>
 
-              <Link href="/Services">
-                <button className="px-6 sm:px-8 py-3 border-2 border-green/30 text-white font-bold rounded-full hover:bg-green/10 transition-all">
-                  Ver sistemas
-                </button>
+              <Link
+                href="/Services"
+                className="group inline-flex items-center gap-2 text-sm text-gray hover:text-white transition-colors duration-200 border-b border-white/10 hover:border-white pb-0.5"
+              >
+                Ver los 4 sistemas
+                <FiArrowUpRight className="w-3.5 h-3.5 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform duration-200" />
               </Link>
-            </div>
-
-            {/* Stats */}
-            <div className="grid grid-cols-4 gap-3 pt-6">
-              {stats.map((stat, idx) => {
-                const Icon = stat.icon;
-                return (
-                  <div
-                    key={idx}
-                    ref={(el) => (statsRef.current[idx] = el)}
-                    className="text-center cursor-pointer"
-                  >
-                    <Icon className="w-5 h-5 text-green mx-auto mb-1" />
-                    <p className="text-lg font-bold text-white">{stat.value}</p>
-                    <p className="text-[11px] text-gray-400 uppercase tracking-wide">
-                      {stat.label}
-                    </p>
-                  </div>
-                );
-              })}
             </div>
           </div>
 
-          {/* Columna Derecha */}
-          <div ref={graphicRef} className="hidden lg:flex justify-center">
-            <div className="relative w-[380px] h-[380px]">
-              {/* Círculo central */}
-              <div className="absolute inset-0 flex items-center justify-center">
-                <div className="w-44 h-44 rounded-full bg-gradient-to-br from-green/20 to-green/5 backdrop-blur-3xl border border-green/30 flex items-center justify-center">
-                  <span className="text-6xl font-anton text-green">S</span>
-                </div>
+          {/* Columna derecha — Stats verticales */}
+          <div className="hidden lg:flex flex-col justify-end gap-0 border-l border-white/10">
+            {stats.map((stat, i) => (
+              <div
+                key={i}
+                ref={(el) => (statsRef.current[i] = el)}
+                className="group px-8 py-6 border-b border-white/10 last:border-b-0 hover:bg-white/[0.02] transition-colors duration-200 cursor-default"
+              >
+                <p className="font-anton text-4xl text-green leading-none mb-1.5">
+                  {stat.value}
+                </p>
+                <p className="text-xs text-gray uppercase tracking-widest leading-relaxed whitespace-pre-line">
+                  {stat.label}
+                </p>
               </div>
-
-              {/* Elementos orbitales */}
-              {[
-                { icon: FiTarget, label: "Conversión", angle: 0 },
-                { icon: FiZap, label: "Velocidad", angle: 90 },
-                { icon: FiTrendingUp, label: "Escala", angle: 180 },
-                { icon: FiAward, label: "Calidad", angle: 270 },
-              ].map((item, i) => {
-                const Icon = item.icon;
-                const rad = (item.angle * Math.PI) / 180;
-                const radius = 140;
-                const x = 190 + radius * Math.cos(rad);
-                const y = 190 + radius * Math.sin(rad);
-
-                return (
-                  <div
-                    key={i}
-                    className="absolute w-16 h-16 bg-green/10 backdrop-blur-sm rounded-xl border border-green/30 flex flex-col items-center justify-center"
-                    style={{ left: x - 32, top: y - 32 }}
-                  >
-                    <Icon className="text-green text-xl" />
-                    <span className="text-[10px] text-white mt-1">
-                      {item.label}
-                    </span>
-                  </div>
-                );
-              })}
-            </div>
+            ))}
           </div>
         </div>
-      </div>
 
-      {/* Scroll Indicator */}
-      <div className="absolute bottom-6 left-1/2 -translate-x-1/2">
-        <div className="w-5 h-8 border border-green/40 rounded-full flex justify-center">
-          <div className="w-1 h-2 bg-green rounded-full mt-2 animate-bounce" />
+        {/* Stats mobile — fila horizontal */}
+        <div className="grid grid-cols-4 gap-4 mt-14 pt-8 border-t border-white/10 lg:hidden">
+          {stats.map((stat, i) => (
+            <div
+              key={i}
+              ref={(el) => (statsRef.current[i + 4] = el)}
+              className="text-center"
+            >
+              <p className="font-anton text-2xl text-green leading-none mb-1">
+                {stat.value}
+              </p>
+              <p className="text-[10px] text-gray uppercase tracking-wider leading-relaxed whitespace-pre-line">
+                {stat.label}
+              </p>
+            </div>
+          ))}
         </div>
       </div>
 
-      {/* Redes sociales */}
+      {/* ── Scroll indicator ──────────────────────────────────────────────── */}
       <div
-        ref={socialRef}
-        className="absolute right-4 sm:right-6 bottom-1/2 translate-y-1/2 hidden lg:flex flex-col gap-3"
+        ref={scrollRef}
+        className="absolute bottom-8 left-6 sm:left-8 lg:left-12 flex items-center gap-3"
       >
-        {[FaInstagram, FaWhatsapp, FaLinkedinIn].map((Icon, i) => (
-          <a
-            key={i}
-            href="#"
-            className="w-8 h-8 bg-white/5 rounded-full flex items-center justify-center border border-white/10 hover:border-green/30 transition-all hover:scale-110"
-          >
-            <Icon className="text-green text-sm" />
-          </a>
-        ))}
+        <div className="w-px h-10 bg-gradient-to-b from-green/60 to-transparent" />
+        <span className="text-[10px] text-gray uppercase tracking-[0.25em] font-mono">
+          Scroll
+        </span>
       </div>
 
-      <style jsx>{`
-        @keyframes bounce {
-          0%,
-          100% {
-            transform: translateY(0);
-          }
-          50% {
-            transform: translateY(8px);
-          }
-        }
-        .animate-bounce {
-          animation: bounce 1.2s infinite;
-        }
-      `}</style>
+      {/* ── Línea inferior ────────────────────────────────────────────────── */}
+      <div className="absolute bottom-0 left-0 right-0 h-px bg-white/5" />
     </section>
   );
 };

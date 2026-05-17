@@ -11,6 +11,7 @@ export const FormField = ({
   error,
   placeholder,
   required = false,
+  rows = 4,
 }) => {
   const fieldRef = useRef(null);
   const errorRef = useRef(null);
@@ -21,82 +22,82 @@ export const FormField = ({
     if (error && errorRef.current) {
       gsap.fromTo(
         errorRef.current,
-        { y: -10, opacity: 0 },
+        { y: -8, opacity: 0 },
         { y: 0, opacity: 1, duration: 0.3, ease: "power2.out" }
       );
-
-      gsap.to(inputRef.current, {
-        x: [-5, 5, -3, 3, 0],
-        duration: 0.4,
-        ease: "power2.inOut",
-        borderColor: "#ef4444",
-      });
     }
   }, [error]);
 
-  // Animación de focus
   const handleFocus = () => {
     gsap.to(inputRef.current, {
-      scale: 1.02,
-      borderColor: "#50ff05",
-      boxShadow: "0 4px 6px -1px rgba(57, 255, 20, 1)",
-      duration: 0.2,
+      scale: 1.01,
+      duration: 0.15,
+      ease: "power2.out",
     });
   };
 
   const handleBlur = () => {
     gsap.to(inputRef.current, {
       scale: 1,
-      borderColor: error ? "#ef4444" : "#d1d5db",
-      boxShadow: "none",
-      duration: 0.2,
+      duration: 0.15,
+      ease: "power2.out",
     });
   };
 
+  const baseClass = `
+    w-full px-4 py-3 bg-white/5 border text-white text-sm
+    placeholder:text-white/20 transition-colors duration-200
+    focus:outline-none focus:border-green
+    ${error ? "border-red-500/60" : "border-white/10 hover:border-white/20"}
+  `;
+
+  const { ref: registerRef, ...registerProps } = register(name);
+
   return (
-    <div className="mb-6" ref={fieldRef}>
+    <div ref={fieldRef} className="space-y-1.5">
       <label
         htmlFor={name}
-        className="block text-sm font-medium text-black mb-2"
+        className="block text-xs font-mono text-gray uppercase tracking-widest"
       >
-        {label} {required && <span className="text-red">*</span>}
+        {label} {required && <span className="text-green">*</span>}
       </label>
 
-      <input
-        id={name}
-        type={type}
-        {...register(name)}
-        ref={(e) => {
-          register(name).ref(e);
-          inputRef.current = e;
-        }}
-        onFocus={handleFocus}
-        onBlur={handleBlur}
-        placeholder={placeholder}
-        className={`
-          bg-gray w-full px-4 py-3 rounded-lg border
-          transition-all duration-200
-          focus:outline-none focus:ring-2 focus:ring-green
-          ${
-            error
-              ? "border-red bg-red"
-              : "border-gray hover:border-gray"
-          }
-        `}
-      />
+      {type === "textarea" ? (
+        <textarea
+          id={name}
+          {...registerProps}
+          ref={(e) => {
+            registerRef(e);
+            inputRef.current = e;
+          }}
+          onFocus={handleFocus}
+          onBlur={handleBlur}
+          placeholder={placeholder}
+          rows={rows}
+          className={`${baseClass} resize-none`}
+        />
+      ) : (
+        <input
+          id={name}
+          type={type}
+          {...registerProps}
+          ref={(e) => {
+            registerRef(e);
+            inputRef.current = e;
+          }}
+          onFocus={handleFocus}
+          onBlur={handleBlur}
+          placeholder={placeholder}
+          className={baseClass}
+        />
+      )}
 
       {error && (
         <p
           ref={errorRef}
-          className="mt-2 text-sm text-red flex items-center gap-1"
+          className="text-xs text-red-400 flex items-center gap-1.5 font-mono"
         >
-          <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
-            <path
-              fillRule="evenodd"
-              d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7 4a1 1 0 11-2 0 1 1 0 012 0zm-1-9a1 1 0 00-1 1v4a1 1 0 102 0V6a1 1 0 00-1-1z"
-              clipRule="evenodd"
-            />
-          </svg>
+          <span>↳</span>
           {error}
         </p>
       )}

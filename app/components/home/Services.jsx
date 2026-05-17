@@ -20,10 +20,12 @@ import { RiTeamLine } from "react-icons/ri";
 
 gsap.registerPlugin(ScrollTrigger);
 
+// ─── Datos ────────────────────────────────────────────────────────────────────
 const items = [
   {
     title: "SISTEMA DE CONVERSIÓN",
-    subtitle: "Nivel 1 · $8,000–12,000",
+    subtitle: "Nivel 1",
+    metric: "Desde $8,000",
     content:
       "Transformamos tu presencia digital en un sistema que genera clientes reales de manera consistente.",
     benefits: [
@@ -34,14 +36,12 @@ const items = [
       "Formulario básico de contacto",
       "Mensaje automático preconfigurado",
     ],
-    gradient: "from-green to-green2",
     icon: FiTarget,
-    metric: "Desde $8,000",
-    color: "green",
   },
   {
     title: "SISTEMA DE CAPTACIÓN",
-    subtitle: "Nivel 2 · $18,000–28,000",
+    subtitle: "Nivel 2",
+    metric: "Desde $18,000",
     content:
       "Evita que los clientes interesados se pierdan y organiza tus prospectos automáticamente.",
     benefits: [
@@ -52,14 +52,12 @@ const items = [
       "Notificaciones por correo",
       "Integración con Notion / Sheets / Airtable",
     ],
-    gradient: "from-green2 to-green3",
     icon: FiTrendingUp,
-    metric: "Desde $18,000",
-    color: "green2",
   },
   {
     title: "SISTEMA AUTOMATIZADO",
-    subtitle: "Nivel 3 · $22,000–40,000",
+    subtitle: "Nivel 3",
+    metric: "Desde $28,000",
     content:
       "Crea un sistema digital que trabaja incluso cuando tu negocio no está disponible.",
     benefits: [
@@ -70,14 +68,12 @@ const items = [
       "Recordatorios de citas",
       "Panel de gestión de prospectos",
     ],
-    gradient: "from-green3 to-green4",
     icon: FiZap,
-    metric: "Desde $22,000",
-    color: "green3",
   },
   {
     title: "SISTEMA ESPECIALIZADO",
-    subtitle: "Nivel 4 · $40,000–90,000+",
+    subtitle: "Nivel 4",
+    metric: "Desde $40,000",
     content:
       "Desarrollamos sistemas digitales personalizados para negocios que necesitan algo más avanzado.",
     benefits: [
@@ -88,178 +84,194 @@ const items = [
       "Paneles de control internos",
       "Integraciones con APIs externas",
     ],
-    gradient: "from-green4 to-green",
     icon: MdOutlineRocketLaunch,
-    metric: "Desde $40,000",
-    color: "green4",
   },
   {
     title: "PLANES DE CONTINUIDAD",
     subtitle: "Soporte mensual",
+    metric: "Desde $1,800/mes",
     content: "Mantenimiento y optimización continua para tu sistema digital.",
     benefits: [
-      "Plan Base: $1,800–2,500/mes - Hosting, mantenimiento, soporte",
-      "Plan Crecimiento: $3,000–4,500/mes - Optimización mensual, ajustes",
-      "Plan Escalamiento: $5,000–8,000/mes - Análisis, soporte prioritario",
+      "Plan Base $1,800–2,500/mes — Hosting, mantenimiento, soporte",
+      "Plan Crecimiento $3,000–4,500/mes — Optimización mensual, ajustes",
+      "Plan Escalamiento $5,000–8,000/mes — Análisis y soporte prioritario",
     ],
-    gradient: "from-green to-green2",
     icon: FiClock,
-    metric: "Desde $1,800/mes",
-    color: "green",
   },
 ];
 
 const stats = [
-  { value: "10+", label: "Sistemas implementados", icon: RiTeamLine },
-  { value: "85%", label: "Aumento en conversión", icon: MdOutlineAnalytics },
-  { value: "24h", label: "Respuesta inicial", icon: FiClock },
-  { value: "100%", label: "Personalizado", icon: FiAward },
+  { value: "4", label: "Sistemas\nimplementados", icon: RiTeamLine },
+  { value: "85%", label: "Aumento en\nconversión", icon: MdOutlineAnalytics },
+  { value: "24h", label: "Diagnóstico\ninicial", icon: FiClock },
+  { value: "100%", label: "Sin\nplantillas", icon: FiAward },
 ];
 
+// ─── Componente ───────────────────────────────────────────────────────────────
 const Services = () => {
   const [openIndex, setOpenIndex] = useState(null);
-  const [mounted, setMounted] = useState(false);
 
   const containerRef = useRef(null);
-  const headerRef = useRef(null);
+  const tagRef = useRef(null);
+  const titleRef = useRef(null);
+  const descRef = useRef(null);
   const statsRef = useRef([]);
   const cardsRef = useRef([]);
   const ctaRef = useRef(null);
 
   useEffect(() => {
-    setMounted(true);
-  }, []);
-
-  // Animaciones con ScrollTrigger - se activan cuando la sección entra en vista
-  useEffect(() => {
-    if (!mounted) return;
-
     const ctx = gsap.context(() => {
-      // Header se anima al entrar
-      gsap.from(headerRef.current, {
-        scrollTrigger: {
-          trigger: headerRef.current,
-          start: "top 85%",
-          toggleActions: "play none none none",
-        },
+      // ── Estado inicial ──────────────────────────────────────────────────────
+      gsap.set([tagRef.current, titleRef.current, descRef.current], {
         opacity: 0,
-        y: 40,
-        duration: 0.7,
-        ease: "power2.out",
+        y: 24,
       });
+      gsap.set(statsRef.current.filter(Boolean), { opacity: 0, y: 16 });
+      gsap.set(cardsRef.current.filter(Boolean), { opacity: 0, y: 24 });
+      gsap.set(ctaRef.current, { opacity: 0, y: 16 });
 
-      // Stats con stagger
-      gsap.from(statsRef.current.filter(Boolean), {
+      // ── Header ──────────────────────────────────────────────────────────────
+      const tlHeader = gsap.timeline({
+        scrollTrigger: {
+          trigger: tagRef.current,
+          start: "top 82%",
+          once: true,
+        },
+      });
+      tlHeader
+        .to(tagRef.current, {
+          opacity: 1,
+          y: 0,
+          duration: 0.5,
+          ease: "power3.out",
+        })
+        .to(
+          titleRef.current,
+          { opacity: 1, y: 0, duration: 0.6, ease: "power3.out" },
+          "-=0.3"
+        )
+        .to(
+          descRef.current,
+          { opacity: 1, y: 0, duration: 0.5, ease: "power3.out" },
+          "-=0.3"
+        );
+
+      // ── Stats ───────────────────────────────────────────────────────────────
+      gsap.to(statsRef.current.filter(Boolean), {
+        opacity: 1,
+        y: 0,
+        stagger: 0.08,
+        duration: 0.45,
+        ease: "power3.out",
         scrollTrigger: {
           trigger: statsRef.current[0],
-          start: "top 85%",
-          toggleActions: "play none none none",
+          start: "top 84%",
+          once: true,
         },
-        opacity: 0,
-        y: 25,
-        stagger: 0.1,
-        duration: 0.6,
-        ease: "power2.out",
       });
 
-      // Cards con stagger
-      gsap.from(cardsRef.current.filter(Boolean), {
+      // ── Cards ───────────────────────────────────────────────────────────────
+      gsap.to(cardsRef.current.filter(Boolean), {
+        opacity: 1,
+        y: 0,
+        stagger: 0.1,
+        duration: 0.5,
+        ease: "power3.out",
         scrollTrigger: {
           trigger: cardsRef.current[0],
-          start: "top 85%",
-          toggleActions: "play none none none",
+          start: "top 84%",
+          once: true,
         },
-        opacity: 0,
-        y: 35,
-        stagger: 0.12,
-        duration: 0.7,
-        ease: "back.out(1)",
       });
 
-      // CTA
-      gsap.from(ctaRef.current, {
+      // ── CTA ─────────────────────────────────────────────────────────────────
+      gsap.to(ctaRef.current, {
+        opacity: 1,
+        y: 0,
+        duration: 0.5,
+        ease: "power3.out",
         scrollTrigger: {
           trigger: ctaRef.current,
-          start: "top 85%",
-          toggleActions: "play none none none",
+          start: "top 88%",
+          once: true,
         },
-        opacity: 0,
-        y: 25,
-        duration: 0.6,
-        ease: "power2.out",
       });
     }, containerRef);
 
     return () => ctx.revert();
-  }, [mounted]);
+  }, []);
 
-  const toggle = (idx) => {
-    setOpenIndex(openIndex === idx ? null : idx);
-  };
-
-  if (!mounted) {
-    return (
-      <section className="bg-white py-24">
-        <div className="max-w-7xl mx-auto px-4">
-          <div className="h-96 bg-gray animate-pulse rounded-2xl" />
-        </div>
-      </section>
-    );
-  }
+  const toggle = (idx) => setOpenIndex(openIndex === idx ? null : idx);
 
   return (
     <section
       ref={containerRef}
-      className="relative bg-gradient-to-b from-white via-gray-50 to-white py-24 md:py-32 overflow-hidden"
+      className="relative bg-black py-24 md:py-32 overflow-hidden"
     >
-      {/* Elementos decorativos */}
+      {/* ── Fondo decorativo ──────────────────────────────────────────────── */}
       <div className="absolute inset-0 pointer-events-none">
-        <div className="absolute top-0 left-0 w-96 h-96 bg-green/5 rounded-full filter blur-3xl" />
-        <div className="absolute bottom-0 right-0 w-96 h-96 bg-green2/5 rounded-full filter blur-3xl" />
+        <div className="absolute top-0 left-1/4 w-[500px] h-[500px] bg-green/5 rounded-full blur-[100px]" />
+        <div className="absolute bottom-0 right-0 w-[400px] h-[400px] bg-green/3 rounded-full blur-[80px]" />
+        <div
+          className="absolute inset-0 opacity-[0.03]"
+          style={{
+            backgroundImage:
+              "radial-gradient(circle at 1px 1px, #50ff05 1px, transparent 0)",
+            backgroundSize: "40px 40px",
+          }}
+        />
       </div>
 
-      <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        {/* Header */}
-        <div ref={headerRef} className="text-center mb-16 space-y-4">
-          <span className="inline-block px-4 py-2 bg-green/10 text-green rounded-full text-sm font-mono border border-green/30">
-            ✦ SISTEMAS DE CONVERSIÓN
-          </span>
-
-          <h1 className="text-5xl md:text-7xl lg:text-8xl font-ubuntu font-black tracking-tight">
-            <span className="text-black">POTENCIA TUS</span>
-            <br />
-            <span className="bg-gradient-to-r from-green to-green2 bg-clip-text text-transparent">
-              RESULTADOS
+      <div className="relative max-w-4xl mx-auto px-6 sm:px-8 lg:px-12">
+        {/* ── Header ────────────────────────────────────────────────────────── */}
+        <div className="mb-16 space-y-6">
+          <div ref={tagRef}>
+            <span className="inline-flex items-center gap-2.5 px-3 py-1.5 border border-green/30 text-green text-xs font-mono uppercase tracking-[0.2em] rounded-sm">
+              <span className="w-1.5 h-1.5 rounded-full bg-green" />
+              Los 4 sistemas
             </span>
-          </h1>
+          </div>
 
-          <p className="text-lg md:text-xl text-gray max-w-2xl mx-auto">
-            Cuatro niveles de automatización para cada etapa de tu negocio.
-            Implementamos sistemas digitales que convierten visitas en clientes
-            reales.
+          <h2
+            ref={titleRef}
+            className="font-anton text-5xl sm:text-6xl md:text-7xl leading-[0.9] tracking-tighter text-white uppercase"
+          >
+            Elige tu nivel <span className="text-green">de sistema</span>
+          </h2>
+
+          <p
+            ref={descRef}
+            className="text-gray text-lg leading-relaxed max-w-xl"
+          >
+            Cuatro niveles de automatización para cada etapa de tu negocio. Cada
+            sistema incluye el anterior — siempre puedes escalar.
           </p>
         </div>
 
-        {/* Stats rápidas */}
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-4 max-w-3xl mx-auto mb-12">
-          {stats.map((stat, index) => {
+        {/* ── Stats ─────────────────────────────────────────────────────────── */}
+        <div className="grid grid-cols-4 gap-px bg-white/5 mb-16">
+          {stats.map((stat, i) => {
             const Icon = stat.icon;
             return (
               <div
-                key={index}
-                ref={(el) => (statsRef.current[index] = el)}
-                className="text-center p-4 bg-white/50 backdrop-blur-sm rounded-xl border border-gray/20 hover:scale-105 transition-transform duration-300 cursor-pointer"
+                key={i}
+                ref={(el) => (statsRef.current[i] = el)}
+                className="bg-black px-4 py-6 text-center hover:bg-white/[0.03] transition-colors duration-200"
               >
-                <Icon className="text-2xl text-green mx-auto mb-2" />
-                <p className="text-xl font-bold text-black">{stat.value}</p>
-                <p className="text-xs text-gray">{stat.label}</p>
+                <Icon className="text-green text-xl mx-auto mb-2" />
+                <p className="font-anton text-2xl text-green leading-none mb-1">
+                  {stat.value}
+                </p>
+                <p className="text-[10px] text-gray uppercase tracking-wider leading-relaxed whitespace-pre-line">
+                  {stat.label}
+                </p>
               </div>
             );
           })}
         </div>
 
-        {/* Acordeones */}
-        <div className="max-w-4xl mx-auto space-y-4">
+        {/* ── Acordeones ────────────────────────────────────────────────────── */}
+        <div className="space-y-px">
           {items.map((item, index) => {
             const isOpen = openIndex === index;
             const Icon = item.icon;
@@ -268,78 +280,96 @@ const Services = () => {
               <div
                 key={index}
                 ref={(el) => (cardsRef.current[index] = el)}
-                className="relative bg-white rounded-2xl shadow-lg hover:shadow-xl transition-shadow duration-300"
+                className="border border-white/10 hover:border-white/20 transition-colors duration-200 bg-black"
               >
-                {/* Header */}
+                {/* Trigger */}
                 <button
                   onClick={() => toggle(index)}
                   className="w-full flex items-center justify-between p-6 md:p-8 text-left group"
                 >
-                  <div className="flex items-center gap-4">
+                  <div className="flex items-center gap-5">
+                    {/* Ícono */}
                     <div
-                      className={`w-14 h-14 rounded-xl bg-gradient-to-br ${item.gradient} flex items-center justify-center shadow-lg transition-transform duration-300 group-hover:scale-110`}
+                      className={`w-11 h-11 border flex-shrink-0 flex items-center justify-center transition-all duration-300 ${
+                        isOpen
+                          ? "border-green bg-green/10"
+                          : "border-white/10 group-hover:border-green/40"
+                      }`}
                     >
-                      <Icon className="text-2xl text-white" />
+                      <Icon
+                        className={`text-lg transition-colors duration-300 ${
+                          isOpen
+                            ? "text-green"
+                            : "text-gray group-hover:text-green"
+                        }`}
+                      />
                     </div>
 
-                    <div>
-                      <div className="flex items-center gap-2 mb-1 flex-wrap">
-                        <h3
-                          className={`text-xl md:text-2xl font-ubuntu font-bold transition-colors duration-300 ${
-                            isOpen ? "text-green" : "text-black"
-                          }`}
-                        >
-                          {item.title}
-                        </h3>
+                    {/* Texto */}
+                    <div className="text-left">
+                      <div className="flex items-center gap-3 flex-wrap mb-0.5">
+                        <span className="text-xs font-mono text-gray uppercase tracking-widest">
+                          {item.subtitle}
+                        </span>
+                        <span className="text-xs font-mono text-green">
+                          {item.metric}
+                        </span>
                       </div>
-                      <p className="text-sm text-green font-mono mb-1">
-                        {item.subtitle}
-                      </p>
-                      <p className="text-gray text-sm md:text-base">
-                        {item.content}
-                      </p>
+                      <h3
+                        className={`font-anton text-xl md:text-2xl tracking-tight leading-tight transition-colors duration-200 ${
+                          isOpen ? "text-green" : "text-white"
+                        }`}
+                      >
+                        {item.title}
+                      </h3>
                     </div>
                   </div>
 
+                  {/* Toggle icon */}
                   <div
-                    className={`w-10 h-10 rounded-full flex items-center justify-center transition-all duration-300 ${
+                    className={`w-8 h-8 flex-shrink-0 border flex items-center justify-center transition-all duration-300 ${
                       isOpen
-                        ? "bg-gradient-to-r from-green to-green2 text-white shadow-lg"
-                        : "bg-gray/10 text-gray group-hover:bg-gray/20"
+                        ? "border-green bg-green text-black"
+                        : "border-white/20 text-gray group-hover:border-white/40"
                     }`}
                   >
-                    {isOpen ? <FiMinus /> : <FiPlus />}
+                    {isOpen ? (
+                      <FiMinus className="text-sm" />
+                    ) : (
+                      <FiPlus className="text-sm" />
+                    )}
                   </div>
                 </button>
 
-                {/* Content - CSS transition */}
+                {/* Contenido expandible */}
                 <div
                   className={`overflow-hidden transition-all duration-300 ease-in-out ${
-                    isOpen ? "max-h-[500px] opacity-100" : "max-h-0 opacity-0"
+                    isOpen ? "max-h-[600px] opacity-100" : "max-h-0 opacity-0"
                   }`}
                 >
-                  <div className="px-6 md:px-8 pb-6 md:pb-8 pt-2 border-t border-gray/20">
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                  <div className="px-6 md:px-8 pb-8 border-t border-white/5">
+                    <p className="text-gray text-sm leading-relaxed mt-6 mb-6">
+                      {item.content}
+                    </p>
+
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 mb-8">
                       {item.benefits.map((benefit, i) => (
-                        <div
-                          key={i}
-                          className="flex items-start gap-2 hover:translate-x-1 transition-transform duration-200"
-                        >
+                        <div key={i} className="flex items-start gap-2.5">
                           <FiCheckCircle className="text-green text-sm mt-0.5 flex-shrink-0" />
-                          <span className="text-black text-sm">{benefit}</span>
+                          <span className="text-white/80 text-sm leading-relaxed">
+                            {benefit}
+                          </span>
                         </div>
                       ))}
                     </div>
 
-                    <div className="mt-6 pt-4 border-t border-gray/20">
-                      <Link
-                        href="/quote"
-                        className="inline-flex items-center text-sm font-medium text-green hover:opacity-80 transition-all group"
-                      >
-                        Solicitar diagnóstico
-                        <FiArrowRight className="ml-2 group-hover:translate-x-2 transition-transform" />
-                      </Link>
-                    </div>
+                    <Link
+                      href="/quote"
+                      className="group inline-flex items-center gap-2 text-sm font-semibold text-green hover:gap-3 transition-all duration-200"
+                    >
+                      Solicitar diagnóstico
+                      <FiArrowRight className="text-xs group-hover:translate-x-1 transition-transform duration-200" />
+                    </Link>
                   </div>
                 </div>
               </div>
@@ -347,16 +377,16 @@ const Services = () => {
           })}
         </div>
 
-        {/* CTA Principal */}
-        <div ref={ctaRef} className="text-center mt-20">
-          <Link href="/quote">
-            <button className="group relative inline-flex items-center px-8 py-4 bg-gradient-to-r from-green to-green2 text-black font-bold rounded-full overflow-hidden transition-all duration-300 hover:pr-12 hover:shadow-2xl hover:shadow-green/30">
-              <span className="relative z-10">Diagnosticar mi negocio</span>
-              <FiArrowRight className="absolute right-4 opacity-0 group-hover:opacity-100 group-hover:right-6 transition-all duration-300" />
-              <div className="absolute inset-0 bg-white/20 translate-y-full group-hover:translate-y-0 transition-transform duration-300" />
-            </button>
+        {/* ── CTA ───────────────────────────────────────────────────────────── */}
+        <div ref={ctaRef} className="mt-16 text-center space-y-4">
+          <Link
+            href="/quote"
+            className="group inline-flex items-center gap-2 px-8 py-4 bg-green text-black font-bold text-sm uppercase tracking-wide rounded-sm hover:bg-white transition-colors duration-200"
+          >
+            Diagnosticar mi negocio
+            <FiArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform duration-200" />
           </Link>
-          <p className="text-sm text-gray mt-4">
+          <p className="text-xs text-gray font-mono">
             Descubre qué nivel necesita tu negocio · Respuesta en 24h
           </p>
         </div>

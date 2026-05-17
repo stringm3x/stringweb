@@ -9,7 +9,6 @@ import { FormSuccess } from "./FormSuccess";
 import { useRef, useEffect, useState, useCallback } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { motion, AnimatePresence } from "framer-motion";
 import toast from "react-hot-toast";
 import {
   FiArrowRight,
@@ -23,66 +22,32 @@ import {
   FiClock,
   FiShield,
   FiZap,
-  FiTrendingUp,
-  FiAward,
-  FiBarChart2,
-  FiInfo,
 } from "react-icons/fi";
-import { MdOutlineRocketLaunch, MdOutlineAnalytics } from "react-icons/md";
-
-// Importar constantes
-import {
-  PROJECT_TYPES,
-  MONTHLY_PLANS,
-} from "../../lib/constants/project-types";
+import { PROJECT_TYPES } from "../../lib/constants/project-types";
 
 gsap.registerPlugin(ScrollTrigger);
 
+// ─── Datos ────────────────────────────────────────────────────────────────────
 const benefits = [
-  {
-    icon: FiZap,
-    text: "Diagnóstico en 24h",
-    color: "from-yellow to-orange",
-  },
-  {
-    icon: FiCheckCircle,
-    text: "Sistema 100% personalizado",
-    color: "from-green to-green-600",
-  },
-  {
-    icon: FiShield,
-    text: "Sin plantillas",
-    color: "from-blue to-indigo-500",
-  },
-  {
-    icon: FiClock,
-    text: "Soporte continuo",
-    color: "from-purple to-pink-500",
-  },
+  { icon: FiZap, text: "Diagnóstico en 24h" },
+  { icon: FiCheckCircle, text: "Sistema 100% personalizado" },
+  { icon: FiShield, text: "Sin plantillas" },
+  { icon: FiClock, text: "Soporte continuo" },
 ];
 
-// Mapeo de iconos por nivel
-const levelIcons = {
-  nivel1: FiTarget,
-  nivel2: FiTrendingUp,
-  nivel3: FiZap,
-  nivel4: MdOutlineRocketLaunch,
-};
-
+// ─── Componente ───────────────────────────────────────────────────────────────
 export const QuoteForm = () => {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [successData, setSuccessData] = useState(null);
-  const [focusedField, setFocusedField] = useState(null);
-  const [selectedLevel, setSelectedLevel] = useState(null);
-  const [showLevelInfo, setShowLevelInfo] = useState(false);
+  const [selectedLevelData, setSelectedLevelData] = useState(null);
 
+  const sectionRef = useRef(null);
+  const tagRef = useRef(null);
+  const titleRef = useRef(null);
+  const descRef = useRef(null);
+  const benefitsRef = useRef([]);
   const formRef = useRef(null);
   const buttonRef = useRef(null);
-  const titleRef = useRef(null);
-  const subtitleRef = useRef(null);
-  const benefitsRef = useRef([]);
-  const sectionRef = useRef(null);
-  const infoRef = useRef(null);
 
   const {
     register,
@@ -106,81 +71,69 @@ export const QuoteForm = () => {
 
   const selectedSystem = watch("projectType");
 
-  // Actualizar nivel seleccionado y sugerir presupuesto
+  // Actualizar nivel seleccionado y autocompletar presupuesto
   useEffect(() => {
     if (selectedSystem) {
-      setSelectedLevel(selectedSystem);
       const level = PROJECT_TYPES.find((l) => l.id === selectedSystem);
+      setSelectedLevelData(level || null);
       if (level) {
-        // Extraer presupuesto mínimo del rango
         const minBudget = parseInt(
-          level.price.split(" - ")[0].replace(",", "")
+          level.price.split(" - ")[0].replace(/,/g, "")
         );
         setValue("budget", minBudget.toString());
       }
+    } else {
+      setSelectedLevelData(null);
     }
   }, [selectedSystem, setValue]);
 
-  // Animación de entrada
+  // ── Animación de entrada ────────────────────────────────────────────────────
   useEffect(() => {
     const ctx = gsap.context(() => {
       gsap.set(
-        [
-          titleRef.current,
-          subtitleRef.current,
-          formRef.current,
-          ...benefitsRef.current.filter(Boolean),
-        ],
-        {
-          opacity: 1,
-          y: 0,
-          visibility: "visible",
-        }
+        [tagRef.current, titleRef.current, descRef.current, formRef.current],
+        { opacity: 0, y: 24 }
       );
+      gsap.set(benefitsRef.current.filter(Boolean), { opacity: 0, y: 16 });
 
       const tl = gsap.timeline({
         scrollTrigger: {
           trigger: sectionRef.current,
           start: "top 80%",
-          toggleActions: "play none none none",
+          once: true,
         },
       });
 
-      tl.from(titleRef.current, {
-        opacity: 0,
-        y: 50,
-        duration: 0.8,
+      tl.to(tagRef.current, {
+        opacity: 1,
+        y: 0,
+        duration: 0.5,
         ease: "power3.out",
       })
-        .from(
-          subtitleRef.current,
-          {
-            opacity: 0,
-            y: 30,
-            duration: 0.6,
-            ease: "power2.out",
-          },
-          "-=0.4"
-        )
-        .from(
-          benefitsRef.current.filter(Boolean),
-          {
-            opacity: 0,
-            x: -20,
-            stagger: 0.1,
-            duration: 0.6,
-            ease: "power2.out",
-          },
+        .to(
+          titleRef.current,
+          { opacity: 1, y: 0, duration: 0.6, ease: "power3.out" },
           "-=0.3"
         )
-        .from(
-          formRef.current,
+        .to(
+          descRef.current,
+          { opacity: 1, y: 0, duration: 0.5, ease: "power3.out" },
+          "-=0.3"
+        )
+        .to(
+          benefitsRef.current.filter(Boolean),
           {
-            opacity: 0,
-            y: 50,
-            duration: 0.8,
-            ease: "back.out(1.2)",
+            opacity: 1,
+            y: 0,
+            stagger: 0.08,
+            duration: 0.4,
+            ease: "power3.out",
           },
+          "-=0.2"
+        )
+        .to(
+          formRef.current,
+          { opacity: 1, y: 0, duration: 0.6, ease: "power3.out" },
           "-=0.2"
         );
     }, sectionRef);
@@ -188,30 +141,32 @@ export const QuoteForm = () => {
     return () => ctx.revert();
   }, []);
 
-  // Animación de error
+  // ── Shake en error ──────────────────────────────────────────────────────────
   useEffect(() => {
-    if (Object.keys(errors).length > 0) {
+    if (Object.keys(errors).length > 0 && formRef.current) {
       gsap.to(formRef.current, {
-        x: [-5, 5, -3, 3, 0],
-        duration: 0.4,
+        keyframes: { x: [-4, 4, -3, 3, 0] },
+        duration: 0.35,
         ease: "power2.inOut",
       });
     }
   }, [errors]);
 
+  // ── Submit ──────────────────────────────────────────────────────────────────
   const onSubmit = async (data) => {
     setIsSubmitting(true);
 
-    try {
-      gsap
-        .timeline()
-        .to(buttonRef.current, { scale: 0.95, duration: 0.1 })
-        .to(buttonRef.current, {
-          scale: 1,
-          duration: 0.2,
-          ease: "elastic.out(1, 0.5)",
-        });
+    // Feedback táctil en botón
+    gsap
+      .timeline()
+      .to(buttonRef.current, { scale: 0.96, duration: 0.1 })
+      .to(buttonRef.current, {
+        scale: 1,
+        duration: 0.2,
+        ease: "elastic.out(1, 0.5)",
+      });
 
+    try {
       const response = await fetch("/api/quote", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -225,36 +180,13 @@ export const QuoteForm = () => {
       }
 
       setSuccessData(data);
-
-      toast.success("¡Cotización enviada! Te contactaré en 24h", {
+      toast.success("¡Diagnóstico enviado! Te contactamos en 24h", {
         duration: 5000,
-        icon: "🎉",
-        style: {
-          borderRadius: "12px",
-          background: "#10b981",
-          color: "#fff",
-          padding: "16px",
-        },
+        icon: "✓",
       });
-
-      gsap
-        .timeline()
-        .to(formRef.current, { scale: 0.98, opacity: 0.7, duration: 0.3 })
-        .to(formRef.current, {
-          scale: 1,
-          opacity: 1,
-          duration: 0.4,
-          ease: "back.out(1.2)",
-        });
     } catch (error) {
-      toast.error(error.message || "Error al enviar", {
-        icon: "❌",
-        style: {
-          borderRadius: "12px",
-          background: "#ef4444",
-          color: "#fff",
-          padding: "16px",
-        },
+      toast.error(error.message || "Error al enviar. Intenta de nuevo.", {
+        duration: 4000,
       });
     } finally {
       setIsSubmitting(false);
@@ -266,8 +198,8 @@ export const QuoteForm = () => {
     reset();
     gsap.fromTo(
       formRef.current,
-      { scale: 0.95, opacity: 0, y: 20 },
-      { scale: 1, opacity: 1, y: 0, duration: 0.6, ease: "back.out(1.4)" }
+      { opacity: 0, y: 16 },
+      { opacity: 1, y: 0, duration: 0.5, ease: "power3.out" }
     );
   }, [reset]);
 
@@ -275,271 +207,189 @@ export const QuoteForm = () => {
     return <FormSuccess data={successData} onReset={handleReset} />;
   }
 
-  // Encontrar el nivel seleccionado para mostrar información
-  const selectedLevelData = PROJECT_TYPES.find((l) => l.id === selectedSystem);
-
   return (
-    <section
-      ref={sectionRef}
-      className="relative min-h-screen bg-gradient-to-br from-gray-50 via-white to-gray-50 py-20 overflow-hidden"
-    >
-      {/* Elementos decorativos */}
-      <div className="absolute inset-0 pointer-events-none">
-        <div className="absolute top-40 left-20 w-72 h-72 bg-green/5 rounded-full filter blur-3xl" />
-        <div className="absolute bottom-40 right-20 w-96 h-96 bg-green2/5 rounded-full filter blur-3xl" />
-      </div>
-
-      <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        {/* Header */}
-        <div className="text-center mb-12">
-          <motion.div ref={titleRef} className="space-y-4">
-            <span className="inline-block px-4 py-2 bg-green/10 text-green rounded-full text-sm font-mono border border-green/30">
-               SISTEMAS DE CONVERSIÓN
-            </span>
-
-            <h1 className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-ubuntu font-black tracking-tight leading-none">
-              <span className="text-black">DIAGNOSTICA</span>
-              <br />
-              <span className="text-green relative">
-                TU NEGOCIO
-                <span className="absolute -bottom-3 left-0 w-full h-1 bg-green rounded-full" />
-              </span>
-            </h1>
-          </motion.div>
-
-          <motion.p
-            ref={subtitleRef}
-            className="text-lg md:text-xl text-gray max-w-2xl mx-auto mt-6 leading-relaxed"
-          >
-            Descubre qué nivel del Sistema STRING necesita tu negocio para
-            convertir visitas en clientes reales.
-          </motion.p>
+    <section ref={sectionRef} className="relative max-w-5xl mx-auto">
+      {/* ── Header ──────────────────────────────────────────────────────────── */}
+      <div className="mb-12 space-y-6">
+        <div ref={tagRef}>
+          <span className="inline-flex items-center gap-2.5 px-3 py-1.5 border border-green/30 text-green text-xs font-mono uppercase tracking-[0.2em] rounded-sm">
+            <span className="w-1.5 h-1.5 rounded-full bg-green animate-pulse" />
+            Diagnóstico gratuito
+          </span>
         </div>
 
-        {/* Beneficios */}
-        <div className="flex flex-wrap justify-center gap-4 mb-12">
-          {benefits.map((benefit, index) => {
-            const Icon = benefit.icon;
+        <h1
+          ref={titleRef}
+          className="font-anton text-6xl sm:text-7xl md:text-8xl leading-[0.9] tracking-tighter uppercase"
+        >
+          <span className="text-white">Diagnostica</span>
+          <br />
+          <span className="text-green">tu negocio</span>
+        </h1>
+
+        <p ref={descRef} className="text-gray text-lg leading-relaxed max-w-xl">
+          Descubre qué nivel del Sistema STRING necesita tu negocio para
+          convertir visitas en clientes reales.
+        </p>
+
+        {/* Benefits */}
+        <div className="flex flex-wrap gap-3">
+          {benefits.map((b, i) => {
+            const Icon = b.icon;
             return (
-              <motion.div
-                key={index}
-                ref={(el) => (benefitsRef.current[index] = el)}
-                whileHover={{ y: -4, scale: 1.02 }}
-                className="flex items-center gap-3 px-5 py-2.5 bg-white rounded-full shadow-lg border border-gray hover:shadow-xl transition-all"
+              <div
+                key={i}
+                ref={(el) => (benefitsRef.current[i] = el)}
+                className="inline-flex items-center gap-2 px-3 py-1.5 border border-white/10 text-xs font-mono text-gray"
               >
-                <div
-                  className={`w-8 h-8 rounded-full bg-gradient-to-br ${benefit.color} flex items-center justify-center`}
-                >
-                  <Icon className="text-white text-sm" />
-                </div>
-                <span className="text-sm font-medium text-gray">
-                  {benefit.text}
-                </span>
-              </motion.div>
+                <Icon className="text-green text-sm" />
+                {b.text}
+              </div>
             );
           })}
         </div>
+      </div>
 
-        {/* Formulario */}
-        <motion.div ref={formRef} className="max-w-3xl mx-auto">
-          <form
-            onSubmit={handleSubmit(onSubmit)}
-            className="bg-white/90 backdrop-blur-xl rounded-3xl shadow-2xl p-8 md:p-10 border border-gray-200/50"
-            noValidate
-          >
-            <div className="grid md:grid-cols-2 gap-6">
-              <FormField
-                label="Nombre completo"
-                name="name"
-                register={register}
-                error={errors.name?.message}
-                placeholder="Juan Pérez"
-                icon={FiUser}
-                onFocus={() => setFocusedField("name")}
-                onBlur={() => setFocusedField(null)}
-                isFocused={focusedField === "name"}
-                required
-              />
+      {/* ── Formulario ──────────────────────────────────────────────────────── */}
+      <div ref={formRef}>
+        <form
+          onSubmit={handleSubmit(onSubmit)}
+          className="border border-white/10 p-8 md:p-10 space-y-6"
+          noValidate
+        >
+          {/* Fila 1: Nombre + Email */}
+          <div className="grid md:grid-cols-2 gap-6">
+            <FormField
+              label="Nombre completo"
+              name="name"
+              register={register}
+              error={errors.name?.message}
+              placeholder="Juan Pérez"
+              icon={FiUser}
+              required
+            />
+            <FormField
+              label="Email"
+              name="email"
+              type="email"
+              register={register}
+              error={errors.email?.message}
+              placeholder="juan@email.com"
+              required
+            />
+          </div>
 
-              <FormField
-                label="Email"
-                name="email"
-                type="email"
-                register={register}
-                error={errors.email?.message}
-                placeholder="juan@email.com"
-                icon={FiMail}
-                onFocus={() => setFocusedField("email")}
-                onBlur={() => setFocusedField(null)}
-                isFocused={focusedField === "email"}
-                required
-              />
+          {/* Fila 2: WhatsApp + Nivel */}
+          <div className="grid md:grid-cols-2 gap-6">
+            <FormField
+              label="WhatsApp"
+              name="whatsapp"
+              type="tel"
+              register={register}
+              error={errors.whatsapp?.message}
+              placeholder="521234567890"
+              required
+            />
+            <FormSelect
+              label="Nivel del Sistema STRING"
+              name="projectType"
+              register={register}
+              error={errors.projectType?.message}
+              required
+            />
+          </div>
 
-              <FormField
-                label="WhatsApp"
-                name="whatsapp"
-                type="tel"
-                register={register}
-                error={errors.whatsapp?.message}
-                placeholder="521234567890"
-                icon={FiPhone}
-                onFocus={() => setFocusedField("whatsapp")}
-                onBlur={() => setFocusedField(null)}
-                isFocused={focusedField === "whatsapp"}
-                required
-              />
-
-              {/* Selector de nivel con información */}
-              <div className="relative">
-                <FormSelect
-                  label="Nivel del Sistema STRING"
-                  name="projectType"
-                  register={register}
-                  error={errors.projectType?.message}
-                  options={PROJECT_TYPES.map((p) => ({
-                    value: p.id,
-                    label: `${p.label}`,
-                  }))}
-                  icon={FiTarget}
-                  onFocus={() => setFocusedField("projectType")}
-                  onBlur={() => setFocusedField(null)}
-                  isFocused={focusedField === "projectType"}
-                  required
-                />
-
-                {/* Botón de información del nivel */}
-                {selectedLevel && (
-                  <button
-                    type="button"
-                    onClick={() => setShowLevelInfo(!showLevelInfo)}
-                    className="absolute right-10 top-9 text-green hover:text-green2 transition-colors"
-                  >
-                    <FiInfo className="text-lg" />
-                  </button>
-                )}
-              </div>
-            </div>
-
-            {/* Información del nivel seleccionado */}
-            <AnimatePresence>
-              {showLevelInfo && selectedLevelData && (
-                <motion.div
-                  initial={{ opacity: 0, height: 0 }}
-                  animate={{ opacity: 1, height: "auto" }}
-                  exit={{ opacity: 0, height: 0 }}
-                  transition={{ duration: 0.3 }}
-                  className="overflow-hidden mt-4"
-                >
-                  <div className="bg-green/5 rounded-xl p-4 border border-green/20">
-                    <h4 className="font-bold text-green mb-2">
-                      {selectedLevelData.label}
-                    </h4>
-                    <p className="text-sm text-gray mb-2">
-                      {selectedLevelData.description}
-                    </p>
-                    <p className="text-xs text-gray-500 mb-2">
-                      Precio estimado: {selectedLevelData.price}
-                    </p>
-                    <div className="grid grid-cols-2 gap-2 mt-2"></div>
-                  </div>
-                </motion.div>
-              )}
-            </AnimatePresence>
-
-            <div className="mt-6">
-              <FormField
-                label="Objetivo del proyecto"
-                name="objective"
-                type="textarea"
-                register={register}
-                error={errors.objective?.message}
-                placeholder="Cuéntanos qué necesitas, cuál es tu negocio y qué esperas lograr..."
-                rows={4}
-                icon={FiTarget}
-                onFocus={() => setFocusedField("objective")}
-                onBlur={() => setFocusedField(null)}
-                isFocused={focusedField === "objective"}
-                required
-              />
-            </div>
-
-            <div className="grid md:grid-cols-2 gap-6 mt-6">
-              <FormField
-                label="Fecha ideal de entrega"
-                name="idealDate"
-                type="date"
-                register={register}
-                error={errors.idealDate?.message}
-                icon={FiCalendar}
-                onFocus={() => setFocusedField("idealDate")}
-                onBlur={() => setFocusedField(null)}
-                isFocused={focusedField === "idealDate"}
-                required
-              />
-
-              <FormField
-                label="Presupuesto estimado (MXN)"
-                name="budget"
-                type="number"
-                register={register}
-                error={errors.budget?.message}
-                placeholder="20,000"
-                icon={FiDollarSign}
-                onFocus={() => setFocusedField("budget")}
-                onBlur={() => setFocusedField(null)}
-                isFocused={focusedField === "budget"}
-                required
-              />
-            </div>
-
-            {/* Botón de envío */}
-            <div className="mt-10">
-              <motion.button
-                ref={buttonRef}
-                type="submit"
-                disabled={isSubmitting}
-                className="group relative w-full overflow-hidden rounded-2xl bg-gradient-to-r from-green to-green2 text-black font-bold px-8 py-5 text-lg transition-all hover:shadow-2xl hover:shadow-green/30 disabled:cursor-not-allowed disabled:opacity-70"
-                whileHover={{ scale: 1.02 }}
-                whileTap={{ scale: 0.98 }}
-              >
-                <span className="relative z-10 flex items-center justify-center gap-2">
-                  {isSubmitting ? (
-                    <>
-                      <svg className="animate-spin h-5 w-5" viewBox="0 0 24 24">
-                        <circle
-                          className="opacity-25"
-                          cx="12"
-                          cy="12"
-                          r="10"
-                          stroke="currentColor"
-                          strokeWidth="4"
-                          fill="none"
-                        />
-                        <path
-                          className="opacity-75"
-                          fill="currentColor"
-                          d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
-                        />
-                      </svg>
-                      <span>Enviando diagnóstico...</span>
-                    </>
-                  ) : (
-                    <>
-                      <span>Solicitar diagnóstico gratuito</span>
-                      <FiArrowRight className="group-hover:translate-x-2 transition-transform" />
-                    </>
-                  )}
-                </span>
-                <div className="absolute inset-0 -translate-x-full group-hover:translate-x-0 bg-gradient-to-r from-white/20 to-transparent transition-transform duration-700" />
-              </motion.button>
-
-              <p className="text-sm text-gray text-center mt-4">
-                Te contactaremos en menos de 24 horas con un diagnóstico
-                preliminar.
+          {/* Info del nivel seleccionado */}
+          {selectedLevelData && (
+            <div className="border border-green/20 bg-green/5 p-4 space-y-2">
+              <p className="text-[10px] font-mono text-green uppercase tracking-widest">
+                {selectedLevelData.label}
+              </p>
+              <p className="text-white/80 text-sm leading-relaxed">
+                {selectedLevelData.description}
+              </p>
+              <p className="text-[10px] font-mono text-gray">
+                Precio estimado: ${selectedLevelData.price} MXN
               </p>
             </div>
-          </form>
-        </motion.div>
+          )}
+
+          {/* Objetivo */}
+          <FormField
+            label="Objetivo del proyecto"
+            name="objective"
+            type="textarea"
+            register={register}
+            error={errors.objective?.message}
+            placeholder="Cuéntanos qué necesitas, cuál es tu negocio y qué esperas lograr..."
+            rows={4}
+            required
+          />
+
+          {/* Fila 3: Fecha + Presupuesto */}
+          <div className="grid md:grid-cols-2 gap-6">
+            <FormField
+              label="Fecha ideal de entrega"
+              name="idealDate"
+              type="date"
+              register={register}
+              error={errors.idealDate?.message}
+              required
+            />
+            <FormField
+              label="Presupuesto estimado (MXN)"
+              name="budget"
+              type="number"
+              register={register}
+              error={errors.budget?.message}
+              placeholder="8000"
+              required
+            />
+          </div>
+
+          {/* Submit */}
+          <div className="pt-2">
+            <button
+              ref={buttonRef}
+              type="submit"
+              disabled={isSubmitting}
+              className="group relative w-full overflow-hidden bg-green text-black font-bold px-8 py-4 text-sm uppercase tracking-wide rounded-sm hover:bg-white transition-colors duration-200 disabled:opacity-60 disabled:cursor-not-allowed"
+            >
+              <span className="relative z-10 flex items-center justify-center gap-2">
+                {isSubmitting ? (
+                  <>
+                    <svg className="animate-spin h-4 w-4" viewBox="0 0 24 24">
+                      <circle
+                        className="opacity-25"
+                        cx="12"
+                        cy="12"
+                        r="10"
+                        stroke="currentColor"
+                        strokeWidth="4"
+                        fill="none"
+                      />
+                      <path
+                        className="opacity-75"
+                        fill="currentColor"
+                        d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
+                      />
+                    </svg>
+                    Enviando diagnóstico...
+                  </>
+                ) : (
+                  <>
+                    Solicitar diagnóstico gratuito
+                    <FiArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform duration-200" />
+                  </>
+                )}
+              </span>
+            </button>
+
+            <p className="text-xs text-gray text-center mt-4 font-mono">
+              Te contactamos en menos de 24 horas · Sin compromiso
+            </p>
+          </div>
+        </form>
       </div>
     </section>
   );

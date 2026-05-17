@@ -1,425 +1,364 @@
 "use client";
 
 import React, { useEffect, useRef, useState } from "react";
-import { motion, useInView } from "framer-motion";
+import Link from "next/link";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import Link from "next/link";
 import {
   FiArrowRight,
-  FiTarget,
-  FiTrendingUp,
-  FiZap,
-  FiUsers,
   FiCheckCircle,
-  FiBarChart2,
-  FiClock,
-  FiAward,
   FiSearch,
   FiLayers,
   FiCode,
   FiShield,
 } from "react-icons/fi";
-import {
-  MdOutlineSpeed,
-  MdOutlineAnalytics,
-  MdOutlineRocketLaunch,
-} from "react-icons/md";
 
 gsap.registerPlugin(ScrollTrigger);
 
-// Las 4 fases de la metodología STRING
+// ─── Datos ────────────────────────────────────────────────────────────────────
 const stepsData = [
   {
     number: "01",
     title: "DIAGNÓSTICO",
-    description: "Análisis profundo de tu presencia digital actual",
+    fase: "Fase 1",
+    metric: "24h",
+    description:
+      "Análisis profundo de tu presencia digital actual. Identificamos fricciones, oportunidades y el punto de partida real del sistema.",
     items: [
       "Análisis de redes sociales actuales",
       "Evaluación de claridad de servicios",
-      "Revisión de proceso actual de contacto",
+      "Revisión del proceso actual de contacto",
       "Identificación de fricciones en la captación",
     ],
-    gradient: "from-green to-green2",
     icon: FiSearch,
-    metric: "24h",
-    color: "green",
-    fase: "Fase 1",
   },
   {
     number: "02",
     title: "ESTRUCTURACIÓN",
-    description: "Definición de la estrategia del sistema digital",
+    fase: "Fase 2",
+    metric: "Estratégico",
+    description:
+      "Definimos la arquitectura del sistema. Propuesta de valor, flujo de conversión y llamados a la acción con propósito claro.",
     items: [
       "Definición de propuesta de valor",
       "Diseño de flujo de conversión",
       "Estructura de la página",
       "Llamados a la acción claros",
     ],
-    gradient: "from-green2 to-green3",
     icon: FiLayers,
-    metric: "Estratégico",
-    color: "green2",
-    fase: "Fase 2",
   },
   {
     number: "03",
     title: "DESARROLLO",
-    description: "Implementación del sistema digital",
+    fase: "Fase 3",
+    metric: "Técnico",
+    description:
+      "Implementamos el sistema digital. Landing optimizada, integración con WhatsApp y automatizaciones que trabajan por ti.",
     items: [
       "Desarrollo de landing page",
       "Optimización para celular",
       "Integración con WhatsApp",
       "Implementación de automatizaciones",
     ],
-    gradient: "from-green3 to-green4",
     icon: FiCode,
-    metric: "Técnico",
-    color: "green3",
-    fase: "Fase 3",
   },
   {
     number: "04",
     title: "AJUSTE INICIAL",
-    description: "Pruebas y verificación del sistema",
+    fase: "Fase 4",
+    metric: "Garantizado",
+    description:
+      "Pruebas y verificación del sistema completo antes de la entrega. Cero errores, flujo funcional, listo para captar.",
     items: [
       "Pruebas de funcionamiento",
       "Revisión del flujo de contacto",
       "Ajustes de claridad",
       "Verificación técnica completa",
     ],
-    gradient: "from-green4 to-green",
     icon: FiShield,
-    metric: "Garantizado",
-    color: "green4",
-    fase: "Fase 4",
   },
 ];
 
-const StepCircle = ({ step, index, isActive, onHover }) => {
-  const circleRef = useRef(null);
-  const isInView = useInView(circleRef, { once: true, amount: 0.3 });
-
-  return (
-    <motion.div
-      ref={circleRef}
-      initial={{ opacity: 0, scale: 0.5 }}
-      animate={isInView ? { opacity: 1, scale: 1 } : {}}
-      transition={{ duration: 0.6, delay: index * 0.15 }}
-      onMouseEnter={() => onHover(index)}
-      onMouseLeave={() => onHover(null)}
-      className="relative cursor-pointer"
-    >
-      {/* Círculo principal */}
-      <div
-        className={`
-          relative w-[200px] h-[200px] md:w-[240px] md:h-[240px] 
-          rounded-full bg-gradient-to-br ${step.gradient}
-          flex items-center justify-center
-          shadow-2xl
-          border-4 border-white/10
-          transition-all duration-300
-          ${isActive ? "scale-110 ring-4 ring-white/30" : "hover:scale-105"}
-        `}
-      >
-        {/* Círculo interior con blur */}
-        <div className="absolute inset-2 rounded-full bg-black/20 backdrop-blur-sm" />
-
-        {/* Contenido */}
-        <div className="relative z-10 text-center p-4">
-          <span className="text-xs font-mono text-white/80 mb-1 block">
-            {step.fase}
-          </span>
-          <span className="text-3xl md:text-4xl font-black text-white mb-2 block">
-            {step.number}
-          </span>
-          <step.icon className="text-3xl md:text-4xl text-white mx-auto mb-2" />
-          <h3 className="text-base md:text-lg font-ubuntu font-bold text-white">
-            {step.title}
-          </h3>
-          <span className={`text-xs font-mono text-${step.color} mt-2 block`}>
-            {step.metric}
-          </span>
-        </div>
-      </div>
-    </motion.div>
-  );
-};
-
-const InfoPanel = ({ step, isVisible }) => {
-  if (!step || !isVisible) return null;
-
-  return (
-    <motion.div
-      initial={{ opacity: 0, y: 20 }}
-      animate={{ opacity: 1, y: 0 }}
-      exit={{ opacity: 0, y: -20 }}
-      transition={{ duration: 0.4 }}
-      className="bg-white/5 backdrop-blur-lg rounded-2xl p-6 md:p-8 border border-white/10"
-    >
-      <div className="flex items-center gap-4 mb-6">
-        <div
-          className={`w-12 h-12 rounded-xl bg-gradient-to-br ${step.gradient} flex items-center justify-center`}
-        >
-          <step.icon className="text-2xl text-white" />
-        </div>
-        <div>
-          <span className={`text-sm font-mono text-${step.color} mb-1 block`}>
-            {step.fase} · PASO {step.number}
-          </span>
-          <h3 className="text-xl md:text-2xl font-ubuntu font-bold text-white">
-            {step.title}
-          </h3>
-        </div>
-      </div>
-
-      <p className="text-gray-300 mb-6 text-base md:text-lg leading-relaxed">
-        {step.description}
-      </p>
-
-      <div className="bg-black/30 rounded-xl p-4 mb-6">
-        <p className="text-sm text-green font-mono mb-3">
-          OBJETIVO DE ESTA FASE:
-        </p>
-        <ul className="space-y-3">
-          {step.items.map((item, i) => (
-            <motion.li
-              key={i}
-              initial={{ opacity: 0, x: -10 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ delay: i * 0.1 }}
-              className="flex items-start gap-3 text-gray-300 text-sm"
-            >
-              <FiCheckCircle
-                className={`text-${step.color} mt-1 flex-shrink-0`}
-              />
-              <span>{item}</span>
-            </motion.li>
-          ))}
-        </ul>
-      </div>
-
-      <p className="text-sm text-gray-400 italic border-t border-white/10 pt-4">
-        "STRING no entrega páginas web. Entrega sistemas funcionales de
-        captación de clientes."
-      </p>
-
-      {/* Barra de progreso decorativa */}
-      <div className="mt-4 h-1 w-full bg-white/10 rounded-full overflow-hidden">
-        <motion.div
-          initial={{ width: "0%" }}
-          animate={{ width: "100%" }}
-          transition={{ duration: 1, delay: 0.3 }}
-          className={`h-full bg-gradient-to-r ${step.gradient}`}
-        />
-      </div>
-    </motion.div>
-  );
-};
-
+// ─── Componente ───────────────────────────────────────────────────────────────
 const Steps = () => {
-  const [mounted, setMounted] = useState(false);
   const [activeStep, setActiveStep] = useState(0);
   const sectionRef = useRef(null);
+  const tagRef = useRef(null);
   const titleRef = useRef(null);
-  const subtitleRef = useRef(null);
-  const descriptionRef = useRef(null);
+  const descRef = useRef(null);
+  const stepsRef = useRef([]);
+  const panelRef = useRef(null);
+  const ctaRef = useRef(null);
 
+  // ── Animación de entrada ────────────────────────────────────────────────────
   useEffect(() => {
-    setMounted(true);
-  }, []);
-
-  // Animación de entrada con ScrollTrigger
-  useEffect(() => {
-    if (!mounted) return;
-
     const ctx = gsap.context(() => {
-      // Configurar estado inicial
       gsap.set(
-        [titleRef.current, subtitleRef.current, descriptionRef.current],
-        {
-          opacity: 0,
-          y: 30,
-        }
+        [tagRef.current, titleRef.current, descRef.current, ctaRef.current],
+        { opacity: 0, y: 24 }
       );
+      gsap.set(stepsRef.current.filter(Boolean), { opacity: 0, y: 20 });
+      gsap.set(panelRef.current, { opacity: 0, y: 16 });
 
-      // Timeline con ScrollTrigger
-      const tl = gsap.timeline({
+      const tlHeader = gsap.timeline({
         scrollTrigger: {
-          trigger: sectionRef.current,
-          start: "top 80%",
-          toggleActions: "play none none none",
+          trigger: tagRef.current,
+          start: "top 82%",
+          once: true,
         },
       });
 
-      tl.to(titleRef.current, {
-        opacity: 1,
-        y: 0,
-        duration: 0.7,
-        ease: "power2.out",
-      })
+      tlHeader
+        .to(tagRef.current, {
+          opacity: 1,
+          y: 0,
+          duration: 0.5,
+          ease: "power3.out",
+        })
         .to(
-          subtitleRef.current,
-          {
-            opacity: 1,
-            y: 0,
-            duration: 0.6,
-            ease: "power2.out",
-          },
-          "-=0.4"
+          titleRef.current,
+          { opacity: 1, y: 0, duration: 0.6, ease: "power3.out" },
+          "-=0.3"
         )
         .to(
-          descriptionRef.current,
-          {
-            opacity: 1,
-            y: 0,
-            duration: 0.6,
-            ease: "power2.out",
-          },
+          descRef.current,
+          { opacity: 1, y: 0, duration: 0.5, ease: "power3.out" },
           "-=0.3"
         );
+
+      gsap.to(stepsRef.current.filter(Boolean), {
+        opacity: 1,
+        y: 0,
+        stagger: 0.1,
+        duration: 0.5,
+        ease: "power3.out",
+        scrollTrigger: {
+          trigger: stepsRef.current[0],
+          start: "top 84%",
+          once: true,
+        },
+      });
+
+      gsap.to(panelRef.current, {
+        opacity: 1,
+        y: 0,
+        duration: 0.5,
+        ease: "power3.out",
+        scrollTrigger: {
+          trigger: panelRef.current,
+          start: "top 86%",
+          once: true,
+        },
+      });
+
+      gsap.to(ctaRef.current, {
+        opacity: 1,
+        y: 0,
+        duration: 0.5,
+        ease: "power3.out",
+        scrollTrigger: {
+          trigger: ctaRef.current,
+          start: "top 88%",
+          once: true,
+        },
+      });
     }, sectionRef);
 
     return () => ctx.revert();
-  }, [mounted]);
+  }, []);
 
-  if (!mounted) {
-    return (
-      <section className="relative bg-black py-20">
-        <div className="max-w-7xl mx-auto px-4">
-          <div className="h-96 bg-gray-900 animate-pulse rounded-2xl" />
-        </div>
-      </section>
+  // ── Animar panel al cambiar step ───────────────────────────────────────────
+  const handleStepChange = (index) => {
+    if (index === activeStep) return;
+    gsap.fromTo(
+      panelRef.current,
+      { opacity: 0, y: 10 },
+      { opacity: 1, y: 0, duration: 0.3, ease: "power2.out" }
     );
-  }
+    setActiveStep(index);
+  };
+
+  const step = stepsData[activeStep];
+  const Icon = step.icon;
 
   return (
     <section
       ref={sectionRef}
-      className="relative bg-black py-20 overflow-hidden"
+      className="relative bg-black py-24 md:py-32 overflow-hidden"
     >
-      {/* Fondo con partículas */}
-      <div className="absolute inset-0">
-        <div className="absolute inset-0 bg-gradient-to-b from-green-900/10 via-black to-black" />
-
-        {/* Estrellas/partículas estáticas (sin animación para mejor rendimiento) */}
-        <div className="absolute inset-0 opacity-30">
-          <div
-            className="absolute inset-0"
-            style={{
-              backgroundImage: `radial-gradient(circle at 1px 1px, rgba(80, 255, 5, 0.2) 1px, transparent 0)`,
-              backgroundSize: "40px 40px",
-            }}
-          />
-        </div>
-
-        {/* Líneas orbitales decorativas */}
-        <svg className="absolute inset-0 w-full h-full pointer-events-none opacity-10">
-          <circle
-            cx="50%"
-            cy="50%"
-            r="300"
-            fill="none"
-            stroke="url(#grad)"
-            strokeWidth="1"
-            strokeDasharray="10,10"
-          />
-          <defs>
-            <linearGradient id="grad" x1="0%" y1="0%" x2="100%" y2="100%">
-              <stop offset="0%" stopColor="#50ff05" />
-              <stop offset="100%" stopColor="#28a624" />
-            </linearGradient>
-          </defs>
-        </svg>
+      {/* ── Fondo ─────────────────────────────────────────────────────────── */}
+      <div className="absolute inset-0 pointer-events-none">
+        <div className="absolute top-0 right-1/4 w-[500px] h-[500px] bg-green/4 rounded-full blur-[120px]" />
+        <div
+          className="absolute inset-0 opacity-[0.03]"
+          style={{
+            backgroundImage:
+              "radial-gradient(circle at 1px 1px, #50ff05 1px, transparent 0)",
+            backgroundSize: "40px 40px",
+          }}
+        />
       </div>
 
-      <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        {/* Header */}
-        <div className="text-center mb-16">
-          <div ref={titleRef} className="space-y-4">
-            <span className="inline-block px-4 py-2 bg-green/10 text-green rounded-full text-sm font-mono border border-green/30">
-              ✦ METODOLOGÍA STRING
+      <div className="relative max-w-5xl mx-auto px-6 sm:px-8 lg:px-12">
+        {/* ── Header ────────────────────────────────────────────────────────── */}
+        <div className="mb-16 space-y-6">
+          <div ref={tagRef}>
+            <span className="inline-flex items-center gap-2.5 px-3 py-1.5 border border-green/30 text-green text-xs font-mono uppercase tracking-[0.2em] rounded-sm">
+              <span className="w-1.5 h-1.5 rounded-full bg-green" />
+              Metodología STRING
             </span>
-
-            <h2 className="text-5xl md:text-6xl lg:text-7xl font-ubuntu font-black tracking-tight leading-tight">
-              <span className="text-white">NUESTRO</span>
-              <br />
-              <span className="bg-gradient-to-r from-green to-green2 bg-clip-text text-transparent">
-                SISTEMA
-              </span>
-            </h2>
-
-            <h2
-              ref={subtitleRef}
-              className="text-4xl md:text-5xl lg:text-6xl font-ubuntu font-bold tracking-tight leading-tight text-white"
-            >
-              DE CONVERSIÓN
-            </h2>
           </div>
 
+          <h2
+            ref={titleRef}
+            className="font-anton text-5xl sm:text-6xl md:text-7xl leading-[0.9] tracking-tighter text-white uppercase"
+          >
+            Nuestro sistema <span className="text-green">de conversión</span>
+          </h2>
+
           <p
-            ref={descriptionRef}
-            className="text-base md:text-lg text-gray-400 max-w-2xl mx-auto mt-6"
+            ref={descRef}
+            className="text-gray text-lg leading-relaxed max-w-xl"
           >
             Cuatro fases para transformar tu presencia digital en un sistema que
             convierte visitas en clientes potenciales organizados.
           </p>
         </div>
 
-        {/* Círculos en fila */}
-        <div className="flex flex-wrap justify-center items-center gap-8 md:gap-12 lg:gap-16 mb-16">
-          {stepsData.map((step, index) => (
-            <StepCircle
-              key={index}
-              step={step}
-              index={index}
-              isActive={activeStep === index}
-              onHover={setActiveStep}
-            />
-          ))}
+        {/* ── Steps — tabs horizontales ──────────────────────────────────────── */}
+        <div className="grid grid-cols-4 gap-px bg-white/5 mb-px">
+          {stepsData.map((s, i) => {
+            const SIcon = s.icon;
+            const isActive = activeStep === i;
+            return (
+              <button
+                key={i}
+                ref={(el) => (stepsRef.current[i] = el)}
+                onClick={() => handleStepChange(i)}
+                className={`group relative bg-black px-4 py-6 text-left transition-colors duration-200 ${
+                  isActive ? "bg-white/[0.04]" : "hover:bg-white/[0.02]"
+                }`}
+              >
+                {/* Indicador activo */}
+                <div
+                  className={`absolute top-0 left-0 right-0 h-px transition-all duration-300 ${
+                    isActive ? "bg-green" : "bg-transparent"
+                  }`}
+                />
+
+                <span className="text-[10px] font-mono text-gray uppercase tracking-widest block mb-3">
+                  {s.fase}
+                </span>
+
+                <SIcon
+                  className={`text-xl mb-3 transition-colors duration-200 ${
+                    isActive ? "text-green" : "text-gray group-hover:text-white"
+                  }`}
+                />
+
+                <p
+                  className={`font-anton text-base leading-tight tracking-tight transition-colors duration-200 ${
+                    isActive
+                      ? "text-green"
+                      : "text-white/60 group-hover:text-white"
+                  }`}
+                >
+                  {s.title}
+                </p>
+
+                <p className="text-[10px] font-mono text-gray mt-2">
+                  {s.metric}
+                </p>
+              </button>
+            );
+          })}
         </div>
 
-        {/* Panel de información dinámico */}
-        <div className="max-w-3xl mx-auto">
-          <InfoPanel step={stepsData[activeStep]} isVisible={true} />
+        {/* ── Panel de detalle ──────────────────────────────────────────────── */}
+        <div
+          ref={panelRef}
+          className="border border-white/10 border-t-0 bg-black p-8 md:p-10"
+        >
+          <div className="grid md:grid-cols-[1fr_1fr] gap-8 md:gap-12">
+            {/* Info */}
+            <div className="space-y-6">
+              <div className="flex items-center gap-4">
+                <div className="w-10 h-10 border border-green/30 bg-green/10 flex items-center justify-center flex-shrink-0">
+                  <Icon className="text-green text-lg" />
+                </div>
+                <div>
+                  <span className="text-[10px] font-mono text-gray uppercase tracking-widest">
+                    {step.fase} · Paso {step.number}
+                  </span>
+                  <h3 className="font-anton text-2xl text-white tracking-tight leading-tight">
+                    {step.title}
+                  </h3>
+                </div>
+              </div>
+
+              <p className="text-gray leading-relaxed text-sm">
+                {step.description}
+              </p>
+
+              {/* Número grande decorativo */}
+              <div className="font-anton text-[8rem] leading-none text-white/[0.04] select-none mt-auto">
+                {step.number}
+              </div>
+            </div>
+
+            {/* Items */}
+            <div className="space-y-3">
+              <p className="text-[10px] font-mono text-green uppercase tracking-[0.2em] mb-4">
+                Objetivo de esta fase
+              </p>
+              {step.items.map((item, i) => (
+                <div key={i} className="flex items-start gap-3">
+                  <FiCheckCircle className="text-green text-sm mt-0.5 flex-shrink-0" />
+                  <span className="text-white/80 text-sm leading-relaxed">
+                    {item}
+                  </span>
+                </div>
+              ))}
+
+              <div className="pt-6 mt-6 border-t border-white/5">
+                <p className="text-xs text-gray italic leading-relaxed">
+                  "STRING no entrega páginas web. Entrega sistemas funcionales
+                  de captación de clientes."
+                </p>
+              </div>
+            </div>
+          </div>
         </div>
 
-        {/* Indicadores de paso */}
-        <div className="flex justify-center gap-3 mt-8">
-          {stepsData.map((_, index) => (
+        {/* ── Indicadores de paso ───────────────────────────────────────────── */}
+        <div className="flex items-center gap-2 mt-4">
+          {stepsData.map((_, i) => (
             <button
-              key={index}
-              onClick={() => setActiveStep(index)}
-              className={`w-2 h-2 rounded-full transition-all duration-300 ${
-                activeStep === index
+              key={i}
+              onClick={() => handleStepChange(i)}
+              className={`h-px transition-all duration-300 ${
+                activeStep === i
                   ? "w-8 bg-green"
-                  : "bg-white/20 hover:bg-white/40"
+                  : "w-4 bg-white/20 hover:bg-white/40"
               }`}
             />
           ))}
         </div>
 
-        {/* CTA */}
-        <div className="text-center mt-20">
-          <Link href="/quote">
-            <button className="group relative px-8 py-4 bg-gradient-to-r from-green to-green2 text-black font-bold rounded-full overflow-hidden hover:shadow-2xl hover:shadow-green/30 transition-all">
-              <span className="relative z-10 flex items-center gap-2">
-                Comenzar diagnóstico
-                <FiArrowRight className="group-hover:translate-x-2 transition-transform" />
-              </span>
-              <div className="absolute inset-0 bg-white/20 translate-y-full group-hover:translate-y-0 transition-transform duration-500" />
-            </button>
+        {/* ── CTA ───────────────────────────────────────────────────────────── */}
+        <div
+          ref={ctaRef}
+          className="mt-16 flex flex-col sm:flex-row items-start sm:items-center gap-6"
+        >
+          <Link
+            href="/quote"
+            className="group inline-flex items-center gap-2 px-8 py-4 bg-green text-black font-bold text-sm uppercase tracking-wide rounded-sm hover:bg-white transition-colors duration-200"
+          >
+            Comenzar diagnóstico
+            <FiArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform duration-200" />
           </Link>
-          <p className="text-sm text-gray-500 mt-4">
-            Diagnóstico gratuito · Respuesta en 24h
-          </p>
-        </div>
-
-        {/* Mensaje final */}
-        <div className="text-center mt-12 text-sm text-gray">
-          <p>
-            STRING no entrega páginas. Entrega sistemas funcionales de
-            captación.
+          <p className="text-xs text-gray font-mono">
+            Diagnóstico en 24h · Sin compromiso
           </p>
         </div>
       </div>

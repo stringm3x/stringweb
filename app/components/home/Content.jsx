@@ -1,50 +1,40 @@
 "use client";
-import React, { useEffect, useRef, useState } from "react";
-import { motion, useInView } from "framer-motion";
+
+import React, { useEffect, useRef } from "react";
+import Link from "next/link";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import Link from "next/link";
 import {
   FiArrowRight,
   FiTarget,
   FiTrendingUp,
   FiZap,
   FiUsers,
-  FiCheckCircle,
-  FiBarChart2,
   FiClock,
   FiAward,
 } from "react-icons/fi";
-import { MdOutlineAnalytics } from "react-icons/md";
-import { RiTeamLine } from "react-icons/ri";
 
 gsap.registerPlugin(ScrollTrigger);
 
-// Datos actualizados
+// ─── Datos ────────────────────────────────────────────────────────────────────
 const stats = [
   {
-    value: "10+",
+    value: "4",
     label: "Sistemas implementados",
-    description: "Negocios transformados con estructura digital",
-    gradient: "from-green to-green2",
-    icon: RiTeamLine,
+    description: "Negocios transformados con estructura digital real.",
     metric: "Clientes recurrentes",
   },
   {
     value: "85%",
     label: "Aumento en conversión",
-    description: "Promedio de mejora en clientes",
-    gradient: "from-green2 to-green3",
-    icon: MdOutlineAnalytics,
-    metric: "promedio",
+    description: "Promedio de mejora medida en cada sistema entregado.",
+    metric: "Promedio real",
   },
   {
     value: "24h",
-    label: "Respuesta inicial",
-    description: "Diagnóstico exprés de presencia digital",
-    gradient: "from-green3 to-green4",
-    icon: FiClock,
-    metric: "garantizado",
+    label: "Diagnóstico inicial",
+    description: "Análisis exprés de tu presencia digital desde el día uno.",
+    metric: "Garantizado",
   },
 ];
 
@@ -52,7 +42,7 @@ const principios = [
   {
     icon: FiTarget,
     title: "Enfoque en conversión",
-    desc: "No diseñamos páginas, construimos sistemas que convierten visitas en clientes potenciales organizados.",
+    desc: "No diseñamos páginas. Construimos sistemas que convierten visitas en clientes reales.",
   },
   {
     icon: FiTrendingUp,
@@ -62,7 +52,7 @@ const principios = [
   {
     icon: FiZap,
     title: "Optimización continua",
-    desc: "Mejoramos constantemente la claridad y el flujo de captación basado en datos.",
+    desc: "Mejoramos el flujo de captación basándonos en datos, no en tendencias.",
   },
   {
     icon: FiUsers,
@@ -71,303 +61,288 @@ const principios = [
   },
 ];
 
+// ─── Componente ───────────────────────────────────────────────────────────────
 const Content = () => {
-  const [mounted, setMounted] = useState(false);
   const sectionRef = useRef(null);
+  const headerRef = useRef(null);
+  const tagRef = useRef(null);
   const titleRef = useRef(null);
-  const subtitleRef = useRef(null);
-  const descriptionRef = useRef(null);
+  const descRef = useRef(null);
   const principiosRef = useRef([]);
+  const statsRef = useRef([]);
   const ctaRef = useRef(null);
   const lineRef = useRef(null);
 
   useEffect(() => {
-    setMounted(true);
-  }, []);
-
-  useEffect(() => {
-    if (!mounted) return;
-
     const ctx = gsap.context(() => {
-      // Configurar estado inicial
+      // ── Estado inicial ──────────────────────────────────────────────────────
       gsap.set(
-        [titleRef.current, subtitleRef.current, descriptionRef.current],
-        {
-          opacity: 0,
-          y: 30,
-        }
+        [tagRef.current, titleRef.current, descRef.current, ctaRef.current],
+        { opacity: 0, y: 24 }
       );
-
-      gsap.set(principiosRef.current.filter(Boolean), {
-        opacity: 0,
-        y: 25,
+      gsap.set(principiosRef.current.filter(Boolean), { opacity: 0, y: 20 });
+      gsap.set(statsRef.current.filter(Boolean), { opacity: 0, y: 20 });
+      gsap.set(lineRef.current, {
+        scaleX: 0,
+        transformOrigin: "left center",
       });
 
-      // Timeline con ScrollTrigger
-      const tl = gsap.timeline({
+      // ── Header ──────────────────────────────────────────────────────────────
+      const tlHeader = gsap.timeline({
         scrollTrigger: {
-          trigger: sectionRef.current,
-          start: "top 75%",
-          toggleActions: "play none none none",
+          trigger: headerRef.current,
+          start: "top 80%",
+          once: true,
         },
       });
 
-      tl.to(titleRef.current, {
-        opacity: 1,
-        y: 0,
-        duration: 0.6,
-        ease: "power2.out",
-      })
+      tlHeader
+        .to(tagRef.current, {
+          opacity: 1,
+          y: 0,
+          duration: 0.5,
+          ease: "power3.out",
+        })
         .to(
-          subtitleRef.current,
-          {
-            opacity: 1,
-            y: 0,
-            duration: 0.5,
-            ease: "power2.out",
-          },
+          titleRef.current,
+          { opacity: 1, y: 0, duration: 0.6, ease: "power3.out" },
           "-=0.3"
         )
         .to(
-          descriptionRef.current,
-          {
-            opacity: 1,
-            y: 0,
-            duration: 0.5,
-            ease: "power2.out",
-          },
-          "-=0.2"
+          descRef.current,
+          { opacity: 1, y: 0, duration: 0.5, ease: "power3.out" },
+          "-=0.3"
         )
         .to(
-          principiosRef.current.filter(Boolean),
-          {
-            opacity: 1,
-            y: 0,
-            stagger: 0.1,
-            duration: 0.5,
-            ease: "power2.out",
-          },
+          lineRef.current,
+          { scaleX: 1, duration: 0.7, ease: "expo.out" },
           "-=0.2"
-        )
-        .to(
-          ctaRef.current,
-          {
-            opacity: 1,
-            y: 0,
-            duration: 0.5,
-            ease: "power2.out",
-          },
-          "-=0.1"
         );
 
-      // Línea decorativa
-      gsap.to(lineRef.current, {
-        width: "100%",
+      // ── Principios ──────────────────────────────────────────────────────────
+      gsap.to(principiosRef.current.filter(Boolean), {
+        opacity: 1,
+        y: 0,
+        stagger: 0.1,
+        duration: 0.5,
+        ease: "power3.out",
         scrollTrigger: {
-          trigger: sectionRef.current,
-          start: "top 70%",
-          end: "bottom 20%",
-          scrub: 1,
+          trigger: principiosRef.current[0],
+          start: "top 82%",
+          once: true,
         },
-        ease: "none",
+      });
+
+      // ── Stats ───────────────────────────────────────────────────────────────
+      gsap.to(statsRef.current.filter(Boolean), {
+        opacity: 1,
+        y: 0,
+        stagger: 0.1,
+        duration: 0.5,
+        ease: "power3.out",
+        scrollTrigger: {
+          trigger: statsRef.current[0],
+          start: "top 82%",
+          once: true,
+        },
+      });
+
+      // ── CTA ─────────────────────────────────────────────────────────────────
+      gsap.to(ctaRef.current, {
+        opacity: 1,
+        y: 0,
+        duration: 0.6,
+        ease: "power3.out",
+        scrollTrigger: {
+          trigger: ctaRef.current,
+          start: "top 85%",
+          once: true,
+        },
       });
     }, sectionRef);
 
     return () => ctx.revert();
-  }, [mounted]);
-
-  if (!mounted) {
-    return (
-      <section className="relative overflow-hidden bg-white py-24 md:py-32">
-        <div className="max-w-7xl mx-auto px-4">
-          <div className="h-96 bg-gray animate-pulse rounded-2xl" />
-        </div>
-      </section>
-    );
-  }
+  }, []);
 
   return (
     <section
       ref={sectionRef}
-      className="relative overflow-hidden bg-white py-24 md:py-32"
+      className="relative overflow-hidden bg-black py-24 md:py-32"
     >
-      {/* Elementos decorativos */}
+      {/* ── Fondo decorativo ──────────────────────────────────────────────── */}
       <div className="absolute inset-0 pointer-events-none">
-        <div className="absolute top-40 right-20 w-96 h-96 bg-green/5 rounded-full filter blur-3xl" />
-        <div className="absolute bottom-40 left-20 w-96 h-96 bg-green2/5 rounded-full filter blur-3xl" />
-
-        {/* Línea de progreso */}
+        <div className="absolute top-40 right-0 w-[500px] h-[500px] bg-green/5 rounded-full blur-[100px]" />
+        <div className="absolute bottom-20 left-0 w-[400px] h-[400px] bg-green/3 rounded-full blur-[80px]" />
+        {/* Grid de puntos */}
         <div
-          ref={lineRef}
-          className="absolute top-0 left-0 h-1 bg-gradient-to-r from-green via-green2 to-green3"
-          style={{ width: "0%" }}
+          className="absolute inset-0 opacity-[0.03]"
+          style={{
+            backgroundImage:
+              "radial-gradient(circle at 1px 1px, #50ff05 1px, transparent 0)",
+            backgroundSize: "40px 40px",
+          }}
         />
       </div>
 
-      <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex flex-col gap-20 lg:gap-24">
-          {/* Header */}
-          <div className="text-center space-y-4">
-            <div ref={titleRef} className="inline-block">
-              <span className="px-4 py-2 bg-green/10 text-green rounded-full text-sm font-mono border border-green/30">
-                SISTEMAS DE CONVERSIÓN
+      <div className="relative max-w-7xl mx-auto px-6 sm:px-8 lg:px-12">
+        <div className="flex flex-col gap-20 lg:gap-28">
+          {/* ── Header ────────────────────────────────────────────────────── */}
+          <div ref={headerRef} className="max-w-3xl space-y-6">
+            <div ref={tagRef}>
+              <span className="inline-flex items-center gap-2.5 px-3 py-1.5 border border-green/30 text-green text-xs font-mono uppercase tracking-[0.2em] rounded-sm">
+                <span className="w-1.5 h-1.5 rounded-full bg-green" />
+                Nuestra filosofía
               </span>
             </div>
 
             <h2
-              ref={subtitleRef}
-              className="text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-ubuntu font-black tracking-tight leading-tight"
+              ref={titleRef}
+              className="font-anton text-5xl sm:text-6xl md:text-7xl leading-[0.9] tracking-tighter text-white uppercase"
             >
-              <span className="text-black">NO ES DISEÑO,</span>
-              <br />
-              <span className="text-green">ES ESTRUCTURA</span>
+              No es diseño, <span className="text-green">es estructura</span>
             </h2>
 
-            <div ref={descriptionRef} className="max-w-2xl mx-auto">
-              <p className="text-lg md:text-xl text-gray leading-relaxed">
-                En <span className="font-bold text-green">STRING</span>{" "}
-                transformamos presencia digital en clientes reales mediante
-                sistemas claros de conversión. No vendemos páginas, vendemos
-                <span className="font-semibold text-black"> estructura</span>.
-              </p>
-            </div>
+            <p
+              ref={descRef}
+              className="text-gray text-lg leading-relaxed max-w-xl"
+            >
+              En <span className="text-white font-semibold">STRING</span>{" "}
+              transformamos presencia digital en clientes reales mediante
+              sistemas claros de conversión. No vendemos páginas, vendemos{" "}
+              <span className="text-white">estructura</span>.
+            </p>
+
+            {/* Línea decorativa animada */}
+            <div
+              ref={lineRef}
+              className="h-px w-full bg-gradient-to-r from-green via-green/40 to-transparent"
+            />
           </div>
 
-          {/* Principios estratégicos */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-            {principios.map((principio, index) => {
-              const Icon = principio.icon;
+          {/* ── Principios ────────────────────────────────────────────────── */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-px bg-white/5">
+            {principios.map((p, i) => {
+              const Icon = p.icon;
               return (
                 <div
-                  key={index}
-                  ref={(el) => (principiosRef.current[index] = el)}
-                  className="group relative bg-white rounded-2xl p-6 shadow-lg hover:shadow-2xl transition-all duration-300 border border-gray/20"
+                  key={i}
+                  ref={(el) => (principiosRef.current[i] = el)}
+                  className="group bg-black p-8 hover:bg-white/[0.03] transition-colors duration-300 relative"
                 >
-                  <div className="absolute inset-0 bg-gradient-to-br from-green/5 to-transparent rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity" />
-
-                  <div className="relative z-10">
-                    <div className="w-12 h-12 bg-green/10 rounded-xl flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
-                      <Icon className="text-2xl text-green" />
-                    </div>
-
-                    <h3 className="text-lg font-bold text-black mb-2">
-                      {principio.title}
-                    </h3>
-
-                    <p className="text-sm text-gray leading-relaxed">
-                      {principio.desc}
-                    </p>
-
-                    {/* Barra decorativa */}
-                    <div className="absolute bottom-0 left-0 w-0 h-0.5 bg-gradient-to-r from-green to-green2 group-hover:w-full transition-all duration-500" />
-                  </div>
-                </div>
-              );
-            })}
-          </div>
-
-          {/* Stats Cards */}
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 lg:gap-8">
-            {stats.map((stat, index) => {
-              const Icon = stat.icon;
-              return (
-                <div
-                  key={index}
-                  className="group relative bg-white rounded-2xl shadow-xl border-2 border-green/20 p-8 overflow-hidden hover:scale-[1.02] transition-transform duration-300"
-                >
-                  <span className="absolute -bottom-4 -right-4 text-8xl font-black text-green/5 select-none">
-                    {index + 1}
+                  {/* Número de fondo */}
+                  <span className="absolute top-6 right-6 font-anton text-6xl text-white/[0.04] select-none leading-none">
+                    {i + 1}
                   </span>
 
-                  <div className="relative z-10 mb-4">
-                    <div className="w-16 h-16 bg-gradient-to-br from-green to-green2 rounded-2xl flex items-center justify-center shadow-lg group-hover:scale-110 transition-transform">
-                      <Icon className="text-3xl text-white" />
+                  <div className="relative z-10 space-y-4">
+                    <div className="w-10 h-10 border border-green/30 rounded-sm flex items-center justify-center group-hover:border-green group-hover:bg-green/10 transition-all duration-300">
+                      <Icon className="text-green text-lg" />
                     </div>
-                  </div>
 
-                  <div className="relative z-10">
-                    <p
-                      className={`text-4xl lg:text-5xl font-black mb-2 bg-gradient-to-r ${stat.gradient} bg-clip-text text-transparent`}
-                    >
-                      {stat.value}
-                    </p>
-
-                    <h3 className="text-xl font-bold text-black mb-2">
-                      {stat.label}
+                    <h3 className="text-white font-bold text-base leading-tight">
+                      {p.title}
                     </h3>
 
-                    <p className="text-sm text-gray mb-3">{stat.description}</p>
-
-                    <div className="flex items-center gap-2 text-xs text-green font-mono">
-                      <FiCheckCircle />
-                      <span>{stat.metric}</span>
-                    </div>
+                    <p className="text-gray text-sm leading-relaxed">
+                      {p.desc}
+                    </p>
                   </div>
 
-                  {/* Barra de progreso animada */}
-                  <div className="absolute bottom-0 left-0 w-full h-1 bg-gray/20">
-                    <div
-                      className={`h-full bg-gradient-to-r ${
-                        stat.gradient
-                      } transition-all duration-1000 delay-${index * 200}`}
-                      style={{ width: "100%" }}
-                    />
-                  </div>
+                  {/* Borde inferior hover */}
+                  <div className="absolute bottom-0 left-0 w-0 h-px bg-green group-hover:w-full transition-all duration-500" />
                 </div>
               );
             })}
           </div>
 
-          {/* CTA Section */}
+          {/* ── Stats ─────────────────────────────────────────────────────── */}
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-px bg-white/5">
+            {stats.map((stat, i) => (
+              <div
+                key={i}
+                ref={(el) => (statsRef.current[i] = el)}
+                className="group bg-black px-8 py-10 hover:bg-white/[0.03] transition-colors duration-300 relative overflow-hidden"
+              >
+                {/* Número grande de fondo */}
+                <span className="absolute -bottom-4 -right-2 font-anton text-[8rem] leading-none text-white/[0.03] select-none">
+                  {i + 1}
+                </span>
+
+                <div className="relative z-10 space-y-3">
+                  <p className="font-anton text-6xl text-green leading-none">
+                    {stat.value}
+                  </p>
+                  <h3 className="text-white font-bold text-base">
+                    {stat.label}
+                  </h3>
+                  <p className="text-gray text-sm leading-relaxed">
+                    {stat.description}
+                  </p>
+                  <div className="flex items-center gap-2 pt-2">
+                    <span className="w-1 h-1 rounded-full bg-green" />
+                    <span className="text-xs text-green font-mono uppercase tracking-wider">
+                      {stat.metric}
+                    </span>
+                  </div>
+                </div>
+
+                {/* Borde inferior hover */}
+                <div className="absolute bottom-0 left-0 w-0 h-px bg-green group-hover:w-full transition-all duration-500" />
+              </div>
+            ))}
+          </div>
+
+          {/* ── CTA ───────────────────────────────────────────────────────── */}
           <div
             ref={ctaRef}
-            className="relative bg-gradient-to-r from-green/5 to-green2/5 rounded-3xl p-8 md:p-12 border border-green/20 overflow-hidden"
+            className="relative border border-white/10 p-10 md:p-14 overflow-hidden"
           >
-            <div className="absolute inset-0 opacity-10">
-              <div className="absolute top-0 right-0 w-64 h-64 bg-green rounded-full filter blur-3xl" />
-              <div className="absolute bottom-0 left-0 w-64 h-64 bg-green2 rounded-full filter blur-3xl" />
-            </div>
+            {/* Glow de fondo */}
+            <div className="absolute top-0 right-0 w-80 h-80 bg-green/5 rounded-full blur-[80px] pointer-events-none" />
 
-            <div className="relative z-10 flex flex-col lg:flex-row items-center justify-between gap-8">
-              <div className="text-center lg:text-left space-y-3">
-                <h3 className="text-3xl md:text-4xl font-ubuntu font-bold text-black">
+            <div className="relative z-10 flex flex-col lg:flex-row items-start lg:items-center justify-between gap-8">
+              <div className="space-y-4 max-w-xl">
+                <h3 className="font-anton text-4xl md:text-5xl text-white uppercase leading-[0.95] tracking-tight">
                   ¿Listo para <span className="text-green">transformar</span> tu
                   negocio?
                 </h3>
-                <p className="text-gray max-w-xl">
-                  Obtén un diagnóstico gratuito de tu presencia digital y
-                  descubre cómo un sistema estructurado puede organizar tu
-                  captación de clientes.
+                <p className="text-gray leading-relaxed">
+                  Obtén un diagnóstico de tu presencia digital y descubre cómo
+                  un sistema estructurado puede organizar tu captación de
+                  clientes.
                 </p>
 
-                <div className="flex flex-wrap justify-center lg:justify-start gap-4 pt-4">
-                  <span className="flex items-center gap-1 text-xs text-gray">
-                    <FiClock /> Diagnóstico 24h
-                  </span>
-                  <span className="flex items-center gap-1 text-xs text-gray">
-                    <FiAward /> Sin compromiso
-                  </span>
-                  <span className="flex items-center gap-1 text-xs text-gray">
-                    <FiUsers /> 50+ sistemas
-                  </span>
+                <div className="flex flex-wrap gap-6 pt-2">
+                  {[
+                    { icon: FiClock, label: "Diagnóstico 24h" },
+                    { icon: FiAward, label: "Sin compromiso" },
+                    { icon: FiTarget, label: "100% personalizado" },
+                  ].map(({ icon: Icon, label }) => (
+                    <span
+                      key={label}
+                      className="flex items-center gap-1.5 text-xs text-gray font-mono"
+                    >
+                      <Icon className="text-green" />
+                      {label}
+                    </span>
+                  ))}
                 </div>
               </div>
 
-              <div className="flex flex-col sm:flex-row gap-4">
-                <Link href="/quote">
-                  <button className="group relative px-8 py-4 bg-gradient-to-r from-green to-green2 text-black font-bold rounded-full overflow-hidden hover:shadow-2xl hover:shadow-green/30 transition-all whitespace-nowrap">
-                    <span className="relative z-10 flex items-center gap-2">
-                      Diagnosticar mi negocio
-                      <FiArrowRight className="group-hover:translate-x-2 transition-transform" />
-                    </span>
-                    <div className="absolute inset-0 bg-white/20 translate-y-full group-hover:translate-y-0 transition-transform duration-500" />
-                  </button>
+              <div className="flex flex-col sm:flex-row gap-4 flex-shrink-0">
+                <Link
+                  href="/quote"
+                  className="group inline-flex items-center gap-2 px-7 py-3.5 bg-green text-black font-bold text-sm uppercase tracking-wide rounded-sm hover:bg-white transition-colors duration-200 whitespace-nowrap"
+                >
+                  Solicitar diagnóstico
+                  <FiArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform duration-200" />
                 </Link>
 
-                <Link href="/Services">
-                  <button className="px-8 py-4 border-2 border-green/30 text-black font-bold rounded-full hover:bg-green/5 transition-colors whitespace-nowrap">
-                    Ver sistemas
-                  </button>
+                <Link
+                  href="/Services"
+                  className="inline-flex items-center gap-2 px-7 py-3.5 border border-white/20 text-white font-bold text-sm uppercase tracking-wide rounded-sm hover:border-white/40 hover:bg-white/5 transition-all duration-200 whitespace-nowrap"
+                >
+                  Ver sistemas
                 </Link>
               </div>
             </div>

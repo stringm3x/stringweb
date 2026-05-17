@@ -22,45 +22,38 @@ const ubuntu = Ubuntu({
 });
 
 export const metadata = {
-  // Título y descripción principal
   title: {
-    default: "STRING | Desarrollo Web Profesional",
-    template: "%s | STRING - Desarrollo Web",
+    default: "STRING | Sistemas Digitales de Conversión",
+    template: "%s | STRING",
   },
   description:
-    "STRING: Agencia de desarrollo web en México. Creamos sitios web profesionales, tiendas online y aplicaciones web a medida. Diseño UX/UI, SEO y desarrollo con Codigo puro.",
+    "STRING: Agencia de sistemas digitales estratégicos en México. Transformamos tu presencia digital en un sistema que capta, organiza y convierte prospectos en clientes reales.",
 
-  // Palabras clave para SEO
   keywords: [
-    "desarrollo web",
-    "diseño web",
-    "crear página web",
-    "desarrollador web",
-    "páginas web profesionales",
-    "tiendas online",
-    "e-commerce",
-    "aplicaciones web",
-    "React",
-    "Next.js",
-    "México",
-    "CDMX",
+    "sistemas digitales",
+    "captación de clientes",
+    "automatización de ventas",
+    "sistema de conversión",
+    "landing page que convierte",
+    "CRM automatizado",
+    "agencia digital México",
+    "sistemas de captación CDMX",
+    "automatización WhatsApp",
+    "Next.js México",
   ],
 
-  // Autor
   authors: [{ name: "STRING", url: "https://www.stringwebs.com/" }],
 
-  // Iconos
   icons: {
     icon: "/ico.png",
     shortcut: "/ico.png",
     apple: "/ico.png",
   },
 
-  // Open Graph (para redes sociales)
   openGraph: {
-    title: "STRING | Desarrollo Web Profesional",
+    title: "STRING | Sistemas Digitales de Conversión",
     description:
-      "Creamos experiencias digitales que transforman negocios. Desarrollo web a medida con código puro.",
+      "No necesitas más seguidores. Necesitas un sistema que convierta. Diseñamos sistemas digitales que trabajan solos.",
     url: "https://www.stringwebs.com/",
     siteName: "STRING",
     images: [
@@ -68,23 +61,22 @@ export const metadata = {
         url: "/og-image.png",
         width: 1200,
         height: 630,
-        alt: "STRING - Desarrollo Web Profesional",
+        alt: "STRING - Sistemas Digitales de Conversión",
       },
     ],
     locale: "es_MX",
     type: "website",
   },
 
-  // Twitter Cards
   twitter: {
     card: "summary_large_image",
-    title: "STRING | Desarrollo Web Profesional",
-    description: "Creamos experiencias digitales que transforman negocios.",
+    title: "STRING | Sistemas Digitales de Conversión",
+    description:
+      "No necesitas más seguidores. Necesitas un sistema que convierta.",
     images: ["/og-image.png"],
     creator: "@stringmx",
   },
 
-  // Robots (control de indexación)
   robots: {
     index: true,
     follow: true,
@@ -97,12 +89,10 @@ export const metadata = {
     },
   },
 
-  // Verificación de Google Search Console
   verification: {
-    google: "tu-codigo-de-verificacion", // Agrega tu código de Search Console
+    google: "tu-codigo-de-verificacion",
   },
 
-  // Canonical URL
   alternates: {
     canonical: "https://www.stringwebs.com/",
     languages: {
@@ -110,7 +100,6 @@ export const metadata = {
     },
   },
 
-  // Otros metadatos útiles
   category: "technology",
   generator: "Next.js",
   applicationName: "STRING",
@@ -126,16 +115,11 @@ export default function RootLayout({ children }) {
   return (
     <html lang="es-MX" className="dark">
       <head>
-        {/* Favicon adicional para diferentes dispositivos */}
         <link rel="apple-touch-icon" href="/ico.png" />
         <link rel="manifest" href="/manifest.json" />
-
-        {/* Meta tags adicionales útiles */}
         <meta name="theme-color" content="#50ff05" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <meta httpEquiv="Content-Type" content="text/html; charset=utf-8" />
-
-        {/* Geo tags para México */}
         <meta name="geo.region" content="MX" />
         <meta name="geo.placename" content="Ciudad de México" />
       </head>

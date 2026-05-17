@@ -2,19 +2,20 @@ import { QuoteForm } from "../components/forms/QuoteForm";
 import { Toaster } from "react-hot-toast";
 
 export const metadata = {
-  title: "Cotiza tu Proyecto Web | Desarrollo Personalizado",
+  title: "Solicitar Diagnóstico | STRING — Sistemas Digitales",
   description:
-    "Solicita una cotización profesional para tu proyecto web. Desarrollo a medida en Next.js, React y más.",
+    "Solicita un diagnóstico gratuito de tu presencia digital. Descubre qué nivel del Sistema STRING necesita tu negocio.",
   openGraph: {
-    title: "Cotiza tu Proyecto Web",
-    description: "Desarrollo web profesional y personalizado",
+    title: "Solicitar Diagnóstico | STRING",
+    description:
+      "Sistemas digitales estratégicos para convertir visitas en clientes reales.",
     type: "website",
   },
 };
 
 export default function QuotePage() {
   return (
-    <main className="min-h-screen bg-white py-16 px-4">
+    <main className="min-h-screen bg-black py-24 px-6 sm:px-8 lg:px-12">
       <Toaster
         position="top-center"
         toastOptions={{
@@ -22,12 +23,15 @@ export default function QuotePage() {
           style: {
             background: "#000",
             color: "#fff",
+            border: "1px solid rgba(255,255,255,0.1)",
+            borderRadius: "2px",
+            fontSize: "14px",
           },
           success: {
-            duration: 3000,
+            duration: 5000,
             iconTheme: {
-              primary: "#10b981",
-              secondary: "#fff",
+              primary: "#50ff05",
+              secondary: "#000",
             },
           },
           error: {
