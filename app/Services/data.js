@@ -15,7 +15,7 @@ const servicios = [
     id: "1",
     service: "SISTEMA DE CONVERSIÓN",
     title2: "Nivel 1 · $8,000",
-    img: "/serv/conversion1.png",
+    img: "https://images.unsplash.com/photo-1467232004584-a241de8bcf5d?w=800&q=80",
     intro:
       "Transformamos tu presencia digital en un sistema que genera clientes reales de manera consistente.",
     p: "No se trata de tener una página bonita. Se trata de tener una estructura clara que guíe a tus visitantes a convertirse en clientes. Analizamos tu negocio, identificamos fricciones y diseñamos un flujo de conversión optimizado.",
@@ -68,7 +68,7 @@ const servicios = [
     id: "2",
     service: "SISTEMA DE CAPTACIÓN",
     title2: "Nivel 2 · $18,000",
-    img: "/serv/captacion.png",
+    img: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800&q=80",
     intro:
       "Evita que los clientes interesados se pierdan y organiza tus prospectos automáticamente.",
     p: "No basta con recibir mensajes. Hay que organizarlos. Este nivel añade herramientas de captación que registran, clasifican y notifican cada nuevo prospecto, para que no se pierda ninguna oportunidad.",
@@ -120,7 +120,7 @@ const servicios = [
     id: "3",
     service: "SISTEMA AUTOMATIZADO",
     title2: "Nivel 3 · $28,000",
-    img: "/serv/auto.png",
+    img: "https://images.unsplash.com/photo-1518770660439-4636190af475?w=800&q=80",
     intro:
       "Crea un sistema digital que trabaja incluso cuando tu negocio no está disponible.",
     p: "Imagina un sistema que recibe, organiza y responde clientes mientras tú duermes. Este nivel añade automatizaciones avanzadas que mejoran la percepción de atención y aumentan conversiones.",
@@ -172,7 +172,7 @@ const servicios = [
     id: "4",
     service: "SISTEMA ESPECIALIZADO",
     title2: "Nivel 4 · $40,000",
-    img: "/serv/especial.png",
+    img: "https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=800&q=80",
     intro:
       "Desarrollamos sistemas digitales personalizados para negocios que necesitan algo más avanzado.",
     p: "Este nivel está pensado para empresas que necesitan procesos digitales completos que integren captación, seguimiento, ventas y gestión interna. Infraestructura digital diseñada específicamente para tu operación.",
