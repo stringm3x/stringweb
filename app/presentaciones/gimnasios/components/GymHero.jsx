@@ -1,7 +1,6 @@
 "use client";
 
 // Slide 1 — Hero
-// Imagen: Unsplash gym atmosphere, oscurecida con overlay
 export default function GymHero() {
   return (
     <div className="relative w-full h-full flex items-center overflow-hidden bg-black">
@@ -14,17 +13,17 @@ export default function GymHero() {
         }}
       />
       {/* Overlay */}
-      <div className="absolute inset-0 bg-black/80" />
+      <div className="absolute inset-0 bg-black/85" />
       {/* Glow verde */}
-      <div className="absolute top-1/2 left-1/4 -translate-y-1/2 w-[600px] h-[600px] bg-green-400/5 rounded-full blur-[120px] pointer-events-none" />
+      <div className="absolute top-1/2 left-1/4 -translate-y-1/2 w-[600px] h-[600px] bg-green/5 rounded-full blur-[120px] pointer-events-none" />
       {/* Línea superior */}
       <div className="slide-line absolute top-0 left-0 right-0 h-px bg-green-400/40" />
 
       <div className="relative z-10 max-w-5xl mx-auto px-12 lg:px-20">
         {/* Tag */}
         <div className="slide-tag mb-8">
-          <span className="inline-flex items-center gap-2.5 px-3 py-1.5 border border-green-400/30 text-green-400 text-xs font-mono uppercase tracking-[0.25em]">
-            <span className="w-1.5 h-1.5 rounded-full bg-green-400 animate-pulse" />
+          <span className="inline-flex items-center gap-2.5 px-3 py-1.5 border border-green/30 text-green text-xs font-mono uppercase tracking-[0.25em]">
+            <span className="w-1.5 h-1.5 rounded-full bg-green animate-pulse" />
             STRING para Gimnasios
           </span>
         </div>
@@ -32,34 +31,37 @@ export default function GymHero() {
         {/* Headline */}
         <h1
           className="slide-heading font-black text-white uppercase leading-[0.88] tracking-tighter mb-8"
-          style={{ fontSize: "clamp(2.5rem, 6vw, 5.5rem)" }}
+          style={{ fontSize: "clamp(2.2rem, 5.5vw, 5rem)" }}
         >
-          Tu gimnasio <span className="text-green-400">llena clases.</span>
+          Cada día que tu gimnasio
           <br />
-          Pero pierde prospectos
+          opera sin sistema, hay
           <br />
-          todos los días.
+          <span className="text-green">dinero que se va</span>
+          <br />
+          sin que nadie lo vea.
         </h1>
 
-        {/* Sub */}
-        <p className="slide-sub text-gray-400 text-lg leading-relaxed max-w-xl mb-10">
-          Un sistema que capta, organiza y da seguimiento a cada persona que
-          pregunta — aunque tú estés entrenando.
+        {/* Subheadline */}
+        <p className="slide-sub text-gray text-base sm:text-lg leading-relaxed max-w-2xl mb-10">
+          Prospectos que preguntan por Instagram y nunca reciben respuesta.
+          Pagos registrados en papel. Miembros que vencen sin seguimiento.{" "}
+          <span className="text-white/70">
+            No es culpa del equipo — es falta de estructura.
+          </span>
         </p>
 
         {/* CTA */}
-        <a
-          href="#cta"
-          className="slide-cta group inline-flex items-center gap-2 px-8 py-4 bg-green-400 text-black font-bold text-sm uppercase tracking-wide hover:bg-white transition-colors duration-200"
-          onClick={(e) => {
-            e.preventDefault();
+        <button
+          className="slide-cta group inline-flex items-center gap-2 px-8 py-4 bg-green text-black font-bold text-sm uppercase tracking-wide hover:bg-white transition-colors duration-200"
+          onClick={() =>
             window.scrollTo({
               top: document.body.scrollHeight,
               behavior: "smooth",
-            });
-          }}
+            })
+          }
         >
-          Quiero mi diagnóstico gratuito
+          Quiero ver cómo funciona
           <svg
             width="16"
             height="10"
@@ -75,7 +77,7 @@ export default function GymHero() {
               strokeLinejoin="round"
             />
           </svg>
-        </a>
+        </button>
       </div>
 
       {/* Número decorativo */}

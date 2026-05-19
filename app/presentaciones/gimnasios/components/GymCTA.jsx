@@ -1,12 +1,64 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
+import gsap from "gsap";
 import { FiArrowRight } from "react-icons/fi";
 
-// Slide 6 — CTA Final con formulario
 export default function GymCTA() {
   const [form, setForm] = useState({ name: "", gym: "", whatsapp: "" });
-  const [status, setStatus] = useState("idle"); // idle | loading | success | error
+  const [status, setStatus] = useState("idle");
+
+  const containerRef = useRef(null);
+  const hasAnimated = useRef(false);
+  const headerRefs = useRef([]);
+  const calcRef = useRef(null);
+  const formRef = useRef(null);
+
+  useEffect(() => {
+    const container = containerRef.current;
+    if (!container) return;
+
+    gsap.set(headerRefs.current.filter(Boolean), { opacity: 0, y: 24 });
+    gsap.set(calcRef.current, { opacity: 0, y: 16 });
+    gsap.set(formRef.current, { opacity: 0, y: 24 });
+
+    container.__animateIn = () => {
+      if (hasAnimated.current) return;
+      hasAnimated.current = true;
+
+      const tl = gsap.timeline();
+
+      tl.to(headerRefs.current.filter(Boolean), {
+        opacity: 1,
+        y: 0,
+        stagger: 0.12,
+        duration: 0.6,
+        ease: "power3.out",
+      });
+
+      tl.to(
+        calcRef.current,
+        {
+          opacity: 1,
+          y: 0,
+          duration: 0.5,
+          ease: "power3.out",
+        },
+        "-=0.2"
+      );
+
+      tl.to(
+        formRef.current,
+        {
+          opacity: 1,
+          y: 0,
+          duration: 0.6,
+          ease: "power3.out",
+        },
+        "-=0.2"
+      );
+    };
+  }, []);
 
   const handleChange = (e) =>
     setForm((prev) => ({ ...prev, [e.target.name]: e.target.value }));
@@ -17,24 +69,23 @@ export default function GymCTA() {
     setStatus("loading");
 
     try {
-      // Reutiliza el endpoint existente con campos mínimos
       const res = await fetch("/api/quote", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           name: form.name,
-          email: `gym-lead@stringwebs.com`, // placeholder — no requerido en este flujo
+          email: "gym-lead@stringwebs.com",
           whatsapp: form.whatsapp,
           projectType: "nivel3",
-          objective: `Lead desde landing gimnasios. Gimnasio: ${form.gym}`,
+          objective: `Diagnóstico desde presentación gimnasios. Gimnasio: ${form.gym}`,
           idealDate: new Date(Date.now() + 30 * 24 * 60 * 60 * 1000)
             .toISOString()
             .split("T")[0],
-          budget: "28000",
+          budget: "32000",
         }),
       });
 
-      if (!res.ok) throw new Error("Error");
+      if (!res.ok) throw new Error();
       setStatus("success");
     } catch {
       setStatus("error");
@@ -42,9 +93,12 @@ export default function GymCTA() {
   };
 
   return (
-    <div className="relative w-full h-full flex items-center overflow-hidden bg-black">
-      {/* Glow */}
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[700px] bg-green-400/5 rounded-full blur-[120px] pointer-events-none" />
+    <div
+      ref={containerRef}
+      className="relative w-full h-full flex items-center overflow-hidden bg-black"
+    >
+      {/* Glow central */}
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[700px] bg-green/5 rounded-full blur-[120px] pointer-events-none" />
       <div
         className="absolute inset-0 opacity-[0.03]"
         style={{
@@ -53,19 +107,13 @@ export default function GymCTA() {
           backgroundSize: "40px 40px",
         }}
       />
-      <div className="slide-line absolute top-0 left-0 right-0 h-px bg-green-400/30" />
+      <div className="absolute top-0 left-0 right-0 h-px bg-green/30" />
 
-      <div className="relative z-10 w-full max-w-4xl mx-auto px-12 lg:px-20">
-        <div className="slide-tag mb-8">
-          <span className="text-[10px] font-mono text-green-400 uppercase tracking-[0.3em]">
-            06 · Empezar
-          </span>
-        </div>
-
+      <div className="relative z-10 w-full max-w-5xl mx-auto px-12 lg:px-20">
         {status === "success" ? (
-          // ── Estado éxito ─────────────────────────────────────────────────
+          // ── Éxito ─────────────────────────────────────────────────────────
           <div className="text-center space-y-6">
-            <div className="w-16 h-16 bg-green-400 flex items-center justify-center mx-auto">
+            <div className="w-16 h-16 bg-green flex items-center justify-center mx-auto">
               <svg
                 className="w-8 h-8 text-black"
                 fill="none"
@@ -80,21 +128,24 @@ export default function GymCTA() {
                 />
               </svg>
             </div>
-            <h2 className="font-black text-white uppercase text-4xl tracking-tight leading-tight">
+            <h2
+              className="font-black text-white uppercase leading-tight tracking-tighter"
+              style={{ fontSize: "clamp(2rem, 4vw, 3.5rem)" }}
+            >
               ¡Listo, {form.name.split(" ")[0]}!
             </h2>
-            <p className="text-gray-400 text-lg max-w-md mx-auto leading-relaxed">
+            <p className="text-gray text-lg max-w-md mx-auto leading-relaxed">
               Te contactamos en menos de{" "}
               <span className="text-white font-bold">24 horas</span> para
-              agendar tu diagnóstico gratuito.
+              agendar tu diagnóstico.
             </p>
             <a
               href={`https://wa.me/525545524847?text=${encodeURIComponent(
-                `Hola, soy ${form.name} de ${form.gym}. Acabo de solicitar un diagnóstico desde stringwebs.com/gimnasios.`
+                `Hola, soy ${form.name} de ${form.gym}. Acabo de solicitar un diagnóstico desde la presentación de STRING.`
               )}`}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 px-7 py-3.5 bg-green-400 text-black font-bold text-sm uppercase tracking-wide hover:bg-white transition-colors duration-200"
+              className="inline-flex items-center gap-2 px-7 py-3.5 bg-green text-black font-bold text-sm uppercase tracking-wide hover:bg-white transition-colors duration-200"
             >
               Contactar por WhatsApp
               <FiArrowRight className="w-4 h-4" />
@@ -102,45 +153,64 @@ export default function GymCTA() {
           </div>
         ) : (
           // ── Formulario ────────────────────────────────────────────────────
-          <div className="grid lg:grid-cols-2 gap-14 items-center">
-            {/* Copy */}
-            <div className="space-y-6">
+          <div className="grid lg:grid-cols-2 gap-16 items-center">
+            {/* Copy izquierda */}
+            <div className="space-y-8">
+              <div ref={(el) => (headerRefs.current[0] = el)}>
+                <span className="text-[10px] font-mono text-green uppercase tracking-[0.3em]">
+                  06 · Empezar
+                </span>
+              </div>
+
               <h2
-                className="slide-heading font-black text-white uppercase leading-[0.9] tracking-tighter"
-                style={{ fontSize: "clamp(2rem, 4vw, 3.5rem)" }}
+                ref={(el) => (headerRefs.current[1] = el)}
+                className="font-black text-white uppercase leading-[0.88] tracking-tighter"
+                style={{ fontSize: "clamp(2rem, 4vw, 3.8rem)" }}
               >
                 ¿Cuántos prospectos
                 <br />
                 perdió tu gimnasio
                 <br />
-                <span className="text-green-400">esta semana?</span>
+                <span className="text-green">esta semana?</span>
               </h2>
 
-              <p className="slide-sub text-gray-500 text-sm leading-relaxed">
-                Sin costo. Sin compromiso.{" "}
-                <span className="text-white">30 minutos.</span>
-              </p>
+              {/* Cálculo */}
+              <div
+                ref={calcRef}
+                className="border border-white/10 p-5 space-y-3"
+              >
+                <p className="text-[10px] font-mono text-green uppercase tracking-widest">
+                  El costo real del desorden
+                </p>
+                <p className="text-white/60 text-sm leading-relaxed">
+                  Si pierdes{" "}
+                  <span className="text-white font-bold">
+                    3 prospectos por semana
+                  </span>{" "}
+                  y cada membresía vale{" "}
+                  <span className="text-white font-bold">$600/mes</span> —
+                </p>
+                <p className="font-black text-white text-2xl leading-none">
+                  $21,600{" "}
+                  <span className="text-sm font-normal text-gray">
+                    al año que se van por falta de sistema.
+                  </span>
+                </p>
+              </div>
 
-              <div className="space-y-2">
-                {[
-                  "Sin promesas de resultados garantizados",
-                  "Sin precio fijo sin diagnóstico previo",
-                  "Sin plantillas genéricas",
-                ].map((item, i) => (
-                  <div key={i} className="flex items-center gap-2.5">
-                    <span className="w-1 h-1 rounded-full bg-green-400/50" />
-                    <span className="text-gray-600 text-xs font-mono">
-                      {item}
-                    </span>
-                  </div>
-                ))}
+              <div ref={(el) => (headerRefs.current[2] = el)}>
+                <p className="text-white/30 text-xs leading-relaxed font-mono italic">
+                  "No es una llamada de ventas. Es un diagnóstico real de cómo
+                  está operando tu gimnasio hoy."
+                </p>
               </div>
             </div>
 
-            {/* Form */}
+            {/* Formulario derecha */}
             <form
+              ref={formRef}
               onSubmit={handleSubmit}
-              className="slide-item border border-white/10 p-8 space-y-5"
+              className="border border-white/10 p-8 space-y-5"
             >
               {[
                 { name: "name", label: "Tu nombre", placeholder: "Juan Pérez" },
@@ -157,8 +227,8 @@ export default function GymCTA() {
                 },
               ].map((field) => (
                 <div key={field.name} className="space-y-1.5">
-                  <label className="block text-[10px] font-mono text-gray-500 uppercase tracking-widest">
-                    {field.label} <span className="text-green-400">*</span>
+                  <label className="block text-[10px] font-mono text-gray uppercase tracking-widest">
+                    {field.label} <span className="text-green">*</span>
                   </label>
                   <input
                     type={field.type || "text"}
@@ -167,13 +237,13 @@ export default function GymCTA() {
                     onChange={handleChange}
                     placeholder={field.placeholder}
                     required
-                    className="w-full px-4 py-3 bg-white/5 border border-white/10 text-white text-sm placeholder:text-white/20 focus:outline-none focus:border-green-400 transition-colors duration-200"
+                    className="w-full px-4 py-3 bg-white/5 border border-white/10 text-white text-sm placeholder:text-white/20 focus:outline-none focus:border-green transition-colors duration-200"
                   />
                 </div>
               ))}
 
               {status === "error" && (
-                <p className="text-red-400 text-xs font-mono">
+                <p className="text-red text-xs font-mono">
                   Error al enviar. Intenta de nuevo.
                 </p>
               )}
@@ -181,7 +251,7 @@ export default function GymCTA() {
               <button
                 type="submit"
                 disabled={status === "loading"}
-                className="slide-cta group w-full flex items-center justify-center gap-2 px-6 py-4 bg-green-400 text-black font-bold text-sm uppercase tracking-wide hover:bg-white transition-colors duration-200 disabled:opacity-60 disabled:cursor-not-allowed"
+                className="group w-full flex items-center justify-center gap-2 px-6 py-4 bg-green text-black font-bold text-sm uppercase tracking-wide hover:bg-white transition-colors duration-200 disabled:opacity-60 disabled:cursor-not-allowed"
               >
                 {status === "loading" ? (
                   <span className="flex items-center gap-2">
@@ -210,6 +280,10 @@ export default function GymCTA() {
                   </>
                 )}
               </button>
+
+              <p className="text-center text-[10px] font-mono text-white/20 uppercase tracking-widest">
+                Sin costo · Sin compromiso · 30 minutos
+              </p>
             </form>
           </div>
         )}

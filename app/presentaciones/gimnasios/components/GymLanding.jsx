@@ -22,7 +22,6 @@ const SLIDES = [
 ];
 
 const TOTAL = SLIDES.length;
-// vh por slide — controla la velocidad del scroll
 const VH_PER_SLIDE = 120;
 
 export default function GymLanding() {
@@ -40,17 +39,21 @@ export default function GymLanding() {
 
         const slides = Array.from(track.querySelectorAll(".gym-slide"));
 
-        // Ocultar todos excepto el Hero
+        // Ocultar elementos con clase slide-* en slides que no tienen __animateIn
         slides.forEach((slide, i) => {
           if (i === 0) return;
-          gsap.set(getAnimatables(slide), { opacity: 0, y: 40 });
+          const root = slide.firstElementChild;
+          // Si el componente expone __animateIn, él maneja sus propios elementos
+          // Si no, usamos el fallback de clases slide-*
+          if (!root?.__animateIn) {
+            gsap.set(getAnimatables(slide), { opacity: 0, y: 40 });
+          }
         });
 
-        // Hero entra de inmediato
+        // Animar Hero inmediatamente
         animateSlide(slides[0]);
         animatedSlides.current.add(0);
 
-        // ScrollTrigger único
         const totalDistance = (TOTAL - 1) * window.innerWidth;
         const scrollLength = TOTAL * VH_PER_SLIDE * (window.innerHeight / 100);
 
@@ -91,7 +94,7 @@ export default function GymLanding() {
 
   return (
     <>
-      {/* Indicador de scroll */}
+      {/* Indicador */}
       <div className="fixed bottom-6 right-6 z-50 flex items-center gap-2 px-3 py-1.5 border border-white/10 bg-black/80 backdrop-blur-sm pointer-events-none">
         <span className="text-[10px] font-mono text-gray-500 uppercase tracking-widest">
           Scroll
@@ -107,7 +110,6 @@ export default function GymLanding() {
         </svg>
       </div>
 
-      {/* Wrapper con altura total de scroll */}
       <div ref={wrapperRef} style={{ height: `${TOTAL * VH_PER_SLIDE}vh` }}>
         <div className="sticky top-0 h-screen overflow-hidden">
           <div
@@ -130,8 +132,17 @@ export default function GymLanding() {
   );
 }
 
+// Animar slide — usa __animateIn si existe, si no usa clases slide-*
 function animateSlide(slide) {
   if (!slide) return;
+  const root = slide.firstElementChild;
+
+  if (root?.__animateIn) {
+    root.__animateIn();
+    return;
+  }
+
+  // Fallback — clases slide-*
   const els = getAnimatables(slide);
   if (!els.length) return;
   gsap.to(els, {
