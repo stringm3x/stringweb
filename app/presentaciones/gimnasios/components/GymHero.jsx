@@ -1,9 +1,8 @@
 "use client";
 
-// Slide 1 — Hero
 export default function GymHero() {
   return (
-    <div className="relative w-full h-full flex items-center overflow-hidden bg-black">
+    <div className="relative w-full min-h-screen flex items-center overflow-hidden bg-black">
       {/* Imagen de fondo */}
       <div
         className="absolute inset-0 bg-cover bg-center"
@@ -12,14 +11,11 @@ export default function GymHero() {
             "url('https://images.unsplash.com/photo-1534438327276-14e5300c3a48?w=1600&q=80')",
         }}
       />
-      {/* Overlay */}
       <div className="absolute inset-0 bg-black/85" />
-      {/* Glow verde */}
       <div className="absolute top-1/2 left-1/4 -translate-y-1/2 w-[600px] h-[600px] bg-green/5 rounded-full blur-[120px] pointer-events-none" />
-      {/* Línea superior */}
-      <div className="slide-line absolute top-0 left-0 right-0 h-px bg-green-400/40" />
+      <div className="slide-line absolute top-0 left-0 right-0 h-px bg-green/40" />
 
-      <div className="relative z-10 max-w-5xl mx-auto px-12 lg:px-20">
+      <div className="relative z-10 w-full max-w-5xl mx-auto px-6 sm:px-12 lg:px-20 py-24">
         {/* Tag */}
         <div className="slide-tag mb-8">
           <span className="inline-flex items-center gap-2.5 px-3 py-1.5 border border-green/30 text-green text-xs font-mono uppercase tracking-[0.25em]">
@@ -31,7 +27,7 @@ export default function GymHero() {
         {/* Headline */}
         <h1
           className="slide-heading font-black text-white uppercase leading-[0.88] tracking-tighter mb-8"
-          style={{ fontSize: "clamp(2.2rem, 5.5vw, 5rem)" }}
+          style={{ fontSize: "clamp(2.2rem, 8vw, 5rem)" }}
         >
           Cada día que tu gimnasio
           <br />
@@ -42,7 +38,7 @@ export default function GymHero() {
           sin que nadie lo vea.
         </h1>
 
-        {/* Subheadline */}
+        {/* Sub */}
         <p className="slide-sub text-gray text-base sm:text-lg leading-relaxed max-w-2xl mb-10">
           Prospectos que preguntan por Instagram y nunca reciben respuesta.
           Pagos registrados en papel. Miembros que vencen sin seguimiento.{" "}
@@ -80,10 +76,9 @@ export default function GymHero() {
         </button>
       </div>
 
-      {/* Número decorativo */}
       <div
-        className="absolute right-12 bottom-12 font-black text-white/[0.03] select-none leading-none pointer-events-none"
-        style={{ fontSize: "20vw" }}
+        className="absolute right-6 bottom-8 font-black text-white/[0.03] select-none leading-none pointer-events-none"
+        style={{ fontSize: "clamp(8rem, 20vw, 20rem)" }}
       >
         01
       </div>

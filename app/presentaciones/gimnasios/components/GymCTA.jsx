@@ -27,7 +27,6 @@ export default function GymCTA() {
       hasAnimated.current = true;
 
       const tl = gsap.timeline();
-
       tl.to(headerRefs.current.filter(Boolean), {
         opacity: 1,
         y: 0,
@@ -35,26 +34,14 @@ export default function GymCTA() {
         duration: 0.6,
         ease: "power3.out",
       });
-
       tl.to(
         calcRef.current,
-        {
-          opacity: 1,
-          y: 0,
-          duration: 0.5,
-          ease: "power3.out",
-        },
+        { opacity: 1, y: 0, duration: 0.5, ease: "power3.out" },
         "-=0.2"
       );
-
       tl.to(
         formRef.current,
-        {
-          opacity: 1,
-          y: 0,
-          duration: 0.6,
-          ease: "power3.out",
-        },
+        { opacity: 1, y: 0, duration: 0.6, ease: "power3.out" },
         "-=0.2"
       );
     };
@@ -84,7 +71,6 @@ export default function GymCTA() {
           budget: "32000",
         }),
       });
-
       if (!res.ok) throw new Error();
       setStatus("success");
     } catch {
@@ -95,9 +81,8 @@ export default function GymCTA() {
   return (
     <div
       ref={containerRef}
-      className="relative w-full h-full flex items-center overflow-hidden bg-black"
+      className="relative w-full min-h-screen flex items-center overflow-hidden bg-black"
     >
-      {/* Glow central */}
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[700px] bg-green/5 rounded-full blur-[120px] pointer-events-none" />
       <div
         className="absolute inset-0 opacity-[0.03]"
@@ -109,9 +94,8 @@ export default function GymCTA() {
       />
       <div className="absolute top-0 left-0 right-0 h-px bg-green/30" />
 
-      <div className="relative z-10 w-full max-w-5xl mx-auto px-12 lg:px-20">
+      <div className="relative z-10 w-full max-w-5xl mx-auto px-6 sm:px-8 lg:px-20 py-16">
         {status === "success" ? (
-          // ── Éxito ─────────────────────────────────────────────────────────
           <div className="text-center space-y-6">
             <div className="w-16 h-16 bg-green flex items-center justify-center mx-auto">
               <svg
@@ -130,7 +114,7 @@ export default function GymCTA() {
             </div>
             <h2
               className="font-black text-white uppercase leading-tight tracking-tighter"
-              style={{ fontSize: "clamp(2rem, 4vw, 3.5rem)" }}
+              style={{ fontSize: "clamp(2rem, 5vw, 3.5rem)" }}
             >
               ¡Listo, {form.name.split(" ")[0]}!
             </h2>
@@ -152,10 +136,9 @@ export default function GymCTA() {
             </a>
           </div>
         ) : (
-          // ── Formulario ────────────────────────────────────────────────────
-          <div className="grid lg:grid-cols-2 gap-16 items-center">
-            {/* Copy izquierda */}
-            <div className="space-y-8">
+          <div className="grid lg:grid-cols-2 gap-10 lg:gap-16 items-start">
+            {/* Copy */}
+            <div className="space-y-6">
               <div ref={(el) => (headerRefs.current[0] = el)}>
                 <span className="text-[10px] font-mono text-green uppercase tracking-[0.3em]">
                   06 · Empezar
@@ -165,7 +148,7 @@ export default function GymCTA() {
               <h2
                 ref={(el) => (headerRefs.current[1] = el)}
                 className="font-black text-white uppercase leading-[0.88] tracking-tighter"
-                style={{ fontSize: "clamp(2rem, 4vw, 3.8rem)" }}
+                style={{ fontSize: "clamp(2rem, 5vw, 3.8rem)" }}
               >
                 ¿Cuántos prospectos
                 <br />
@@ -174,7 +157,7 @@ export default function GymCTA() {
                 <span className="text-green">esta semana?</span>
               </h2>
 
-              {/* Cálculo */}
+              {/* Calculador */}
               <div
                 ref={calcRef}
                 className="border border-white/10 p-5 space-y-3"
@@ -185,13 +168,13 @@ export default function GymCTA() {
                 <p className="text-white/60 text-sm leading-relaxed">
                   Si pierdes{" "}
                   <span className="text-white font-bold">
-                    3 prospectos por semana
+                    10 prospectos por semana
                   </span>{" "}
                   y cada membresía vale{" "}
                   <span className="text-white font-bold">$600/mes</span> —
                 </p>
                 <p className="font-black text-white text-2xl leading-none">
-                  $21,600{" "}
+                  $72,600{" "}
                   <span className="text-sm font-normal text-gray">
                     al año que se van por falta de sistema.
                   </span>
@@ -206,11 +189,11 @@ export default function GymCTA() {
               </div>
             </div>
 
-            {/* Formulario derecha */}
+            {/* Formulario */}
             <form
               ref={formRef}
               onSubmit={handleSubmit}
-              className="border border-white/10 p-8 space-y-5"
+              className="border border-white/10 p-6 sm:p-8 space-y-5"
             >
               {[
                 { name: "name", label: "Tu nombre", placeholder: "Juan Pérez" },
@@ -275,7 +258,7 @@ export default function GymCTA() {
                   </span>
                 ) : (
                   <>
-                    Quiero mi diagnóstico gratuito
+                    Quiero saber cuánto está perdiendo mi gimnasio
                     <FiArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform duration-200" />
                   </>
                 )}
@@ -290,8 +273,8 @@ export default function GymCTA() {
       </div>
 
       <div
-        className="absolute right-12 bottom-12 font-black text-white/[0.03] select-none leading-none pointer-events-none"
-        style={{ fontSize: "20vw" }}
+        className="absolute right-6 bottom-8 font-black text-white/[0.03] select-none leading-none pointer-events-none"
+        style={{ fontSize: "clamp(8rem, 20vw, 20rem)" }}
       >
         06
       </div>

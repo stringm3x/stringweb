@@ -126,7 +126,7 @@ export default function GymProblem() {
   return (
     <div
       ref={containerRef}
-      className="relative w-full h-full flex items-center overflow-hidden bg-black"
+      className="relative w-full min-h-screen flex items-center overflow-hidden bg-black"
     >
       <div
         className="absolute inset-0 opacity-[0.04]"

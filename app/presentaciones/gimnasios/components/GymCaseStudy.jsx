@@ -79,7 +79,7 @@ export default function GymCaseStudy() {
   return (
     <div
       ref={containerRef}
-      className="relative w-full h-full flex items-center overflow-hidden bg-black"
+      className="relative w-full min-h-screen flex items-center overflow-hidden bg-black"
     >
       {/* Imagen de fondo */}
       <div

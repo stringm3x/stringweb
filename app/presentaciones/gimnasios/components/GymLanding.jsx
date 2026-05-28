@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import GymHero from "./GymHero";
@@ -25,11 +25,24 @@ const TOTAL = SLIDES.length;
 const VH_PER_SLIDE = 120;
 
 export default function GymLanding() {
+  const [isMobile, setIsMobile] = useState(false);
   const wrapperRef = useRef(null);
   const trackRef = useRef(null);
+  const mobileSectionsRef = useRef([]);
   const animatedSlides = useRef(new Set());
 
+  // Detectar mobile
   useEffect(() => {
+    const check = () => setIsMobile(window.innerWidth < 1024);
+    check();
+    window.addEventListener("resize", check);
+    return () => window.removeEventListener("resize", check);
+  }, []);
+
+  // ── DESKTOP — horizontal scroll ───────────────────────────────────────────
+  useEffect(() => {
+    if (isMobile) return;
+
     let ctx;
 
     const init = () => {
@@ -39,18 +52,11 @@ export default function GymLanding() {
 
         const slides = Array.from(track.querySelectorAll(".gym-slide"));
 
-        // Ocultar elementos con clase slide-* en slides que no tienen __animateIn
         slides.forEach((slide, i) => {
           if (i === 0) return;
-          const root = slide.firstElementChild;
-          // Si el componente expone __animateIn, él maneja sus propios elementos
-          // Si no, usamos el fallback de clases slide-*
-          if (!root?.__animateIn) {
-            gsap.set(getAnimatables(slide), { opacity: 0, y: 40 });
-          }
+          gsap.set(getAnimatables(slide), { opacity: 0, y: 40 });
         });
 
-        // Animar Hero inmediatamente
         animateSlide(slides[0]);
         animatedSlides.current.add(0);
 
@@ -84,19 +90,95 @@ export default function GymLanding() {
     };
 
     const t = setTimeout(init, 150);
-
     return () => {
       clearTimeout(t);
       ctx?.revert();
       animatedSlides.current.clear();
     };
-  }, []);
+  }, [isMobile]);
 
+  // ── MOBILE — scroll vertical con animaciones por sección ─────────────────
+  useEffect(() => {
+    if (!isMobile) return;
+
+    const ctx = gsap.context(() => {
+      mobileSectionsRef.current.forEach((section, i) => {
+        if (!section) return;
+
+        const els = getAnimatables(section);
+        const root = section.firstElementChild;
+
+        if (i === 0) {
+          // Hero entra de inmediato
+          if (root?.__animateIn) {
+            root.__animateIn();
+          } else {
+            gsap.set(els, { opacity: 0, y: 30 });
+            gsap.to(els, {
+              opacity: 1,
+              y: 0,
+              stagger: 0.08,
+              duration: 0.6,
+              ease: "power3.out",
+              delay: 0.3,
+            });
+          }
+          return;
+        }
+
+        // Resto de secciones con ScrollTrigger vertical
+        if (root?.__animateIn) {
+          gsap.set([], {}); // no-op, __animateIn maneja su propio estado
+          ScrollTrigger.create({
+            trigger: section,
+            start: "top 80%",
+            once: true,
+            onEnter: () => root.__animateIn(),
+          });
+        } else {
+          gsap.set(els, { opacity: 0, y: 30 });
+          gsap.to(els, {
+            opacity: 1,
+            y: 0,
+            stagger: 0.08,
+            duration: 0.6,
+            ease: "power3.out",
+            scrollTrigger: {
+              trigger: section,
+              start: "top 80%",
+              once: true,
+            },
+          });
+        }
+      });
+    });
+
+    return () => ctx.revert();
+  }, [isMobile]);
+
+  // ── MOBILE layout ─────────────────────────────────────────────────────────
+  if (isMobile) {
+    return (
+      <div className="bg-black">
+        {SLIDES.map(({ id, Component }, i) => (
+          <div
+            key={id}
+            ref={(el) => (mobileSectionsRef.current[i] = el)}
+            className="min-h-screen w-full"
+          >
+            <Component />
+          </div>
+        ))}
+      </div>
+    );
+  }
+
+  // ── DESKTOP layout ────────────────────────────────────────────────────────
   return (
     <>
-      {/* Indicador */}
+      {/* Indicador scroll */}
       <div className="fixed bottom-6 right-6 z-50 flex items-center gap-2 px-3 py-1.5 border border-white/10 bg-black/80 backdrop-blur-sm pointer-events-none">
-        <span className="text-[10px] font-mono text-gray-500 uppercase tracking-widest">
+        <span className="text-[10px] font-mono text-gray uppercase tracking-widest">
           Scroll
         </span>
         <svg width="16" height="10" viewBox="0 0 16 10" fill="none">
@@ -132,17 +214,14 @@ export default function GymLanding() {
   );
 }
 
-// Animar slide — usa __animateIn si existe, si no usa clases slide-*
+// ── Helpers ───────────────────────────────────────────────────────────────────
 function animateSlide(slide) {
   if (!slide) return;
   const root = slide.firstElementChild;
-
   if (root?.__animateIn) {
     root.__animateIn();
     return;
   }
-
-  // Fallback — clases slide-*
   const els = getAnimatables(slide);
   if (!els.length) return;
   gsap.to(els, {
