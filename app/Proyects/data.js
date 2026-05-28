@@ -11,12 +11,12 @@ export const proyects = [
     year: "En desarrollo",
   },
   {
-    id: "TheZerug",
-    title: "Portafolio",
-    href: "https://zerug.vercel.app/",
-    img: "/proyects/zerug.png",
+    id: "Evolution GYM",
+    title: "Landing Page",
+    href: "https://evolutiongymneza.com/",
+    img: "/proyects/evolutiongym.png",
     info: "Editor de videos profesionales para youtubers y tiktokers.",
-    category: "portfolio",
+    category: "landing",
     year: "2026",
   },
   {
