@@ -141,7 +141,7 @@ export default function GymCTA() {
             <div className="space-y-6">
               <div ref={(el) => (headerRefs.current[0] = el)}>
                 <span className="text-[10px] font-mono text-green uppercase tracking-[0.3em]">
-                  06 · Empezar
+                  07 · Empezar
                 </span>
               </div>
 

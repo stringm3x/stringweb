@@ -119,7 +119,7 @@ export default function GymProcess() {
         {/* Header */}
         <div ref={(el) => (headerRefs.current[0] = el)} className="mb-2">
           <span className="text-[10px] font-mono text-green uppercase tracking-[0.3em]">
-            05 · Cómo funciona
+            06 · Cómo funciona
           </span>
         </div>
 

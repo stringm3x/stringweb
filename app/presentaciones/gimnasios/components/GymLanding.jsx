@@ -8,6 +8,7 @@ import GymProblem from "./GymProblem";
 import GymSolution from "./GymSolution";
 import GymCaseStudy from "./GymCaseStudy";
 import GymProcess from "./GymProcess";
+import GymPlanes from "./GymPlanes";
 import GymCTA from "./GymCTA";
 
 gsap.registerPlugin(ScrollTrigger);
@@ -17,6 +18,7 @@ const SLIDES = [
   { id: "problem", Component: GymProblem },
   { id: "solution", Component: GymSolution },
   { id: "case", Component: GymCaseStudy },
+  { id: "planes", Component: GymPlanes },
   { id: "process", Component: GymProcess },
   { id: "cta", Component: GymCTA },
 ];
