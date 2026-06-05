@@ -160,13 +160,13 @@ export async function POST(req) {
     await transporter.sendMail({
       ...mailOptions,
       to: `${cliente.nombre_contacto} <${process.env.SMTP_FROM}>`,
-      replyTo: "hola@stringwebs.com",
+      replyTo: "stringwebmx@gmail.com",
     });
 
     // Email a STRING
     await transporter.sendMail({
       ...mailOptions,
-      to: "hola@stringwebs.com",
+      to: "stringwebmx@gmail.com",
       subject: `[ONBOARDING] Mapa aprobado — ${cliente.nombre_negocio} · ${fecha}`,
     });
 
