@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState, useRef } from "react";
+import { useEffect, useState } from "react";
 import { useSearchParams, useRouter } from "next/navigation";
 import { obtenerDiagnostico } from "../lib/storage";
 import { etiquetaScore } from "../lib/scoring";
@@ -41,6 +41,7 @@ export default function ResultadoContent() {
     propuestaTexto,
     resumenWA,
     notas,
+    tier,
   } = diag;
 
   const etOp = etiquetaScore(scoreOp);
@@ -72,7 +73,6 @@ export default function ResultadoContent() {
   };
 
   const imprimirPDF = () => window.print();
-
   const abrirWhatsApp = () => {
     window.open(
       `https://wa.me/525545524847?text=${encodeURIComponent(resumenWA)}`,
@@ -198,6 +198,9 @@ export default function ResultadoContent() {
           )}
           <BarraSalud label="Operación" score={scoreOp} etiqueta={etOp} />
         </div>
+
+        {/* ── Metodología de entrega ── */}
+        <MetodologiaSection tier={tier} />
 
         {/* Fricciones */}
         <div className="space-y-3">
@@ -372,6 +375,146 @@ export default function ResultadoContent() {
   );
 }
 
+// ── Metodología de entrega ────────────────────────────────────────────────────
+function MetodologiaSection({ tier }) {
+  const esComplejo = ["agenda", "multi", "eco3", "rest3"].includes(tier);
+
+  const fasesBase = [
+    {
+      num: "01",
+      titulo: "Diagnóstico profundo",
+      desc: "Análisis del estado actual y fricciones detectadas.",
+      obligatoria: false,
+    },
+    {
+      num: "02",
+      titulo: "Estructuración estratégica",
+      desc: "Mapa de conversión aprobado por el cliente.",
+      obligatoria: false,
+    },
+    {
+      num: "03",
+      titulo: "Desarrollo e implementación",
+      desc: "Sistema funcional en entorno de prueba.",
+      obligatoria: false,
+    },
+    {
+      num: "04",
+      titulo: "Ajuste y lanzamiento",
+      desc: "Pruebas, capacitación básica, sistema publicado.",
+      obligatoria: false,
+    },
+  ];
+
+  const fasesComplejas = [
+    {
+      num: "01",
+      titulo: "Diagnóstico profundo",
+      desc: "Análisis del estado actual y fricciones detectadas.",
+      obligatoria: false,
+    },
+    {
+      num: "02",
+      titulo: "Estructuración estratégica",
+      desc: "Mapa de conversión aprobado por el cliente.",
+      obligatoria: false,
+    },
+    {
+      num: "03",
+      titulo: "Estudio de procesos",
+      desc: "Documentación de cómo opera el negocio hoy. Mapa de procesos firmado por el cliente. Sin este documento no arranca el desarrollo.",
+      obligatoria: true,
+    },
+    {
+      num: "04",
+      titulo: "Desarrollo e implementación",
+      desc: "Sistema funcional en entorno de prueba.",
+      obligatoria: false,
+    },
+    {
+      num: "05",
+      titulo: "Pruebas completas",
+      desc: "Verificación de todos los flujos del sistema.",
+      obligatoria: false,
+    },
+    {
+      num: "06",
+      titulo: "Capacitación",
+      desc: "Sesión 60–90 min + video grabado + guía rápida.",
+      obligatoria: false,
+    },
+    {
+      num: "07",
+      titulo: "Entrega formal",
+      desc: "Sistema publicado, pago final, 30 días de soporte incluido.",
+      obligatoria: false,
+    },
+  ];
+
+  const fases = esComplejo ? fasesComplejas : fasesBase;
+  const semanas = esComplejo ? "4 a 6 semanas" : "2 a 3 semanas";
+
+  return (
+    <div className="space-y-3">
+      <div className="flex items-center justify-between flex-wrap gap-2">
+        <p className="text-[10px] font-mono text-gray uppercase tracking-widest">
+          Metodología de entrega · {fases.length} fases · {semanas}
+        </p>
+        {esComplejo && (
+          <span className="text-[9px] font-mono text-yellow border border-yellow/30 px-2 py-0.5 uppercase tracking-wider">
+            Proyecto complejo
+          </span>
+        )}
+      </div>
+
+      <div className="space-y-px">
+        {fases.map((fase, i) => (
+          <div
+            key={i}
+            className={`flex gap-4 px-4 py-3 border-l-2 ${
+              fase.obligatoria
+                ? "border-yellow bg-yellow/5"
+                : "border-white/5 bg-white/[0.02]"
+            }`}
+          >
+            <span
+              className={`text-[10px] font-mono flex-shrink-0 mt-0.5 w-5 ${
+                fase.obligatoria ? "text-yellow" : "text-gray"
+              }`}
+            >
+              {fase.num}
+            </span>
+            <div className="flex-1 min-w-0">
+              <div className="flex items-center gap-2 flex-wrap mb-0.5">
+                <p
+                  className={`text-xs font-bold uppercase tracking-tight ${
+                    fase.obligatoria ? "text-yellow" : "text-white"
+                  }`}
+                >
+                  {fase.titulo}
+                </p>
+                {fase.obligatoria && (
+                  <span className="text-[9px] font-mono text-yellow bg-yellow/10 px-1.5 py-0.5 uppercase tracking-wider flex-shrink-0">
+                    Obligatoria — sin esto no arranca
+                  </span>
+                )}
+              </div>
+              <p
+                className={`text-xs leading-relaxed ${
+                  fase.obligatoria ? "text-yellow/70" : "text-white/40"
+                }`}
+              >
+                {fase.desc}
+              </p>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+}
+
+// ── Barra de salud ────────────────────────────────────────────────────────────
 function BarraSalud({ label, score, etiqueta }) {
   return (
     <div className="space-y-1.5">

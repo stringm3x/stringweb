@@ -104,11 +104,13 @@ export default function DiagnosticoForm() {
         fricciones,
         notas: respuestas.notas,
       });
+
       const resumenWA = generarResumenWhatsApp({
         bizName: respuestas["biz-name"],
         ownerName: respuestas["owner-name"],
         sistema,
         metricas,
+        tier,
       });
 
       const diagnostico = {

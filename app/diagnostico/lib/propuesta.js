@@ -1,8 +1,8 @@
 // ─── Generador de propuesta formal ───────────────────────────────────────────
+// Documento maestro STRING · Junio 2026
 
 import { formatMXN } from "./metricas";
 
-// Entregables requeridos por sector/tier
 const getEntregables = (flow, tier) => {
   const base = [
     "Logo en alta resolución",
@@ -10,33 +10,34 @@ const getEntregables = (flow, tier) => {
     "Fotografías del negocio (mínimo 5)",
     "Número de WhatsApp activo",
   ];
-
   if (flow === "ecommerce") {
     base.push(
       "Catálogo de productos con fotos y precios",
       "Acceso a pasarela de pago (Stripe o MercadoPago)"
     );
   }
-
   if (flow === "menu") {
     base.push(
       "Menú completo con precios y fotos",
       "Horario de atención y zonas de entrega"
     );
   }
-
   if (flow === "servicios" && (tier === "agenda" || tier === "multi")) {
     base.push(
       "Horario de atención por servicio",
       "Lista de servicios con duración y precio"
     );
   }
-
+  // Fase 3 obligatoria para sistemas complejos
+  if (["agenda", "multi", "eco3", "rest3"].includes(tier)) {
+    base.push(
+      "Mapa de procesos firmado — Fase 3 obligatoria antes de iniciar desarrollo"
+    );
+  }
   return base;
 };
 
-// Qué NO incluye el sistema
-const getNoIncluye = (sistema) => [
+const getNoIncluye = () => [
   "Publicidad pagada (Meta Ads, Google Ads)",
   "Gestión de redes sociales",
   "Creación de contenido o copywriting continuo",
@@ -44,10 +45,34 @@ const getNoIncluye = (sistema) => [
   "Modificaciones fuera del alcance sin addendum firmado",
 ];
 
-// Fecha de vigencia (hoy + 15 días)
+// Esquema correcto según Documento Maestro STRING
+const getEsquemaPago = (tier, sistema) => {
+  const esComplejo =
+    ["agenda", "multi", "eco3", "rest3"].includes(tier) ||
+    sistema.esquema === "40 / 30 / 30";
+  if (esComplejo) {
+    return {
+      texto: "40% arranque / 30% mitad del proyecto / 30% entrega",
+      lineas: [
+        { label: "Arranque (40%)", valor: sistema.anticipo },
+        { label: "Mitad del proyecto (30%)", valor: "Al aprobar Fase 4" },
+        { label: "Contra entrega (30%)", valor: "Al lanzamiento" },
+      ],
+    };
+  }
+  return {
+    texto: "50% anticipo / 50% entrega",
+    lineas: [
+      { label: "Anticipo (50%)", valor: sistema.anticipo },
+      { label: "Contra entrega (50%)", valor: "Al lanzamiento" },
+    ],
+  };
+};
+
+// Vigencia 7 días — Documento Maestro STRING
 const getVigencia = () => {
   const fecha = new Date();
-  fecha.setDate(fecha.getDate() + 15);
+  fecha.setDate(fecha.getDate() + 7);
   return fecha.toLocaleDateString("es-MX", {
     day: "numeric",
     month: "long",
@@ -55,7 +80,6 @@ const getVigencia = () => {
   });
 };
 
-// Generador principal
 export const generarPropuesta = ({
   bizName,
   ownerName,
@@ -74,8 +98,8 @@ export const generarPropuesta = ({
   });
   const vigencia = getVigencia();
   const entregables = getEntregables(flow, tier);
-  const noIncluye = getNoIncluye(sistema);
-
+  const noIncluye = getNoIncluye();
+  const esquema = getEsquemaPago(tier, sistema);
   const friccionesHi = fricciones.filter((f) => f.severidad === "hi");
   const friccionesMe = fricciones.filter((f) => f.severidad === "me");
 
@@ -94,10 +118,9 @@ EL PROBLEMA
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
 Costo estimado del desorden: ${formatMXN(metricas.perdAnual)} al año
-
 ${
   metricas.perdMes > 0
-    ? `El negocio pierde aproximadamente ${metricas.perdMes} ${metricas.label}.`
+    ? `\nEl negocio pierde aproximadamente ${metricas.perdMes} ${metricas.label}.`
     : ""
 }
 ${
@@ -110,10 +133,9 @@ Fricciones críticas detectadas:
 ${friccionesHi
   .map((f) => `• [CRÍTICO] ${f.titulo}: ${f.descripcion}`)
   .join("\n")}
-
 ${
   friccionesMe.length > 0
-    ? `Fricciones importantes:\n${friccionesMe
+    ? `\nFricciones importantes:\n${friccionesMe
         .map((f) => `• [IMPORTANTE] ${f.titulo}`)
         .join("\n")}`
     : ""
@@ -131,8 +153,6 @@ SISTEMA RECOMENDADO
 
 ${sistema.nombre}
 Inversión: ${sistema.precio} MXN
-Anticipo: ${sistema.anticipo}
-Esquema de pago: ${sistema.esquema}
 Tiempo de implementación: ${sistema.tiempo}
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
@@ -142,15 +162,25 @@ QUÉ NECESITAMOS DE TI PARA ARRANCAR
 ${entregables.map((e, i) => `${i + 1}. ${e}`).join("\n")}
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-CONDICIONES
+CONDICIONES E INVERSIÓN
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
-Inversión total:      ${sistema.precio} MXN
-Anticipo:             ${sistema.anticipo}
-Liquidación:          Resto al entregar
-Tiempo:               ${sistema.tiempo}
-Métodos de pago:      Transferencia bancaria / OXXO
-Vigencia propuesta:   ${vigencia}
+Inversión total:    ${sistema.precio} MXN
+Esquema de pago:    ${esquema.texto}
+
+${esquema.lineas.map((l) => `  ${l.label}: ${l.valor}`).join("\n")}
+
+Tiempo:             ${sistema.tiempo}
+Métodos de pago:    SPEI / Transferencia / Stripe / PayPal
+Vigencia:           ${vigencia} (7 días naturales)
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+PRÓXIMOS PASOS
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+1. ${bizName} confirma el sistema
+2. STRING envía contrato en 24h
+3. Primer pago → arranca en 48h
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 CONDICIONES GENERALES
@@ -159,7 +189,8 @@ CONDICIONES GENERALES
 • Sin anticipo confirmado no inicia ningún proyecto.
 • Todo cambio de alcance requiere addendum firmado.
 • STRING optimiza captación — los resultados de ventas dependen de la oferta del cliente.
-• Esta propuesta tiene vigencia hasta el ${vigencia}.
+• No se prometen ventas garantizadas.
+• Esta propuesta vence el ${vigencia}.
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 STRING · stringwebs.com
@@ -169,15 +200,15 @@ CDMX, México
 `.trim();
 };
 
-// Resumen corto para copiar por WhatsApp
 export const generarResumenWhatsApp = ({
   bizName,
   ownerName,
   sistema,
   metricas,
+  tier,
 }) => {
   const vigencia = getVigencia();
-
+  const esquema = getEsquemaPago(tier, sistema);
   return `
 *Propuesta STRING — ${bizName}*
 
@@ -188,11 +219,12 @@ Hola ${ownerName.split(" ")[0]}, te comparto el resumen de lo que hablamos:
 🔧 *Sistema recomendado:* ${sistema.nombre}
 💰 *Inversión:* ${sistema.precio} MXN
 📅 *Tiempo:* ${sistema.tiempo}
-⚡ *Anticipo para arrancar:* ${sistema.anticipo}
+⚡ *Esquema:* ${esquema.texto}
+🕐 *Vigencia:* ${vigencia} (7 días)
 
-La propuesta completa tiene vigencia hasta el ${vigencia}.
+Para arrancar confirma el primer pago y te mando el contrato en 24h.
 
-¿Tienes alguna duda antes de arrancar?
+¿Tienes alguna duda?
 
 _STRING — stringwebs.com_
   `.trim();

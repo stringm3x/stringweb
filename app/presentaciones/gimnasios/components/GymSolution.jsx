@@ -10,12 +10,15 @@ import {
   FiChevronDown,
 } from "react-icons/fi";
 
+// PARCHE — solo el array levels con precios corregidos
+// Reemplazar el array levels en GymSolution.jsx
+
 const levels = [
   {
     id: "nivel2",
     label: "Nivel 2",
     title: "Sistema de Captación",
-    price: "$12,000 – $18,000",
+    price: "$18,000 – $24,000",
     tag: null,
     pitch:
       "Para gimnasios que ya tienen interesados pero los pierden por desorden.",
@@ -34,7 +37,7 @@ const levels = [
     id: "gym-completo",
     label: "Sistema GYM Completo",
     title: "Captación + Operación",
-    price: "$32,000 – $40,000",
+    price: "$45,000 – $55,000",
     tag: "Recomendado",
     pitch:
       "Para gimnasios que quieren resolver captación y operación de una sola vez.",
@@ -45,7 +48,7 @@ const levels = [
         label: "Captación",
         items: [
           "Landing page optimizada",
-          "Agenda automática de clases de prueba gratis — el prospecto elige horario sin coordinación manual",
+          "Agenda automática de clases de prueba gratis",
           "Seguimiento a prospectos no convertidos",
           "Recordatorios automáticos de cita",
         ],
@@ -67,7 +70,7 @@ const levels = [
     id: "especializado",
     label: "Sistema Especializado",
     title: "Multi-sucursal",
-    price: "Desde $55,000",
+    price: "Desde $70,000",
     tag: null,
     pitch:
       "Para cadenas o gimnasios con operaciones que un sistema estándar no puede cubrir.",

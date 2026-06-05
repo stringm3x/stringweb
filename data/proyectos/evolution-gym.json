@@ -1,0 +1,81 @@
+{
+  "slug": "evolution-gym",
+  "nombre_negocio": "Evolution GYM",
+  "nombre_contacto": "Carlos Rodríguez",
+  "sistema_contratado": "Sistema GYM Completo",
+  "fecha_inicio": "2026-06-01",
+  "fecha_entrega_estimada": "2026-07-01",
+  "fase_actual": 4,
+  "progreso_porcentaje": 55,
+  "estado": "En desarrollo",
+  "fases": [
+    {
+      "numero": 1,
+      "nombre": "Diagnóstico profundo",
+      "estado": "completado",
+      "progreso_pct": 100,
+      "fecha_completado": "2026-06-03"
+    },
+    {
+      "numero": 2,
+      "nombre": "Estructuración estratégica",
+      "estado": "completado",
+      "progreso_pct": 100,
+      "fecha_completado": "2026-06-05"
+    },
+    {
+      "numero": 3,
+      "nombre": "Estudio de procesos",
+      "estado": "completado",
+      "progreso_pct": 100,
+      "fecha_completado": "2026-06-07"
+    },
+    {
+      "numero": 4,
+      "nombre": "Desarrollo e implementación",
+      "estado": "en_progreso",
+      "progreso_pct": 60,
+      "fecha_completado": null
+    },
+    {
+      "numero": 5,
+      "nombre": "Pruebas completas",
+      "estado": "pendiente",
+      "progreso_pct": 0,
+      "fecha_completado": null
+    },
+    {
+      "numero": 6,
+      "nombre": "Capacitación",
+      "estado": "pendiente",
+      "progreso_pct": 0,
+      "fecha_completado": null
+    },
+    {
+      "numero": 7,
+      "nombre": "Entrega formal",
+      "estado": "pendiente",
+      "progreso_pct": 0,
+      "fecha_completado": null
+    }
+  ],
+  "tareas_string": [
+    "Panel de miembros activos e inactivos",
+    "Integración de caja de pagos",
+    "Dashboard con métricas en tiempo real"
+  ],
+  "tareas_cliente": [
+    "Logo en alta resolución (PNG o SVG)",
+    "Confirmar los tipos de membresía exactos",
+    "Acceso DNS para configurar el dominio"
+  ],
+  "entregables": [
+    { "nombre": "Informe de diagnóstico", "fecha": "2026-06-03", "url": null },
+    {
+      "nombre": "Mapa de procesos aprobado",
+      "fecha": "2026-06-07",
+      "url": null
+    }
+  ],
+  "whatsapp_mensaje": "Hola, soy Evolution GYM, tengo una pregunta sobre mi proyecto"
+}

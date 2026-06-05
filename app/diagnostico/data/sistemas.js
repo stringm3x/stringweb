@@ -3,31 +3,34 @@
 
 export const SISTEMAS = {
   // ── Gym ────────────────────────────────────────────────────────────────────
+  // PARCHE — solo los valores corregidos para gym
+  // Reemplazar en sistemas.js el bloque gym completo
+
   gym: {
     base: {
       nombre: "Sistema de Captación — Nivel 2",
-      precio: "$12,000 – $18,000",
-      precioMin: 12000,
-      anticipo: "$9,000 (50%)",
+      precio: "$18,000 – $24,000",
+      precioMin: 18000,
+      anticipo: "$9,000 (40%)",
       anticipoVal: 9000,
       tiempo: "2 a 3 semanas",
       esquema: "50 / 50",
     },
     agenda: {
       nombre: "Sistema GYM Completo",
-      precio: "$32,000 – $40,000",
-      precioMin: 32000,
-      anticipo: "$16,000 (50%)",
-      anticipoVal: 16000,
+      precio: "$45,000 – $55,000",
+      precioMin: 45000,
+      anticipo: "$18,000 (40%)",
+      anticipoVal: 18000,
       tiempo: "3 a 4 semanas",
-      esquema: "50 / 50",
+      esquema: "40 / 30 / 30",
     },
     multi: {
       nombre: "Sistema GYM Multi-sucursal",
-      precio: "Desde $55,000",
-      precioMin: 55000,
-      anticipo: "$22,000 (40%)",
-      anticipoVal: 22000,
+      precio: "Desde $70,000",
+      precioMin: 70000,
+      anticipo: "$28,000 (40%)",
+      anticipoVal: 28000,
       tiempo: "5 a 7 semanas",
       esquema: "40 / 30 / 30",
     },
