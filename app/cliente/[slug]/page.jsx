@@ -22,6 +22,24 @@ export default async function ClientePage({ params }) {
   return <ClienteDashboard proyecto={proyecto} />;
 }
 
-export function generateMetadata() {
-  return { robots: "noindex, nofollow" };
+export async function generateMetadata({ params }) {
+  const { slug } = await params;
+  const filePath = path.join(
+    process.cwd(),
+    "data",
+    "proyectos",
+    `${slug}.json`
+  );
+
+  if (!fs.existsSync(filePath)) {
+    return { title: "Dashboard | STRING" };
+  }
+
+  const proyecto = JSON.parse(fs.readFileSync(filePath, "utf-8"));
+
+  return {
+    title: `${proyecto.nombre_negocio} — Avance del proyecto | STRING`,
+    description: `Sigue el avance de ${proyecto.sistema_contratado} en tiempo real.`,
+    robots: "noindex, nofollow",
+  };
 }

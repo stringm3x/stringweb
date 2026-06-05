@@ -19,6 +19,19 @@ export default async function OnboardingPage({ params }) {
   return <OnboardingForm cliente={cliente} />;
 }
 
-export function generateMetadata() {
-  return { robots: "noindex, nofollow" };
+export async function generateMetadata({ params }) {
+  const { slug } = await params;
+  const filePath = path.join(process.cwd(), "data", "clientes", `${slug}.json`);
+
+  if (!fs.existsSync(filePath)) {
+    return { title: "Onboarding | STRING" };
+  }
+
+  const cliente = JSON.parse(fs.readFileSync(filePath, "utf-8"));
+
+  return {
+    title: `Estudio de Procesos — ${cliente.nombre_negocio} | STRING`,
+    description: `Fase 3 del proyecto ${cliente.sistema_contratado} para ${cliente.nombre_negocio}.`,
+    robots: "noindex, nofollow",
+  };
 }

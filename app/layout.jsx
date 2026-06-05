@@ -1,8 +1,6 @@
 import { Geist, Anton, Ubuntu } from "next/font/google";
 import { Providers } from "./provider";
 import "./globals.css";
-import Footer from "./Footer";
-import Header from "./header";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -28,7 +26,6 @@ export const metadata = {
   },
   description:
     "STRING: Agencia de sistemas digitales estratégicos en México. Transformamos tu presencia digital en un sistema que capta, organiza y convierte prospectos en clientes reales.",
-
   keywords: [
     "sistemas digitales",
     "captación de clientes",
@@ -41,15 +38,12 @@ export const metadata = {
     "automatización WhatsApp",
     "Next.js México",
   ],
-
   authors: [{ name: "STRING", url: "https://www.stringwebs.com/" }],
-
   icons: {
     icon: "/ico.png",
     shortcut: "/ico.png",
     apple: "/ico.png",
   },
-
   openGraph: {
     title: "STRING | Sistemas Digitales de Conversión",
     description:
@@ -67,7 +61,6 @@ export const metadata = {
     locale: "es_MX",
     type: "website",
   },
-
   twitter: {
     card: "summary_large_image",
     title: "STRING | Sistemas Digitales de Conversión",
@@ -76,7 +69,6 @@ export const metadata = {
     images: ["/og-image.png"],
     creator: "@stringmx",
   },
-
   robots: {
     index: true,
     follow: true,
@@ -88,18 +80,15 @@ export const metadata = {
       "max-snippet": -1,
     },
   },
-
   verification: {
     google: "tu-codigo-de-verificacion",
   },
-
   alternates: {
     canonical: "https://www.stringwebs.com/",
     languages: {
       "es-MX": "https://www.stringwebs.com/",
     },
   },
-
   category: "technology",
   generator: "Next.js",
   applicationName: "STRING",
@@ -126,11 +115,7 @@ export default function RootLayout({ children }) {
       <body
         className={`${geistSans.variable} ${anton.variable} ${ubuntu.variable} antialiased`}
       >
-        <Providers>
-          <Header />
-          <main className="min-h-screen">{children}</main>
-          <Footer />
-        </Providers>
+        <Providers>{children}</Providers>
       </body>
     </html>
   );
