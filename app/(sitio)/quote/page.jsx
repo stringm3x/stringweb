@@ -1,4 +1,4 @@
-import { QuoteForm } from "../components/forms/QuoteForm";
+import { QuoteForm } from "../../components/forms/QuoteForm";
 import { Toaster } from "react-hot-toast";
 
 export const metadata = {
