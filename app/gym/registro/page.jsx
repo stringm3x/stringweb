@@ -3,7 +3,7 @@ import { FiArrowLeft } from "react-icons/fi";
 import { RegistroForm } from "./RegistroForm";
 
 export const metadata = {
-  title: "Crea tu cuenta",
+  title: "Registra tu gimnasio — STRING GYM",
   description:
     "Completa tus datos y empieza tu prueba gratuita de 14 días de STRING GYM.",
 };

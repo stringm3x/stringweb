@@ -2,7 +2,7 @@ import Link from "next/link";
 import { FiCheck, FiArrowRight } from "react-icons/fi";
 
 export const metadata = {
-  title: "Elige tu plan",
+  title: "Empieza tu prueba gratis — STRING GYM",
   description:
     "Empieza tu prueba gratuita de 14 días de STRING GYM. Sin tarjeta de crédito.",
 };

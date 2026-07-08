@@ -20,12 +20,13 @@ const ubuntu = Ubuntu({
 });
 
 export const metadata = {
+  metadataBase: new URL("https://www.stringwebs.com"),
   title: {
-    default: "STRING | Sistemas Digitales de Conversión",
+    default: "STRING — Sistemas Digitales Estratégicos",
     template: "%s | STRING",
   },
   description:
-    "STRING: Agencia de sistemas digitales estratégicos en México. Transformamos tu presencia digital en un sistema que capta, organiza y convierte prospectos en clientes reales.",
+    "Agencia de sistemas digitales en México. CRM para gimnasios, e-commerce y automatizaciones.",
   keywords: [
     "sistemas digitales",
     "captación de clientes",
@@ -45,9 +46,9 @@ export const metadata = {
     apple: "/ico.png",
   },
   openGraph: {
-    title: "STRING | Sistemas Digitales de Conversión",
+    title: "STRING — Sistemas Digitales Estratégicos",
     description:
-      "No necesitas más seguidores. Necesitas un sistema que convierta. Diseñamos sistemas digitales que trabajan solos.",
+      "Agencia de sistemas digitales en México. CRM para gimnasios, e-commerce y automatizaciones.",
     url: "https://www.stringwebs.com/",
     siteName: "STRING",
     images: [
@@ -55,7 +56,7 @@ export const metadata = {
         url: "/og-image.png",
         width: 1200,
         height: 630,
-        alt: "STRING - Sistemas Digitales de Conversión",
+        alt: "STRING — Sistemas Digitales Estratégicos",
       },
     ],
     locale: "es_MX",
@@ -63,9 +64,9 @@ export const metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "STRING | Sistemas Digitales de Conversión",
+    title: "STRING — Sistemas Digitales Estratégicos",
     description:
-      "No necesitas más seguidores. Necesitas un sistema que convierta.",
+      "Agencia de sistemas digitales en México. CRM para gimnasios, e-commerce y automatizaciones.",
     images: ["/og-image.png"],
     creator: "@stringmx",
   },
