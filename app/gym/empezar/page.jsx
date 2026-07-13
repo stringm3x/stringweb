@@ -7,32 +7,43 @@ export const metadata = {
     "Empieza tu prueba gratuita de 14 días de STRING GYM. Sin tarjeta de crédito.",
 };
 
+// El `id` es el valor interno del plan que viaja al CRM (?plan= y la solicitud):
+// se mantiene "basico" aunque el plan se muestre como "Starter".
 const PLANES = [
   {
     id: "basico",
-    nombre: "Básico",
-    precio: "$999",
+    nombre: "Starter",
+    precio: "$799",
     periodo: "/mes",
     destacado: false,
     features: [
       "Miembros ilimitados",
-      "Check-in + Caja + Inventario",
-      "Importación CSV",
-      "Dashboard básico",
+      "Check-in + QR + Kiosco self-service",
+      "Caja + Inventario + POS",
+      "Dashboard con gráficas",
+      "Importación CSV con plantilla",
+      "Onboarding guiado",
+      "14 días gratis",
     ],
   },
   {
     id: "pro",
     nombre: "Pro",
-    precio: "$1,999",
+    precio: "$1,799",
     periodo: "/mes",
     destacado: true,
     features: [
-      "Todo lo de Básico",
+      "Todo Starter, más:",
       "Sistema de clases con reservas",
-      "Acceso QR sin hardware",
       "Multiusuario con roles",
-      "Web conectada al CRM ($299/mes)",
+      "MercadoPago + OXXO + SPEI incluido",
+      "API pública + SDK",
+      "Portal del miembro",
+      "Créditos y pagos a plazos",
+      "Campañas masivas",
+      "Saldo de productos",
+      "Nutrición Nivel 1",
+      "Retroalimentación de miembros",
     ],
   },
   {
@@ -42,10 +53,12 @@ const PLANES = [
     periodo: "/mes",
     destacado: false,
     features: [
-      "Todo lo de Pro",
+      "Todo Pro, más:",
+      "Web profesional conectada al CRM incluida",
       "WhatsApp automático",
-      "Portal del miembro",
-      "Rutinas IA",
+      "Bot WhatsApp IA",
+      "Inbox WhatsApp en el SaaS",
+      "Kiosco de autoservicio",
       "Soporte prioritario",
     ],
   },

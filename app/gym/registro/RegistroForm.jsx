@@ -11,9 +11,11 @@ import { TurnstileWidget } from "../components/TurnstileWidget";
 
 const ENDPOINT = "https://app.gym.stringwebs.com/api/solicitudes";
 
+// El value es el id interno del plan (lo valida el SaaS): se mantiene "basico"
+// aunque se muestre como "Starter".
 const PLAN_OPTIONS = [
-  { value: "basico", label: "Básico — $999/mes" },
-  { value: "pro", label: "Pro — $1,999/mes" },
+  { value: "basico", label: "Starter — $799/mes" },
+  { value: "pro", label: "Pro — $1,799/mes" },
   { value: "escala", label: "Escala — $2,999/mes" },
 ];
 
