@@ -10,6 +10,7 @@ import { FaWhatsapp } from "react-icons/fa";
 const menuItems = [
   { label: "Inicio", href: "/" },
   { label: "Servicios", href: "/Services" },
+  { label: "STRING SaaS", href: "/saas" },
   { label: "Proyectos", href: "/Proyects" },
   { label: "Nosotros", href: "/Us" },
   { label: "Cotización", href: "/quote" },

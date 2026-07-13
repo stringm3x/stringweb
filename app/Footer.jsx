@@ -20,9 +20,10 @@ gsap.registerPlugin(ScrollTrigger);
 const pages = [
   { id: "1", title: "Inicio", link: "/" },
   { id: "2", title: "Servicios", link: "/Services" },
-  { id: "3", title: "Proyectos", link: "/Proyects" },
-  { id: "4", title: "Nosotros", link: "/Us" },
-  { id: "5", title: "Cotización", link: "/quote" },
+  { id: "3", title: "STRING SaaS", link: "/saas" },
+  { id: "4", title: "Proyectos", link: "/Proyects" },
+  { id: "5", title: "Nosotros", link: "/Us" },
+  { id: "6", title: "Cotización", link: "/quote" },
 ];
 
 const socialLinks = [
