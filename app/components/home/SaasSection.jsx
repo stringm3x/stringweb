@@ -136,7 +136,7 @@ const SaasSection = () => {
           </div>
 
           <Link
-            href="/gym/empezar"
+            href="/saas"
             className="group inline-flex items-center justify-center gap-2 px-6 py-3.5 bg-green text-black font-bold text-sm uppercase tracking-wide rounded-sm hover:bg-white transition-colors duration-200 whitespace-nowrap"
           >
             Ver sistema

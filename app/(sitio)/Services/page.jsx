@@ -293,7 +293,7 @@ const PageServices = () => {
             gimnasios — desde $799/mes.
           </p>
           <Link
-            href="/#saas"
+            href="/saas"
             className="group inline-flex items-center gap-2 text-sm font-semibold text-green hover:gap-3 transition-all duration-200"
           >
             Conocer STRING SaaS

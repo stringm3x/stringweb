@@ -8,6 +8,7 @@ const ROUTES = [
   { path: "/Proyects", priority: 0.7, changeFrequency: "monthly" },
   { path: "/quote", priority: 0.8, changeFrequency: "monthly" },
   { path: "/diagnostico", priority: 0.7, changeFrequency: "monthly" },
+  { path: "/saas", priority: 0.9, changeFrequency: "weekly" },
   { path: "/gym/empezar", priority: 0.9, changeFrequency: "monthly" },
   { path: "/gym/registro", priority: 0.8, changeFrequency: "monthly" },
 ];

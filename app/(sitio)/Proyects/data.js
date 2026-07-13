@@ -12,11 +12,11 @@ export const proyects = [
   },
   {
     id: "Evolution GYM",
-    title: "Landing Page",
+    title: "STRING GYM · Sistema SaaS",
     href: "https://evolutiongymneza.com/",
     img: "/proyects/evolutiongym.png",
-    info: "Editor de videos profesionales para youtubers y tiktokers.",
-    category: "landing",
+    info: "Gimnasio en CDMX. Sistema STRING GYM implementado: gestión de miembros (70 activos / 59 inactivos), caja, inventario (23 productos), kiosco de autoservicio, WhatsApp automático, bot WhatsApp IA, inbox integrado, portal del miembro y dashboard con gráficas. Activo desde junio 2026.",
+    category: "saas",
     year: "2026",
   },
   {
@@ -86,6 +86,7 @@ export const proyects = [
 
 export const categories = [
   { id: "all", label: "Todos" },
+  { id: "saas", label: "STRING SaaS" },
   { id: "landing", label: "Landing Pages" },
   { id: "ecommerce", label: "E-commerce" },
   { id: "menu", label: "Menús Digitales" },
