@@ -38,6 +38,7 @@ module.exports = {
       yellow: "#F5A524",
       gold: "#f6c75e",
       black: "#000000",
+      charcoal: "#111111",
       bg: "#000000",
       gray: "#A1A1AA",
     },

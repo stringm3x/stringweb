@@ -2,4 +2,15 @@
 @tailwind components;
 @tailwind utilities;
 
+/* Cursor personalizado: activo solo cuando CustomCursor.jsx logra montarse
+   (descarta touch y prefers-reduced-motion antes de agregar esta clase). */
+html.custom-cursor-active,
+html.custom-cursor-active * {
+  cursor: none !important;
+}
 
+html.custom-cursor-active input,
+html.custom-cursor-active textarea,
+html.custom-cursor-active select {
+  cursor: text !important;
+}
