@@ -10,10 +10,10 @@ gsap.registerPlugin(ScrollTrigger);
 
 // ─── Datos ────────────────────────────────────────────────────────────────────
 const stats = [
-  { value: "4", label: "Sistemas\nimplementados" },
-  { value: "85%", label: "Aumento en\nconversión" },
-  { value: "24h", label: "Diagnóstico\ninicial" },
-  { value: "100%", label: "Sin\nplantillas" },
+  { value: "4", label: "Sistemas\nactivos" },
+  { value: "1", label: "SaaS en\nproducción" },
+  { value: "70", label: "Miembros en\nEvolution GYM" },
+  { value: "3", label: "Sectores\natendidos" },
 ];
 
 // ─── Componente ───────────────────────────────────────────────────────────────
