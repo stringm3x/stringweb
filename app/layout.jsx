@@ -81,9 +81,6 @@ export const metadata = {
       "max-snippet": -1,
     },
   },
-  verification: {
-    google: "tu-codigo-de-verificacion",
-  },
   alternates: {
     canonical: "https://www.stringwebs.com/",
     languages: {

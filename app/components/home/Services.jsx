@@ -101,10 +101,10 @@ const items = [
 ];
 
 const stats = [
-  { value: "4", label: "Sistemas\nimplementados", icon: RiTeamLine },
-  { value: "85%", label: "Aumento en\nconversión", icon: MdOutlineAnalytics },
-  { value: "24h", label: "Diagnóstico\ninicial", icon: FiClock },
-  { value: "100%", label: "Sin\nplantillas", icon: FiAward },
+  { value: "4", label: "Sistemas\nactivos", icon: RiTeamLine },
+  { value: "1", label: "SaaS en\nproducción", icon: MdOutlineAnalytics },
+  { value: "70", label: "Miembros en\nEvolution GYM", icon: FiClock },
+  { value: "3", label: "Sectores\natendidos", icon: FiAward },
 ];
 
 // ─── Componente ───────────────────────────────────────────────────────────────

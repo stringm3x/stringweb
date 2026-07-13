@@ -20,21 +20,21 @@ gsap.registerPlugin(ScrollTrigger);
 const stats = [
   {
     value: "4",
-    label: "Sistemas implementados",
+    label: "Sistemas activos",
     description: "Negocios transformados con estructura digital real.",
     metric: "Clientes recurrentes",
   },
   {
-    value: "85%",
-    label: "Aumento en conversión",
-    description: "Promedio de mejora medida en cada sistema entregado.",
-    metric: "Promedio real",
+    value: "1",
+    label: "SaaS en producción",
+    description: "STRING GYM operando en un gimnasio real desde junio 2026.",
+    metric: "En operación",
   },
   {
-    value: "24h",
-    label: "Diagnóstico inicial",
-    description: "Análisis exprés de tu presencia digital desde el día uno.",
-    metric: "Garantizado",
+    value: "70",
+    label: "Miembros gestionados",
+    description: "Gestionados hoy en Evolution GYM con STRING GYM.",
+    metric: "Dato real",
   },
 ];
 
