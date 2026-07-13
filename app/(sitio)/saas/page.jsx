@@ -1,5 +1,6 @@
 import Link from "next/link";
-import { FiArrowRight, FiCheck, FiCheckCircle } from "react-icons/fi";
+import { FiArrowRight, FiCheck, FiCheckCircle, FiStar } from "react-icons/fi";
+import { MdOutlineFitnessCenter } from "react-icons/md";
 import WaitlistForm from "./WaitlistForm";
 import {
   productos,
@@ -66,7 +67,7 @@ export default function SaasPage() {
                   }`}
                 >
                   <div className="flex items-center justify-between">
-                    <span className="text-2xl">{p.emoji}</span>
+                    <p.icon className="text-2xl text-white/80" />
                     <span
                       className={`px-2 py-0.5 text-[10px] font-bold uppercase tracking-widest rounded-sm ${
                         activo
@@ -122,8 +123,9 @@ export default function SaasPage() {
         <div className="max-w-4xl mx-auto space-y-24">
           {/* Header */}
           <div className="text-center space-y-4">
-            <span className="inline-flex items-center gap-2.5 px-3 py-1.5 border border-green/30 text-green text-xs font-mono uppercase tracking-[0.2em] rounded-sm">
-              🏋️ STRING GYM
+            <span className="inline-flex items-center gap-2 px-3 py-1.5 border border-green/30 text-green text-xs font-mono uppercase tracking-[0.2em] rounded-sm">
+              <MdOutlineFitnessCenter className="text-sm" />
+              STRING GYM
             </span>
             <h2 className="font-anton text-4xl sm:text-5xl md:text-6xl leading-[0.9] tracking-tighter text-white uppercase">
               El sistema completo <span className="text-green">para tu gimnasio</span>
@@ -171,7 +173,8 @@ export default function SaasPage() {
                   >
                     {plan.destacado && (
                       <span className="absolute -top-3 left-8 inline-flex items-center gap-1.5 bg-green px-3 py-1 font-mono text-[10px] font-bold uppercase tracking-widest text-black">
-                        ⭐ Recomendado
+                        <FiStar className="text-xs" />
+                        Recomendado
                       </span>
                     )}
                     <div className="flex items-center gap-2 mb-4">

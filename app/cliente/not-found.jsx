@@ -1,10 +1,12 @@
 // app/cliente/not-found.jsx
+import { FiLock } from "react-icons/fi";
+
 export default function ClienteNotFound() {
   return (
     <div className="min-h-screen bg-[#111111] flex items-center justify-center px-6">
       <div className="text-center space-y-6 max-w-md">
         <div className="w-16 h-16 border border-white/10 flex items-center justify-center mx-auto">
-          <span className="text-2xl">🔒</span>
+          <FiLock className="text-2xl text-white/60" />
         </div>
         <p className="text-white font-bold text-xl">
           Esta página no está disponible.

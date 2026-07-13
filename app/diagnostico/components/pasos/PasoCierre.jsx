@@ -1,5 +1,7 @@
 "use client";
 
+import { FiCheck } from "react-icons/fi";
+
 const prioridadesPorFlow = {
   servicios: [
     {
@@ -106,7 +108,7 @@ export default function PasoCierre({ respuestas, flow, onChange }) {
                 <p className="text-[10px] text-gray mt-0.5">{p.sub}</p>
               </div>
               {respuestas.prioridad === p.value && (
-                <span className="text-green text-lg">✓</span>
+                <FiCheck className="text-green text-lg" />
               )}
             </button>
           ))}

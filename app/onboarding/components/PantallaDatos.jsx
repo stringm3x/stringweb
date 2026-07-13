@@ -7,12 +7,14 @@ import { SECTORES_ONBOARDING } from "../data/preguntas";
 
 export default function PantallaDatos({ cliente }) {
   const sector = SECTORES_ONBOARDING.find((s) => s.id === cliente.sector);
+  const SectorIcon = sector?.icon;
 
   const campos = [
     { label: "Nombre del negocio", value: cliente.nombre_negocio },
     {
       label: "Sector",
-      value: sector ? `${sector.emoji} ${sector.label}` : cliente.sector,
+      value: sector ? sector.label : cliente.sector,
+      icon: SectorIcon,
     },
     { label: "Sistema contratado", value: cliente.sistema_contratado },
     { label: "Nombre del contacto", value: cliente.nombre_contacto },
@@ -43,7 +45,8 @@ export default function PantallaDatos({ cliente }) {
             <p className="text-[10px] font-mono text-white/30 uppercase tracking-wider leading-relaxed pt-0.5">
               {campo.label}
             </p>
-            <p className="text-white text-sm font-medium leading-relaxed">
+            <p className="text-white text-sm font-medium leading-relaxed flex items-center gap-1.5">
+              {campo.icon && <campo.icon className="text-[#50ff05]" />}
               {campo.value}
             </p>
           </div>

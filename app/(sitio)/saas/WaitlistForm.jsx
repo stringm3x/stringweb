@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { FiCheck } from "react-icons/fi";
 
 const STORAGE_KEY = "string_saas_waitlist";
 
@@ -27,8 +28,9 @@ export default function WaitlistForm({ producto }) {
 
   if (enviado) {
     return (
-      <p className="text-[10px] font-mono text-green uppercase tracking-widest pt-1">
-        ✓ Te avisamos cuando esté listo
+      <p className="flex items-center gap-1.5 text-[10px] font-mono text-green uppercase tracking-widest pt-1">
+        <FiCheck className="text-xs" />
+        Te avisamos cuando esté listo
       </p>
     );
   }

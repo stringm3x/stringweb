@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
+import { FiBriefcase, FiInbox } from "react-icons/fi";
 import { obtenerDiagnosticos, eliminarDiagnostico } from "../lib/storage";
 import { formatMXN } from "../lib/metricas";
 import { SECTORES } from "../data/sectores";
@@ -38,8 +39,7 @@ export default function HistorialPage() {
     });
   };
 
-  const getSectorEmoji = (id) =>
-    SECTORES.find((s) => s.id === id)?.emoji || "🏢";
+  const getSectorIcon = (id) => SECTORES.find((s) => s.id === id)?.icon || FiBriefcase;
 
   return (
     <div className="min-h-screen bg-black text-white">
@@ -105,26 +105,30 @@ export default function HistorialPage() {
             >
               Todos
             </button>
-            {[...new Set(diagnosticos.map((d) => d.sector))].map((s) => (
-              <button
-                key={s}
-                onClick={() => setFiltroSector(s)}
-                className={`px-3 py-1.5 text-[10px] font-mono uppercase tracking-widest border transition-all duration-150 ${
-                  filtroSector === s
-                    ? "border-green bg-green/10 text-green"
-                    : "border-white/10 text-gray hover:border-white/30"
-                }`}
-              >
-                {getSectorEmoji(s)} {s}
-              </button>
-            ))}
+            {[...new Set(diagnosticos.map((d) => d.sector))].map((s) => {
+              const SectorIcon = getSectorIcon(s);
+              return (
+                <button
+                  key={s}
+                  onClick={() => setFiltroSector(s)}
+                  className={`flex items-center gap-1.5 px-3 py-1.5 text-[10px] font-mono uppercase tracking-widest border transition-all duration-150 ${
+                    filtroSector === s
+                      ? "border-green bg-green/10 text-green"
+                      : "border-white/10 text-gray hover:border-white/30"
+                  }`}
+                >
+                  <SectorIcon className="text-xs" />
+                  {s}
+                </button>
+              );
+            })}
           </div>
         )}
 
         {/* Lista */}
         {filtrados.length === 0 ? (
           <div className="border border-white/10 p-12 text-center space-y-3">
-            <p className="text-4xl">📋</p>
+            <FiInbox className="text-4xl text-white/20 mx-auto" />
             <p className="text-white font-bold">Sin diagnósticos aún</p>
             <p className="text-gray text-sm">
               Completa tu primera llamada de diagnóstico y aparecerá aquí.
@@ -152,9 +156,10 @@ export default function HistorialPage() {
                     }
                   >
                     <div className="flex items-center gap-2 mb-2">
-                      <span className="text-lg">
-                        {getSectorEmoji(d.sector)}
-                      </span>
+                      {(() => {
+                        const SectorIcon = getSectorIcon(d.sector);
+                        return <SectorIcon className="text-lg text-green" />;
+                      })()}
                       <span className="text-[10px] font-mono text-gray uppercase tracking-widest">
                         {d.sector} · {formatFecha(d.createdAt)}
                       </span>

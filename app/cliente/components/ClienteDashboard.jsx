@@ -1,5 +1,7 @@
 "use client";
 
+import { FiCheckCircle, FiRefreshCw, FiClock, FiTool, FiZap } from "react-icons/fi";
+
 // app/cliente/components/ClienteDashboard.jsx
 
 const ESTADOS_CONFIG = {
@@ -35,9 +37,9 @@ const ESTADOS_CONFIG = {
 };
 
 const FASE_ICONS = {
-  completado: { icon: "✅", color: "text-green" },
-  en_progreso: { icon: "🔄", color: "text-yellow" },
-  pendiente: { icon: "⏳", color: "text-white/20" },
+  completado: { icon: FiCheckCircle, color: "text-green" },
+  en_progreso: { icon: FiRefreshCw, color: "text-yellow" },
+  pendiente: { icon: FiClock, color: "text-white/20" },
 };
 
 export default function ClienteDashboard({ proyecto }) {
@@ -187,7 +189,7 @@ export default function ClienteDashboard({ proyecto }) {
                       : "bg-white/[0.01] border-l-2 border-transparent"
                   }`}
                 >
-                  <span className="text-lg flex-shrink-0">{config.icon}</span>
+                  <config.icon className={`text-lg flex-shrink-0 ${config.color}`} />
                   <div className="flex-1 min-w-0">
                     <div className="flex items-center gap-2 flex-wrap">
                       <span className="text-[10px] font-mono text-white/30">
@@ -244,8 +246,9 @@ export default function ClienteDashboard({ proyecto }) {
         >
           {/* STRING trabajando en... */}
           <div className="bg-[#111111] p-6 space-y-3">
-            <p className="text-[10px] font-mono text-white/30 uppercase tracking-widest">
-              🔧 STRING está trabajando en
+            <p className="flex items-center gap-1.5 text-[10px] font-mono text-white/30 uppercase tracking-widest">
+              <FiTool className="text-xs" />
+              STRING está trabajando en
             </p>
             <ul className="space-y-2">
               {tareas_string?.map((t, i) => (
@@ -262,8 +265,9 @@ export default function ClienteDashboard({ proyecto }) {
           {/* Necesitamos de ti — solo si hay tareas */}
           {tareas_cliente?.length > 0 && (
             <div className="bg-yellow/5 border border-yellow/20 p-6 space-y-3">
-              <p className="text-[10px] font-mono text-yellow uppercase tracking-widest">
-                ⚡ Necesitamos de ti
+              <p className="flex items-center gap-1.5 text-[10px] font-mono text-yellow uppercase tracking-widest">
+                <FiZap className="text-xs" />
+                Necesitamos de ti
               </p>
               <ul className="space-y-2">
                 {tareas_cliente.map((t, i) => (

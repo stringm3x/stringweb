@@ -1,5 +1,7 @@
 "use client";
 
+import { FiClock, FiUsers, FiFileText, FiZap } from "react-icons/fi";
+
 // app/onboarding/components/PantallaBienvenida.jsx
 export default function PantallaBienvenida({ cliente, onSiguiente }) {
   return (
@@ -39,22 +41,22 @@ export default function PantallaBienvenida({ cliente, onSiguiente }) {
         </p>
         <div className="space-y-3">
           {[
-            { icon: "🕐", text: "Esta sesión dura 30–45 minutos." },
+            { icon: FiClock, text: "Esta sesión dura 30–45 minutos." },
             {
-              icon: "👥",
+              icon: FiUsers,
               text: "Tú y el equipo STRING la completan juntos en llamada.",
             },
             {
-              icon: "📄",
+              icon: FiFileText,
               text: "Al terminar se genera un documento firmado que arranca el desarrollo.",
             },
             {
-              icon: "🚀",
+              icon: FiZap,
               text: "Sin este documento, el desarrollo no inicia.",
             },
           ].map((item, i) => (
             <div key={i} className="flex items-start gap-3">
-              <span className="text-base">{item.icon}</span>
+              <item.icon className="text-base text-[#50ff05] flex-shrink-0 mt-0.5" />
               <p className="text-white/60 text-sm leading-relaxed">
                 {item.text}
               </p>

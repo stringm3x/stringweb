@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { FiCheck, FiArrowRight } from "react-icons/fi";
+import { FiCheck, FiArrowRight, FiStar } from "react-icons/fi";
 
 export const metadata = {
   title: "Empieza tu prueba gratis — STRING GYM",
@@ -97,7 +97,8 @@ export default function EmpezarPage() {
           >
             {plan.destacado && (
               <span className="absolute -top-3 left-8 inline-flex items-center gap-1.5 bg-green px-3 py-1 font-mono text-[10px] font-bold uppercase tracking-widest text-black">
-                ⭐ Más popular
+                <FiStar className="text-xs" />
+                Más popular
               </span>
             )}
 

@@ -1,6 +1,20 @@
 // ─── Preguntas del formulario de onboarding ───────────────────────────────────
 // Estructura: bloques con preguntas, cada pregunta tiene tipo y validación
 
+import {
+  MdOutlineBuild,
+  MdOutlineBusinessCenter,
+  MdOutlineConstruction,
+  MdOutlineFitnessCenter,
+  MdOutlineHomeWork,
+  MdOutlineLocalHospital,
+  MdOutlinePets,
+  MdOutlineRestaurant,
+  MdOutlineSchool,
+  MdOutlineShoppingCart,
+  MdOutlineSpa,
+} from "react-icons/md";
+
 // ── Bloque A — Operación actual (todos los sectores) ──────────────────────────
 export const bloqueA = {
   id: "operacion",
@@ -621,15 +635,23 @@ export const getBloqueB = (sector) => bloquesB[sector] || null;
 
 // Sectores disponibles
 export const SECTORES_ONBOARDING = [
-  { id: "gym", label: "Gimnasio", emoji: "🏋️" },
-  { id: "salud", label: "Salud / Clínica", emoji: "🏥" },
-  { id: "estetica", label: "Estética / Belleza", emoji: "💅" },
-  { id: "academia", label: "Academia / Educación", emoji: "🎓" },
-  { id: "veterinaria", label: "Veterinaria", emoji: "🐾" },
-  { id: "construccion", label: "Construcción", emoji: "🏗️" },
-  { id: "profesional", label: "Profesional / Consultoría", emoji: "💼" },
-  { id: "taller", label: "Taller / Reparación", emoji: "🔧" },
-  { id: "inmobiliaria", label: "Inmobiliaria", emoji: "🏘️" },
-  { id: "ecommerce", label: "E-commerce", emoji: "🛒" },
-  { id: "restaurante", label: "Restaurante / Food", emoji: "🍽️" },
+  { id: "gym", label: "Gimnasio", icon: MdOutlineFitnessCenter },
+  { id: "salud", label: "Salud / Clínica", icon: MdOutlineLocalHospital },
+  { id: "estetica", label: "Estética / Belleza", icon: MdOutlineSpa },
+  { id: "academia", label: "Academia / Educación", icon: MdOutlineSchool },
+  { id: "veterinaria", label: "Veterinaria", icon: MdOutlinePets },
+  { id: "construccion", label: "Construcción", icon: MdOutlineConstruction },
+  {
+    id: "profesional",
+    label: "Profesional / Consultoría",
+    icon: MdOutlineBusinessCenter,
+  },
+  { id: "taller", label: "Taller / Reparación", icon: MdOutlineBuild },
+  { id: "inmobiliaria", label: "Inmobiliaria", icon: MdOutlineHomeWork },
+  { id: "ecommerce", label: "E-commerce", icon: MdOutlineShoppingCart },
+  {
+    id: "restaurante",
+    label: "Restaurante / Food",
+    icon: MdOutlineRestaurant,
+  },
 ];

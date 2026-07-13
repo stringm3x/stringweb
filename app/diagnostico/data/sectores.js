@@ -1,11 +1,25 @@
+import {
+  MdOutlineBuild,
+  MdOutlineBusinessCenter,
+  MdOutlineConstruction,
+  MdOutlineFitnessCenter,
+  MdOutlineHomeWork,
+  MdOutlineLocalHospital,
+  MdOutlinePets,
+  MdOutlineRestaurant,
+  MdOutlineSchool,
+  MdOutlineShoppingCart,
+  MdOutlineSpa,
+} from "react-icons/md";
+
 // ─── Sectores ─────────────────────────────────────────────────────────────────
-// Cada sector define: flow, ticketLabel, tickets, icono emoji
+// Cada sector define: flow, ticketLabel, tickets, icon
 
 export const SECTORES = [
   {
     id: "gym",
     label: "Gimnasio",
-    emoji: "🏋️",
+    icon: MdOutlineFitnessCenter,
     flow: "servicios",
     ticketLabel: "Membresía mensual promedio",
     tickets: [
@@ -18,7 +32,7 @@ export const SECTORES = [
   {
     id: "salud",
     label: "Salud / Clínica",
-    emoji: "🏥",
+    icon: MdOutlineLocalHospital,
     flow: "servicios",
     ticketLabel: "Consulta o tratamiento promedio",
     tickets: [
@@ -31,7 +45,7 @@ export const SECTORES = [
   {
     id: "estetica",
     label: "Estética / Belleza",
-    emoji: "💅",
+    icon: MdOutlineSpa,
     flow: "servicios",
     ticketLabel: "Servicio promedio por visita",
     tickets: [
@@ -44,7 +58,7 @@ export const SECTORES = [
   {
     id: "academia",
     label: "Academia / Educación",
-    emoji: "🎓",
+    icon: MdOutlineSchool,
     flow: "servicios",
     ticketLabel: "Inscripción o mensualidad promedio",
     tickets: [
@@ -57,7 +71,7 @@ export const SECTORES = [
   {
     id: "veterinaria",
     label: "Veterinaria",
-    emoji: "🐾",
+    icon: MdOutlinePets,
     flow: "servicios",
     ticketLabel: "Consulta o servicio promedio",
     tickets: [
@@ -70,7 +84,7 @@ export const SECTORES = [
   {
     id: "construccion",
     label: "Construcción",
-    emoji: "🏗️",
+    icon: MdOutlineConstruction,
     flow: "servicios",
     ticketLabel: "Proyecto promedio",
     tickets: [
@@ -83,7 +97,7 @@ export const SECTORES = [
   {
     id: "profesional",
     label: "Profesional / Consultoría",
-    emoji: "💼",
+    icon: MdOutlineBusinessCenter,
     flow: "servicios",
     ticketLabel: "Honorarios promedio por cliente",
     tickets: [
@@ -96,7 +110,7 @@ export const SECTORES = [
   {
     id: "taller",
     label: "Taller / Reparación",
-    emoji: "🔧",
+    icon: MdOutlineBuild,
     flow: "servicios",
     ticketLabel: "Servicio promedio",
     tickets: [
@@ -109,7 +123,7 @@ export const SECTORES = [
   {
     id: "inmobiliaria",
     label: "Inmobiliaria",
-    emoji: "🏘️",
+    icon: MdOutlineHomeWork,
     flow: "servicios",
     ticketLabel: "Comisión promedio por operación",
     tickets: [
@@ -122,7 +136,7 @@ export const SECTORES = [
   {
     id: "ecommerce",
     label: "E-commerce",
-    emoji: "🛒",
+    icon: MdOutlineShoppingCart,
     flow: "ecommerce",
     ticketLabel: "Ticket promedio por pedido",
     tickets: [
@@ -135,7 +149,7 @@ export const SECTORES = [
   {
     id: "restaurante",
     label: "Restaurante / Food",
-    emoji: "🍽️",
+    icon: MdOutlineRestaurant,
     flow: "menu",
     ticketLabel: "Ticket promedio por pedido",
     tickets: [

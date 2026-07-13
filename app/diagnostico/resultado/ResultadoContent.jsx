@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { useSearchParams, useRouter } from "next/navigation";
+import { FiAlertTriangle, FiCheck } from "react-icons/fi";
 import { obtenerDiagnostico } from "../lib/storage";
 import { etiquetaScore } from "../lib/scoring";
 import { colorSeveridad } from "../data/fricciones";
@@ -124,11 +125,16 @@ export default function ResultadoContent() {
             }`}
           >
             <p
-              className={`text-xs font-mono uppercase tracking-widest mb-1 ${
+              className={`flex items-center gap-1.5 text-xs font-mono uppercase tracking-widest mb-1 ${
                 alerta.tipo === "amarillo" ? "text-yellow" : "text-green"
               }`}
             >
-              {alerta.tipo === "amarillo" ? "⚠ Atención" : "✓ Presupuesto"}
+              {alerta.tipo === "amarillo" ? (
+                <FiAlertTriangle className="text-xs" />
+              ) : (
+                <FiCheck className="text-xs" />
+              )}
+              {alerta.tipo === "amarillo" ? "Atención" : "Presupuesto"}
             </p>
             <p className="text-white/70 text-sm leading-relaxed">
               {alerta.msg}
@@ -362,9 +368,10 @@ export default function ResultadoContent() {
         <div className="grid grid-cols-1 sm:grid-cols-3 gap-2 print:hidden">
           <button
             onClick={copiarResumen}
-            className="px-4 py-3 border border-white/10 text-gray text-xs font-mono uppercase tracking-wider hover:border-white/30 hover:text-white transition-all duration-200"
+            className="flex items-center justify-center gap-1.5 px-4 py-3 border border-white/10 text-gray text-xs font-mono uppercase tracking-wider hover:border-white/30 hover:text-white transition-all duration-200"
           >
-            {copiado ? "✓ Copiado" : "Copiar resumen"}
+            {copiado && <FiCheck className="text-xs" />}
+            {copiado ? "Copiado" : "Copiar resumen"}
           </button>
           <button
             onClick={abrirWhatsApp}

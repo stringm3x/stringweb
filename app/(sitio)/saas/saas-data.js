@@ -1,10 +1,16 @@
 import { FiTarget, FiZap, FiSettings } from "react-icons/fi";
+import {
+  MdOutlineFitnessCenter,
+  MdOutlineRestaurant,
+  MdOutlineLocalHospital,
+  MdOutlineContentCut,
+} from "react-icons/md";
 
 // ── Productos ─────────────────────────────────────────────────────────────────
 export const productos = [
   {
     id: "gym",
-    emoji: "🏋️",
+    icon: MdOutlineFitnessCenter,
     nombre: "STRING GYM",
     estado: "activo",
     desc: "CRM y sistema de gestión para gimnasios mexicanos.",
@@ -13,21 +19,21 @@ export const productos = [
   },
   {
     id: "resto",
-    emoji: "🍽️",
+    icon: MdOutlineRestaurant,
     nombre: "STRING RESTO",
     estado: "proximamente",
     desc: "Sistema para restaurantes: mesas, órdenes, caja, inventario.",
   },
   {
     id: "clinic",
-    emoji: "🏥",
+    icon: MdOutlineLocalHospital,
     nombre: "STRING CLINIC",
     estado: "proximamente",
     desc: "Sistema para clínicas y consultorios.",
   },
   {
     id: "barber",
-    emoji: "✂️",
+    icon: MdOutlineContentCut,
     nombre: "STRING BARBER",
     estado: "proximamente",
     desc: "Sistema para barberías y estéticas.",

@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { FiAlertTriangle } from "react-icons/fi";
 import { bloqueA, getBloqueB, bloqueC, bloqueD } from "../data/preguntas";
 
 // app/onboarding/components/PantallaResumen.jsx
@@ -127,8 +128,9 @@ export default function PantallaResumen({
       {/* Alerta de preguntas faltantes */}
       {!todasRespondidas && (
         <div className="border border-yellow-500/30 bg-yellow-500/5 p-4">
-          <p className="text-[10px] font-mono text-yellow-400 uppercase tracking-widest mb-1">
-            ⚠ Faltan respuestas requeridas
+          <p className="flex items-center gap-1.5 text-[10px] font-mono text-yellow-400 uppercase tracking-widest mb-1">
+            <FiAlertTriangle className="text-xs" />
+            Faltan respuestas requeridas
           </p>
           <p className="text-white/50 text-xs leading-relaxed">
             Hay preguntas obligatorias sin responder. Regresa a completarlas

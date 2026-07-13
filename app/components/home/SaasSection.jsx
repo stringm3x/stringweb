@@ -5,26 +5,11 @@ import Link from "next/link";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { FiArrowRight, FiCheck } from "react-icons/fi";
+import { productos } from "@/app/(sitio)/saas/saas-data";
 
 gsap.registerPlugin(ScrollTrigger);
 
-const proximamente = [
-  {
-    emoji: "🍽️",
-    nombre: "STRING RESTO",
-    desc: "Sistema para restaurantes: mesas, órdenes, caja, inventario.",
-  },
-  {
-    emoji: "🏥",
-    nombre: "STRING CLINIC",
-    desc: "Sistema para clínicas: agenda, expediente, cobros, recordatorios.",
-  },
-  {
-    emoji: "✂️",
-    nombre: "STRING BARBER",
-    desc: "Sistema para barberías: agenda, clientes frecuentes, caja.",
-  },
-];
+const proximamente = productos.filter((p) => p.estado === "proximamente");
 
 const SaasSection = () => {
   const sectionRef = useRef(null);
@@ -153,7 +138,7 @@ const SaasSection = () => {
               className="bg-black p-6 space-y-2"
             >
               <div className="flex items-center gap-2">
-                <span className="text-lg">{p.emoji}</span>
+                <p.icon className="text-lg text-white/40" />
                 <span className="font-anton text-base text-white/50 tracking-tight">
                   {p.nombre}
                 </span>

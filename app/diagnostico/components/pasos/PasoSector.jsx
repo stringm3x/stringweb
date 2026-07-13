@@ -20,7 +20,9 @@ export default function PasoSector({ valor, onChange }) {
       </div>
 
       <div className="grid grid-cols-2 sm:grid-cols-3 gap-2">
-        {SECTORES.map((s) => (
+        {SECTORES.map((s) => {
+          const Icon = s.icon;
+          return (
           <button
             key={s.id}
             onClick={() => onChange(s.id)}
@@ -30,7 +32,11 @@ export default function PasoSector({ valor, onChange }) {
                 : "border-white/10 hover:border-white/30 bg-white/[0.02]"
             }`}
           >
-            <span className="text-2xl">{s.emoji}</span>
+            <Icon
+              className={`text-2xl ${
+                valor === s.id ? "text-green" : "text-white/70"
+              }`}
+            />
             <span
               className={`text-xs font-bold uppercase tracking-wide ${
                 valor === s.id ? "text-green" : "text-white/80"
@@ -39,7 +45,8 @@ export default function PasoSector({ valor, onChange }) {
               {s.label}
             </span>
           </button>
-        ))}
+          );
+        })}
       </div>
     </div>
   );

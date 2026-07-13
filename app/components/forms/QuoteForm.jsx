@@ -12,6 +12,7 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 import toast from "react-hot-toast";
 import {
   FiArrowRight,
+  FiCheck,
   FiCheckCircle,
   FiDollarSign,
   FiMail,
@@ -182,7 +183,7 @@ export const QuoteForm = () => {
       setSuccessData(data);
       toast.success("¡Diagnóstico enviado! Te contactamos en 24h", {
         duration: 5000,
-        icon: "✓",
+        icon: <FiCheck className="text-green" />,
       });
     } catch (error) {
       toast.error(error.message || "Error al enviar. Intenta de nuevo.", {
