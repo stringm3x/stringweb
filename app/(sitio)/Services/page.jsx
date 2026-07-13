@@ -18,10 +18,10 @@ gsap.registerPlugin(ScrollTrigger);
 
 // ─── Stats ────────────────────────────────────────────────────────────────────
 const statsPrincipales = [
-  { value: "4", label: "Sistemas\nimplementados", icon: FiUsers },
-  { value: "85%", label: "Aumento en\nconversión", icon: FiBarChart2 },
-  { value: "24h", label: "Diagnóstico\ninicial", icon: FiClock },
-  { value: "100%", label: "Sin\nplantillas", icon: FiAward },
+  { value: "4", label: "Sistemas\nactivos", icon: FiUsers },
+  { value: "1", label: "SaaS en\nproducción", icon: FiBarChart2 },
+  { value: "70", label: "Miembros en\nEvolution GYM", icon: FiClock },
+  { value: "3", label: "Sectores\natendidos", icon: FiAward },
 ];
 
 // ─── Componente ───────────────────────────────────────────────────────────────
@@ -279,6 +279,26 @@ const PageServices = () => {
           <p className="text-xs text-gray font-mono">
             Diagnóstico gratuito · Respuesta en 24h
           </p>
+        </div>
+
+        {/* ── CTA STRING SaaS ──────────────────────────────────────────────── */}
+        <div className="mt-16 border border-white/10 p-8 md:p-10 text-center space-y-3">
+          <h3 className="font-anton text-2xl md:text-3xl text-white uppercase tracking-tight">
+            ¿Presupuesto limitado <span className="text-green">o necesitas empezar ya?</span>
+          </h3>
+          <p className="text-gray text-sm leading-relaxed max-w-xl mx-auto">
+            STRING también tiene sistemas listos por nicho con suscripción
+            mensual. Primer producto activo:{" "}
+            <span className="text-white font-semibold">STRING GYM</span> para
+            gimnasios — desde $799/mes.
+          </p>
+          <Link
+            href="/#saas"
+            className="group inline-flex items-center gap-2 text-sm font-semibold text-green hover:gap-3 transition-all duration-200"
+          >
+            Conocer STRING SaaS
+            <FiArrowRight className="text-xs group-hover:translate-x-1 transition-transform duration-200" />
+          </Link>
         </div>
       </div>
     </section>

@@ -30,6 +30,7 @@ export default function ResultadoContent() {
   }
 
   const {
+    sector,
     sistema,
     metricas,
     fricciones,
@@ -43,6 +44,8 @@ export default function ResultadoContent() {
     notas,
     tier,
   } = diag;
+
+  const mostrarOpcionSaaS = sector === "gym" && presupuesto === "bajo";
 
   const etOp = etiquetaScore(scoreOp);
   const etCapt = scoreCapt !== null ? etiquetaScore(scoreCapt) : null;
@@ -130,6 +133,27 @@ export default function ResultadoContent() {
             <p className="text-white/70 text-sm leading-relaxed">
               {alerta.msg}
             </p>
+          </div>
+        )}
+
+        {/* Bifurcación STRING SaaS — además del resultado, no en su lugar */}
+        {mostrarOpcionSaaS && (
+          <div className="border border-dashed border-green/40 bg-green/5 p-6 space-y-3">
+            <p className="text-[10px] font-mono text-green uppercase tracking-widest">
+              ¿Sabías que existe una opción más accesible?
+            </p>
+            <p className="text-white/80 text-sm leading-relaxed">
+              Si tu presupuesto es limitado por ahora, STRING GYM te da el
+              sistema completo de gestión para tu gimnasio desde{" "}
+              <span className="text-white font-bold">$799/mes</span>. Sin
+              inversión inicial. Prueba gratis 14 días.
+            </p>
+            <a
+              href="/gym/empezar"
+              className="inline-flex items-center gap-2 text-sm font-semibold text-green hover:gap-3 transition-all duration-200"
+            >
+              Ver STRING GYM →
+            </a>
           </div>
         )}
 
