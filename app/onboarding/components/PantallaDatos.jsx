@@ -24,7 +24,7 @@ export default function PantallaDatos({ cliente }) {
   return (
     <div className="space-y-8">
       <div className="space-y-2">
-        <span className="text-[10px] font-mono text-[#50ff05] uppercase tracking-[0.3em]">
+        <span className="text-[10px] font-mono text-green uppercase tracking-[0.3em]">
           Paso 2 · Datos del negocio
         </span>
         <h2 className="font-black text-white text-3xl uppercase leading-tight tracking-tight">
@@ -46,7 +46,7 @@ export default function PantallaDatos({ cliente }) {
               {campo.label}
             </p>
             <p className="text-white text-sm font-medium leading-relaxed flex items-center gap-1.5">
-              {campo.icon && <campo.icon className="text-[#50ff05]" />}
+              {campo.icon && <campo.icon className="text-green" />}
               {campo.value}
             </p>
           </div>

@@ -7,8 +7,8 @@ export default function PantallaBienvenida({ cliente, onSiguiente }) {
   return (
     <div className="space-y-10 pt-6">
       {/* Tag */}
-      <div className="inline-flex items-center gap-2 px-3 py-1.5 border border-[#50ff05]/30 text-[#50ff05] text-xs font-mono uppercase tracking-[0.25em]">
-        <span className="w-1.5 h-1.5 rounded-full bg-[#50ff05] animate-pulse" />
+      <div className="inline-flex items-center gap-2 px-3 py-1.5 border border-green/30 text-green text-xs font-mono uppercase tracking-[0.25em]">
+        <span className="w-1.5 h-1.5 rounded-full bg-green animate-pulse" />
         Estudio de Procesos · Fase 3
       </div>
 
@@ -17,7 +17,7 @@ export default function PantallaBienvenida({ cliente, onSiguiente }) {
         <h1 className="font-black text-white text-4xl sm:text-5xl leading-tight tracking-tight">
           Bienvenido,
           <br />
-          <span className="text-[#50ff05]">
+          <span className="text-green">
             {cliente.nombre_contacto.split(" ")[0]}
           </span>
         </h1>
@@ -36,7 +36,7 @@ export default function PantallaBienvenida({ cliente, onSiguiente }) {
 
       {/* Info del proceso */}
       <div className="border border-white/10 p-6 space-y-4">
-        <p className="text-[10px] font-mono text-[#50ff05] uppercase tracking-widest">
+        <p className="text-[10px] font-mono text-green uppercase tracking-widest">
           ¿Qué es esto?
         </p>
         <div className="space-y-3">
@@ -56,7 +56,7 @@ export default function PantallaBienvenida({ cliente, onSiguiente }) {
             },
           ].map((item, i) => (
             <div key={i} className="flex items-start gap-3">
-              <item.icon className="text-base text-[#50ff05] flex-shrink-0 mt-0.5" />
+              <item.icon className="text-base text-green flex-shrink-0 mt-0.5" />
               <p className="text-white/60 text-sm leading-relaxed">
                 {item.text}
               </p>
@@ -69,7 +69,7 @@ export default function PantallaBienvenida({ cliente, onSiguiente }) {
       <div className="space-y-3">
         <button
           onClick={onSiguiente}
-          className="w-full flex items-center justify-center gap-2 px-8 py-4 bg-[#50ff05] text-black font-bold text-sm uppercase tracking-wide hover:bg-white transition-colors duration-200"
+          className="w-full flex items-center justify-center gap-2 px-8 py-4 bg-green text-black font-bold text-sm uppercase tracking-wide hover:bg-white transition-colors duration-200"
         >
           Comenzar →
         </button>

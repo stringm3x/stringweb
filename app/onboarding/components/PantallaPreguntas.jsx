@@ -11,13 +11,13 @@ export default function PantallaPreguntas({ sector, respuestas, onChange }) {
   return (
     <div className="space-y-10">
       <div className="space-y-2">
-        <span className="text-[10px] font-mono text-[#50ff05] uppercase tracking-[0.3em]">
+        <span className="text-[10px] font-mono text-green uppercase tracking-[0.3em]">
           Paso 3 · Preguntas
         </span>
         <h2 className="font-black text-white text-3xl uppercase leading-tight tracking-tight">
           Cuéntanos cómo
           <br />
-          <span className="text-[#50ff05]">opera tu negocio</span>
+          <span className="text-green">opera tu negocio</span>
         </h2>
         <p className="text-white/40 text-sm">
           Las preguntas marcadas con <span className="text-red-400">*</span> son
@@ -41,7 +41,7 @@ function BloquePreguntas({ bloque, respuestas, onChange }) {
   return (
     <div className="space-y-6">
       <div className="border-b border-white/10 pb-2">
-        <p className="text-[10px] font-mono text-[#50ff05] uppercase tracking-[0.25em]">
+        <p className="text-[10px] font-mono text-green uppercase tracking-[0.25em]">
           {bloque.titulo}
         </p>
       </div>
@@ -83,7 +83,7 @@ function Pregunta({ pregunta, valor, onChange }) {
               onClick={() => onChange(op.value)}
               className={`px-4 py-3 border text-left text-xs font-medium uppercase tracking-wide transition-all duration-150 ${
                 valor === op.value
-                  ? "border-[#50ff05] bg-[#50ff05]/10 text-[#50ff05]"
+                  ? "border-green bg-green/10 text-green"
                   : "border-white/10 text-white/60 hover:border-white/30"
               }`}
             >
@@ -111,14 +111,14 @@ function Pregunta({ pregunta, valor, onChange }) {
                 }}
                 className={`px-4 py-3 border text-left text-xs font-medium uppercase tracking-wide transition-all duration-150 flex items-center gap-2 ${
                   isSelected
-                    ? "border-[#50ff05] bg-[#50ff05]/10 text-[#50ff05]"
+                    ? "border-green bg-green/10 text-green"
                     : "border-white/10 text-white/60 hover:border-white/30"
                 }`}
               >
                 <span
                   className={`w-3 h-3 border flex-shrink-0 flex items-center justify-center ${
                     isSelected
-                      ? "border-[#50ff05] bg-[#50ff05]"
+                      ? "border-green bg-green"
                       : "border-white/30"
                   }`}
                 >
@@ -149,7 +149,7 @@ function Pregunta({ pregunta, valor, onChange }) {
           value={valor || ""}
           onChange={(e) => onChange(e.target.value)}
           placeholder={pregunta.placeholder}
-          className="w-full max-w-xs px-4 py-3 bg-white/5 border border-white/10 text-white text-sm placeholder:text-white/20 focus:outline-none focus:border-[#50ff05] transition-colors duration-200"
+          className="w-full max-w-xs px-4 py-3 bg-white/5 border border-white/10 text-white text-sm placeholder:text-white/20 focus:outline-none focus:border-green transition-colors duration-200"
         />
       )}
 
@@ -160,7 +160,7 @@ function Pregunta({ pregunta, valor, onChange }) {
           value={valor || ""}
           onChange={(e) => onChange(e.target.value)}
           placeholder={pregunta.placeholder}
-          className="w-full px-4 py-3 bg-white/5 border border-white/10 text-white text-sm placeholder:text-white/20 focus:outline-none focus:border-[#50ff05] transition-colors duration-200"
+          className="w-full px-4 py-3 bg-white/5 border border-white/10 text-white text-sm placeholder:text-white/20 focus:outline-none focus:border-green transition-colors duration-200"
         />
       )}
 
@@ -173,7 +173,7 @@ function Pregunta({ pregunta, valor, onChange }) {
             placeholder={pregunta.placeholder}
             maxLength={pregunta.maxLength}
             rows={4}
-            className="w-full px-4 py-3 bg-white/5 border border-white/10 text-white text-sm placeholder:text-white/20 focus:outline-none focus:border-[#50ff05] transition-colors duration-200 resize-none"
+            className="w-full px-4 py-3 bg-white/5 border border-white/10 text-white text-sm placeholder:text-white/20 focus:outline-none focus:border-green transition-colors duration-200 resize-none"
           />
           {pregunta.maxLength && (
             <p className="text-[10px] font-mono text-white/20 text-right">

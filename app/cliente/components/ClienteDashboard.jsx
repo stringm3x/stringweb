@@ -85,13 +85,13 @@ export default function ClienteDashboard({ proyecto }) {
   )}`;
 
   return (
-    <div className="min-h-screen bg-[#111111] text-white">
+    <div className="min-h-screen bg-charcoal text-white">
       {/* ── Header ────────────────────────────────────────────────────────── */}
       <div className="border-b border-white/10">
         <div className="max-w-3xl mx-auto px-6 py-5 flex items-center justify-between gap-4">
           <div>
             <p className="font-bold text-lg tracking-tight">
-              STRING <span className="text-[#50ff05]">·</span> {nombre_negocio}
+              STRING <span className="text-green">·</span> {nombre_negocio}
             </p>
             <p className="text-white/30 text-xs font-mono mt-0.5">
               {sistema_contratado}
@@ -101,7 +101,7 @@ export default function ClienteDashboard({ proyecto }) {
             href={waUrl}
             target="_blank"
             rel="noopener noreferrer"
-            className="flex-shrink-0 px-4 py-2 bg-[#50ff05] text-black text-xs font-bold uppercase tracking-wide hover:bg-white transition-colors duration-200"
+            className="flex-shrink-0 px-4 py-2 bg-green text-black text-xs font-bold uppercase tracking-wide hover:bg-white transition-colors duration-200"
           >
             Contactar a STRING →
           </a>
@@ -139,13 +139,13 @@ export default function ClienteDashboard({ proyecto }) {
               <span className="text-[10px] font-mono text-white/30 uppercase tracking-widest">
                 Avance general
               </span>
-              <span className="font-bold text-[#50ff05] text-sm">
+              <span className="font-bold text-green text-sm">
                 {progreso_porcentaje}%
               </span>
             </div>
             <div className="h-2 bg-white/5 rounded-full overflow-hidden">
               <div
-                className="h-full bg-[#50ff05] rounded-full transition-all duration-1000"
+                className="h-full bg-green rounded-full transition-all duration-1000"
                 style={{ width: `${progreso_porcentaje}%` }}
               />
             </div>
@@ -183,7 +183,7 @@ export default function ClienteDashboard({ proyecto }) {
                   key={fase.numero}
                   className={`flex items-center gap-4 px-4 py-4 ${
                     fase.estado === "en_progreso"
-                      ? "bg-[#50ff05]/5 border-l-2 border-[#50ff05]"
+                      ? "bg-green/5 border-l-2 border-green"
                       : fase.estado === "completado"
                       ? "bg-white/[0.02] border-l-2 border-white/10"
                       : "bg-white/[0.01] border-l-2 border-transparent"
@@ -205,7 +205,7 @@ export default function ClienteDashboard({ proyecto }) {
                         {fase.nombre}
                       </p>
                       {fase.estado === "en_progreso" && (
-                        <span className="text-[9px] font-mono text-[#50ff05] border border-[#50ff05]/30 px-1.5 py-0.5 uppercase tracking-wider">
+                        <span className="text-[9px] font-mono text-green border border-green/30 px-1.5 py-0.5 uppercase tracking-wider">
                           En progreso
                         </span>
                       )}
@@ -221,7 +221,7 @@ export default function ClienteDashboard({ proyecto }) {
                     <div className="w-16 flex-shrink-0">
                       <div className="h-1 bg-white/10 rounded-full overflow-hidden">
                         <div
-                          className="h-full bg-[#50ff05] rounded-full"
+                          className="h-full bg-green rounded-full"
                           style={{ width: `${fase.progreso_pct}%` }}
                         />
                       </div>
@@ -245,7 +245,7 @@ export default function ClienteDashboard({ proyecto }) {
           }`}
         >
           {/* STRING trabajando en... */}
-          <div className="bg-[#111111] p-6 space-y-3">
+          <div className="bg-charcoal p-6 space-y-3">
             <p className="flex items-center gap-1.5 text-[10px] font-mono text-white/30 uppercase tracking-widest">
               <FiTool className="text-xs" />
               STRING está trabajando en
@@ -253,7 +253,7 @@ export default function ClienteDashboard({ proyecto }) {
             <ul className="space-y-2">
               {tareas_string?.map((t, i) => (
                 <li key={i} className="flex items-start gap-2">
-                  <span className="text-[#50ff05] mt-1 flex-shrink-0">·</span>
+                  <span className="text-green mt-1 flex-shrink-0">·</span>
                   <span className="text-white/60 text-sm leading-relaxed">
                     {t}
                   </span>
@@ -306,7 +306,7 @@ export default function ClienteDashboard({ proyecto }) {
                       href={e.url}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="flex-shrink-0 px-3 py-1.5 bg-[#50ff05] text-black text-[10px] font-bold uppercase tracking-wider hover:bg-white transition-colors duration-200"
+                      className="flex-shrink-0 px-3 py-1.5 bg-green text-black text-[10px] font-bold uppercase tracking-wider hover:bg-white transition-colors duration-200"
                     >
                       Descargar PDF →
                     </a>
@@ -330,7 +330,7 @@ export default function ClienteDashboard({ proyecto }) {
             href={waUrl}
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center gap-2 px-6 py-3 bg-[#50ff05] text-black font-bold text-sm uppercase tracking-wide hover:bg-white transition-colors duration-200"
+            className="inline-flex items-center gap-2 px-6 py-3 bg-green text-black font-bold text-sm uppercase tracking-wide hover:bg-white transition-colors duration-200"
           >
             Escribir por WhatsApp →
           </a>

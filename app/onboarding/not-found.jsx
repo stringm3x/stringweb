@@ -3,7 +3,7 @@ import { FiLock } from "react-icons/fi";
 
 export default function OnboardingNotFound() {
   return (
-    <div className="min-h-screen bg-[#111111] flex items-center justify-center px-6">
+    <div className="min-h-screen bg-charcoal flex items-center justify-center px-6">
       <div className="text-center space-y-6 max-w-md">
         <div className="w-16 h-16 border border-white/10 flex items-center justify-center mx-auto">
           <FiLock className="text-2xl text-white/60" />
@@ -19,7 +19,7 @@ export default function OnboardingNotFound() {
           href="https://wa.me/525545524847"
           target="_blank"
           rel="noopener noreferrer"
-          className="inline-flex items-center gap-2 px-6 py-3 bg-[#50ff05] text-black font-bold text-sm uppercase tracking-wide hover:bg-white transition-colors duration-200"
+          className="inline-flex items-center gap-2 px-6 py-3 bg-green text-black font-bold text-sm uppercase tracking-wide hover:bg-white transition-colors duration-200"
         >
           Contactar a STRING →
         </a>

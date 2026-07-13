@@ -3,10 +3,10 @@
 // app/onboarding/components/PantallaConfirmacion.jsx
 export default function PantallaConfirmacion({ cliente }) {
   return (
-    <div className="min-h-screen bg-[#111111] flex items-center justify-center px-6">
+    <div className="min-h-screen bg-charcoal flex items-center justify-center px-6">
       <div className="text-center space-y-8 max-w-lg">
         {/* Check */}
-        <div className="w-20 h-20 bg-[#50ff05] flex items-center justify-center mx-auto">
+        <div className="w-20 h-20 bg-green flex items-center justify-center mx-auto">
           <svg
             className="w-10 h-10 text-black"
             fill="none"
@@ -44,8 +44,8 @@ export default function PantallaConfirmacion({ cliente }) {
         </div>
 
         {/* Info adicional */}
-        <div className="border border-[#50ff05]/20 bg-[#50ff05]/5 p-6 text-left space-y-3">
-          <p className="text-[10px] font-mono text-[#50ff05] uppercase tracking-widest">
+        <div className="border border-green/20 bg-green/5 p-6 text-left space-y-3">
+          <p className="text-[10px] font-mono text-green uppercase tracking-widest">
             ¿Qué sigue?
           </p>
           {[
@@ -54,7 +54,7 @@ export default function PantallaConfirmacion({ cliente }) {
             "Puedes ver el avance de tu proyecto en tu dashboard de cliente.",
           ].map((item, i) => (
             <div key={i} className="flex items-start gap-3">
-              <span className="text-[#50ff05] font-mono text-xs mt-0.5">
+              <span className="text-green font-mono text-xs mt-0.5">
                 0{i + 1}
               </span>
               <p className="text-white/60 text-sm leading-relaxed">{item}</p>

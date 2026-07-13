@@ -26,13 +26,13 @@ export default function OnboardingForm({ cliente }) {
   }
 
   return (
-    <div className="min-h-screen bg-[#111111] text-white">
+    <div className="min-h-screen bg-charcoal text-white">
       {/* Header con progreso */}
-      <div className="sticky top-0 z-50 bg-[#111111] border-b border-white/10">
+      <div className="sticky top-0 z-50 bg-charcoal border-b border-white/10">
         <div className="max-w-2xl mx-auto px-6 py-4">
           <div className="flex items-center justify-between mb-3">
             <span className="font-bold text-lg tracking-tight">
-              STRING <span className="text-[#50ff05]">Onboarding</span>
+              STRING <span className="text-green">Onboarding</span>
             </span>
             <span className="text-[10px] font-mono text-white/30 uppercase tracking-widest">
               {pantalla + 1} / {PANTALLAS.length}
@@ -44,12 +44,12 @@ export default function OnboardingForm({ cliente }) {
               <div key={nombre} className="flex-1 space-y-1">
                 <div
                   className={`h-0.5 rounded-full transition-all duration-300 ${
-                    i <= pantalla ? "bg-[#50ff05]" : "bg-white/10"
+                    i <= pantalla ? "bg-green" : "bg-white/10"
                   }`}
                 />
                 <p
                   className={`text-[9px] font-mono uppercase tracking-wider hidden sm:block ${
-                    i === pantalla ? "text-[#50ff05]" : "text-white/20"
+                    i === pantalla ? "text-green" : "text-white/20"
                   }`}
                 >
                   {nombre}
@@ -85,7 +85,7 @@ export default function OnboardingForm({ cliente }) {
 
       {/* Nav bottom — solo pantallas 1 a 3 */}
       {pantalla > 0 && pantalla < 3 && (
-        <div className="fixed bottom-0 left-0 right-0 bg-[#111111] border-t border-white/10 z-50">
+        <div className="fixed bottom-0 left-0 right-0 bg-charcoal border-t border-white/10 z-50">
           <div className="max-w-2xl mx-auto px-6 py-4 flex items-center justify-between gap-4">
             <button
               onClick={anterior}
@@ -95,7 +95,7 @@ export default function OnboardingForm({ cliente }) {
             </button>
             <button
               onClick={siguiente}
-              className="flex-1 sm:flex-none px-8 py-3 bg-[#50ff05] text-black font-bold text-sm uppercase tracking-wide hover:bg-white transition-colors duration-200"
+              className="flex-1 sm:flex-none px-8 py-3 bg-green text-black font-bold text-sm uppercase tracking-wide hover:bg-white transition-colors duration-200"
             >
               Siguiente →
             </button>

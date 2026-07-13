@@ -61,13 +61,13 @@ export default function PantallaResumen({
   return (
     <div className="space-y-8">
       <div className="space-y-2">
-        <span className="text-[10px] font-mono text-[#50ff05] uppercase tracking-[0.3em]">
+        <span className="text-[10px] font-mono text-green uppercase tracking-[0.3em]">
           Paso 4 · Resumen
         </span>
         <h2 className="font-black text-white text-3xl uppercase leading-tight tracking-tight">
           Revisa y aprueba
           <br />
-          <span className="text-[#50ff05]">el mapa de procesos</span>
+          <span className="text-green">el mapa de procesos</span>
         </h2>
         <p className="text-white/40 text-sm leading-relaxed">
           Revisa que todo esté correcto antes de aprobar. Puedes regresar a
@@ -150,7 +150,7 @@ export default function PantallaResumen({
         <button
           onClick={handleAprobar}
           disabled={!todasRespondidas || enviando}
-          className="w-full flex items-center justify-center gap-2 px-8 py-4 bg-[#50ff05] text-black font-bold text-sm uppercase tracking-wide hover:bg-white transition-colors duration-200 disabled:opacity-40 disabled:cursor-not-allowed"
+          className="w-full flex items-center justify-center gap-2 px-8 py-4 bg-green text-black font-bold text-sm uppercase tracking-wide hover:bg-white transition-colors duration-200 disabled:opacity-40 disabled:cursor-not-allowed"
         >
           {enviando ? (
             <span className="flex items-center gap-2">
@@ -191,7 +191,7 @@ export default function PantallaResumen({
 function ResumenBloque({ titulo, children }) {
   return (
     <div className="space-y-2">
-      <p className="text-[10px] font-mono text-[#50ff05] uppercase tracking-[0.2em]">
+      <p className="text-[10px] font-mono text-green uppercase tracking-[0.2em]">
         {titulo}
       </p>
       <div className="space-y-px">{children}</div>
