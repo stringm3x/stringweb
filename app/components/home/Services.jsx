@@ -4,6 +4,7 @@ import { useState, useEffect, useRef } from "react";
 import Link from "next/link";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { REVEAL_START } from "@/app/lib/scrollTriggerDefaults";
 import {
   FiPlus,
   FiMinus,
@@ -134,7 +135,7 @@ const Services = () => {
       const tlHeader = gsap.timeline({
         scrollTrigger: {
           trigger: tagRef.current,
-          start: "top 82%",
+          start: REVEAL_START,
           once: true,
         },
       });
@@ -165,7 +166,7 @@ const Services = () => {
         ease: "power3.out",
         scrollTrigger: {
           trigger: statsRef.current[0],
-          start: "top 84%",
+          start: REVEAL_START,
           once: true,
         },
       });
@@ -179,7 +180,7 @@ const Services = () => {
         ease: "power3.out",
         scrollTrigger: {
           trigger: cardsRef.current[0],
-          start: "top 84%",
+          start: REVEAL_START,
           once: true,
         },
       });
@@ -192,7 +193,7 @@ const Services = () => {
         ease: "power3.out",
         scrollTrigger: {
           trigger: ctaRef.current,
-          start: "top 88%",
+          start: REVEAL_START,
           once: true,
         },
       });

@@ -4,6 +4,7 @@ import React, { useEffect, useRef } from "react";
 import Link from "next/link";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { REVEAL_START } from "@/app/lib/scrollTriggerDefaults";
 import {
   FiArrowRight,
   FiTarget,
@@ -142,7 +143,7 @@ const PageUs = () => {
             ease: "power3.out",
             scrollTrigger: {
               trigger: ref.current,
-              start: "top 82%",
+              start: REVEAL_START,
               once: true,
             },
           }

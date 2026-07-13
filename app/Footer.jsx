@@ -14,6 +14,7 @@ import {
 } from "react-icons/fa";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { REVEAL_START } from "@/app/lib/scrollTriggerDefaults";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -79,7 +80,7 @@ const Footer = () => {
           ease: "power3.out",
           scrollTrigger: {
             trigger: footerRef.current,
-            start: "top 90%",
+            start: REVEAL_START,
             once: true,
           },
         }
@@ -95,7 +96,7 @@ const Footer = () => {
           ease: "power3.out",
           scrollTrigger: {
             trigger: footerRef.current,
-            start: "top 88%",
+            start: REVEAL_START,
             once: true,
           },
         }
@@ -112,7 +113,7 @@ const Footer = () => {
           ease: "power3.out",
           scrollTrigger: {
             trigger: footerRef.current,
-            start: "top 85%",
+            start: REVEAL_START,
             once: true,
           },
         }
@@ -129,7 +130,7 @@ const Footer = () => {
           ease: "back.out(1.7)",
           scrollTrigger: {
             trigger: footerRef.current,
-            start: "top 82%",
+            start: REVEAL_START,
             once: true,
           },
         }
@@ -146,7 +147,7 @@ const Footer = () => {
           ease: "power2.out",
           scrollTrigger: {
             trigger: footerRef.current,
-            start: "top 82%",
+            start: REVEAL_START,
             once: true,
           },
         }

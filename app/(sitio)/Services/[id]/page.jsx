@@ -17,6 +17,7 @@ import {
 } from "react-icons/fi";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { REVEAL_START } from "@/app/lib/scrollTriggerDefaults";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -87,7 +88,7 @@ const ServicePage = ({ params: paramsPromise }) => {
         ease: "power3.out",
         scrollTrigger: {
           trigger: incluyeRef.current[0],
-          start: "top 84%",
+          start: REVEAL_START,
           once: true,
         },
       });
@@ -99,7 +100,7 @@ const ServicePage = ({ params: paramsPromise }) => {
         ease: "power3.out",
         scrollTrigger: {
           trigger: ctaRef.current,
-          start: "top 88%",
+          start: REVEAL_START,
           once: true,
         },
       });

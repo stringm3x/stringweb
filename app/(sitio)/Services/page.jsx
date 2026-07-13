@@ -5,6 +5,7 @@ import Image from "next/image";
 import Link from "next/link";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { REVEAL_START } from "@/app/lib/scrollTriggerDefaults";
 import {
   FiArrowRight,
   FiUsers,
@@ -49,7 +50,7 @@ const PageServices = () => {
       const tlHeader = gsap.timeline({
         scrollTrigger: {
           trigger: tagRef.current,
-          start: "top 82%",
+          start: REVEAL_START,
           once: true,
         },
       });
@@ -80,7 +81,7 @@ const PageServices = () => {
         ease: "power3.out",
         scrollTrigger: {
           trigger: statsRef.current[0],
-          start: "top 84%",
+          start: REVEAL_START,
           once: true,
         },
       });
@@ -94,7 +95,7 @@ const PageServices = () => {
         ease: "power3.out",
         scrollTrigger: {
           trigger: cardsRef.current[0],
-          start: "top 84%",
+          start: REVEAL_START,
           once: true,
         },
       });
@@ -107,7 +108,7 @@ const PageServices = () => {
         ease: "power3.out",
         scrollTrigger: {
           trigger: ctaRef.current,
-          start: "top 88%",
+          start: REVEAL_START,
           once: true,
         },
       });

@@ -12,6 +12,7 @@ import {
 } from "react-icons/fi";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { REVEAL_START } from "@/app/lib/scrollTriggerDefaults";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -44,7 +45,7 @@ const Us = () => {
       const tl = gsap.timeline({
         scrollTrigger: {
           trigger: sectionRef.current,
-          start: "top 80%",
+          start: REVEAL_START,
           once: true,
         },
       });
@@ -75,7 +76,7 @@ const Us = () => {
         ease: "power3.out",
         scrollTrigger: {
           trigger: statsRef.current[0],
-          start: "top 86%",
+          start: REVEAL_START,
           once: true,
         },
       });

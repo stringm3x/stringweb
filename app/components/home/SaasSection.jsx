@@ -4,6 +4,7 @@ import { useEffect, useRef } from "react";
 import Link from "next/link";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { REVEAL_START } from "@/app/lib/scrollTriggerDefaults";
 import { FiArrowRight, FiCheck } from "react-icons/fi";
 import { productos } from "@/app/(sitio)/saas/saas-data";
 
@@ -30,7 +31,7 @@ const SaasSection = () => {
         ease: "power3.out",
         scrollTrigger: {
           trigger: headerRef.current,
-          start: "top 82%",
+          start: REVEAL_START,
           once: true,
         },
       });
@@ -43,7 +44,7 @@ const SaasSection = () => {
         ease: "power3.out",
         scrollTrigger: {
           trigger: cardsRef.current[0],
-          start: "top 84%",
+          start: REVEAL_START,
           once: true,
         },
       });
@@ -55,7 +56,7 @@ const SaasSection = () => {
         ease: "power3.out",
         scrollTrigger: {
           trigger: ctaRef.current,
-          start: "top 88%",
+          start: REVEAL_START,
           once: true,
         },
       });

@@ -9,6 +9,7 @@ import { FormSuccess } from "./FormSuccess";
 import { useRef, useEffect, useState, useCallback } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { REVEAL_START } from "@/app/lib/scrollTriggerDefaults";
 import toast from "react-hot-toast";
 import {
   FiArrowRight,
@@ -100,7 +101,7 @@ export const QuoteForm = () => {
       const tl = gsap.timeline({
         scrollTrigger: {
           trigger: sectionRef.current,
-          start: "top 80%",
+          start: REVEAL_START,
           once: true,
         },
       });

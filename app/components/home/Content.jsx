@@ -4,6 +4,7 @@ import React, { useEffect, useRef } from "react";
 import Link from "next/link";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { REVEAL_START } from "@/app/lib/scrollTriggerDefaults";
 import {
   FiArrowRight,
   FiTarget,
@@ -91,7 +92,7 @@ const Content = () => {
       const tlHeader = gsap.timeline({
         scrollTrigger: {
           trigger: headerRef.current,
-          start: "top 80%",
+          start: REVEAL_START,
           once: true,
         },
       });
@@ -128,7 +129,7 @@ const Content = () => {
         ease: "power3.out",
         scrollTrigger: {
           trigger: principiosRef.current[0],
-          start: "top 82%",
+          start: REVEAL_START,
           once: true,
         },
       });
@@ -142,7 +143,7 @@ const Content = () => {
         ease: "power3.out",
         scrollTrigger: {
           trigger: statsRef.current[0],
-          start: "top 82%",
+          start: REVEAL_START,
           once: true,
         },
       });
@@ -155,7 +156,7 @@ const Content = () => {
         ease: "power3.out",
         scrollTrigger: {
           trigger: ctaRef.current,
-          start: "top 85%",
+          start: REVEAL_START,
           once: true,
         },
       });
