@@ -1,10 +1,11 @@
 "use client";
 
 const presupuestos = [
-  { value: "bajo", label: "Bajo", sub: "Menos de $15,000" },
-  { value: "medio", label: "Medio", sub: "$15,000 – $35,000" },
-  { value: "alto", label: "Alto", sub: "Más de $35,000" },
-  { value: "nose", label: "No lo sé", sub: "Por definir" },
+  { value: "bajo", label: "Bajo", sub: "Menos de $15,000 MXN" },
+  { value: "medio", label: "Medio", sub: "$15,000 – $35,000 MXN" },
+  { value: "medio-alto", label: "Medio-alto", sub: "$35,000 – $70,000 MXN" },
+  { value: "alto", label: "Alto", sub: "Más de $70,000 MXN" },
+  { value: "nose", label: "Prefiero no decirlo", sub: "Por definir" },
 ];
 
 const sucursales = [
