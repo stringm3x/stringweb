@@ -5,6 +5,15 @@ export const metadata = {
   title: "Empieza tu prueba gratis — STRING GYM",
   description:
     "Empieza tu prueba gratuita de 14 días de STRING GYM. Sin tarjeta de crédito.",
+  alternates: {
+    canonical: "https://www.stringwebs.com/gym/empezar",
+  },
+  openGraph: {
+    title: "Empieza tu prueba gratis — STRING GYM",
+    description:
+      "Sistema completo de gestión para gimnasios. Desde $799/mes, 14 días gratis.",
+    url: "https://www.stringwebs.com/gym/empezar",
+  },
 };
 
 // El `id` es el valor interno del plan que viaja al CRM (?plan= y la solicitud):

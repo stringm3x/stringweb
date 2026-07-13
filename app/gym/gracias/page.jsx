@@ -4,6 +4,7 @@ import { FaWhatsapp } from "react-icons/fa";
 export const metadata = {
   title: "¡Listo!",
   description: "Recibimos tu solicitud. Te contactamos pronto.",
+  robots: "noindex, nofollow",
 };
 
 const DEMO_URL = "https://app.gym.stringwebs.com/gym-demo/hoy";

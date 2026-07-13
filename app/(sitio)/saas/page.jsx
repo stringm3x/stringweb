@@ -18,11 +18,44 @@ export const metadata = {
   alternates: {
     canonical: "https://www.stringwebs.com/saas",
   },
+  openGraph: {
+    title: "STRING SaaS — Sistemas listos por nicho",
+    description:
+      "STRING GYM: sistema completo de gestión para gimnasios desde $799/mes. Prueba gratis 14 días.",
+    url: "https://www.stringwebs.com/saas",
+  },
+};
+
+const softwareJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "SoftwareApplication",
+  name: "STRING GYM",
+  applicationCategory: "BusinessApplication",
+  operatingSystem: "Web",
+  url: "https://www.stringwebs.com/saas",
+  description:
+    "CRM y sistema de gestión para gimnasios mexicanos: miembros, caja, inventario, WhatsApp automático y portal del miembro.",
+  offers: planes.map((p) => ({
+    "@type": "Offer",
+    name: p.nombre,
+    price: p.precio.replace(/[^0-9]/g, ""),
+    priceCurrency: "MXN",
+    priceSpecification: {
+      "@type": "UnitPriceSpecification",
+      price: p.precio.replace(/[^0-9]/g, ""),
+      priceCurrency: "MXN",
+      billingDuration: "P1M",
+    },
+  })),
 };
 
 export default function SaasPage() {
   return (
     <div className="bg-black">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(softwareJsonLd) }}
+      />
       {/* ── HERO ─────────────────────────────────────────────────────────────── */}
       <section className="relative overflow-hidden px-6 sm:px-8 lg:px-12 pt-32 pb-20 md:pt-40 md:pb-28">
         <div className="absolute inset-0 pointer-events-none">

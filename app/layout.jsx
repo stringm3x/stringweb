@@ -2,6 +2,29 @@ import { Geist, Anton, Ubuntu } from "next/font/google";
 import { Providers } from "./provider";
 import "./globals.css";
 
+const organizationJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  name: "STRING",
+  url: "https://www.stringwebs.com",
+  logo: "https://www.stringwebs.com/logo-s.png",
+  description:
+    "Agencia de sistemas digitales en México. Sistemas de conversión a medida y STRING SaaS, sistemas listos por nicho.",
+  email: "hola@stringwebs.com",
+  telephone: "+525545524847",
+  address: {
+    "@type": "PostalAddress",
+    addressLocality: "Ciudad de México",
+    addressCountry: "MX",
+  },
+  areaServed: "MX",
+  sameAs: [
+    "https://www.instagram.com/stringwebmx/",
+    "https://www.facebook.com/profile.php?id=61576042750915",
+    "https://www.tiktok.com/@stringmx",
+  ],
+};
+
 const geistSans = Geist({
   variable: "--font-geist-sans",
   subsets: ["latin"],
@@ -109,6 +132,10 @@ export default function RootLayout({ children }) {
         <meta httpEquiv="Content-Type" content="text/html; charset=utf-8" />
         <meta name="geo.region" content="MX" />
         <meta name="geo.placename" content="Ciudad de México" />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationJsonLd) }}
+        />
       </head>
       <body
         className={`${geistSans.variable} ${anton.variable} ${ubuntu.variable} antialiased`}

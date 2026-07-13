@@ -6,6 +6,13 @@ export const metadata = {
   title: "Registra tu gimnasio — STRING GYM",
   description:
     "Completa tus datos y empieza tu prueba gratuita de 14 días de STRING GYM.",
+  alternates: {
+    canonical: "https://www.stringwebs.com/gym/registro",
+  },
+  robots: {
+    index: true,
+    follow: false,
+  },
 };
 
 const PLANES_VALIDOS = ["basico", "pro", "escala"];
