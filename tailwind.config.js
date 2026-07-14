@@ -1,4 +1,3 @@
-import { heroui } from "@heroui/react";
 /** @type {import('tailwindcss').Config} */
 
 module.exports = {
@@ -6,7 +5,6 @@ module.exports = {
     "./app/**/*.{js,ts,jsx,tsx,mdx}",
     "./pages/**/*.{js,ts,jsx,tsx,mdx}",
     "./components/**/*.{js,ts,jsx,tsx,mdx}",
-    "./node_modules/@heroui/theme/dist/**/*.{js,ts,jsx,tsx}",
   ],
   theme: {
     screens: {
@@ -96,20 +94,5 @@ module.exports = {
     },
   },
   darkMode: "class",
-  plugins: [
-    heroui({
-      themes: {
-        dark: {
-          colors: {
-            current: "#FFFF",
-            primary: {
-              DEFAULT: "#50ff05",
-              foreground: "#FFFF",
-            },
-            focus: "#50ff05",
-          },
-        },
-      },
-    }),
-  ],
+  plugins: [],
 };

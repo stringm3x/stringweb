@@ -97,7 +97,7 @@ const Us = () => {
           alt="STRING Studio"
           fill
           className="object-cover"
-          priority
+          loading="lazy"
           quality={85}
         />
         <div className="absolute inset-0 bg-gradient-to-r from-black/95 via-black/85 to-black/70" />
