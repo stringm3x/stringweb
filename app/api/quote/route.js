@@ -1,26 +1,7 @@
 import { NextResponse } from "next/server";
-import nodemailer from "nodemailer";
 import { quoteSchema } from "../../lib/validations/quote-schema";
 import { generateEmailTemplate } from "./email-template";
-
-// ── Transporter singleton — se crea una vez, no en cada request ───────────────
-let transporter = null;
-
-const getTransporter = () => {
-  if (transporter) return transporter;
-
-  transporter = nodemailer.createTransport({
-    host: process.env.SMTP_HOST,
-    port: Number(process.env.SMTP_PORT),
-    secure: process.env.SMTP_SECURE === "true",
-    auth: {
-      user: process.env.SMTP_USER,
-      pass: process.env.SMTP_PASSWORD,
-    },
-  });
-
-  return transporter;
-};
+import { getTransporter, getMissingSmtpEnvVars } from "../../lib/mailer";
 
 // ── POST /api/quote ────────────────────────────────────────────────────────────
 export async function POST(request) {
@@ -44,16 +25,7 @@ export async function POST(request) {
     const data = validation.data;
 
     // ── Verificar variables de entorno requeridas ───────────────────────────
-    const requiredEnvVars = [
-      "SMTP_HOST",
-      "SMTP_PORT",
-      "SMTP_USER",
-      "SMTP_PASSWORD",
-      "SMTP_FROM",
-      "NOTIFICATION_EMAIL",
-    ];
-
-    const missingVars = requiredEnvVars.filter((v) => !process.env[v]);
+    const missingVars = getMissingSmtpEnvVars();
 
     if (missingVars.length > 0) {
       console.error("Missing env vars:", missingVars);

@@ -1,17 +1,7 @@
 // app/api/onboarding-email/route.js
 // Envía el mapa de procesos por email al aprobar el onboarding
 
-import nodemailer from "nodemailer";
-
-const transporter = nodemailer.createTransport({
-  host: process.env.SMTP_HOST,
-  port: Number(process.env.SMTP_PORT) || 587,
-  secure: false,
-  auth: {
-    user: process.env.SMTP_USER,
-    pass: process.env.SMTP_PASS,
-  },
-});
+import { getTransporter } from "../../lib/mailer";
 
 // Generar HTML del mapa de procesos
 const generarHTML = (cliente, respuestas) => {
@@ -156,22 +146,25 @@ export async function POST(req) {
       html,
     };
 
+    const mailer = getTransporter();
+
     // Email al cliente
-    await transporter.sendMail({
+    await mailer.sendMail({
       ...mailOptions,
       to: `${cliente.nombre_contacto} <${process.env.SMTP_FROM}>`,
-      replyTo: "stringwebmx@gmail.com",
+      replyTo: "hola@stringwebs.com",
     });
 
     // Email a STRING
-    await transporter.sendMail({
+    await mailer.sendMail({
       ...mailOptions,
-      to: "stringwebmx@gmail.com",
+      to: process.env.NOTIFICATION_EMAIL,
       subject: `[ONBOARDING] Mapa aprobado — ${cliente.nombre_negocio} · ${fecha}`,
     });
 
     return Response.json({ ok: true });
   } catch (error) {
+    console.error("Onboarding email API error:", error.message);
     return Response.json({ error: "Error al enviar email" }, { status: 500 });
   }
 }

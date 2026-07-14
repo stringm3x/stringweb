@@ -3,30 +3,29 @@
 import { useState } from "react";
 import { FiCheck } from "react-icons/fi";
 
-const STORAGE_KEY = "string_saas_waitlist";
-
 export default function WaitlistForm({ producto }) {
   const [email, setEmail] = useState("");
-  const [enviado, setEnviado] = useState(false);
+  const [estado, setEstado] = useState("idle"); // idle | enviando | enviado | error
 
-  const guardar = (e) => {
+  const enviar = async (e) => {
     e.preventDefault();
-    if (!email.trim()) return;
+    if (!email.trim() || estado === "enviando") return;
+
+    setEstado("enviando");
     try {
-      const existentes = JSON.parse(localStorage.getItem(STORAGE_KEY) || "[]");
-      existentes.push({
-        producto,
-        email: email.trim(),
-        createdAt: new Date().toISOString(),
+      const res = await fetch("/api/waitlist", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ producto, email: email.trim() }),
       });
-      localStorage.setItem(STORAGE_KEY, JSON.stringify(existentes));
-      setEnviado(true);
+      if (!res.ok) throw new Error("Error al enviar");
+      setEstado("enviado");
     } catch {
-      setEnviado(true);
+      setEstado("error");
     }
   };
 
-  if (enviado) {
+  if (estado === "enviado") {
     return (
       <p className="flex items-center gap-1.5 text-[10px] font-mono text-green uppercase tracking-widest pt-1">
         <FiCheck className="text-xs" />
@@ -36,21 +35,29 @@ export default function WaitlistForm({ producto }) {
   }
 
   return (
-    <form onSubmit={guardar} className="flex gap-1.5 pt-1">
-      <input
-        type="email"
-        required
-        value={email}
-        onChange={(e) => setEmail(e.target.value)}
-        placeholder="tu@email.com"
-        className="min-w-0 flex-1 px-2.5 py-1.5 bg-white/5 border border-white/10 text-white text-xs placeholder:text-white/20 focus:outline-none focus:border-green transition-colors duration-200"
-      />
-      <button
-        type="submit"
-        className="px-3 py-1.5 border border-white/20 text-white/70 text-[10px] font-mono uppercase tracking-wider hover:border-green hover:text-green transition-colors duration-200 whitespace-nowrap"
-      >
-        Avisarme
-      </button>
+    <form onSubmit={enviar} className="space-y-1 pt-1">
+      <div className="flex gap-1.5">
+        <input
+          type="email"
+          required
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+          placeholder="tu@email.com"
+          className="min-w-0 flex-1 px-2.5 py-1.5 bg-white/5 border border-white/10 text-white text-xs placeholder:text-white/20 focus:outline-none focus:border-green transition-colors duration-200"
+        />
+        <button
+          type="submit"
+          disabled={estado === "enviando"}
+          className="px-3 py-1.5 border border-white/20 text-white/70 text-[10px] font-mono uppercase tracking-wider hover:border-green hover:text-green transition-colors duration-200 whitespace-nowrap disabled:opacity-50"
+        >
+          {estado === "enviando" ? "..." : "Avisarme"}
+        </button>
+      </div>
+      {estado === "error" && (
+        <p className="text-[10px] font-mono text-red uppercase tracking-widest">
+          Error al enviar, intenta de nuevo
+        </p>
+      )}
     </form>
   );
 }
