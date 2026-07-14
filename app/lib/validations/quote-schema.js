@@ -9,13 +9,17 @@ export const quoteSchema = z.object({
     .regex(/^[a-zA-ZáéíóúÁÉÍÓÚñÑ\s]+$/, "Solo se permiten letras y espacios")
     .transform((name) => name.trim()), // Limpiar espacios extras
 
-  // Email - Formato válido y longitud razonable
+  // Email - Formato válido y longitud razonable.
+  // trim/toLowerCase van ANTES de min/max/email: así un email pegado con
+  // espacios accidentales se normaliza antes de validarse, en vez de
+  // rechazarse por espacios que el usuario ni notó que llevaba.
   email: z
     .string()
+    .trim()
+    .toLowerCase()
     .min(5, "El email es demasiado corto")
     .max(100, "El email no puede exceder 100 caracteres")
-    .email("Por favor, ingresa un email válido")
-    .transform((email) => email.toLowerCase().trim()), // Normalizar
+    .email("Por favor, ingresa un email válido"),
 
   // WhatsApp - Solo números, entre 10 y 15 dígitos
   whatsapp: z
@@ -139,12 +143,13 @@ export const fieldHelpText = {
 };
 
 // Ejemplos de datos válidos (para testing)
+// projectType usa los mismos ids que PROJECT_TYPES (app/lib/constants/project-types.js)
 export const validExamples = {
   basico: {
     name: "Juan Pérez",
     email: "juan@email.com",
     whatsapp: "521234567890",
-    projectType: "basica",
+    projectType: "nivel1",
     objective: "Landing page para mi negocio de consultoría",
     idealDate: new Date(Date.now() + 30 * 24 * 60 * 60 * 1000)
       .toISOString()
@@ -155,7 +160,7 @@ export const validExamples = {
     name: "María García",
     email: "maria@empresa.com",
     whatsapp: "521234567891",
-    projectType: "intermedia",
+    projectType: "nivel2",
     objective: "Sitio web corporativo con blog y área de clientes",
     idealDate: new Date(Date.now() + 45 * 24 * 60 * 60 * 1000)
       .toISOString()
@@ -166,7 +171,7 @@ export const validExamples = {
     name: "Carlos Rodríguez",
     email: "carlos@startup.io",
     whatsapp: "521234567892",
-    projectType: "avanzada",
+    projectType: "nivel4",
     objective: "Marketplace para productos artesanales con pasarela de pagos",
     idealDate: new Date(Date.now() + 90 * 24 * 60 * 60 * 1000)
       .toISOString()
