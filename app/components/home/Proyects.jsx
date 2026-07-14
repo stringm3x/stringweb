@@ -14,30 +14,30 @@ gsap.registerPlugin(ScrollTrigger);
 const projects = [
   {
     id: 1,
-    src: "/design/joyeria.png",
-    title: "Joyería Caelora",
-    category: "E-commerce",
+    src: "/proyects/evolutiongym.png",
+    title: "Evolution GYM",
+    category: "Gimnasio",
     description:
-      "Sistema de tienda online para joyería premium con flujo de compra optimizado.",
-    tags: ["React", "Next.js", "Stripe"],
+      "Sitio web para gimnasio en CDMX, enfocado en captación de nuevos miembros.",
+    tags: ["Next.js", "WhatsApp", "Tailwind"],
   },
   {
     id: 2,
-    src: "/design/restuarante.png",
-    title: "Sushi Sensation",
-    category: "Restaurante",
+    src: "/proyects/pecadodecanela1.png",
+    title: "Pecado de Canela",
+    category: "Panadería",
     description:
-      "Menú digital interactivo con diseño moderno y reservaciones en línea.",
-    tags: ["Framer", "UI/UX"],
+      "Panadería artesanal con presencia digital enfocada en branding cálido y experiencia gastronómica.",
+    tags: ["Next.js", "Menú Digital"],
   },
   {
     id: 3,
-    src: "/design/ropa.png",
-    title: "GARM",
-    category: "Moda",
+    src: "/proyects/yuma1.png",
+    title: "Yuma",
+    category: "E-commerce",
     description:
-      "Tienda online con experiencia de compra rápida y catálogo dinámico.",
-    tags: ["E-commerce", "Node.js", "Custom"],
+      "Proyecto digital enfocado en diseño minimalista y experiencia de usuario moderna para marca emergente.",
+    tags: ["Next.js", "E-commerce"],
   },
 ];
 
