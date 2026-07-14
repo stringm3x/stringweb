@@ -339,7 +339,7 @@ export default function SaasPage() {
               <FiArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform duration-200" />
             </Link>
             <p className="text-xs text-gray font-mono">
-              Acceso inmediato · Cancela cuando quieras
+              Te contactamos en menos de 24 horas · Cancela cuando quieras
             </p>
           </div>
         </div>

@@ -16,6 +16,18 @@ const nextConfig = {
   compiler: {
     removeConsole: process.env.NODE_ENV === "production",
   },
+  async redirects() {
+    return [
+      {
+        // /gym/empezar duplicaba los planes que ya muestra /saas#gym-detalle
+        // (con más contexto: problema, comparativa, caso real) — se consolida
+        // en un solo lugar en vez de mantener dos páginas de precios.
+        source: "/gym/empezar",
+        destination: "/saas#gym-detalle",
+        permanent: true,
+      },
+    ];
+  },
 };
 
 export default nextConfig;

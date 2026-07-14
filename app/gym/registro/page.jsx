@@ -25,7 +25,7 @@ export default async function RegistroPage({ searchParams }) {
   return (
     <section className="mx-auto max-w-2xl px-6 py-24 md:py-28">
       <Link
-        href="/gym/empezar"
+        href="/saas#gym-detalle"
         className="inline-flex items-center gap-2 font-mono text-xs uppercase tracking-widest text-gray transition-colors hover:text-green"
       >
         <FiArrowLeft className="h-3.5 w-3.5" />

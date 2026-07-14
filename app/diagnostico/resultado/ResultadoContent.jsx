@@ -155,7 +155,7 @@ export default function ResultadoContent() {
               inversión inicial. Prueba gratis 14 días.
             </p>
             <a
-              href="/gym/empezar"
+              href="/saas#gym-detalle"
               className="inline-flex items-center gap-2 text-sm font-semibold text-green hover:gap-3 transition-all duration-200"
             >
               Ver STRING GYM →
