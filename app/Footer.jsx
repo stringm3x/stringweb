@@ -160,7 +160,7 @@ const Footer = () => {
   return (
     <footer
       ref={footerRef}
-      className="relative text-white pt-20 pb-8 px-4 md:px-8 lg:px-12 overflow-hidden"
+      className="relative bg-black text-white pt-20 pb-8 px-4 md:px-8 lg:px-12 overflow-hidden"
       style={{ opacity: 0 }}
     >
       {/* Fondo decorativo */}

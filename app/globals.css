@@ -2,6 +2,14 @@
 @tailwind components;
 @tailwind utilities;
 
+/* Fondo negro a nivel body: cada sección pone su propio bg-black, pero si
+   alguna lo olvida (como pasó con el footer) queda un parche blanco del
+   fondo default del navegador en vez del tema del sitio. */
+html,
+body {
+  background-color: #000000;
+}
+
 /* Cursor personalizado: activo solo cuando CustomCursor.jsx logra montarse
    (descarta touch y prefers-reduced-motion antes de agregar esta clase). */
 html.custom-cursor-active,
