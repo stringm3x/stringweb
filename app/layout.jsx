@@ -1,4 +1,6 @@
 import { Geist, Anton, Ubuntu } from "next/font/google";
+import { Analytics } from "@vercel/analytics/react";
+import { SpeedInsights } from "@vercel/speed-insights/next";
 import { Providers } from "./provider";
 import "./globals.css";
 
@@ -141,6 +143,8 @@ export default function RootLayout({ children }) {
         className={`${geistSans.variable} ${anton.variable} ${ubuntu.variable} antialiased`}
       >
         <Providers>{children}</Providers>
+        <Analytics />
+        <SpeedInsights />
       </body>
     </html>
   );
