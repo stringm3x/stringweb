@@ -18,11 +18,11 @@ export const productos = [
     precio: "Desde $799/mes · Prueba gratis 14 días",
   },
   {
-    id: "resto",
-    icon: MdOutlineRestaurant,
-    nombre: "STRING RESTO",
+    id: "barber",
+    icon: MdOutlineContentCut,
+    nombre: "STRING BARBER",
     estado: "proximamente",
-    desc: "Sistema para restaurantes: mesas, órdenes, caja, inventario.",
+    desc: "Sistema para barberías y estéticas.",
   },
   {
     id: "clinic",
@@ -32,11 +32,11 @@ export const productos = [
     desc: "Sistema para clínicas y consultorios.",
   },
   {
-    id: "barber",
-    icon: MdOutlineContentCut,
-    nombre: "STRING BARBER",
+    id: "resto",
+    icon: MdOutlineRestaurant,
+    nombre: "STRING RESTO",
     estado: "proximamente",
-    desc: "Sistema para barberías y estéticas.",
+    desc: "Sistema para restaurantes: mesas, órdenes, caja, inventario.",
   },
 ];
 

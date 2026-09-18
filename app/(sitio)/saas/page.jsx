@@ -14,7 +14,7 @@ import {
 export const metadata = {
   title: "STRING SaaS — Sistemas listos por nicho",
   description:
-    "Sistemas listos por nicho, sin desarrollo desde cero. STRING GYM ya está activo — sistema completo de gestión para gimnasios desde $799/mes. Próximamente: STRING RESTO, CLINIC y BARBER.",
+    "Sistemas listos por nicho, sin desarrollo desde cero. STRING GYM ya está activo — sistema completo de gestión para gimnasios desde $799/mes. Próximamente: STRING BARBER, CLINIC y RESTO.",
   alternates: {
     canonical: "https://www.stringwebs.com/saas",
   },
