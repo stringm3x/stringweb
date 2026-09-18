@@ -1,4 +1,4 @@
-// Este archivo va en: app/onboarding/not-found.jsx
+// Este archivo va en: app/alta/not-found.jsx
 import { FiLock } from "react-icons/fi";
 
 export default function OnboardingNotFound() {

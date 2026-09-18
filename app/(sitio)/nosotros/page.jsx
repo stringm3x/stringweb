@@ -199,14 +199,14 @@ const PageUs = () => {
 
           <div ref={heroCtaRef} className="flex flex-wrap gap-4">
             <Link
-              href="/quote"
+              href="/cotizacion"
               className="group inline-flex items-center gap-2 px-7 py-3.5 bg-green text-black font-bold text-sm uppercase tracking-wide rounded-sm hover:bg-white transition-colors duration-200"
             >
               Diagnosticar mi negocio
               <FiArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform duration-200" />
             </Link>
             <Link
-              href="/Services"
+              href="/servicios"
               className="inline-flex items-center gap-2 px-7 py-3.5 border border-white/20 text-white font-bold text-sm uppercase tracking-wide rounded-sm hover:border-white/40 hover:bg-white/5 transition-all duration-200"
             >
               Ver sistemas
@@ -435,14 +435,14 @@ const PageUs = () => {
               </p>
               <div className="flex flex-wrap justify-center gap-4 pt-2">
                 <Link
-                  href="/quote"
+                  href="/cotizacion"
                   className="group inline-flex items-center gap-2 px-8 py-4 bg-green text-black font-bold text-sm uppercase tracking-wide rounded-sm hover:bg-white transition-colors duration-200"
                 >
                   Diagnosticar mi negocio
                   <FiArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform duration-200" />
                 </Link>
                 <Link
-                  href="/Services"
+                  href="/servicios"
                   className="inline-flex items-center gap-2 px-8 py-4 border border-white/20 text-white font-bold text-sm uppercase tracking-wide rounded-sm hover:border-white/40 hover:bg-white/5 transition-all duration-200"
                 >
                   Ver sistemas

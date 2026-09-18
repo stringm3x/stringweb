@@ -1,9 +1,9 @@
 import { notFound } from "next/navigation";
 import fs from "fs";
 import path from "path";
-import OnboardingForm from "../../onboarding/components/OnboardingForm";
+import OnboardingForm from "../../alta/components/OnboardingForm";
 
-// Este archivo va en: app/onboarding/[slug]/page.jsx
+// Este archivo va en: app/alta/[slug]/page.jsx
 
 export default async function OnboardingPage({ params }) {
   const { slug } = await params;

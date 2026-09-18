@@ -229,7 +229,7 @@ const Hero = () => {
             {/* CTAs */}
             <div ref={ctaRef} className="flex flex-wrap items-center gap-4">
               <Link
-                href="/quote"
+                href="/cotizacion"
                 className="group inline-flex items-center gap-2 px-7 py-3.5 bg-green text-black font-bold text-sm uppercase tracking-wide rounded-sm hover:bg-white transition-colors duration-200"
               >
                 Solicitar diagnóstico
@@ -237,7 +237,7 @@ const Hero = () => {
               </Link>
 
               <Link
-                href="/Services"
+                href="/servicios"
                 className="group inline-flex items-center gap-2 text-sm text-gray hover:text-white transition-colors duration-200 border-b border-white/10 hover:border-white pb-0.5"
               >
                 Ver los 4 sistemas

@@ -135,7 +135,7 @@ const ServicePage = ({ params: paramsPromise }) => {
         {/* ── Botón volver ──────────────────────────────────────────────────── */}
         <div className="mb-10">
           <Link
-            href="/Services"
+            href="/servicios"
             className="inline-flex items-center gap-2 text-gray hover:text-green transition-colors duration-200 group text-sm font-mono"
           >
             <FiArrowLeft className="group-hover:-translate-x-1 transition-transform duration-200" />
@@ -367,7 +367,7 @@ const ServicePage = ({ params: paramsPromise }) => {
 
             <div className="flex flex-col sm:flex-row gap-4 flex-shrink-0">
               <Link
-                href="/quote"
+                href="/cotizacion"
                 className="group inline-flex items-center gap-2 px-7 py-3.5 bg-green text-black font-bold text-sm uppercase tracking-wide rounded-sm hover:bg-white transition-colors duration-200 whitespace-nowrap"
               >
                 Solicitar diagnóstico
@@ -375,7 +375,7 @@ const ServicePage = ({ params: paramsPromise }) => {
               </Link>
 
               <Link
-                href="/Proyects"
+                href="/proyectos"
                 className="inline-flex items-center gap-2 px-7 py-3.5 border border-white/20 text-white font-bold text-sm uppercase tracking-wide rounded-sm hover:border-white/40 hover:bg-white/5 transition-all duration-200 whitespace-nowrap"
               >
                 Ver proyectos

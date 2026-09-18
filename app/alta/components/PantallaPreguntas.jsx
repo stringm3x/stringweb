@@ -2,7 +2,7 @@
 
 import { bloqueA, getBloqueB, bloqueC, bloqueD } from "../data/preguntas";
 
-// app/onboarding/components/PantallaPreguntas.jsx
+// app/alta/components/PantallaPreguntas.jsx
 
 export default function PantallaPreguntas({ sector, respuestas, onChange }) {
   const bloqueB = getBloqueB(sector);

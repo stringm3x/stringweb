@@ -8,7 +8,7 @@ export async function generateMetadata({ params }) {
     return { title: "Servicio no encontrado" };
   }
 
-  const url = `https://www.stringwebs.com/Services/${id}`;
+  const url = `https://www.stringwebs.com/servicios/${id}`;
   const title = `${servicio.service} — ${servicio.title2}`;
 
   return {

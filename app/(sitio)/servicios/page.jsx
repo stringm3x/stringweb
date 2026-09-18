@@ -190,7 +190,7 @@ const PageServices = () => {
             const Icon = servicio.icon;
             return (
               <Link
-                href={`/Services/${servicio.id}`}
+                href={`/servicios/${servicio.id}`}
                 key={servicio.id}
                 className="block group"
               >
@@ -271,7 +271,7 @@ const PageServices = () => {
         {/* ── CTA ───────────────────────────────────────────────────────────── */}
         <div ref={ctaRef} className="text-center mt-20 space-y-4">
           <Link
-            href="/quote"
+            href="/cotizacion"
             className="group inline-flex items-center gap-2 px-8 py-4 bg-green text-black font-bold text-sm uppercase tracking-wide rounded-sm hover:bg-white transition-colors duration-200"
           >
             Diagnosticar mi negocio

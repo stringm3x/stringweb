@@ -332,7 +332,7 @@ const Content = () => {
 
               <div className="flex flex-col sm:flex-row gap-4 flex-shrink-0">
                 <Link
-                  href="/quote"
+                  href="/cotizacion"
                   className="group inline-flex items-center gap-2 px-7 py-3.5 bg-green text-black font-bold text-sm uppercase tracking-wide rounded-sm hover:bg-white transition-colors duration-200 whitespace-nowrap"
                 >
                   Solicitar diagnóstico
@@ -340,7 +340,7 @@ const Content = () => {
                 </Link>
 
                 <Link
-                  href="/Services"
+                  href="/servicios"
                   className="inline-flex items-center gap-2 px-7 py-3.5 border border-white/20 text-white font-bold text-sm uppercase tracking-wide rounded-sm hover:border-white/40 hover:bg-white/5 transition-all duration-200 whitespace-nowrap"
                 >
                   Ver sistemas

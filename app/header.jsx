@@ -9,11 +9,11 @@ import { FaWhatsapp } from "react-icons/fa";
 
 const menuItems = [
   { label: "Inicio", href: "/" },
-  { label: "Servicios", href: "/Services" },
+  { label: "Servicios", href: "/servicios" },
   { label: "STRING SaaS", href: "/saas" },
-  { label: "Proyectos", href: "/Proyects" },
-  { label: "Nosotros", href: "/Us" },
-  { label: "Cotización", href: "/quote" },
+  { label: "Proyectos", href: "/proyectos" },
+  { label: "Nosotros", href: "/nosotros" },
+  { label: "Cotización", href: "/cotizacion" },
 ];
 
 export default function Header() {
@@ -181,7 +181,7 @@ export default function Header() {
                     ¿Listo para construir tu sistema?
                   </p>
                   <Link
-                    href="/quote"
+                    href="/cotizacion"
                     onClick={() => setIsOpen(false)}
                     className="inline-flex items-center gap-2 text-green hover:gap-3 transition-all duration-200 group"
                   >
