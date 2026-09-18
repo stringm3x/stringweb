@@ -156,8 +156,6 @@ const PageProyects = () => {
     >
       {/* ── Fondo decorativo ──────────────────────────────────────────────── */}
       <div className="absolute inset-0 pointer-events-none">
-        <div className="absolute top-40 left-20 w-72 h-72 bg-green/5 rounded-full blur-[100px]" />
-        <div className="absolute bottom-40 right-20 w-96 h-96 bg-green/3 rounded-full blur-[80px]" />
         <div
           className="absolute inset-0 opacity-[0.03]"
           style={{
@@ -172,7 +170,7 @@ const PageProyects = () => {
         {/* ── Header ────────────────────────────────────────────────────────── */}
         <div className="mb-16 space-y-6">
           <div ref={tagRef}>
-            <span className="inline-flex items-center gap-2.5 px-3 py-1.5 border border-green/30 text-green text-xs font-mono uppercase tracking-[0.2em] rounded-sm">
+            <span className="inline-flex items-center gap-2.5 px-3 py-1.5 border border-green/30 text-green text-xs font-mono uppercase tracking-[0.2em]">
               <span className="w-1.5 h-1.5 rounded-full bg-green" />
               Portafolio
             </span>
@@ -213,7 +211,7 @@ const PageProyects = () => {
                 <span className="px-2 py-1 bg-green text-black text-[10px] font-bold uppercase tracking-wider">
                   {item.title}
                 </span>
-                <span className="px-2 py-1 bg-black/60 backdrop-blur-sm border border-white/20 text-white text-[10px] font-mono">
+                <span className="px-2 py-1 bg-fondo-elevado border border-white/20 text-white text-[10px] font-mono">
                   {item.year}
                 </span>
               </div>
@@ -239,7 +237,7 @@ const PageProyects = () => {
       {activeProject && (
         <div
           ref={expandedRef}
-          className="fixed overflow-hidden shadow-2xl"
+          className="fixed overflow-hidden"
           style={{ zIndex: 100 }}
         >
           <Image
@@ -276,7 +274,7 @@ const PageProyects = () => {
               href={activeProject.href}
               target="_blank"
               rel="noopener noreferrer"
-              className="group inline-flex items-center gap-2 px-7 py-3.5 bg-green text-black font-bold text-sm uppercase tracking-wide rounded-sm hover:bg-white transition-colors duration-200"
+              className="group inline-flex items-center gap-2 px-7 py-3.5 bg-green text-black font-bold text-sm uppercase tracking-wide hover:bg-white transition-colors duration-200"
             >
               Visitar sitio
               <FiExternalLink className="w-4 h-4 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform duration-200" />
@@ -285,7 +283,7 @@ const PageProyects = () => {
 
           <button
             onClick={closeCard}
-            className="absolute top-6 right-6 w-10 h-10 flex items-center justify-center bg-white/10 backdrop-blur-sm border border-white/20 hover:bg-white/20 hover:border-white/40 transition-all duration-200 text-white z-20"
+            className="absolute top-6 right-6 w-10 h-10 flex items-center justify-center bg-fondo-elevado border border-white/20 hover:bg-white/20 hover:border-white/40 transition-all duration-200 text-white z-20"
           >
             <FiX className="text-lg" />
           </button>

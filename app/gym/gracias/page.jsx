@@ -64,7 +64,7 @@ export default function GraciasPage() {
             href={DEMO_URL}
             target="_blank"
             rel="noopener noreferrer"
-            className="group mt-5 inline-flex items-center gap-2 rounded-sm bg-green px-5 py-3 text-xs font-bold uppercase tracking-wide text-black transition-colors duration-200 hover:bg-white"
+            className="group mt-5 inline-flex items-center gap-2 bg-green px-5 py-3 text-xs font-bold uppercase tracking-wide text-black transition-colors duration-200 hover:bg-white"
           >
             Ver demo en vivo
             <FiExternalLink className="h-3.5 w-3.5" />
@@ -82,7 +82,7 @@ export default function GraciasPage() {
             href={WHATSAPP_URL}
             target="_blank"
             rel="noopener noreferrer"
-            className="group mt-5 inline-flex items-center gap-2 rounded-sm border border-white/15 px-5 py-3 text-xs font-bold uppercase tracking-wide text-white transition-colors duration-200 hover:border-green hover:text-green"
+            className="group mt-5 inline-flex items-center gap-2 border border-white/15 px-5 py-3 text-xs font-bold uppercase tracking-wide text-white transition-colors duration-200 hover:border-green hover:text-green"
           >
             <FaWhatsapp className="text-base" />
             WhatsApp

@@ -191,8 +191,6 @@ const Services = () => {
     >
       {/* ── Fondo decorativo ──────────────────────────────────────────────── */}
       <div className="absolute inset-0 pointer-events-none">
-        <div className="absolute top-0 left-1/4 w-[500px] h-[500px] bg-green/5 rounded-full blur-[100px]" />
-        <div className="absolute bottom-0 right-0 w-[400px] h-[400px] bg-green/3 rounded-full blur-[80px]" />
         <div
           className="absolute inset-0 opacity-[0.03]"
           style={{
@@ -207,7 +205,7 @@ const Services = () => {
         {/* ── Header ────────────────────────────────────────────────────────── */}
         <div className="mb-16 space-y-6">
           <div ref={tagRef}>
-            <span className="inline-flex items-center gap-2.5 px-3 py-1.5 border border-green/30 text-green text-xs font-mono uppercase tracking-[0.2em] rounded-sm">
+            <span className="inline-flex items-center gap-2.5 px-3 py-1.5 border border-green/30 text-green text-xs font-mono uppercase tracking-[0.2em]">
               <span className="w-1.5 h-1.5 rounded-full bg-green" />
               Los 4 sistemas
             </span>
@@ -367,7 +365,7 @@ const Services = () => {
         <div ref={ctaRef} className="mt-16 text-center space-y-4">
           <Link
             href="/cotizacion"
-            className="group inline-flex items-center gap-2 px-8 py-4 bg-green text-black font-bold text-sm uppercase tracking-wide rounded-sm hover:bg-white transition-colors duration-200"
+            className="group inline-flex items-center gap-2 px-8 py-4 bg-green text-black font-bold text-sm uppercase tracking-wide hover:bg-white transition-colors duration-200"
           >
             Diagnosticar mi negocio
             <FiArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform duration-200" />

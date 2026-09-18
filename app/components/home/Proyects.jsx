@@ -129,7 +129,7 @@ const Proyects = () => {
         {/* ── Header ────────────────────────────────────────────────────────── */}
         <div className="mb-16 space-y-6">
           <div ref={tagRef}>
-            <span className="inline-flex items-center gap-2.5 px-3 py-1.5 border border-green/30 text-green text-xs font-mono uppercase tracking-[0.2em] rounded-sm">
+            <span className="inline-flex items-center gap-2.5 px-3 py-1.5 border border-green/30 text-green text-xs font-mono uppercase tracking-[0.2em]">
               <span className="w-1.5 h-1.5 rounded-full bg-green" />
               Portafolio
             </span>
@@ -193,7 +193,7 @@ const Proyects = () => {
 
             <Link
               href="/proyectos"
-              className="absolute top-6 right-6 w-9 h-9 bg-black/40 backdrop-blur-sm border border-white/20 flex items-center justify-center hover:border-green hover:bg-green/10 transition-all duration-200 opacity-0 group-hover:opacity-100"
+              className="absolute top-6 right-6 w-9 h-9 bg-fondo-elevado border border-white/20 flex items-center justify-center hover:border-green hover:bg-green/10 transition-all duration-200 opacity-0 group-hover:opacity-100"
             >
               <FiExternalLink className="text-white text-sm" />
             </Link>
@@ -227,7 +227,7 @@ const Proyects = () => {
 
             <Link
               href="/proyectos"
-              className="absolute top-5 right-5 w-8 h-8 bg-black/40 backdrop-blur-sm border border-white/20 flex items-center justify-center hover:border-green hover:bg-green/10 transition-all duration-200 opacity-0 group-hover:opacity-100"
+              className="absolute top-5 right-5 w-8 h-8 bg-fondo-elevado border border-white/20 flex items-center justify-center hover:border-green hover:bg-green/10 transition-all duration-200 opacity-0 group-hover:opacity-100"
             >
               <FiExternalLink className="text-white text-xs" />
             </Link>
@@ -270,7 +270,7 @@ const Proyects = () => {
 
             <Link
               href="/proyectos"
-              className="w-10 h-10 bg-black/40 backdrop-blur-sm border border-white/20 flex items-center justify-center hover:border-green hover:bg-green/10 transition-all duration-200 opacity-0 group-hover:opacity-100 flex-shrink-0"
+              className="w-10 h-10 bg-fondo-elevado border border-white/20 flex items-center justify-center hover:border-green hover:bg-green/10 transition-all duration-200 opacity-0 group-hover:opacity-100 flex-shrink-0"
             >
               <FiExternalLink className="text-white text-sm" />
             </Link>
@@ -281,7 +281,7 @@ const Proyects = () => {
         <div ref={ctaRef} className="text-center">
           <Link
             href="/proyectos"
-            className="group inline-flex items-center gap-2 px-8 py-4 bg-green text-black font-bold text-sm uppercase tracking-wide rounded-sm hover:bg-white transition-colors duration-200"
+            className="group inline-flex items-center gap-2 px-8 py-4 bg-green text-black font-bold text-sm uppercase tracking-wide hover:bg-white transition-colors duration-200"
           >
             Ver todos los proyectos
             <FiArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform duration-200" />

@@ -160,7 +160,6 @@ const PageUs = () => {
       <section className="relative min-h-screen flex items-center py-24 px-6 sm:px-8 lg:px-12">
         {/* Fondo */}
         <div className="absolute inset-0 pointer-events-none">
-          <div className="absolute top-1/3 left-1/4 w-[600px] h-[600px] bg-green/5 rounded-full blur-[120px]" />
           <div
             className="absolute inset-0 opacity-[0.03]"
             style={{
@@ -173,7 +172,7 @@ const PageUs = () => {
 
         <div className="relative max-w-5xl mx-auto w-full">
           <div ref={heroTagRef} className="mb-8">
-            <span className="inline-flex items-center gap-2.5 px-3 py-1.5 border border-green/30 text-green text-xs font-mono uppercase tracking-[0.2em] rounded-sm">
+            <span className="inline-flex items-center gap-2.5 px-3 py-1.5 border border-green/30 text-green text-xs font-mono uppercase tracking-[0.2em]">
               <span className="w-1.5 h-1.5 rounded-full bg-green animate-pulse" />
               Agencia de sistemas digitales estratégicos
             </span>
@@ -200,14 +199,14 @@ const PageUs = () => {
           <div ref={heroCtaRef} className="flex flex-wrap gap-4">
             <Link
               href="/cotizacion"
-              className="group inline-flex items-center gap-2 px-7 py-3.5 bg-green text-black font-bold text-sm uppercase tracking-wide rounded-sm hover:bg-white transition-colors duration-200"
+              className="group inline-flex items-center gap-2 px-7 py-3.5 bg-green text-black font-bold text-sm uppercase tracking-wide hover:bg-white transition-colors duration-200"
             >
               Diagnosticar mi negocio
               <FiArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform duration-200" />
             </Link>
             <Link
               href="/servicios"
-              className="inline-flex items-center gap-2 px-7 py-3.5 border border-white/20 text-white font-bold text-sm uppercase tracking-wide rounded-sm hover:border-white/40 hover:bg-white/5 transition-all duration-200"
+              className="inline-flex items-center gap-2 px-7 py-3.5 border border-white/20 text-white font-bold text-sm uppercase tracking-wide hover:border-white/40 hover:bg-white/5 transition-all duration-200"
             >
               Ver sistemas
             </Link>
@@ -423,8 +422,6 @@ const PageUs = () => {
       >
         <div className="max-w-5xl mx-auto">
           <div className="border border-white/10 p-12 md:p-16 relative overflow-hidden">
-            <div className="absolute top-0 right-0 w-96 h-96 bg-green/5 rounded-full blur-[100px] pointer-events-none" />
-
             <div className="relative z-10 text-center space-y-6">
               <h2 className="font-anton text-5xl md:text-6xl lg:text-7xl leading-[0.9] tracking-tighter uppercase">
                 ¿Listo para <span className="text-green">transformar</span> tu
@@ -436,14 +433,14 @@ const PageUs = () => {
               <div className="flex flex-wrap justify-center gap-4 pt-2">
                 <Link
                   href="/cotizacion"
-                  className="group inline-flex items-center gap-2 px-8 py-4 bg-green text-black font-bold text-sm uppercase tracking-wide rounded-sm hover:bg-white transition-colors duration-200"
+                  className="group inline-flex items-center gap-2 px-8 py-4 bg-green text-black font-bold text-sm uppercase tracking-wide hover:bg-white transition-colors duration-200"
                 >
                   Diagnosticar mi negocio
                   <FiArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform duration-200" />
                 </Link>
                 <Link
                   href="/servicios"
-                  className="inline-flex items-center gap-2 px-8 py-4 border border-white/20 text-white font-bold text-sm uppercase tracking-wide rounded-sm hover:border-white/40 hover:bg-white/5 transition-all duration-200"
+                  className="inline-flex items-center gap-2 px-8 py-4 border border-white/20 text-white font-bold text-sm uppercase tracking-wide hover:border-white/40 hover:bg-white/5 transition-all duration-200"
                 >
                   Ver sistemas
                 </Link>

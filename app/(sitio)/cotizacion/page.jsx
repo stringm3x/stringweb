@@ -25,10 +25,10 @@ export default function QuotePage() {
         toastOptions={{
           duration: 4000,
           style: {
-            background: "#000",
-            color: "#fff",
-            border: "1px solid rgba(255,255,255,0.1)",
-            borderRadius: "2px",
+            background: "#0f1310",
+            color: "#ffffff",
+            border: "1px solid #242b24",
+            borderRadius: "0",
             fontSize: "14px",
           },
           success: {
@@ -41,8 +41,8 @@ export default function QuotePage() {
           error: {
             duration: 4000,
             iconTheme: {
-              primary: "#ef4444",
-              secondary: "#fff",
+              primary: "#ffffff",
+              secondary: "#0f1310",
             },
           },
         }}

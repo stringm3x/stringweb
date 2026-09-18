@@ -43,8 +43,6 @@ const Content = () => {
     >
       {/* ── Fondo decorativo ──────────────────────────────────────────────── */}
       <div className="absolute inset-0 pointer-events-none">
-        <div className="absolute top-40 right-0 w-[500px] h-[500px] bg-green/5 rounded-full blur-[100px]" />
-        <div className="absolute bottom-20 left-0 w-[400px] h-[400px] bg-green/3 rounded-full blur-[80px]" />
         {/* Grid de puntos */}
         <div
           className="absolute inset-0 opacity-[0.03]"
@@ -63,9 +61,6 @@ const Content = () => {
             ref={ctaRef}
             className="relative border border-white/10 p-10 md:p-14 overflow-hidden"
           >
-            {/* Glow de fondo */}
-            <div className="absolute top-0 right-0 w-80 h-80 bg-green/5 rounded-full blur-[80px] pointer-events-none" />
-
             <div className="relative z-10 flex flex-col lg:flex-row items-start lg:items-center justify-between gap-8">
               <div className="space-y-4 max-w-xl">
                 <h3 className="font-anton text-4xl md:text-5xl text-white uppercase leading-[0.95] tracking-tight">
@@ -98,7 +93,7 @@ const Content = () => {
               <div className="flex flex-col sm:flex-row gap-4 flex-shrink-0">
                 <Link
                   href="/cotizacion"
-                  className="group inline-flex items-center gap-2 px-7 py-3.5 bg-green text-black font-bold text-sm uppercase tracking-wide rounded-sm hover:bg-white transition-colors duration-200 whitespace-nowrap"
+                  className="group inline-flex items-center gap-2 px-7 py-3.5 bg-green text-black font-bold text-sm uppercase tracking-wide hover:bg-white transition-colors duration-200 whitespace-nowrap"
                 >
                   Solicitar diagnóstico
                   <FiArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform duration-200" />
@@ -106,7 +101,7 @@ const Content = () => {
 
                 <Link
                   href="/servicios"
-                  className="inline-flex items-center gap-2 px-7 py-3.5 border border-white/20 text-white font-bold text-sm uppercase tracking-wide rounded-sm hover:border-white/40 hover:bg-white/5 transition-all duration-200 whitespace-nowrap"
+                  className="inline-flex items-center gap-2 px-7 py-3.5 border border-white/20 text-white font-bold text-sm uppercase tracking-wide hover:border-white/40 hover:bg-white/5 transition-all duration-200 whitespace-nowrap"
                 >
                   Ver sistemas
                 </Link>

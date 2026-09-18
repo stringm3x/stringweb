@@ -24,21 +24,38 @@ module.exports = {
       // => @media (min-width: 1536px) { ... }
     },
     colors: {
-      white: "#FFFFFF",
-      blue: "#004aad",
-      purple: "#7e5bef",
-      red: "#ff3131",
-      orange: "#f97316",
-      green: "#50ff05",
-      green2: "#759c7f",
-      green3: "#3d603f",
-      green4: "#28a624",
-      yellow: "#F5A524",
-      gold: "#f6c75e",
+      transparent: "transparent",
+      current: "currentColor",
       black: "#000000",
-      charcoal: "#111111",
+      white: "#ffffff",
+      fondo: "#000000",
+      "fondo-elevado": "#0f1310",
+      papel: "#f7f5ef",
+      tinta: "#ffffff",
+      "tinta-papel": "#111111",
+      "tinta-suave": "#a8b3a6",
+      "tinta-tenue": "#7c8a7d",
+      acido: "#50ff05",
+      "acido-profundo": "#2f7a05",
+      linea: "#242b24",
+      // ALIAS TEMPORAL: se elimina al terminar el rediseño
+      green: "#50ff05",
+      // ALIAS TEMPORAL: se elimina al terminar el rediseño
+      gray: "#a8b3a6",
+      // ALIAS TEMPORAL: se elimina al terminar el rediseño
+      charcoal: "#0f1310",
+      // ALIAS TEMPORAL: se elimina al terminar el rediseño
       bg: "#000000",
-      gray: "#A1A1AA",
+    },
+    boxShadow: {
+      acido: "8px 8px 0 #50ff05",
+      tinta: "8px 8px 0 #111111",
+      none: "none",
+    },
+    borderRadius: {
+      none: "0",
+      DEFAULT: "4px",
+      full: "9999px",
     },
     spacing: {
       0: "0",
@@ -78,18 +95,38 @@ module.exports = {
       3.5: "0.875rem",
     },
     extend: {
-      fontFamily: {
-        anton: ["var(--font-anton-sans)"],
-        ubuntu: ["var(--font-ubuntu-sans)"],
+      spacing: {
+        "espacio-1": "4px",
+        "espacio-2": "8px",
+        "espacio-3": "16px",
+        "espacio-4": "24px",
+        "espacio-5": "40px",
+        "espacio-6": "64px",
+        "espacio-7": "96px",
       },
-      animation: {
-        scroll: "scroll 20s linear infinite",
+      fontFamily: {
+        sans: ["var(--font-geist-sans)", "system-ui", "-apple-system", "sans-serif"],
+        mono: ["var(--font-ubuntu-mono)", "ui-monospace", "monospace"],
+        anton: ["var(--font-anton-sans)", "Arial Narrow", "Impact", "sans-serif"],
+      },
+      fontSize: {
+        "titular-xl": ["88px", { lineHeight: "80px", letterSpacing: "0.01em" }],
+        "titular-l": ["56px", { lineHeight: "52px", letterSpacing: "0.01em" }],
+        "titular-m": ["34px", { lineHeight: "34px", letterSpacing: "0.01em" }],
+        "cuerpo-l": ["19px", { lineHeight: "30px" }],
+        cuerpo: ["16px", { lineHeight: "26px" }],
+        "cuerpo-s": ["14px", { lineHeight: "22px" }],
+        etiqueta: ["13px", { lineHeight: "16px", letterSpacing: "0.16em" }],
+        dato: ["15px", { lineHeight: "20px", letterSpacing: "0.04em" }],
       },
       keyframes: {
-        scroll: {
+        cinta: {
           from: { transform: "translateX(0)" },
           to: { transform: "translateX(-50%)" },
         },
+      },
+      animation: {
+        cinta: "cinta 30s linear infinite",
       },
     },
   },

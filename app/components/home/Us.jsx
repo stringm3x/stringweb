@@ -73,18 +73,13 @@ const Us = () => {
         <div className="absolute inset-0 bg-gradient-to-r from-black/95 via-black/85 to-black/70" />
       </div>
 
-      {/* ── Decorativo ────────────────────────────────────────────────────── */}
-      <div className="absolute inset-0 pointer-events-none">
-        <div className="absolute top-20 left-20 w-64 h-64 bg-green/5 rounded-full blur-[80px]" />
-      </div>
-
       <div className="relative w-full max-w-7xl mx-auto px-6 sm:px-8 lg:px-12">
         <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
           {/* ── Columna izquierda ─────────────────────────────────────────── */}
           <div className="space-y-8">
             {/* Tag */}
             <div ref={tagRef}>
-              <span className="inline-flex items-center gap-2.5 px-3 py-1.5 border border-green/30 text-green text-xs font-mono uppercase tracking-[0.2em] rounded-sm">
+              <span className="inline-flex items-center gap-2.5 px-3 py-1.5 border border-green/30 text-green text-xs font-mono uppercase tracking-[0.2em]">
                 <span className="w-1.5 h-1.5 rounded-full bg-green animate-pulse" />
                 STRING Studio
               </span>
@@ -110,7 +105,7 @@ const Us = () => {
 
               <Link
                 href="/nosotros"
-                className="group inline-flex items-center gap-2 px-7 py-3.5 bg-green text-black font-bold text-sm uppercase tracking-wide rounded-sm hover:bg-white transition-colors duration-200"
+                className="group inline-flex items-center gap-2 px-7 py-3.5 bg-green text-black font-bold text-sm uppercase tracking-wide hover:bg-white transition-colors duration-200"
               >
                 Acerca de STRING
                 <FiArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform duration-200" />
@@ -120,7 +115,7 @@ const Us = () => {
 
           {/* ── Columna derecha — card de propuesta ───────────────────────── */}
           <div ref={cardRef} className="w-full lg:flex lg:justify-end">
-            <div className="border border-white/10 bg-black/60 backdrop-blur-md p-8 max-w-md w-full">
+            <div className="border border-white/10 bg-fondo-elevado p-8 max-w-md w-full">
               {/* Header card */}
               <div className="border-b border-white/10 pb-6 mb-6">
                 <p className="text-xs font-mono text-green uppercase tracking-[0.2em] mb-3">

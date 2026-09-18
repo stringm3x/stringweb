@@ -2,10 +2,12 @@
 
 import { useRef, useEffect } from "react";
 import gsap from "gsap";
+import { FiAlertCircle } from "react-icons/fi";
 import { PROJECT_TYPES } from "../../lib/constants/project-types";
 
 export const FormSelect = ({ register, error, name, label, required }) => {
   const errorRef = useRef(null);
+  const errorId = `${name}-error`;
 
   useEffect(() => {
     if (error && errorRef.current) {
@@ -19,21 +21,20 @@ export const FormSelect = ({ register, error, name, label, required }) => {
 
   return (
     <div className="space-y-1.5">
-      <label className="block text-xs font-mono text-gray uppercase tracking-widest">
-        {label} {required && <span className="text-green">*</span>}
+      <label className="block font-mono uppercase text-etiqueta text-tinta-tenue">
+        {label} {required && <span className="text-acido">*</span>}
       </label>
 
       <select
         {...register(name)}
+        id={name}
+        aria-invalid={!!error}
+        aria-describedby={error ? errorId : undefined}
         className={`
-          w-full px-4 py-3 bg-white/5 border text-white text-sm
+          w-full px-4 py-3 bg-fondo-elevado border-2 rounded text-tinta text-sm
           transition-colors duration-200 appearance-none cursor-pointer
-          focus:outline-none focus:border-green
-          ${
-            error
-              ? "border-red-500/60"
-              : "border-white/10 hover:border-white/20"
-          }
+          focus:outline-none focus:border-acido
+          ${error ? "border-tinta" : "border-linea hover:border-tinta-tenue"}
         `}
         style={{
           backgroundImage: `url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3e%3cpath stroke='%2350ff05' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='M6 8l4 4 4-4'/%3e%3c/svg%3e")`,
@@ -55,9 +56,10 @@ export const FormSelect = ({ register, error, name, label, required }) => {
       {error && (
         <p
           ref={errorRef}
-          className="text-xs text-red-400 flex items-center gap-1.5 font-mono"
+          id={errorId}
+          className="text-xs text-tinta flex items-center gap-1.5 font-mono"
         >
-          <span>↳</span>
+          <FiAlertCircle className="h-3.5 w-3.5 flex-shrink-0" />
           {error}
         </p>
       )}

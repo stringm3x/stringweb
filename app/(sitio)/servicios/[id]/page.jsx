@@ -116,7 +116,6 @@ const ServicePage = ({ params: paramsPromise }) => {
     >
       {/* ── Fondo decorativo ──────────────────────────────────────────────── */}
       <div className="absolute inset-0 pointer-events-none">
-        <div className="absolute top-0 right-1/4 w-[500px] h-[500px] bg-green/5 rounded-full blur-[120px]" />
         <div
           className="absolute inset-0 opacity-[0.03]"
           style={{
@@ -141,11 +140,11 @@ const ServicePage = ({ params: paramsPromise }) => {
 
         {/* ── Tag + título ──────────────────────────────────────────────────── */}
         <div ref={tagRef} className="flex flex-wrap items-center gap-3 mb-8">
-          <span className="inline-flex items-center gap-2 px-3 py-1.5 border border-green/30 text-green text-xs font-mono uppercase tracking-[0.2em] rounded-sm">
+          <span className="inline-flex items-center gap-2 px-3 py-1.5 border border-green/30 text-green text-xs font-mono uppercase tracking-[0.2em]">
             <span className="w-1.5 h-1.5 rounded-full bg-green" />
             {servicio.title2}
           </span>
-          <span className="px-3 py-1.5 bg-green text-black text-xs font-bold uppercase tracking-wide rounded-sm">
+          <span className="px-3 py-1.5 bg-green text-black text-xs font-bold uppercase tracking-wide">
             {servicio.metric}
           </span>
         </div>
@@ -293,8 +292,6 @@ const ServicePage = ({ params: paramsPromise }) => {
           ref={ctaRef}
           className="border border-white/10 p-10 md:p-14 relative overflow-hidden"
         >
-          <div className="absolute top-0 right-0 w-80 h-80 bg-green/5 rounded-full blur-[80px] pointer-events-none" />
-
           <div className="relative z-10 flex flex-col lg:flex-row items-start lg:items-center justify-between gap-8">
             <div className="space-y-3">
               <h3 className="font-anton text-4xl md:text-5xl text-white uppercase leading-[0.95] tracking-tight">
@@ -313,7 +310,7 @@ const ServicePage = ({ params: paramsPromise }) => {
             <div className="flex flex-col sm:flex-row gap-4 flex-shrink-0">
               <Link
                 href="/cotizacion"
-                className="group inline-flex items-center gap-2 px-7 py-3.5 bg-green text-black font-bold text-sm uppercase tracking-wide rounded-sm hover:bg-white transition-colors duration-200 whitespace-nowrap"
+                className="group inline-flex items-center gap-2 px-7 py-3.5 bg-green text-black font-bold text-sm uppercase tracking-wide hover:bg-white transition-colors duration-200 whitespace-nowrap"
               >
                 Solicitar diagnóstico
                 <FiArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform duration-200" />
@@ -321,7 +318,7 @@ const ServicePage = ({ params: paramsPromise }) => {
 
               <Link
                 href="/proyectos"
-                className="inline-flex items-center gap-2 px-7 py-3.5 border border-white/20 text-white font-bold text-sm uppercase tracking-wide rounded-sm hover:border-white/40 hover:bg-white/5 transition-all duration-200 whitespace-nowrap"
+                className="inline-flex items-center gap-2 px-7 py-3.5 border border-white/20 text-white font-bold text-sm uppercase tracking-wide hover:border-white/40 hover:bg-white/5 transition-all duration-200 whitespace-nowrap"
               >
                 Ver proyectos
               </Link>

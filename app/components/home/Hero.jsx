@@ -150,9 +150,6 @@ const Hero = () => {
         }}
       />
 
-      {/* ── Glow ambiental ────────────────────────────────────────────────── */}
-      <div className="absolute top-1/2 left-1/4 -translate-y-1/2 w-[600px] h-[600px] bg-green/5 rounded-full blur-[120px] pointer-events-none" />
-
       {/* ── Línea superior ────────────────────────────────────────────────── */}
       <div
         ref={lineTopRef}
@@ -172,7 +169,7 @@ const Hero = () => {
           <div className="space-y-10">
             {/* Tag */}
             <div ref={tagRef}>
-              <span className="inline-flex items-center gap-2.5 px-3 py-1.5 border border-green/30 text-green text-xs font-mono uppercase tracking-[0.2em] rounded-sm">
+              <span className="inline-flex items-center gap-2.5 px-3 py-1.5 border border-green/30 text-green text-xs font-mono uppercase tracking-[0.2em]">
                 <span className="w-1.5 h-1.5 rounded-full bg-green animate-pulse" />
                 Sistemas de conversión · CDMX
               </span>
@@ -223,7 +220,7 @@ const Hero = () => {
             <div ref={ctaRef} className="flex flex-wrap items-center gap-4">
               <Link
                 href="/cotizacion"
-                className="group inline-flex items-center gap-2 px-7 py-3.5 bg-green text-black font-bold text-sm uppercase tracking-wide rounded-sm hover:bg-white transition-colors duration-200"
+                className="group inline-flex items-center gap-2 px-7 py-3.5 bg-green text-black font-bold text-sm uppercase tracking-wide hover:bg-white transition-colors duration-200"
               >
                 Solicitar diagnóstico
                 <FiArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform duration-200" />

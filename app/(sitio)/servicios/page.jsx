@@ -113,7 +113,6 @@ const PageServices = () => {
     >
       {/* ── Fondo decorativo ──────────────────────────────────────────────── */}
       <div className="absolute inset-0 pointer-events-none">
-        <div className="absolute top-0 left-1/3 w-[500px] h-[500px] bg-green/5 rounded-full blur-[120px]" />
         <div
           className="absolute inset-0 opacity-[0.03]"
           style={{
@@ -128,7 +127,7 @@ const PageServices = () => {
         {/* ── Header ────────────────────────────────────────────────────────── */}
         <div className="mb-16 space-y-6">
           <div ref={tagRef}>
-            <span className="inline-flex items-center gap-2.5 px-3 py-1.5 border border-green/30 text-green text-xs font-mono uppercase tracking-[0.2em] rounded-sm">
+            <span className="inline-flex items-center gap-2.5 px-3 py-1.5 border border-green/30 text-green text-xs font-mono uppercase tracking-[0.2em]">
               <span className="w-1.5 h-1.5 rounded-full bg-green" />
               Sistemas de conversión
             </span>
@@ -191,7 +190,7 @@ const PageServices = () => {
 
                     {/* Precio sobre imagen */}
                     <div className="absolute top-4 right-4">
-                      <span className="px-2 py-1 bg-black/60 backdrop-blur-sm border border-green/30 text-green text-xs font-mono">
+                      <span className="px-2 py-1 bg-fondo-elevado border border-green/30 text-green text-xs font-mono">
                         {servicio.metric}
                       </span>
                     </div>
@@ -279,7 +278,7 @@ const PageServices = () => {
         <div ref={ctaRef} className="text-center mt-20 space-y-4">
           <Link
             href="/cotizacion"
-            className="group inline-flex items-center gap-2 px-8 py-4 bg-green text-black font-bold text-sm uppercase tracking-wide rounded-sm hover:bg-white transition-colors duration-200"
+            className="group inline-flex items-center gap-2 px-8 py-4 bg-green text-black font-bold text-sm uppercase tracking-wide hover:bg-white transition-colors duration-200"
           >
             Diagnosticar mi negocio
             <FiArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform duration-200" />

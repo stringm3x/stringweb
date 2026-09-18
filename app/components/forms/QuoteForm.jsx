@@ -215,7 +215,7 @@ export const QuoteForm = () => {
       {/* ── Header ──────────────────────────────────────────────────────────── */}
       <div className="mb-12 space-y-6">
         <div ref={tagRef}>
-          <span className="inline-flex items-center gap-2.5 px-3 py-1.5 border border-green/30 text-green text-xs font-mono uppercase tracking-[0.2em] rounded-sm">
+          <span className="inline-flex items-center gap-2.5 px-3 py-1.5 border border-green/30 text-green text-xs font-mono uppercase tracking-[0.2em]">
             <span className="w-1.5 h-1.5 rounded-full bg-green animate-pulse" />
             Diagnóstico gratuito
           </span>
@@ -362,7 +362,7 @@ export const QuoteForm = () => {
               ref={buttonRef}
               type="submit"
               disabled={isSubmitting}
-              className="group relative w-full overflow-hidden bg-green text-black font-bold px-8 py-4 text-sm uppercase tracking-wide rounded-sm hover:bg-white transition-colors duration-200 disabled:opacity-60 disabled:cursor-not-allowed"
+              className="group relative w-full overflow-hidden bg-green text-black font-bold px-8 py-4 text-sm uppercase tracking-wide hover:bg-white transition-colors duration-200 disabled:opacity-60 disabled:cursor-not-allowed"
             >
               <span className="relative z-10 flex items-center justify-center gap-2">
                 {isSubmitting ? (
