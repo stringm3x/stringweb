@@ -4,7 +4,7 @@ import { useState } from "react";
 import { FiAlertTriangle } from "react-icons/fi";
 import { bloqueA, getBloqueB, bloqueC, bloqueD } from "../data/preguntas";
 
-// app/onboarding/components/PantallaResumen.jsx
+// app/alta/components/PantallaResumen.jsx
 
 export default function PantallaResumen({
   cliente,

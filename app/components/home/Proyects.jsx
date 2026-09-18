@@ -215,7 +215,7 @@ const Proyects = () => {
             </div>
 
             <Link
-              href="/Proyects"
+              href="/proyectos"
               className="absolute top-6 right-6 w-9 h-9 bg-black/40 backdrop-blur-sm border border-white/20 flex items-center justify-center hover:border-green hover:bg-green/10 transition-all duration-200 opacity-0 group-hover:opacity-100"
             >
               <FiExternalLink className="text-white text-sm" />
@@ -249,7 +249,7 @@ const Proyects = () => {
             </div>
 
             <Link
-              href="/Proyects"
+              href="/proyectos"
               className="absolute top-5 right-5 w-8 h-8 bg-black/40 backdrop-blur-sm border border-white/20 flex items-center justify-center hover:border-green hover:bg-green/10 transition-all duration-200 opacity-0 group-hover:opacity-100"
             >
               <FiExternalLink className="text-white text-xs" />
@@ -292,7 +292,7 @@ const Proyects = () => {
             </div>
 
             <Link
-              href="/Proyects"
+              href="/proyectos"
               className="w-10 h-10 bg-black/40 backdrop-blur-sm border border-white/20 flex items-center justify-center hover:border-green hover:bg-green/10 transition-all duration-200 opacity-0 group-hover:opacity-100 flex-shrink-0"
             >
               <FiExternalLink className="text-white text-sm" />
@@ -332,7 +332,7 @@ const Proyects = () => {
         {/* ── CTA ───────────────────────────────────────────────────────────── */}
         <div ref={ctaRef} className="text-center">
           <Link
-            href="/Proyects"
+            href="/proyectos"
             className="group inline-flex items-center gap-2 px-8 py-4 bg-green text-black font-bold text-sm uppercase tracking-wide rounded-sm hover:bg-white transition-colors duration-200"
           >
             Ver todos los proyectos

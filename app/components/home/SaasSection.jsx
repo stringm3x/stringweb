@@ -158,7 +158,7 @@ const SaasSection = () => {
             ¿Tu sector no está en la lista? Construimos sistemas a medida.
           </p>
           <Link
-            href="/quote"
+            href="/cotizacion"
             className="group inline-flex items-center gap-2 px-8 py-4 border border-white/20 text-white font-bold text-sm uppercase tracking-wide rounded-sm hover:border-white/40 hover:bg-white/5 transition-all duration-200"
           >
             Diagnóstico gratuito

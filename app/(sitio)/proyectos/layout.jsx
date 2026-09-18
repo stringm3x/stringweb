@@ -3,13 +3,13 @@ export const metadata = {
   description:
     "Portafolio de STRING: landing pages, e-commerce, menús digitales y portafolios entregados para negocios en México.",
   alternates: {
-    canonical: "https://www.stringwebs.com/Proyects",
+    canonical: "https://www.stringwebs.com/proyectos",
   },
   openGraph: {
     title: "Proyectos | STRING",
     description:
       "Portafolio de sistemas digitales entregados por STRING para negocios en México.",
-    url: "https://www.stringwebs.com/Proyects",
+    url: "https://www.stringwebs.com/proyectos",
   },
 };
 

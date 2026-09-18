@@ -365,7 +365,7 @@ const Services = () => {
                     </div>
 
                     <Link
-                      href="/quote"
+                      href="/cotizacion"
                       className="group inline-flex items-center gap-2 text-sm font-semibold text-green hover:gap-3 transition-all duration-200"
                     >
                       Solicitar diagnóstico
@@ -381,7 +381,7 @@ const Services = () => {
         {/* ── CTA ───────────────────────────────────────────────────────────── */}
         <div ref={ctaRef} className="mt-16 text-center space-y-4">
           <Link
-            href="/quote"
+            href="/cotizacion"
             className="group inline-flex items-center gap-2 px-8 py-4 bg-green text-black font-bold text-sm uppercase tracking-wide rounded-sm hover:bg-white transition-colors duration-200"
           >
             Diagnosticar mi negocio

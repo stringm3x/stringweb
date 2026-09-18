@@ -18,28 +18,28 @@ const serviceJsonLd = {
       {
         "@type": "Offer",
         name: "Sistema de Conversión — Nivel 1",
-        url: "https://www.stringwebs.com/Services/1",
+        url: "https://www.stringwebs.com/servicios/1",
         priceCurrency: "MXN",
         price: "8000",
       },
       {
         "@type": "Offer",
         name: "Sistema de Captación — Nivel 2",
-        url: "https://www.stringwebs.com/Services/2",
+        url: "https://www.stringwebs.com/servicios/2",
         priceCurrency: "MXN",
         price: "18000",
       },
       {
         "@type": "Offer",
         name: "Sistema Automatizado — Nivel 3",
-        url: "https://www.stringwebs.com/Services/3",
+        url: "https://www.stringwebs.com/servicios/3",
         priceCurrency: "MXN",
         price: "28000",
       },
       {
         "@type": "Offer",
         name: "Sistema Especializado — Nivel 4",
-        url: "https://www.stringwebs.com/Services/4",
+        url: "https://www.stringwebs.com/servicios/4",
         priceCurrency: "MXN",
         price: "40000",
       },
@@ -52,13 +52,13 @@ export const metadata = {
   description:
     "4 niveles de sistemas digitales de conversión para negocios en México, desde $8,000 MXN: captación, automatización y sistemas especializados a medida.",
   alternates: {
-    canonical: "https://www.stringwebs.com/Services",
+    canonical: "https://www.stringwebs.com/servicios",
   },
   openGraph: {
     title: "Servicios | STRING",
     description:
       "4 niveles de sistemas digitales de conversión, desde $8,000 MXN. Diagnóstico gratuito en 24h.",
-    url: "https://www.stringwebs.com/Services",
+    url: "https://www.stringwebs.com/servicios",
   },
 };
 

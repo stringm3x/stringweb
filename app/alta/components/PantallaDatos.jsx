@@ -2,7 +2,7 @@
 
 import { SECTORES_ONBOARDING } from "../data/preguntas";
 
-// app/onboarding/components/PantallaDatos.jsx
+// app/alta/components/PantallaDatos.jsx
 // Campos prellenados por STRING — solo lectura para el cliente
 
 export default function PantallaDatos({ cliente }) {

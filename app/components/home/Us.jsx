@@ -139,7 +139,7 @@ const Us = () => {
               </p>
 
               <Link
-                href="/Us"
+                href="/nosotros"
                 className="group inline-flex items-center gap-2 px-7 py-3.5 bg-green text-black font-bold text-sm uppercase tracking-wide rounded-sm hover:bg-white transition-colors duration-200"
               >
                 Acerca de STRING

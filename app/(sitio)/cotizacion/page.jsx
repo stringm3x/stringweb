@@ -6,13 +6,13 @@ export const metadata = {
   description:
     "Solicita un diagnóstico gratuito de tu presencia digital. Descubre qué nivel del Sistema STRING necesita tu negocio.",
   alternates: {
-    canonical: "https://www.stringwebs.com/quote",
+    canonical: "https://www.stringwebs.com/cotizacion",
   },
   openGraph: {
     title: "Solicitar Diagnóstico | STRING",
     description:
       "Sistemas digitales estratégicos para convertir visitas en clientes reales.",
-    url: "https://www.stringwebs.com/quote",
+    url: "https://www.stringwebs.com/cotizacion",
     type: "website",
   },
 };

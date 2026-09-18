@@ -94,18 +94,21 @@ pueden no coincidir con los del sistema de marca. No se renombran ni migran sin 
 
 ## Rutas
 
-Convención: rutas en español y en minúsculas. La migración está pendiente (Tarea 1):
+Convención: rutas en español y en minúsculas (migrada en la Tarea 1). Las rutas viejas siguen
+respondiendo, pero solo como redirect — no se enlazan desde ningún lado del sitio:
 
-| Actual | Destino |
+| Vigente | Ruta vieja (solo redirect) |
 |---|---|
-| /Proyects | /proyectos |
-| /Services, /Services/[id] | /servicios, /servicios/[id] |
-| /Us | /nosotros |
-| /quote | /cotizacion |
-| /onboarding | /alta |
+| /proyectos | /Proyects |
+| /servicios, /servicios/[id] | /Services, /Services/[id] |
+| /nosotros | /Us |
+| /cotizacion | /quote |
+| /alta/[slug] | /onboarding/[slug] |
 
-Toda ruta que cambie lleva un redirect 301 en `next.config.mjs`. En el mismo cambio se actualizan
-los enlaces internos, el nav, el footer, `sitemap.js`, el canonical y los datos estructurados.
+Los redirects viven en `next.config.mjs` con `statusCode: 301`, no `permanent: true` (`permanent`
+emite 308, no 301). Toda ruta que cambie de aquí en adelante lleva su propio redirect 301. En el
+mismo cambio se actualizan los enlaces internos, el nav, el footer, `sitemap.js`, el canonical y
+los datos estructurados.
 
 ## Cifras públicas
 

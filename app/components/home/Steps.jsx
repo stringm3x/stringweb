@@ -352,7 +352,7 @@ const Steps = () => {
           className="mt-16 flex flex-col sm:flex-row items-start sm:items-center gap-6"
         >
           <Link
-            href="/quote"
+            href="/cotizacion"
             className="group inline-flex items-center gap-2 px-8 py-4 bg-green text-black font-bold text-sm uppercase tracking-wide rounded-sm hover:bg-white transition-colors duration-200"
           >
             Comenzar diagnóstico

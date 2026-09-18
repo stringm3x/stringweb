@@ -26,6 +26,38 @@ const nextConfig = {
         destination: "/saas#gym-detalle",
         permanent: true,
       },
+      // Rutas migradas a español (Tarea 1). statusCode: 301 en vez de
+      // permanent: true porque permanent emite 308, no 301.
+      {
+        source: "/Proyects",
+        destination: "/proyectos",
+        statusCode: 301,
+      },
+      {
+        source: "/Services",
+        destination: "/servicios",
+        statusCode: 301,
+      },
+      {
+        source: "/Services/:id",
+        destination: "/servicios/:id",
+        statusCode: 301,
+      },
+      {
+        source: "/Us",
+        destination: "/nosotros",
+        statusCode: 301,
+      },
+      {
+        source: "/quote",
+        destination: "/cotizacion",
+        statusCode: 301,
+      },
+      {
+        source: "/onboarding/:slug",
+        destination: "/alta/:slug",
+        statusCode: 301,
+      },
     ];
   },
 };

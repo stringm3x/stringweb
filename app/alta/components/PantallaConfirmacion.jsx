@@ -1,6 +1,6 @@
 "use client";
 
-// app/onboarding/components/PantallaConfirmacion.jsx
+// app/alta/components/PantallaConfirmacion.jsx
 export default function PantallaConfirmacion({ cliente }) {
   return (
     <div className="min-h-screen bg-charcoal flex items-center justify-center px-6">

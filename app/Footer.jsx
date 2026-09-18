@@ -20,11 +20,11 @@ gsap.registerPlugin(ScrollTrigger);
 
 const pages = [
   { id: "1", title: "Inicio", link: "/" },
-  { id: "2", title: "Servicios", link: "/Services" },
+  { id: "2", title: "Servicios", link: "/servicios" },
   { id: "3", title: "STRING SaaS", link: "/saas" },
-  { id: "4", title: "Proyectos", link: "/Proyects" },
-  { id: "5", title: "Nosotros", link: "/Us" },
-  { id: "6", title: "Cotización", link: "/quote" },
+  { id: "4", title: "Proyectos", link: "/proyectos" },
+  { id: "5", title: "Nosotros", link: "/nosotros" },
+  { id: "6", title: "Cotización", link: "/cotizacion" },
 ];
 
 const socialLinks = [
@@ -235,7 +235,7 @@ const Footer = () => {
                   style={{ opacity: 0 }}
                 >
                   <Link
-                    href={`/Services/${service.id}`}
+                    href={`/servicios/${service.id}`}
                     className="text-gray hover:text-white transition-colors text-sm block hover:translate-x-1 transform duration-200"
                   >
                     {service.label}
@@ -309,7 +309,7 @@ const Footer = () => {
                 ¿Listo para construir tu sistema?
               </p>
               <Link
-                href="/quote"
+                href="/cotizacion"
                 className="inline-flex items-center gap-2 text-sm font-semibold text-green hover:gap-3 transition-all duration-200"
               >
                 Solicitar diagnóstico

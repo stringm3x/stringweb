@@ -2,7 +2,7 @@
 
 import { FiClock, FiUsers, FiFileText, FiZap } from "react-icons/fi";
 
-// app/onboarding/components/PantallaBienvenida.jsx
+// app/alta/components/PantallaBienvenida.jsx
 export default function PantallaBienvenida({ cliente, onSiguiente }) {
   return (
     <div className="space-y-10 pt-6">
