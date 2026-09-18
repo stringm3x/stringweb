@@ -171,7 +171,7 @@ const PageServices = () => {
                   }`}
                 >
                   {destacado && (
-                    <span className="absolute -top-3 left-6 z-10 inline-flex items-center gap-1.5 bg-green px-3 py-1 font-mono text-[10px] font-bold uppercase tracking-widest text-black">
+                    <span className="absolute top-3 left-6 z-10 inline-flex items-center gap-1.5 bg-green px-3 py-1 font-mono text-[10px] font-bold uppercase tracking-widest text-black">
                       <FiStar className="text-xs" />
                       Recomendado
                     </span>
