@@ -1,7 +1,7 @@
 const BASE = "https://www.stringwebs.com";
 
-// Rutas públicas del sitio (las privadas/cliente/internas no se indexan).
-// /diagnostico, /cliente, /alta y /gym/gracias tienen noindex — no van aquí.
+// Rutas públicas del sitio (las privadas/internas no se indexan).
+// /gym/gracias tiene noindex — no va aquí.
 const ROUTES = [
   { path: "/", priority: 1.0, changeFrequency: "weekly" },
   { path: "/nosotros", priority: 0.7, changeFrequency: "monthly" },
