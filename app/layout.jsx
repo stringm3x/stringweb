@@ -1,4 +1,4 @@
-import { Geist, Anton, Ubuntu } from "next/font/google";
+import { Geist, Anton, Ubuntu_Mono } from "next/font/google";
 import { Analytics } from "@vercel/analytics/react";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 import { Providers } from "./provider";
@@ -38,9 +38,9 @@ const anton = Anton({
   subsets: ["latin"],
 });
 
-const ubuntu = Ubuntu({
-  variable: "--font-ubuntu-sans",
-  weight: "500",
+const ubuntuMono = Ubuntu_Mono({
+  variable: "--font-ubuntu-mono",
+  weight: ["400", "700"],
   subsets: ["latin"],
 });
 
@@ -140,7 +140,7 @@ export default function RootLayout({ children }) {
         />
       </head>
       <body
-        className={`${geistSans.variable} ${anton.variable} ${ubuntu.variable} antialiased`}
+        className={`${geistSans.variable} ${anton.variable} ${ubuntuMono.variable} font-sans bg-fondo text-tinta antialiased`}
       >
         <Providers>{children}</Providers>
         <Analytics />
