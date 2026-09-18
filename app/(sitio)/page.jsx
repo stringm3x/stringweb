@@ -7,6 +7,7 @@ import Services from "@/app/components/home/Services";
 import SaasSection from "@/app/components/home/SaasSection";
 import Us from "@/app/components/home/Us";
 import Steps from "@/app/components/home/Steps";
+import { Cinta } from "@/app/components/ui/Cinta";
 
 const Home = () => {
   return (
@@ -15,6 +16,7 @@ const Home = () => {
       <Content />
       <Proyects />
       <Services />
+      <Cinta texto="STRING" variante="solida" decorativo />
       <SaasSection />
       <Steps />
       <Us />

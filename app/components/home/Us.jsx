@@ -1,14 +1,21 @@
 "use client";
 
 import React, { useEffect, useRef } from "react";
-import Image from "next/image";
-import Link from "next/link";
 import { FiArrowRight } from "react-icons/fi";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { REVEAL_START } from "@/app/lib/scrollTriggerDefaults";
+import { Etiqueta } from "@/app/components/ui/Etiqueta";
+import { Boton } from "@/app/components/ui/Boton";
 
 gsap.registerPlugin(ScrollTrigger);
+
+const PUNTOS = [
+  "Diagnóstico real antes de cualquier propuesta",
+  "Sin plantillas — cada sistema es construido desde cero",
+  "Entregamos en 24h el análisis inicial",
+  "Soporte continuo después de la entrega",
+];
 
 // ─── Componente ───────────────────────────────────────────────────────────────
 const Us = () => {
@@ -58,70 +65,53 @@ const Us = () => {
   return (
     <section
       ref={sectionRef}
-      className="relative min-h-screen flex items-center justify-center overflow-hidden bg-black py-24"
+      className="relative flex items-center justify-center overflow-hidden bg-papel py-espacio-6 lg:py-espacio-7"
     >
-      {/* ── Imagen de fondo ───────────────────────────────────────────────── */}
-      <div className="absolute inset-0">
-        <Image
-          src="/sonido.png"
-          alt="STRING Studio"
-          fill
-          className="object-cover"
-          loading="lazy"
-          quality={85}
-        />
-        <div className="absolute inset-0 bg-gradient-to-r from-black/95 via-black/85 to-black/70" />
-      </div>
-
       <div className="relative w-full max-w-7xl mx-auto px-6 sm:px-8 lg:px-12">
         <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
           {/* ── Columna izquierda ─────────────────────────────────────────── */}
           <div className="space-y-8">
             {/* Tag */}
             <div ref={tagRef}>
-              <span className="inline-flex items-center gap-2.5 px-3 py-1.5 border border-green/30 text-green text-xs font-mono uppercase tracking-[0.2em]">
-                <span className="w-1.5 h-1.5 rounded-full bg-green animate-pulse" />
+              <Etiqueta conPunto sobrePapel>
                 STRING Studio
-              </span>
+              </Etiqueta>
             </div>
 
             {/* Texto */}
             <div ref={contentRef} className="space-y-6">
-              <h2 className="font-anton text-5xl sm:text-6xl lg:text-7xl xl:text-8xl leading-[0.9] tracking-tighter uppercase">
-                <span className="text-white">Hemos ayudado</span>
+              <h2 className="font-anton text-titular-l text-tinta-papel uppercase">
+                Hemos ayudado
                 <br />
-                <span className="text-white">a las marcas a</span>
+                a las marcas a
                 <br />
-                <span className="text-green">crecer con</span>
+                <span className="text-acido-profundo">crecer con</span>
                 <br />
-                <span className="text-green">claridad.</span>
+                <span className="text-acido-profundo">claridad.</span>
               </h2>
 
-              <p className="text-gray text-base sm:text-lg leading-relaxed max-w-md">
+              <p className="text-tinta-papel/70 text-cuerpo max-w-md">
                 En STRING transformamos presencia digital en clientes reales.
                 Cada sistema es único, construido a medida, sin plantillas ni
                 atajos.
               </p>
 
-              <Link
-                href="/nosotros"
-                className="group inline-flex items-center gap-2 px-7 py-3.5 bg-green text-black font-bold text-sm uppercase tracking-wide hover:bg-white transition-colors duration-200"
-              >
+              <Boton href="/nosotros" variante="primario" sobrePapel>
                 Acerca de STRING
-                <FiArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform duration-200" />
-              </Link>
+                <FiArrowRight className="w-4 h-4" />
+              </Boton>
             </div>
           </div>
 
           {/* ── Columna derecha — card de propuesta ───────────────────────── */}
           <div ref={cardRef} className="w-full lg:flex lg:justify-end">
-            <div className="border border-white/10 bg-fondo-elevado p-8 max-w-md w-full">
+            <div className="border border-tinta-papel/10 bg-papel p-8 max-w-md w-full">
               {/* Header card */}
-              <div className="border-b border-white/10 pb-6 mb-6">
-                <p className="text-xs font-mono text-green uppercase tracking-[0.2em] mb-3">
+              <div className="border-b border-tinta-papel/10 pb-6 mb-6">
+                <Etiqueta variante="texto" sobrePapel className="mb-3">
                   Por qué STRING
-                </p>
-                <p className="text-white text-lg leading-relaxed font-medium">
+                </Etiqueta>
+                <p className="text-tinta-papel text-cuerpo-l font-medium">
                   No vendemos páginas web. Vendemos sistemas que trabajan por tu
                   negocio mientras tú haces lo tuyo.
                 </p>
@@ -129,15 +119,10 @@ const Us = () => {
 
               {/* Puntos clave */}
               <div className="space-y-4">
-                {[
-                  "Diagnóstico real antes de cualquier propuesta",
-                  "Sin plantillas — cada sistema es construido desde cero",
-                  "Entregamos en 24h el análisis inicial",
-                  "Soporte continuo después de la entrega",
-                ].map((item, i) => (
-                  <div key={i} className="flex items-start gap-3">
-                    <span className="w-1 h-1 rounded-full bg-green mt-2 flex-shrink-0" />
-                    <span className="text-gray text-sm leading-relaxed">
+                {PUNTOS.map((item) => (
+                  <div key={item} className="flex items-start gap-3">
+                    <span className="w-1 h-1 rounded-full bg-acido-profundo mt-2 flex-shrink-0" />
+                    <span className="text-tinta-papel/70 text-cuerpo-s">
                       {item}
                     </span>
                   </div>
@@ -145,13 +130,15 @@ const Us = () => {
               </div>
 
               {/* Firma */}
-              <div className="mt-8 pt-6 border-t border-white/10 flex items-center gap-3">
-                <div className="w-8 h-8 bg-green flex items-center justify-center flex-shrink-0">
-                  <span className="font-anton text-black text-sm">S</span>
+              <div className="mt-8 pt-6 border-t border-tinta-papel/10 flex items-center gap-3">
+                <div className="w-8 h-8 bg-acido-profundo flex items-center justify-center flex-shrink-0">
+                  <span className="font-anton text-white text-sm">S</span>
                 </div>
                 <div>
-                  <p className="text-white text-sm font-semibold">STRING</p>
-                  <p className="text-gray text-xs font-mono">
+                  <p className="text-tinta-papel text-sm font-semibold">
+                    STRING
+                  </p>
+                  <p className="font-mono uppercase text-etiqueta text-tinta-papel/60">
                     Sistemas digitales estratégicos · CDMX
                   </p>
                 </div>

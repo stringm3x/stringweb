@@ -38,6 +38,14 @@ export function Boton({
   const varianteEfectiva = estaDesactivado ? "desactivado" : variante;
   const clases = `${BASE} ${clasesVariante(varianteEfectiva, sobrePapel)} ${className}`.trim();
 
+  if (estaDesactivado) {
+    return (
+      <span aria-disabled="true" className={clases}>
+        {children}
+      </span>
+    );
+  }
+
   if (href) {
     const esExterno = /^https?:\/\//.test(href);
 
@@ -63,7 +71,7 @@ export function Boton({
   }
 
   return (
-    <button type={type} onClick={onClick} disabled={estaDesactivado} className={clases}>
+    <button type={type} onClick={onClick} className={clases}>
       {children}
     </button>
   );

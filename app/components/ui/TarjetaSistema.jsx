@@ -22,7 +22,7 @@ export function TarjetaSistema({
       {frase && <p className="text-cuerpo-s text-tinta-suave mb-espacio-4">{frase}</p>}
 
       {puntos.length > 0 && (
-        <ul className="divide-y divide-linea border-t border-linea">
+        <ul className="divide-y divide-linea border-y border-linea">
           {puntos.map((punto) => (
             <li
               key={punto}
