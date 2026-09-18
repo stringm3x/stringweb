@@ -1,20 +1,13 @@
 "use client";
 
 import { useState, useEffect, useRef } from "react";
-import Link from "next/link";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { REVEAL_START } from "@/app/lib/scrollTriggerDefaults";
-import {
-  FiPlus,
-  FiMinus,
-  FiArrowRight,
-  FiCheckCircle,
-  FiTarget,
-  FiTrendingUp,
-  FiZap,
-} from "react-icons/fi";
-import { MdOutlineRocketLaunch } from "react-icons/md";
+import { FiPlus, FiMinus, FiArrowRight, FiCheckCircle } from "react-icons/fi";
+import { Etiqueta } from "@/app/components/ui/Etiqueta";
+import { Boton } from "@/app/components/ui/Boton";
+import { TarjetaSistema } from "@/app/components/ui/TarjetaSistema";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -34,7 +27,6 @@ const items = [
       "Formulario básico de contacto",
       "Mensaje automático preconfigurado",
     ],
-    icon: FiTarget,
   },
   {
     title: "SISTEMA DE CAPTACIÓN",
@@ -50,7 +42,6 @@ const items = [
       "Notificaciones por correo",
       "Integración con Notion / Sheets / Airtable",
     ],
-    icon: FiTrendingUp,
   },
   {
     title: "SISTEMA AUTOMATIZADO",
@@ -66,7 +57,6 @@ const items = [
       "Recordatorios de citas",
       "Panel de gestión de prospectos",
     ],
-    icon: FiZap,
   },
   {
     title: "SISTEMA ESPECIALIZADO",
@@ -82,7 +72,6 @@ const items = [
       "Paneles de control internos",
       "Integraciones con APIs externas",
     ],
-    icon: MdOutlineRocketLaunch,
   },
 ];
 
@@ -205,89 +194,58 @@ const Services = () => {
         {/* ── Header ────────────────────────────────────────────────────────── */}
         <div className="mb-16 space-y-6">
           <div ref={tagRef}>
-            <span className="inline-flex items-center gap-2.5 px-3 py-1.5 border border-green/30 text-green text-xs font-mono uppercase tracking-[0.2em]">
-              <span className="w-1.5 h-1.5 rounded-full bg-green" />
-              Los 4 sistemas
-            </span>
+            <Etiqueta conPunto>Los 4 sistemas</Etiqueta>
           </div>
 
           <h2
             ref={titleRef}
-            className="font-anton text-5xl sm:text-6xl md:text-7xl leading-[0.9] tracking-tighter text-white uppercase"
+            className="font-anton text-titular-l text-white uppercase"
           >
-            Elige tu nivel <span className="text-green">de sistema</span>
+            Elige tu nivel <span className="text-acido">de sistema</span>
           </h2>
 
-          <p
-            ref={descRef}
-            className="text-gray text-lg leading-relaxed max-w-xl"
-          >
+          <p ref={descRef} className="text-tinta-suave text-cuerpo max-w-xl">
             Cuatro niveles de automatización para cada etapa de tu negocio. Cada
             sistema incluye el anterior — siempre puedes escalar.
           </p>
         </div>
 
         {/* ── Acordeones ────────────────────────────────────────────────────── */}
-        <div className="space-y-px">
+        <div className="border-y border-linea divide-y divide-linea">
           {items.map((item, index) => {
             const isOpen = openIndex === index;
-            const Icon = item.icon;
 
             return (
-              <div
-                key={index}
-                ref={(el) => (cardsRef.current[index] = el)}
-                className="border border-white/10 hover:border-white/20 transition-colors duration-200 bg-black"
-              >
+              <div key={index} ref={(el) => (cardsRef.current[index] = el)}>
                 {/* Trigger */}
                 <button
                   onClick={() => toggle(index)}
-                  className="w-full flex items-center justify-between p-6 md:p-8 text-left group"
+                  className="w-full flex items-center justify-between p-6 md:p-8 text-left transition-colors duration-200 hover:bg-fondo-elevado/50"
                 >
-                  <div className="flex items-center gap-5">
-                    {/* Ícono */}
-                    <div
-                      className={`w-11 h-11 border flex-shrink-0 flex items-center justify-center transition-all duration-300 ${
-                        isOpen
-                          ? "border-green bg-green/10"
-                          : "border-white/10 group-hover:border-green/40"
+                  <div className="text-left">
+                    <div className="flex items-center gap-3 flex-wrap mb-0.5">
+                      <span className="font-mono uppercase text-etiqueta text-tinta-tenue">
+                        {item.subtitle}
+                      </span>
+                      <span className="font-mono text-dato text-acido">
+                        {item.metric}
+                      </span>
+                    </div>
+                    <h3
+                      className={`font-anton text-titular-m transition-colors duration-200 ${
+                        isOpen ? "text-acido" : "text-white"
                       }`}
                     >
-                      <Icon
-                        className={`text-lg transition-colors duration-300 ${
-                          isOpen
-                            ? "text-green"
-                            : "text-gray group-hover:text-green"
-                        }`}
-                      />
-                    </div>
-
-                    {/* Texto */}
-                    <div className="text-left">
-                      <div className="flex items-center gap-3 flex-wrap mb-0.5">
-                        <span className="text-xs font-mono text-gray uppercase tracking-widest">
-                          {item.subtitle}
-                        </span>
-                        <span className="text-xs font-mono text-green">
-                          {item.metric}
-                        </span>
-                      </div>
-                      <h3
-                        className={`font-anton text-xl md:text-2xl tracking-tight leading-tight transition-colors duration-200 ${
-                          isOpen ? "text-green" : "text-white"
-                        }`}
-                      >
-                        {item.title}
-                      </h3>
-                    </div>
+                      {item.title}
+                    </h3>
                   </div>
 
                   {/* Toggle icon */}
                   <div
                     className={`w-8 h-8 flex-shrink-0 border flex items-center justify-center transition-all duration-300 ${
                       isOpen
-                        ? "border-green bg-green text-black"
-                        : "border-white/20 text-gray group-hover:border-white/40"
+                        ? "border-acido bg-acido text-black"
+                        : "border-linea text-tinta-tenue"
                     }`}
                   >
                     {isOpen ? (
@@ -304,29 +262,26 @@ const Services = () => {
                     isOpen ? "max-h-[600px] opacity-100" : "max-h-0 opacity-0"
                   }`}
                 >
-                  <div className="px-6 md:px-8 pb-8 border-t border-white/5">
-                    <p className="text-gray text-sm leading-relaxed mt-6 mb-6">
+                  <div className="px-6 md:px-8 pb-8 border-t border-linea">
+                    <p className="text-tinta-suave text-cuerpo-s mt-6 mb-6">
                       {item.content}
                     </p>
 
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 mb-8">
                       {item.benefits.map((benefit, i) => (
                         <div key={i} className="flex items-start gap-2.5">
-                          <FiCheckCircle className="text-green text-sm mt-0.5 flex-shrink-0" />
-                          <span className="text-white/80 text-sm leading-relaxed">
+                          <FiCheckCircle className="text-acido text-sm mt-0.5 flex-shrink-0" />
+                          <span className="text-tinta-suave text-cuerpo-s">
                             {benefit}
                           </span>
                         </div>
                       ))}
                     </div>
 
-                    <Link
-                      href="/cotizacion"
-                      className="group inline-flex items-center gap-2 text-sm font-semibold text-green hover:gap-3 transition-all duration-200"
-                    >
+                    <Boton href="/cotizacion" variante="texto">
                       Solicitar diagnóstico
-                      <FiArrowRight className="text-xs group-hover:translate-x-1 transition-transform duration-200" />
-                    </Link>
+                      <FiArrowRight className="w-3.5 h-3.5" />
+                    </Boton>
                   </div>
                 </div>
               </div>
@@ -335,42 +290,33 @@ const Services = () => {
         </div>
 
         {/* ── Planes de continuidad ────────────────────────────────────────── */}
-        <div className="mt-16 border border-white/10 p-8 md:p-10">
-          <p className="text-[10px] font-mono text-green uppercase tracking-[0.2em] mb-2">
-            Planes de continuidad
-          </p>
-          <p className="text-gray text-sm leading-relaxed max-w-xl mb-6">
+        <div className="mt-16">
+          <Etiqueta variante="texto">Planes de continuidad</Etiqueta>
+          <p className="mt-2 text-tinta-suave text-cuerpo max-w-xl mb-6">
             Tu sistema no termina el día de la entrega. Un plan de
-            continuidad lo mantiene funcionando y, según el plan, lo
-            optimiza cada mes.
+            continuidad lo mantiene funcionando y, según el plan, lo optimiza
+            cada mes.
           </p>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-px bg-white/5">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             {continuidad.map((plan) => (
-              <div key={plan.nombre} className="bg-black p-6">
-                <h3 className="font-anton text-xl text-white tracking-tight mb-1">
-                  {plan.nombre}
-                </h3>
-                <p className="text-green font-mono text-sm mb-2">
-                  {plan.precio}
-                </p>
-                <p className="text-gray text-sm leading-relaxed">
-                  {plan.incluye}
-                </p>
-              </div>
+              <TarjetaSistema
+                key={plan.nombre}
+                kicker="CONTINUIDAD"
+                precio={plan.precio}
+                titulo={plan.nombre}
+                frase={plan.incluye}
+              />
             ))}
           </div>
         </div>
 
         {/* ── CTA ───────────────────────────────────────────────────────────── */}
         <div ref={ctaRef} className="mt-16 text-center space-y-4">
-          <Link
-            href="/cotizacion"
-            className="group inline-flex items-center gap-2 px-8 py-4 bg-green text-black font-bold text-sm uppercase tracking-wide hover:bg-white transition-colors duration-200"
-          >
+          <Boton href="/cotizacion" variante="primario">
             Diagnosticar mi negocio
-            <FiArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform duration-200" />
-          </Link>
-          <p className="text-xs text-gray font-mono">
+            <FiArrowRight className="w-4 h-4" />
+          </Boton>
+          <p className="font-mono uppercase text-etiqueta text-tinta-tenue">
             Descubre qué nivel necesita tu negocio · Respuesta en 24h
           </p>
         </div>
