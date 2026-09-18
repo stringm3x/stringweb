@@ -1,18 +1,12 @@
 "use client";
 
 import React, { useEffect, useRef, useState } from "react";
-import Link from "next/link";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { REVEAL_START } from "@/app/lib/scrollTriggerDefaults";
-import {
-  FiArrowRight,
-  FiCheckCircle,
-  FiSearch,
-  FiLayers,
-  FiCode,
-  FiShield,
-} from "react-icons/fi";
+import { FiArrowRight, FiCheckCircle } from "react-icons/fi";
+import { Etiqueta } from "@/app/components/ui/Etiqueta";
+import { Boton } from "@/app/components/ui/Boton";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -31,7 +25,6 @@ const stepsData = [
       "Revisión del proceso actual de contacto",
       "Identificación de fricciones en la captación",
     ],
-    icon: FiSearch,
   },
   {
     number: "02",
@@ -46,7 +39,6 @@ const stepsData = [
       "Estructura de la página",
       "Llamados a la acción claros",
     ],
-    icon: FiLayers,
   },
   {
     number: "03",
@@ -61,7 +53,6 @@ const stepsData = [
       "Integración con WhatsApp",
       "Implementación de automatizaciones",
     ],
-    icon: FiCode,
   },
   {
     number: "04",
@@ -76,7 +67,6 @@ const stepsData = [
       "Ajustes de claridad",
       "Verificación técnica completa",
     ],
-    icon: FiShield,
   },
 ];
 
@@ -180,7 +170,6 @@ const Steps = () => {
   };
 
   const step = stepsData[activeStep];
-  const Icon = step.icon;
 
   return (
     <section
@@ -203,70 +192,52 @@ const Steps = () => {
         {/* ── Header ────────────────────────────────────────────────────────── */}
         <div className="mb-16 space-y-6">
           <div ref={tagRef}>
-            <span className="inline-flex items-center gap-2.5 px-3 py-1.5 border border-green/30 text-green text-xs font-mono uppercase tracking-[0.2em]">
-              <span className="w-1.5 h-1.5 rounded-full bg-green" />
-              Metodología STRING
-            </span>
+            <Etiqueta conPunto>Metodología STRING</Etiqueta>
           </div>
 
           <h2
             ref={titleRef}
-            className="font-anton text-5xl sm:text-6xl md:text-7xl leading-[0.9] tracking-tighter text-white uppercase"
+            className="font-anton text-titular-l text-white uppercase"
           >
-            Nuestro sistema <span className="text-green">de conversión</span>
+            Nuestro sistema <span className="text-acido">de conversión</span>
           </h2>
 
-          <p
-            ref={descRef}
-            className="text-gray text-lg leading-relaxed max-w-xl"
-          >
+          <p ref={descRef} className="text-tinta-suave text-cuerpo max-w-xl">
             Cuatro fases para transformar tu presencia digital en un sistema que
             convierte visitas en clientes potenciales organizados.
           </p>
         </div>
 
-        {/* ── Steps — tabs horizontales ──────────────────────────────────────── */}
-        <div className="grid grid-cols-4 gap-px bg-white/5 mb-px">
+        {/* ── Steps — tabs cuadradas ────────────────────────────────────────── */}
+        <div className="grid grid-cols-4 gap-px bg-linea mb-px">
           {stepsData.map((s, i) => {
-            const SIcon = s.icon;
             const isActive = activeStep === i;
             return (
               <button
                 key={i}
                 ref={(el) => (stepsRef.current[i] = el)}
                 onClick={() => handleStepChange(i)}
-                className={`group relative bg-black px-4 py-6 text-left transition-colors duration-200 ${
-                  isActive ? "bg-white/[0.04]" : "hover:bg-white/[0.02]"
+                className={`group relative bg-black px-4 py-6 text-left border-b-2 transition-colors duration-200 ${
+                  isActive
+                    ? "border-acido bg-white/[0.04]"
+                    : "border-tinta-tenue hover:bg-white/[0.02]"
                 }`}
               >
-                {/* Indicador activo */}
-                <div
-                  className={`absolute top-0 left-0 right-0 h-px transition-all duration-300 ${
-                    isActive ? "bg-green" : "bg-transparent"
-                  }`}
-                />
-
-                <span className="text-[10px] font-mono text-gray uppercase tracking-widest block mb-3">
-                  {s.fase}
+                <span className="font-mono uppercase text-etiqueta text-tinta-tenue block mb-3">
+                  Fase {s.number}
                 </span>
 
-                <SIcon
-                  className={`text-xl mb-3 transition-colors duration-200 ${
-                    isActive ? "text-green" : "text-gray group-hover:text-white"
-                  }`}
-                />
-
                 <p
-                  className={`font-anton text-base leading-tight tracking-tight transition-colors duration-200 ${
+                  className={`font-anton text-base leading-tight transition-colors duration-200 ${
                     isActive
-                      ? "text-green"
+                      ? "text-acido"
                       : "text-white/60 group-hover:text-white"
                   }`}
                 >
                   {s.title}
                 </p>
 
-                <p className="text-[10px] font-mono text-gray mt-2">
+                <p className="font-mono text-etiqueta text-tinta-tenue mt-2">
                   {s.metric}
                 </p>
               </button>
@@ -277,26 +248,21 @@ const Steps = () => {
         {/* ── Panel de detalle ──────────────────────────────────────────────── */}
         <div
           ref={panelRef}
-          className="border border-white/10 border-t-0 bg-black p-8 md:p-10"
+          className="border border-linea border-t-0 bg-black p-8 md:p-10"
         >
           <div className="grid md:grid-cols-[1fr_1fr] gap-8 md:gap-12">
             {/* Info */}
             <div className="space-y-6">
-              <div className="flex items-center gap-4">
-                <div className="w-10 h-10 border border-green/30 bg-green/10 flex items-center justify-center flex-shrink-0">
-                  <Icon className="text-green text-lg" />
-                </div>
-                <div>
-                  <span className="text-[10px] font-mono text-gray uppercase tracking-widest">
-                    {step.fase} · Paso {step.number}
-                  </span>
-                  <h3 className="font-anton text-2xl text-white tracking-tight leading-tight">
-                    {step.title}
-                  </h3>
-                </div>
+              <div>
+                <span className="font-mono uppercase text-etiqueta text-tinta-tenue">
+                  {step.fase} · Paso {step.number}
+                </span>
+                <h3 className="font-anton text-titular-m text-white uppercase">
+                  {step.title}
+                </h3>
               </div>
 
-              <p className="text-gray leading-relaxed text-sm">
+              <p className="text-tinta-suave text-cuerpo-s">
                 {step.description}
               </p>
 
@@ -308,20 +274,18 @@ const Steps = () => {
 
             {/* Items */}
             <div className="space-y-3">
-              <p className="text-[10px] font-mono text-green uppercase tracking-[0.2em] mb-4">
+              <Etiqueta variante="texto" className="mb-4">
                 Objetivo de esta fase
-              </p>
+              </Etiqueta>
               {step.items.map((item, i) => (
                 <div key={i} className="flex items-start gap-3">
-                  <FiCheckCircle className="text-green text-sm mt-0.5 flex-shrink-0" />
-                  <span className="text-white/80 text-sm leading-relaxed">
-                    {item}
-                  </span>
+                  <FiCheckCircle className="text-acido text-sm mt-0.5 flex-shrink-0" />
+                  <span className="text-tinta-suave text-cuerpo-s">{item}</span>
                 </div>
               ))}
 
-              <div className="pt-6 mt-6 border-t border-white/5">
-                <p className="text-xs text-gray italic leading-relaxed">
+              <div className="pt-6 mt-6 border-t border-linea">
+                <p className="text-tinta-suave text-cuerpo-s italic">
                   "STRING no entrega páginas web. Entrega sistemas funcionales
                   de captación de clientes."
                 </p>
@@ -338,7 +302,7 @@ const Steps = () => {
               onClick={() => handleStepChange(i)}
               className={`h-px transition-all duration-300 ${
                 activeStep === i
-                  ? "w-8 bg-green"
+                  ? "w-8 bg-acido"
                   : "w-4 bg-white/20 hover:bg-white/40"
               }`}
             />
@@ -350,14 +314,11 @@ const Steps = () => {
           ref={ctaRef}
           className="mt-16 flex flex-col sm:flex-row items-start sm:items-center gap-6"
         >
-          <Link
-            href="/cotizacion"
-            className="group inline-flex items-center gap-2 px-8 py-4 bg-green text-black font-bold text-sm uppercase tracking-wide hover:bg-white transition-colors duration-200"
-          >
+          <Boton href="/cotizacion" variante="primario">
             Comenzar diagnóstico
-            <FiArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform duration-200" />
-          </Link>
-          <p className="text-xs text-gray font-mono">
+            <FiArrowRight className="w-4 h-4" />
+          </Boton>
+          <p className="font-mono uppercase text-etiqueta text-tinta-tenue">
             Diagnóstico en 24h · Sin compromiso
           </p>
         </div>
