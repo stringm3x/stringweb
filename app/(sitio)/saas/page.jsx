@@ -7,6 +7,7 @@ import {
   problema,
   problemaCierre,
   planes,
+  complementos,
   diferenciadores,
   casoEvolutionGym,
 } from "./saas-data";
@@ -21,7 +22,7 @@ export const metadata = {
   openGraph: {
     title: "STRING SaaS — Sistemas listos por nicho",
     description:
-      "STRING GYM: sistema completo de gestión para gimnasios desde $799/mes. Prueba gratis 14 días.",
+      "STRING GYM: sistema completo de gestión para gimnasios desde $799/mes. 14 días con Pro completo, sin tarjeta.",
     url: "https://www.stringwebs.com/saas",
   },
 };
@@ -34,15 +35,15 @@ const softwareJsonLd = {
   operatingSystem: "Web",
   url: "https://www.stringwebs.com/saas",
   description:
-    "CRM y sistema de gestión para gimnasios mexicanos: miembros, caja, inventario, WhatsApp automático y portal del miembro.",
+    "CRM y sistema de gestión para gimnasios mexicanos: socios, caja, inventario, WhatsApp automático y portal del socio.",
   offers: planes.map((p) => ({
     "@type": "Offer",
     name: p.nombre,
-    price: p.precio.replace(/[^0-9]/g, ""),
+    price: p.precioMensual.replace(/[^0-9]/g, ""),
     priceCurrency: "MXN",
     priceSpecification: {
       "@type": "UnitPriceSpecification",
-      price: p.precio.replace(/[^0-9]/g, ""),
+      price: p.precioMensual.replace(/[^0-9]/g, ""),
       priceCurrency: "MXN",
       billingDuration: "P1M",
     },
@@ -210,19 +211,21 @@ export default function SaasPage() {
                         Recomendado
                       </span>
                     )}
-                    <div className="flex items-center gap-2 mb-4">
+                    <div className="flex items-center gap-2 mb-1">
                       <Icon className="text-green" />
                       <p className="font-mono text-xs uppercase tracking-widest text-gray">
                         {plan.nombre}
                       </p>
                     </div>
-                    <p className="flex items-baseline gap-1 mb-6">
+                    <p className="text-white/60 text-xs mb-4">{plan.tagline}</p>
+                    <p className="flex items-baseline gap-1">
                       <span className="font-anton text-4xl tracking-tight text-white">
-                        {plan.precio}
+                        {plan.precioMensual}
                       </span>
-                      <span className="font-mono text-sm text-gray">
-                        {plan.periodo}
-                      </span>
+                      <span className="font-mono text-sm text-gray">/mes</span>
+                    </p>
+                    <p className="font-mono text-xs text-gray mb-6">
+                      {plan.precioAnual}/año
                     </p>
                     <ul className="space-y-2.5 flex-1">
                       {plan.features.map((f) => (
@@ -248,6 +251,15 @@ export default function SaasPage() {
                   </div>
                 );
               })}
+            </div>
+
+            {/* Complementos */}
+            <div className="flex flex-wrap justify-center gap-x-8 gap-y-2 pt-2">
+              {complementos.map((c) => (
+                <p key={c.nombre} className="font-mono text-xs text-gray">
+                  <span className="text-white">{c.nombre}:</span> {c.precio}
+                </p>
+              ))}
             </div>
           </div>
 
@@ -307,7 +319,7 @@ export default function SaasPage() {
           {/* CTA */}
           <div className="text-center space-y-4 border border-green/30 bg-green/5 p-10 md:p-14">
             <h3 className="font-anton text-3xl md:text-4xl text-white uppercase tracking-tight">
-              14 días gratis. <span className="text-green">Sin tarjeta. Sin compromiso.</span>
+              14 días con Pro completo. <span className="text-green">Sin tarjeta.</span>
             </h3>
             <Link
               href="/gym/registro"
