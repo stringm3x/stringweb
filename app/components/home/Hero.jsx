@@ -191,7 +191,7 @@ const Hero = () => {
                   className="overflow-hidden flex items-end gap-4"
                 >
                   <p className="font-anton text-[13vw] sm:text-[10vw] lg:text-[9vw] leading-[0.88] text-green uppercase tracking-tighter">
-                    más likes.
+                    más seguidores.
                   </p>
                 </div>
                 <div ref={line3Ref} className="overflow-hidden">
