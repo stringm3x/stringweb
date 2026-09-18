@@ -15,22 +15,106 @@ const PROJECT_PRICES = {
 
 // ── Generador de template ─────────────────────────────────────────────────────
 export const generateEmailTemplate = (data) => {
-  const projectLabel =
-    PROJECT_TYPE_LABELS[data.projectType] || data.projectType;
-  const projectPrice = PROJECT_PRICES[data.projectType] || "A consultar";
+  const projectLabel = data.projectType
+    ? PROJECT_TYPE_LABELS[data.projectType] || data.projectType
+    : null;
+  const projectPrice = data.projectType
+    ? PROJECT_PRICES[data.projectType] || "A consultar"
+    : null;
 
-  const formattedDate = new Date(data.idealDate).toLocaleDateString("es-MX", {
-    year: "numeric",
-    month: "long",
-    day: "numeric",
-  });
+  const formattedDate = data.idealDate
+    ? new Date(data.idealDate).toLocaleDateString("es-MX", {
+        year: "numeric",
+        month: "long",
+        day: "numeric",
+      })
+    : null;
 
-  const formattedBudget = Number(data.budget).toLocaleString("es-MX");
+  const formattedBudget = data.budget
+    ? Number(data.budget).toLocaleString("es-MX")
+    : null;
+
+  const hasProjectDetails =
+    projectLabel || formattedBudget || formattedDate;
 
   const whatsappMsg = encodeURIComponent(
     `Hola ${data.name}, recibí tu solicitud de diagnóstico en stringwebs.com. ` +
       `Me pongo en contacto para agendar tu diagnóstico gratuito. ¡Hablamos pronto!`
   );
+
+  // ── Filas opcionales: no imprimen nada si el dato llegó vacío ────────────────
+  const emailRow = data.email
+    ? `
+            <tr>
+              <td style="padding:8px 0;color:#666666;font-size:12px;font-family:monospace;text-transform:uppercase;letter-spacing:1px;vertical-align:top;">
+                Email
+              </td>
+              <td style="padding:8px 0;">
+                <a href="mailto:${data.email}" style="color:#50ff05;text-decoration:none;font-size:14px;">
+                  ${data.email}
+                </a>
+              </td>
+            </tr>`
+    : "";
+
+  const sistemaRow = projectLabel
+    ? `
+            <tr>
+              <td style="padding:8px 0;color:#666666;font-size:12px;font-family:monospace;text-transform:uppercase;letter-spacing:1px;width:120px;vertical-align:top;">
+                Sistema
+              </td>
+              <td style="padding:8px 0;color:#50ff05;font-size:14px;font-weight:700;">
+                ${projectLabel}
+              </td>
+            </tr>
+            <tr>
+              <td style="padding:8px 0;color:#666666;font-size:12px;font-family:monospace;text-transform:uppercase;letter-spacing:1px;vertical-align:top;">
+                Precio ref.
+              </td>
+              <td style="padding:8px 0;color:#ffffff;font-size:13px;">
+                ${projectPrice}
+              </td>
+            </tr>`
+    : "";
+
+  const presupuestoRow = formattedBudget
+    ? `
+            <tr>
+              <td style="padding:8px 0;color:#666666;font-size:12px;font-family:monospace;text-transform:uppercase;letter-spacing:1px;vertical-align:top;">
+                Presupuesto
+              </td>
+              <td style="padding:8px 0;color:#ffffff;font-size:22px;font-weight:900;letter-spacing:-0.5px;">
+                $${formattedBudget} <span style="font-size:12px;color:#666666;font-weight:400;">MXN</span>
+              </td>
+            </tr>`
+    : "";
+
+  const fechaRow = formattedDate
+    ? `
+            <tr>
+              <td style="padding:8px 0;color:#666666;font-size:12px;font-family:monospace;text-transform:uppercase;letter-spacing:1px;vertical-align:top;">
+                Fecha ideal
+              </td>
+              <td style="padding:8px 0;color:#ffffff;font-size:14px;">
+                ${formattedDate}
+              </td>
+            </tr>`
+    : "";
+
+  const proyectoSection = hasProjectDetails
+    ? `
+      <div style="border:1px solid #1f1f1f;margin-bottom:20px;overflow:hidden;">
+        <div style="background:#0a0a0a;padding:10px 16px;border-bottom:1px solid #1f1f1f;">
+          <p style="color:#50ff05;font-size:10px;letter-spacing:3px;text-transform:uppercase;margin:0;font-family:monospace;">
+            Detalles del proyecto
+          </p>
+        </div>
+        <div style="padding:20px;">
+          <table style="width:100%;border-collapse:collapse;">${sistemaRow}${presupuestoRow}${fechaRow}
+          </table>
+        </div>
+      </div>`
+    : "";
 
   return `
 <!DOCTYPE html>
@@ -86,14 +170,12 @@ export const generateEmailTemplate = (data) => {
             </tr>
             <tr>
               <td style="padding:8px 0;color:#666666;font-size:12px;font-family:monospace;text-transform:uppercase;letter-spacing:1px;vertical-align:top;">
-                Email
+                Tipo de negocio
               </td>
-              <td style="padding:8px 0;">
-                <a href="mailto:${data.email}" style="color:#50ff05;text-decoration:none;font-size:14px;">
-                  ${data.email}
-                </a>
+              <td style="padding:8px 0;color:#ffffff;font-size:14px;">
+                ${data.businessType}
               </td>
-            </tr>
+            </tr>${emailRow}
             <tr>
               <td style="padding:8px 0;color:#666666;font-size:12px;font-family:monospace;text-transform:uppercase;letter-spacing:1px;vertical-align:top;">
                 WhatsApp
@@ -107,57 +189,12 @@ export const generateEmailTemplate = (data) => {
           </table>
         </div>
       </div>
-
-      <!-- Proyecto -->
-      <div style="border:1px solid #1f1f1f;margin-bottom:20px;overflow:hidden;">
-        <div style="background:#0a0a0a;padding:10px 16px;border-bottom:1px solid #1f1f1f;">
-          <p style="color:#50ff05;font-size:10px;letter-spacing:3px;text-transform:uppercase;margin:0;font-family:monospace;">
-            Detalles del proyecto
-          </p>
-        </div>
-        <div style="padding:20px;">
-          <table style="width:100%;border-collapse:collapse;">
-            <tr>
-              <td style="padding:8px 0;color:#666666;font-size:12px;font-family:monospace;text-transform:uppercase;letter-spacing:1px;width:120px;vertical-align:top;">
-                Sistema
-              </td>
-              <td style="padding:8px 0;color:#50ff05;font-size:14px;font-weight:700;">
-                ${projectLabel}
-              </td>
-            </tr>
-            <tr>
-              <td style="padding:8px 0;color:#666666;font-size:12px;font-family:monospace;text-transform:uppercase;letter-spacing:1px;vertical-align:top;">
-                Precio ref.
-              </td>
-              <td style="padding:8px 0;color:#ffffff;font-size:13px;">
-                ${projectPrice}
-              </td>
-            </tr>
-            <tr>
-              <td style="padding:8px 0;color:#666666;font-size:12px;font-family:monospace;text-transform:uppercase;letter-spacing:1px;vertical-align:top;">
-                Presupuesto
-              </td>
-              <td style="padding:8px 0;color:#ffffff;font-size:22px;font-weight:900;letter-spacing:-0.5px;">
-                $${formattedBudget} <span style="font-size:12px;color:#666666;font-weight:400;">MXN</span>
-              </td>
-            </tr>
-            <tr>
-              <td style="padding:8px 0;color:#666666;font-size:12px;font-family:monospace;text-transform:uppercase;letter-spacing:1px;vertical-align:top;">
-                Fecha ideal
-              </td>
-              <td style="padding:8px 0;color:#ffffff;font-size:14px;">
-                ${formattedDate}
-              </td>
-            </tr>
-          </table>
-        </div>
-      </div>
-
+${proyectoSection}
       <!-- Objetivo -->
       <div style="border:1px solid #1f1f1f;margin-bottom:28px;overflow:hidden;">
         <div style="background:#0a0a0a;padding:10px 16px;border-bottom:1px solid #1f1f1f;">
           <p style="color:#50ff05;font-size:10px;letter-spacing:3px;text-transform:uppercase;margin:0;font-family:monospace;">
-            Objetivo del proyecto
+            Qué te está pasando hoy
           </p>
         </div>
         <div style="padding:20px;">

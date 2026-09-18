@@ -6,10 +6,29 @@ import Link from "next/link";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { REVEAL_START } from "@/app/lib/scrollTriggerDefaults";
-import { FiArrowRight } from "react-icons/fi";
+import { FiArrowRight, FiStar } from "react-icons/fi";
 import servicios from "./data";
 
 gsap.registerPlugin(ScrollTrigger);
+
+// ─── Datos ────────────────────────────────────────────────────────────────────
+const continuidad = [
+  {
+    nombre: "Base",
+    precio: "$1,800–$2,500/mes",
+    incluye: "Hosting, mantenimiento y soporte",
+  },
+  {
+    nombre: "Crecimiento",
+    precio: "$3,000–$4,500/mes",
+    incluye: "Optimización mensual y ajustes",
+  },
+  {
+    nombre: "Escalamiento",
+    precio: "$5,000–$8,000/mes",
+    incluye: "Análisis, mejoras y soporte prioritario",
+  },
+];
 
 // ─── Componente ───────────────────────────────────────────────────────────────
 const PageServices = () => {
@@ -136,6 +155,7 @@ const PageServices = () => {
         <div className="grid grid-cols-1 md:grid-cols-2 gap-px bg-white/5">
           {servicios.map((servicio, index) => {
             const Icon = servicio.icon;
+            const destacado = servicio.id === "3";
             return (
               <Link
                 href={`/servicios/${servicio.id}`}
@@ -144,8 +164,18 @@ const PageServices = () => {
               >
                 <div
                   ref={(el) => (cardsRef.current[index] = el)}
-                  className="relative bg-black overflow-hidden h-full hover:bg-white/[0.03] transition-colors duration-300"
+                  className={`relative overflow-hidden h-full transition-colors duration-300 ${
+                    destacado
+                      ? "border border-green bg-green/5 hover:bg-green/10"
+                      : "bg-black hover:bg-white/[0.03]"
+                  }`}
                 >
+                  {destacado && (
+                    <span className="absolute top-3 left-6 z-10 inline-flex items-center gap-1.5 bg-green px-3 py-1 font-mono text-[10px] font-bold uppercase tracking-widest text-black">
+                      <FiStar className="text-xs" />
+                      Recomendado
+                    </span>
+                  )}
                   {/* Imagen */}
                   <div className="relative h-52 w-full overflow-hidden">
                     <Image
@@ -187,18 +217,20 @@ const PageServices = () => {
                     </p>
 
                     {/* Stats rápidas */}
-                    <div className="flex gap-6 mb-6 pb-6 border-b border-white/5">
-                      {servicio.stats.map((stat, i) => (
-                        <div key={i}>
-                          <p className="font-anton text-lg text-green leading-none">
-                            {stat.value}
-                          </p>
-                          <p className="text-[10px] text-gray uppercase tracking-wider mt-0.5">
-                            {stat.label}
-                          </p>
-                        </div>
-                      ))}
-                    </div>
+                    {servicio.stats.length > 0 && (
+                      <div className="flex gap-6 mb-6 pb-6 border-b border-white/5">
+                        {servicio.stats.map((stat, i) => (
+                          <div key={i}>
+                            <p className="font-anton text-lg text-green leading-none">
+                              {stat.value}
+                            </p>
+                            <p className="text-[10px] text-gray uppercase tracking-wider mt-0.5">
+                              {stat.label}
+                            </p>
+                          </div>
+                        ))}
+                      </div>
+                    )}
 
                     <div className="flex items-center justify-between">
                       <span className="text-xs font-mono text-gray group-hover:text-green transition-colors duration-200 uppercase tracking-wider">
@@ -214,6 +246,33 @@ const PageServices = () => {
               </Link>
             );
           })}
+        </div>
+
+        {/* ── Planes de continuidad ────────────────────────────────────────── */}
+        <div className="mt-16 border border-white/10 p-8 md:p-10">
+          <p className="text-[10px] font-mono text-green uppercase tracking-[0.2em] mb-2">
+            Planes de continuidad
+          </p>
+          <p className="text-gray text-sm leading-relaxed max-w-xl mb-6">
+            Tu sistema no termina el día de la entrega. Un plan de
+            continuidad lo mantiene funcionando y, según el plan, lo
+            optimiza cada mes.
+          </p>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-px bg-white/5">
+            {continuidad.map((plan) => (
+              <div key={plan.nombre} className="bg-black p-6">
+                <h3 className="font-anton text-xl text-white tracking-tight mb-1">
+                  {plan.nombre}
+                </h3>
+                <p className="text-green font-mono text-sm mb-2">
+                  {plan.precio}
+                </p>
+                <p className="text-gray text-sm leading-relaxed">
+                  {plan.incluye}
+                </p>
+              </div>
+            ))}
+          </div>
         </div>
 
         {/* ── CTA ───────────────────────────────────────────────────────────── */}

@@ -5,111 +5,19 @@ import Link from "next/link";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { REVEAL_START } from "@/app/lib/scrollTriggerDefaults";
-import {
-  FiArrowRight,
-  FiTarget,
-  FiTrendingUp,
-  FiZap,
-  FiUsers,
-  FiClock,
-  FiAward,
-} from "react-icons/fi";
+import { FiArrowRight, FiTarget, FiClock, FiAward } from "react-icons/fi";
 
 gsap.registerPlugin(ScrollTrigger);
-
-// ─── Datos ────────────────────────────────────────────────────────────────────
-const principios = [
-  {
-    icon: FiTarget,
-    title: "Enfoque en conversión",
-    desc: "No diseñamos páginas. Construimos sistemas que convierten visitas en clientes reales.",
-  },
-  {
-    icon: FiTrendingUp,
-    title: "Estructura clara",
-    desc: "Cada elemento tiene un propósito estratégico: guiar al visitante hacia el contacto.",
-  },
-  {
-    icon: FiZap,
-    title: "Optimización continua",
-    desc: "Mejoramos el flujo de captación basándonos en datos, no en tendencias.",
-  },
-  {
-    icon: FiUsers,
-    title: "Enfoque humano",
-    desc: "Automatizamos procesos, no relaciones. La tecnología al servicio de las personas.",
-  },
-];
 
 // ─── Componente ───────────────────────────────────────────────────────────────
 const Content = () => {
   const sectionRef = useRef(null);
-  const headerRef = useRef(null);
-  const tagRef = useRef(null);
-  const titleRef = useRef(null);
-  const descRef = useRef(null);
-  const principiosRef = useRef([]);
   const ctaRef = useRef(null);
-  const lineRef = useRef(null);
 
   useEffect(() => {
     const ctx = gsap.context(() => {
       // ── Estado inicial ──────────────────────────────────────────────────────
-      gsap.set(
-        [tagRef.current, titleRef.current, descRef.current, ctaRef.current],
-        { opacity: 0, y: 24 }
-      );
-      gsap.set(principiosRef.current.filter(Boolean), { opacity: 0, y: 20 });
-      gsap.set(lineRef.current, {
-        scaleX: 0,
-        transformOrigin: "left center",
-      });
-
-      // ── Header ──────────────────────────────────────────────────────────────
-      const tlHeader = gsap.timeline({
-        scrollTrigger: {
-          trigger: headerRef.current,
-          start: REVEAL_START,
-          once: true,
-        },
-      });
-
-      tlHeader
-        .to(tagRef.current, {
-          opacity: 1,
-          y: 0,
-          duration: 0.5,
-          ease: "power3.out",
-        })
-        .to(
-          titleRef.current,
-          { opacity: 1, y: 0, duration: 0.6, ease: "power3.out" },
-          "-=0.3"
-        )
-        .to(
-          descRef.current,
-          { opacity: 1, y: 0, duration: 0.5, ease: "power3.out" },
-          "-=0.3"
-        )
-        .to(
-          lineRef.current,
-          { scaleX: 1, duration: 0.7, ease: "expo.out" },
-          "-=0.2"
-        );
-
-      // ── Principios ──────────────────────────────────────────────────────────
-      gsap.to(principiosRef.current.filter(Boolean), {
-        opacity: 1,
-        y: 0,
-        stagger: 0.1,
-        duration: 0.5,
-        ease: "power3.out",
-        scrollTrigger: {
-          trigger: principiosRef.current[0],
-          start: REVEAL_START,
-          once: true,
-        },
-      });
+      gsap.set(ctaRef.current, { opacity: 0, y: 24 });
 
       // ── CTA ─────────────────────────────────────────────────────────────────
       gsap.to(ctaRef.current, {
@@ -150,75 +58,6 @@ const Content = () => {
 
       <div className="relative max-w-7xl mx-auto px-6 sm:px-8 lg:px-12">
         <div className="flex flex-col gap-20 lg:gap-28">
-          {/* ── Header ────────────────────────────────────────────────────── */}
-          <div ref={headerRef} className="max-w-3xl space-y-6">
-            <div ref={tagRef}>
-              <span className="inline-flex items-center gap-2.5 px-3 py-1.5 border border-green/30 text-green text-xs font-mono uppercase tracking-[0.2em] rounded-sm">
-                <span className="w-1.5 h-1.5 rounded-full bg-green" />
-                Nuestra filosofía
-              </span>
-            </div>
-
-            <h2
-              ref={titleRef}
-              className="font-anton text-5xl sm:text-6xl md:text-7xl leading-[0.9] tracking-tighter text-white uppercase"
-            >
-              No es diseño, <span className="text-green">es estructura</span>
-            </h2>
-
-            <p
-              ref={descRef}
-              className="text-gray text-lg leading-relaxed max-w-xl"
-            >
-              En <span className="text-white font-semibold">STRING</span>{" "}
-              transformamos presencia digital en clientes reales mediante
-              sistemas claros de conversión. No vendemos páginas, vendemos{" "}
-              <span className="text-white">estructura</span>.
-            </p>
-
-            {/* Línea decorativa animada */}
-            <div
-              ref={lineRef}
-              className="h-px w-full bg-gradient-to-r from-green via-green/40 to-transparent"
-            />
-          </div>
-
-          {/* ── Principios ────────────────────────────────────────────────── */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-px bg-white/5">
-            {principios.map((p, i) => {
-              const Icon = p.icon;
-              return (
-                <div
-                  key={i}
-                  ref={(el) => (principiosRef.current[i] = el)}
-                  className="group bg-black p-8 hover:bg-white/[0.03] transition-colors duration-300 relative"
-                >
-                  {/* Número de fondo */}
-                  <span className="absolute top-6 right-6 font-anton text-6xl text-white/[0.04] select-none leading-none">
-                    {i + 1}
-                  </span>
-
-                  <div className="relative z-10 space-y-4">
-                    <div className="w-10 h-10 border border-green/30 rounded-sm flex items-center justify-center group-hover:border-green group-hover:bg-green/10 transition-all duration-300">
-                      <Icon className="text-green text-lg" />
-                    </div>
-
-                    <h3 className="text-white font-bold text-base leading-tight">
-                      {p.title}
-                    </h3>
-
-                    <p className="text-gray text-sm leading-relaxed">
-                      {p.desc}
-                    </p>
-                  </div>
-
-                  {/* Borde inferior hover */}
-                  <div className="absolute bottom-0 left-0 w-0 h-px bg-green group-hover:w-full transition-all duration-500" />
-                </div>
-              );
-            })}
-          </div>
-
           {/* ── CTA ───────────────────────────────────────────────────────── */}
           <div
             ref={ctaRef}

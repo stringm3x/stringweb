@@ -1,5 +1,11 @@
 import Link from "next/link";
-import { FiArrowRight, FiCheck, FiCheckCircle, FiStar } from "react-icons/fi";
+import {
+  FiArrowRight,
+  FiCheck,
+  FiCheckCircle,
+  FiClock,
+  FiStar,
+} from "react-icons/fi";
 import { MdOutlineFitnessCenter } from "react-icons/md";
 import WaitlistForm from "./WaitlistForm";
 import {
@@ -7,21 +13,22 @@ import {
   problema,
   problemaCierre,
   planes,
-  comparativa,
+  complementos,
+  diferenciadores,
   casoEvolutionGym,
 } from "./saas-data";
 
 export const metadata = {
   title: "STRING SaaS — Sistemas listos por nicho",
   description:
-    "Sistemas listos por nicho, sin desarrollo desde cero. STRING GYM ya está activo — sistema completo de gestión para gimnasios desde $799/mes. Próximamente: STRING RESTO, CLINIC y BARBER.",
+    "Sistemas listos por nicho, sin desarrollo desde cero. STRING GYM ya está activo — sistema completo de gestión para gimnasios desde $799/mes. Próximamente: STRING BARBER, CLINIC y RESTO.",
   alternates: {
     canonical: "https://www.stringwebs.com/saas",
   },
   openGraph: {
     title: "STRING SaaS — Sistemas listos por nicho",
     description:
-      "STRING GYM: sistema completo de gestión para gimnasios desde $799/mes. Prueba gratis 14 días.",
+      "STRING GYM: sistema completo de gestión para gimnasios desde $799/mes. 14 días con Pro completo, sin tarjeta.",
     url: "https://www.stringwebs.com/saas",
   },
 };
@@ -34,15 +41,15 @@ const softwareJsonLd = {
   operatingSystem: "Web",
   url: "https://www.stringwebs.com/saas",
   description:
-    "CRM y sistema de gestión para gimnasios mexicanos: miembros, caja, inventario, WhatsApp automático y portal del miembro.",
+    "CRM y sistema de gestión para gimnasios mexicanos: socios, caja, inventario, WhatsApp automático y portal del socio.",
   offers: planes.map((p) => ({
     "@type": "Offer",
     name: p.nombre,
-    price: p.precio.replace(/[^0-9]/g, ""),
+    price: p.precioMensual.replace(/[^0-9]/g, ""),
     priceCurrency: "MXN",
     priceSpecification: {
       "@type": "UnitPriceSpecification",
-      price: p.precio.replace(/[^0-9]/g, ""),
+      price: p.precioMensual.replace(/[^0-9]/g, ""),
       priceCurrency: "MXN",
       billingDuration: "P1M",
     },
@@ -210,19 +217,21 @@ export default function SaasPage() {
                         Recomendado
                       </span>
                     )}
-                    <div className="flex items-center gap-2 mb-4">
+                    <div className="flex items-center gap-2 mb-1">
                       <Icon className="text-green" />
                       <p className="font-mono text-xs uppercase tracking-widest text-gray">
                         {plan.nombre}
                       </p>
                     </div>
-                    <p className="flex items-baseline gap-1 mb-6">
+                    <p className="text-white/60 text-xs mb-4">{plan.tagline}</p>
+                    <p className="flex items-baseline gap-1">
                       <span className="font-anton text-4xl tracking-tight text-white">
-                        {plan.precio}
+                        {plan.precioMensual}
                       </span>
-                      <span className="font-mono text-sm text-gray">
-                        {plan.periodo}
-                      </span>
+                      <span className="font-mono text-sm text-gray">/mes</span>
+                    </p>
+                    <p className="font-mono text-xs text-gray mb-6">
+                      {plan.precioAnual}/año
                     </p>
                     <ul className="space-y-2.5 flex-1">
                       {plan.features.map((f) => (
@@ -249,44 +258,31 @@ export default function SaasPage() {
                 );
               })}
             </div>
+
+            {/* Complementos */}
+            <div className="flex flex-wrap justify-center gap-x-8 gap-y-2 pt-2">
+              {complementos.map((c) => (
+                <p key={c.nombre} className="font-mono text-xs text-gray">
+                  <span className="text-white">{c.nombre}:</span> {c.precio}
+                </p>
+              ))}
+            </div>
           </div>
 
-          {/* Comparativa */}
+          {/* Diferenciadores */}
           <div className="space-y-6">
             <p className="text-[10px] font-mono text-green uppercase tracking-widest text-center">
-              vs. la competencia
+              Diferenciadores
             </p>
-            <div className="overflow-x-auto">
-              <table className="w-full border-collapse text-sm min-w-[600px]">
-                <thead>
-                  <tr className="border-b border-white/10">
-                    <th className="text-left py-3 pr-4 text-[10px] font-mono text-gray uppercase tracking-widest">
-                      Diferenciador
-                    </th>
-                    <th className="text-left py-3 pr-4 text-[10px] font-mono text-gray uppercase tracking-widest">
-                      vs. quién
-                    </th>
-                    <th className="text-left py-3 text-[10px] font-mono text-gray uppercase tracking-widest">
-                      Dato concreto
-                    </th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {comparativa.map((row, i) => (
-                    <tr key={i} className="border-b border-white/5">
-                      <td className="py-3 pr-4 text-white font-semibold align-top">
-                        {row.diferenciador}
-                      </td>
-                      <td className="py-3 pr-4 text-gray align-top whitespace-nowrap">
-                        {row.vsQuien}
-                      </td>
-                      <td className="py-3 text-white/70 align-top">
-                        {row.dato}
-                      </td>
-                    </tr>
-                  ))}
-                </tbody>
-              </table>
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 border border-white/10 p-6 md:p-8">
+              {diferenciadores.map((item, i) => (
+                <div key={i} className="flex items-start gap-3">
+                  <FiCheckCircle className="text-green text-sm mt-0.5 flex-shrink-0" />
+                  <span className="text-white/80 text-sm leading-relaxed">
+                    {item}
+                  </span>
+                </div>
+              ))}
             </div>
           </div>
 
@@ -301,7 +297,7 @@ export default function SaasPage() {
               </span>
             </div>
 
-            <div className="grid grid-cols-3 gap-px bg-white/5">
+            <div className="grid grid-cols-2 gap-px bg-white/5">
               {casoEvolutionGym.stats.map((s) => (
                 <div key={s.label} className="bg-black px-4 py-6 text-center">
                   <p className="font-anton text-3xl text-green leading-none mb-1">
@@ -314,22 +310,45 @@ export default function SaasPage() {
               ))}
             </div>
 
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-              {casoEvolutionGym.modulos.map((m) => (
-                <div key={m} className="flex items-start gap-2.5">
-                  <FiCheckCircle className="text-green text-sm mt-0.5 flex-shrink-0" />
-                  <span className="text-white/80 text-sm leading-relaxed">
-                    {m}
-                  </span>
-                </div>
-              ))}
+            <div className="space-y-3">
+              <p className="text-[10px] font-mono text-green uppercase tracking-widest">
+                Activo hoy
+              </p>
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                {casoEvolutionGym.activoHoy.map((m) => (
+                  <div key={m} className="flex items-start gap-2.5">
+                    <FiCheckCircle className="text-green text-sm mt-0.5 flex-shrink-0" />
+                    <span className="text-white/80 text-sm leading-relaxed">
+                      {m}
+                    </span>
+                  </div>
+                ))}
+              </div>
             </div>
+
+            {casoEvolutionGym.enDesarrollo.length > 0 && (
+              <div className="space-y-3 pt-3 border-t border-white/5">
+                <p className="text-[10px] font-mono text-gray uppercase tracking-widest">
+                  En desarrollo
+                </p>
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                  {casoEvolutionGym.enDesarrollo.map((m) => (
+                    <div key={m} className="flex items-start gap-2.5">
+                      <FiClock className="text-white/40 text-sm mt-0.5 flex-shrink-0" />
+                      <span className="text-white/50 text-sm leading-relaxed">
+                        {m}
+                      </span>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            )}
           </div>
 
           {/* CTA */}
           <div className="text-center space-y-4 border border-green/30 bg-green/5 p-10 md:p-14">
             <h3 className="font-anton text-3xl md:text-4xl text-white uppercase tracking-tight">
-              14 días gratis. <span className="text-green">Sin tarjeta. Sin compromiso.</span>
+              14 días con Pro completo. <span className="text-green">Sin tarjeta.</span>
             </h3>
             <Link
               href="/gym/registro"

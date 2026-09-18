@@ -64,6 +64,7 @@ export const QuoteForm = () => {
       name: "",
       email: "",
       whatsapp: "",
+      businessType: "",
       projectType: "",
       objective: "",
       idealDate: "",
@@ -259,7 +260,7 @@ export const QuoteForm = () => {
           className="border border-white/10 p-8 md:p-10 space-y-6"
           noValidate
         >
-          {/* Fila 1: Nombre + Email */}
+          {/* Fila 1: Nombre + WhatsApp (obligatorios) */}
           <div className="grid md:grid-cols-2 gap-6">
             <FormField
               label="Nombre completo"
@@ -271,19 +272,6 @@ export const QuoteForm = () => {
               required
             />
             <FormField
-              label="Email"
-              name="email"
-              type="email"
-              register={register}
-              error={errors.email?.message}
-              placeholder="juan@email.com"
-              required
-            />
-          </div>
-
-          {/* Fila 2: WhatsApp + Nivel */}
-          <div className="grid md:grid-cols-2 gap-6">
-            <FormField
               label="WhatsApp"
               name="whatsapp"
               type="tel"
@@ -292,12 +280,45 @@ export const QuoteForm = () => {
               placeholder="521234567890"
               required
             />
+          </div>
+
+          {/* Tipo de negocio (obligatorio) */}
+          <FormField
+            label="Tipo de negocio"
+            name="businessType"
+            register={register}
+            error={errors.businessType?.message}
+            placeholder="Ej. Gimnasio, restaurante, consultoría..."
+            required
+          />
+
+          {/* Qué te está pasando hoy (obligatorio) */}
+          <FormField
+            label="¿Qué te está pasando hoy?"
+            name="objective"
+            type="textarea"
+            register={register}
+            error={errors.objective?.message}
+            placeholder="Cuéntanos qué necesitas, cuál es tu negocio y qué esperas lograr..."
+            rows={4}
+            required
+          />
+
+          {/* Fila 2: Email + Nivel (opcionales) */}
+          <div className="grid md:grid-cols-2 gap-6">
+            <FormField
+              label="Email"
+              name="email"
+              type="email"
+              register={register}
+              error={errors.email?.message}
+              placeholder="juan@email.com"
+            />
             <FormSelect
               label="Nivel del Sistema STRING"
               name="projectType"
               register={register}
               error={errors.projectType?.message}
-              required
             />
           </div>
 
@@ -316,19 +337,7 @@ export const QuoteForm = () => {
             </div>
           )}
 
-          {/* Objetivo */}
-          <FormField
-            label="Objetivo del proyecto"
-            name="objective"
-            type="textarea"
-            register={register}
-            error={errors.objective?.message}
-            placeholder="Cuéntanos qué necesitas, cuál es tu negocio y qué esperas lograr..."
-            rows={4}
-            required
-          />
-
-          {/* Fila 3: Fecha + Presupuesto */}
+          {/* Fila 3: Fecha + Presupuesto (opcionales) */}
           <div className="grid md:grid-cols-2 gap-6">
             <FormField
               label="Fecha ideal de entrega"
@@ -336,7 +345,6 @@ export const QuoteForm = () => {
               type="date"
               register={register}
               error={errors.idealDate?.message}
-              required
             />
             <FormField
               label="Presupuesto estimado (MXN)"
@@ -345,7 +353,6 @@ export const QuoteForm = () => {
               register={register}
               error={errors.budget?.message}
               placeholder="8000"
-              required
             />
           </div>
 

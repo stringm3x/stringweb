@@ -9,7 +9,7 @@ export const quoteSchema = z.object({
     .regex(/^[a-zA-ZáéíóúÁÉÍÓÚñÑ\s]+$/, "Solo se permiten letras y espacios")
     .transform((name) => name.trim()), // Limpiar espacios extras
 
-  // Email - Formato válido y longitud razonable.
+  // Email - Opcional. Si se captura, debe tener formato válido.
   // trim/toLowerCase van ANTES de min/max/email: así un email pegado con
   // espacios accidentales se normaliza antes de validarse, en vez de
   // rechazarse por espacios que el usuario ni notó que llevaba.
@@ -17,9 +17,11 @@ export const quoteSchema = z.object({
     .string()
     .trim()
     .toLowerCase()
-    .min(5, "El email es demasiado corto")
     .max(100, "El email no puede exceder 100 caracteres")
-    .email("Por favor, ingresa un email válido"),
+    .refine((val) => val === "" || z.string().email().safeParse(val).success, {
+      message: "Por favor, ingresa un email válido",
+    })
+    .optional(),
 
   // WhatsApp - Solo números, entre 10 y 15 dígitos
   whatsapp: z
@@ -29,42 +31,57 @@ export const quoteSchema = z.object({
     .regex(/^[0-9]+$/, "Solo se permiten números (sin espacios, guiones o +)")
     .transform((whatsapp) => whatsapp.trim()),
 
-  // Tipo de proyecto - Solo valores permitidos
-  projectType: z.enum(["nivel1", "nivel2", "nivel3", "nivel4"], {
-    errorMap: () => ({
-      message: "Selecciona un nivel del sistema STRING válido",
-    }),
-  }),
-  // Objetivo - Texto descriptivo con mínimo de caracteres
+  // Tipo de negocio - Texto libre, obligatorio
+  businessType: z
+    .string()
+    .min(2, "Cuéntanos qué tipo de negocio tienes")
+    .max(80, "Máximo 80 caracteres")
+    .transform((val) => val.trim()),
+
+  // Tipo de proyecto - Opcional. Si se elige, debe ser un nivel válido.
+  projectType: z
+    .string()
+    .optional()
+    .refine(
+      (val) => !val || ["nivel1", "nivel2", "nivel3", "nivel4"].includes(val),
+      { message: "Selecciona un nivel del sistema STRING válido" }
+    ),
+
+  // "¿Qué te está pasando hoy?" - Texto libre, obligatorio
   objective: z
     .string()
-    .min(10, "Describe tu objetivo con más detalle (mínimo 10 caracteres)")
-    .max(500, "El objetivo no puede exceder 500 caracteres")
+    .min(10, "Cuéntanos qué te está pasando con más detalle (mínimo 10 caracteres)")
+    .max(500, "El texto no puede exceder 500 caracteres")
     .transform((objective) => objective.trim())
     .refine(
       (text) => text.split(" ").length >= 3,
-      "Por favor, describe tu objetivo con al menos 3 palabras"
+      "Por favor, cuéntanos con al menos 3 palabras"
     ),
 
-  // Fecha ideal - Debe ser futura
-  idealDate: z.string().refine(
-    (date) => {
-      const selectedDate = new Date(date);
-      const today = new Date();
-      today.setHours(0, 0, 0, 0);
-      return selectedDate >= today;
-    },
-    {
-      message: "La fecha ideal debe ser hoy o una fecha futura",
-    }
-  ),
+  // Fecha ideal - Opcional. Si se elige, debe ser futura.
+  idealDate: z
+    .string()
+    .optional()
+    .refine(
+      (date) => {
+        if (!date) return true;
+        const selectedDate = new Date(date);
+        const today = new Date();
+        today.setHours(0, 0, 0, 0);
+        return selectedDate >= today;
+      },
+      {
+        message: "La fecha ideal debe ser hoy o una fecha futura",
+      }
+    ),
 
-  // Presupuesto - Número positivo (obligatorio por negocio)
+  // Presupuesto - Opcional. Si se captura, debe ser un número positivo.
   budget: z
     .string()
-    .min(1, "El presupuesto estimado es obligatorio")
+    .optional()
     .refine(
       (val) => {
+        if (!val) return true;
         const num = Number(val);
         return !isNaN(num) && num > 0;
       },
@@ -74,6 +91,7 @@ export const quoteSchema = z.object({
     )
     .refine(
       (val) => {
+        if (!val) return true;
         const num = Number(val);
         return num <= 1000000; // 1 millón USD máximo
       },
@@ -134,12 +152,13 @@ export const validatePartial = (data) => {
 // Mensajes de ayuda por campo (para UI)
 export const fieldHelpText = {
   name: "Tu nombre completo como aparecerá en la cotización",
-  email: "Te enviaremos los detalles del proyecto aquí",
+  email: "Opcional. Te enviaremos los detalles del proyecto aquí",
   whatsapp: "Código de país + número (ej: 521234567890)",
-  projectType: "Selecciona el tipo que mejor describa tu proyecto",
-  objective: "Cuéntame qué necesitas lograr con tu sitio web",
-  idealDate: "¿Para cuándo necesitas tenerlo listo?",
-  budget: "Indica tu rango de inversión estimado en USD",
+  businessType: "¿A qué se dedica tu negocio?",
+  projectType: "Opcional. Selecciona el tipo que mejor describa tu proyecto",
+  objective: "Cuéntanos qué te está pasando hoy con tu negocio",
+  idealDate: "Opcional. ¿Para cuándo necesitas tenerlo listo?",
+  budget: "Opcional. Indica tu rango de inversión estimado en MXN",
 };
 
 // Ejemplos de datos válidos (para testing)
@@ -149,6 +168,7 @@ export const validExamples = {
     name: "Juan Pérez",
     email: "juan@email.com",
     whatsapp: "521234567890",
+    businessType: "Consultoría",
     projectType: "nivel1",
     objective: "Landing page para mi negocio de consultoría",
     idealDate: new Date(Date.now() + 30 * 24 * 60 * 60 * 1000)
@@ -160,6 +180,7 @@ export const validExamples = {
     name: "María García",
     email: "maria@empresa.com",
     whatsapp: "521234567891",
+    businessType: "Despacho de arquitectura",
     projectType: "nivel2",
     objective: "Sitio web corporativo con blog y área de clientes",
     idealDate: new Date(Date.now() + 45 * 24 * 60 * 60 * 1000)
@@ -171,12 +192,20 @@ export const validExamples = {
     name: "Carlos Rodríguez",
     email: "carlos@startup.io",
     whatsapp: "521234567892",
+    businessType: "Marca de productos artesanales",
     projectType: "nivel4",
     objective: "Marketplace para productos artesanales con pasarela de pagos",
     idealDate: new Date(Date.now() + 90 * 24 * 60 * 60 * 1000)
       .toISOString()
       .split("T")[0],
     budget: "25000",
+  },
+  // Solo los 4 campos obligatorios, el resto queda vacío/ausente
+  minimo: {
+    name: "Ana López",
+    whatsapp: "521234567893",
+    businessType: "Salón de belleza",
+    objective: "No sé por dónde empezar con mi presencia digital",
   },
 };
 
@@ -185,9 +214,9 @@ export const invalidExamples = {
   nombreCorto: { name: "a" },
   emailInvalido: { email: "correo@" },
   whatsappConEspacios: { whatsapp: "52 123 456 7890" },
+  tipoNegocioCorto: { businessType: "A" },
   objetivoCorto: { objective: "Hola" },
   fechaPasada: { idealDate: "2020-01-01" },
-  presupuestoVacio: { budget: "" },
   presupuestoNegativo: { budget: "-100" },
 };
 
@@ -204,15 +233,7 @@ export const businessRules = {
     intermedia: 30,
     avanzada: 60,
   },
-  requiredFields: [
-    "name",
-    "email",
-    "whatsapp",
-    "projectType",
-    "objective",
-    "idealDate",
-    "budget",
-  ],
+  requiredFields: ["name", "whatsapp", "businessType", "objective"],
 };
 
 // Validación de reglas de negocio (más allá de formato)
@@ -290,6 +311,13 @@ export const sanitizeData = (data) => {
       .replace(/<[^>]*>/g, "")
       .replace(/[<>]/g, "")
       .slice(0, 500); // Limitar longitud por seguridad
+  }
+
+  if (sanitized.businessType) {
+    sanitized.businessType = sanitized.businessType
+      .replace(/<[^>]*>/g, "")
+      .replace(/[<>]/g, "")
+      .slice(0, 80);
   }
 
   // Email siempre en minúsculas

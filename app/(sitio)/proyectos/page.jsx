@@ -4,16 +4,17 @@ import React, { useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import gsap from "gsap";
 import SplitType from "split-type";
-import { FiX, FiExternalLink, FiFilter } from "react-icons/fi";
-import { proyects, categories, getProjectsByCategory } from "./data";
+import { FiX, FiExternalLink } from "react-icons/fi";
+import { proyects } from "./data";
+
+// YUMA sigue en desarrollo: no se muestra en el sitio, pero sus datos e
+// imágenes se quedan intactos en ./data para cuando se lance.
+const proyectosVisibles = proyects.filter((p) => p.id !== "YUMA");
 
 // ─── Componente ───────────────────────────────────────────────────────────────
 const PageProyects = () => {
   const [activeProject, setActiveProject] = useState(null);
   const [selectedCard, setSelectedCard] = useState(null);
-  const [activeCategory, setActiveCategory] = useState("all");
-  const [filteredProjects, setFilteredProjects] = useState(proyects);
-  const [isFilterOpen, setIsFilterOpen] = useState(false);
 
   const cardRefs = useRef([]);
   const expandedRef = useRef(null);
@@ -22,17 +23,11 @@ const PageProyects = () => {
   const sectionRef = useRef(null);
   const tagRef = useRef(null);
   const titleRef = useRef(null);
-  const filterRef = useRef(null);
-
-  // ── Filtrar proyectos ───────────────────────────────────────────────────────
-  useEffect(() => {
-    setFilteredProjects(getProjectsByCategory(activeCategory));
-  }, [activeCategory]);
 
   // ── Animación de entrada ────────────────────────────────────────────────────
   useEffect(() => {
     const ctx = gsap.context(() => {
-      gsap.set([tagRef.current, titleRef.current, filterRef.current], {
+      gsap.set([tagRef.current, titleRef.current], {
         opacity: 0,
         y: 24,
       });
@@ -51,11 +46,6 @@ const PageProyects = () => {
           "-=0.3"
         )
         .to(
-          filterRef.current,
-          { opacity: 1, y: 0, duration: 0.5, ease: "power3.out" },
-          "-=0.3"
-        )
-        .to(
           cardRefs.current.filter(Boolean),
           {
             opacity: 1,
@@ -70,16 +60,6 @@ const PageProyects = () => {
 
     return () => ctx.revert();
   }, []);
-
-  // ── Re-animar cards al filtrar ──────────────────────────────────────────────
-  useEffect(() => {
-    if (cardRefs.current.filter(Boolean).length === 0) return;
-    gsap.fromTo(
-      cardRefs.current.filter(Boolean),
-      { opacity: 0, y: 20 },
-      { opacity: 1, y: 0, stagger: 0.06, duration: 0.4, ease: "power3.out" }
-    );
-  }, [filteredProjects]);
 
   // ── Animación expand ────────────────────────────────────────────────────────
   useEffect(() => {
@@ -206,73 +186,9 @@ const PageProyects = () => {
           </h1>
         </div>
 
-        {/* ── Filtros ───────────────────────────────────────────────────────── */}
-        <div ref={filterRef} className="mb-12">
-          {/* Desktop */}
-          <div className="hidden lg:flex items-center gap-px bg-white/5 w-fit">
-            {categories.map((cat) => (
-              <button
-                key={cat.id}
-                onClick={() => setActiveCategory(cat.id)}
-                className={`px-5 py-3 text-xs font-mono uppercase tracking-widest transition-colors duration-200 ${
-                  activeCategory === cat.id
-                    ? "bg-green text-black"
-                    : "bg-black text-gray hover:text-white"
-                }`}
-              >
-                {cat.label}
-              </button>
-            ))}
-          </div>
-
-          {/* Mobile */}
-          <div className="lg:hidden">
-            <button
-              onClick={() => setIsFilterOpen(!isFilterOpen)}
-              className="flex items-center gap-2 px-4 py-2.5 border border-white/10 text-gray hover:text-white hover:border-white/30 transition-all duration-200 text-xs font-mono uppercase tracking-widest"
-            >
-              <FiFilter className="text-green" />
-              Filtrar
-            </button>
-
-            {/* Dropdown mobile — CSS transition */}
-            <div
-              className={`overflow-hidden transition-all duration-300 ${
-                isFilterOpen
-                  ? "max-h-[300px] opacity-100 mt-2"
-                  : "max-h-0 opacity-0"
-              }`}
-            >
-              <div className="flex flex-col gap-px bg-white/5 w-fit">
-                {categories.map((cat) => (
-                  <button
-                    key={cat.id}
-                    onClick={() => {
-                      setActiveCategory(cat.id);
-                      setIsFilterOpen(false);
-                    }}
-                    className={`px-5 py-3 text-xs font-mono uppercase tracking-widest text-left transition-colors duration-200 ${
-                      activeCategory === cat.id
-                        ? "bg-green text-black"
-                        : "bg-black text-gray hover:text-white"
-                    }`}
-                  >
-                    {cat.label}
-                  </button>
-                ))}
-              </div>
-            </div>
-          </div>
-
-          <p className="text-[10px] font-mono text-gray uppercase tracking-widest mt-4">
-            {filteredProjects.length} proyecto
-            {filteredProjects.length !== 1 ? "s" : ""}
-          </p>
-        </div>
-
         {/* ── Grid de proyectos ─────────────────────────────────────────────── */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-px bg-white/5">
-          {filteredProjects.map((item, index) => (
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-px bg-white/5 mt-12">
+          {proyectosVisibles.map((item, index) => (
             <div
               key={`${item.id}-${index}`}
               ref={(el) => {

@@ -5,7 +5,6 @@ import { useRouter } from "next/navigation";
 import Link from "next/link";
 import servicios from "../data";
 import { notFound } from "next/navigation";
-import Image from "next/image";
 import {
   FiPlus,
   FiMinus,
@@ -30,7 +29,6 @@ const ServicePage = ({ params: paramsPromise }) => {
   if (!servicio) return notFound();
 
   const [openIndex, setOpenIndex] = useState(null);
-  const [activeTab, setActiveTab] = useState("beneficios");
 
   const sectionRef = useRef(null);
   const tagRef = useRef(null);
@@ -111,8 +109,6 @@ const ServicePage = ({ params: paramsPromise }) => {
 
   const toggle = (idx) => setOpenIndex(openIndex === idx ? null : idx);
 
-  const Icon = servicio.icon;
-
   return (
     <section
       ref={sectionRef}
@@ -163,21 +159,14 @@ const ServicePage = ({ params: paramsPromise }) => {
 
         {/* ── Grid principal ────────────────────────────────────────────────── */}
         <div className="grid lg:grid-cols-2 gap-px bg-white/5 mb-px">
-          {/* Imagen */}
+          {/* Bloque de color con número de nivel */}
           <div
             ref={imageRef}
-            className="relative h-[400px] lg:h-[500px] overflow-hidden bg-black"
+            className="relative h-[400px] lg:h-[500px] overflow-hidden bg-black flex items-center justify-center"
           >
-            <Image
-              src={servicio.img}
-              alt={servicio.service}
-              fill
-              className="object-cover"
-              priority
-              sizes="(max-width: 1024px) 100vw, 50vw"
-              quality={80}
-            />
-            <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
+            <span className="font-anton text-green text-[10rem] lg:text-[14rem] leading-none select-none">
+              {servicio.id}
+            </span>
           </div>
 
           {/* Info */}
@@ -201,18 +190,20 @@ const ServicePage = ({ params: paramsPromise }) => {
             </div>
 
             {/* Stats */}
-            <div className="grid grid-cols-2 gap-px bg-white/5">
-              {servicio.stats.map((stat, i) => (
-                <div key={i} className="bg-black px-4 py-4 text-center">
-                  <p className="font-anton text-2xl text-green leading-none mb-1">
-                    {stat.value}
-                  </p>
-                  <p className="text-[10px] text-gray uppercase tracking-wider">
-                    {stat.label}
-                  </p>
-                </div>
-              ))}
-            </div>
+            {servicio.stats.length > 0 && (
+              <div className="grid grid-cols-2 gap-px bg-white/5">
+                {servicio.stats.map((stat, i) => (
+                  <div key={i} className="bg-black px-4 py-4 text-center">
+                    <p className="font-anton text-2xl text-green leading-none mb-1">
+                      {stat.value}
+                    </p>
+                    <p className="text-[10px] text-gray uppercase tracking-wider">
+                      {stat.label}
+                    </p>
+                  </div>
+                ))}
+              </div>
+            )}
           </div>
         </div>
 
@@ -244,103 +235,57 @@ const ServicePage = ({ params: paramsPromise }) => {
           </div>
         </div>
 
-        {/* ── Tabs: Beneficios + FAQs ───────────────────────────────────────── */}
-        <div className="mb-16">
-          {/* Tab headers */}
-          <div className="grid grid-cols-2 gap-px bg-white/5 mb-px">
-            {["beneficios", "faqs"].map((tab) => (
-              <button
-                key={tab}
-                onClick={() => setActiveTab(tab)}
-                className={`px-6 py-4 text-xs font-mono uppercase tracking-widest transition-colors duration-200 ${
-                  activeTab === tab
-                    ? "bg-green text-black"
-                    : "bg-black text-gray hover:text-white"
-                }`}
-              >
-                {tab === "beneficios" ? "Beneficios" : "Preguntas frecuentes"}
-              </button>
-            ))}
-          </div>
-
-          {/* Beneficios */}
-          {activeTab === "beneficios" && (
-            <div className="border border-white/10 border-t-0 p-8 md:p-10">
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-px bg-white/5">
-                {servicio.content.map((texto, idx) => (
-                  <div
-                    key={idx}
-                    className="bg-black p-6 hover:bg-white/[0.03] transition-colors duration-200 group relative"
+        {/* ── Preguntas frecuentes ─────────────────────────────────────────── */}
+        <div className="border border-white/10 border-t-0 p-8 md:p-10 mb-16">
+          <p className="text-[10px] font-mono text-green uppercase tracking-[0.2em] mb-6">
+            Preguntas frecuentes
+          </p>
+          <div className="space-y-px">
+            {servicio.faqs?.map((item, index) => {
+              const isOpen = openIndex === index;
+              return (
+                <div key={index} className="bg-black">
+                  <button
+                    onClick={() => toggle(index)}
+                    className="w-full flex items-center justify-between p-6 md:p-8 text-left hover:bg-white/[0.02] transition-colors duration-200"
                   >
-                    <span className="font-anton text-5xl text-white/[0.04] absolute top-4 right-4 select-none leading-none">
-                      {idx + 1}
+                    <span
+                      className={`text-sm font-semibold pr-8 transition-colors duration-200 ${
+                        isOpen ? "text-green" : "text-white"
+                      }`}
+                    >
+                      {item.title}
                     </span>
-                    <div className="w-7 h-7 border border-green/30 flex items-center justify-center mb-4 group-hover:border-green group-hover:bg-green/10 transition-all duration-300">
-                      <Icon className="text-green text-sm" />
+                    <div
+                      className={`w-7 h-7 border flex items-center justify-center flex-shrink-0 transition-all duration-200 ${
+                        isOpen
+                          ? "border-green bg-green text-black"
+                          : "border-white/20 text-gray"
+                      }`}
+                    >
+                      {isOpen ? (
+                        <FiMinus className="text-xs" />
+                      ) : (
+                        <FiPlus className="text-xs" />
+                      )}
                     </div>
-                    <p className="text-white/80 text-sm leading-relaxed">
-                      {texto}
-                    </p>
-                    <div className="absolute bottom-0 left-0 w-0 h-px bg-green group-hover:w-full transition-all duration-500" />
+                  </button>
+
+                  <div
+                    className={`overflow-hidden transition-all duration-300 ease-in-out ${
+                      isOpen ? "max-h-[300px] opacity-100" : "max-h-0 opacity-0"
+                    }`}
+                  >
+                    <div className="px-6 md:px-8 pb-6 border-t border-white/5">
+                      <p className="text-gray text-sm leading-relaxed pt-4">
+                        {item.content}
+                      </p>
+                    </div>
                   </div>
-                ))}
-              </div>
-            </div>
-          )}
-
-          {/* FAQs */}
-          {activeTab === "faqs" && (
-            <div className="border border-white/10 border-t-0">
-              <div className="space-y-px">
-                {servicio.faqs?.map((item, index) => {
-                  const isOpen = openIndex === index;
-                  return (
-                    <div key={index} className="bg-black">
-                      <button
-                        onClick={() => toggle(index)}
-                        className="w-full flex items-center justify-between p-6 md:p-8 text-left hover:bg-white/[0.02] transition-colors duration-200"
-                      >
-                        <span
-                          className={`text-sm font-semibold pr-8 transition-colors duration-200 ${
-                            isOpen ? "text-green" : "text-white"
-                          }`}
-                        >
-                          {item.title}
-                        </span>
-                        <div
-                          className={`w-7 h-7 border flex items-center justify-center flex-shrink-0 transition-all duration-200 ${
-                            isOpen
-                              ? "border-green bg-green text-black"
-                              : "border-white/20 text-gray"
-                          }`}
-                        >
-                          {isOpen ? (
-                            <FiMinus className="text-xs" />
-                          ) : (
-                            <FiPlus className="text-xs" />
-                          )}
-                        </div>
-                      </button>
-
-                      <div
-                        className={`overflow-hidden transition-all duration-300 ease-in-out ${
-                          isOpen
-                            ? "max-h-[300px] opacity-100"
-                            : "max-h-0 opacity-0"
-                        }`}
-                      >
-                        <div className="px-6 md:px-8 pb-6 border-t border-white/5">
-                          <p className="text-gray text-sm leading-relaxed pt-4">
-                            {item.content}
-                          </p>
-                        </div>
-                      </div>
-                    </div>
-                  );
-                })}
-              </div>
-            </div>
-          )}
+                </div>
+              );
+            })}
+          </div>
         </div>
 
         {/* ── CTA ───────────────────────────────────────────────────────────── */}

@@ -48,19 +48,6 @@ export const proyects = [
   },
 ];
 
-export const categories = [
-  { id: "all", label: "Todos" },
-  { id: "landing", label: "Landing Pages" },
-  { id: "ecommerce", label: "E-commerce" },
-  { id: "menu", label: "Menús Digitales" },
-];
-
-// Función helper para obtener proyectos por categoría
-export const getProjectsByCategory = (category) => {
-  if (category === "all") return proyects;
-  return proyects.filter((p) => p.category === category);
-};
-
 // Función para obtener estadísticas
 export const getProjectStats = () => ({
   total: proyects.length,

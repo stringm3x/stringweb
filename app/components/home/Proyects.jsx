@@ -31,23 +31,16 @@ const projects = [
     tags: ["Next.js", "Menú Digital"],
   },
   {
+    // YUMA sigue en desarrollo y no se muestra; este es el siguiente
+    // proyecto de /proyectos que no estaba ya en la home.
     id: 3,
-    src: "/proyects/yuma1.png",
-    title: "Yuma",
-    category: "E-commerce",
+    src: "/proyects/alba&aguilar.png",
+    title: "ALBA AGUILAR",
+    category: "Construcción",
     description:
-      "Proyecto digital enfocado en diseño minimalista y experiencia de usuario moderna para marca emergente.",
-    tags: ["Next.js", "E-commerce"],
+      "Empresa de construcción especializada en desarrollos residenciales y proyectos arquitectónicos de alto nivel en México.",
+    tags: ["Landing Page"],
   },
-];
-
-const techStack = [
-  { src: "/tecno/css.png", title: "CSS3" },
-  { src: "/tecno/html.png", title: "HTML5" },
-  { src: "/tecno/javascript.png", title: "JavaScript" },
-  { src: "/tecno/react.png", title: "React" },
-  { src: "/tecno/nextjs.png", title: "Next.js" },
-  { src: "/tecno/tailwind.png", title: "Tailwind" },
 ];
 
 // ─── Componente ───────────────────────────────────────────────────────────────
@@ -57,7 +50,6 @@ const Proyects = () => {
   const titleRef = useRef(null);
   const descRef = useRef(null);
   const projectsRef = useRef([]);
-  const techRef = useRef([]);
   const ctaRef = useRef(null);
 
   useEffect(() => {
@@ -68,7 +60,6 @@ const Proyects = () => {
         y: 24,
       });
       gsap.set(projectsRef.current.filter(Boolean), { opacity: 0, y: 30 });
-      gsap.set(techRef.current.filter(Boolean), { opacity: 0, y: 16 });
       gsap.set(ctaRef.current, { opacity: 0, y: 16 });
 
       // ── Header ──────────────────────────────────────────────────────────────
@@ -107,20 +98,6 @@ const Proyects = () => {
         ease: "power3.out",
         scrollTrigger: {
           trigger: projectsRef.current[0],
-          start: REVEAL_START,
-          once: true,
-        },
-      });
-
-      // ── Tech stack ──────────────────────────────────────────────────────────
-      gsap.to(techRef.current.filter(Boolean), {
-        opacity: 1,
-        y: 0,
-        stagger: 0.06,
-        duration: 0.4,
-        ease: "power3.out",
-        scrollTrigger: {
-          trigger: techRef.current[0],
           start: REVEAL_START,
           once: true,
         },
@@ -300,35 +277,6 @@ const Proyects = () => {
           </div>
         </div>
 
-        {/* ── Tech Stack ────────────────────────────────────────────────────── */}
-        <div className="mb-20 border-t border-white/5 pt-16">
-          <p className="text-xs font-mono text-gray uppercase tracking-[0.25em] text-center mb-10">
-            Stack tecnológico
-          </p>
-          <div className="flex flex-wrap justify-center gap-6 items-center">
-            {techStack.map((tech, i) => (
-              <div
-                key={i}
-                ref={(el) => (techRef.current[i] = el)}
-                className="group flex flex-col items-center gap-2"
-              >
-                <div className="w-14 h-14 bg-white/5 border border-white/10 p-3 hover:border-green/30 hover:bg-white/10 transition-all duration-300">
-                  <Image
-                    src={tech.src}
-                    alt={tech.title}
-                    width={56}
-                    height={56}
-                    className="object-contain w-full h-full"
-                  />
-                </div>
-                <span className="text-xs text-gray font-mono group-hover:text-white transition-colors duration-200">
-                  {tech.title}
-                </span>
-              </div>
-            ))}
-          </div>
-        </div>
-
         {/* ── CTA ───────────────────────────────────────────────────────────── */}
         <div ref={ctaRef} className="text-center">
           <Link
@@ -338,6 +286,9 @@ const Proyects = () => {
             Ver todos los proyectos
             <FiArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform duration-200" />
           </Link>
+          <p className="text-xs text-gray font-mono mt-4">
+            Construido con Next.js, TypeScript y Supabase.
+          </p>
         </div>
       </div>
     </section>

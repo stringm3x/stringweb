@@ -42,10 +42,7 @@ const servicios = [
       "Formulario básico de contacto",
       "Mensaje automático preconfigurado",
     ],
-    stats: [
-      { value: "24h", label: "Diagnóstico" },
-      { value: "100%", label: "Personalizado" },
-    ],
+    stats: [],
     faqs: [
       {
         title: "¿Qué es un sistema de conversión?",
@@ -95,8 +92,6 @@ const servicios = [
       "Integración con herramientas externas",
     ],
     stats: [
-      { value: "100%", label: "Captación" },
-      { value: "Auto", label: "Organizado" },
     ],
     faqs: [
       {
@@ -147,8 +142,6 @@ const servicios = [
       "Panel de gestión de prospectos",
     ],
     stats: [
-      { value: "24/7", label: "Automático" },
-      { value: "30%", label: "Más conversión" },
     ],
     faqs: [
       {
@@ -198,8 +191,6 @@ const servicios = [
       "Integraciones con APIs externas",
     ],
     stats: [
-      { value: "100%", label: "A medida" },
-      { value: "Escalable", label: "Infraestructura" },
     ],
     faqs: [
       {

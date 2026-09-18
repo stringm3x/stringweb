@@ -4,6 +4,13 @@ import { FaWhatsapp } from "react-icons/fa";
 export const metadata = {
   title: "¡Listo!",
   description: "Recibimos tu solicitud. Te contactamos pronto.",
+  alternates: {
+    canonical: "https://www.stringwebs.com/gym/gracias",
+  },
+  openGraph: {
+    title: "¡Listo!",
+    url: "https://www.stringwebs.com/gym/gracias",
+  },
   robots: "noindex, nofollow",
 };
 
