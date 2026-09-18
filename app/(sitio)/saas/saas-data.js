@@ -5,6 +5,7 @@ import {
   MdOutlineLocalHospital,
   MdOutlineContentCut,
 } from "react-icons/md";
+import { SOCIOS_CARGADOS, SOCIOS_ACTIVOS } from "@/app/lib/stats";
 
 // ── Productos ─────────────────────────────────────────────────────────────────
 export const productos = [
@@ -154,25 +155,44 @@ export const diferenciadores = [
 ];
 
 // ── Caso real ─────────────────────────────────────────────────────────────────
+// Cifras tomadas de app/lib/stats.js — no se duplican los números aquí.
+// 59 (inactivos) y 23 (productos) son solo para demostración, no van al sitio.
 export const casoEvolutionGym = {
   nombre: "Evolution GYM",
   ubicacion: "CDMX",
   badge: "Sistema activo · CDMX · Junio 2026",
   stats: [
-    { value: "70", label: "Miembros activos" },
-    { value: "59", label: "Miembros inactivos" },
-    { value: "23", label: "Productos en inventario" },
+    { value: SOCIOS_CARGADOS, label: "Socios cargados" },
+    { value: SOCIOS_ACTIVOS, label: "Socios activos hoy" },
   ],
-  modulos: [
-    "Gestión de miembros",
-    "Caja",
-    "Inventario",
-    "Kiosco de autoservicio",
+  activoHoy: [
+    "Panel de socios",
+    "Check-in por kiosco, manual, QR e historial",
+    "Caja y pagos, corte de caja y reembolsos",
+    "Inventario y punto de venta",
+    "Panel con MRR, ARPU, LTV y rotación",
+    "Clases con reservas, lista de espera e inasistencias",
+    "Prospectos en tablero",
+    "Portal del socio",
+    "Créditos y cuentas por cobrar",
+    "Reportes en CSV y PDF",
+    "Multiusuario con permisos",
+    "Congelación y cambio de plan",
+    "Planes por visitas",
+    "Personalización de marca",
+    "Bot de IA por WhatsApp",
     "WhatsApp automático",
-    "Bot WhatsApp IA",
-    "Inbox WhatsApp",
-    "Portal del miembro",
-    "Dashboard con gráficas",
+    "Inbox de WhatsApp",
+    "Importación desde CSV",
+    "Exportación de datos",
+    // Confirmadas por D1 ("SÍ, TODAS")
+    "Campañas de WhatsApp",
+    "Alertas proactivas al dueño por WhatsApp",
     "Retroalimentación con Google Maps",
+    "Nutrición",
+    "API pública y componentes web",
+    "Landing con dominio propio",
+    "Promociones",
   ],
+  enDesarrollo: ["Cobro automático de la suscripción"],
 };

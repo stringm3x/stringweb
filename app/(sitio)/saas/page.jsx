@@ -1,5 +1,11 @@
 import Link from "next/link";
-import { FiArrowRight, FiCheck, FiCheckCircle, FiStar } from "react-icons/fi";
+import {
+  FiArrowRight,
+  FiCheck,
+  FiCheckCircle,
+  FiClock,
+  FiStar,
+} from "react-icons/fi";
 import { MdOutlineFitnessCenter } from "react-icons/md";
 import WaitlistForm from "./WaitlistForm";
 import {
@@ -291,7 +297,7 @@ export default function SaasPage() {
               </span>
             </div>
 
-            <div className="grid grid-cols-3 gap-px bg-white/5">
+            <div className="grid grid-cols-2 gap-px bg-white/5">
               {casoEvolutionGym.stats.map((s) => (
                 <div key={s.label} className="bg-black px-4 py-6 text-center">
                   <p className="font-anton text-3xl text-green leading-none mb-1">
@@ -304,16 +310,39 @@ export default function SaasPage() {
               ))}
             </div>
 
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-              {casoEvolutionGym.modulos.map((m) => (
-                <div key={m} className="flex items-start gap-2.5">
-                  <FiCheckCircle className="text-green text-sm mt-0.5 flex-shrink-0" />
-                  <span className="text-white/80 text-sm leading-relaxed">
-                    {m}
-                  </span>
-                </div>
-              ))}
+            <div className="space-y-3">
+              <p className="text-[10px] font-mono text-green uppercase tracking-widest">
+                Activo hoy
+              </p>
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                {casoEvolutionGym.activoHoy.map((m) => (
+                  <div key={m} className="flex items-start gap-2.5">
+                    <FiCheckCircle className="text-green text-sm mt-0.5 flex-shrink-0" />
+                    <span className="text-white/80 text-sm leading-relaxed">
+                      {m}
+                    </span>
+                  </div>
+                ))}
+              </div>
             </div>
+
+            {casoEvolutionGym.enDesarrollo.length > 0 && (
+              <div className="space-y-3 pt-3 border-t border-white/5">
+                <p className="text-[10px] font-mono text-gray uppercase tracking-widest">
+                  En desarrollo
+                </p>
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                  {casoEvolutionGym.enDesarrollo.map((m) => (
+                    <div key={m} className="flex items-start gap-2.5">
+                      <FiClock className="text-white/40 text-sm mt-0.5 flex-shrink-0" />
+                      <span className="text-white/50 text-sm leading-relaxed">
+                        {m}
+                      </span>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            )}
           </div>
 
           {/* CTA */}
