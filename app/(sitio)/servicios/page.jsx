@@ -1,7 +1,6 @@
 "use client";
 
 import React, { useEffect, useRef } from "react";
-import Link from "next/link";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { REVEAL_START } from "@/app/lib/scrollTriggerDefaults";
@@ -111,7 +110,7 @@ const PageServices = () => {
   return (
     <section
       ref={sectionRef}
-      className="min-h-screen bg-black py-24 px-6 sm:px-8 lg:px-12 overflow-hidden"
+      className="min-h-screen bg-black py-espacio-6 lg:py-espacio-7 px-6 sm:px-8 lg:px-12 overflow-hidden"
     >
       {/* ── Fondo decorativo ──────────────────────────────────────────────── */}
       <div className="absolute inset-0 pointer-events-none">
@@ -129,24 +128,18 @@ const PageServices = () => {
         {/* ── Header ────────────────────────────────────────────────────────── */}
         <div className="mb-16 space-y-6">
           <div ref={tagRef}>
-            <span className="inline-flex items-center gap-2.5 px-3 py-1.5 border border-green/30 text-green text-xs font-mono uppercase tracking-[0.2em]">
-              <span className="w-1.5 h-1.5 rounded-full bg-green" />
-              Sistemas de conversión
-            </span>
+            <Etiqueta conPunto>Sistemas de conversión</Etiqueta>
           </div>
 
           <h1
             ref={titleRef}
-            className="font-anton text-5xl sm:text-6xl md:text-7xl lg:text-8xl leading-[0.9] tracking-tighter uppercase"
+            className="font-anton text-titular-l uppercase"
           >
             <span className="text-white">Servicios</span>{" "}
-            <span className="text-green">estratégicos</span>
+            <span className="text-acido">estratégicos</span>
           </h1>
 
-          <p
-            ref={descRef}
-            className="text-gray text-lg leading-relaxed max-w-xl"
-          >
+          <p ref={descRef} className="text-tinta-suave text-cuerpo max-w-xl">
             No vendemos páginas. Implementamos sistemas digitales diseñados para
             convertir visitas en clientes reales.
           </p>
@@ -202,36 +195,30 @@ const PageServices = () => {
 
         {/* ── CTA ───────────────────────────────────────────────────────────── */}
         <div ref={ctaRef} className="text-center mt-20 space-y-4">
-          <Link
-            href="/cotizacion"
-            className="group inline-flex items-center gap-2 px-8 py-4 bg-green text-black font-bold text-sm uppercase tracking-wide hover:bg-white transition-colors duration-200"
-          >
+          <Boton href="/cotizacion" variante="primario">
             Diagnosticar mi negocio
-            <FiArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform duration-200" />
-          </Link>
-          <p className="text-xs text-gray font-mono">
+            <FiArrowRight className="w-4 h-4" />
+          </Boton>
+          <p className="font-mono uppercase text-etiqueta text-tinta-tenue">
             Diagnóstico gratuito · Respuesta en 24h
           </p>
         </div>
 
         {/* ── CTA STRING SaaS ──────────────────────────────────────────────── */}
-        <div className="mt-16 border border-white/10 p-8 md:p-10 text-center space-y-3">
-          <h3 className="font-anton text-2xl md:text-3xl text-white uppercase tracking-tight">
-            ¿Presupuesto limitado <span className="text-green">o necesitas empezar ya?</span>
+        <div className="mt-16 border border-linea p-8 md:p-10 text-center space-y-3">
+          <h3 className="font-anton text-titular-m text-white uppercase">
+            ¿Presupuesto limitado <span className="text-acido">o necesitas empezar ya?</span>
           </h3>
-          <p className="text-gray text-sm leading-relaxed max-w-xl mx-auto">
+          <p className="text-tinta-suave text-cuerpo-s max-w-xl mx-auto">
             STRING también tiene sistemas listos por nicho con suscripción
             mensual. Primer producto activo:{" "}
             <span className="text-white font-semibold">STRING GYM</span> para
             gimnasios — desde $799/mes.
           </p>
-          <Link
-            href="/saas"
-            className="group inline-flex items-center gap-2 text-sm font-semibold text-green hover:gap-3 transition-all duration-200"
-          >
+          <Boton href="/saas" variante="texto">
             Conocer STRING SaaS
-            <FiArrowRight className="text-xs group-hover:translate-x-1 transition-transform duration-200" />
-          </Link>
+            <FiArrowRight className="w-3.5 h-3.5" />
+          </Boton>
         </div>
       </div>
     </section>
