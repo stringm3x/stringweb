@@ -21,7 +21,6 @@ export async function generateMetadata({ params }) {
       title: `${title} | STRING`,
       description: servicio.intro,
       url,
-      images: servicio.img ? [{ url: servicio.img }] : undefined,
     },
   };
 }

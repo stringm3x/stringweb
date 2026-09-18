@@ -5,7 +5,6 @@ import { useRouter } from "next/navigation";
 import Link from "next/link";
 import servicios from "../data";
 import { notFound } from "next/navigation";
-import Image from "next/image";
 import {
   FiPlus,
   FiMinus,
@@ -163,21 +162,14 @@ const ServicePage = ({ params: paramsPromise }) => {
 
         {/* ── Grid principal ────────────────────────────────────────────────── */}
         <div className="grid lg:grid-cols-2 gap-px bg-white/5 mb-px">
-          {/* Imagen */}
+          {/* Bloque de color con número de nivel */}
           <div
             ref={imageRef}
-            className="relative h-[400px] lg:h-[500px] overflow-hidden bg-black"
+            className="relative h-[400px] lg:h-[500px] overflow-hidden bg-black flex items-center justify-center"
           >
-            <Image
-              src={servicio.img}
-              alt={servicio.service}
-              fill
-              className="object-cover"
-              priority
-              sizes="(max-width: 1024px) 100vw, 50vw"
-              quality={80}
-            />
-            <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
+            <span className="font-anton text-green text-[10rem] lg:text-[14rem] leading-none select-none">
+              {servicio.id}
+            </span>
           </div>
 
           {/* Info */}
