@@ -31,13 +31,15 @@ const projects = [
     tags: ["Next.js", "Menú Digital"],
   },
   {
+    // YUMA sigue en desarrollo y no se muestra; este es el siguiente
+    // proyecto de /proyectos que no estaba ya en la home.
     id: 3,
-    src: "/proyects/yuma1.png",
-    title: "Yuma",
-    category: "E-commerce",
+    src: "/proyects/alba&aguilar.png",
+    title: "ALBA AGUILAR",
+    category: "Construcción",
     description:
-      "Proyecto digital enfocado en diseño minimalista y experiencia de usuario moderna para marca emergente.",
-    tags: ["Next.js", "E-commerce"],
+      "Empresa de construcción especializada en desarrollos residenciales y proyectos arquitectónicos de alto nivel en México.",
+    tags: ["Landing Page"],
   },
 ];
 
