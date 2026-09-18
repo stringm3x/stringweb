@@ -180,28 +180,22 @@ const PageServices = () => {
         </div>
 
         {/* ── Planes de continuidad ────────────────────────────────────────── */}
-        <div className="mt-16 border border-white/10 p-8 md:p-10">
-          <p className="text-[10px] font-mono text-green uppercase tracking-[0.2em] mb-2">
-            Planes de continuidad
-          </p>
-          <p className="text-gray text-sm leading-relaxed max-w-xl mb-6">
+        <div className="mt-16">
+          <Etiqueta variante="texto">Planes de continuidad</Etiqueta>
+          <p className="mt-2 text-tinta-suave text-cuerpo max-w-xl mb-6">
             Tu sistema no termina el día de la entrega. Un plan de
             continuidad lo mantiene funcionando y, según el plan, lo
             optimiza cada mes.
           </p>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-px bg-white/5">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             {continuidad.map((plan) => (
-              <div key={plan.nombre} className="bg-black p-6">
-                <h3 className="font-anton text-xl text-white tracking-tight mb-1">
-                  {plan.nombre}
-                </h3>
-                <p className="text-green font-mono text-sm mb-2">
-                  {plan.precio}
-                </p>
-                <p className="text-gray text-sm leading-relaxed">
-                  {plan.incluye}
-                </p>
-              </div>
+              <TarjetaSistema
+                key={plan.nombre}
+                kicker="CONTINUIDAD"
+                precio={plan.precio}
+                titulo={plan.nombre}
+                frase={plan.incluye}
+              />
             ))}
           </div>
         </div>
