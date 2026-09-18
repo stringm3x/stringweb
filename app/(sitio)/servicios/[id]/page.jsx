@@ -99,18 +99,6 @@ const ServicePage = ({ params: paramsPromise }) => {
         ref={sectionRef}
         className="min-h-screen bg-black py-espacio-6 lg:py-espacio-7 px-6 sm:px-8 lg:px-12 relative overflow-hidden"
       >
-      {/* ── Fondo decorativo ──────────────────────────────────────────────── */}
-      <div className="absolute inset-0 pointer-events-none">
-        <div
-          className="absolute inset-0 opacity-[0.03]"
-          style={{
-            backgroundImage:
-              "radial-gradient(circle at 1px 1px, #50ff05 1px, transparent 0)",
-            backgroundSize: "40px 40px",
-          }}
-        />
-      </div>
-
       <div className="relative max-w-6xl mx-auto">
         {/* ── Botón volver ──────────────────────────────────────────────────── */}
         <div className="mb-10">
