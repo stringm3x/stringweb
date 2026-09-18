@@ -42,9 +42,7 @@ const servicios = [
       "Formulario básico de contacto",
       "Mensaje automático preconfigurado",
     ],
-    stats: [
-      { value: "24h", label: "Diagnóstico" },
-    ],
+    stats: [],
     faqs: [
       {
         title: "¿Qué es un sistema de conversión?",
