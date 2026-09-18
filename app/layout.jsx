@@ -9,7 +9,7 @@ const organizationJsonLd = {
   "@type": "Organization",
   name: "STRING",
   url: "https://www.stringwebs.com",
-  logo: "https://www.stringwebs.com/logo-s.png",
+  logo: "https://www.stringwebs.com/marca/string-wordmark-horizontal.png",
   description:
     "Agencia de sistemas digitales en México. Sistemas de conversión a medida y STRING SaaS, sistemas listos por nicho.",
   email: "hola@stringwebs.com",
