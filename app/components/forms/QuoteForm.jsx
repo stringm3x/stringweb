@@ -26,6 +26,7 @@ import {
   FiZap,
 } from "react-icons/fi";
 import { PROJECT_TYPES } from "../../lib/constants/project-types";
+import { Etiqueta } from "@/app/components/ui/Etiqueta";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -215,18 +216,14 @@ export const QuoteForm = () => {
       {/* ── Header ──────────────────────────────────────────────────────────── */}
       <div className="mb-12 space-y-6">
         <div ref={tagRef}>
-          <span className="inline-flex items-center gap-2.5 px-3 py-1.5 border border-green/30 text-green text-xs font-mono uppercase tracking-[0.2em]">
-            <span className="w-1.5 h-1.5 rounded-full bg-green animate-pulse" />
-            Diagnóstico gratuito
-          </span>
+          <Etiqueta variante="linea">Diagnóstico gratuito</Etiqueta>
         </div>
 
         <h1
           ref={titleRef}
-          className="font-anton text-6xl sm:text-7xl md:text-8xl leading-[0.9] tracking-tighter uppercase"
+          className="font-anton text-titular-l uppercase"
         >
-          <span className="text-white">Diagnostica</span>
-          <br />
+          <span className="text-white">Diagnostica</span>{" "}
           <span className="text-green">tu negocio</span>
         </h1>
 

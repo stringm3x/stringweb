@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { FiArrowLeft } from "react-icons/fi";
 import { RegistroForm } from "./RegistroForm";
+import { Etiqueta } from "@/app/components/ui/Etiqueta";
 
 export const metadata = {
   title: "Registra tu gimnasio — STRING GYM",
@@ -54,7 +55,8 @@ export default async function RegistroPage({ searchParams }) {
       </Link>
 
       <div className="mb-10 mt-6 space-y-4">
-        <h1 className="font-anton text-4xl uppercase leading-[0.95] tracking-tighter text-white sm:text-5xl">
+        <Etiqueta variante="linea">STRING GYM</Etiqueta>
+        <h1 className="font-anton text-titular-l uppercase text-white">
           Crea tu cuenta
         </h1>
         <p className="text-lg leading-relaxed text-gray">

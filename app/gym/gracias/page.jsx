@@ -1,5 +1,6 @@
 import { FiArrowRight, FiExternalLink } from "react-icons/fi";
 import { FaWhatsapp } from "react-icons/fa";
+import { Etiqueta } from "@/app/components/ui/Etiqueta";
 
 export const metadata = {
   title: "¡Listo!",
@@ -46,10 +47,8 @@ export default function GraciasPage() {
         </svg>
       </div>
 
-      <span className="font-mono text-[10px] uppercase tracking-[0.3em] text-green">
-        Solicitud recibida
-      </span>
-      <h1 className="mt-4 font-anton text-4xl uppercase leading-tight tracking-tight text-white sm:text-5xl">
+      <Etiqueta variante="linea">Solicitud recibida</Etiqueta>
+      <h1 className="mt-4 font-anton text-titular-l uppercase text-white">
         ¡Listo! Nos ponemos en
         <br />
         contacto contigo pronto
