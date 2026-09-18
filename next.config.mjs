@@ -53,11 +53,6 @@ const nextConfig = {
         destination: "/cotizacion",
         statusCode: 301,
       },
-      {
-        source: "/onboarding/:slug",
-        destination: "/alta/:slug",
-        statusCode: 301,
-      },
     ];
   },
 };
