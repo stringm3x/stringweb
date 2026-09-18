@@ -239,10 +239,14 @@ const PageServices = () => {
 
         {/* ── Planes de continuidad ────────────────────────────────────────── */}
         <div className="mt-16 border border-white/10 p-8 md:p-10">
-          <p className="text-[10px] font-mono text-green uppercase tracking-[0.2em] mb-6">
+          <p className="text-[10px] font-mono text-green uppercase tracking-[0.2em] mb-2">
             Planes de continuidad
           </p>
-          {/* TODO(copy): D4 pendiente — línea de introducción del bloque */}
+          <p className="text-gray text-sm leading-relaxed max-w-xl mb-6">
+            Tu sistema no termina el día de la entrega. Un plan de
+            continuidad lo mantiene funcionando y, según el plan, lo
+            optimiza cada mes.
+          </p>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-px bg-white/5">
             {continuidad.map((plan) => (
               <div key={plan.nombre} className="bg-black p-6">
