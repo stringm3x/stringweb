@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { usePathname } from "next/navigation";
 import { motion, AnimatePresence, useReducedMotion } from "framer-motion";
 import { FiMenu, FiX, FiArrowRight } from "react-icons/fi";
@@ -57,11 +58,15 @@ export default function Header() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center">
             {/* Logo */}
-            <Link
-              href="/"
-              className="font-anton text-2xl tracking-tight text-white hover:text-green transition-colors duration-200"
-            >
-              STRING
+            <Link href="/" className="block">
+              <Image
+                src="/marca/string-wordmark-acido.png"
+                alt="STRING"
+                width={409}
+                height={144}
+                priority
+                className="h-auto w-[120px]"
+              />
             </Link>
 
             {/* Botones derecha */}
@@ -121,9 +126,13 @@ export default function Header() {
             >
               {/* Header del panel */}
               <div className="flex justify-between items-center p-6">
-                <span className="font-anton text-xl text-white tracking-tight">
-                  STRING
-                </span>
+                <Image
+                  src="/marca/string-wordmark-acido.png"
+                  alt="STRING"
+                  width={409}
+                  height={144}
+                  className="h-auto w-[120px]"
+                />
                 <motion.button
                   {...(shouldReduceMotion
                     ? {}

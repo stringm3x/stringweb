@@ -2,6 +2,7 @@
 
 import React, { useEffect, useRef } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import {
   FaInstagram,
   FaWhatsapp,
@@ -169,10 +170,16 @@ const Footer = () => {
           {/* Columna 1: Logo + descripción + contacto */}
           <div className="lg:col-span-4 space-y-6">
             <div ref={logoRef} style={{ opacity: 0 }}>
-              <h2 className="font-anton text-5xl md:text-6xl lg:text-7xl tracking-tight">
-                STRING
-              </h2>
-              <p className="text-green text-xs uppercase tracking-widest mt-1">
+              <div className="inline-block p-[34px]">
+                <Image
+                  src="/marca/string-wordmark-acido.png"
+                  alt="STRING"
+                  width={409}
+                  height={144}
+                  className="h-auto w-[200px]"
+                />
+              </div>
+              <p className="text-green text-xs uppercase tracking-widest">
                 Sistemas digitales estratégicos
               </p>
             </div>
