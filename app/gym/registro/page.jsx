@@ -9,6 +9,10 @@ export const metadata = {
   alternates: {
     canonical: "https://www.stringwebs.com/gym/registro",
   },
+  openGraph: {
+    title: "Registra tu gimnasio — STRING GYM",
+    url: "https://www.stringwebs.com/gym/registro",
+  },
   robots: {
     index: true,
     follow: false,
