@@ -14,6 +14,14 @@ export const metadata = {
       "Sistemas digitales estratégicos para convertir visitas en clientes reales.",
     url: "https://www.stringwebs.com/cotizacion",
     type: "website",
+    images: [
+      {
+        url: "/opengraph-image",
+        width: 1200,
+        height: 630,
+        alt: "STRING — Sistemas Digitales Estratégicos",
+      },
+    ],
   },
 };
 

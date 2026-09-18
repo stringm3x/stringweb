@@ -10,6 +10,14 @@ export const metadata = {
     description:
       "Portafolio de sistemas digitales entregados por STRING para negocios en México.",
     url: "https://www.stringwebs.com/proyectos",
+    images: [
+      {
+        url: "/opengraph-image",
+        width: 1200,
+        height: 630,
+        alt: "STRING — Sistemas Digitales Estratégicos",
+      },
+    ],
   },
 };
 

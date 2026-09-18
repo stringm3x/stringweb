@@ -59,6 +59,14 @@ export const metadata = {
     description:
       "4 niveles de sistemas digitales de conversión, desde $8,000 MXN. Diagnóstico gratuito en 24h.",
     url: "https://www.stringwebs.com/servicios",
+    images: [
+      {
+        url: "/opengraph-image",
+        width: 1200,
+        height: 630,
+        alt: "STRING — Sistemas Digitales Estratégicos",
+      },
+    ],
   },
 };
 
