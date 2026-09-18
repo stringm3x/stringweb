@@ -10,6 +10,14 @@ export const metadata = {
   openGraph: {
     title: "¡Listo!",
     url: "https://www.stringwebs.com/gym/gracias",
+    images: [
+      {
+        url: "/opengraph-image",
+        width: 1200,
+        height: 630,
+        alt: "STRING — Sistemas Digitales Estratégicos",
+      },
+    ],
   },
   robots: "noindex, nofollow",
 };

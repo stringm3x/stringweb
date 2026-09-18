@@ -30,6 +30,14 @@ export const metadata = {
     description:
       "STRING GYM: sistema completo de gestión para gimnasios desde $799/mes. 14 días con Pro completo, sin tarjeta.",
     url: "https://www.stringwebs.com/saas",
+    images: [
+      {
+        url: "/opengraph-image",
+        width: 1200,
+        height: 630,
+        alt: "STRING — Sistemas Digitales Estratégicos",
+      },
+    ],
   },
 };
 

@@ -12,6 +12,14 @@ export const metadata = {
   openGraph: {
     title: "Registra tu gimnasio — STRING GYM",
     url: "https://www.stringwebs.com/gym/registro",
+    images: [
+      {
+        url: "/opengraph-image",
+        width: 1200,
+        height: 630,
+        alt: "STRING — Sistemas Digitales Estratégicos",
+      },
+    ],
   },
   robots: {
     index: true,

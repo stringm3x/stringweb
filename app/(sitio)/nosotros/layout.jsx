@@ -10,6 +10,14 @@ export const metadata = {
     description:
       "No vendemos diseño, vendemos estructura. Conoce la metodología y filosofía detrás de STRING.",
     url: "https://www.stringwebs.com/nosotros",
+    images: [
+      {
+        url: "/opengraph-image",
+        width: 1200,
+        height: 630,
+        alt: "STRING — Sistemas Digitales Estratégicos",
+      },
+    ],
   },
 };
 
