@@ -190,18 +190,20 @@ const ServicePage = ({ params: paramsPromise }) => {
             </div>
 
             {/* Stats */}
-            <div className="grid grid-cols-2 gap-px bg-white/5">
-              {servicio.stats.map((stat, i) => (
-                <div key={i} className="bg-black px-4 py-4 text-center">
-                  <p className="font-anton text-2xl text-green leading-none mb-1">
-                    {stat.value}
-                  </p>
-                  <p className="text-[10px] text-gray uppercase tracking-wider">
-                    {stat.label}
-                  </p>
-                </div>
-              ))}
-            </div>
+            {servicio.stats.length > 0 && (
+              <div className="grid grid-cols-2 gap-px bg-white/5">
+                {servicio.stats.map((stat, i) => (
+                  <div key={i} className="bg-black px-4 py-4 text-center">
+                    <p className="font-anton text-2xl text-green leading-none mb-1">
+                      {stat.value}
+                    </p>
+                    <p className="text-[10px] text-gray uppercase tracking-wider">
+                      {stat.label}
+                    </p>
+                  </div>
+                ))}
+              </div>
+            )}
           </div>
         </div>
 

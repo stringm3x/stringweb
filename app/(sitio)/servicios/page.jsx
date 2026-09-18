@@ -187,18 +187,20 @@ const PageServices = () => {
                     </p>
 
                     {/* Stats rápidas */}
-                    <div className="flex gap-6 mb-6 pb-6 border-b border-white/5">
-                      {servicio.stats.map((stat, i) => (
-                        <div key={i}>
-                          <p className="font-anton text-lg text-green leading-none">
-                            {stat.value}
-                          </p>
-                          <p className="text-[10px] text-gray uppercase tracking-wider mt-0.5">
-                            {stat.label}
-                          </p>
-                        </div>
-                      ))}
-                    </div>
+                    {servicio.stats.length > 0 && (
+                      <div className="flex gap-6 mb-6 pb-6 border-b border-white/5">
+                        {servicio.stats.map((stat, i) => (
+                          <div key={i}>
+                            <p className="font-anton text-lg text-green leading-none">
+                              {stat.value}
+                            </p>
+                            <p className="text-[10px] text-gray uppercase tracking-wider mt-0.5">
+                              {stat.label}
+                            </p>
+                          </div>
+                        ))}
+                      </div>
+                    )}
 
                     <div className="flex items-center justify-between">
                       <span className="text-xs font-mono text-gray group-hover:text-green transition-colors duration-200 uppercase tracking-wider">
