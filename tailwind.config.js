@@ -119,6 +119,15 @@ module.exports = {
         etiqueta: ["13px", { lineHeight: "16px", letterSpacing: "0.16em" }],
         dato: ["15px", { lineHeight: "20px", letterSpacing: "0.04em" }],
       },
+      keyframes: {
+        cinta: {
+          from: { transform: "translateX(0)" },
+          to: { transform: "translateX(-50%)" },
+        },
+      },
+      animation: {
+        cinta: "cinta 30s linear infinite",
+      },
     },
   },
   darkMode: "class",
