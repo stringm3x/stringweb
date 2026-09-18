@@ -1,13 +1,15 @@
 "use client";
 
 import React, { useEffect, useRef } from "react";
-import Image from "next/image";
 import Link from "next/link";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { REVEAL_START } from "@/app/lib/scrollTriggerDefaults";
-import { FiArrowRight, FiStar } from "react-icons/fi";
+import { FiArrowRight } from "react-icons/fi";
 import servicios from "./data";
+import { Etiqueta } from "@/app/components/ui/Etiqueta";
+import { Boton } from "@/app/components/ui/Boton";
+import { TarjetaSistema } from "@/app/components/ui/TarjetaSistema";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -151,98 +153,28 @@ const PageServices = () => {
         </div>
 
         {/* ── Grid de servicios ─────────────────────────────────────────────── */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-px bg-white/5">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           {servicios.map((servicio, index) => {
-            const Icon = servicio.icon;
             const destacado = servicio.id === "3";
+            const kicker = destacado
+              ? `NIVEL ${servicio.id.padStart(2, "0")} · RECOMENDADO`
+              : `NIVEL ${servicio.id.padStart(2, "0")}`;
             return (
-              <Link
-                href={`/servicios/${servicio.id}`}
-                key={servicio.id}
-                className="block group"
-              >
-                <div
-                  ref={(el) => (cardsRef.current[index] = el)}
-                  className={`relative overflow-hidden h-full transition-colors duration-300 ${
-                    destacado
-                      ? "border border-green bg-green/5 hover:bg-green/10"
-                      : "bg-black hover:bg-white/[0.03]"
-                  }`}
+              <div key={servicio.id} ref={(el) => (cardsRef.current[index] = el)}>
+                <TarjetaSistema
+                  kicker={kicker}
+                  precio={servicio.metric}
+                  titulo={servicio.service}
+                  frase={servicio.intro}
+                  puntos={servicio.incluye.slice(0, 6)}
+                  destacada={destacado}
                 >
-                  {destacado && (
-                    <span className="absolute top-3 left-6 z-10 inline-flex items-center gap-1.5 bg-green px-3 py-1 font-mono text-[10px] font-bold uppercase tracking-widest text-black">
-                      <FiStar className="text-xs" />
-                      Recomendado
-                    </span>
-                  )}
-                  {/* Imagen */}
-                  <div className="relative h-52 w-full overflow-hidden">
-                    <Image
-                      src={servicio.img}
-                      alt={servicio.service}
-                      fill
-                      className="object-cover transition-transform duration-700 group-hover:scale-105"
-                      sizes="(max-width: 768px) 100vw, 50vw"
-                      loading={index < 2 ? "eager" : "lazy"}
-                      quality={75}
-                    />
-                    <div className="absolute inset-0 bg-gradient-to-t from-black via-black/40 to-transparent" />
-
-                    {/* Precio sobre imagen */}
-                    <div className="absolute top-4 right-4">
-                      <span className="px-2 py-1 bg-fondo-elevado border border-green/30 text-green text-xs font-mono">
-                        {servicio.metric}
-                      </span>
-                    </div>
-                  </div>
-
-                  {/* Contenido */}
-                  <div className="p-6 md:p-8">
-                    <div className="flex items-center gap-3 mb-4">
-                      <div className="w-9 h-9 border border-green/30 flex items-center justify-center group-hover:border-green group-hover:bg-green/10 transition-all duration-300">
-                        <Icon className="text-green text-base" />
-                      </div>
-                      <span className="text-[10px] font-mono text-gray uppercase tracking-widest">
-                        {servicio.title2}
-                      </span>
-                    </div>
-
-                    <h2 className="font-anton text-2xl text-white tracking-tight leading-tight mb-3 group-hover:text-green transition-colors duration-200">
-                      {servicio.service}
-                    </h2>
-
-                    <p className="text-gray text-sm leading-relaxed mb-6 line-clamp-2">
-                      {servicio.intro}
-                    </p>
-
-                    {/* Stats rápidas */}
-                    {servicio.stats.length > 0 && (
-                      <div className="flex gap-6 mb-6 pb-6 border-b border-white/5">
-                        {servicio.stats.map((stat, i) => (
-                          <div key={i}>
-                            <p className="font-anton text-lg text-green leading-none">
-                              {stat.value}
-                            </p>
-                            <p className="text-[10px] text-gray uppercase tracking-wider mt-0.5">
-                              {stat.label}
-                            </p>
-                          </div>
-                        ))}
-                      </div>
-                    )}
-
-                    <div className="flex items-center justify-between">
-                      <span className="text-xs font-mono text-gray group-hover:text-green transition-colors duration-200 uppercase tracking-wider">
-                        Ver sistema
-                      </span>
-                      <FiArrowRight className="text-gray group-hover:text-green group-hover:translate-x-1 transition-all duration-200" />
-                    </div>
-                  </div>
-
-                  {/* Borde inferior hover */}
-                  <div className="absolute bottom-0 left-0 w-0 h-px bg-green group-hover:w-full transition-all duration-500" />
-                </div>
-              </Link>
+                  <Boton href={`/servicios/${servicio.id}`} variante="texto">
+                    Ver sistema
+                    <FiArrowRight className="w-3.5 h-3.5" />
+                  </Boton>
+                </TarjetaSistema>
+              </div>
             );
           })}
         </div>
