@@ -5,16 +5,9 @@ import Link from "next/link";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { FiArrowRight, FiArrowUpRight } from "react-icons/fi";
+import { HOME_STATS } from "@/app/lib/stats";
 
 gsap.registerPlugin(ScrollTrigger);
-
-// ─── Datos ────────────────────────────────────────────────────────────────────
-const stats = [
-  { value: "4", label: "Sistemas\nactivos" },
-  { value: "1", label: "SaaS en\nproducción" },
-  { value: "70", label: "Miembros en\nEvolution GYM" },
-  { value: "3", label: "Sectores\natendidos" },
-];
 
 // ─── Componente ───────────────────────────────────────────────────────────────
 const Hero = () => {
@@ -248,7 +241,7 @@ const Hero = () => {
 
           {/* Columna derecha — Stats verticales */}
           <div className="hidden lg:flex flex-col justify-end gap-0 border-l border-white/10">
-            {stats.map((stat, i) => (
+            {HOME_STATS.map((stat, i) => (
               <div
                 key={i}
                 ref={(el) => (statsRef.current[i] = el)}
@@ -266,11 +259,11 @@ const Hero = () => {
         </div>
 
         {/* Stats mobile — fila horizontal */}
-        <div className="grid grid-cols-4 gap-4 mt-14 pt-8 border-t border-white/10 lg:hidden">
-          {stats.map((stat, i) => (
+        <div className="grid grid-cols-3 gap-4 mt-14 pt-8 border-t border-white/10 lg:hidden">
+          {HOME_STATS.map((stat, i) => (
             <div
               key={i}
-              ref={(el) => (statsRef.current[i + 4] = el)}
+              ref={(el) => (statsRef.current[i + 5] = el)}
               className="text-center"
             >
               <p className="font-anton text-2xl text-green leading-none mb-1">

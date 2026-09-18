@@ -6,24 +6,10 @@ import Link from "next/link";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { REVEAL_START } from "@/app/lib/scrollTriggerDefaults";
-import {
-  FiArrowRight,
-  FiUsers,
-  FiBarChart2,
-  FiClock,
-  FiAward,
-} from "react-icons/fi";
+import { FiArrowRight } from "react-icons/fi";
 import servicios from "./data";
 
 gsap.registerPlugin(ScrollTrigger);
-
-// ─── Stats ────────────────────────────────────────────────────────────────────
-const statsPrincipales = [
-  { value: "4", label: "Sistemas\nactivos", icon: FiUsers },
-  { value: "1", label: "SaaS en\nproducción", icon: FiBarChart2 },
-  { value: "70", label: "Miembros en\nEvolution GYM", icon: FiClock },
-  { value: "3", label: "Sectores\natendidos", icon: FiAward },
-];
 
 // ─── Componente ───────────────────────────────────────────────────────────────
 const PageServices = () => {
@@ -31,7 +17,6 @@ const PageServices = () => {
   const tagRef = useRef(null);
   const titleRef = useRef(null);
   const descRef = useRef(null);
-  const statsRef = useRef([]);
   const cardsRef = useRef([]);
   const ctaRef = useRef(null);
 
@@ -42,7 +27,6 @@ const PageServices = () => {
         opacity: 0,
         y: 24,
       });
-      gsap.set(statsRef.current.filter(Boolean), { opacity: 0, y: 16 });
       gsap.set(cardsRef.current.filter(Boolean), { opacity: 0, y: 24 });
       gsap.set(ctaRef.current, { opacity: 0, y: 16 });
 
@@ -71,20 +55,6 @@ const PageServices = () => {
           { opacity: 1, y: 0, duration: 0.5, ease: "power3.out" },
           "-=0.3"
         );
-
-      // ── Stats ───────────────────────────────────────────────────────────────
-      gsap.to(statsRef.current.filter(Boolean), {
-        opacity: 1,
-        y: 0,
-        stagger: 0.08,
-        duration: 0.45,
-        ease: "power3.out",
-        scrollTrigger: {
-          trigger: statsRef.current[0],
-          start: REVEAL_START,
-          once: true,
-        },
-      });
 
       // ── Cards ───────────────────────────────────────────────────────────────
       gsap.to(cardsRef.current.filter(Boolean), {
@@ -160,28 +130,6 @@ const PageServices = () => {
             No vendemos páginas. Implementamos sistemas digitales diseñados para
             convertir visitas en clientes reales.
           </p>
-        </div>
-
-        {/* ── Stats ─────────────────────────────────────────────────────────── */}
-        <div className="grid grid-cols-4 gap-px bg-white/5 mb-16">
-          {statsPrincipales.map((stat, i) => {
-            const Icon = stat.icon;
-            return (
-              <div
-                key={i}
-                ref={(el) => (statsRef.current[i] = el)}
-                className="bg-black px-4 py-6 text-center hover:bg-white/[0.03] transition-colors duration-200"
-              >
-                <Icon className="text-green text-xl mx-auto mb-2" />
-                <p className="font-anton text-2xl text-green leading-none mb-1">
-                  {stat.value}
-                </p>
-                <p className="text-[10px] text-gray uppercase tracking-wider leading-relaxed whitespace-pre-line">
-                  {stat.label}
-                </p>
-              </div>
-            );
-          })}
         </div>
 
         {/* ── Grid de servicios ─────────────────────────────────────────────── */}

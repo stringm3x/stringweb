@@ -3,26 +3,12 @@
 import React, { useEffect, useRef } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import {
-  FiArrowRight,
-  FiUsers,
-  FiAward,
-  FiTarget,
-  FiClock,
-} from "react-icons/fi";
+import { FiArrowRight } from "react-icons/fi";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { REVEAL_START } from "@/app/lib/scrollTriggerDefaults";
 
 gsap.registerPlugin(ScrollTrigger);
-
-// ─── Datos reales ─────────────────────────────────────────────────────────────
-const stats = [
-  { icon: FiUsers, value: "10+", label: "Clientes con sistema" },
-  { icon: FiAward, value: "2+", label: "Años de experiencia" },
-  { icon: FiTarget, value: "4", label: "Sistemas activos" },
-  { icon: FiClock, value: "24h", label: "Diagnóstico inicial" },
-];
 
 // ─── Componente ───────────────────────────────────────────────────────────────
 const Us = () => {
@@ -30,7 +16,6 @@ const Us = () => {
   const tagRef = useRef(null);
   const contentRef = useRef(null);
   const cardRef = useRef(null);
-  const statsRef = useRef([]);
 
   useEffect(() => {
     const ctx = gsap.context(() => {
@@ -39,7 +24,6 @@ const Us = () => {
         opacity: 0,
         y: 24,
       });
-      gsap.set(statsRef.current.filter(Boolean), { opacity: 0, y: 16 });
 
       // ── Contenido ───────────────────────────────────────────────────────────
       const tl = gsap.timeline({
@@ -66,20 +50,6 @@ const Us = () => {
           { opacity: 1, y: 0, duration: 0.6, ease: "power3.out" },
           "-=0.3"
         );
-
-      // ── Stats ───────────────────────────────────────────────────────────────
-      gsap.to(statsRef.current.filter(Boolean), {
-        opacity: 1,
-        y: 0,
-        stagger: 0.08,
-        duration: 0.45,
-        ease: "power3.out",
-        scrollTrigger: {
-          trigger: statsRef.current[0],
-          start: REVEAL_START,
-          once: true,
-        },
-      });
     }, sectionRef);
 
     return () => ctx.revert();
@@ -193,28 +163,6 @@ const Us = () => {
               </div>
             </div>
           </div>
-        </div>
-
-        {/* ── Stats ─────────────────────────────────────────────────────────── */}
-        <div className="grid grid-cols-4 gap-px bg-white/5 mt-16">
-          {stats.map((stat, i) => {
-            const Icon = stat.icon;
-            return (
-              <div
-                key={i}
-                ref={(el) => (statsRef.current[i] = el)}
-                className="bg-black/80 backdrop-blur-sm px-4 py-6 text-center hover:bg-black/60 transition-colors duration-200"
-              >
-                <Icon className="text-green text-xl mx-auto mb-2" />
-                <p className="font-anton text-2xl text-green leading-none mb-1">
-                  {stat.value}
-                </p>
-                <p className="text-[10px] text-gray uppercase tracking-wider">
-                  {stat.label}
-                </p>
-              </div>
-            );
-          })}
         </div>
       </div>
     </section>
