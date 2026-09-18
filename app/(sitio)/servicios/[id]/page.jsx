@@ -3,14 +3,26 @@
 import React, { useState, useEffect, useRef } from "react";
 import servicios from "../data";
 import { notFound } from "next/navigation";
-import { FiPlus, FiMinus, FiArrowLeft, FiArrowRight } from "react-icons/fi";
+import { FiPlus, FiMinus, FiArrowLeft } from "react-icons/fi";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { REVEAL_START } from "@/app/lib/scrollTriggerDefaults";
 import { Etiqueta } from "@/app/components/ui/Etiqueta";
 import { Boton } from "@/app/components/ui/Boton";
+import { Cierre } from "@/app/components/ui/Cierre";
+import { Telefono } from "@/app/components/ilustraciones/Telefono";
+import { Libreta } from "@/app/components/ilustraciones/Libreta";
+import { Reloj } from "@/app/components/ilustraciones/Reloj";
+import { Tablero } from "@/app/components/ilustraciones/Tablero";
 
 gsap.registerPlugin(ScrollTrigger);
+
+const ILUSTRACIONES = {
+  1: Telefono,
+  2: Libreta,
+  3: Reloj,
+  4: Tablero,
+};
 
 // ─── Componente ───────────────────────────────────────────────────────────────
 const ServicePage = ({ params: paramsPromise }) => {
@@ -27,19 +39,12 @@ const ServicePage = ({ params: paramsPromise }) => {
   const imageRef = useRef(null);
   const infoRef = useRef(null);
   const incluyeRef = useRef([]);
-  const ctaRef = useRef(null);
 
   useEffect(() => {
     const ctx = gsap.context(() => {
       // ── Estado inicial ──────────────────────────────────────────────────────
       gsap.set(
-        [
-          tagRef.current,
-          titleRef.current,
-          imageRef.current,
-          infoRef.current,
-          ctaRef.current,
-        ],
+        [tagRef.current, titleRef.current, imageRef.current, infoRef.current],
         { opacity: 0, y: 24 }
       );
       gsap.set(incluyeRef.current.filter(Boolean), { opacity: 0, y: 16 });
@@ -81,18 +86,6 @@ const ServicePage = ({ params: paramsPromise }) => {
           once: true,
         },
       });
-
-      gsap.to(ctaRef.current, {
-        opacity: 1,
-        y: 0,
-        duration: 0.5,
-        ease: "power3.out",
-        scrollTrigger: {
-          trigger: ctaRef.current,
-          start: REVEAL_START,
-          once: true,
-        },
-      });
     }, sectionRef);
 
     return () => ctx.revert();
@@ -101,10 +94,11 @@ const ServicePage = ({ params: paramsPromise }) => {
   const toggle = (idx) => setOpenIndex(openIndex === idx ? null : idx);
 
   return (
-    <section
-      ref={sectionRef}
-      className="min-h-screen bg-black py-espacio-6 lg:py-espacio-7 px-6 sm:px-8 lg:px-12 relative overflow-hidden"
-    >
+    <>
+      <section
+        ref={sectionRef}
+        className="min-h-screen bg-black py-espacio-6 lg:py-espacio-7 px-6 sm:px-8 lg:px-12 relative overflow-hidden"
+      >
       {/* ── Fondo decorativo ──────────────────────────────────────────────── */}
       <div className="absolute inset-0 pointer-events-none">
         <div
@@ -128,7 +122,9 @@ const ServicePage = ({ params: paramsPromise }) => {
 
         {/* ── Tag + título ──────────────────────────────────────────────────── */}
         <div ref={tagRef} className="flex flex-wrap items-center gap-3 mb-8">
-          <Etiqueta conPunto>NIVEL {servicio.id.padStart(2, "0")}</Etiqueta>
+          <Etiqueta variante="linea">
+            LÁMINA {servicio.id.padStart(2, "0")} / 04
+          </Etiqueta>
         </div>
 
         <div className="flex flex-wrap items-baseline gap-4 mb-12">
@@ -145,14 +141,15 @@ const ServicePage = ({ params: paramsPromise }) => {
 
         {/* ── Grid principal ────────────────────────────────────────────────── */}
         <div className="grid lg:grid-cols-2 gap-6 mb-6">
-          {/* Bloque de color con número de nivel */}
+          {/* Bloque acido con la ilustración del nivel */}
           <div
             ref={imageRef}
-            className="relative h-[240px] lg:h-[500px] overflow-hidden bg-black flex items-center justify-center"
+            className="relative h-[240px] lg:h-[500px] overflow-hidden bg-black"
           >
-            <span className="font-anton text-acido text-[10rem] lg:text-[14rem] leading-none select-none">
-              {servicio.id}
-            </span>
+            {(() => {
+              const Ilustracion = ILUSTRACIONES[servicio.id];
+              return <Ilustracion className="w-full h-full" />;
+            })()}
           </div>
 
           {/* Info */}
@@ -161,7 +158,7 @@ const ServicePage = ({ params: paramsPromise }) => {
 
             {/* Objetivo */}
             <div className="border border-linea p-6 space-y-3">
-              <Etiqueta variante="texto">Objetivo</Etiqueta>
+              <Etiqueta variante="linea">Objetivo</Etiqueta>
               <p className="text-white text-cuerpo-s">{servicio.objetivo}</p>
               <div className="pt-2 border-t border-linea">
                 <p className="font-mono uppercase text-etiqueta text-tinta-tenue mb-1">
@@ -184,7 +181,7 @@ const ServicePage = ({ params: paramsPromise }) => {
 
         {/* ── Qué incluye ───────────────────────────────────────────────────── */}
         <div className="border border-linea p-8 md:p-10 mb-16">
-          <Etiqueta variante="texto" className="mb-6">
+          <Etiqueta variante="linea" className="mb-6">
             Qué incluye este sistema
           </Etiqueta>
           <div className="divide-y divide-linea border-y border-linea">
@@ -205,7 +202,7 @@ const ServicePage = ({ params: paramsPromise }) => {
 
         {/* ── Preguntas frecuentes ─────────────────────────────────────────── */}
         <div className="border border-linea p-8 md:p-10 mb-16">
-          <Etiqueta variante="texto" className="mb-6">
+          <Etiqueta variante="linea" className="mb-6">
             Preguntas frecuentes
           </Etiqueta>
           <div className="divide-y divide-linea border-y border-linea">
@@ -252,40 +249,15 @@ const ServicePage = ({ params: paramsPromise }) => {
           </div>
         </div>
 
-        {/* ── CTA ───────────────────────────────────────────────────────────── */}
-        <div
-          ref={ctaRef}
-          className="border border-linea p-10 md:p-14 relative overflow-hidden"
-        >
-          <div className="relative z-10 flex flex-col lg:flex-row items-start lg:items-center justify-between gap-8">
-            <div className="space-y-3">
-              <h3 className="font-anton text-titular-m text-white uppercase">
-                ¿Listo para <span className="text-acido">implementar</span> este
-                sistema?
-              </h3>
-              <p className="text-tinta-suave text-cuerpo max-w-lg">
-                Agenda un diagnóstico y descubre cómo este nivel puede
-                transformar tu negocio.
-              </p>
-              <p className="font-mono uppercase text-etiqueta text-tinta-tenue">
-                Diagnóstico en 24h · Sin compromiso
-              </p>
-            </div>
-
-            <div className="flex flex-col sm:flex-row gap-4 flex-shrink-0">
-              <Boton href="/cotizacion" variante="primario">
-                Solicitar diagnóstico
-                <FiArrowRight className="w-4 h-4" />
-              </Boton>
-
-              <Boton href="/servicios" variante="secundario">
-                Ver servicios
-              </Boton>
-            </div>
-          </div>
-        </div>
       </div>
     </section>
+
+      <Cierre
+        ctaTexto="Solicitar diagnóstico"
+        ctaHref="/cotizacion"
+        nota="Respuesta en 24 h · Sin compromiso"
+      />
+    </>
   );
 };
 
