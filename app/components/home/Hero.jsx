@@ -1,11 +1,13 @@
 "use client";
 
 import React, { useEffect, useRef } from "react";
-import Link from "next/link";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { FiArrowRight, FiArrowUpRight } from "react-icons/fi";
 import { HOME_STATS } from "@/app/lib/stats";
+import { Etiqueta } from "@/app/components/ui/Etiqueta";
+import { Boton } from "@/app/components/ui/Boton";
+import { FranjaDatos } from "@/app/components/ui/FranjaDatos";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -20,7 +22,7 @@ const Hero = () => {
   const line3Ref = useRef(null);
   const descRef = useRef(null);
   const ctaRef = useRef(null);
-  const statsRef = useRef([]);
+  const franjaRef = useRef(null);
   const accentRef = useRef(null);
   const scrollRef = useRef(null);
 
@@ -37,7 +39,7 @@ const Hero = () => {
           ctaRef.current,
           accentRef.current,
           scrollRef.current,
-          ...statsRef.current.filter(Boolean),
+          franjaRef.current,
         ],
         { opacity: 0 }
       );
@@ -47,8 +49,9 @@ const Hero = () => {
         skewY: 3,
       });
 
-      gsap.set([tagRef.current, descRef.current, ctaRef.current], { y: 20 });
-      gsap.set(statsRef.current.filter(Boolean), { y: 16 });
+      gsap.set([tagRef.current, descRef.current, ctaRef.current, franjaRef.current], {
+        y: 20,
+      });
       gsap.set(accentRef.current, {
         scaleX: 0,
         transformOrigin: "left center",
@@ -109,14 +112,8 @@ const Hero = () => {
           "-=0.3"
         )
         .to(
-          statsRef.current.filter(Boolean),
-          {
-            opacity: 1,
-            y: 0,
-            stagger: 0.07,
-            duration: 0.45,
-            ease: "power3.out",
-          },
+          franjaRef.current,
+          { opacity: 1, y: 0, duration: 0.5, ease: "power3.out" },
           "-=0.2"
         )
         .to(
@@ -137,7 +134,7 @@ const Hero = () => {
       {/* ── Overlay de entrada ─────────────────────────────────────────────── */}
       <div
         ref={overlayRef}
-        className="absolute inset-0 bg-green z-50 pointer-events-none"
+        className="absolute inset-0 bg-acido z-50 pointer-events-none"
       />
 
       {/* ── Fondo: grid de puntos ──────────────────────────────────────────── */}
@@ -153,7 +150,7 @@ const Hero = () => {
       {/* ── Línea superior ────────────────────────────────────────────────── */}
       <div
         ref={lineTopRef}
-        className="absolute top-0 left-0 right-0 h-px bg-green/40"
+        className="absolute top-0 left-0 right-0 h-px bg-acido/40"
         style={{ transformOrigin: "left center" }}
       />
 
@@ -164,113 +161,67 @@ const Hero = () => {
 
       {/* ── Contenido principal ───────────────────────────────────────────── */}
       <div className="relative max-w-7xl mx-auto w-full px-6 sm:px-8 lg:px-12 pt-32 pb-24">
-        <div className="grid lg:grid-cols-[1fr_320px] gap-16 lg:gap-24 items-end">
-          {/* Columna izquierda */}
-          <div className="space-y-10">
-            {/* Tag */}
-            <div ref={tagRef}>
-              <span className="inline-flex items-center gap-2.5 px-3 py-1.5 border border-green/30 text-green text-xs font-mono uppercase tracking-[0.2em]">
-                <span className="w-1.5 h-1.5 rounded-full bg-green animate-pulse" />
-                Sistemas de conversión · CDMX
-              </span>
-            </div>
+        <div className="space-y-10">
+          {/* Tag */}
+          <div ref={tagRef}>
+            <Etiqueta conPunto>Sistemas de conversión · CDMX</Etiqueta>
+          </div>
 
-            {/* Headline — tipografía masiva */}
-            <div className="overflow-hidden">
-              <div className="space-y-1">
-                <div ref={line1Ref} className="overflow-hidden">
-                  <p className="font-anton text-[13vw] sm:text-[10vw] lg:text-[9vw] leading-[0.88] text-white uppercase tracking-tighter">
-                    No necesitas
-                  </p>
-                </div>
-                <div
-                  ref={line2Ref}
-                  className="overflow-hidden flex items-end gap-4"
-                >
-                  <p className="font-anton text-[13vw] sm:text-[10vw] lg:text-[9vw] leading-[0.88] text-green uppercase tracking-tighter">
-                    más seguidores.
-                  </p>
-                </div>
-                <div ref={line3Ref} className="overflow-hidden">
-                  <p className="font-anton text-[13vw] sm:text-[10vw] lg:text-[9vw] leading-[0.88] text-white uppercase tracking-tighter">
-                    Necesitas un{" "}
-                    <span className="relative inline-block">
-                      sistema
-                      <span
-                        ref={accentRef}
-                        className="absolute bottom-1 left-0 right-0 h-[4px] bg-green"
-                      />
-                    </span>
-                    .
-                  </p>
-                </div>
+          {/* Headline */}
+          <div className="overflow-hidden">
+            <div className="space-y-1">
+              <div ref={line1Ref} className="overflow-hidden">
+                <p className="font-anton text-titular-m sm:text-titular-l lg:text-titular-xl text-white uppercase">
+                  No necesitas
+                </p>
               </div>
-            </div>
-
-            {/* Descripción */}
-            <div ref={descRef} className="max-w-lg">
-              <p className="text-gray text-base sm:text-lg leading-relaxed">
-                Transformamos tu presencia digital en un sistema que genera
-                clientes reales. Diagnóstico, estrategia y ejecución —{" "}
-                <span className="text-white">sin plantillas, sin excusas.</span>
-              </p>
-            </div>
-
-            {/* CTAs */}
-            <div ref={ctaRef} className="flex flex-wrap items-center gap-4">
-              <Link
-                href="/cotizacion"
-                className="group inline-flex items-center gap-2 px-7 py-3.5 bg-green text-black font-bold text-sm uppercase tracking-wide hover:bg-white transition-colors duration-200"
-              >
-                Solicitar diagnóstico
-                <FiArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform duration-200" />
-              </Link>
-
-              <Link
-                href="/servicios"
-                className="group inline-flex items-center gap-2 text-sm text-gray hover:text-white transition-colors duration-200 border-b border-white/10 hover:border-white pb-0.5"
-              >
-                Ver los 4 sistemas
-                <FiArrowUpRight className="w-3.5 h-3.5 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform duration-200" />
-              </Link>
+              <div ref={line2Ref} className="overflow-hidden flex items-end gap-4">
+                <p className="font-anton text-titular-m sm:text-titular-l lg:text-titular-xl text-acido uppercase">
+                  más seguidores.
+                </p>
+              </div>
+              <div ref={line3Ref} className="overflow-hidden">
+                <p className="font-anton text-titular-m sm:text-titular-l lg:text-titular-xl text-white uppercase">
+                  Necesitas un{" "}
+                  <span className="relative inline-block">
+                    sistema
+                    <span
+                      ref={accentRef}
+                      className="absolute bottom-1 left-0 right-0 h-[4px] bg-acido"
+                    />
+                  </span>
+                  .
+                </p>
+              </div>
             </div>
           </div>
 
-          {/* Columna derecha — Stats verticales */}
-          <div className="hidden lg:flex flex-col justify-end gap-0 border-l border-white/10">
-            {HOME_STATS.map((stat, i) => (
-              <div
-                key={i}
-                ref={(el) => (statsRef.current[i] = el)}
-                className="group px-8 py-6 border-b border-white/10 last:border-b-0 hover:bg-white/[0.02] transition-colors duration-200 cursor-default"
-              >
-                <p className="font-anton text-4xl text-green leading-none mb-1.5">
-                  {stat.value}
-                </p>
-                <p className="text-xs text-gray uppercase tracking-widest leading-relaxed whitespace-pre-line">
-                  {stat.label}
-                </p>
-              </div>
-            ))}
+          {/* Descripción */}
+          <div ref={descRef} className="max-w-lg">
+            <p className="text-tinta-suave text-cuerpo-l">
+              Transformamos tu presencia digital en un sistema que genera
+              clientes reales. Diagnóstico, estrategia y ejecución —{" "}
+              <span className="text-white">sin plantillas, sin excusas.</span>
+            </p>
+          </div>
+
+          {/* CTAs */}
+          <div ref={ctaRef} className="flex flex-wrap items-center gap-4">
+            <Boton href="/cotizacion" variante="primario">
+              Solicitar diagnóstico
+              <FiArrowRight className="w-4 h-4" />
+            </Boton>
+
+            <Boton href="/servicios" variante="secundario">
+              Ver los 4 sistemas
+              <FiArrowUpRight className="w-4 h-4" />
+            </Boton>
           </div>
         </div>
 
-        {/* Stats mobile — fila horizontal */}
-        <div className="grid grid-cols-3 gap-4 mt-14 pt-8 border-t border-white/10 lg:hidden">
-          {HOME_STATS.map((stat, i) => (
-            <div
-              key={i}
-              ref={(el) => (statsRef.current[i + 5] = el)}
-              className="text-center"
-            >
-              <p className="font-anton text-2xl text-green leading-none mb-1">
-                {stat.value}
-              </p>
-              <p className="text-[10px] text-gray uppercase tracking-wider leading-relaxed whitespace-pre-line">
-                {stat.label}
-              </p>
-            </div>
-          ))}
+        {/* Franja de cifras */}
+        <div ref={franjaRef} className="mt-espacio-6 lg:mt-espacio-7">
+          <FranjaDatos datos={HOME_STATS} />
         </div>
       </div>
 
@@ -279,8 +230,8 @@ const Hero = () => {
         ref={scrollRef}
         className="absolute bottom-8 left-6 sm:left-8 lg:left-12 flex items-center gap-3"
       >
-        <div className="w-px h-10 bg-gradient-to-b from-green/60 to-transparent" />
-        <span className="text-[10px] text-gray uppercase tracking-[0.25em] font-mono">
+        <div className="w-px h-10 bg-acido" />
+        <span className="text-etiqueta text-tinta-suave uppercase font-mono">
           Scroll
         </span>
       </div>
