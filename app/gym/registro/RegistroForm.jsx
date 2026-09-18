@@ -267,7 +267,7 @@ export function RegistroForm({ initialPlan = "" }) {
         <button
           type="submit"
           disabled={isSubmitting}
-          className="group relative w-full overflow-hidden rounded-sm bg-green px-8 py-4 text-sm font-bold uppercase tracking-wide text-black transition-colors duration-200 hover:bg-white disabled:cursor-not-allowed disabled:opacity-60"
+          className="group relative w-full overflow-hidden bg-green px-8 py-4 text-sm font-bold uppercase tracking-wide text-black transition-colors duration-200 hover:bg-white disabled:cursor-not-allowed disabled:opacity-60"
         >
           <span className="relative z-10 flex items-center justify-center gap-2">
             {isSubmitting ? (

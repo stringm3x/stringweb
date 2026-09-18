@@ -44,7 +44,7 @@ export default function Header() {
       <header
         className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
           scrolled
-            ? "py-3 bg-black/80 backdrop-blur-md border-b border-white/5"
+            ? "py-3 bg-fondo border-b border-linea"
             : "py-5 bg-transparent"
         }`}
       >
@@ -70,7 +70,7 @@ export default function Header() {
                   target="_blank"
                   rel="noopener noreferrer"
                   aria-label="WhatsApp"
-                  className="block bg-green/10 backdrop-blur-sm p-2.5 rounded-full border border-green/30 hover:border-green hover:bg-green/20 transition-all duration-200"
+                  className="block bg-fondo-elevado p-2.5 rounded-full border border-green/30 hover:border-green hover:bg-green/20 transition-all duration-200"
                 >
                   <FaWhatsapp className="text-green text-xl" />
                 </Link>
@@ -81,7 +81,7 @@ export default function Header() {
                 whileHover={{ scale: 1.1 }}
                 whileTap={{ scale: 0.95 }}
                 onClick={() => setIsOpen(true)}
-                className="bg-white/10 backdrop-blur-sm p-2.5 rounded-full border border-white/30 hover:border-white hover:bg-white/20 transition-all duration-200"
+                className="bg-fondo-elevado p-2.5 rounded-full border border-white/30 hover:border-white hover:bg-white/20 transition-all duration-200"
                 aria-label="Abrir menú"
               >
                 <FiMenu className="text-green text-xl" />
@@ -101,7 +101,7 @@ export default function Header() {
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
               transition={{ duration: 0.3 }}
-              className="fixed inset-0 bg-black/80 backdrop-blur-sm z-40"
+              className="fixed inset-0 bg-fondo z-40"
               onClick={() => setIsOpen(false)}
             />
 
@@ -111,7 +111,7 @@ export default function Header() {
               animate={{ x: 0 }}
               exit={{ x: "100%" }}
               transition={{ type: "spring", damping: 25, stiffness: 200 }}
-              className="fixed top-0 right-0 bottom-0 w-full sm:w-[400px] bg-black z-50 shadow-2xl"
+              className="fixed top-0 right-0 bottom-0 w-full sm:w-[400px] bg-black z-50"
             >
               {/* Header del panel */}
               <div className="flex justify-between items-center p-6">

@@ -163,12 +163,6 @@ const Footer = () => {
       className="relative bg-black text-white pt-20 pb-8 px-4 md:px-8 lg:px-12 overflow-hidden"
       style={{ opacity: 0 }}
     >
-      {/* Fondo decorativo */}
-      <div className="absolute inset-0 opacity-5 pointer-events-none">
-        <div className="absolute top-0 left-0 w-64 h-64 bg-white rounded-full filter blur-3xl" />
-        <div className="absolute bottom-0 right-0 w-96 h-96 bg-green rounded-full filter blur-3xl" />
-      </div>
-
       {/* Línea superior */}
       <div className="absolute top-0 left-0 right-0 h-px bg-green opacity-60" />
 
@@ -294,7 +288,7 @@ const Footer = () => {
                     target="_blank"
                     rel="noopener noreferrer"
                     aria-label={social.label}
-                    className={`flex items-center gap-2 px-3 py-2 bg-white/5 rounded-lg hover:bg-white/10 transition-all duration-300 hover:scale-105 text-sm text-gray ${social.color}`}
+                    className={`flex items-center gap-2 px-3 py-2 bg-white/5 hover:bg-white/10 transition-all duration-300 hover:scale-105 text-sm text-gray ${social.color}`}
                   >
                     <social.icon className="text-base" />
                     <span>{social.label}</span>
@@ -304,7 +298,7 @@ const Footer = () => {
             </div>
 
             {/* CTA Footer */}
-            <div className="mt-6 p-4 border border-green/20 rounded-xl bg-green/5">
+            <div className="mt-6 p-4 border border-green/20 bg-green/5">
               <p className="text-xs text-gray mb-3">
                 ¿Listo para construir tu sistema?
               </p>

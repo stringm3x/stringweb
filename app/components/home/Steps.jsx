@@ -189,7 +189,6 @@ const Steps = () => {
     >
       {/* ── Fondo ─────────────────────────────────────────────────────────── */}
       <div className="absolute inset-0 pointer-events-none">
-        <div className="absolute top-0 right-1/4 w-[500px] h-[500px] bg-green/4 rounded-full blur-[120px]" />
         <div
           className="absolute inset-0 opacity-[0.03]"
           style={{
@@ -204,7 +203,7 @@ const Steps = () => {
         {/* ── Header ────────────────────────────────────────────────────────── */}
         <div className="mb-16 space-y-6">
           <div ref={tagRef}>
-            <span className="inline-flex items-center gap-2.5 px-3 py-1.5 border border-green/30 text-green text-xs font-mono uppercase tracking-[0.2em] rounded-sm">
+            <span className="inline-flex items-center gap-2.5 px-3 py-1.5 border border-green/30 text-green text-xs font-mono uppercase tracking-[0.2em]">
               <span className="w-1.5 h-1.5 rounded-full bg-green" />
               Metodología STRING
             </span>
@@ -353,7 +352,7 @@ const Steps = () => {
         >
           <Link
             href="/cotizacion"
-            className="group inline-flex items-center gap-2 px-8 py-4 bg-green text-black font-bold text-sm uppercase tracking-wide rounded-sm hover:bg-white transition-colors duration-200"
+            className="group inline-flex items-center gap-2 px-8 py-4 bg-green text-black font-bold text-sm uppercase tracking-wide hover:bg-white transition-colors duration-200"
           >
             Comenzar diagnóstico
             <FiArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform duration-200" />

@@ -65,11 +65,8 @@ export default function SaasPage() {
       />
       {/* ── HERO ─────────────────────────────────────────────────────────────── */}
       <section className="relative overflow-hidden px-6 sm:px-8 lg:px-12 pt-32 pb-20 md:pt-40 md:pb-28">
-        <div className="absolute inset-0 pointer-events-none">
-          <div className="absolute top-0 left-1/3 w-[500px] h-[500px] bg-green/5 rounded-full blur-[120px]" />
-        </div>
         <div className="relative max-w-4xl mx-auto text-center space-y-6">
-          <span className="inline-flex items-center gap-2.5 px-3 py-1.5 border border-green/30 text-green text-xs font-mono uppercase tracking-[0.2em] rounded-sm">
+          <span className="inline-flex items-center gap-2.5 px-3 py-1.5 border border-green/30 text-green text-xs font-mono uppercase tracking-[0.2em]">
             <span className="w-1.5 h-1.5 rounded-full bg-green animate-pulse" />
             STRING SaaS
           </span>
@@ -82,7 +79,7 @@ export default function SaasPage() {
           </p>
           <Link
             href="#productos"
-            className="group inline-flex items-center gap-2 px-8 py-4 bg-green text-black font-bold text-sm uppercase tracking-wide rounded-sm hover:bg-white transition-colors duration-200"
+            className="group inline-flex items-center gap-2 px-8 py-4 bg-green text-black font-bold text-sm uppercase tracking-wide hover:bg-white transition-colors duration-200"
           >
             Ver productos
             <FiArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform duration-200" />
@@ -109,7 +106,7 @@ export default function SaasPage() {
                   <div className="flex items-center justify-between">
                     <p.icon className="text-2xl text-white/80" />
                     <span
-                      className={`px-2 py-0.5 text-[10px] font-bold uppercase tracking-widest rounded-sm ${
+                      className={`px-2 py-0.5 text-[10px] font-bold uppercase tracking-widest ${
                         activo
                           ? "bg-green text-black"
                           : "bg-white/10 text-white/40"
@@ -163,7 +160,7 @@ export default function SaasPage() {
         <div className="max-w-4xl mx-auto space-y-24">
           {/* Header */}
           <div className="text-center space-y-4">
-            <span className="inline-flex items-center gap-2 px-3 py-1.5 border border-green/30 text-green text-xs font-mono uppercase tracking-[0.2em] rounded-sm">
+            <span className="inline-flex items-center gap-2 px-3 py-1.5 border border-green/30 text-green text-xs font-mono uppercase tracking-[0.2em]">
               <MdOutlineFitnessCenter className="text-sm" />
               STRING GYM
             </span>
@@ -246,7 +243,7 @@ export default function SaasPage() {
                     </ul>
                     <Link
                       href={`/gym/registro?plan=${plan.id}`}
-                      className={`mt-8 inline-flex items-center justify-center gap-2 px-6 py-3 text-sm font-bold uppercase tracking-wide rounded-sm transition-colors duration-200 ${
+                      className={`mt-8 inline-flex items-center justify-center gap-2 px-6 py-3 text-sm font-bold uppercase tracking-wide transition-colors duration-200 ${
                         plan.destacado
                           ? "bg-green text-black hover:bg-white"
                           : "border border-white/15 text-white hover:border-green hover:text-green"
@@ -352,7 +349,7 @@ export default function SaasPage() {
             </h3>
             <Link
               href="/gym/registro"
-              className="group inline-flex items-center gap-2 px-8 py-4 bg-green text-black font-bold text-sm uppercase tracking-wide rounded-sm hover:bg-white transition-colors duration-200"
+              className="group inline-flex items-center gap-2 px-8 py-4 bg-green text-black font-bold text-sm uppercase tracking-wide hover:bg-white transition-colors duration-200"
             >
               Crear mi cuenta
               <FiArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform duration-200" />
@@ -376,7 +373,7 @@ export default function SaasPage() {
           </p>
           <Link
             href="/servicios"
-            className="group inline-flex items-center gap-2 px-8 py-4 border border-white/20 text-white font-bold text-sm uppercase tracking-wide rounded-sm hover:border-white/40 hover:bg-white/5 transition-all duration-200"
+            className="group inline-flex items-center gap-2 px-8 py-4 border border-white/20 text-white font-bold text-sm uppercase tracking-wide hover:border-white/40 hover:bg-white/5 transition-all duration-200"
           >
             Ver Sistemas a Medida
             <FiArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform duration-200" />
