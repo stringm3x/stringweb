@@ -110,7 +110,7 @@ export const planes = [
 
 // ── Diferenciadores ──────────────────────────────────────────────────────────
 export const diferenciadores = [
-  // TODO(copy): D2 pendiente — primer diferenciador por definir
+  "Socios y planes ilimitados en todos los planes, desde Starter",
   "Precio final, sin IVA agregado después",
   "Kiosco de autoservicio: el socio paga sin personal",
   "Tres capas de WhatsApp: automático, bot de IA e inbox integrado",
