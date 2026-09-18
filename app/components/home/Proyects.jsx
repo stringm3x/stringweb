@@ -5,8 +5,9 @@ import Image from "next/image";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { REVEAL_START } from "@/app/lib/scrollTriggerDefaults";
-import Link from "next/link";
 import { FiArrowRight, FiExternalLink } from "react-icons/fi";
+import { Etiqueta } from "@/app/components/ui/Etiqueta";
+import { Boton } from "@/app/components/ui/Boton";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -129,22 +130,19 @@ const Proyects = () => {
         {/* ── Header ────────────────────────────────────────────────────────── */}
         <div className="mb-16 space-y-6">
           <div ref={tagRef}>
-            <span className="inline-flex items-center gap-2.5 px-3 py-1.5 border border-green/30 text-green text-xs font-mono uppercase tracking-[0.2em]">
-              <span className="w-1.5 h-1.5 rounded-full bg-green" />
-              Portafolio
-            </span>
+            <Etiqueta conPunto>Portafolio</Etiqueta>
           </div>
 
           <h2
             ref={titleRef}
-            className="font-anton text-6xl sm:text-7xl md:text-8xl lg:text-9xl leading-[0.88] tracking-tighter text-white uppercase"
+            className="font-anton text-titular-l text-white uppercase"
           >
-            Proyectos <span className="text-green">recientes</span>
+            Proyectos <span className="text-acido">recientes</span>
           </h2>
 
           <p
             ref={descRef}
-            className="text-gray text-lg leading-relaxed max-w-xl"
+            className="text-tinta-suave text-cuerpo-l max-w-xl"
           >
             Sistemas reales, resultados medibles. Cada proyecto tiene una
             estructura diseñada para convertir — no para impresionar en
@@ -153,140 +151,57 @@ const Proyects = () => {
         </div>
 
         {/* ── Grid de proyectos ─────────────────────────────────────────────── */}
-        <div className="grid lg:grid-cols-3 gap-px bg-white/5 mb-px">
-          {/* Proyecto 1 — ocupa 2 columnas */}
-          <div
-            ref={(el) => (projectsRef.current[0] = el)}
-            className="lg:col-span-2 relative h-[400px] lg:h-[520px] overflow-hidden group cursor-pointer bg-black"
-          >
-            <Image
-              src={projects[0].src}
-              alt={projects[0].title}
-              fill
-              className="object-cover transition-transform duration-700 group-hover:scale-105"
-              sizes="(max-width: 1024px) 100vw, 66vw"
-            />
-            <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/30 to-transparent opacity-60 group-hover:opacity-100 transition-opacity duration-500" />
+        <div className="grid md:grid-cols-3 gap-6 mb-16">
+          {projects.map((project, i) => (
+            <div
+              key={project.id}
+              ref={(el) => (projectsRef.current[i] = el)}
+              className="flex flex-col bg-fondo-elevado border border-linea"
+            >
+              <div className="relative h-[280px] lg:h-[360px] overflow-hidden bg-black">
+                <Image
+                  src={project.src}
+                  alt={project.title}
+                  fill
+                  className="object-cover"
+                  sizes="(max-width: 768px) 100vw, 33vw"
+                />
+              </div>
 
-            {/* Info siempre visible */}
-            <div className="absolute bottom-0 left-0 right-0 p-8">
-              <span className="text-xs font-mono text-green uppercase tracking-widest">
-                {projects[0].category}
-              </span>
-              <h3 className="font-anton text-3xl text-white mt-1 mb-2 leading-tight">
-                {projects[0].title}
-              </h3>
-              <p className="text-white/60 text-sm leading-relaxed opacity-0 group-hover:opacity-100 transition-opacity duration-300 mb-4">
-                {projects[0].description}
-              </p>
-              <div className="flex flex-wrap gap-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                {projects[0].tags.map((tag) => (
-                  <span
-                    key={tag}
-                    className="px-2 py-0.5 border border-white/20 text-white/70 text-xs font-mono"
-                  >
-                    {tag}
-                  </span>
-                ))}
+              <div className="flex flex-1 flex-col gap-3 p-6">
+                <Etiqueta variante="texto">{project.category}</Etiqueta>
+                <h3 className="font-anton text-titular-m text-white uppercase">
+                  {project.title}
+                </h3>
+                <p className="flex-1 text-cuerpo-s text-tinta-suave">
+                  {project.description}
+                </p>
+                <div className="flex flex-wrap gap-2">
+                  {project.tags.map((tag) => (
+                    <span
+                      key={tag}
+                      className="px-2 py-0.5 border border-linea font-mono uppercase text-etiqueta text-tinta-tenue"
+                    >
+                      {tag}
+                    </span>
+                  ))}
+                </div>
+                <Boton href="/proyectos" variante="texto" className="self-start">
+                  Ver proyecto
+                  <FiExternalLink className="w-3.5 h-3.5" />
+                </Boton>
               </div>
             </div>
-
-            <Link
-              href="/proyectos"
-              className="absolute top-6 right-6 w-9 h-9 bg-fondo-elevado border border-white/20 flex items-center justify-center hover:border-green hover:bg-green/10 transition-all duration-200 opacity-0 group-hover:opacity-100"
-            >
-              <FiExternalLink className="text-white text-sm" />
-            </Link>
-          </div>
-
-          {/* Proyecto 2 */}
-          <div
-            ref={(el) => (projectsRef.current[1] = el)}
-            className="relative h-[400px] lg:h-[520px] overflow-hidden group cursor-pointer bg-black"
-          >
-            <Image
-              src={projects[1].src}
-              alt={projects[1].title}
-              fill
-              className="object-cover transition-transform duration-700 group-hover:scale-105"
-              sizes="(max-width: 1024px) 100vw, 33vw"
-            />
-            <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/30 to-transparent opacity-60 group-hover:opacity-100 transition-opacity duration-500" />
-
-            <div className="absolute bottom-0 left-0 right-0 p-6">
-              <span className="text-xs font-mono text-green uppercase tracking-widest">
-                {projects[1].category}
-              </span>
-              <h3 className="font-anton text-2xl text-white mt-1 mb-2 leading-tight">
-                {projects[1].title}
-              </h3>
-              <p className="text-white/60 text-sm leading-relaxed opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                {projects[1].description}
-              </p>
-            </div>
-
-            <Link
-              href="/proyectos"
-              className="absolute top-5 right-5 w-8 h-8 bg-fondo-elevado border border-white/20 flex items-center justify-center hover:border-green hover:bg-green/10 transition-all duration-200 opacity-0 group-hover:opacity-100"
-            >
-              <FiExternalLink className="text-white text-xs" />
-            </Link>
-          </div>
-        </div>
-
-        {/* Proyecto 3 — ancho completo */}
-        <div
-          ref={(el) => (projectsRef.current[2] = el)}
-          className="relative h-[300px] lg:h-[420px] overflow-hidden group cursor-pointer bg-black mb-20"
-        >
-          <Image
-            src={projects[2].src}
-            alt={projects[2].title}
-            fill
-            className="object-cover transition-transform duration-700 group-hover:scale-105"
-            sizes="100vw"
-          />
-          <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent opacity-60 group-hover:opacity-100 transition-opacity duration-500" />
-
-          <div className="absolute bottom-0 left-0 right-0 p-8 flex items-end justify-between">
-            <div>
-              <span className="text-xs font-mono text-green uppercase tracking-widest">
-                {projects[2].category}
-              </span>
-              <h3 className="font-anton text-4xl text-white mt-1 mb-2 leading-tight">
-                {projects[2].title}
-              </h3>
-              <div className="flex flex-wrap gap-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                {projects[2].tags.map((tag) => (
-                  <span
-                    key={tag}
-                    className="px-2 py-0.5 border border-white/20 text-white/70 text-xs font-mono"
-                  >
-                    {tag}
-                  </span>
-                ))}
-              </div>
-            </div>
-
-            <Link
-              href="/proyectos"
-              className="w-10 h-10 bg-fondo-elevado border border-white/20 flex items-center justify-center hover:border-green hover:bg-green/10 transition-all duration-200 opacity-0 group-hover:opacity-100 flex-shrink-0"
-            >
-              <FiExternalLink className="text-white text-sm" />
-            </Link>
-          </div>
+          ))}
         </div>
 
         {/* ── CTA ───────────────────────────────────────────────────────────── */}
         <div ref={ctaRef} className="text-center">
-          <Link
-            href="/proyectos"
-            className="group inline-flex items-center gap-2 px-8 py-4 bg-green text-black font-bold text-sm uppercase tracking-wide hover:bg-white transition-colors duration-200"
-          >
+          <Boton href="/proyectos" variante="primario">
             Ver todos los proyectos
-            <FiArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform duration-200" />
-          </Link>
-          <p className="text-xs text-gray font-mono mt-4">
+            <FiArrowRight className="w-4 h-4" />
+          </Boton>
+          <p className="mt-4 font-mono uppercase text-etiqueta text-tinta-tenue">
             Construido con Next.js, TypeScript y Supabase.
           </p>
         </div>
