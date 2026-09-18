@@ -1,28 +1,19 @@
 "use client";
 
 import React, { useState, useEffect, useRef } from "react";
-import { useRouter } from "next/navigation";
-import Link from "next/link";
 import servicios from "../data";
 import { notFound } from "next/navigation";
-import {
-  FiPlus,
-  FiMinus,
-  FiArrowLeft,
-  FiArrowRight,
-  FiCheckCircle,
-  FiClock,
-  FiDollarSign,
-} from "react-icons/fi";
+import { FiPlus, FiMinus, FiArrowLeft, FiArrowRight } from "react-icons/fi";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { REVEAL_START } from "@/app/lib/scrollTriggerDefaults";
+import { Etiqueta } from "@/app/components/ui/Etiqueta";
+import { Boton } from "@/app/components/ui/Boton";
 
 gsap.registerPlugin(ScrollTrigger);
 
 // ─── Componente ───────────────────────────────────────────────────────────────
 const ServicePage = ({ params: paramsPromise }) => {
-  const router = useRouter();
   const params = React.use(paramsPromise);
   const servicio = servicios.find((p) => p.id === params.id);
 
@@ -112,7 +103,7 @@ const ServicePage = ({ params: paramsPromise }) => {
   return (
     <section
       ref={sectionRef}
-      className="min-h-screen bg-black py-24 px-6 sm:px-8 lg:px-12 relative overflow-hidden"
+      className="min-h-screen bg-black py-espacio-6 lg:py-espacio-7 px-6 sm:px-8 lg:px-12 relative overflow-hidden"
     >
       {/* ── Fondo decorativo ──────────────────────────────────────────────── */}
       <div className="absolute inset-0 pointer-events-none">
@@ -129,137 +120,111 @@ const ServicePage = ({ params: paramsPromise }) => {
       <div className="relative max-w-6xl mx-auto">
         {/* ── Botón volver ──────────────────────────────────────────────────── */}
         <div className="mb-10">
-          <Link
-            href="/servicios"
-            className="inline-flex items-center gap-2 text-gray hover:text-green transition-colors duration-200 group text-sm font-mono"
-          >
-            <FiArrowLeft className="group-hover:-translate-x-1 transition-transform duration-200" />
+          <Boton href="/servicios" variante="texto">
+            <FiArrowLeft className="w-3.5 h-3.5" />
             Volver a Servicios
-          </Link>
+          </Boton>
         </div>
 
         {/* ── Tag + título ──────────────────────────────────────────────────── */}
         <div ref={tagRef} className="flex flex-wrap items-center gap-3 mb-8">
-          <span className="inline-flex items-center gap-2 px-3 py-1.5 border border-green/30 text-green text-xs font-mono uppercase tracking-[0.2em]">
-            <span className="w-1.5 h-1.5 rounded-full bg-green" />
-            {servicio.title2}
-          </span>
-          <span className="px-3 py-1.5 bg-green text-black text-xs font-bold uppercase tracking-wide">
+          <Etiqueta conPunto>NIVEL {servicio.id.padStart(2, "0")}</Etiqueta>
+        </div>
+
+        <div className="flex flex-wrap items-baseline gap-4 mb-12">
+          <h1
+            ref={titleRef}
+            className="font-anton text-titular-l text-white uppercase"
+          >
+            {servicio.service}
+          </h1>
+          <span className="font-mono text-dato text-acido">
             {servicio.metric}
           </span>
         </div>
 
-        <h1
-          ref={titleRef}
-          className="font-anton text-5xl sm:text-6xl md:text-7xl leading-[0.9] tracking-tighter text-white uppercase mb-12"
-        >
-          {servicio.service}
-        </h1>
-
         {/* ── Grid principal ────────────────────────────────────────────────── */}
-        <div className="grid lg:grid-cols-2 gap-px bg-white/5 mb-px">
+        <div className="grid lg:grid-cols-2 gap-6 mb-6">
           {/* Bloque de color con número de nivel */}
           <div
             ref={imageRef}
-            className="relative h-[400px] lg:h-[500px] overflow-hidden bg-black flex items-center justify-center"
+            className="relative h-[240px] lg:h-[500px] overflow-hidden bg-black flex items-center justify-center"
           >
-            <span className="font-anton text-green text-[10rem] lg:text-[14rem] leading-none select-none">
+            <span className="font-anton text-acido text-[10rem] lg:text-[14rem] leading-none select-none">
               {servicio.id}
             </span>
           </div>
 
           {/* Info */}
           <div ref={infoRef} className="bg-black p-8 md:p-10 space-y-6">
-            <p className="text-gray leading-relaxed">{servicio.intro}</p>
+            <p className="text-tinta-suave text-cuerpo">{servicio.intro}</p>
 
             {/* Objetivo */}
-            <div className="border border-white/10 p-6 space-y-3">
-              <p className="text-[10px] font-mono text-green uppercase tracking-[0.2em]">
-                Objetivo
-              </p>
-              <p className="text-white text-sm leading-relaxed">
-                {servicio.objetivo}
-              </p>
-              <div className="pt-2 border-t border-white/5">
-                <p className="text-[10px] font-mono text-gray uppercase tracking-wider mb-1">
+            <div className="border border-linea p-6 space-y-3">
+              <Etiqueta variante="texto">Objetivo</Etiqueta>
+              <p className="text-white text-cuerpo-s">{servicio.objetivo}</p>
+              <div className="pt-2 border-t border-linea">
+                <p className="font-mono uppercase text-etiqueta text-tinta-tenue mb-1">
                   Ideal para
                 </p>
-                <p className="text-gray text-sm">{servicio.ideal}</p>
+                <p className="text-tinta-suave text-cuerpo-s">
+                  {servicio.ideal}
+                </p>
               </div>
             </div>
-
-            {/* Stats */}
-            {servicio.stats.length > 0 && (
-              <div className="grid grid-cols-2 gap-px bg-white/5">
-                {servicio.stats.map((stat, i) => (
-                  <div key={i} className="bg-black px-4 py-4 text-center">
-                    <p className="font-anton text-2xl text-green leading-none mb-1">
-                      {stat.value}
-                    </p>
-                    <p className="text-[10px] text-gray uppercase tracking-wider">
-                      {stat.label}
-                    </p>
-                  </div>
-                ))}
-              </div>
-            )}
           </div>
         </div>
 
         {/* ── Descripción ───────────────────────────────────────────────────── */}
-        <div className="border border-white/10 border-t-0 p-8 md:p-10 mb-px">
-          <p className="text-gray leading-relaxed text-lg max-w-3xl">
+        <div className="border border-linea p-8 md:p-10 mb-6">
+          <p className="text-tinta-suave text-cuerpo max-w-3xl">
             {servicio.p}
           </p>
         </div>
 
         {/* ── Qué incluye ───────────────────────────────────────────────────── */}
-        <div className="border border-white/10 border-t-0 p-8 md:p-10 mb-16">
-          <p className="text-[10px] font-mono text-green uppercase tracking-[0.2em] mb-6">
+        <div className="border border-linea p-8 md:p-10 mb-16">
+          <Etiqueta variante="texto" className="mb-6">
             Qué incluye este sistema
-          </p>
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+          </Etiqueta>
+          <div className="divide-y divide-linea border-y border-linea">
             {servicio.incluye.map((item, index) => (
               <div
                 key={index}
                 ref={(el) => (incluyeRef.current[index] = el)}
-                className="flex items-start gap-3"
+                className="flex items-start gap-3 py-espacio-2"
               >
-                <FiCheckCircle className="text-green text-sm mt-0.5 flex-shrink-0" />
-                <span className="text-white/80 text-sm leading-relaxed">
-                  {item}
+                <span className="text-acido" aria-hidden="true">
+                  —
                 </span>
+                <span className="text-tinta-suave text-cuerpo-s">{item}</span>
               </div>
             ))}
           </div>
         </div>
 
         {/* ── Preguntas frecuentes ─────────────────────────────────────────── */}
-        <div className="border border-white/10 border-t-0 p-8 md:p-10 mb-16">
-          <p className="text-[10px] font-mono text-green uppercase tracking-[0.2em] mb-6">
+        <div className="border border-linea p-8 md:p-10 mb-16">
+          <Etiqueta variante="texto" className="mb-6">
             Preguntas frecuentes
-          </p>
-          <div className="space-y-px">
+          </Etiqueta>
+          <div className="divide-y divide-linea border-y border-linea">
             {servicio.faqs?.map((item, index) => {
               const isOpen = openIndex === index;
               return (
-                <div key={index} className="bg-black">
+                <div key={index}>
                   <button
                     onClick={() => toggle(index)}
-                    className="w-full flex items-center justify-between p-6 md:p-8 text-left hover:bg-white/[0.02] transition-colors duration-200"
+                    className="w-full flex items-center justify-between p-6 md:p-8 text-left transition-colors duration-200 hover:bg-fondo-elevado/50"
                   >
-                    <span
-                      className={`text-sm font-semibold pr-8 transition-colors duration-200 ${
-                        isOpen ? "text-green" : "text-white"
-                      }`}
-                    >
+                    <span className="text-cuerpo text-tinta pr-8">
                       {item.title}
                     </span>
                     <div
                       className={`w-7 h-7 border flex items-center justify-center flex-shrink-0 transition-all duration-200 ${
                         isOpen
-                          ? "border-green bg-green text-black"
-                          : "border-white/20 text-gray"
+                          ? "border-acido bg-acido text-black"
+                          : "border-linea text-tinta-tenue"
                       }`}
                     >
                       {isOpen ? (
@@ -275,8 +240,8 @@ const ServicePage = ({ params: paramsPromise }) => {
                       isOpen ? "max-h-[300px] opacity-100" : "max-h-0 opacity-0"
                     }`}
                   >
-                    <div className="px-6 md:px-8 pb-6 border-t border-white/5">
-                      <p className="text-gray text-sm leading-relaxed pt-4">
+                    <div className="px-6 md:px-8 pb-6 border-t border-linea">
+                      <p className="text-tinta-suave text-cuerpo-s pt-4">
                         {item.content}
                       </p>
                     </div>
@@ -290,38 +255,32 @@ const ServicePage = ({ params: paramsPromise }) => {
         {/* ── CTA ───────────────────────────────────────────────────────────── */}
         <div
           ref={ctaRef}
-          className="border border-white/10 p-10 md:p-14 relative overflow-hidden"
+          className="border border-linea p-10 md:p-14 relative overflow-hidden"
         >
           <div className="relative z-10 flex flex-col lg:flex-row items-start lg:items-center justify-between gap-8">
             <div className="space-y-3">
-              <h3 className="font-anton text-4xl md:text-5xl text-white uppercase leading-[0.95] tracking-tight">
-                ¿Listo para <span className="text-green">implementar</span> este
+              <h3 className="font-anton text-titular-m text-white uppercase">
+                ¿Listo para <span className="text-acido">implementar</span> este
                 sistema?
               </h3>
-              <p className="text-gray leading-relaxed max-w-lg">
+              <p className="text-tinta-suave text-cuerpo max-w-lg">
                 Agenda un diagnóstico y descubre cómo este nivel puede
                 transformar tu negocio.
               </p>
-              <p className="text-xs text-gray font-mono">
+              <p className="font-mono uppercase text-etiqueta text-tinta-tenue">
                 Diagnóstico en 24h · Sin compromiso
               </p>
             </div>
 
             <div className="flex flex-col sm:flex-row gap-4 flex-shrink-0">
-              <Link
-                href="/cotizacion"
-                className="group inline-flex items-center gap-2 px-7 py-3.5 bg-green text-black font-bold text-sm uppercase tracking-wide hover:bg-white transition-colors duration-200 whitespace-nowrap"
-              >
+              <Boton href="/cotizacion" variante="primario">
                 Solicitar diagnóstico
-                <FiArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform duration-200" />
-              </Link>
+                <FiArrowRight className="w-4 h-4" />
+              </Boton>
 
-              <Link
-                href="/proyectos"
-                className="inline-flex items-center gap-2 px-7 py-3.5 border border-white/20 text-white font-bold text-sm uppercase tracking-wide hover:border-white/40 hover:bg-white/5 transition-all duration-200 whitespace-nowrap"
-              >
-                Ver proyectos
-              </Link>
+              <Boton href="/servicios" variante="secundario">
+                Ver servicios
+              </Boton>
             </div>
           </div>
         </div>
