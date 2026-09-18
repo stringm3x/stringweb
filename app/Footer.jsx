@@ -15,6 +15,7 @@ import {
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { REVEAL_START } from "@/app/lib/scrollTriggerDefaults";
+import { Boton } from "@/app/components/ui/Boton";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -32,25 +33,21 @@ const socialLinks = [
     icon: FaInstagram,
     href: "https://www.instagram.com/stringwebmx/",
     label: "Instagram",
-    color: "hover:text-pink-500",
   },
   {
     icon: FaWhatsapp,
     href: "https://wa.me/525545524847?text=¡Hola!%20Quiero%20más%20info%20sobre%20STRING",
     label: "WhatsApp",
-    color: "hover:text-green",
   },
   {
     icon: FaFacebookF,
     href: "https://www.facebook.com/profile.php?id=61576042750915",
     label: "Facebook",
-    color: "hover:text-blue-500",
   },
   {
     icon: FaTiktok,
     href: "https://www.tiktok.com/@stringmx",
     label: "TikTok",
-    color: "hover:text-gray-300",
   },
 ];
 
@@ -288,27 +285,23 @@ const Footer = () => {
                     target="_blank"
                     rel="noopener noreferrer"
                     aria-label={social.label}
-                    className={`flex items-center gap-2 px-3 py-2 bg-white/5 hover:bg-white/10 transition-all duration-300 hover:scale-105 text-sm text-gray ${social.color}`}
+                    className="flex items-center justify-center w-12 h-12 border border-linea text-gray hover:text-green transition-colors duration-200"
                   >
-                    <social.icon className="text-base" />
-                    <span>{social.label}</span>
+                    <social.icon className="text-lg" />
                   </Link>
                 </div>
               ))}
             </div>
 
             {/* CTA Footer */}
-            <div className="mt-6 p-4 border border-green/20 bg-green/5">
+            <div className="mt-6 p-4 bg-fondo-elevado border border-acido">
               <p className="text-xs text-gray mb-3">
                 ¿Listo para construir tu sistema?
               </p>
-              <Link
-                href="/cotizacion"
-                className="inline-flex items-center gap-2 text-sm font-semibold text-green hover:gap-3 transition-all duration-200"
-              >
+              <Boton href="/cotizacion" variante="primario" className="w-full">
                 Solicitar diagnóstico
                 <FaArrowRight className="text-xs" />
-              </Link>
+              </Boton>
             </div>
           </div>
         </div>

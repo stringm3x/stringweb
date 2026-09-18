@@ -3,9 +3,10 @@
 import { useState, useEffect } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion, AnimatePresence, useReducedMotion } from "framer-motion";
 import { FiMenu, FiX, FiArrowRight } from "react-icons/fi";
 import { FaWhatsapp } from "react-icons/fa";
+import { Boton } from "./components/ui/Boton";
 
 const menuItems = [
   { label: "Inicio", href: "/" },
@@ -20,6 +21,7 @@ export default function Header() {
   const [isOpen, setIsOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const pathname = usePathname();
+  const shouldReduceMotion = useReducedMotion();
 
   // Detectar scroll
   useEffect(() => {
@@ -37,6 +39,10 @@ export default function Header() {
       document.body.style.overflow = "unset";
     };
   }, [isOpen]);
+
+  const microHover = shouldReduceMotion
+    ? {}
+    : { whileHover: { scale: 1.1 }, whileTap: { scale: 0.95 } };
 
   return (
     <>
@@ -61,10 +67,7 @@ export default function Header() {
             {/* Botones derecha */}
             <div className="flex items-center gap-3">
               {/* WhatsApp */}
-              <motion.div
-                whileHover={{ scale: 1.1 }}
-                whileTap={{ scale: 0.95 }}
-              >
+              <motion.div {...microHover}>
                 <Link
                   href="https://wa.me/525545524847?text=¡Hola!%20Quiero%20más%20info%20sobre%20STRING"
                   target="_blank"
@@ -78,8 +81,7 @@ export default function Header() {
 
               {/* Hamburguesa */}
               <motion.button
-                whileHover={{ scale: 1.1 }}
-                whileTap={{ scale: 0.95 }}
+                {...microHover}
                 onClick={() => setIsOpen(true)}
                 className="bg-fondo-elevado p-2.5 rounded-full border border-white/30 hover:border-white hover:bg-white/20 transition-all duration-200"
                 aria-label="Abrir menú"
@@ -100,18 +102,22 @@ export default function Header() {
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
-              transition={{ duration: 0.3 }}
+              transition={{ duration: shouldReduceMotion ? 0 : 0.3 }}
               className="fixed inset-0 bg-fondo z-40"
               onClick={() => setIsOpen(false)}
             />
 
             {/* Panel */}
             <motion.div
-              initial={{ x: "100%" }}
+              initial={{ x: shouldReduceMotion ? 0 : "100%" }}
               animate={{ x: 0 }}
-              exit={{ x: "100%" }}
-              transition={{ type: "spring", damping: 25, stiffness: 200 }}
-              className="fixed top-0 right-0 bottom-0 w-full sm:w-[400px] bg-black z-50"
+              exit={{ x: shouldReduceMotion ? 0 : "100%" }}
+              transition={
+                shouldReduceMotion
+                  ? { duration: 0 }
+                  : { type: "spring", damping: 25, stiffness: 200 }
+              }
+              className="fixed top-0 right-0 bottom-0 w-full sm:w-[400px] bg-fondo-elevado z-50"
             >
               {/* Header del panel */}
               <div className="flex justify-between items-center p-6">
@@ -119,10 +125,11 @@ export default function Header() {
                   STRING
                 </span>
                 <motion.button
-                  whileHover={{ scale: 1.1, rotate: 90 }}
-                  whileTap={{ scale: 0.95 }}
+                  {...(shouldReduceMotion
+                    ? {}
+                    : { whileHover: { scale: 1.1, rotate: 90 }, whileTap: { scale: 0.95 } })}
                   onClick={() => setIsOpen(false)}
-                  className="w-11 h-11 bg-white/10 rounded-full flex items-center justify-center border border-white/20 hover:bg-white/20 transition-colors"
+                  className="w-11 h-11 min-w-[48px] min-h-[48px] bg-white/10 rounded-full flex items-center justify-center border border-white/20 hover:bg-white/20 transition-colors"
                   aria-label="Cerrar menú"
                 >
                   <FiX className="text-white text-xl" />
@@ -136,18 +143,21 @@ export default function Header() {
                   return (
                     <motion.div
                       key={item.href}
-                      initial={{ opacity: 0, x: 50 }}
+                      initial={{
+                        opacity: shouldReduceMotion ? 1 : 0,
+                        x: shouldReduceMotion ? 0 : 50,
+                      }}
                       animate={{ opacity: 1, x: 0 }}
-                      transition={{ delay: index * 0.08 }}
+                      transition={{ delay: shouldReduceMotion ? 0 : index * 0.08 }}
                     >
                       <Link
                         href={item.href}
                         onClick={() => setIsOpen(false)}
-                        className="block py-4 border-b border-white/10"
+                        className="flex items-center min-h-[48px] py-4 border-b border-white/10"
                       >
-                        <div className="flex items-center justify-between group">
+                        <div className="flex items-center justify-between w-full group">
                           <span
-                            className={`text-2xl sm:text-3xl font-bold transition-colors duration-200 ${
+                            className={`font-mono uppercase text-etiqueta transition-colors duration-200 ${
                               isActive
                                 ? "text-green"
                                 : "text-white/60 group-hover:text-white"
@@ -171,23 +181,24 @@ export default function Header() {
 
               {/* Footer del panel */}
               <motion.div
-                initial={{ opacity: 0 }}
+                initial={{ opacity: shouldReduceMotion ? 1 : 0 }}
                 animate={{ opacity: 1 }}
-                transition={{ delay: 0.5 }}
+                transition={{ delay: shouldReduceMotion ? 0 : 0.5 }}
                 className="absolute bottom-8 left-6 sm:left-8 right-6 sm:right-8"
               >
                 <div className="border-t border-white/10 pt-6 space-y-4">
                   <p className="text-white/40 text-sm">
                     ¿Listo para construir tu sistema?
                   </p>
-                  <Link
+                  <Boton
                     href="/cotizacion"
+                    variante="primario"
                     onClick={() => setIsOpen(false)}
-                    className="inline-flex items-center gap-2 text-green hover:gap-3 transition-all duration-200 group"
+                    className="w-full"
                   >
-                    <span className="font-semibold">Solicitar diagnóstico</span>
-                    <FiArrowRight className="group-hover:translate-x-1 transition-transform" />
-                  </Link>
+                    Solicitar diagnóstico
+                    <FiArrowRight />
+                  </Boton>
                 </div>
               </motion.div>
             </motion.div>

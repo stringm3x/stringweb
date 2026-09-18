@@ -37,14 +37,20 @@ export function Boton({
 
     if (esExterno) {
       return (
-        <a href={href} target="_blank" rel="noopener noreferrer" className={clases}>
+        <a
+          href={href}
+          target="_blank"
+          rel="noopener noreferrer"
+          onClick={onClick}
+          className={clases}
+        >
           {children}
         </a>
       );
     }
 
     return (
-      <Link href={href} className={clases}>
+      <Link href={href} onClick={onClick} className={clases}>
         {children}
       </Link>
     );
