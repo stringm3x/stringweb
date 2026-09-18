@@ -6,7 +6,7 @@ import Link from "next/link";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { REVEAL_START } from "@/app/lib/scrollTriggerDefaults";
-import { FiArrowRight } from "react-icons/fi";
+import { FiArrowRight, FiStar } from "react-icons/fi";
 import servicios from "./data";
 
 gsap.registerPlugin(ScrollTrigger);
@@ -155,6 +155,7 @@ const PageServices = () => {
         <div className="grid grid-cols-1 md:grid-cols-2 gap-px bg-white/5">
           {servicios.map((servicio, index) => {
             const Icon = servicio.icon;
+            const destacado = servicio.id === "3";
             return (
               <Link
                 href={`/servicios/${servicio.id}`}
@@ -163,8 +164,18 @@ const PageServices = () => {
               >
                 <div
                   ref={(el) => (cardsRef.current[index] = el)}
-                  className="relative bg-black overflow-hidden h-full hover:bg-white/[0.03] transition-colors duration-300"
+                  className={`relative overflow-hidden h-full transition-colors duration-300 ${
+                    destacado
+                      ? "border border-green bg-green/5 hover:bg-green/10"
+                      : "bg-black hover:bg-white/[0.03]"
+                  }`}
                 >
+                  {destacado && (
+                    <span className="absolute -top-3 left-6 z-10 inline-flex items-center gap-1.5 bg-green px-3 py-1 font-mono text-[10px] font-bold uppercase tracking-widest text-black">
+                      <FiStar className="text-xs" />
+                      Recomendado
+                    </span>
+                  )}
                   {/* Imagen */}
                   <div className="relative h-52 w-full overflow-hidden">
                     <Image
