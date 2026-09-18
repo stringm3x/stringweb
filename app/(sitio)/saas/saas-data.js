@@ -108,43 +108,17 @@ export const planes = [
   },
 ];
 
-// ── Comparativa vs competencia ──────────────────────────────────────────────────
-export const comparativa = [
-  {
-    diferenciador: "Más barato con más features",
-    vsQuien: "Gym&i Starter",
-    dato: "$799 vs $927 real (con IVA) + miembros/staff/planes ilimitados",
-  },
-  {
-    diferenciador: "API pública + SDK",
-    vsQuien: "Gym&i, Klasius",
-    dato: "6 endpoints REST + 4 Web Components — nadie en México",
-  },
-  {
-    diferenciador: "Kiosco de autoservicio",
-    vsQuien: "Todos",
-    dato: "El miembro paga sin staff — único en el mercado mexicano",
-  },
-  {
-    diferenciador: "3 capas de WhatsApp juntas",
-    vsQuien: "Todos",
-    dato: "Automático + Bot IA + Inbox integrado — nadie las tiene las tres",
-  },
-  {
-    diferenciador: "Retroalimentación + Google Maps",
-    vsQuien: "Todos",
-    dato: "Rating mensual + botón directo a reseña — diferenciador único",
-  },
-  {
-    diferenciador: "Sin IVA adicional",
-    vsQuien: "Gym&i y otros",
-    dato: "Gym&i cobra +16% IVA encima del precio publicado",
-  },
-  {
-    diferenciador: "Miembros ilimitados",
-    vsQuien: "GymMaster, Gym&i Starter",
-    dato: "Todos los planes, desde Starter",
-  },
+// ── Diferenciadores ──────────────────────────────────────────────────────────
+export const diferenciadores = [
+  // TODO(copy): D2 pendiente — primer diferenciador por definir
+  "Precio final, sin IVA agregado después",
+  "Kiosco de autoservicio: el socio paga sin personal",
+  "Tres capas de WhatsApp: automático, bot de IA e inbox integrado",
+  "API pública y componentes web para el sitio del gimnasio",
+  "Control de acceso por QR sin comprar hardware",
+  "Retroalimentación con Google Maps",
+  "Acompañamiento del fundador en la puesta en marcha",
+  "Producto pensado y escrito en español mexicano",
 ];
 
 // ── Caso real ─────────────────────────────────────────────────────────────────

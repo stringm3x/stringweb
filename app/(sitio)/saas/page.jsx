@@ -7,7 +7,7 @@ import {
   problema,
   problemaCierre,
   planes,
-  comparativa,
+  diferenciadores,
   casoEvolutionGym,
 } from "./saas-data";
 
@@ -251,42 +251,20 @@ export default function SaasPage() {
             </div>
           </div>
 
-          {/* Comparativa */}
+          {/* Diferenciadores */}
           <div className="space-y-6">
             <p className="text-[10px] font-mono text-green uppercase tracking-widest text-center">
-              vs. la competencia
+              Diferenciadores
             </p>
-            <div className="overflow-x-auto">
-              <table className="w-full border-collapse text-sm min-w-[600px]">
-                <thead>
-                  <tr className="border-b border-white/10">
-                    <th className="text-left py-3 pr-4 text-[10px] font-mono text-gray uppercase tracking-widest">
-                      Diferenciador
-                    </th>
-                    <th className="text-left py-3 pr-4 text-[10px] font-mono text-gray uppercase tracking-widest">
-                      vs. quién
-                    </th>
-                    <th className="text-left py-3 text-[10px] font-mono text-gray uppercase tracking-widest">
-                      Dato concreto
-                    </th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {comparativa.map((row, i) => (
-                    <tr key={i} className="border-b border-white/5">
-                      <td className="py-3 pr-4 text-white font-semibold align-top">
-                        {row.diferenciador}
-                      </td>
-                      <td className="py-3 pr-4 text-gray align-top whitespace-nowrap">
-                        {row.vsQuien}
-                      </td>
-                      <td className="py-3 text-white/70 align-top">
-                        {row.dato}
-                      </td>
-                    </tr>
-                  ))}
-                </tbody>
-              </table>
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 border border-white/10 p-6 md:p-8">
+              {diferenciadores.map((item, i) => (
+                <div key={i} className="flex items-start gap-3">
+                  <FiCheckCircle className="text-green text-sm mt-0.5 flex-shrink-0" />
+                  <span className="text-white/80 text-sm leading-relaxed">
+                    {item}
+                  </span>
+                </div>
+              ))}
             </div>
           </div>
 
