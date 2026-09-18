@@ -66,9 +66,12 @@ export const metadata = {
   ],
   authors: [{ name: "STRING", url: "https://www.stringwebs.com/" }],
   icons: {
-    icon: "/ico.png",
-    shortcut: "/ico.png",
-    apple: "/ico.png",
+    icon: [
+      { url: "/favicon-16x16.png", sizes: "16x16", type: "image/png" },
+      { url: "/favicon-32x32.png", sizes: "32x32", type: "image/png" },
+    ],
+    shortcut: "/favicon-32x32.png",
+    apple: "/apple-icon.png",
   },
   openGraph: {
     title: "STRING — Sistemas Digitales Estratégicos",
@@ -127,7 +130,7 @@ export default function RootLayout({ children }) {
   return (
     <html lang="es-MX" className="dark">
       <head>
-        <link rel="apple-touch-icon" href="/ico.png" />
+        <link rel="apple-touch-icon" href="/apple-icon.png" />
         <link rel="manifest" href="/manifest.json" />
         <meta name="theme-color" content="#50ff05" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
