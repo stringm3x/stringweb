@@ -44,8 +44,8 @@ export async function POST(request) {
     await mailer.sendMail({
       from: `"STRING Diagnósticos" <${process.env.SMTP_FROM}>`,
       to: process.env.NOTIFICATION_EMAIL,
-      replyTo: data.email,
-      subject: `Nuevo diagnóstico: ${data.name} — ${data.projectType}`,
+      ...(data.email ? { replyTo: data.email } : {}),
+      subject: `Nuevo diagnóstico: ${data.name} — ${data.businessType}`,
       html: generateEmailTemplate(data),
     });
 

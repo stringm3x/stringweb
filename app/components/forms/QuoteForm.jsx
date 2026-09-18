@@ -64,6 +64,7 @@ export const QuoteForm = () => {
       name: "",
       email: "",
       whatsapp: "",
+      businessType: "",
       projectType: "",
       objective: "",
       idealDate: "",
@@ -277,7 +278,6 @@ export const QuoteForm = () => {
               register={register}
               error={errors.email?.message}
               placeholder="juan@email.com"
-              required
             />
           </div>
 
@@ -297,9 +297,18 @@ export const QuoteForm = () => {
               name="projectType"
               register={register}
               error={errors.projectType?.message}
-              required
             />
           </div>
+
+          {/* Tipo de negocio */}
+          <FormField
+            label="Tipo de negocio"
+            name="businessType"
+            register={register}
+            error={errors.businessType?.message}
+            placeholder="Ej. Gimnasio, restaurante, consultoría..."
+            required
+          />
 
           {/* Info del nivel seleccionado */}
           {selectedLevelData && (
@@ -316,9 +325,9 @@ export const QuoteForm = () => {
             </div>
           )}
 
-          {/* Objetivo */}
+          {/* Qué te está pasando hoy */}
           <FormField
-            label="Objetivo del proyecto"
+            label="¿Qué te está pasando hoy?"
             name="objective"
             type="textarea"
             register={register}
@@ -336,7 +345,6 @@ export const QuoteForm = () => {
               type="date"
               register={register}
               error={errors.idealDate?.message}
-              required
             />
             <FormField
               label="Presupuesto estimado (MXN)"
@@ -345,7 +353,6 @@ export const QuoteForm = () => {
               register={register}
               error={errors.budget?.message}
               placeholder="8000"
-              required
             />
           </div>
 

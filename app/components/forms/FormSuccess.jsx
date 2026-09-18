@@ -20,16 +20,36 @@ export const FormSuccess = ({ data, onReset }) => {
     nivel4: "Sistema Especializado",
   };
 
+  const whatsappLines = [
+    `Nombre: ${data.name}`,
+    `Tipo de negocio: ${data.businessType}`,
+    data.email && `Email: ${data.email}`,
+    `WhatsApp: ${data.whatsapp}`,
+    data.projectType &&
+      `Sistema: ${levelLabels[data.projectType] || data.projectType}`,
+    `Qué te está pasando: ${data.objective}`,
+    data.idealDate && `Fecha ideal: ${data.idealDate}`,
+    data.budget &&
+      `Presupuesto: $${Number(data.budget).toLocaleString("es-MX")} MXN`,
+  ].filter(Boolean);
+
   const whatsappUrl = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(
     `Hola, acabo de solicitar un diagnóstico en stringwebs.com:\n\n` +
-      `Nombre: ${data.name}\n` +
-      `Email: ${data.email}\n` +
-      `WhatsApp: ${data.whatsapp}\n` +
-      `Sistema: ${levelLabels[data.projectType] || data.projectType}\n` +
-      `Objetivo: ${data.objective}\n` +
-      `Fecha ideal: ${data.idealDate}\n` +
-      `Presupuesto: $${Number(data.budget).toLocaleString("es-MX")} MXN`
+      whatsappLines.join("\n")
   )}`;
+
+  const resumenItems = [
+    { label: "Tipo de negocio", value: data.businessType },
+    data.projectType && {
+      label: "Sistema",
+      value: levelLabels[data.projectType] || data.projectType,
+    },
+    data.budget && {
+      label: "Presupuesto",
+      value: `$${Number(data.budget).toLocaleString("es-MX")} MXN`,
+    },
+    data.idealDate && { label: "Fecha ideal", value: data.idealDate },
+  ].filter(Boolean);
 
   useEffect(() => {
     const tl = gsap.timeline();
@@ -97,17 +117,7 @@ export const FormSuccess = ({ data, onReset }) => {
           <p className="text-[10px] font-mono text-green uppercase tracking-widest mb-3">
             Tu solicitud
           </p>
-          {[
-            {
-              label: "Sistema",
-              value: levelLabels[data.projectType] || data.projectType,
-            },
-            {
-              label: "Presupuesto",
-              value: `$${Number(data.budget).toLocaleString("es-MX")} MXN`,
-            },
-            { label: "Fecha ideal", value: data.idealDate },
-          ].map(({ label, value }) => (
+          {resumenItems.map(({ label, value }) => (
             <div key={label} className="flex justify-between items-center">
               <span className="text-xs text-gray font-mono">{label}</span>
               <span className="text-xs text-white font-semibold">{value}</span>
