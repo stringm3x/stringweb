@@ -95,6 +95,15 @@ module.exports = {
       3.5: "0.875rem",
     },
     extend: {
+      spacing: {
+        "espacio-1": "4px",
+        "espacio-2": "8px",
+        "espacio-3": "16px",
+        "espacio-4": "24px",
+        "espacio-5": "40px",
+        "espacio-6": "64px",
+        "espacio-7": "96px",
+      },
       fontFamily: {
         sans: ["var(--font-geist-sans)", "system-ui", "-apple-system", "sans-serif"],
         mono: ["var(--font-ubuntu-mono)", "ui-monospace", "monospace"],
