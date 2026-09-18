@@ -3,241 +3,198 @@
 import React, { useEffect, useRef } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { FiArrowRight, FiArrowUpRight } from "react-icons/fi";
-import { HOME_STATS } from "@/app/lib/stats";
+import {
+  SOCIOS_CARGADOS,
+  SOCIOS_ACTIVOS,
+  SAAS_EN_PRODUCCION,
+  DIAGNOSTICO_INICIAL,
+} from "@/app/lib/stats";
 import { Etiqueta } from "@/app/components/ui/Etiqueta";
 import { Boton } from "@/app/components/ui/Boton";
 import { FranjaDatos } from "@/app/components/ui/FranjaDatos";
 
 gsap.registerPlugin(ScrollTrigger);
 
+const STATS_ESCRITORIO = [
+  { value: SOCIOS_CARGADOS, label: "Socios cargados" },
+  { value: SOCIOS_ACTIVOS, label: "Activos hoy" },
+  { value: SAAS_EN_PRODUCCION, label: "SaaS en producción" },
+  { value: DIAGNOSTICO_INICIAL, label: "Diagnóstico inicial" },
+];
+
+const STATS_CELULAR = [
+  { value: SOCIOS_CARGADOS, label: "Cargados" },
+  { value: SOCIOS_ACTIVOS, label: "Activos" },
+  { value: DIAGNOSTICO_INICIAL, label: "Diagnóstico" },
+];
+
+const CLIP_ESCRITORIO =
+  "M 36 604 C 240 566 470 520 700 462 C 930 404 1180 348 1436 306 L 1440 474 C 1180 516 930 572 700 632 C 470 692 240 740 44 762 Z";
+const CLIP_MOVIL =
+  "M -8 392 C 70 374 158 350 248 322 C 310 302 356 288 398 276 L 398 396 C 352 408 306 424 244 444 C 154 472 66 496 -8 514 Z";
+
 // ─── Componente ───────────────────────────────────────────────────────────────
 const Hero = () => {
-  const containerRef = useRef(null);
-  const overlayRef = useRef(null);
-  const lineTopRef = useRef(null);
+  const sectionRef = useRef(null);
+  const svgRef = useRef(null);
   const tagRef = useRef(null);
-  const line1Ref = useRef(null);
-  const line2Ref = useRef(null);
-  const line3Ref = useRef(null);
   const descRef = useRef(null);
   const ctaRef = useRef(null);
   const franjaRef = useRef(null);
-  const accentRef = useRef(null);
-  const scrollRef = useRef(null);
 
   useEffect(() => {
     const ctx = gsap.context(() => {
-      // ── Estado inicial ──────────────────────────────────────────────────────
       gsap.set(
-        [
-          tagRef.current,
-          line1Ref.current,
-          line2Ref.current,
-          line3Ref.current,
-          descRef.current,
-          ctaRef.current,
-          accentRef.current,
-          scrollRef.current,
-          franjaRef.current,
-        ],
-        { opacity: 0 }
+        [svgRef.current, tagRef.current, descRef.current, ctaRef.current, franjaRef.current],
+        { opacity: 0, y: 20 }
       );
 
-      gsap.set([line1Ref.current, line2Ref.current, line3Ref.current], {
-        y: 60,
-        skewY: 3,
-      });
-
-      gsap.set([tagRef.current, descRef.current, ctaRef.current, franjaRef.current], {
-        y: 20,
-      });
-      gsap.set(accentRef.current, {
-        scaleX: 0,
-        transformOrigin: "left center",
-      });
-
-      // ── Overlay de entrada ──────────────────────────────────────────────────
-      gsap.fromTo(
-        overlayRef.current,
-        { scaleX: 1, transformOrigin: "right center" },
-        {
-          scaleX: 0,
-          duration: 1.2,
-          ease: "expo.inOut",
-        }
-      );
-
-      // ── Línea superior ──────────────────────────────────────────────────────
-      gsap.fromTo(
-        lineTopRef.current,
-        { scaleX: 0, transformOrigin: "left center" },
-        { scaleX: 1, duration: 1, ease: "expo.out", delay: 0.3 }
-      );
-
-      // ── Timeline principal ──────────────────────────────────────────────────
-      const tl = gsap.timeline({ delay: 0.5 });
-
-      tl.to(tagRef.current, {
-        opacity: 1,
-        y: 0,
-        duration: 0.5,
-        ease: "power3.out",
-      })
-        .to(
-          [line1Ref.current, line2Ref.current, line3Ref.current],
-          {
-            opacity: 1,
-            y: 0,
-            skewY: 0,
-            stagger: 0.1,
-            duration: 0.7,
-            ease: "power4.out",
-          },
-          "-=0.2"
-        )
-        .to(
-          accentRef.current,
-          { scaleX: 1, duration: 0.6, ease: "expo.out" },
-          "-=0.3"
-        )
-        .to(
-          descRef.current,
-          { opacity: 1, y: 0, duration: 0.5, ease: "power3.out" },
-          "-=0.2"
-        )
-        .to(
-          ctaRef.current,
-          { opacity: 1, y: 0, duration: 0.5, ease: "power3.out" },
-          "-=0.3"
-        )
-        .to(
-          franjaRef.current,
-          { opacity: 1, y: 0, duration: 0.5, ease: "power3.out" },
-          "-=0.2"
-        )
-        .to(
-          scrollRef.current,
-          { opacity: 1, duration: 0.4, ease: "power2.out" },
-          "-=0.1"
-        );
-    }, containerRef);
+      const tl = gsap.timeline({ delay: 0.2 });
+      tl.to(tagRef.current, { opacity: 1, y: 0, duration: 0.5, ease: "power3.out" })
+        .to(svgRef.current, { opacity: 1, y: 0, duration: 0.7, ease: "power3.out" }, "-=0.3")
+        .to(descRef.current, { opacity: 1, y: 0, duration: 0.5, ease: "power3.out" }, "-=0.3")
+        .to(ctaRef.current, { opacity: 1, y: 0, duration: 0.5, ease: "power3.out" }, "-=0.3")
+        .to(franjaRef.current, { opacity: 1, y: 0, duration: 0.5, ease: "power3.out" }, "-=0.2");
+    }, sectionRef);
 
     return () => ctx.revert();
   }, []);
 
   return (
-    <section
-      ref={containerRef}
-      className="relative min-h-screen bg-black flex flex-col justify-center overflow-hidden"
-    >
-      {/* ── Overlay de entrada ─────────────────────────────────────────────── */}
-      <div
-        ref={overlayRef}
-        className="absolute inset-0 bg-acido z-50 pointer-events-none"
-      />
+    <section ref={sectionRef} className="relative bg-black overflow-hidden">
+      {/* h1 real, para lectores de pantalla — el titular visible vive en el SVG */}
+      <h1 className="sr-only">
+        No necesitas más seguidores. Necesitas un sistema.
+      </h1>
 
-      {/* ── Fondo: grid de puntos ──────────────────────────────────────────── */}
-      <div
-        className="absolute inset-0 opacity-[0.04]"
-        style={{
-          backgroundImage:
-            "radial-gradient(circle at 1px 1px, #50ff05 1px, transparent 0)",
-          backgroundSize: "40px 40px",
-        }}
-      />
+      <div className="pt-32 md:pt-40">
+        {/* Kicker */}
+        <div ref={tagRef} className="px-6 lg:px-24 mb-8 md:mb-12">
+          <Etiqueta variante="linea">Sistemas de conversión · CDMX</Etiqueta>
+        </div>
 
-      {/* ── Línea superior ────────────────────────────────────────────────── */}
-      <div
-        ref={lineTopRef}
-        className="absolute top-0 left-0 right-0 h-px bg-acido/40"
-        style={{ transformOrigin: "left center" }}
-      />
+        {/* Titular en SVG */}
+        <div ref={svgRef}>
+          <svg
+            viewBox="0 0 1440 900"
+            aria-hidden="true"
+            className="hidden md:block w-full h-auto"
+          >
+            <defs>
+              <clipPath id="hero-clip-escritorio">
+                <path d={CLIP_ESCRITORIO} />
+              </clipPath>
+            </defs>
+            <path d={CLIP_ESCRITORIO} className="fill-acido" />
+            <g className="fill-black">
+              <path d="M 1150 356 C 1240 342 1330 328 1424 316 L 1426 332 C 1332 344 1242 358 1152 372 Z" />
+              <path d="M 980 428 C 1040 418 1098 408 1156 398 L 1158 408 C 1100 418 1042 428 982 438 Z" />
+              <path d="M 120 690 C 220 676 322 660 420 642 L 422 654 C 324 672 222 688 122 702 Z" />
+              <path d="M 640 540 C 700 530 760 518 818 506 L 820 514 C 762 526 702 538 642 548 Z" />
+            </g>
+            <text
+              fontFamily="var(--font-anton-sans)"
+              fontSize="104"
+              letterSpacing="0.01em"
+              className="fill-tinta"
+            >
+              <tspan x="96" y="392">NO NECESITAS</tspan>
+              <tspan x="96" y="488">MÁS SEGUIDORES.</tspan>
+              <tspan x="96" y="584">NECESITAS UN SISTEMA.</tspan>
+            </text>
+            <text
+              fontFamily="var(--font-anton-sans)"
+              fontSize="104"
+              letterSpacing="0.01em"
+              className="fill-black"
+              clipPath="url(#hero-clip-escritorio)"
+            >
+              <tspan x="96" y="392">NO NECESITAS</tspan>
+              <tspan x="96" y="488">MÁS SEGUIDORES.</tspan>
+              <tspan x="96" y="584">NECESITAS UN SISTEMA.</tspan>
+            </text>
+          </svg>
 
-      {/* ── Número decorativo de fondo ────────────────────────────────────── */}
-      <div className="absolute right-0 top-1/2 -translate-y-1/2 font-anton text-[28vw] leading-none text-white/[0.02] select-none pointer-events-none pr-4 hidden lg:block">
-        S
-      </div>
+          <svg
+            viewBox="0 0 390 844"
+            aria-hidden="true"
+            className="md:hidden w-full h-auto"
+          >
+            <defs>
+              <clipPath id="hero-clip-movil">
+                <path d={CLIP_MOVIL} />
+              </clipPath>
+            </defs>
+            <path d={CLIP_MOVIL} className="fill-acido" />
+            <g className="fill-black">
+              <path d="M 250 338 C 300 324 348 310 394 298 L 394 308 C 348 320 300 334 250 348 Z" />
+              <path d="M 20 452 C 80 440 142 424 200 408 L 200 416 C 142 432 80 448 20 460 Z" />
+            </g>
+            <text
+              fontFamily="var(--font-anton-sans)"
+              fontSize="46"
+              letterSpacing="0.01em"
+              className="fill-tinta"
+            >
+              <tspan x="24" y="300">NO NECESITAS</tspan>
+              <tspan x="24" y="344">MÁS SEGUIDORES.</tspan>
+              <tspan x="24" y="388">NECESITAS UN</tspan>
+              <tspan x="24" y="432">SISTEMA.</tspan>
+            </text>
+            <text
+              fontFamily="var(--font-anton-sans)"
+              fontSize="46"
+              letterSpacing="0.01em"
+              className="fill-black"
+              clipPath="url(#hero-clip-movil)"
+            >
+              <tspan x="24" y="300">NO NECESITAS</tspan>
+              <tspan x="24" y="344">MÁS SEGUIDORES.</tspan>
+              <tspan x="24" y="388">NECESITAS UN</tspan>
+              <tspan x="24" y="432">SISTEMA.</tspan>
+            </text>
+          </svg>
+        </div>
 
-      {/* ── Contenido principal ───────────────────────────────────────────── */}
-      <div className="relative max-w-7xl mx-auto w-full px-6 sm:px-8 lg:px-12 pt-32 pb-espacio-6 lg:pb-espacio-7">
-        <div className="space-y-10">
-          {/* Tag */}
-          <div ref={tagRef}>
-            <Etiqueta conPunto>Sistemas de conversión · CDMX</Etiqueta>
-          </div>
+        {/* Bajada */}
+        <div ref={descRef} className="px-6 lg:px-24 mt-8 md:mt-10">
+          <p className="hidden md:block max-w-2xl text-cuerpo-l text-tinta-suave">
+            El sistema trabaja aunque tu negocio no esté disponible. Captamos,
+            registramos y damos seguimiento a cada prospecto — sin que
+            dependas de tu memoria.
+          </p>
+          <p className="md:hidden text-cuerpo text-tinta-suave">
+            El sistema trabaja aunque tu negocio no esté disponible.
+          </p>
+        </div>
 
-          {/* Headline */}
-          <div className="overflow-hidden">
-            <div className="space-y-1">
-              <div ref={line1Ref} className="overflow-hidden">
-                <p className="font-anton text-titular-m sm:text-titular-l lg:text-titular-xl text-white uppercase">
-                  No necesitas
-                </p>
-              </div>
-              <div ref={line2Ref} className="overflow-hidden flex items-end gap-4">
-                <p className="font-anton text-titular-m sm:text-titular-l lg:text-titular-xl text-acido uppercase">
-                  más seguidores.
-                </p>
-              </div>
-              <div ref={line3Ref} className="overflow-hidden">
-                <p className="font-anton text-titular-m sm:text-titular-l lg:text-titular-xl text-white uppercase">
-                  Necesitas un{" "}
-                  <span className="relative inline-block">
-                    sistema
-                    <span
-                      ref={accentRef}
-                      className="absolute bottom-1 left-0 right-0 h-[4px] bg-acido"
-                    />
-                  </span>
-                  .
-                </p>
-              </div>
-            </div>
-          </div>
-
-          {/* Descripción */}
-          <div ref={descRef} className="max-w-lg">
-            <p className="text-tinta-suave text-cuerpo-l">
-              Transformamos tu presencia digital en un sistema que genera
-              clientes reales. Diagnóstico, estrategia y ejecución —{" "}
-              <span className="text-white">sin plantillas, sin excusas.</span>
-            </p>
-          </div>
-
-          {/* CTAs */}
-          <div ref={ctaRef} className="flex flex-wrap items-center gap-4">
-            <Boton href="/cotizacion" variante="primario">
-              Solicitar diagnóstico
-              <FiArrowRight className="w-4 h-4" />
-            </Boton>
-
-            <Boton href="/servicios" variante="secundario">
-              Ver los 4 sistemas
-              <FiArrowUpRight className="w-4 h-4" />
-            </Boton>
-          </div>
+        {/* CTAs */}
+        <div
+          ref={ctaRef}
+          className="px-6 lg:px-24 mt-8 flex flex-col sm:flex-row items-stretch sm:items-center gap-4"
+        >
+          <Boton href="/cotizacion" variante="primario" className="w-full sm:w-auto">
+            Solicitar diagnóstico
+          </Boton>
+          <Boton
+            href="/gym/registro?plan=pro"
+            variante="secundario"
+            className="w-full sm:w-auto"
+          >
+            Probar STRING GYM
+          </Boton>
         </div>
 
         {/* Franja de cifras */}
-        <div ref={franjaRef} className="mt-espacio-6 lg:mt-espacio-7">
-          <FranjaDatos datos={HOME_STATS} />
+        <div ref={franjaRef} className="mt-espacio-6 md:mt-espacio-7">
+          <div className="hidden md:block">
+            <FranjaDatos datos={STATS_ESCRITORIO} compacta />
+          </div>
+          <div className="md:hidden">
+            <FranjaDatos datos={STATS_CELULAR} compacta />
+          </div>
         </div>
       </div>
-
-      {/* ── Scroll indicator ──────────────────────────────────────────────── */}
-      <div
-        ref={scrollRef}
-        className="absolute bottom-8 left-6 sm:left-8 lg:left-12 flex items-center gap-3"
-      >
-        <div className="w-px h-10 bg-acido" />
-        <span className="text-etiqueta text-tinta-suave uppercase font-mono">
-          Scroll
-        </span>
-      </div>
-
-      {/* ── Línea inferior ────────────────────────────────────────────────── */}
-      <div className="absolute bottom-0 left-0 right-0 h-px bg-white/5" />
     </section>
   );
 };

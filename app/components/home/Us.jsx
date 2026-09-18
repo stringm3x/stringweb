@@ -73,7 +73,7 @@ const Us = () => {
           <div className="space-y-8">
             {/* Tag */}
             <div ref={tagRef}>
-              <Etiqueta conPunto sobrePapel>
+              <Etiqueta variante="linea" sobrePapel>
                 STRING Studio
               </Etiqueta>
             </div>
