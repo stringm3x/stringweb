@@ -2,6 +2,7 @@ import { Geist, Anton, Ubuntu_Mono } from "next/font/google";
 import { Analytics } from "@vercel/analytics/react";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 import { Providers } from "./provider";
+import { Grano } from "./components/Grano";
 import "./globals.css";
 
 const organizationJsonLd = {
@@ -137,6 +138,7 @@ export default function RootLayout({ children }) {
         className={`${geistSans.variable} ${anton.variable} ${ubuntuMono.variable} font-sans bg-fondo text-tinta antialiased`}
       >
         <Providers>{children}</Providers>
+        <Grano />
         <Analytics />
         <SpeedInsights />
       </body>

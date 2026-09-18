@@ -16,6 +16,10 @@ function clasesVariante(variante, sobrePapel) {
     return "py-espacio-2 px-0 border-0 underline decoration-2 underline-offset-[6px] text-acido hover:text-tinta";
   }
 
+  if (variante === "sobreAcido") {
+    return "py-espacio-2 px-[28px] border-black bg-black text-acido hover:bg-acido hover:text-black";
+  }
+
   // primario
   if (sobrePapel) {
     return "py-espacio-2 px-[28px] border-acido-profundo bg-acido-profundo text-white hover:bg-tinta hover:text-acido-profundo";

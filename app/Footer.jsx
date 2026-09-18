@@ -16,7 +16,6 @@ import {
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { REVEAL_START } from "@/app/lib/scrollTriggerDefaults";
-import { Boton } from "@/app/components/ui/Boton";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -298,17 +297,6 @@ const Footer = () => {
                   </Link>
                 </div>
               ))}
-            </div>
-
-            {/* CTA Footer */}
-            <div className="mt-6 p-4 bg-fondo-elevado border border-acido">
-              <p className="text-xs text-gray mb-3">
-                ¿Listo para construir tu sistema?
-              </p>
-              <Boton href="/cotizacion" variante="primario" className="w-full">
-                Solicitar diagnóstico
-                <FaArrowRight className="text-xs" />
-              </Boton>
             </div>
           </div>
         </div>

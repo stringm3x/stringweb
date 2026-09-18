@@ -1,6 +1,12 @@
-export function FranjaDatos({ datos, sobrePapel = false, className = "" }) {
+export function FranjaDatos({ datos, sobrePapel = false, compacta = false, className = "" }) {
   const colorCifra = sobrePapel ? "text-acido-profundo" : "text-acido";
   const colorEtiqueta = sobrePapel ? "text-tinta-papel" : "text-tinta-tenue";
+  const tamanoCifra = compacta
+    ? "text-[30px] sm:text-[44px] leading-none"
+    : "text-titular-l";
+  const tamanoEtiqueta = compacta
+    ? "text-[12px] leading-[16px] tracking-[0.16em]"
+    : "text-etiqueta";
 
   return (
     <div
@@ -11,9 +17,9 @@ export function FranjaDatos({ datos, sobrePapel = false, className = "" }) {
           key={dato.label}
           className="border-b border-linea last:border-b-0 lg:border-b-0 px-4 py-6 text-center"
         >
-          <p className={`font-anton text-titular-l ${colorCifra}`}>{dato.value}</p>
+          <p className={`font-anton ${tamanoCifra} ${colorCifra}`}>{dato.value}</p>
           <p
-            className={`mt-espacio-2 font-mono uppercase text-etiqueta whitespace-pre-line ${colorEtiqueta}`}
+            className={`mt-espacio-2 font-mono uppercase ${tamanoEtiqueta} whitespace-pre-line ${colorEtiqueta}`}
           >
             {dato.label}
           </p>
