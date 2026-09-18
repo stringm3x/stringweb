@@ -6,6 +6,8 @@ import gsap from "gsap";
 import SplitType from "split-type";
 import { FiX, FiExternalLink } from "react-icons/fi";
 import { proyects } from "./data";
+import { Etiqueta } from "@/app/components/ui/Etiqueta";
+import { Cierre } from "@/app/components/ui/Cierre";
 
 // YUMA sigue en desarrollo: no se muestra en el sitio, pero sus datos e
 // imágenes se quedan intactos en ./data para cuando se lance.
@@ -150,42 +152,25 @@ const PageProyects = () => {
   };
 
   return (
+    <>
     <section
       ref={sectionRef}
-      className="bg-black min-h-screen px-6 sm:px-8 lg:px-12 py-24 relative overflow-hidden"
+      className="bg-black min-h-screen px-6 lg:px-24 py-espacio-6 lg:py-espacio-7 relative overflow-hidden"
     >
-      {/* ── Fondo decorativo ──────────────────────────────────────────────── */}
-      <div className="absolute inset-0 pointer-events-none">
-        <div
-          className="absolute inset-0 opacity-[0.03]"
-          style={{
-            backgroundImage:
-              "radial-gradient(circle at 1px 1px, #50ff05 1px, transparent 0)",
-            backgroundSize: "40px 40px",
-          }}
-        />
-      </div>
-
-      <div className="relative z-10 max-w-7xl mx-auto">
+      <div className="relative z-10 max-w-6xl mx-auto">
         {/* ── Header ────────────────────────────────────────────────────────── */}
-        <div className="mb-16 space-y-6">
+        <div className="mb-espacio-6 space-y-6">
           <div ref={tagRef}>
-            <span className="inline-flex items-center gap-2.5 px-3 py-1.5 border border-green/30 text-green text-xs font-mono uppercase tracking-[0.2em]">
-              <span className="w-1.5 h-1.5 rounded-full bg-green" />
-              Portafolio
-            </span>
+            <Etiqueta variante="linea">Portafolio</Etiqueta>
           </div>
 
-          <h1
-            ref={titleRef}
-            className="font-anton text-6xl sm:text-7xl md:text-8xl lg:text-9xl leading-[0.88] tracking-tighter text-white uppercase"
-          >
-            Nuestros <span className="text-green">proyectos</span>
+          <h1 ref={titleRef} className="font-anton text-titular-l text-white uppercase">
+            Nuestros <span className="text-acido">proyectos</span>
           </h1>
         </div>
 
         {/* ── Grid de proyectos ─────────────────────────────────────────────── */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-px bg-white/5 mt-12">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {proyectosVisibles.map((item, index) => (
             <div
               key={`${item.id}-${index}`}
@@ -193,41 +178,32 @@ const PageProyects = () => {
                 cardRefs.current[index] = el;
               }}
               onClick={() => handleProjectClick(item, index)}
-              className="relative cursor-pointer h-[320px] md:h-[420px] overflow-hidden group bg-black"
+              className="flex cursor-pointer flex-col border border-linea bg-fondo-elevado"
             >
-              <Image
-                src={item.img}
-                alt={item.id}
-                fill
-                className="object-cover transition-transform duration-700 group-hover:scale-105"
-                sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-              />
+              <div className="relative h-[240px] overflow-hidden">
+                <Image
+                  src={item.img}
+                  alt={item.id}
+                  fill
+                  className="object-cover"
+                  sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                />
+              </div>
 
-              {/* Overlay */}
-              <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/30 to-transparent opacity-60 group-hover:opacity-100 transition-opacity duration-500" />
-
-              {/* Badges */}
-              <div className="absolute top-4 left-4 right-4 flex justify-between items-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                <span className="px-2 py-1 bg-green text-black text-[10px] font-bold uppercase tracking-wider">
-                  {item.title}
+              <div className="flex flex-1 flex-col gap-2 p-6">
+                <span className="font-mono uppercase text-etiqueta text-tinta-tenue">
+                  {`PROYECTO ${String(index + 1).padStart(2, "0")} / ${String(
+                    proyectosVisibles.length
+                  ).padStart(2, "0")}`}
                 </span>
-                <span className="px-2 py-1 bg-fondo-elevado border border-white/20 text-white text-[10px] font-mono">
+                <h3 className="font-anton text-titular-m text-white uppercase">
+                  {item.id}
+                </h3>
+                <p className="text-cuerpo-s text-tinta-suave">{item.title}</p>
+                <span className="mt-auto font-mono uppercase text-etiqueta text-tinta-tenue">
                   {item.year}
                 </span>
               </div>
-
-              {/* Título */}
-              <div className="absolute bottom-0 left-0 right-0 p-6">
-                <h3 className="font-anton text-2xl text-white leading-tight tracking-tight group-hover:-translate-y-1 transition-transform duration-300">
-                  {item.id}
-                </h3>
-                <p className="text-[10px] font-mono text-green uppercase tracking-widest mt-1 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                  Ver proyecto →
-                </p>
-              </div>
-
-              {/* Borde inferior */}
-              <div className="absolute bottom-0 left-0 w-0 h-px bg-green group-hover:w-full transition-all duration-500" />
             </div>
           ))}
         </div>
@@ -258,7 +234,7 @@ const PageProyects = () => {
             ref={textRef}
             className="absolute inset-0 flex flex-col items-center justify-center text-white text-center px-6 md:px-16 space-y-6 z-10 overflow-y-auto py-12"
           >
-            <span className="text-[10px] font-mono text-green uppercase tracking-[0.3em]">
+            <span className="font-mono text-etiqueta text-green uppercase tracking-[0.3em]">
               {activeProject.title}
             </span>
 
@@ -290,6 +266,13 @@ const PageProyects = () => {
         </div>
       )}
     </section>
+
+      <Cierre
+        ctaTexto="Solicitar diagnóstico"
+        ctaHref="/cotizacion"
+        nota="Respuesta en 24 h · Sin compromiso"
+      />
+    </>
   );
 };
 
