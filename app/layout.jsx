@@ -79,14 +79,6 @@ export const metadata = {
       "Agencia de sistemas digitales en México. CRM para gimnasios, e-commerce y automatizaciones.",
     url: "https://www.stringwebs.com/",
     siteName: "STRING",
-    images: [
-      {
-        url: "/og-image.png",
-        width: 1200,
-        height: 630,
-        alt: "STRING — Sistemas Digitales Estratégicos",
-      },
-    ],
     locale: "es_MX",
     type: "website",
   },
@@ -95,7 +87,6 @@ export const metadata = {
     title: "STRING — Sistemas Digitales Estratégicos",
     description:
       "Agencia de sistemas digitales en México. CRM para gimnasios, e-commerce y automatizaciones.",
-    images: ["/og-image.png"],
     creator: "@stringmx",
   },
   robots: {
