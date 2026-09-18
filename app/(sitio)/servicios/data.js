@@ -1,15 +1,3 @@
-import {
-  FiTarget,
-  FiTrendingUp,
-  FiZap,
-  FiClock,
-  FiAward,
-  FiBarChart2,
-  FiUsers,
-} from "react-icons/fi";
-import { MdOutlineAnalytics, MdOutlineRocketLaunch } from "react-icons/md";
-import { RiTeamLine } from "react-icons/ri";
-
 const servicios = [
   {
     id: "1",
@@ -30,9 +18,6 @@ const servicios = [
       "Crear una presencia digital clara que convierta visitas en mensajes de clientes interesados.",
     ideal: "Negocios que dependen de Instagram, WhatsApp y recomendaciones",
     metric: "Desde $8,000",
-    gradient: "from-green to-green2",
-    icon: FiTarget,
-    color: "green",
     incluye: [
       "Diagnóstico digital inicial",
       "Estructura estratégica de página",
@@ -78,9 +63,6 @@ const servicios = [
       "Organizar los prospectos y evitar la pérdida de clientes interesados.",
     ideal: "Negocios con volumen creciente de consultas",
     metric: "Desde $18,000",
-    gradient: "from-green2 to-green3",
-    icon: FiTrendingUp,
-    color: "green",
     incluye: [
       "Todo el Sistema de Conversión",
       "Captura automática de leads",
@@ -127,9 +109,6 @@ const servicios = [
       "Automatizar la atención y seguimiento para escalar sin aumentar carga operativa.",
     ideal: "Negocios con alto volumen de consultas o que trabajan con citas",
     metric: "Desde $28,000",
-    gradient: "from-green3 to-green4",
-    icon: FiZap,
-    color: "green",
     incluye: [
       "Todo el Sistema de Captación",
       "Respuesta automática inmediata",
@@ -175,9 +154,6 @@ const servicios = [
     objetivo: "Crear infraestructura digital a medida para tu negocio.",
     ideal: "Empresas con procesos complejos o necesidades específicas",
     metric: "Desde $40,000",
-    gradient: "from-green4 to-green",
-    icon: MdOutlineRocketLaunch,
-    color: "green",
     incluye: [
       "Todo el Sistema Automatizado",
       "Desarrollo a medida según negocio",
