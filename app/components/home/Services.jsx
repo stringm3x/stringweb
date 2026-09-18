@@ -14,10 +14,8 @@ import {
   FiTrendingUp,
   FiZap,
   FiClock,
-  FiAward,
 } from "react-icons/fi";
-import { MdOutlineAnalytics, MdOutlineRocketLaunch } from "react-icons/md";
-import { RiTeamLine } from "react-icons/ri";
+import { MdOutlineRocketLaunch } from "react-icons/md";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -101,13 +99,6 @@ const items = [
   },
 ];
 
-const stats = [
-  { value: "4", label: "Sistemas\nactivos", icon: RiTeamLine },
-  { value: "1", label: "SaaS en\nproducción", icon: MdOutlineAnalytics },
-  { value: "70", label: "Miembros en\nEvolution GYM", icon: FiClock },
-  { value: "3", label: "Sectores\natendidos", icon: FiAward },
-];
-
 // ─── Componente ───────────────────────────────────────────────────────────────
 const Services = () => {
   const [openIndex, setOpenIndex] = useState(null);
@@ -116,7 +107,6 @@ const Services = () => {
   const tagRef = useRef(null);
   const titleRef = useRef(null);
   const descRef = useRef(null);
-  const statsRef = useRef([]);
   const cardsRef = useRef([]);
   const ctaRef = useRef(null);
 
@@ -127,7 +117,6 @@ const Services = () => {
         opacity: 0,
         y: 24,
       });
-      gsap.set(statsRef.current.filter(Boolean), { opacity: 0, y: 16 });
       gsap.set(cardsRef.current.filter(Boolean), { opacity: 0, y: 24 });
       gsap.set(ctaRef.current, { opacity: 0, y: 16 });
 
@@ -156,20 +145,6 @@ const Services = () => {
           { opacity: 1, y: 0, duration: 0.5, ease: "power3.out" },
           "-=0.3"
         );
-
-      // ── Stats ───────────────────────────────────────────────────────────────
-      gsap.to(statsRef.current.filter(Boolean), {
-        opacity: 1,
-        y: 0,
-        stagger: 0.08,
-        duration: 0.45,
-        ease: "power3.out",
-        scrollTrigger: {
-          trigger: statsRef.current[0],
-          start: REVEAL_START,
-          once: true,
-        },
-      });
 
       // ── Cards ───────────────────────────────────────────────────────────────
       gsap.to(cardsRef.current.filter(Boolean), {
@@ -247,28 +222,6 @@ const Services = () => {
             Cuatro niveles de automatización para cada etapa de tu negocio. Cada
             sistema incluye el anterior — siempre puedes escalar.
           </p>
-        </div>
-
-        {/* ── Stats ─────────────────────────────────────────────────────────── */}
-        <div className="grid grid-cols-4 gap-px bg-white/5 mb-16">
-          {stats.map((stat, i) => {
-            const Icon = stat.icon;
-            return (
-              <div
-                key={i}
-                ref={(el) => (statsRef.current[i] = el)}
-                className="bg-black px-4 py-6 text-center hover:bg-white/[0.03] transition-colors duration-200"
-              >
-                <Icon className="text-green text-xl mx-auto mb-2" />
-                <p className="font-anton text-2xl text-green leading-none mb-1">
-                  {stat.value}
-                </p>
-                <p className="text-[10px] text-gray uppercase tracking-wider leading-relaxed whitespace-pre-line">
-                  {stat.label}
-                </p>
-              </div>
-            );
-          })}
         </div>
 
         {/* ── Acordeones ────────────────────────────────────────────────────── */}

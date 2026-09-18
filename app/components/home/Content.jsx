@@ -18,27 +18,6 @@ import {
 gsap.registerPlugin(ScrollTrigger);
 
 // ─── Datos ────────────────────────────────────────────────────────────────────
-const stats = [
-  {
-    value: "4",
-    label: "Sistemas activos",
-    description: "Negocios transformados con estructura digital real.",
-    metric: "Clientes recurrentes",
-  },
-  {
-    value: "1",
-    label: "SaaS en producción",
-    description: "STRING GYM operando en un gimnasio real desde junio 2026.",
-    metric: "En operación",
-  },
-  {
-    value: "70",
-    label: "Miembros gestionados",
-    description: "Gestionados hoy en Evolution GYM con STRING GYM.",
-    metric: "Dato real",
-  },
-];
-
 const principios = [
   {
     icon: FiTarget,
@@ -70,7 +49,6 @@ const Content = () => {
   const titleRef = useRef(null);
   const descRef = useRef(null);
   const principiosRef = useRef([]);
-  const statsRef = useRef([]);
   const ctaRef = useRef(null);
   const lineRef = useRef(null);
 
@@ -82,7 +60,6 @@ const Content = () => {
         { opacity: 0, y: 24 }
       );
       gsap.set(principiosRef.current.filter(Boolean), { opacity: 0, y: 20 });
-      gsap.set(statsRef.current.filter(Boolean), { opacity: 0, y: 20 });
       gsap.set(lineRef.current, {
         scaleX: 0,
         transformOrigin: "left center",
@@ -129,20 +106,6 @@ const Content = () => {
         ease: "power3.out",
         scrollTrigger: {
           trigger: principiosRef.current[0],
-          start: REVEAL_START,
-          once: true,
-        },
-      });
-
-      // ── Stats ───────────────────────────────────────────────────────────────
-      gsap.to(statsRef.current.filter(Boolean), {
-        opacity: 1,
-        y: 0,
-        stagger: 0.1,
-        duration: 0.5,
-        ease: "power3.out",
-        scrollTrigger: {
-          trigger: statsRef.current[0],
           start: REVEAL_START,
           once: true,
         },
@@ -254,43 +217,6 @@ const Content = () => {
                 </div>
               );
             })}
-          </div>
-
-          {/* ── Stats ─────────────────────────────────────────────────────── */}
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-px bg-white/5">
-            {stats.map((stat, i) => (
-              <div
-                key={i}
-                ref={(el) => (statsRef.current[i] = el)}
-                className="group bg-black px-8 py-10 hover:bg-white/[0.03] transition-colors duration-300 relative overflow-hidden"
-              >
-                {/* Número grande de fondo */}
-                <span className="absolute -bottom-4 -right-2 font-anton text-[8rem] leading-none text-white/[0.03] select-none">
-                  {i + 1}
-                </span>
-
-                <div className="relative z-10 space-y-3">
-                  <p className="font-anton text-6xl text-green leading-none">
-                    {stat.value}
-                  </p>
-                  <h3 className="text-white font-bold text-base">
-                    {stat.label}
-                  </h3>
-                  <p className="text-gray text-sm leading-relaxed">
-                    {stat.description}
-                  </p>
-                  <div className="flex items-center gap-2 pt-2">
-                    <span className="w-1 h-1 rounded-full bg-green" />
-                    <span className="text-xs text-green font-mono uppercase tracking-wider">
-                      {stat.metric}
-                    </span>
-                  </div>
-                </div>
-
-                {/* Borde inferior hover */}
-                <div className="absolute bottom-0 left-0 w-0 h-px bg-green group-hover:w-full transition-all duration-500" />
-              </div>
-            ))}
           </div>
 
           {/* ── CTA ───────────────────────────────────────────────────────── */}
