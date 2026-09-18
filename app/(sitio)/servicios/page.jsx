@@ -11,6 +11,25 @@ import servicios from "./data";
 
 gsap.registerPlugin(ScrollTrigger);
 
+// ─── Datos ────────────────────────────────────────────────────────────────────
+const continuidad = [
+  {
+    nombre: "Base",
+    precio: "$1,800–$2,500/mes",
+    incluye: "Hosting, mantenimiento y soporte",
+  },
+  {
+    nombre: "Crecimiento",
+    precio: "$3,000–$4,500/mes",
+    incluye: "Optimización mensual y ajustes",
+  },
+  {
+    nombre: "Escalamiento",
+    precio: "$5,000–$8,000/mes",
+    incluye: "Análisis, mejoras y soporte prioritario",
+  },
+];
+
 // ─── Componente ───────────────────────────────────────────────────────────────
 const PageServices = () => {
   const sectionRef = useRef(null);
@@ -216,6 +235,29 @@ const PageServices = () => {
               </Link>
             );
           })}
+        </div>
+
+        {/* ── Planes de continuidad ────────────────────────────────────────── */}
+        <div className="mt-16 border border-white/10 p-8 md:p-10">
+          <p className="text-[10px] font-mono text-green uppercase tracking-[0.2em] mb-6">
+            Planes de continuidad
+          </p>
+          {/* TODO(copy): D4 pendiente — línea de introducción del bloque */}
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-px bg-white/5">
+            {continuidad.map((plan) => (
+              <div key={plan.nombre} className="bg-black p-6">
+                <h3 className="font-anton text-xl text-white tracking-tight mb-1">
+                  {plan.nombre}
+                </h3>
+                <p className="text-green font-mono text-sm mb-2">
+                  {plan.precio}
+                </p>
+                <p className="text-gray text-sm leading-relaxed">
+                  {plan.incluye}
+                </p>
+              </div>
+            ))}
+          </div>
         </div>
 
         {/* ── CTA ───────────────────────────────────────────────────────────── */}
