@@ -38,9 +38,6 @@ module.exports = {
       acido: "#50ff05",
       "acido-profundo": "#2f7a05",
       linea: "#242b24",
-      // Se elimina en R1.5 junto con las clases red-* de FormField/FormSelect/
-      // RegistroForm/WaitlistForm. Las de /nosotros se resuelven en su propio pase.
-      red: "#ff3131",
       // ALIAS TEMPORAL: se elimina al terminar el rediseño
       green: "#50ff05",
       // ALIAS TEMPORAL: se elimina al terminar el rediseño

@@ -2,6 +2,7 @@
 
 import { useRef, useEffect } from "react";
 import gsap from "gsap";
+import { FiAlertCircle } from "react-icons/fi";
 
 export const FormField = ({
   label,
@@ -16,6 +17,7 @@ export const FormField = ({
   const fieldRef = useRef(null);
   const errorRef = useRef(null);
   const inputRef = useRef(null);
+  const errorId = `${name}-error`;
 
   // Animación de error
   useEffect(() => {
@@ -45,10 +47,10 @@ export const FormField = ({
   };
 
   const baseClass = `
-    w-full px-4 py-3 bg-white/5 border text-white text-sm
-    placeholder:text-white/20 transition-colors duration-200
-    focus:outline-none focus:border-green
-    ${error ? "border-red-500/60" : "border-white/10 hover:border-white/20"}
+    w-full px-4 py-3 bg-fondo-elevado border-2 rounded text-tinta text-sm
+    placeholder:text-tinta-tenue transition-colors duration-200
+    focus:outline-none focus:border-acido
+    ${error ? "border-tinta" : "border-linea hover:border-tinta-tenue"}
   `;
 
   const { ref: registerRef, ...registerProps } = register(name);
@@ -57,9 +59,9 @@ export const FormField = ({
     <div ref={fieldRef} className="space-y-1.5">
       <label
         htmlFor={name}
-        className="block text-xs font-mono text-gray uppercase tracking-widest"
+        className="block font-mono uppercase text-etiqueta text-tinta-tenue"
       >
-        {label} {required && <span className="text-green">*</span>}
+        {label} {required && <span className="text-acido">*</span>}
       </label>
 
       {type === "textarea" ? (
@@ -74,6 +76,8 @@ export const FormField = ({
           onBlur={handleBlur}
           placeholder={placeholder}
           rows={rows}
+          aria-invalid={!!error}
+          aria-describedby={error ? errorId : undefined}
           className={`${baseClass} resize-none`}
         />
       ) : (
@@ -88,6 +92,8 @@ export const FormField = ({
           onFocus={handleFocus}
           onBlur={handleBlur}
           placeholder={placeholder}
+          aria-invalid={!!error}
+          aria-describedby={error ? errorId : undefined}
           className={baseClass}
         />
       )}
@@ -95,9 +101,10 @@ export const FormField = ({
       {error && (
         <p
           ref={errorRef}
-          className="text-xs text-red-400 flex items-center gap-1.5 font-mono"
+          id={errorId}
+          className="text-xs text-tinta flex items-center gap-1.5 font-mono"
         >
-          <span>↳</span>
+          <FiAlertCircle className="h-3.5 w-3.5 flex-shrink-0" />
           {error}
         </p>
       )}

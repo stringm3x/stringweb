@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { FiCheck } from "react-icons/fi";
+import { FiCheck, FiAlertCircle } from "react-icons/fi";
 
 export default function WaitlistForm({ producto }) {
   const [email, setEmail] = useState("");
@@ -43,7 +43,11 @@ export default function WaitlistForm({ producto }) {
           value={email}
           onChange={(e) => setEmail(e.target.value)}
           placeholder="tu@email.com"
-          className="min-w-0 flex-1 px-2.5 py-1.5 bg-white/5 border border-white/10 text-white text-xs placeholder:text-white/20 focus:outline-none focus:border-green transition-colors duration-200"
+          aria-invalid={estado === "error"}
+          aria-describedby={estado === "error" ? "waitlist-error" : undefined}
+          className={`min-w-0 flex-1 px-2.5 py-1.5 bg-fondo-elevado border-2 rounded text-tinta text-xs placeholder:text-tinta-tenue focus:outline-none focus:border-acido transition-colors duration-200 ${
+            estado === "error" ? "border-tinta" : "border-linea"
+          }`}
         />
         <button
           type="submit"
@@ -54,7 +58,11 @@ export default function WaitlistForm({ producto }) {
         </button>
       </div>
       {estado === "error" && (
-        <p className="text-[10px] font-mono text-red uppercase tracking-widest">
+        <p
+          id="waitlist-error"
+          className="flex items-center gap-1.5 text-[10px] font-mono text-tinta uppercase tracking-widest"
+        >
+          <FiAlertCircle className="h-3 w-3 flex-shrink-0" />
           Error al enviar, intenta de nuevo
         </p>
       )}

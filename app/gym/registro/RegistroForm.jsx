@@ -5,7 +5,7 @@ import { useRouter } from "next/navigation";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import toast from "react-hot-toast";
-import { FiArrowRight } from "react-icons/fi";
+import { FiArrowRight, FiAlertCircle } from "react-icons/fi";
 import { solicitudSchema } from "../../lib/validations/solicitud-schema";
 import { TurnstileWidget } from "../components/TurnstileWidget";
 
@@ -28,8 +28,8 @@ const MIEMBROS_OPTIONS = [
 ];
 
 const inputClass = (error) =>
-  `w-full px-4 py-3 bg-white/5 border text-white text-sm placeholder:text-white/20 transition-colors duration-200 focus:outline-none focus:border-green ${
-    error ? "border-red/60" : "border-white/10 hover:border-white/20"
+  `w-full px-4 py-3 bg-fondo-elevado border-2 rounded text-tinta text-sm placeholder:text-tinta-tenue transition-colors duration-200 focus:outline-none focus:border-acido ${
+    error ? "border-tinta" : "border-linea hover:border-tinta-tenue"
   }`;
 
 const selectStyle = {
@@ -43,18 +43,18 @@ function Label({ htmlFor, children, required }) {
   return (
     <label
       htmlFor={htmlFor}
-      className="block text-xs font-mono text-gray uppercase tracking-widest"
+      className="block font-mono uppercase text-etiqueta text-tinta-tenue"
     >
-      {children} {required && <span className="text-green">*</span>}
+      {children} {required && <span className="text-acido">*</span>}
     </label>
   );
 }
 
-function ErrorText({ children }) {
+function ErrorText({ id, children }) {
   if (!children) return null;
   return (
-    <p className="text-xs text-red flex items-center gap-1.5 font-mono">
-      <span>↳</span>
+    <p id={id} className="text-xs text-tinta flex items-center gap-1.5 font-mono">
+      <FiAlertCircle className="h-3.5 w-3.5 flex-shrink-0" />
       {children}
     </p>
   );
@@ -140,9 +140,11 @@ export function RegistroForm({ initialPlan = "" }) {
             type="text"
             placeholder="Juan Pérez"
             className={inputClass(errors.nombre)}
+            aria-invalid={!!errors.nombre}
+            aria-describedby={errors.nombre ? "nombre-error" : undefined}
             {...register("nombre")}
           />
-          <ErrorText>{errors.nombre?.message}</ErrorText>
+          <ErrorText id="nombre-error">{errors.nombre?.message}</ErrorText>
         </div>
 
         <div className="space-y-1.5">
@@ -154,9 +156,11 @@ export function RegistroForm({ initialPlan = "" }) {
             type="email"
             placeholder="juan@email.com"
             className={inputClass(errors.email)}
+            aria-invalid={!!errors.email}
+            aria-describedby={errors.email ? "email-error" : undefined}
             {...register("email")}
           />
-          <ErrorText>{errors.email?.message}</ErrorText>
+          <ErrorText id="email-error">{errors.email?.message}</ErrorText>
         </div>
       </div>
 
@@ -171,9 +175,11 @@ export function RegistroForm({ initialPlan = "" }) {
             type="tel"
             placeholder="+52 55 0000 0000"
             className={inputClass(errors.telefono)}
+            aria-invalid={!!errors.telefono}
+            aria-describedby={errors.telefono ? "telefono-error" : undefined}
             {...register("telefono")}
           />
-          <ErrorText>{errors.telefono?.message}</ErrorText>
+          <ErrorText id="telefono-error">{errors.telefono?.message}</ErrorText>
         </div>
 
         <div className="space-y-1.5">
@@ -185,9 +191,11 @@ export function RegistroForm({ initialPlan = "" }) {
             type="text"
             placeholder="Iron Gym"
             className={inputClass(errors.nombre_gym)}
+            aria-invalid={!!errors.nombre_gym}
+            aria-describedby={errors.nombre_gym ? "nombre_gym-error" : undefined}
             {...register("nombre_gym")}
           />
-          <ErrorText>{errors.nombre_gym?.message}</ErrorText>
+          <ErrorText id="nombre_gym-error">{errors.nombre_gym?.message}</ErrorText>
         </div>
       </div>
 
@@ -201,6 +209,8 @@ export function RegistroForm({ initialPlan = "" }) {
             id="plan_interes"
             className={`${inputClass(errors.plan_interes)} appearance-none cursor-pointer`}
             style={selectStyle}
+            aria-invalid={!!errors.plan_interes}
+            aria-describedby={errors.plan_interes ? "plan_interes-error" : undefined}
             {...register("plan_interes")}
           >
             <option value="" className="bg-black text-white/50">
@@ -212,7 +222,7 @@ export function RegistroForm({ initialPlan = "" }) {
               </option>
             ))}
           </select>
-          <ErrorText>{errors.plan_interes?.message}</ErrorText>
+          <ErrorText id="plan_interes-error">{errors.plan_interes?.message}</ErrorText>
         </div>
 
         <div className="space-y-1.5">
@@ -222,9 +232,11 @@ export function RegistroForm({ initialPlan = "" }) {
             type="text"
             placeholder="Ciudad de México"
             className={inputClass(errors.ciudad)}
+            aria-invalid={!!errors.ciudad}
+            aria-describedby={errors.ciudad ? "ciudad-error" : undefined}
             {...register("ciudad")}
           />
-          <ErrorText>{errors.ciudad?.message}</ErrorText>
+          <ErrorText id="ciudad-error">{errors.ciudad?.message}</ErrorText>
         </div>
       </div>
 
