@@ -1,13 +1,15 @@
 "use client";
 
 import React, { useEffect, useRef } from "react";
-import Link from "next/link";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { REVEAL_START } from "@/app/lib/scrollTriggerDefaults";
-import { FiArrowRight, FiTarget, FiClock, FiAward } from "react-icons/fi";
+import { FiArrowRight } from "react-icons/fi";
+import { Boton } from "@/app/components/ui/Boton";
 
 gsap.registerPlugin(ScrollTrigger);
+
+const RASGOS = ["Diagnóstico 24h", "Sin compromiso", "100% personalizado"];
 
 // ─── Componente ───────────────────────────────────────────────────────────────
 const Content = () => {
@@ -39,7 +41,7 @@ const Content = () => {
   return (
     <section
       ref={sectionRef}
-      className="relative overflow-hidden bg-black py-24 md:py-32"
+      className="relative overflow-hidden bg-fondo-elevado border-t-2 border-acido py-24 md:py-32"
     >
       {/* ── Fondo decorativo ──────────────────────────────────────────────── */}
       <div className="absolute inset-0 pointer-events-none">
@@ -55,58 +57,41 @@ const Content = () => {
       </div>
 
       <div className="relative max-w-7xl mx-auto px-6 sm:px-8 lg:px-12">
-        <div className="flex flex-col gap-20 lg:gap-28">
-          {/* ── CTA ───────────────────────────────────────────────────────── */}
-          <div
-            ref={ctaRef}
-            className="relative border border-white/10 p-10 md:p-14 overflow-hidden"
-          >
-            <div className="relative z-10 flex flex-col lg:flex-row items-start lg:items-center justify-between gap-8">
-              <div className="space-y-4 max-w-xl">
-                <h3 className="font-anton text-4xl md:text-5xl text-white uppercase leading-[0.95] tracking-tight">
-                  ¿Listo para <span className="text-green">transformar</span> tu
-                  negocio?
-                </h3>
-                <p className="text-gray leading-relaxed">
-                  Obtén un diagnóstico de tu presencia digital y descubre cómo
-                  un sistema estructurado puede organizar tu captación de
-                  clientes.
-                </p>
+        <div
+          ref={ctaRef}
+          className="flex flex-col lg:flex-row items-start lg:items-center justify-between gap-8"
+        >
+          <div className="space-y-4 max-w-xl">
+            <h3 className="font-anton text-titular-l text-white uppercase">
+              ¿Listo para <span className="text-acido">transformar</span> tu
+              negocio?
+            </h3>
+            <p className="text-tinta-suave text-cuerpo">
+              Obtén un diagnóstico de tu presencia digital y descubre cómo un
+              sistema estructurado puede organizar tu captación de clientes.
+            </p>
 
-                <div className="flex flex-wrap gap-6 pt-2">
-                  {[
-                    { icon: FiClock, label: "Diagnóstico 24h" },
-                    { icon: FiAward, label: "Sin compromiso" },
-                    { icon: FiTarget, label: "100% personalizado" },
-                  ].map(({ icon: Icon, label }) => (
-                    <span
-                      key={label}
-                      className="flex items-center gap-1.5 text-xs text-gray font-mono"
-                    >
-                      <Icon className="text-green" />
-                      {label}
-                    </span>
-                  ))}
-                </div>
-              </div>
-
-              <div className="flex flex-col sm:flex-row gap-4 flex-shrink-0">
-                <Link
-                  href="/cotizacion"
-                  className="group inline-flex items-center gap-2 px-7 py-3.5 bg-green text-black font-bold text-sm uppercase tracking-wide hover:bg-white transition-colors duration-200 whitespace-nowrap"
+            <div className="flex flex-wrap gap-6 pt-2">
+              {RASGOS.map((rasgo) => (
+                <span
+                  key={rasgo}
+                  className="font-mono uppercase text-etiqueta text-tinta-tenue"
                 >
-                  Solicitar diagnóstico
-                  <FiArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform duration-200" />
-                </Link>
-
-                <Link
-                  href="/servicios"
-                  className="inline-flex items-center gap-2 px-7 py-3.5 border border-white/20 text-white font-bold text-sm uppercase tracking-wide hover:border-white/40 hover:bg-white/5 transition-all duration-200 whitespace-nowrap"
-                >
-                  Ver sistemas
-                </Link>
-              </div>
+                  {rasgo}
+                </span>
+              ))}
             </div>
+          </div>
+
+          <div className="flex flex-col sm:flex-row gap-4 flex-shrink-0">
+            <Boton href="/cotizacion" variante="primario">
+              Solicitar diagnóstico
+              <FiArrowRight className="w-4 h-4" />
+            </Boton>
+
+            <Boton href="/servicios" variante="texto">
+              Ver sistemas
+            </Boton>
           </div>
         </div>
       </div>
