@@ -174,7 +174,7 @@ const Steps = () => {
   return (
     <section
       ref={sectionRef}
-      className="relative bg-black py-24 md:py-32 overflow-hidden"
+      className="relative bg-black py-espacio-6 lg:py-espacio-7 overflow-hidden"
     >
       {/* ── Fondo ─────────────────────────────────────────────────────────── */}
       <div className="absolute inset-0 pointer-events-none">

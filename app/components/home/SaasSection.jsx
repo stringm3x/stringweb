@@ -72,7 +72,7 @@ const SaasSection = () => {
     <section
       id="saas"
       ref={sectionRef}
-      className="relative bg-black py-24 md:py-32 overflow-hidden scroll-mt-20"
+      className="relative bg-black py-espacio-6 lg:py-espacio-7 overflow-hidden scroll-mt-20"
     >
       <div className="relative max-w-4xl mx-auto px-6 sm:px-8 lg:px-12">
         {/* Header */}

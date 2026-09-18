@@ -124,7 +124,7 @@ const Proyects = () => {
   return (
     <section
       ref={sectionRef}
-      className="bg-black py-24 md:py-32 px-6 sm:px-8 lg:px-12 overflow-hidden"
+      className="bg-black py-espacio-6 lg:py-espacio-7 px-6 sm:px-8 lg:px-12 overflow-hidden"
     >
       <div className="max-w-7xl mx-auto">
         {/* ── Header ────────────────────────────────────────────────────────── */}

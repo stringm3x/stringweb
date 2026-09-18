@@ -41,7 +41,7 @@ const Content = () => {
   return (
     <section
       ref={sectionRef}
-      className="relative overflow-hidden bg-fondo-elevado border-t-2 border-acido py-24 md:py-32"
+      className="relative overflow-hidden bg-fondo-elevado border-t-2 border-acido py-espacio-6 lg:py-espacio-7"
     >
       {/* ── Fondo decorativo ──────────────────────────────────────────────── */}
       <div className="absolute inset-0 pointer-events-none">

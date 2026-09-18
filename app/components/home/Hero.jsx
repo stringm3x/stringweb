@@ -160,7 +160,7 @@ const Hero = () => {
       </div>
 
       {/* ── Contenido principal ───────────────────────────────────────────── */}
-      <div className="relative max-w-7xl mx-auto w-full px-6 sm:px-8 lg:px-12 pt-32 pb-24">
+      <div className="relative max-w-7xl mx-auto w-full px-6 sm:px-8 lg:px-12 pt-32 pb-espacio-6 lg:pb-espacio-7">
         <div className="space-y-10">
           {/* Tag */}
           <div ref={tagRef}>
