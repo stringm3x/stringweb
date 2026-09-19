@@ -3,6 +3,7 @@ import { Etiqueta } from "@/app/components/ui/Etiqueta";
 import { Boton } from "@/app/components/ui/Boton";
 import { Mancuerna } from "@/app/components/ilustraciones/Mancuerna";
 import { PintarAlScroll } from "@/app/components/PintarAlScroll";
+import { MarcasRegistro } from "@/app/components/ui/MarcasRegistro";
 
 const FILAS = [
   {
@@ -34,8 +35,9 @@ export function Caso({ mostrarBotonSaas = true }) {
         <div className="flex flex-col lg:flex-row gap-10 lg:gap-16">
           {/* Ilustración */}
           <div className="lg:w-[520px] flex-shrink-0 space-y-3">
-            <PintarAlScroll>
+            <PintarAlScroll className="relative">
               <Mancuerna className="w-full h-auto" />
+              <MarcasRegistro className="text-tinta-papel/50" />
             </PintarAlScroll>
             <p className="font-mono uppercase text-etiqueta text-tinta-tenue">
               El gimnasio del fundador · operando con STRING GYM

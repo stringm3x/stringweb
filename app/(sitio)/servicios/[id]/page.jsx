@@ -10,6 +10,7 @@ import { REVEAL_START } from "@/app/lib/scrollTriggerDefaults";
 import { Etiqueta } from "@/app/components/ui/Etiqueta";
 import { Boton } from "@/app/components/ui/Boton";
 import { Cierre } from "@/app/components/ui/Cierre";
+import { MarcasRegistro } from "@/app/components/ui/MarcasRegistro";
 import { Telefono } from "@/app/components/ilustraciones/Telefono";
 import { Libreta } from "@/app/components/ilustraciones/Libreta";
 import { Reloj } from "@/app/components/ilustraciones/Reloj";
@@ -138,6 +139,7 @@ const ServicePage = ({ params: paramsPromise }) => {
               const Ilustracion = ILUSTRACIONES[servicio.id];
               return <Ilustracion className="w-full h-full" />;
             })()}
+            <MarcasRegistro />
           </div>
 
           {/* Info */}

@@ -11,6 +11,7 @@ import { Boton } from "@/app/components/ui/Boton";
 import { TarjetaSistema } from "@/app/components/ui/TarjetaSistema";
 import { Cierre } from "@/app/components/ui/Cierre";
 import { TitularBrochada } from "@/app/components/ui/TitularBrochada";
+import { MarcasRegistro } from "@/app/components/ui/MarcasRegistro";
 import { Telefono } from "@/app/components/ilustraciones/Telefono";
 import { Libreta } from "@/app/components/ilustraciones/Libreta";
 import { Reloj } from "@/app/components/ilustraciones/Reloj";
@@ -150,8 +151,9 @@ const PageServices = () => {
                         destacada ? "border-acido shadow-acido" : "border-linea"
                       }`}
                     >
-                      <div className="h-[200px]">
+                      <div className="relative h-[200px]">
                         <Ilustracion className="h-full w-full" />
+                        <MarcasRegistro />
                       </div>
                       <div className="flex flex-1 flex-col p-6">
                         <span
