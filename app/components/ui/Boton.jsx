@@ -37,12 +37,19 @@ export function Boton({
   disabled = false,
   sobrePapel = false,
   compacto = false,
+  barrido = false,
   className = "",
 }) {
   const estaDesactivado = disabled || variante === "desactivado";
   const varianteEfectiva = estaDesactivado ? "desactivado" : variante;
   const altura = compacto ? "min-h-[40px]" : "min-h-[48px]";
-  const clases = `${BASE} ${altura} ${clasesVariante(varianteEfectiva, sobrePapel)} ${className}`.trim();
+  // Barrido al pulsar: una brochada clara cruza el botón de izquierda a derecha.
+  const clasesBarrido = barrido
+    ? "relative overflow-hidden after:absolute after:inset-0 after:origin-left after:scale-x-0 after:bg-tinta/25 after:transition-transform after:duration-300 after:content-[''] active:after:scale-x-100 [&>*]:relative [&>*]:z-10"
+    : "";
+  const clases = `${BASE} ${altura} ${clasesVariante(varianteEfectiva, sobrePapel)} ${clasesBarrido} ${className}`
+    .replace(/\s+/g, " ")
+    .trim();
 
   // Un enlace nunca se deshabilita (se vuelve span), pero un botón de
   // formulario sí: conserva la semántica de <button disabled>.

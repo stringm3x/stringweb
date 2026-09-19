@@ -59,6 +59,7 @@ export default function WaitlistForm({ producto }) {
       <Boton
         type="submit"
         variante="secundario"
+        barrido
         disabled={estado === "enviando"}
         className="w-full"
       >

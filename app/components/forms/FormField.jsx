@@ -56,12 +56,17 @@ export const FormField = ({
   const { ref: registerRef, ...registerProps } = register(name);
 
   return (
-    <div ref={fieldRef} className="space-y-1.5">
+    <div ref={fieldRef} className="group space-y-1.5">
       <label
         htmlFor={name}
         className="block font-mono uppercase text-etiqueta text-tinta-tenue"
       >
         {label} {required && <span className="text-acido">*</span>}
+        {/* La raya de Etiqueta linea: crece cuando el campo tiene el foco */}
+        <span
+          aria-hidden="true"
+          className="ml-2 inline-block h-[3px] w-0 align-middle bg-acido transition-[width] duration-300 group-focus-within:w-6"
+        />
       </label>
 
       {type === "textarea" ? (

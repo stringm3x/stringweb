@@ -321,7 +321,7 @@ export const QuoteForm = () => {
 
           {/* Submit */}
           <div className="pt-2">
-            <Boton type="submit" variante="primario" disabled={isSubmitting} className="w-full">
+            <Boton type="submit" variante="primario" barrido disabled={isSubmitting} className="w-full">
               {isSubmitting ? "Enviando diagnóstico…" : "Solicitar diagnóstico gratuito"}
             </Boton>
 

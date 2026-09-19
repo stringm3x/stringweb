@@ -180,7 +180,7 @@ export function RegistroForm({ initialPlan = "" }) {
       </div>
 
       <div className="pt-2">
-        <Boton type="submit" variante="primario" disabled={isSubmitting} className="w-full">
+        <Boton type="submit" variante="primario" barrido disabled={isSubmitting} className="w-full">
           {isSubmitting ? "Enviando…" : "Empezar mi prueba gratuita"}
         </Boton>
         <p className="mt-4 text-center font-mono uppercase text-etiqueta text-tinta-tenue">
