@@ -193,7 +193,7 @@ export const QuoteForm = () => {
         </div>
 
         <div>
-          <TitularBrochada lineas={["Diagnostica", "tu negocio"]} retraso={0.25} />
+          <TitularBrochada lineas={["Diagnostica", "tu negocio"]} forma="tachon" retraso={0.25} />
         </div>
 
         <p ref={descRef} className="max-w-xl text-cuerpo-l text-tinta-suave">

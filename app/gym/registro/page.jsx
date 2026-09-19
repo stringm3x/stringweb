@@ -55,7 +55,7 @@ export default async function RegistroPage({ searchParams }) {
       <div className="mb-10 mt-6 space-y-4">
         <Etiqueta variante="linea">STRING GYM</Etiqueta>
         <div>
-          <TitularBrochada lineas={["Crea", "tu cuenta"]} retraso={0.2} />
+          <TitularBrochada lineas={["Crea", "tu cuenta"]} forma="corta" retraso={0.2} />
         </div>
         <p className="text-cuerpo-l text-tinta-suave">
           Déjanos tus datos y activamos tu prueba gratuita de 14 días con Pro

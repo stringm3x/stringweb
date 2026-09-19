@@ -116,7 +116,7 @@ const PageServices = () => {
             </div>
 
             <div>
-              <TitularBrochada lineas={["Servicios", "estratégicos"]} retraso={0.25} />
+              <TitularBrochada lineas={["Servicios", "estratégicos"]} forma="tachon" retraso={0.25} />
             </div>
 
             <p ref={descRef} className="text-tinta-suave text-cuerpo max-w-xl">

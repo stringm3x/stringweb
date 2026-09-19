@@ -77,7 +77,7 @@ export default function SaasPage() {
             STRING SaaS
           </Etiqueta>
           <div>
-            <TitularBrochada lineas={["Sistemas listos", "para tu negocio"]} retraso={0.15} />
+            <TitularBrochada lineas={["Sistemas listos", "para tu negocio"]} forma="mancha" retraso={0.15} />
           </div>
           <p className="text-tinta-suave text-cuerpo max-w-xl mx-auto">
             Sin invertir en desarrollo desde cero. Sin contratos largos.

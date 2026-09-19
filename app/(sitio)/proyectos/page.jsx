@@ -152,7 +152,7 @@ const PageProyects = () => {
           </div>
 
           <div>
-            <TitularBrochada lineas={["Nuestros", "proyectos"]} retraso={0.25} />
+            <TitularBrochada lineas={["Nuestros", "proyectos"]} forma="corta" retraso={0.25} />
           </div>
         </div>
 
