@@ -19,11 +19,11 @@ const nextConfig = {
   async redirects() {
     return [
       {
-        // /gym/empezar duplicaba los planes que ya muestra /saas#gym-detalle
+        // /gym/empezar duplicaba los planes que ya muestra /saas#planes
         // (con más contexto: problema, comparativa, caso real) — se consolida
         // en un solo lugar en vez de mantener dos páginas de precios.
         source: "/gym/empezar",
-        destination: "/saas#gym-detalle",
+        destination: "/saas#planes",
         permanent: true,
       },
       // Rutas migradas a español (Tarea 1). statusCode: 301 en vez de
