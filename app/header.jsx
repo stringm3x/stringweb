@@ -2,13 +2,12 @@
 
 import { useState, useEffect, useRef } from "react";
 import Link from "next/link";
-import Image from "next/image";
 import { usePathname } from "next/navigation";
 import gsap from "gsap";
 import { FiMenu, FiX, FiArrowRight } from "react-icons/fi";
 import { FaWhatsapp } from "react-icons/fa";
 import { Boton } from "./components/ui/Boton";
-import { Etiqueta } from "./components/ui/Etiqueta";
+import { Logo } from "./components/ui/Logo";
 
 const menuItems = [
   { label: "Inicio", href: "/" },
@@ -16,14 +15,13 @@ const menuItems = [
   { label: "STRING SaaS", href: "/saas" },
   { label: "Proyectos", href: "/proyectos" },
   { label: "Nosotros", href: "/nosotros" },
-  { label: "Cotización", href: "/cotizacion" },
 ];
 
 const WHATSAPP_URL =
   "https://wa.me/525545524847?text=¡Hola!%20Quiero%20más%20info%20sobre%20STRING";
 
 const BOTON_ICONO =
-  "flex h-11 w-11 items-center justify-center rounded-full border border-linea bg-fondo-elevado text-acido transition-colors duration-200 hover:border-acido";
+  "flex h-10 w-10 items-center justify-center rounded-full border border-linea bg-fondo-elevado text-acido transition-colors duration-200 hover:border-acido";
 
 export default function Header() {
   const [isOpen, setIsOpen] = useState(false);
@@ -37,15 +35,14 @@ export default function Header() {
   const tlRef = useRef(null);
 
   useEffect(() => {
-    const handleScroll = () => setScrolled(window.scrollY > 50);
+    const handleScroll = () => setScrolled(window.scrollY > 24);
     handleScroll();
     window.addEventListener("scroll", handleScroll, { passive: true });
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  // El panel entra desde la derecha y sus filas suben en cascada; al cerrar
-  // se reproduce en reversa. Con movimiento reducido GSAP lo resuelve al
-  // instante (ver lib/motionPrefs).
+  // El panel (solo celular) entra desde la derecha y sus filas suben en
+  // cascada; al cerrar se reproduce en reversa.
   useEffect(() => {
     const ctx = gsap.context(() => {
       gsap.set(fondoRef.current, { autoAlpha: 0 });
@@ -87,25 +84,46 @@ export default function Header() {
   }, [isOpen]);
 
   const cerrar = () => setIsOpen(false);
+  const esActiva = (href) => (href === "/" ? pathname === "/" : pathname.startsWith(href));
 
   return (
     <>
       <header
-        className={`fixed left-0 right-0 top-0 z-50 py-5 transition-colors duration-300 ${
-          scrolled ? "border-b border-linea bg-fondo" : "bg-transparent"
+        className={`fixed left-0 right-0 top-0 z-50 transition-colors duration-300 ${
+          scrolled ? "border-b border-linea bg-fondo/95" : "bg-transparent"
         }`}
       >
-        <div className="mx-auto flex max-w-7xl items-center justify-between px-6 lg:px-8">
-          <Link href="/" className="block" aria-label="STRING, inicio">
-            <Image
-              src="/marca/string-wordmark-acido.png"
-              alt="STRING"
-              width={409}
-              height={144}
-              priority
-              className="h-auto w-[120px]"
-            />
-          </Link>
+        <div className="flex h-[72px] items-center justify-between px-6 lg:h-[80px] lg:px-24">
+          <Logo />
+
+          {/* Nav de escritorio */}
+          <nav aria-label="Principal" className="hidden lg:block">
+            <ul className="flex items-center gap-8">
+              {menuItems.map((item) => {
+                const activa = esActiva(item.href);
+                return (
+                  <li key={item.href}>
+                    <Link
+                      href={item.href}
+                      aria-current={activa ? "page" : undefined}
+                      className={`group relative block py-2 font-mono uppercase text-etiqueta transition-colors duration-200 ${
+                        activa ? "text-tinta" : "text-tinta-suave hover:text-tinta"
+                      }`}
+                    >
+                      {item.label}
+                      {/* La raya acido de Etiqueta linea, como subrayado: fija en la activa, crece al pasar en las demás */}
+                      <span
+                        aria-hidden="true"
+                        className={`absolute -bottom-0.5 left-0 h-[3px] bg-acido transition-[width] duration-300 ${
+                          activa ? "w-7" : "w-0 group-hover:w-7"
+                        }`}
+                      />
+                    </Link>
+                  </li>
+                );
+              })}
+            </ul>
+          </nav>
 
           <div className="flex items-center gap-3">
             <a
@@ -115,17 +133,20 @@ export default function Header() {
               aria-label="WhatsApp"
               className={BOTON_ICONO}
             >
-              <FaWhatsapp className="text-xl" />
+              <FaWhatsapp className="text-lg" />
             </a>
+            <Boton href="/cotizacion" variante="primario" compacto className="hidden px-5 lg:inline-flex">
+              Solicitar diagnóstico
+            </Boton>
             <button
               type="button"
               onClick={() => setIsOpen(true)}
               aria-label="Abrir menú"
               aria-expanded={isOpen}
               aria-controls="menu-principal"
-              className={BOTON_ICONO}
+              className={`${BOTON_ICONO} lg:hidden`}
             >
-              <FiMenu className="text-xl" />
+              <FiMenu className="text-lg" />
             </button>
           </div>
         </div>
@@ -136,10 +157,10 @@ export default function Header() {
         ref={fondoRef}
         onClick={cerrar}
         aria-hidden="true"
-        className="fixed inset-0 z-40 bg-fondo/90"
+        className="fixed inset-0 z-40 bg-fondo/90 lg:hidden"
       />
 
-      {/* Panel del menú */}
+      {/* Panel del menú (celular) */}
       <div
         ref={panelRef}
         id="menu-principal"
@@ -148,24 +169,24 @@ export default function Header() {
         aria-label="Menú principal"
         aria-hidden={!isOpen}
         inert={!isOpen}
-        className="fixed bottom-0 right-0 top-0 z-50 flex w-full flex-col border-l border-linea bg-fondo sm:w-[440px]"
+        className="fixed bottom-0 right-0 top-0 z-50 flex w-full flex-col border-l border-linea bg-fondo sm:w-[440px] lg:hidden"
       >
-        <div className="flex items-center justify-between p-6">
-          <Etiqueta variante="linea">Menú</Etiqueta>
+        <div className="flex h-[72px] items-center justify-between px-6">
+          <Logo onClick={cerrar} />
           <button
             type="button"
             onClick={cerrar}
             aria-label="Cerrar menú"
             className={BOTON_ICONO}
           >
-            <FiX className="text-xl" />
+            <FiX className="text-lg" />
           </button>
         </div>
 
-        <nav className="flex-1 overflow-y-auto px-6 sm:px-8">
+        <nav aria-label="Principal, celular" className="flex-1 overflow-y-auto px-6">
           <ul className="border-t border-linea">
-            {menuItems.map((item, index) => {
-              const isActive = pathname === item.href;
+            {[...menuItems, { label: "Cotización", href: "/cotizacion" }].map((item, index) => {
+              const activa = esActiva(item.href);
               return (
                 <li
                   key={item.href}
@@ -175,19 +196,19 @@ export default function Header() {
                   <Link
                     href={item.href}
                     onClick={cerrar}
-                    aria-current={isActive ? "page" : undefined}
+                    aria-current={activa ? "page" : undefined}
                     className="group flex min-h-[64px] items-center gap-5 py-3"
                   >
                     <span
                       className={`w-8 flex-shrink-0 font-mono text-etiqueta ${
-                        isActive ? "text-acido" : "text-tinta-tenue"
+                        activa ? "text-acido" : "text-tinta-tenue"
                       }`}
                     >
                       {String(index + 1).padStart(2, "0")}
                     </span>
                     <span
                       className={`flex-1 font-anton uppercase text-titular-m transition-colors duration-200 ${
-                        isActive ? "text-acido" : "text-tinta group-hover:text-acido"
+                        activa ? "text-acido" : "text-tinta group-hover:text-acido"
                       }`}
                     >
                       {item.label}
@@ -195,7 +216,7 @@ export default function Header() {
                     <FiArrowRight
                       aria-hidden="true"
                       className={`text-lg transition-all duration-200 ${
-                        isActive
+                        activa
                           ? "translate-x-1 text-acido"
                           : "text-linea group-hover:translate-x-1 group-hover:text-acido"
                       }`}
@@ -207,7 +228,7 @@ export default function Header() {
           </ul>
         </nav>
 
-        <div ref={pieRef} className="border-t border-linea p-6 sm:p-8">
+        <div ref={pieRef} className="border-t border-linea p-6">
           <p className="mb-4 font-mono uppercase text-etiqueta text-tinta-tenue">
             ¿Listo para construir tu sistema?
           </p>

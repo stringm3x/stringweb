@@ -1,7 +1,7 @@
 import Link from "next/link";
 
 const BASE =
-  "inline-flex items-center justify-center gap-2 min-h-[48px] font-mono uppercase text-etiqueta transition-colors duration-200";
+  "inline-flex items-center justify-center gap-2 font-mono uppercase text-etiqueta transition-colors duration-200";
 
 function clasesVariante(variante, sobrePapel) {
   if (variante === "desactivado") {
@@ -36,11 +36,13 @@ export function Boton({
   type = "button",
   disabled = false,
   sobrePapel = false,
+  compacto = false,
   className = "",
 }) {
   const estaDesactivado = disabled || variante === "desactivado";
   const varianteEfectiva = estaDesactivado ? "desactivado" : variante;
-  const clases = `${BASE} ${clasesVariante(varianteEfectiva, sobrePapel)} ${className}`.trim();
+  const altura = compacto ? "min-h-[40px]" : "min-h-[48px]";
+  const clases = `${BASE} ${altura} ${clasesVariante(varianteEfectiva, sobrePapel)} ${className}`.trim();
 
   // Un enlace nunca se deshabilita (se vuelve span), pero un botón de
   // formulario sí: conserva la semántica de <button disabled>.

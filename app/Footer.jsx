@@ -2,8 +2,8 @@
 
 import React, { useEffect, useRef } from "react";
 import Link from "next/link";
-import Image from "next/image";
 import { FaInstagram, FaWhatsapp, FaFacebookF, FaTiktok } from "react-icons/fa";
+import { Logo } from "./components/ui/Logo";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { REVEAL_START } from "@/app/lib/scrollTriggerDefaults";
@@ -87,13 +87,7 @@ const Footer = () => {
         <div className="grid grid-cols-1 gap-12 lg:grid-cols-12">
           {/* Marca + contacto */}
           <div ref={(el) => (bloquesRef.current[0] = el)} className="lg:col-span-5">
-            <Image
-              src="/marca/string-wordmark-acido.png"
-              alt="STRING"
-              width={409}
-              height={144}
-              className="h-auto w-[180px]"
-            />
+            <Logo />
             <p className="mt-4 font-mono uppercase text-etiqueta text-tinta-tenue">
               Sistemas digitales estratégicos
             </p>
