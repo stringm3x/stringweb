@@ -99,9 +99,9 @@ const ServicePage = ({ params: paramsPromise }) => {
     <>
       <section
         ref={sectionRef}
-        className="min-h-screen bg-black py-espacio-6 lg:py-espacio-7 px-6 sm:px-8 lg:px-12 relative overflow-hidden"
+        className="min-h-screen bg-black py-espacio-6 lg:py-espacio-7 px-6 lg:px-24 relative overflow-hidden"
       >
-      <div className="relative max-w-6xl mx-auto">
+      <div className="relative max-w-contenido mx-auto">
         {/* ── Botón volver ──────────────────────────────────────────────────── */}
         <div className="mb-10">
           <Boton href="/servicios" variante="texto">

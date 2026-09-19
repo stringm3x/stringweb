@@ -87,6 +87,13 @@ module.exports = {
       3.5: "0.875rem",
     },
     extend: {
+      // Retícula: la página se centra a 1440 y el contenido a 1248
+      // (1440 menos 96px de margen por lado). Header, hero y secciones
+      // comparten estos dos anchos para que todo arranque en la misma x.
+      maxWidth: {
+        pagina: "1440px",
+        contenido: "1248px",
+      },
       spacing: {
         "espacio-1": "4px",
         "espacio-2": "8px",

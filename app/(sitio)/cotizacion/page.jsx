@@ -55,7 +55,9 @@ export default function QuotePage() {
           },
         }}
       />
-      <QuoteForm />
+      <div className="mx-auto max-w-contenido">
+        <QuoteForm />
+      </div>
     </main>
   );
 }

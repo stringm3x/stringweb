@@ -126,7 +126,7 @@ const PageUs = () => {
     <main ref={pageRef} className="bg-black text-white overflow-hidden">
       {/* ── Hero ────────────────────────────────────────────────────────────── */}
       <section className="px-6 lg:px-24 pt-32 pb-espacio-6 md:pb-espacio-7">
-        <div className="max-w-5xl mx-auto">
+        <div className="max-w-contenido mx-auto">
           <div ref={heroTagRef} className="mb-8">
             <Etiqueta variante="linea">
               Agencia de sistemas digitales estratégicos
@@ -159,7 +159,7 @@ const PageUs = () => {
 
       {/* ── Qué es STRING ─────────────────────────────────────────────────── */}
       <section ref={queEsRef} className="py-espacio-6 lg:py-espacio-7 px-6 lg:px-24">
-        <div className="max-w-6xl mx-auto grid lg:grid-cols-2 gap-16 items-start">
+        <div className="max-w-contenido mx-auto grid lg:grid-cols-2 gap-16 items-start">
           <div className="space-y-6">
             <Etiqueta variante="linea">Qué es STRING</Etiqueta>
             <h2 className="font-anton text-titular-l text-white uppercase">
@@ -209,7 +209,7 @@ const PageUs = () => {
 
       {/* ── No vendemos / Sí vendemos ─────────────────────────────────────── */}
       <section ref={noSiRef} className="py-espacio-6 lg:py-espacio-7 px-6 lg:px-24">
-        <div className="max-w-6xl mx-auto grid md:grid-cols-2 gap-12">
+        <div className="max-w-contenido mx-auto grid md:grid-cols-2 gap-12">
           <div>
             <p className="font-mono uppercase text-etiqueta text-tinta-tenue mb-4">
               No vendemos
@@ -258,7 +258,7 @@ const PageUs = () => {
 
       {/* ── Metodología ───────────────────────────────────────────────────── */}
       <section ref={metodologiaRef} className="py-espacio-6 lg:py-espacio-7 px-6 lg:px-24">
-        <div className="max-w-5xl mx-auto">
+        <div className="max-w-contenido mx-auto">
           <div className="mb-8">
             <Etiqueta variante="linea">Metodología</Etiqueta>
           </div>
@@ -297,7 +297,7 @@ const PageUs = () => {
 
       {/* ── Valores ───────────────────────────────────────────────────────── */}
       <section ref={valoresRef} className="py-espacio-6 lg:py-espacio-7 px-6 lg:px-24">
-        <div className="max-w-6xl mx-auto">
+        <div className="max-w-contenido mx-auto">
           <div className="mb-espacio-6">
             <h2 className="font-anton text-titular-l text-white uppercase">
               Nuestros <span className="text-acido">valores</span>

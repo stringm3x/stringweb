@@ -83,7 +83,7 @@ const Footer = () => {
       ref={footerRef}
       className="border-t-2 border-acido bg-fondo px-6 pb-8 pt-espacio-6 text-tinta lg:px-24 lg:pt-espacio-7"
     >
-      <div className="mx-auto max-w-7xl">
+      <div className="mx-auto max-w-contenido">
         <div className="grid grid-cols-1 gap-12 lg:grid-cols-12">
           {/* Marca + contacto */}
           <div ref={(el) => (bloquesRef.current[0] = el)} className="lg:col-span-5">

@@ -116,7 +116,7 @@ const PageServices = () => {
         ref={sectionRef}
         className="bg-black px-6 lg:px-24 pt-32 md:pt-40 pb-espacio-6 lg:pb-espacio-7"
       >
-        <div className="max-w-6xl mx-auto">
+        <div className="max-w-contenido mx-auto">
           {/* ── Header de la página ─────────────────────────────────────────── */}
           <div className="mb-espacio-6 space-y-6">
             <div ref={tagRef}>

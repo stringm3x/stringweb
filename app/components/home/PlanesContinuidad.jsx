@@ -22,7 +22,7 @@ const continuidad = [
 const PlanesContinuidad = () => {
   return (
     <section className="bg-black px-6 lg:px-24 py-espacio-6 lg:py-espacio-7">
-      <div className="max-w-6xl mx-auto">
+      <div className="max-w-contenido mx-auto">
         <div className="mb-2">
           <Etiqueta variante="linea">Planes de continuidad</Etiqueta>
         </div>

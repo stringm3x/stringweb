@@ -92,7 +92,7 @@ export default function SaasPage() {
 
       {/* ── EL PROBLEMA ──────────────────────────────────────────────────────── */}
       <section className="px-6 lg:px-24 py-espacio-6 lg:py-espacio-7">
-        <div className="max-w-5xl mx-auto">
+        <div className="max-w-contenido mx-auto">
           <div className="mb-8 text-center">
             <Etiqueta variante="linea" className="justify-center">
               El problema
@@ -118,7 +118,7 @@ export default function SaasPage() {
 
       {/* ── PLANES ───────────────────────────────────────────────────────────── */}
       <section id="planes" className="px-6 lg:px-24 py-espacio-6 lg:py-espacio-7 scroll-mt-20">
-        <div className="max-w-6xl mx-auto">
+        <div className="max-w-contenido mx-auto">
           <div className="mb-8">
             <Etiqueta variante="linea">Planes</Etiqueta>
           </div>
@@ -185,7 +185,7 @@ export default function SaasPage() {
 
       {/* ── PRODUCTOS PRÓXIMOS ──────────────────────────────────────────────── */}
       <section className="px-6 lg:px-24 py-espacio-6 lg:py-espacio-7">
-        <div className="max-w-6xl mx-auto">
+        <div className="max-w-contenido mx-auto">
           <div className="mb-8">
             <Etiqueta variante="linea">Próximamente</Etiqueta>
           </div>

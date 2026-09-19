@@ -152,7 +152,7 @@ const PageProyects = () => {
       ref={sectionRef}
       className="bg-black min-h-screen px-6 lg:px-24 py-espacio-6 lg:py-espacio-7 relative overflow-hidden"
     >
-      <div className="relative z-10 max-w-6xl mx-auto">
+      <div className="relative z-10 max-w-contenido mx-auto">
         {/* ── Header ────────────────────────────────────────────────────────── */}
         <div className="mb-espacio-6 space-y-6">
           <div ref={tagRef}>

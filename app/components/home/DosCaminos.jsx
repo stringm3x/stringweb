@@ -26,7 +26,7 @@ const CAMINOS = [
 const DosCaminos = () => {
   return (
     <section className="bg-black px-6 lg:px-24 py-espacio-6 lg:py-espacio-7">
-      <div className="max-w-6xl mx-auto">
+      <div className="max-w-contenido mx-auto">
         <div className="mb-6">
           <Etiqueta variante="linea">Dos caminos</Etiqueta>
         </div>

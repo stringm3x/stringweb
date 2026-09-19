@@ -30,7 +30,7 @@ const WHATSAPP_URL =
 
 export default function GraciasPage() {
   return (
-    <section className="mx-auto flex max-w-3xl flex-col items-center px-6 pt-32 pb-espacio-6 text-center md:pt-40 md:pb-espacio-7">
+    <section className="mx-auto flex max-w-3xl flex-col items-center px-6 pt-32 pb-espacio-6 text-center md:pt-40 md:pb-espacio-7 lg:px-0">
       <Etiqueta variante="linea">Solicitud recibida</Etiqueta>
 
       <div className="mt-6">

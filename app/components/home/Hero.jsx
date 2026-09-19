@@ -104,7 +104,7 @@ const Hero = () => {
         No necesitas más seguidores. Necesitas un sistema.
       </h1>
 
-      <div className="pt-32 md:pt-40">
+      <div className="mx-auto max-w-pagina pt-32 md:pt-40">
         {/* Kicker */}
         <div ref={tagRef} className="px-6 lg:px-24 mb-8 md:mb-12">
           <Etiqueta variante="linea">Sistemas de conversión · CDMX</Etiqueta>

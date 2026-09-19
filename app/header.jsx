@@ -93,7 +93,7 @@ export default function Header() {
           scrolled ? "border-b border-linea bg-fondo/95" : "bg-transparent"
         }`}
       >
-        <div className="flex h-[72px] items-center justify-between px-6 lg:h-[80px] lg:px-24">
+        <div className="mx-auto flex h-[72px] max-w-pagina items-center justify-between px-6 lg:h-[80px] lg:px-24">
           <Logo />
 
           {/* Nav de escritorio */}

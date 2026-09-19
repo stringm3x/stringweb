@@ -185,7 +185,7 @@ export const QuoteForm = () => {
   }
 
   return (
-    <section ref={sectionRef} className="relative max-w-5xl mx-auto">
+    <section ref={sectionRef} className="relative max-w-5xl">
       {/* ── Header ──────────────────────────────────────────────────────────── */}
       <div className="mb-12 space-y-6">
         <div ref={tagRef}>

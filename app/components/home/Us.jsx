@@ -65,9 +65,9 @@ const Us = () => {
   return (
     <section
       ref={sectionRef}
-      className="relative flex items-center justify-center overflow-hidden bg-papel py-espacio-6 lg:py-espacio-7"
+      className="relative overflow-hidden bg-papel px-6 py-espacio-6 lg:px-24 lg:py-espacio-7"
     >
-      <div className="relative w-full max-w-7xl mx-auto px-6 sm:px-8 lg:px-12">
+      <div className="relative mx-auto max-w-contenido">
         <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
           {/* ── Columna izquierda ─────────────────────────────────────────── */}
           <div className="space-y-8">

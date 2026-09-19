@@ -46,7 +46,8 @@ export default async function RegistroPage({ searchParams }) {
   const plan = PLAN_URL_A_INTERNO[planRaw] || "";
 
   return (
-    <section className="mx-auto max-w-2xl px-6 pt-32 pb-espacio-6 md:pt-40 md:pb-espacio-7">
+    <section className="mx-auto max-w-pagina px-6 pt-32 pb-espacio-6 md:pt-40 md:pb-espacio-7 lg:px-24">
+      <div className="max-w-2xl">
       <Boton href="/saas#planes" variante="texto">
         <FiArrowLeft className="h-3.5 w-3.5" />
         Ver planes
@@ -64,6 +65,7 @@ export default async function RegistroPage({ searchParams }) {
       </div>
 
       <RegistroForm initialPlan={plan} />
+      </div>
     </section>
   );
 }
