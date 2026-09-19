@@ -67,11 +67,17 @@ export function Caso({ mostrarBotonSaas = true }) {
             </div>
 
             {/* Cifras */}
-            <div className="flex flex-wrap gap-10 mb-10">
+            <PintarAlScroll className="flex flex-wrap gap-10 mb-10">
               <div>
                 <p className="font-anton text-acido text-[72px] leading-none">
                   {SOCIOS_CARGADOS}
                 </p>
+                {/* Trazo que se dibuja bajo la cifra al entrar en pantalla */}
+                <svg viewBox="0 0 120 10" aria-hidden="true" className="mt-1 h-[10px] w-[120px]">
+                  <g data-brochada>
+                    <path d="M 2 7 C 30 4 60 2 118 4 L 118 8 C 60 6 30 8 2 10 Z" className="fill-acido" />
+                  </g>
+                </svg>
                 <p className="mt-2 font-mono uppercase text-etiqueta text-tinta-tenue">
                   Socios cargados
                 </p>
@@ -84,7 +90,7 @@ export function Caso({ mostrarBotonSaas = true }) {
                   Activos hoy
                 </p>
               </div>
-            </div>
+            </PintarAlScroll>
 
             {/* Pie de sección */}
             <div className="border-t-2 border-acido pt-6 space-y-4">

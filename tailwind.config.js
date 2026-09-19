@@ -116,9 +116,26 @@ module.exports = {
           from: { transform: "translateX(0)" },
           to: { transform: "translateX(-50%)" },
         },
+        girar: {
+          from: { transform: "rotate(0deg)" },
+          to: { transform: "rotate(360deg)" },
+        },
+        // Flash de "impresión": papel que se desvanece sobre la lámina.
+        imprimir: {
+          from: { opacity: "0.9" },
+          to: { opacity: "0" },
+        },
+        tic: {
+          "0%, 100%": { transform: "scale(1)" },
+          "40%": { transform: "scale(0.88)" },
+          "70%": { transform: "scale(1.06)" },
+        },
       },
       animation: {
         cinta: "cinta 30s linear infinite",
+        girar: "girar 24s linear infinite",
+        imprimir: "imprimir 0.35s ease-out forwards",
+        tic: "tic 0.5s ease-out 0.4s 1 both",
       },
     },
   },

@@ -13,6 +13,8 @@ import { Etiqueta } from "@/app/components/ui/Etiqueta";
 import { Boton } from "@/app/components/ui/Boton";
 import { FranjaDatos } from "@/app/components/ui/FranjaDatos";
 import { prefersReducedMotion } from "@/app/lib/motionPrefs";
+import SplitType from "split-type";
+import { Sello } from "@/app/components/ui/Sello";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -44,6 +46,7 @@ const Hero = () => {
   const franjaRef = useRef(null);
 
   useEffect(() => {
+    let split;
     const ctx = gsap.context(() => {
       gsap.set(
         [svgRef.current, tagRef.current, descRef.current, ctaRef.current, franjaRef.current],
@@ -54,9 +57,15 @@ const Hero = () => {
       const brochadas = svgRef.current.querySelectorAll("[data-brochada]");
       gsap.set(brochadas, { clipPath: "inset(0 100% 0 0)" });
 
+      // El kicker se escribe letra por letra, como en una terminal.
+      const kicker = tagRef.current.querySelector("span > span:last-child");
+      split = new SplitType(kicker, { types: "chars" });
+      gsap.set(split.chars, { opacity: 0 });
+
       const tl = gsap.timeline({ delay: 0.2 });
-      tl.to(tagRef.current, { opacity: 1, y: 0, duration: 0.5, ease: "power3.out" })
-        .to(svgRef.current, { opacity: 1, y: 0, duration: 0.7, ease: "power3.out" }, "-=0.3")
+      tl.to(tagRef.current, { opacity: 1, y: 0, duration: 0.4, ease: "power3.out" })
+        .to(split.chars, { opacity: 1, duration: 0.02, stagger: 0.025 }, "-=0.2")
+        .to(svgRef.current, { opacity: 1, y: 0, duration: 0.7, ease: "power3.out" }, "-=0.5")
         .to(brochadas, { clipPath: "inset(0 0% 0 0)", duration: 1, ease: "power3.inOut" }, "-=0.35")
         .to(descRef.current, { opacity: 1, y: 0, duration: 0.5, ease: "power3.out" }, "-=0.3")
         .to(ctaRef.current, { opacity: 1, y: 0, duration: 0.5, ease: "power3.out" }, "-=0.3")
@@ -84,6 +93,7 @@ const Hero = () => {
     return () => {
       quitarParallax();
       ctx.revert();
+      split?.revert();
     };
   }, []);
 
@@ -217,7 +227,8 @@ const Hero = () => {
         </div>
 
         {/* Franja de cifras */}
-        <div ref={franjaRef} className="mt-espacio-6 md:mt-espacio-7">
+        <div ref={franjaRef} className="relative mt-espacio-6 md:mt-espacio-7">
+          <Sello className="absolute right-6 top-0 hidden -translate-y-1/2 md:block lg:right-24" />
           <div className="hidden md:block">
             <FranjaDatos datos={STATS_ESCRITORIO} compacta />
           </div>
