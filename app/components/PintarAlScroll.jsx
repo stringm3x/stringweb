@@ -10,7 +10,12 @@ gsap.registerPlugin(ScrollTrigger);
 // Envuelve una ilustración o mancha: cuando entra en pantalla, todo lo que
 // lleve [data-brochada] adentro se pinta de izquierda a derecha, una sola
 // vez. Con movimiento reducido GSAP lo resuelve al instante.
-export function PintarAlScroll({ children, className = "", duracion = 1 }) {
+export function PintarAlScroll({
+  children,
+  className = "",
+  duracion = 1,
+  escalonado = 0,
+}) {
   const ref = useRef(null);
 
   useEffect(() => {
@@ -21,12 +26,13 @@ export function PintarAlScroll({ children, className = "", duracion = 1 }) {
       gsap.to(brochadas, {
         clipPath: "inset(0 0% 0 0)",
         duration: duracion,
+        stagger: escalonado,
         ease: "power3.inOut",
         scrollTrigger: { trigger: ref.current, start: REVEAL_START, once: true },
       });
     }, ref);
     return () => ctx.revert();
-  }, [duracion]);
+  }, [duracion, escalonado]);
 
   return (
     <div ref={ref} className={className}>

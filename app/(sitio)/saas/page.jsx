@@ -12,6 +12,7 @@ import { Boton } from "@/app/components/ui/Boton";
 import { TarjetaSistema } from "@/app/components/ui/TarjetaSistema";
 import { Caso } from "@/app/components/Caso";
 import { Cierre } from "@/app/components/ui/Cierre";
+import { PintarAlScroll } from "@/app/components/PintarAlScroll";
 import { TitularBrochada } from "@/app/components/ui/TitularBrochada";
 
 export const metadata = {
@@ -97,16 +98,18 @@ export default function SaasPage() {
               El problema
             </Etiqueta>
           </div>
-          <div className="grid grid-cols-1 sm:grid-cols-2">
+          <PintarAlScroll className="grid grid-cols-1 sm:grid-cols-2" duracion={0.5} escalonado={0.08}>
             {problema.map((p, i) => (
               <div key={p} className="flex items-start gap-3 py-5 border-t border-linea">
-                <span className="font-mono text-acido text-etiqueta flex-shrink-0">
+                <span className="flex flex-shrink-0 flex-col gap-1 font-mono text-acido text-etiqueta">
                   {String(i + 1).padStart(2, "0")}
+                  {/* Tic acido que se dibuja al entrar en pantalla */}
+                  <span data-brochada className="block h-[3px] w-6 bg-acido" aria-hidden="true" />
                 </span>
                 <p className="text-tinta-suave text-cuerpo-s">{p}</p>
               </div>
             ))}
-          </div>
+          </PintarAlScroll>
           <p className="mt-8 text-center font-anton text-titular-m text-white uppercase">
             {problemaCierre}
           </p>
@@ -124,7 +127,8 @@ export default function SaasPage() {
             {planes.map((plan) => (
               <TarjetaSistema
                 key={plan.id}
-                kicker={plan.destacado ? "PLAN RECOMENDADO" : "PLAN"}
+                kicker="PLAN"
+                sello={plan.destacado ? "Recomendado" : undefined}
                 precio={`${plan.precioMensual}/MES`}
                 titulo={plan.nombre}
                 frase={plan.tagline}

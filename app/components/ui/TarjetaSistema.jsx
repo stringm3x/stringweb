@@ -5,14 +5,22 @@ export function TarjetaSistema({
   frase,
   puntos = [],
   destacada = false,
+  sello,
   children,
 }) {
   return (
     <div
-      className={`flex flex-col bg-fondo-elevado border-2 p-espacio-4 ${
+      className={`relative flex flex-col bg-fondo-elevado border-2 p-espacio-4 ${
         destacada ? "border-acido shadow-acido" : "border-linea"
       }`}
     >
+      {sello && (
+        <span
+          className="absolute -right-3 -top-3 rotate-[-6deg] border-2 border-acido bg-fondo px-3 py-1 font-mono uppercase text-etiqueta text-acido"
+        >
+          {sello}
+        </span>
+      )}
       <div className="flex items-baseline justify-between gap-espacio-3 mb-espacio-3">
         <span className="font-mono uppercase text-etiqueta text-tinta-tenue">{kicker}</span>
         {precio && <span className="font-mono text-dato text-acido">{precio}</span>}
