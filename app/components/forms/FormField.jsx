@@ -47,7 +47,7 @@ export const FormField = ({
   };
 
   const baseClass = `
-    w-full px-4 py-3 bg-fondo border-2 rounded text-tinta text-sm
+    w-full px-4 py-3 bg-fondo border-2 rounded text-tinta text-cuerpo-s
     placeholder:text-tinta-tenue transition-colors duration-200
     focus:outline-none focus:border-acido
     ${error ? "border-tinta" : "border-linea hover:border-tinta-tenue"}
@@ -102,7 +102,7 @@ export const FormField = ({
         <p
           ref={errorRef}
           id={errorId}
-          className="text-xs text-tinta flex items-center gap-1.5 font-mono"
+          className="flex items-center gap-1.5 font-mono text-cuerpo-s text-tinta"
         >
           <FiAlertCircle className="h-3.5 w-3.5 flex-shrink-0" />
           {error}

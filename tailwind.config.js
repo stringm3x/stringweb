@@ -38,14 +38,6 @@ module.exports = {
       acido: "#50ff05",
       "acido-profundo": "#2f7a05",
       linea: "#242b24",
-      // ALIAS TEMPORAL: se elimina al terminar el rediseño
-      green: "#50ff05",
-      // ALIAS TEMPORAL: se elimina al terminar el rediseño
-      gray: "#a8b3a6",
-      // ALIAS TEMPORAL: se elimina al terminar el rediseño
-      charcoal: "#0f1310",
-      // ALIAS TEMPORAL: se elimina al terminar el rediseño
-      bg: "#000000",
     },
     boxShadow: {
       acido: "8px 8px 0 #50ff05",

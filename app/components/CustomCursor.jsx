@@ -46,13 +46,13 @@ export default function CustomCursor() {
     const onOver = (e) => {
       if (e.target.closest?.(HOVER_SELECTOR)) {
         gsap.to(ringRef.current, { scale: 1.5, duration: 0.2, ease: "power2.out" });
-        ringRef.current?.classList.add("border-green", "bg-green/10");
+        ringRef.current?.classList.add("border-acido", "bg-acido/10");
       }
     };
     const onOut = (e) => {
       if (e.target.closest?.(HOVER_SELECTOR)) {
         gsap.to(ringRef.current, { scale: 1, duration: 0.2, ease: "power2.out" });
-        ringRef.current?.classList.remove("border-green", "bg-green/10");
+        ringRef.current?.classList.remove("border-acido", "bg-acido/10");
       }
     };
     const onLeave = () => gsap.to([dotRef.current, ringRef.current], { opacity: 0, duration: 0.2 });
@@ -80,11 +80,11 @@ export default function CustomCursor() {
     <>
       <div
         ref={dotRef}
-        className="pointer-events-none fixed left-0 top-0 z-[999] h-1.5 w-1.5 rounded-full bg-green"
+        className="pointer-events-none fixed left-0 top-0 z-[999] h-1.5 w-1.5 rounded-full bg-acido"
       />
       <div
         ref={ringRef}
-        className="pointer-events-none fixed left-0 top-0 z-[999] h-8 w-8 rounded-full border border-white/40 transition-[background-color,border-color] duration-200"
+        className="pointer-events-none fixed left-0 top-0 z-[999] h-8 w-8 rounded-full border border-tinta/40 transition-[background-color,border-color] duration-200"
       />
     </>
   );

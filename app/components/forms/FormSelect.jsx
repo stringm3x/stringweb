@@ -44,7 +44,7 @@ export const FormSelect = ({
           id={name}
           aria-invalid={!!error}
           aria-describedby={error ? errorId : undefined}
-          className={`w-full appearance-none cursor-pointer rounded border-2 bg-fondo px-4 py-3 pr-10 text-sm text-tinta transition-colors duration-200 focus:border-acido focus:outline-none ${
+          className={`w-full appearance-none cursor-pointer rounded border-2 bg-fondo px-4 py-3 pr-10 text-cuerpo-s text-tinta transition-colors duration-200 focus:border-acido focus:outline-none ${
             error ? "border-tinta" : "border-linea hover:border-tinta-tenue"
           }`}
         >
@@ -69,7 +69,7 @@ export const FormSelect = ({
         <p
           ref={errorRef}
           id={errorId}
-          className="flex items-center gap-1.5 font-mono text-xs text-tinta"
+          className="flex items-center gap-1.5 font-mono text-cuerpo-s text-tinta"
         >
           <FiAlertCircle className="h-3.5 w-3.5 flex-shrink-0" />
           {error}

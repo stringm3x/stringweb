@@ -118,10 +118,12 @@ const Us = () => {
               </div>
 
               {/* Puntos clave */}
-              <div className="space-y-4">
+              <div className="divide-y divide-tinta-papel/10 border-b border-tinta-papel/10">
                 {PUNTOS.map((item) => (
-                  <div key={item} className="flex items-start gap-3">
-                    <span className="w-1 h-1 rounded-full bg-acido-profundo mt-2 flex-shrink-0" />
+                  <div key={item} className="flex items-start gap-3 py-3">
+                    <span className="text-acido-profundo" aria-hidden="true">
+                      —
+                    </span>
                     <span className="text-tinta-papel/70 text-cuerpo-s">
                       {item}
                     </span>
@@ -135,7 +137,7 @@ const Us = () => {
                   <span className="font-anton text-white text-sm">S</span>
                 </div>
                 <div>
-                  <p className="text-tinta-papel text-sm font-semibold">
+                  <p className="font-anton uppercase text-cuerpo text-tinta-papel">
                     STRING
                   </p>
                   <p className="font-mono uppercase text-etiqueta text-tinta-papel/60">

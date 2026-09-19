@@ -52,7 +52,7 @@ export default function WaitlistForm({ producto }) {
         placeholder="tu@email.com"
         aria-invalid={estado === "error"}
         aria-describedby={estado === "error" ? errorId : undefined}
-        className={`w-full rounded border-2 bg-fondo px-4 py-3 text-sm text-tinta placeholder:text-tinta-tenue transition-colors duration-200 focus:border-acido focus:outline-none ${
+        className={`w-full rounded border-2 bg-fondo px-4 py-3 text-cuerpo-s text-tinta placeholder:text-tinta-tenue transition-colors duration-200 focus:border-acido focus:outline-none ${
           estado === "error" ? "border-tinta" : "border-linea hover:border-tinta-tenue"
         }`}
       />
@@ -67,7 +67,7 @@ export default function WaitlistForm({ producto }) {
       {estado === "error" && (
         <p
           id={errorId}
-          className="flex items-center gap-1.5 font-mono text-xs text-tinta"
+          className="flex items-center gap-1.5 font-mono text-cuerpo-s text-tinta"
         >
           <FiAlertCircle className="h-3 w-3 flex-shrink-0" />
           Error al enviar, intenta de nuevo

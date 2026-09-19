@@ -8,6 +8,7 @@ import { FiX, FiExternalLink } from "react-icons/fi";
 import { proyects } from "./data";
 import { Etiqueta } from "@/app/components/ui/Etiqueta";
 import { Cierre } from "@/app/components/ui/Cierre";
+import { Boton } from "@/app/components/ui/Boton";
 import { TitularBrochada } from "@/app/components/ui/TitularBrochada";
 
 // YUMA sigue en desarrollo: no se muestra en el sitio, pero sus datos e
@@ -22,7 +23,6 @@ const PageProyects = () => {
   const cardRefs = useRef([]);
   const expandedRef = useRef(null);
   const textRef = useRef(null);
-  const overlayRef = useRef(null);
   const sectionRef = useRef(null);
   const tagRef = useRef(null);
 
@@ -76,8 +76,6 @@ const PageProyects = () => {
       zIndex: 100,
     });
 
-    gsap.set(overlayRef.current, { opacity: 0 });
-
     const tl = gsap.timeline();
 
     tl.to(expandedRef.current, {
@@ -88,8 +86,6 @@ const PageProyects = () => {
       duration: 0.8,
       ease: "power3.inOut",
     });
-
-    tl.to(overlayRef.current, { opacity: 0.9, duration: 0.5 }, "-=0.4");
 
     if (textRef.current) {
       const split = new SplitType(textRef.current, { types: "lines" });
@@ -123,7 +119,6 @@ const PageProyects = () => {
     });
 
     tl.to(textRef.current, { opacity: 0, duration: 0.2 });
-    tl.to(overlayRef.current, { opacity: 0, duration: 0.3 }, "-=0.2");
     tl.to(
       expandedRef.current,
       {
@@ -201,57 +196,51 @@ const PageProyects = () => {
         </div>
       </div>
 
-      {/* ── Expanded Card ─────────────────────────────────────────────────── */}
+      {/* ── Ficha expandida ───────────────────────────────────────────────── */}
       {activeProject && (
         <div
           ref={expandedRef}
-          className="fixed overflow-hidden"
+          role="dialog"
+          aria-modal="true"
+          aria-label={activeProject.id}
+          className="fixed flex flex-col overflow-hidden bg-fondo"
           style={{ zIndex: 100 }}
         >
-          <Image
-            src={activeProject.img}
-            alt={activeProject.id}
-            fill
-            className="object-cover"
-            priority
-          />
-
-          <div
-            ref={overlayRef}
-            className="absolute inset-0 bg-black"
-            style={{ opacity: 0 }}
-          />
+          <div className="relative h-[46vh] flex-shrink-0 border-b border-linea md:h-[56vh]">
+            <Image
+              src={activeProject.img}
+              alt={activeProject.id}
+              fill
+              className="object-cover"
+              sizes="100vw"
+              priority
+            />
+          </div>
 
           <div
             ref={textRef}
-            className="absolute inset-0 flex flex-col items-center justify-center text-white text-center px-6 md:px-16 space-y-6 z-10 overflow-y-auto py-12"
+            className="flex flex-1 flex-col gap-4 overflow-y-auto px-6 py-8 md:px-16 md:py-10"
           >
-            <span className="font-mono text-etiqueta text-green uppercase tracking-[0.3em]">
+            <span className="font-mono uppercase text-etiqueta text-acido">
               {activeProject.title}
             </span>
-
-            <h2 className="font-anton text-4xl md:text-6xl lg:text-7xl leading-tight tracking-tighter">
+            <h2 className="font-anton uppercase text-titular-l text-tinta md:text-titular-xl">
               {activeProject.id}
             </h2>
-
-            <p className="max-w-xl text-sm md:text-base text-white/70 leading-relaxed">
-              {activeProject.info}
-            </p>
-
-            <a
-              href={activeProject.href}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="group inline-flex items-center gap-2 px-7 py-3.5 bg-green text-black font-bold text-sm uppercase tracking-wide hover:bg-white transition-colors duration-200"
-            >
-              Visitar sitio
-              <FiExternalLink className="w-4 h-4 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform duration-200" />
-            </a>
+            <p className="max-w-2xl text-cuerpo text-tinta-suave">{activeProject.info}</p>
+            <div className="mt-auto pt-4">
+              <Boton href={activeProject.href} variante="primario">
+                Visitar sitio
+                <FiExternalLink className="h-4 w-4" aria-hidden="true" />
+              </Boton>
+            </div>
           </div>
 
           <button
+            type="button"
             onClick={closeCard}
-            className="absolute top-6 right-6 w-10 h-10 flex items-center justify-center bg-fondo-elevado border border-white/20 hover:bg-white/20 hover:border-white/40 transition-all duration-200 text-white z-20"
+            aria-label="Cerrar"
+            className="absolute right-6 top-6 z-20 flex h-11 w-11 items-center justify-center rounded-full border border-linea bg-fondo-elevado text-acido transition-colors duration-200 hover:border-acido"
           >
             <FiX className="text-lg" />
           </button>

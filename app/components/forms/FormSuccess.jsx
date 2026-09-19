@@ -114,7 +114,7 @@ export const FormSuccess = ({ data, onReset }) => {
           <div className="divide-y divide-linea border-y border-linea">
             {resumenItems.map(({ label, value }) => (
               <div key={label} className="flex items-center justify-between gap-4 py-2">
-                <span className="font-mono text-xs uppercase text-tinta-tenue">{label}</span>
+                <span className="font-mono uppercase text-etiqueta text-tinta-tenue">{label}</span>
                 <span className="text-cuerpo-s text-tinta">{value}</span>
               </div>
             ))}
