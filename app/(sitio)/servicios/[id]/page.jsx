@@ -11,6 +11,7 @@ import { Etiqueta } from "@/app/components/ui/Etiqueta";
 import { Boton } from "@/app/components/ui/Boton";
 import { Cierre } from "@/app/components/ui/Cierre";
 import { MarcasRegistro } from "@/app/components/ui/MarcasRegistro";
+import { TextoTipeado } from "@/app/components/ui/TextoTipeado";
 import { Telefono } from "@/app/components/ilustraciones/Telefono";
 import { Libreta } from "@/app/components/ilustraciones/Libreta";
 import { Reloj } from "@/app/components/ilustraciones/Reloj";
@@ -123,9 +124,11 @@ const ServicePage = ({ params: paramsPromise }) => {
           >
             {servicio.service}
           </h1>
-          <span className="font-mono text-dato text-acido">
-            {servicio.metric}
-          </span>
+          <TextoTipeado
+            texto={servicio.metric}
+            className="font-mono text-dato text-acido"
+            retraso={0.7}
+          />
         </div>
 
         {/* ── Grid principal ────────────────────────────────────────────────── */}
@@ -143,8 +146,15 @@ const ServicePage = ({ params: paramsPromise }) => {
           </div>
 
           {/* Info */}
-          <div ref={infoRef} className="bg-black p-8 md:p-10 space-y-6">
-            <p className="text-tinta-suave text-cuerpo">{servicio.intro}</p>
+          <div ref={infoRef} className="relative bg-black p-8 md:p-10 space-y-6">
+            {/* Número de lámina gigante, casi invisible, detrás de la info */}
+            <span
+              aria-hidden="true"
+              className="pointer-events-none absolute -right-2 -top-10 select-none font-anton text-[220px] leading-none text-tinta/[0.06] lg:text-[300px]"
+            >
+              {servicio.id.padStart(2, "0")}
+            </span>
+            <p className="relative text-tinta-suave text-cuerpo">{servicio.intro}</p>
 
             {/* Objetivo */}
             <div className="border border-linea p-6 space-y-3">
