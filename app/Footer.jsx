@@ -52,10 +52,10 @@ const enlace =
 
 function Encabezado({ children }) {
   return (
-    <h3 className="mb-4 flex items-center gap-3 font-mono uppercase text-etiqueta text-tinta-suave">
+    <h2 className="mb-4 flex items-center gap-3 font-mono uppercase text-etiqueta text-tinta-suave">
       <span className="h-[3px] w-6 bg-acido" aria-hidden="true" />
       {children}
-    </h3>
+    </h2>
   );
 }
 
