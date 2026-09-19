@@ -7,10 +7,12 @@ export function Mancuerna({ className = "" }) {
       className={className}
     >
       <rect width="520" height="380" className="fill-papel" />
-      <path
-        d="M 40 300 C 140 286 250 280 360 288 C 420 292 470 300 500 308 L 500 330 C 460 320 410 312 358 308 C 248 300 140 306 40 320 Z"
-        className="fill-acido"
-      />
+      <g data-brochada>
+        <path
+          d="M 40 300 C 140 286 250 280 360 288 C 420 292 470 300 500 308 L 500 330 C 460 320 410 312 358 308 C 248 300 140 306 40 320 Z"
+          className="fill-acido"
+        />
+      </g>
       <g
         fill="none"
         className="stroke-tinta-papel"

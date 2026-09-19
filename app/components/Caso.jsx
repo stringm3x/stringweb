@@ -2,6 +2,7 @@ import { SOCIOS_CARGADOS, SOCIOS_ACTIVOS } from "@/app/lib/stats";
 import { Etiqueta } from "@/app/components/ui/Etiqueta";
 import { Boton } from "@/app/components/ui/Boton";
 import { Mancuerna } from "@/app/components/ilustraciones/Mancuerna";
+import { PintarAlScroll } from "@/app/components/PintarAlScroll";
 
 const FILAS = [
   {
@@ -33,7 +34,9 @@ export function Caso({ mostrarBotonSaas = true }) {
         <div className="flex flex-col lg:flex-row gap-10 lg:gap-16">
           {/* Ilustración */}
           <div className="lg:w-[520px] flex-shrink-0 space-y-3">
-            <Mancuerna className="w-full h-auto" />
+            <PintarAlScroll>
+              <Mancuerna className="w-full h-auto" />
+            </PintarAlScroll>
             <p className="font-mono uppercase text-etiqueta text-tinta-tenue">
               El gimnasio del fundador · operando con STRING GYM
             </p>

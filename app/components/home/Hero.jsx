@@ -12,6 +12,7 @@ import {
 import { Etiqueta } from "@/app/components/ui/Etiqueta";
 import { Boton } from "@/app/components/ui/Boton";
 import { FranjaDatos } from "@/app/components/ui/FranjaDatos";
+import { prefersReducedMotion } from "@/app/lib/motionPrefs";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -62,7 +63,28 @@ const Hero = () => {
         .to(franjaRef.current, { opacity: 1, y: 0, duration: 0.5, ease: "power3.out" }, "-=0.2");
     }, sectionRef);
 
-    return () => ctx.revert();
+    // Solo con puntero fino y sin movimiento reducido: la brochada sigue al
+    // cursor unos píxeles (el texto blanco se queda quieto, así el negro
+    // "se pinta" distinto según dónde esté el mouse).
+    let quitarParallax = () => {};
+    if (window.matchMedia("(pointer: fine)").matches && !prefersReducedMotion()) {
+      const brochadas = svgRef.current.querySelectorAll("[data-brochada]");
+      const moverX = gsap.quickTo(brochadas, "x", { duration: 0.6, ease: "power3.out" });
+      const moverY = gsap.quickTo(brochadas, "y", { duration: 0.6, ease: "power3.out" });
+      const onMove = (e) => {
+        const nx = e.clientX / window.innerWidth - 0.5;
+        const ny = e.clientY / window.innerHeight - 0.5;
+        moverX(nx * 24);
+        moverY(ny * 12);
+      };
+      window.addEventListener("mousemove", onMove, { passive: true });
+      quitarParallax = () => window.removeEventListener("mousemove", onMove);
+    }
+
+    return () => {
+      quitarParallax();
+      ctx.revert();
+    };
   }, []);
 
   return (

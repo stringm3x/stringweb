@@ -6,6 +6,7 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { REVEAL_START } from "@/app/lib/scrollTriggerDefaults";
 import { Etiqueta } from "@/app/components/ui/Etiqueta";
 import { Mancha } from "@/app/components/Mancha";
+import { PintarAlScroll } from "@/app/components/PintarAlScroll";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -95,7 +96,9 @@ const Problema = () => {
         </div>
 
         <div ref={manchaRef} className="mt-espacio-6 lg:mt-espacio-7">
-          <Mancha lineas={MANCHA_LINEAS} className="w-full h-auto" />
+          <PintarAlScroll>
+            <Mancha lineas={MANCHA_LINEAS} className="w-full h-auto" />
+          </PintarAlScroll>
           <p className="sr-only">No es falta de demanda. Es falta de sistema.</p>
         </div>
       </div>
