@@ -9,6 +9,7 @@ import { proyects } from "./data";
 import { Etiqueta } from "@/app/components/ui/Etiqueta";
 import { Cierre } from "@/app/components/ui/Cierre";
 import { Boton } from "@/app/components/ui/Boton";
+import { MarcasRegistro } from "@/app/components/ui/MarcasRegistro";
 import { TitularBrochada } from "@/app/components/ui/TitularBrochada";
 
 // YUMA sigue en desarrollo: no se muestra en el sitio, pero sus datos e
@@ -21,6 +22,7 @@ const PageProyects = () => {
   const [selectedCard, setSelectedCard] = useState(null);
 
   const cardRefs = useRef([]);
+  const barridoRefs = useRef([]);
   const expandedRef = useRef(null);
   const textRef = useRef(null);
   const sectionRef = useRef(null);
@@ -49,6 +51,12 @@ const PageProyects = () => {
             ease: "power3.out",
           },
           "+=0.6"
+        )
+        // La foto aparece con un barrido acido que sale hacia la derecha.
+        .to(
+          barridoRefs.current.filter(Boolean),
+          { xPercent: 101, stagger: 0.08, duration: 0.6, ease: "power3.inOut" },
+          "-=0.3"
         );
     }, sectionRef);
 
@@ -165,7 +173,7 @@ const PageProyects = () => {
                 cardRefs.current[index] = el;
               }}
               onClick={() => handleProjectClick(item, index)}
-              className="flex cursor-pointer flex-col border border-linea bg-fondo-elevado"
+              className="group flex cursor-pointer flex-col border border-linea bg-fondo-elevado"
             >
               <div className="relative h-[240px] overflow-hidden">
                 <Image
@@ -175,6 +183,19 @@ const PageProyects = () => {
                   className="object-cover"
                   sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                 />
+                <span
+                  ref={(el) => (barridoRefs.current[index] = el)}
+                  aria-hidden="true"
+                  className="absolute inset-0 bg-acido"
+                />
+                {/* Cinta girada que entra al pasar el mouse */}
+                <span
+                  aria-hidden="true"
+                  className="absolute -right-12 top-6 w-48 -translate-y-36 rotate-45 bg-acido py-1 text-center font-mono uppercase text-etiqueta text-black transition-transform duration-300 group-hover:translate-y-0 motion-reduce:translate-y-0"
+                >
+                  {`PROYECTO ${String(index + 1).padStart(2, "0")}`}
+                </span>
+                <MarcasRegistro className="text-tinta/70" />
               </div>
 
               <div className="flex flex-1 flex-col gap-2 p-6">
