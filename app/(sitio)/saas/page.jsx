@@ -12,6 +12,7 @@ import { Boton } from "@/app/components/ui/Boton";
 import { TarjetaSistema } from "@/app/components/ui/TarjetaSistema";
 import { Caso } from "@/app/components/Caso";
 import { Cierre } from "@/app/components/ui/Cierre";
+import { TitularBrochada } from "@/app/components/ui/TitularBrochada";
 
 export const metadata = {
   title: "STRING SaaS — Sistemas listos por nicho",
@@ -75,9 +76,9 @@ export default function SaasPage() {
           <Etiqueta variante="linea" className="justify-center">
             STRING SaaS
           </Etiqueta>
-          <h1 className="font-anton text-titular-l text-white uppercase">
-            Sistemas listos <span className="text-acido">para tu negocio</span>
-          </h1>
+          <div>
+            <TitularBrochada lineas={["Sistemas listos", "para tu negocio"]} retraso={0.15} />
+          </div>
           <p className="text-tinta-suave text-cuerpo max-w-xl mx-auto">
             Sin invertir en desarrollo desde cero. Sin contratos largos.
             Empieza en minutos.

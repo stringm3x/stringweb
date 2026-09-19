@@ -8,6 +8,7 @@ import { FiX, FiExternalLink } from "react-icons/fi";
 import { proyects } from "./data";
 import { Etiqueta } from "@/app/components/ui/Etiqueta";
 import { Cierre } from "@/app/components/ui/Cierre";
+import { TitularBrochada } from "@/app/components/ui/TitularBrochada";
 
 // YUMA sigue en desarrollo: no se muestra en el sitio, pero sus datos e
 // imágenes se quedan intactos en ./data para cuando se lance.
@@ -24,15 +25,11 @@ const PageProyects = () => {
   const overlayRef = useRef(null);
   const sectionRef = useRef(null);
   const tagRef = useRef(null);
-  const titleRef = useRef(null);
 
   // ── Animación de entrada ────────────────────────────────────────────────────
   useEffect(() => {
     const ctx = gsap.context(() => {
-      gsap.set([tagRef.current, titleRef.current], {
-        opacity: 0,
-        y: 24,
-      });
+      gsap.set(tagRef.current, { opacity: 0, y: 24 });
       gsap.set(cardRefs.current.filter(Boolean), { opacity: 0, y: 30 });
 
       const tl = gsap.timeline({ delay: 0.1 });
@@ -43,11 +40,6 @@ const PageProyects = () => {
         ease: "power3.out",
       })
         .to(
-          titleRef.current,
-          { opacity: 1, y: 0, duration: 0.6, ease: "power3.out" },
-          "-=0.3"
-        )
-        .to(
           cardRefs.current.filter(Boolean),
           {
             opacity: 1,
@@ -56,7 +48,7 @@ const PageProyects = () => {
             duration: 0.5,
             ease: "power3.out",
           },
-          "-=0.2"
+          "+=0.6"
         );
     }, sectionRef);
 
@@ -164,9 +156,9 @@ const PageProyects = () => {
             <Etiqueta variante="linea">Portafolio</Etiqueta>
           </div>
 
-          <h1 ref={titleRef} className="font-anton text-titular-l text-white uppercase">
-            Nuestros <span className="text-acido">proyectos</span>
-          </h1>
+          <div>
+            <TitularBrochada lineas={["Nuestros", "proyectos"]} retraso={0.25} />
+          </div>
         </div>
 
         {/* ── Grid de proyectos ─────────────────────────────────────────────── */}

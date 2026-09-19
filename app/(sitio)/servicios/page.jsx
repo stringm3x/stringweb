@@ -10,6 +10,7 @@ import { Etiqueta } from "@/app/components/ui/Etiqueta";
 import { Boton } from "@/app/components/ui/Boton";
 import { TarjetaSistema } from "@/app/components/ui/TarjetaSistema";
 import { Cierre } from "@/app/components/ui/Cierre";
+import { TitularBrochada } from "@/app/components/ui/TitularBrochada";
 import { Telefono } from "@/app/components/ilustraciones/Telefono";
 import { Libreta } from "@/app/components/ilustraciones/Libreta";
 import { Reloj } from "@/app/components/ilustraciones/Reloj";
@@ -63,17 +64,13 @@ const continuidad = [
 const PageServices = () => {
   const sectionRef = useRef(null);
   const tagRef = useRef(null);
-  const titleRef = useRef(null);
   const descRef = useRef(null);
   const cardsRef = useRef([]);
   const ctaRef = useRef(null);
 
   useEffect(() => {
     const ctx = gsap.context(() => {
-      gsap.set([tagRef.current, titleRef.current, descRef.current], {
-        opacity: 0,
-        y: 24,
-      });
+      gsap.set([tagRef.current, descRef.current], { opacity: 0, y: 24 });
       gsap.set(cardsRef.current.filter(Boolean), { opacity: 0, y: 24 });
       gsap.set(ctaRef.current, { opacity: 0, y: 16 });
 
@@ -82,8 +79,7 @@ const PageServices = () => {
       });
       tlHeader
         .to(tagRef.current, { opacity: 1, y: 0, duration: 0.5, ease: "power3.out" })
-        .to(titleRef.current, { opacity: 1, y: 0, duration: 0.6, ease: "power3.out" }, "-=0.3")
-        .to(descRef.current, { opacity: 1, y: 0, duration: 0.5, ease: "power3.out" }, "-=0.3");
+        .to(descRef.current, { opacity: 1, y: 0, duration: 0.5, ease: "power3.out" }, "+=0.4");
 
       gsap.to(cardsRef.current.filter(Boolean), {
         opacity: 1,
@@ -110,7 +106,7 @@ const PageServices = () => {
     <>
       <section
         ref={sectionRef}
-        className="bg-black px-6 lg:px-24 py-espacio-6 lg:py-espacio-7"
+        className="bg-black px-6 lg:px-24 pt-32 md:pt-40 pb-espacio-6 lg:pb-espacio-7"
       >
         <div className="max-w-6xl mx-auto">
           {/* ── Header de la página ─────────────────────────────────────────── */}
@@ -119,10 +115,9 @@ const PageServices = () => {
               <Etiqueta variante="linea">Sistemas de conversión</Etiqueta>
             </div>
 
-            <h1 ref={titleRef} className="font-anton text-titular-l uppercase">
-              <span className="text-white">Servicios</span>{" "}
-              <span className="text-acido">estratégicos</span>
-            </h1>
+            <div>
+              <TitularBrochada lineas={["Servicios", "estratégicos"]} retraso={0.25} />
+            </div>
 
             <p ref={descRef} className="text-tinta-suave text-cuerpo max-w-xl">
               No vendemos páginas. Implementamos sistemas digitales diseñados

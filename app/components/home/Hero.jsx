@@ -49,9 +49,14 @@ const Hero = () => {
         { opacity: 0, y: 20 }
       );
 
+      // La brochada se pinta de izquierda a derecha después de que entra el titular.
+      const brochadas = svgRef.current.querySelectorAll("[data-brochada]");
+      gsap.set(brochadas, { clipPath: "inset(0 100% 0 0)" });
+
       const tl = gsap.timeline({ delay: 0.2 });
       tl.to(tagRef.current, { opacity: 1, y: 0, duration: 0.5, ease: "power3.out" })
         .to(svgRef.current, { opacity: 1, y: 0, duration: 0.7, ease: "power3.out" }, "-=0.3")
+        .to(brochadas, { clipPath: "inset(0 0% 0 0)", duration: 1, ease: "power3.inOut" }, "-=0.35")
         .to(descRef.current, { opacity: 1, y: 0, duration: 0.5, ease: "power3.out" }, "-=0.3")
         .to(ctaRef.current, { opacity: 1, y: 0, duration: 0.5, ease: "power3.out" }, "-=0.3")
         .to(franjaRef.current, { opacity: 1, y: 0, duration: 0.5, ease: "power3.out" }, "-=0.2");
@@ -85,13 +90,6 @@ const Hero = () => {
                 <path d={CLIP_ESCRITORIO} />
               </clipPath>
             </defs>
-            <path d={CLIP_ESCRITORIO} className="fill-acido" />
-            <g className="fill-black">
-              <path d="M 1150 356 C 1240 342 1330 328 1424 316 L 1426 332 C 1332 344 1242 358 1152 372 Z" />
-              <path d="M 980 428 C 1040 418 1098 408 1156 398 L 1158 408 C 1100 418 1042 428 982 438 Z" />
-              <path d="M 120 690 C 220 676 322 660 420 642 L 422 654 C 324 672 222 688 122 702 Z" />
-              <path d="M 640 540 C 700 530 760 518 818 506 L 820 514 C 762 526 702 538 642 548 Z" />
-            </g>
             <text
               fontFamily="var(--font-anton-sans)"
               fontSize="104"
@@ -102,6 +100,14 @@ const Hero = () => {
               <tspan x="96" y="488">MÁS SEGUIDORES.</tspan>
               <tspan x="96" y="584">NECESITAS UN SISTEMA.</tspan>
             </text>
+            <g data-brochada>
+              <path d={CLIP_ESCRITORIO} className="fill-acido" />
+            <g className="fill-black">
+              <path d="M 1150 356 C 1240 342 1330 328 1424 316 L 1426 332 C 1332 344 1242 358 1152 372 Z" />
+              <path d="M 980 428 C 1040 418 1098 408 1156 398 L 1158 408 C 1100 418 1042 428 982 438 Z" />
+              <path d="M 120 690 C 220 676 322 660 420 642 L 422 654 C 324 672 222 688 122 702 Z" />
+              <path d="M 640 540 C 700 530 760 518 818 506 L 820 514 C 762 526 702 538 642 548 Z" />
+            </g>
             <text
               fontFamily="var(--font-anton-sans)"
               fontSize="104"
@@ -113,6 +119,7 @@ const Hero = () => {
               <tspan x="96" y="488">MÁS SEGUIDORES.</tspan>
               <tspan x="96" y="584">NECESITAS UN SISTEMA.</tspan>
             </text>
+            </g>
           </svg>
 
           <svg
@@ -125,11 +132,6 @@ const Hero = () => {
                 <path d={CLIP_MOVIL} />
               </clipPath>
             </defs>
-            <path d={CLIP_MOVIL} className="fill-acido" />
-            <g className="fill-black">
-              <path d="M 250 338 C 300 324 348 310 394 298 L 394 308 C 348 320 300 334 250 348 Z" />
-              <path d="M 20 452 C 80 440 142 424 200 408 L 200 416 C 142 432 80 448 20 460 Z" />
-            </g>
             <text
               fontFamily="var(--font-anton-sans)"
               fontSize="46"
@@ -141,6 +143,12 @@ const Hero = () => {
               <tspan x="24" y="388">NECESITAS UN</tspan>
               <tspan x="24" y="432">SISTEMA.</tspan>
             </text>
+            <g data-brochada>
+              <path d={CLIP_MOVIL} className="fill-acido" />
+            <g className="fill-black">
+              <path d="M 250 338 C 300 324 348 310 394 298 L 394 308 C 348 320 300 334 250 348 Z" />
+              <path d="M 20 452 C 80 440 142 424 200 408 L 200 416 C 142 432 80 448 20 460 Z" />
+            </g>
             <text
               fontFamily="var(--font-anton-sans)"
               fontSize="46"
@@ -153,6 +161,7 @@ const Hero = () => {
               <tspan x="24" y="388">NECESITAS UN</tspan>
               <tspan x="24" y="432">SISTEMA.</tspan>
             </text>
+            </g>
           </svg>
         </div>
 

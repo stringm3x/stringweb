@@ -8,6 +8,7 @@ import { FiX } from "react-icons/fi";
 import { Etiqueta } from "@/app/components/ui/Etiqueta";
 import { Boton } from "@/app/components/ui/Boton";
 import { Cierre } from "@/app/components/ui/Cierre";
+import { TitularBrochada } from "@/app/components/ui/TitularBrochada";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -80,7 +81,6 @@ const valores = [
 const PageUs = () => {
   const pageRef = useRef(null);
   const heroTagRef = useRef(null);
-  const heroTitleRef = useRef(null);
   const heroDescRef = useRef(null);
   const heroCtaRef = useRef(null);
   const queEsRef = useRef(null);
@@ -90,16 +90,15 @@ const PageUs = () => {
 
   useEffect(() => {
     const ctx = gsap.context(() => {
-      gsap.set(
-        [heroTagRef.current, heroTitleRef.current, heroDescRef.current, heroCtaRef.current],
-        { opacity: 0, y: 24 }
-      );
+      gsap.set([heroTagRef.current, heroDescRef.current, heroCtaRef.current], {
+        opacity: 0,
+        y: 24,
+      });
 
       const tlHero = gsap.timeline({ delay: 0.15 });
       tlHero
         .to(heroTagRef.current, { opacity: 1, y: 0, duration: 0.5, ease: "power3.out" })
-        .to(heroTitleRef.current, { opacity: 1, y: 0, duration: 0.7, ease: "power3.out" }, "-=0.3")
-        .to(heroDescRef.current, { opacity: 1, y: 0, duration: 0.5, ease: "power3.out" }, "-=0.3")
+        .to(heroDescRef.current, { opacity: 1, y: 0, duration: 0.5, ease: "power3.out" }, "+=0.6")
         .to(heroCtaRef.current, { opacity: 1, y: 0, duration: 0.5, ease: "power3.out" }, "-=0.3");
 
       const sections = [queEsRef, noSiRef, metodologiaRef, valoresRef];
@@ -133,13 +132,9 @@ const PageUs = () => {
             </Etiqueta>
           </div>
 
-          <h1
-            ref={heroTitleRef}
-            className="font-anton text-titular-l uppercase mb-8"
-          >
-            <span className="text-white">Somos</span>{" "}
-            <span className="text-acido">STRING</span>
-          </h1>
+          <div className="mb-8">
+            <TitularBrochada lineas={["Somos", "STRING"]} retraso={0.3} />
+          </div>
 
           <p
             ref={heroDescRef}
