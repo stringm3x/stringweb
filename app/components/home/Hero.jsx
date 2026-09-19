@@ -76,7 +76,7 @@ const Hero = () => {
         {/* Titular en SVG */}
         <div ref={svgRef}>
           <svg
-            viewBox="0 0 1440 900"
+            viewBox="0 260 1440 540"
             aria-hidden="true"
             className="hidden md:block w-full h-auto"
           >
@@ -116,7 +116,7 @@ const Hero = () => {
           </svg>
 
           <svg
-            viewBox="0 0 390 844"
+            viewBox="0 250 390 310"
             aria-hidden="true"
             className="md:hidden w-full h-auto"
           >
