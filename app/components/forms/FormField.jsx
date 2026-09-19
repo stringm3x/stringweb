@@ -47,7 +47,7 @@ export const FormField = ({
   };
 
   const baseClass = `
-    w-full px-4 py-3 bg-fondo-elevado border-2 rounded text-tinta text-sm
+    w-full px-4 py-3 bg-fondo border-2 rounded text-tinta text-sm
     placeholder:text-tinta-tenue transition-colors duration-200
     focus:outline-none focus:border-acido
     ${error ? "border-tinta" : "border-linea hover:border-tinta-tenue"}

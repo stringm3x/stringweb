@@ -3,7 +3,7 @@
 import { useEffect, useRef } from "react";
 import gsap from "gsap";
 import { FaWhatsapp } from "react-icons/fa";
-import { FiArrowRight } from "react-icons/fi";
+import { Boton } from "../ui/Boton";
 
 // Número real de STRING
 const WHATSAPP_NUMBER = "525545524847";
@@ -55,8 +55,8 @@ export const FormSuccess = ({ data, onReset }) => {
     const tl = gsap.timeline();
     tl.fromTo(
       containerRef.current,
-      { scale: 0.92, opacity: 0, y: 20 },
-      { scale: 1, opacity: 1, y: 0, duration: 0.5, ease: "power3.out" }
+      { opacity: 0, y: 20 },
+      { opacity: 1, y: 0, duration: 0.5, ease: "power3.out" }
     )
       .fromTo(
         checkRef.current,
@@ -75,75 +75,60 @@ export const FormSuccess = ({ data, onReset }) => {
   return (
     <div
       ref={containerRef}
-      className="border border-white/10 p-10 md:p-14 text-center max-w-lg mx-auto"
+      className="mx-auto max-w-lg border-2 border-linea bg-fondo-elevado p-10 text-center md:p-14"
     >
-      {/* Check */}
       <div
         ref={checkRef}
-        className="w-16 h-16 bg-green flex items-center justify-center mx-auto mb-8"
+        className="mx-auto mb-8 flex h-16 w-16 items-center justify-center bg-acido"
       >
         <svg
-          className="w-8 h-8 text-black"
+          className="h-8 w-8 text-black"
           fill="none"
           stroke="currentColor"
           viewBox="0 0 24 24"
+          aria-hidden="true"
         >
-          <path
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            strokeWidth="3"
-            d="M5 13l4 4L19 7"
-          />
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="3" d="M5 13l4 4L19 7" />
         </svg>
       </div>
 
       <div ref={contentRef} className="space-y-4">
-        <span className="text-[10px] font-mono text-green uppercase tracking-[0.3em]">
+        <span className="font-mono uppercase text-etiqueta text-acido">
           Diagnóstico enviado
         </span>
 
-        <h3 className="font-anton text-4xl text-white tracking-tight uppercase leading-tight">
+        <h3 className="font-anton uppercase text-titular-m text-tinta">
           ¡Listo, {data.name.split(" ")[0]}!
         </h3>
 
-        <p className="text-gray text-sm leading-relaxed">
+        <p className="text-cuerpo-s text-tinta-suave">
           Recibimos tu solicitud. Te contactaremos en menos de{" "}
-          <span className="text-white font-semibold">24 horas</span> con un
-          diagnóstico preliminar de tu presencia digital.
+          <span className="text-tinta">24 horas</span> con un diagnóstico
+          preliminar de tu presencia digital.
         </p>
 
-        {/* Resumen */}
-        <div className="border border-white/10 p-4 text-left space-y-2 mt-6">
-          <p className="text-[10px] font-mono text-green uppercase tracking-widest mb-3">
+        <div className="mt-6 text-left">
+          <p className="mb-2 font-mono uppercase text-etiqueta text-tinta-tenue">
             Tu solicitud
           </p>
-          {resumenItems.map(({ label, value }) => (
-            <div key={label} className="flex justify-between items-center">
-              <span className="text-xs text-gray font-mono">{label}</span>
-              <span className="text-xs text-white font-semibold">{value}</span>
-            </div>
-          ))}
+          <div className="divide-y divide-linea border-y border-linea">
+            {resumenItems.map(({ label, value }) => (
+              <div key={label} className="flex items-center justify-between gap-4 py-2">
+                <span className="font-mono text-xs uppercase text-tinta-tenue">{label}</span>
+                <span className="text-cuerpo-s text-tinta">{value}</span>
+              </div>
+            ))}
+          </div>
         </div>
 
-        {/* CTAs */}
         <div className="flex flex-col gap-3 pt-4">
-          <a
-            href={whatsappUrl}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="group inline-flex items-center justify-center gap-2 px-6 py-3.5 bg-green text-black font-bold text-sm uppercase tracking-wide hover:bg-white transition-colors duration-200"
-          >
+          <Boton href={whatsappUrl} variante="primario" className="w-full">
             <FaWhatsapp className="text-lg" />
             Contactar por WhatsApp
-            <FiArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform duration-200" />
-          </a>
-
-          <button
-            onClick={onReset}
-            className="text-xs text-gray hover:text-white transition-colors duration-200 font-mono underline underline-offset-4"
-          >
+          </Boton>
+          <Boton onClick={onReset} variante="texto" className="justify-center">
             Enviar otra cotización
-          </button>
+          </Boton>
         </div>
       </div>
     </div>

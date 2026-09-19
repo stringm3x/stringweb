@@ -5,9 +5,11 @@ import { useRouter } from "next/navigation";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import toast from "react-hot-toast";
-import { FiArrowRight, FiAlertCircle } from "react-icons/fi";
 import { solicitudSchema } from "../../lib/validations/solicitud-schema";
 import { TurnstileWidget } from "../components/TurnstileWidget";
+import { FormField } from "@/app/components/forms/FormField";
+import { FormSelect } from "@/app/components/forms/FormSelect";
+import { Boton } from "@/app/components/ui/Boton";
 
 const ENDPOINT = "https://app.gym.stringwebs.com/api/solicitudes";
 
@@ -26,39 +28,6 @@ const MIEMBROS_OPTIONS = [
   { value: "300", label: "150 a 500" },
   { value: "500", label: "Más de 500" },
 ];
-
-const inputClass = (error) =>
-  `w-full px-4 py-3 bg-fondo-elevado border-2 rounded text-tinta text-sm placeholder:text-tinta-tenue transition-colors duration-200 focus:outline-none focus:border-acido ${
-    error ? "border-tinta" : "border-linea hover:border-tinta-tenue"
-  }`;
-
-const selectStyle = {
-  backgroundImage: `url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3e%3cpath stroke='%2350ff05' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='M6 8l4 4 4-4'/%3e%3c/svg%3e")`,
-  backgroundPosition: "right 0.75rem center",
-  backgroundRepeat: "no-repeat",
-  backgroundSize: "1.25em 1.25em",
-};
-
-function Label({ htmlFor, children, required }) {
-  return (
-    <label
-      htmlFor={htmlFor}
-      className="block font-mono uppercase text-etiqueta text-tinta-tenue"
-    >
-      {children} {required && <span className="text-acido">*</span>}
-    </label>
-  );
-}
-
-function ErrorText({ id, children }) {
-  if (!children) return null;
-  return (
-    <p id={id} className="text-xs text-tinta flex items-center gap-1.5 font-mono">
-      <FiAlertCircle className="h-3.5 w-3.5 flex-shrink-0" />
-      {children}
-    </p>
-  );
-}
 
 export function RegistroForm({ initialPlan = "" }) {
   const router = useRouter();
@@ -84,6 +53,7 @@ export function RegistroForm({ initialPlan = "" }) {
   });
 
   const onSubmit = async (data) => {
+    if (isSubmitting) return;
     if (!token) {
       toast.error("Completa la verificación de seguridad.");
       return;
@@ -126,191 +96,94 @@ export function RegistroForm({ initialPlan = "" }) {
   return (
     <form
       onSubmit={handleSubmit(onSubmit)}
-      className="space-y-6 border border-white/10 bg-white/[0.02] p-8 md:p-10"
+      className="space-y-6 border-2 border-linea bg-fondo-elevado p-8 md:p-10"
       noValidate
     >
-      {/* Nombre + Email */}
       <div className="grid gap-6 md:grid-cols-2">
-        <div className="space-y-1.5">
-          <Label htmlFor="nombre" required>
-            Nombre completo
-          </Label>
-          <input
-            id="nombre"
-            type="text"
-            placeholder="Juan Pérez"
-            className={inputClass(errors.nombre)}
-            aria-invalid={!!errors.nombre}
-            aria-describedby={errors.nombre ? "nombre-error" : undefined}
-            {...register("nombre")}
-          />
-          <ErrorText id="nombre-error">{errors.nombre?.message}</ErrorText>
-        </div>
-
-        <div className="space-y-1.5">
-          <Label htmlFor="email" required>
-            Email
-          </Label>
-          <input
-            id="email"
-            type="email"
-            placeholder="juan@email.com"
-            className={inputClass(errors.email)}
-            aria-invalid={!!errors.email}
-            aria-describedby={errors.email ? "email-error" : undefined}
-            {...register("email")}
-          />
-          <ErrorText id="email-error">{errors.email?.message}</ErrorText>
-        </div>
-      </div>
-
-      {/* Teléfono + Nombre gym */}
-      <div className="grid gap-6 md:grid-cols-2">
-        <div className="space-y-1.5">
-          <Label htmlFor="telefono" required>
-            Teléfono
-          </Label>
-          <input
-            id="telefono"
-            type="tel"
-            placeholder="+52 55 0000 0000"
-            className={inputClass(errors.telefono)}
-            aria-invalid={!!errors.telefono}
-            aria-describedby={errors.telefono ? "telefono-error" : undefined}
-            {...register("telefono")}
-          />
-          <ErrorText id="telefono-error">{errors.telefono?.message}</ErrorText>
-        </div>
-
-        <div className="space-y-1.5">
-          <Label htmlFor="nombre_gym" required>
-            Nombre del gimnasio
-          </Label>
-          <input
-            id="nombre_gym"
-            type="text"
-            placeholder="Iron Gym"
-            className={inputClass(errors.nombre_gym)}
-            aria-invalid={!!errors.nombre_gym}
-            aria-describedby={errors.nombre_gym ? "nombre_gym-error" : undefined}
-            {...register("nombre_gym")}
-          />
-          <ErrorText id="nombre_gym-error">{errors.nombre_gym?.message}</ErrorText>
-        </div>
-      </div>
-
-      {/* Plan + Ciudad */}
-      <div className="grid gap-6 md:grid-cols-2">
-        <div className="space-y-1.5">
-          <Label htmlFor="plan_interes" required>
-            Plan de interés
-          </Label>
-          <select
-            id="plan_interes"
-            className={`${inputClass(errors.plan_interes)} appearance-none cursor-pointer`}
-            style={selectStyle}
-            aria-invalid={!!errors.plan_interes}
-            aria-describedby={errors.plan_interes ? "plan_interes-error" : undefined}
-            {...register("plan_interes")}
-          >
-            <option value="" className="bg-black text-white/50">
-              Selecciona un plan
-            </option>
-            {PLAN_OPTIONS.map((o) => (
-              <option key={o.value} value={o.value} className="bg-black text-white">
-                {o.label}
-              </option>
-            ))}
-          </select>
-          <ErrorText id="plan_interes-error">{errors.plan_interes?.message}</ErrorText>
-        </div>
-
-        <div className="space-y-1.5">
-          <Label htmlFor="ciudad">Ciudad</Label>
-          <input
-            id="ciudad"
-            type="text"
-            placeholder="Ciudad de México"
-            className={inputClass(errors.ciudad)}
-            aria-invalid={!!errors.ciudad}
-            aria-describedby={errors.ciudad ? "ciudad-error" : undefined}
-            {...register("ciudad")}
-          />
-          <ErrorText id="ciudad-error">{errors.ciudad?.message}</ErrorText>
-        </div>
-      </div>
-
-      {/* Miembros aprox */}
-      <div className="space-y-1.5">
-        <Label htmlFor="miembros_aprox">¿Cuántos miembros tienes?</Label>
-        <select
-          id="miembros_aprox"
-          className={`${inputClass(errors.miembros_aprox)} appearance-none cursor-pointer`}
-          style={selectStyle}
-          {...register("miembros_aprox")}
-        >
-          {MIEMBROS_OPTIONS.map((o) => (
-            <option key={o.label} value={o.value} className="bg-black text-white">
-              {o.label}
-            </option>
-          ))}
-        </select>
-      </div>
-
-      {/* Cómo se enteró */}
-      <div className="space-y-1.5">
-        <Label htmlFor="como_entero">¿Cómo te enteraste de STRING GYM?</Label>
-        <input
-          id="como_entero"
-          type="text"
-          placeholder="Instagram, un amigo, Google..."
-          className={inputClass(errors.como_entero)}
-          {...register("como_entero")}
+        <FormField
+          label="Nombre completo"
+          name="nombre"
+          register={register}
+          error={errors.nombre?.message}
+          placeholder="Juan Pérez"
+          required
+        />
+        <FormField
+          label="Email"
+          name="email"
+          type="email"
+          register={register}
+          error={errors.email?.message}
+          placeholder="juan@email.com"
+          required
         />
       </div>
 
-      {/* Turnstile */}
+      <div className="grid gap-6 md:grid-cols-2">
+        <FormField
+          label="Teléfono"
+          name="telefono"
+          type="tel"
+          register={register}
+          error={errors.telefono?.message}
+          placeholder="+52 55 0000 0000"
+          required
+        />
+        <FormField
+          label="Nombre del gimnasio"
+          name="nombre_gym"
+          register={register}
+          error={errors.nombre_gym?.message}
+          placeholder="Iron Gym"
+          required
+        />
+      </div>
+
+      <div className="grid gap-6 md:grid-cols-2">
+        <FormSelect
+          label="Plan de interés"
+          name="plan_interes"
+          register={register}
+          error={errors.plan_interes?.message}
+          opciones={PLAN_OPTIONS}
+          placeholder="Selecciona un plan"
+          required
+        />
+        <FormField
+          label="Ciudad"
+          name="ciudad"
+          register={register}
+          error={errors.ciudad?.message}
+          placeholder="Ciudad de México"
+        />
+      </div>
+
+      <FormSelect
+        label="¿Cuántos miembros tienes?"
+        name="miembros_aprox"
+        register={register}
+        error={errors.miembros_aprox?.message}
+        opciones={MIEMBROS_OPTIONS}
+        placeholder={null}
+      />
+
+      <FormField
+        label="¿Cómo te enteraste de STRING GYM?"
+        name="como_entero"
+        register={register}
+        error={errors.como_entero?.message}
+        placeholder="Instagram, un amigo, Google..."
+      />
+
       <div className="pt-2">
         <TurnstileWidget onVerify={setToken} onExpire={() => setToken("")} />
       </div>
 
-      {/* Submit */}
       <div className="pt-2">
-        <button
-          type="submit"
-          disabled={isSubmitting}
-          className="group relative w-full overflow-hidden bg-green px-8 py-4 text-sm font-bold uppercase tracking-wide text-black transition-colors duration-200 hover:bg-white disabled:cursor-not-allowed disabled:opacity-60"
-        >
-          <span className="relative z-10 flex items-center justify-center gap-2">
-            {isSubmitting ? (
-              <>
-                <svg className="h-4 w-4 animate-spin" viewBox="0 0 24 24">
-                  <circle
-                    className="opacity-25"
-                    cx="12"
-                    cy="12"
-                    r="10"
-                    stroke="currentColor"
-                    strokeWidth="4"
-                    fill="none"
-                  />
-                  <path
-                    className="opacity-75"
-                    fill="currentColor"
-                    d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
-                  />
-                </svg>
-                Enviando...
-              </>
-            ) : (
-              <>
-                Empezar mi prueba gratuita
-                <FiArrowRight className="h-4 w-4 transition-transform duration-200 group-hover:translate-x-1" />
-              </>
-            )}
-          </span>
-        </button>
-        <p className="mt-4 text-center font-mono text-xs text-gray">
+        <Boton type="submit" variante="primario" disabled={isSubmitting} className="w-full">
+          {isSubmitting ? "Enviando…" : "Empezar mi prueba gratuita"}
+        </Boton>
+        <p className="mt-4 text-center font-mono uppercase text-etiqueta text-tinta-tenue">
           Sin tarjeta de crédito · Te contactamos en menos de 24 horas
         </p>
       </div>

@@ -27,6 +27,7 @@ export function TitularBrochada({
   animar = true,
   disparo = "montaje",
   retraso = 0,
+  tamano = "xl",
   className = "",
 }) {
   const id = `brochada-${useId().replace(/[^a-zA-Z0-9_-]/g, "")}`;
@@ -66,7 +67,11 @@ export function TitularBrochada({
     return () => ctx.revert();
   }, [animar, disparo, retraso]);
 
-  const clasesTexto = "font-anton uppercase text-titular-l md:text-titular-xl";
+  // "xl" crece a titular-xl en escritorio; "l" se queda en titular-l para
+  // titulares largos que no caben en una línea.
+  const clasesTexto = `font-anton uppercase text-titular-l ${
+    tamano === "xl" ? "md:text-titular-xl" : ""
+  }`.trim();
 
   return (
     <div ref={raizRef} className={`relative inline-block max-w-full ${className}`.trim()}>

@@ -27,7 +27,7 @@ export const metadata = {
 
 export default function QuotePage() {
   return (
-    <main className="min-h-screen bg-black py-24 px-6 sm:px-8 lg:px-12">
+    <main className="min-h-screen bg-black px-6 pt-32 pb-espacio-6 md:pt-40 md:pb-espacio-7 lg:px-24">
       <Toaster
         position="top-center"
         toastOptions={{

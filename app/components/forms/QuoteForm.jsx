@@ -11,31 +11,20 @@ import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { REVEAL_START } from "@/app/lib/scrollTriggerDefaults";
 import toast from "react-hot-toast";
-import {
-  FiArrowRight,
-  FiCheck,
-  FiCheckCircle,
-  FiDollarSign,
-  FiMail,
-  FiUser,
-  FiPhone,
-  FiTarget,
-  FiCalendar,
-  FiClock,
-  FiShield,
-  FiZap,
-} from "react-icons/fi";
+import { FiCheck } from "react-icons/fi";
 import { PROJECT_TYPES } from "../../lib/constants/project-types";
 import { Etiqueta } from "@/app/components/ui/Etiqueta";
+import { Boton } from "@/app/components/ui/Boton";
+import { TitularBrochada } from "@/app/components/ui/TitularBrochada";
 
 gsap.registerPlugin(ScrollTrigger);
 
 // ─── Datos ────────────────────────────────────────────────────────────────────
 const benefits = [
-  { icon: FiZap, text: "Diagnóstico en 24h" },
-  { icon: FiCheckCircle, text: "Sistema 100% personalizado" },
-  { icon: FiShield, text: "Sin plantillas" },
-  { icon: FiClock, text: "Soporte continuo" },
+  "Diagnóstico en 24h",
+  "Sistema 100% personalizado",
+  "Sin plantillas",
+  "Soporte continuo",
 ];
 
 // ─── Componente ───────────────────────────────────────────────────────────────
@@ -46,11 +35,9 @@ export const QuoteForm = () => {
 
   const sectionRef = useRef(null);
   const tagRef = useRef(null);
-  const titleRef = useRef(null);
   const descRef = useRef(null);
   const benefitsRef = useRef([]);
   const formRef = useRef(null);
-  const buttonRef = useRef(null);
 
   const {
     register,
@@ -94,10 +81,10 @@ export const QuoteForm = () => {
   // ── Animación de entrada ────────────────────────────────────────────────────
   useEffect(() => {
     const ctx = gsap.context(() => {
-      gsap.set(
-        [tagRef.current, titleRef.current, descRef.current, formRef.current],
-        { opacity: 0, y: 24 }
-      );
+      gsap.set([tagRef.current, descRef.current, formRef.current], {
+        opacity: 0,
+        y: 24,
+      });
       gsap.set(benefitsRef.current.filter(Boolean), { opacity: 0, y: 16 });
 
       const tl = gsap.timeline({
@@ -115,14 +102,9 @@ export const QuoteForm = () => {
         ease: "power3.out",
       })
         .to(
-          titleRef.current,
-          { opacity: 1, y: 0, duration: 0.6, ease: "power3.out" },
-          "-=0.3"
-        )
-        .to(
           descRef.current,
           { opacity: 1, y: 0, duration: 0.5, ease: "power3.out" },
-          "-=0.3"
+          "+=0.6"
         )
         .to(
           benefitsRef.current.filter(Boolean),
@@ -158,17 +140,8 @@ export const QuoteForm = () => {
 
   // ── Submit ──────────────────────────────────────────────────────────────────
   const onSubmit = async (data) => {
+    if (isSubmitting) return;
     setIsSubmitting(true);
-
-    // Feedback táctil en botón
-    gsap
-      .timeline()
-      .to(buttonRef.current, { scale: 0.96, duration: 0.1 })
-      .to(buttonRef.current, {
-        scale: 1,
-        duration: 0.2,
-        ease: "elastic.out(1, 0.5)",
-      });
 
     try {
       const response = await fetch("/api/quote", {
@@ -186,7 +159,7 @@ export const QuoteForm = () => {
       setSuccessData(data);
       toast.success("¡Diagnóstico enviado! Te contactamos en 24h", {
         duration: 5000,
-        icon: <FiCheck className="text-green" />,
+        icon: <FiCheck className="text-acido" />,
       });
     } catch (error) {
       toast.error(error.message || "Error al enviar. Intenta de nuevo.", {
@@ -219,34 +192,28 @@ export const QuoteForm = () => {
           <Etiqueta variante="linea">Diagnóstico gratuito</Etiqueta>
         </div>
 
-        <h1
-          ref={titleRef}
-          className="font-anton text-titular-l uppercase"
-        >
-          <span className="text-white">Diagnostica</span>{" "}
-          <span className="text-green">tu negocio</span>
-        </h1>
+        <div>
+          <TitularBrochada lineas={["Diagnostica", "tu negocio"]} retraso={0.25} />
+        </div>
 
-        <p ref={descRef} className="text-gray text-lg leading-relaxed max-w-xl">
+        <p ref={descRef} className="max-w-xl text-cuerpo-l text-tinta-suave">
           Descubre qué nivel del Sistema STRING necesita tu negocio para
           convertir visitas en clientes reales.
         </p>
 
-        {/* Benefits */}
-        <div className="flex flex-wrap gap-3">
-          {benefits.map((b, i) => {
-            const Icon = b.icon;
-            return (
-              <div
-                key={i}
-                ref={(el) => (benefitsRef.current[i] = el)}
-                className="inline-flex items-center gap-2 px-3 py-1.5 border border-white/10 text-xs font-mono text-gray"
-              >
-                <Icon className="text-green text-sm" />
-                {b.text}
-              </div>
-            );
-          })}
+        <div className="flex flex-wrap gap-x-6 gap-y-2">
+          {benefits.map((texto, i) => (
+            <span
+              key={texto}
+              ref={(el) => (benefitsRef.current[i] = el)}
+              className="flex items-center gap-2 font-mono uppercase text-etiqueta text-tinta-suave"
+            >
+              <span className="text-acido" aria-hidden="true">
+                —
+              </span>
+              {texto}
+            </span>
+          ))}
         </div>
       </div>
 
@@ -254,7 +221,7 @@ export const QuoteForm = () => {
       <div ref={formRef}>
         <form
           onSubmit={handleSubmit(onSubmit)}
-          className="border border-white/10 p-8 md:p-10 space-y-6"
+          className="space-y-6 border-2 border-linea bg-fondo-elevado p-8 md:p-10"
           noValidate
         >
           {/* Fila 1: Nombre + WhatsApp (obligatorios) */}
@@ -265,7 +232,6 @@ export const QuoteForm = () => {
               register={register}
               error={errors.name?.message}
               placeholder="Juan Pérez"
-              icon={FiUser}
               required
             />
             <FormField
@@ -321,14 +287,14 @@ export const QuoteForm = () => {
 
           {/* Info del nivel seleccionado */}
           {selectedLevelData && (
-            <div className="border border-green/20 bg-green/5 p-4 space-y-2">
-              <p className="text-[10px] font-mono text-green uppercase tracking-widest">
+            <div className="space-y-2 border-l-2 border-acido pl-4">
+              <p className="font-mono uppercase text-etiqueta text-acido">
                 {selectedLevelData.label}
               </p>
-              <p className="text-white/80 text-sm leading-relaxed">
+              <p className="text-cuerpo-s text-tinta-suave">
                 {selectedLevelData.description}
               </p>
-              <p className="text-[10px] font-mono text-gray">
+              <p className="font-mono text-dato text-tinta">
                 Precio estimado: ${selectedLevelData.price} MXN
               </p>
             </div>
@@ -355,43 +321,11 @@ export const QuoteForm = () => {
 
           {/* Submit */}
           <div className="pt-2">
-            <button
-              ref={buttonRef}
-              type="submit"
-              disabled={isSubmitting}
-              className="group relative w-full overflow-hidden bg-green text-black font-bold px-8 py-4 text-sm uppercase tracking-wide hover:bg-white transition-colors duration-200 disabled:opacity-60 disabled:cursor-not-allowed"
-            >
-              <span className="relative z-10 flex items-center justify-center gap-2">
-                {isSubmitting ? (
-                  <>
-                    <svg className="animate-spin h-4 w-4" viewBox="0 0 24 24">
-                      <circle
-                        className="opacity-25"
-                        cx="12"
-                        cy="12"
-                        r="10"
-                        stroke="currentColor"
-                        strokeWidth="4"
-                        fill="none"
-                      />
-                      <path
-                        className="opacity-75"
-                        fill="currentColor"
-                        d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
-                      />
-                    </svg>
-                    Enviando diagnóstico...
-                  </>
-                ) : (
-                  <>
-                    Solicitar diagnóstico gratuito
-                    <FiArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform duration-200" />
-                  </>
-                )}
-              </span>
-            </button>
+            <Boton type="submit" variante="primario" disabled={isSubmitting} className="w-full">
+              {isSubmitting ? "Enviando diagnóstico…" : "Solicitar diagnóstico gratuito"}
+            </Boton>
 
-            <p className="text-xs text-gray text-center mt-4 font-mono">
+            <p className="mt-4 text-center font-mono uppercase text-etiqueta text-tinta-tenue">
               Te contactamos en menos de 24 horas · Sin compromiso
             </p>
           </div>

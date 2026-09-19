@@ -1,7 +1,8 @@
-import Link from "next/link";
 import { FiArrowLeft } from "react-icons/fi";
 import { RegistroForm } from "./RegistroForm";
 import { Etiqueta } from "@/app/components/ui/Etiqueta";
+import { Boton } from "@/app/components/ui/Boton";
+import { TitularBrochada } from "@/app/components/ui/TitularBrochada";
 
 export const metadata = {
   title: "Registra tu gimnasio — STRING GYM",
@@ -45,21 +46,18 @@ export default async function RegistroPage({ searchParams }) {
   const plan = PLAN_URL_A_INTERNO[planRaw] || "";
 
   return (
-    <section className="mx-auto max-w-2xl px-6 py-24 md:py-28">
-      <Link
-        href="/saas#gym-detalle"
-        className="inline-flex items-center gap-2 font-mono text-xs uppercase tracking-widest text-gray transition-colors hover:text-green"
-      >
+    <section className="mx-auto max-w-2xl px-6 pt-32 pb-espacio-6 md:pt-40 md:pb-espacio-7">
+      <Boton href="/saas#planes" variante="texto">
         <FiArrowLeft className="h-3.5 w-3.5" />
         Ver planes
-      </Link>
+      </Boton>
 
       <div className="mb-10 mt-6 space-y-4">
         <Etiqueta variante="linea">STRING GYM</Etiqueta>
-        <h1 className="font-anton text-titular-l uppercase text-white">
-          Crea tu cuenta
-        </h1>
-        <p className="text-lg leading-relaxed text-gray">
+        <div>
+          <TitularBrochada lineas={["Crea", "tu cuenta"]} retraso={0.2} />
+        </div>
+        <p className="text-cuerpo-l text-tinta-suave">
           Déjanos tus datos y activamos tu prueba gratuita de 14 días con Pro
           completo. Sin tarjeta de crédito.
         </p>
