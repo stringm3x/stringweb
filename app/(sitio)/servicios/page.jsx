@@ -72,7 +72,13 @@ const PageServices = () => {
   useEffect(() => {
     const ctx = gsap.context(() => {
       gsap.set([tagRef.current, descRef.current], { opacity: 0, y: 24 });
-      gsap.set(cardsRef.current.filter(Boolean), { opacity: 0, y: 24 });
+      // Las láminas entran como barajadas: cada una con un giro distinto que se endereza.
+      gsap.set(cardsRef.current.filter(Boolean), {
+        opacity: 0,
+        y: 24,
+        rotation: (i) => (i - 1.5) * 4,
+        transformOrigin: "50% 100%",
+      });
       gsap.set(ctaRef.current, { opacity: 0, y: 16 });
 
       const tlHeader = gsap.timeline({
@@ -85,8 +91,9 @@ const PageServices = () => {
       gsap.to(cardsRef.current.filter(Boolean), {
         opacity: 1,
         y: 0,
+        rotation: 0,
         stagger: 0.1,
-        duration: 0.5,
+        duration: 0.6,
         ease: "power3.out",
         scrollTrigger: { trigger: cardsRef.current[0], start: REVEAL_START, once: true },
       });
@@ -145,7 +152,7 @@ const PageServices = () => {
               const destacada = id === "3";
               return (
                 <div key={id} ref={(el) => (cardsRef.current[index] = el)}>
-                  <Link href={`/servicios/${id}`} className="block h-full">
+                  <Link href={`/servicios/${id}`} className="group block h-full">
                     <div
                       className={`flex h-full flex-col border ${
                         destacada ? "border-acido shadow-acido" : "border-linea"
@@ -153,6 +160,11 @@ const PageServices = () => {
                     >
                       <div className="relative h-[200px]">
                         <Ilustracion className="h-full w-full" />
+                        {/* Flash de impresión: papel que se desvanece al pasar el mouse */}
+                        <span
+                          aria-hidden="true"
+                          className="pointer-events-none absolute inset-0 bg-papel opacity-0 group-hover:animate-imprimir motion-reduce:hidden"
+                        />
                         <MarcasRegistro />
                       </div>
                       <div className="flex flex-1 flex-col p-6">
