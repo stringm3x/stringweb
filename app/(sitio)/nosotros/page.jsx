@@ -9,6 +9,7 @@ import { Etiqueta } from "@/app/components/ui/Etiqueta";
 import { Boton } from "@/app/components/ui/Boton";
 import { Cierre } from "@/app/components/ui/Cierre";
 import { TitularBrochada } from "@/app/components/ui/TitularBrochada";
+import { PintarAlScroll } from "@/app/components/PintarAlScroll";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -213,16 +214,28 @@ const PageUs = () => {
             <p className="font-mono uppercase text-etiqueta text-tinta-tenue mb-4">
               No vendemos
             </p>
-            <div className="divide-y divide-linea border-y border-linea">
+            <PintarAlScroll
+              className="divide-y divide-linea border-y border-linea"
+              duracion={0.45}
+              escalonado={0.1}
+            >
               {noVendemos.map((item) => (
                 <div key={item} className="flex items-start gap-3 py-4">
                   <span className="text-acido" aria-hidden="true">
                     —
                   </span>
-                  <span className="text-tinta-tenue text-cuerpo-s">{item}</span>
+                  <span className="relative text-tinta-tenue text-cuerpo-s">
+                    {item}
+                    {/* Tachón acido que se dibuja al entrar en pantalla */}
+                    <span
+                      data-brochada
+                      aria-hidden="true"
+                      className="absolute left-0 top-1/2 h-[2px] w-full -translate-y-1/2 bg-acido"
+                    />
+                  </span>
                 </div>
               ))}
-            </div>
+            </PintarAlScroll>
           </div>
 
           <div>
@@ -253,11 +266,17 @@ const PageUs = () => {
             Cómo <span className="text-acido">trabajamos</span>
           </h2>
 
-          <div className="border-t border-linea">
+          <PintarAlScroll className="border-t border-linea" duracion={0.5} escalonado={0.12}>
             {metodologia.map((fase) => (
               <div key={fase.step} className="flex gap-6 py-6 border-b border-linea">
-                <span className="font-mono text-acido text-etiqueta flex-shrink-0">
+                <span className="relative self-start font-mono text-acido text-etiqueta flex-shrink-0">
                   {fase.step}
+                  {/* Brochada corta bajo el número */}
+                  <span
+                    data-brochada
+                    aria-hidden="true"
+                    className="absolute -bottom-1.5 -left-1 -right-1 h-[4px] -skew-x-12 bg-acido"
+                  />
                 </span>
                 <div>
                   <h3 className="font-anton uppercase text-titular-m text-white mb-1">
@@ -267,7 +286,7 @@ const PageUs = () => {
                 </div>
               </div>
             ))}
-          </div>
+          </PintarAlScroll>
 
           <p className="mt-8 font-mono uppercase text-etiqueta text-tinta-tenue">
             STRING no entrega páginas web. Entrega sistemas funcionales de
