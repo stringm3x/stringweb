@@ -3,16 +3,7 @@
 import React, { useEffect, useRef } from "react";
 import Link from "next/link";
 import Image from "next/image";
-import {
-  FaInstagram,
-  FaWhatsapp,
-  FaFacebookF,
-  FaTiktok,
-  FaEnvelope,
-  FaPhone,
-  FaMapMarkerAlt,
-  FaArrowRight,
-} from "react-icons/fa";
+import { FaInstagram, FaWhatsapp, FaFacebookF, FaTiktok } from "react-icons/fa";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { REVEAL_START } from "@/app/lib/scrollTriggerDefaults";
@@ -20,20 +11,16 @@ import { REVEAL_START } from "@/app/lib/scrollTriggerDefaults";
 gsap.registerPlugin(ScrollTrigger);
 
 const pages = [
-  { id: "1", title: "Inicio", link: "/" },
-  { id: "2", title: "Servicios", link: "/servicios" },
-  { id: "3", title: "STRING SaaS", link: "/saas" },
-  { id: "4", title: "Proyectos", link: "/proyectos" },
-  { id: "5", title: "Nosotros", link: "/nosotros" },
-  { id: "6", title: "Cotización", link: "/cotizacion" },
+  { title: "Inicio", link: "/" },
+  { title: "Servicios", link: "/servicios" },
+  { title: "STRING SaaS", link: "/saas" },
+  { title: "Proyectos", link: "/proyectos" },
+  { title: "Nosotros", link: "/nosotros" },
+  { title: "Cotización", link: "/cotizacion" },
 ];
 
 const socialLinks = [
-  {
-    icon: FaInstagram,
-    href: "https://www.instagram.com/stringwebmx/",
-    label: "Instagram",
-  },
+  { icon: FaInstagram, href: "https://www.instagram.com/stringwebmx/", label: "Instagram" },
   {
     icon: FaWhatsapp,
     href: "https://wa.me/525545524847?text=¡Hola!%20Quiero%20más%20info%20sobre%20STRING",
@@ -44,11 +31,7 @@ const socialLinks = [
     href: "https://www.facebook.com/profile.php?id=61576042750915",
     label: "Facebook",
   },
-  {
-    icon: FaTiktok,
-    href: "https://www.tiktok.com/@stringmx",
-    label: "TikTok",
-  },
+  { icon: FaTiktok, href: "https://www.tiktok.com/@stringmx", label: "TikTok" },
 ];
 
 const services = [
@@ -58,183 +41,95 @@ const services = [
   { label: "Sistema Especializado", id: "4" },
 ];
 
+const contacto = [
+  { etiqueta: "Email", valor: "hola@stringwebs.com", href: "mailto:hola@stringwebs.com" },
+  { etiqueta: "Tel", valor: "+52 55 4552 4847", href: "tel:+525545524847" },
+  { etiqueta: "Ciudad", valor: "Ciudad de México" },
+];
+
+const enlace =
+  "text-cuerpo-s text-tinta-suave transition-colors duration-200 hover:text-tinta";
+
+function Encabezado({ children }) {
+  return (
+    <h3 className="mb-4 flex items-center gap-3 font-mono uppercase text-etiqueta text-tinta-suave">
+      <span className="h-[3px] w-6 bg-acido" aria-hidden="true" />
+      {children}
+    </h3>
+  );
+}
+
 const Footer = () => {
   const footerRef = useRef(null);
-  const logoRef = useRef(null);
-  const columnsRef = useRef([]);
-  const socialRefs = useRef([]);
-  const linksRef = useRef([]);
+  const bloquesRef = useRef([]);
 
+  // Un solo reveal para todo el pie: los cuatro bloques suben en cascada.
   useEffect(() => {
     const ctx = gsap.context(() => {
-      gsap.fromTo(
-        footerRef.current,
-        { opacity: 0, y: 40 },
-        {
-          opacity: 1,
-          y: 0,
-          duration: 0.8,
-          ease: "power3.out",
-          scrollTrigger: {
-            trigger: footerRef.current,
-            start: REVEAL_START,
-            once: true,
-          },
-        }
-      );
-
-      gsap.fromTo(
-        logoRef.current,
-        { opacity: 0, scale: 0.85 },
-        {
-          opacity: 1,
-          scale: 1,
-          duration: 0.6,
-          ease: "power3.out",
-          scrollTrigger: {
-            trigger: footerRef.current,
-            start: REVEAL_START,
-            once: true,
-          },
-        }
-      );
-
-      gsap.fromTo(
-        columnsRef.current,
-        { opacity: 0, y: 20 },
-        {
-          opacity: 1,
-          y: 0,
-          stagger: 0.1,
-          duration: 0.5,
-          ease: "power3.out",
-          scrollTrigger: {
-            trigger: footerRef.current,
-            start: REVEAL_START,
-            once: true,
-          },
-        }
-      );
-
-      gsap.fromTo(
-        socialRefs.current,
-        { opacity: 0, scale: 0 },
-        {
-          opacity: 1,
-          scale: 1,
-          stagger: 0.08,
-          duration: 0.4,
-          ease: "back.out(1.7)",
-          scrollTrigger: {
-            trigger: footerRef.current,
-            start: REVEAL_START,
-            once: true,
-          },
-        }
-      );
-
-      gsap.fromTo(
-        linksRef.current,
-        { opacity: 0, x: -8 },
-        {
-          opacity: 1,
-          x: 0,
-          stagger: 0.03,
-          duration: 0.3,
-          ease: "power2.out",
-          scrollTrigger: {
-            trigger: footerRef.current,
-            start: REVEAL_START,
-            once: true,
-          },
-        }
-      );
-    });
-
+      gsap.from(bloquesRef.current.filter(Boolean), {
+        opacity: 0,
+        y: 24,
+        duration: 0.6,
+        stagger: 0.1,
+        ease: "power3.out",
+        scrollTrigger: { trigger: footerRef.current, start: REVEAL_START, once: true },
+      });
+    }, footerRef);
     return () => ctx.revert();
   }, []);
 
   return (
     <footer
       ref={footerRef}
-      className="relative bg-black text-white pt-20 pb-8 px-4 md:px-8 lg:px-12 overflow-hidden"
-      style={{ opacity: 0 }}
+      className="border-t-2 border-acido bg-fondo px-6 pb-8 pt-espacio-6 text-tinta lg:px-24 lg:pt-espacio-7"
     >
-      {/* Línea superior */}
-      <div className="absolute top-0 left-0 right-0 h-px bg-green opacity-60" />
-
-      <div className="max-w-7xl mx-auto relative z-10">
-        {/* Grid principal */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12">
-          {/* Columna 1: Logo + descripción + contacto */}
-          <div className="lg:col-span-4 space-y-6">
-            <div ref={logoRef} style={{ opacity: 0 }}>
-              <div className="inline-block p-[34px]">
-                <Image
-                  src="/marca/string-wordmark-acido.png"
-                  alt="STRING"
-                  width={409}
-                  height={144}
-                  className="h-auto w-[200px]"
-                />
-              </div>
-              <p className="text-green text-xs uppercase tracking-widest">
-                Sistemas digitales estratégicos
-              </p>
-            </div>
-
-            <p className="text-gray text-sm leading-relaxed">
+      <div className="mx-auto max-w-7xl">
+        <div className="grid grid-cols-1 gap-12 lg:grid-cols-12">
+          {/* Marca + contacto */}
+          <div ref={(el) => (bloquesRef.current[0] = el)} className="lg:col-span-5">
+            <Image
+              src="/marca/string-wordmark-acido.png"
+              alt="STRING"
+              width={409}
+              height={144}
+              className="h-auto w-[180px]"
+            />
+            <p className="mt-4 font-mono uppercase text-etiqueta text-tinta-tenue">
+              Sistemas digitales estratégicos
+            </p>
+            <p className="mt-6 max-w-sm text-cuerpo-s text-tinta-suave">
               No necesitas más seguidores. Necesitas un sistema que convierta.
               Diseñamos sistemas digitales que transforman tu presencia en
               clientes reales.
             </p>
 
-            <div className="space-y-3 pt-2">
-              <div className="flex items-center space-x-3 group">
-                <FaEnvelope className="text-green group-hover:scale-110 transition-transform flex-shrink-0" />
-                <a
-                  href="mailto:hola@stringwebs.com"
-                  className="text-sm text-gray hover:text-white transition-colors hover:underline"
-                >
-                  hola@stringwebs.com
-                </a>
-              </div>
-              <div className="flex items-center space-x-3 group">
-                <FaPhone className="text-green group-hover:scale-110 transition-transform flex-shrink-0" />
-                <a
-                  href="tel:+525545524847"
-                  className="text-sm text-gray hover:text-white transition-colors hover:underline"
-                >
-                  +52 55 4552 4847
-                </a>
-              </div>
-              <div className="flex items-center space-x-3">
-                <FaMapMarkerAlt className="text-green flex-shrink-0" />
-                <span className="text-sm text-gray">Ciudad de México</span>
-              </div>
-            </div>
+            <dl className="mt-8 max-w-sm divide-y divide-linea border-y border-linea">
+              {contacto.map((c) => (
+                <div key={c.etiqueta} className="flex items-baseline gap-4 py-3">
+                  <dt className="w-16 flex-shrink-0 font-mono uppercase text-etiqueta text-tinta-tenue">
+                    {c.etiqueta}
+                  </dt>
+                  <dd className="min-w-0">
+                    {c.href ? (
+                      <a href={c.href} className={enlace}>
+                        {c.valor}
+                      </a>
+                    ) : (
+                      <span className="text-cuerpo-s text-tinta-suave">{c.valor}</span>
+                    )}
+                  </dd>
+                </div>
+              ))}
+            </dl>
           </div>
 
-          {/* Columna 2: Servicios */}
-          <div
-            ref={(el) => (columnsRef.current[0] = el)}
-            className="lg:col-span-3 space-y-6"
-            style={{ opacity: 0 }}
-          >
-            <h3 className="text-sm font-semibold uppercase tracking-widest text-green">
-              Sistemas
-            </h3>
+          {/* Sistemas */}
+          <div ref={(el) => (bloquesRef.current[1] = el)} className="lg:col-span-3">
+            <Encabezado>Sistemas</Encabezado>
             <ul className="space-y-3">
-              {services.map((service, index) => (
-                <li
-                  key={service.id}
-                  ref={(el) => (linksRef.current[index] = el)}
-                  style={{ opacity: 0 }}
-                >
-                  <Link
-                    href={`/servicios/${service.id}`}
-                    className="text-gray hover:text-white transition-colors text-sm block hover:translate-x-1 transform duration-200"
-                  >
+              {services.map((service) => (
+                <li key={service.id}>
+                  <Link href={`/servicios/${service.id}`} className={enlace}>
                     {service.label}
                   </Link>
                 </li>
@@ -242,27 +137,13 @@ const Footer = () => {
             </ul>
           </div>
 
-          {/* Columna 3: Páginas */}
-          <div
-            ref={(el) => (columnsRef.current[1] = el)}
-            className="lg:col-span-2 space-y-6"
-            style={{ opacity: 0 }}
-          >
-            <h3 className="text-sm font-semibold uppercase tracking-widest text-green">
-              Páginas
-            </h3>
+          {/* Páginas */}
+          <div ref={(el) => (bloquesRef.current[2] = el)} className="lg:col-span-2">
+            <Encabezado>Páginas</Encabezado>
             <ul className="space-y-3">
-              {pages.map((item, index) => (
-                <li
-                  key={item.id}
-                  ref={(el) => (linksRef.current[services.length + index] = el)}
-                  style={{ opacity: 0 }}
-                >
-                  <Link
-                    href={item.link}
-                    className="text-gray hover:text-white transition-colors text-sm flex items-center group"
-                  >
-                    <FaArrowRight className="opacity-0 group-hover:opacity-100 mr-2 text-green text-xs transition-all duration-200" />
+              {pages.map((item) => (
+                <li key={item.link}>
+                  <Link href={item.link} className={enlace}>
                     {item.title}
                   </Link>
                 </li>
@@ -270,65 +151,37 @@ const Footer = () => {
             </ul>
           </div>
 
-          {/* Columna 4: Redes sociales */}
-          <div
-            ref={(el) => (columnsRef.current[2] = el)}
-            className="lg:col-span-3 space-y-6"
-            style={{ opacity: 0 }}
-          >
-            <h3 className="text-sm font-semibold uppercase tracking-widest text-green">
-              Síguenos
-            </h3>
+          {/* Redes */}
+          <div ref={(el) => (bloquesRef.current[3] = el)} className="lg:col-span-2">
+            <Encabezado>Síguenos</Encabezado>
             <div className="flex flex-wrap gap-3">
-              {socialLinks.map((social, index) => (
-                <div
-                  key={index}
-                  ref={(el) => (socialRefs.current[index] = el)}
-                  style={{ opacity: 0 }}
+              {socialLinks.map((social) => (
+                <a
+                  key={social.label}
+                  href={social.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label={social.label}
+                  className="flex h-12 w-12 items-center justify-center border border-linea text-tinta-suave transition-colors duration-200 hover:border-acido hover:text-acido"
                 >
-                  <Link
-                    href={social.href}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    aria-label={social.label}
-                    className="flex items-center justify-center w-12 h-12 border border-linea text-gray hover:text-green transition-colors duration-200"
-                  >
-                    <social.icon className="text-lg" />
-                  </Link>
-                </div>
+                  <social.icon className="text-lg" />
+                </a>
               ))}
             </div>
           </div>
         </div>
 
-        {/* Divisor */}
-        <div className="my-8 border-t border-white/10" />
-
-        {/* Bottom bar */}
-        <div className="flex flex-col md:flex-row justify-between items-center gap-4 text-xs text-gray">
-          <p>
-            © {new Date().getFullYear()} STRING. Todos los derechos reservados.
-          </p>
-
-          <div className="flex gap-6">
-            <Link
-              href="/privacy-policy"
-              className="hover:text-green transition-colors"
-            >
+        {/* Barra inferior */}
+        <div className="mt-espacio-6 flex flex-col gap-4 border-t border-linea pt-6 font-mono uppercase text-etiqueta text-tinta-tenue md:flex-row md:items-center md:justify-between">
+          <p>© {new Date().getFullYear()} STRING · Todos los derechos reservados</p>
+          <div className="flex flex-wrap gap-x-6 gap-y-2">
+            <Link href="/privacy-policy" className="transition-colors hover:text-tinta">
               Aviso de privacidad
             </Link>
-            <Link href="/terms" className="hover:text-green transition-colors">
+            <Link href="/terms" className="transition-colors hover:text-tinta">
               Términos y condiciones
             </Link>
-          </div>
-
-          <div className="flex gap-3">
-            <span className="px-2 py-1 bg-white/5 rounded text-xs">
-              SSL Secure
-            </span>
-            <span className="px-2 py-1 bg-white/5 rounded text-xs">
-              CDMX · MX
-            </span>
+            <span>CDMX · MX</span>
           </div>
         </div>
       </div>
