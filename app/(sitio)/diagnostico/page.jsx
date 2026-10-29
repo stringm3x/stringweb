@@ -1,8 +1,8 @@
-import { QuoteForm } from "../../components/forms/QuoteForm";
-import { Toaster } from "react-hot-toast";
+import { FormularioDiagnostico } from "@/app/components/forms/FormularioDiagnostico";
+import { CUERPO, ETIQUETA } from "@/app/components/salas/estilos";
 
-// Título y descripción de docs/textos.md § Textos que faltaban. El
-// formulario y su encabezado se rehacen en el lote 4.
+// /diagnostico (docs/textos.md § Textos que faltaban): etiqueta, titular,
+// intro y debajo el formulario de cuatro preguntas.
 const DESCRIPCION =
   "Cuatro preguntas para saber qué necesita tu negocio. Te respondemos en un día hábil.";
 
@@ -20,39 +20,22 @@ export const metadata = {
   },
 };
 
-export default function QuotePage() {
+export default function DiagnosticoPage() {
   return (
-    <main className="min-h-screen bg-black px-6 pt-32 pb-espacio-6 md:pt-40 md:pb-espacio-7 lg:px-24">
-      <Toaster
-        position="top-center"
-        toastOptions={{
-          duration: 4000,
-          style: {
-            background: "#0f1310",
-            color: "#ffffff",
-            border: "1px solid #242b24",
-            borderRadius: "0",
-            fontSize: "14px",
-          },
-          success: {
-            duration: 5000,
-            iconTheme: {
-              primary: "#50ff05",
-              secondary: "#000",
-            },
-          },
-          error: {
-            duration: 4000,
-            iconTheme: {
-              primary: "#ffffff",
-              secondary: "#0f1310",
-            },
-          },
-        }}
-      />
-      <div className="mx-auto max-w-contenido">
-        <QuoteForm />
+    <div data-theme="noche" className="bg-fondo px-4 pb-space-8 pt-32 text-texto sm:px-6 lg:px-24 lg:pt-40">
+      <div className="mx-auto flex max-w-[760px] flex-col gap-space-6">
+        <div className="flex flex-col gap-space-4">
+          <p className={ETIQUETA}>DIAGNÓSTICO</p>
+          <h1 className="text-[44px] font-semibold leading-[1.02] tracking-[-0.035em] md:text-[56px] lg:text-titulo">
+            Cuéntanos qué necesita tu negocio.
+          </h1>
+          <p className={CUERPO}>
+            Cuatro preguntas. Te respondemos en un día hábil, y el diagnóstico inicial lo tienes en
+            24 horas.
+          </p>
+        </div>
+        <FormularioDiagnostico />
       </div>
-    </main>
+    </div>
   );
 }
