@@ -2,12 +2,80 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Fondo negro a nivel body: cada sección pone su propio bg-black, pero si
-   alguna lo olvida (como pasó con el footer) queda un parche blanco del
-   fondo default del navegador en vez del tema del sitio. */
-html,
-body {
-  background-color: #000000;
+/* Color (docs/sistema/tokens.json). Van en canales RGB para que Tailwind
+   pueda aplicar opacidad (bg-fondo/95). */
+@layer base {
+  /* Paleta de la casa. Tailwind no la expone: se usa a través de los
+     tokens semánticos de abajo, que cambian con el tema. */
+  :root {
+    --noche: 0 0 0;
+    --linea: 245 245 243;
+    --luz: 80 255 5;
+    --neblina: 154 154 159;
+    --pared: 244 242 236;
+    --tinta: 17 18 20;
+    --verde-profundo: 26 127 0;
+    --grafito: 95 99 104;
+  }
+
+  /* Tema Noche: el principal. */
+  :root,
+  [data-theme="noche"] {
+    --fondo: var(--noche);
+    --superficie: 11 11 12;
+    --texto: var(--linea);
+    --texto-suave: var(--neblina);
+    --hairline: 42 42 44;
+    --acento: var(--luz);
+    --sobre-acento: 0 0 0;
+    --foco: var(--acento);
+  }
+
+  /* Tema Pared: la galería y los impresos. */
+  [data-theme="pared"] {
+    --fondo: var(--pared);
+    --superficie: 255 255 255;
+    --texto: var(--tinta);
+    --texto-suave: var(--grafito);
+    --hairline: 217 217 214;
+    --acento: var(--verde-profundo);
+    --sobre-acento: 255 255 255;
+  }
+
+  :root {
+    /* Solo para mostrar al sistema para gimnasios en la galería. */
+    --boaz-azul: 30 68 255;
+
+    /* Materiales del arte (paleta del 29 oct, docs/diseno.md). Nunca en
+       texto, botones ni enlaces. */
+    --arte-oro: #c9a23f;
+    --arte-oro-luz: #e9cc74;
+    --arte-oro-sombra: #8a6a1e;
+    --arte-terracota: #b5523b;
+    --arte-madera: #9a6534;
+    --arte-madera-sombra: #5e3a1a;
+    --arte-marmol: #dcd3c2;
+    --arte-marmol-luz: #ece5d6;
+    --arte-marmol-sombra: #a99f8c;
+    --arte-concreto: #eae1cf;
+    --arte-vidrio: #cfdce0;
+    --arte-amarillo-obra: #e0a526;
+
+    /* Legado: las ilustraciones viejas piden Anton por variable. Anton ya
+       no se carga; caen en Geist hasta que se rehagan las salas. */
+    --font-anton-sans: var(--font-sans);
+  }
+
+  html,
+  body {
+    background-color: rgb(var(--fondo));
+  }
+
+  /* Foco de teclado del sistema: 2 px en acento con 3 px de separación. */
+  :focus-visible {
+    outline: 2px solid rgb(var(--foco));
+    outline-offset: 3px;
+  }
 }
 
 /* Cursor personalizado: activo solo cuando CustomCursor.jsx logra montarse

@@ -1,4 +1,4 @@
-import { Geist, Anton, Ubuntu_Mono } from "next/font/google";
+import { Geist, Geist_Mono } from "next/font/google";
 import { Analytics } from "@vercel/analytics/react";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 import { Providers } from "./provider";
@@ -28,20 +28,17 @@ const organizationJsonLd = {
   ],
 };
 
+// Geist para titulares y texto; Geist Mono para cifras, precios y
+// etiquetas. Anton no se carga: el logo la trae a trazo en su SVG.
 const geistSans = Geist({
-  variable: "--font-geist-sans",
+  variable: "--font-sans",
+  weight: ["400", "500", "600"],
   subsets: ["latin"],
 });
 
-const anton = Anton({
-  variable: "--font-anton-sans",
-  weight: "400",
-  subsets: ["latin"],
-});
-
-const ubuntuMono = Ubuntu_Mono({
-  variable: "--font-ubuntu-mono",
-  weight: ["400", "700"],
+const geistMono = Geist_Mono({
+  variable: "--font-mono",
+  weight: ["400", "500"],
   subsets: ["latin"],
 });
 
@@ -120,7 +117,7 @@ export const metadata = {
 
 export default function RootLayout({ children }) {
   return (
-    <html lang="es-MX" className="dark">
+    <html lang="es-MX" className={`dark ${geistSans.variable} ${geistMono.variable}`}>
       <head>
         <link rel="apple-touch-icon" href="/apple-icon.png" />
         <link rel="manifest" href="/manifest.json" />
@@ -135,7 +132,7 @@ export default function RootLayout({ children }) {
         />
       </head>
       <body
-        className={`${geistSans.variable} ${anton.variable} ${ubuntuMono.variable} font-sans bg-fondo text-tinta antialiased`}
+        className="font-sans bg-fondo text-texto antialiased"
       >
         <Providers>{children}</Providers>
         <Grano />

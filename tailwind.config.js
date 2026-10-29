@@ -28,7 +28,19 @@ module.exports = {
       current: "currentColor",
       black: "#000000",
       white: "#ffffff",
-      fondo: "#000000",
+      // Tokens de docs/sistema/tokens.json. Cambian solos con data-theme
+      // (noche o pared); los valores viven en app/globals.css.
+      fondo: "rgb(var(--fondo) / <alpha-value>)",
+      superficie: "rgb(var(--superficie) / <alpha-value>)",
+      texto: "rgb(var(--texto) / <alpha-value>)",
+      "texto-suave": "rgb(var(--texto-suave) / <alpha-value>)",
+      hairline: "rgb(var(--hairline) / <alpha-value>)",
+      acento: "rgb(var(--acento) / <alpha-value>)",
+      "sobre-acento": "rgb(var(--sobre-acento) / <alpha-value>)",
+      foco: "rgb(var(--foco) / <alpha-value>)",
+      "boaz-azul": "rgb(var(--boaz-azul) / <alpha-value>)",
+      // Legado de la marca anterior: lo usan las salas que se rehacen en
+      // los lotes 2 a 4. No usar en piezas nuevas.
       "fondo-elevado": "#0f1310",
       papel: "#f7f5ef",
       tinta: "#ffffff",
@@ -48,6 +60,10 @@ module.exports = {
       none: "0",
       DEFAULT: "4px",
       full: "9999px",
+      sm: "8px",
+      md: "14px",
+      lg: "20px",
+      pill: "999px",
     },
     spacing: {
       0: "0",
@@ -102,20 +118,39 @@ module.exports = {
         "espacio-5": "40px",
         "espacio-6": "64px",
         "espacio-7": "96px",
+        // Espaciado de tokens.json.
+        "space-1": "4px",
+        "space-2": "8px",
+        "space-3": "16px",
+        "space-4": "24px",
+        "space-5": "32px",
+        "space-6": "48px",
+        "space-7": "64px",
+        "space-8": "120px",
       },
       fontFamily: {
-        sans: ["var(--font-geist-sans)", "system-ui", "-apple-system", "sans-serif"],
-        mono: ["var(--font-ubuntu-mono)", "ui-monospace", "monospace"],
-        anton: ["var(--font-anton-sans)", "Arial Narrow", "Impact", "sans-serif"],
+        sans: ["var(--font-sans)", "system-ui", "-apple-system", "Segoe UI", "sans-serif"],
+        mono: ["var(--font-mono)", "ui-monospace", "SF Mono", "Menlo", "monospace"],
+        // Legado: Anton ya no se carga (solo vive a trazo en el logo SVG).
+        // Lo que aún dice font-anton cae en Geist hasta rehacer su sala.
+        anton: ["var(--font-sans)", "system-ui", "sans-serif"],
       },
       fontSize: {
+        // Escala de tokens.json.
+        display: ["96px", { lineHeight: "1.02", letterSpacing: "-0.035em", fontWeight: "600" }],
+        titulo: ["64px", { lineHeight: "1.02", letterSpacing: "-0.035em", fontWeight: "600" }],
+        subtitulo: ["30px", { lineHeight: "1.15", letterSpacing: "-0.02em", fontWeight: "600" }],
+        entrada: ["22px", { lineHeight: "1.45" }],
+        cuerpo: ["17px", { lineHeight: "1.5" }],
+        pequeno: ["14px", { lineHeight: "1.45" }],
+        etiqueta: ["12px", { lineHeight: "1.4", letterSpacing: "0.16em", fontWeight: "500" }],
+        cifra: ["16px", { lineHeight: "1.4" }],
+        // Legado de la marca anterior.
         "titular-xl": ["88px", { lineHeight: "80px", letterSpacing: "0.01em" }],
         "titular-l": ["56px", { lineHeight: "52px", letterSpacing: "0.01em" }],
         "titular-m": ["34px", { lineHeight: "34px", letterSpacing: "0.01em" }],
         "cuerpo-l": ["19px", { lineHeight: "30px" }],
-        cuerpo: ["16px", { lineHeight: "26px" }],
         "cuerpo-s": ["14px", { lineHeight: "22px" }],
-        etiqueta: ["13px", { lineHeight: "16px", letterSpacing: "0.16em" }],
         dato: ["15px", { lineHeight: "20px", letterSpacing: "0.04em" }],
       },
       keyframes: {
