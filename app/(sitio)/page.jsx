@@ -4,27 +4,24 @@ import { Sala3Caso } from "@/app/components/salas/Sala3Caso";
 import { Sala4Niveles } from "@/app/components/salas/Sala4Niveles";
 import { Sala5Galeria } from "@/app/components/salas/Sala5Galeria";
 import { Sala6Trabajo } from "@/app/components/salas/Sala6Trabajo";
-import PlanesContinuidad from "@/app/components/home/PlanesContinuidad";
-import Us from "@/app/components/home/Us";
-import { Cierre } from "@/app/components/ui/Cierre";
+import { Sala7Continuidad } from "@/app/components/salas/Sala7Continuidad";
+import { Preguntas } from "@/app/components/salas/Preguntas";
+import { Cierre } from "@/app/components/salas/Cierre";
 
+// La portada: siete salas, preguntas y cierre (CLAUDE.md § La portada).
 const Home = () => {
   return (
-    <div className="overflow-hidden">
+    <>
       <Sala1Inicio />
       <Sala2Problema />
       <Sala3Caso />
       <Sala4Niveles />
       <Sala5Galeria />
       <Sala6Trabajo />
-      <PlanesContinuidad />
-      <Us />
-      <Cierre
-        ctaTexto="Solicitar diagnóstico"
-        ctaHref="/diagnostico"
-        nota="Respuesta en 24 h · Sin compromiso"
-      />
-    </div>
+      <Sala7Continuidad />
+      <Preguntas />
+      <Cierre />
+    </>
   );
 };
 
