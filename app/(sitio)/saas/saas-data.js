@@ -1,46 +1,6 @@
 import { FiTarget, FiZap, FiSettings } from "react-icons/fi";
-import {
-  MdOutlineFitnessCenter,
-  MdOutlineRestaurant,
-  MdOutlineLocalHospital,
-  MdOutlineContentCut,
-} from "react-icons/md";
 
-// ── Productos ─────────────────────────────────────────────────────────────────
-export const productos = [
-  {
-    id: "gym",
-    icon: MdOutlineFitnessCenter,
-    nombre: "STRING GYM",
-    estado: "activo",
-    desc: "CRM y sistema de gestión para gimnasios mexicanos.",
-    modulos: "Socios · Caja · Inventario · WhatsApp · Portal del socio",
-    precio: "Desde $799/mes · 14 días con Pro completo, sin tarjeta",
-  },
-  {
-    id: "barber",
-    icon: MdOutlineContentCut,
-    nombre: "STRING BARBER",
-    estado: "proximamente",
-    desc: "Sistema para barberías y estéticas.",
-  },
-  {
-    id: "clinic",
-    icon: MdOutlineLocalHospital,
-    nombre: "STRING CLINIC",
-    estado: "proximamente",
-    desc: "Sistema para clínicas y consultorios.",
-  },
-  {
-    id: "resto",
-    icon: MdOutlineRestaurant,
-    nombre: "STRING RESTO",
-    estado: "proximamente",
-    desc: "Sistema para restaurantes: mesas, órdenes, caja, inventario.",
-  },
-];
-
-// ── El problema (STRING GYM) ────────────────────────────────────────────────────
+// ── El problema (el sistema para gimnasios) ─────────────────────────────────────
 export const problema = [
   "Alguien pregunta por membresía en Instagram → nadie responde a tiempo",
   "Conversaciones perdidas entre cientos de chats de WhatsApp",

@@ -4,9 +4,9 @@ import Header from "../header";
 import Footer from "../Footer";
 
 export const metadata = {
-  title: "Prueba STRING GYM",
+  title: "Prueba el sistema para gimnasios",
   description:
-    "Empieza tu prueba gratuita de 14 días con Pro completo, sin tarjeta, en STRING GYM, el sistema operativo para tu gimnasio.",
+    "Empieza tu prueba gratuita de 14 días con Pro completo, sin tarjeta, en el sistema para gimnasios de STRING.",
 };
 
 export default function GymLayout({ children }) {

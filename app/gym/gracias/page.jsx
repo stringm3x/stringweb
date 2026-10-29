@@ -1,6 +1,7 @@
 import { FaWhatsapp } from "react-icons/fa";
 import { Etiqueta } from "@/app/components/ui/Etiqueta";
 import { Boton } from "@/app/components/ui/Boton";
+import { whatsappUrl } from "@/app/lib/contacto";
 import { TitularBrochada } from "@/app/components/ui/TitularBrochada";
 
 export const metadata = {
@@ -17,7 +18,7 @@ export const metadata = {
         url: "/opengraph-image",
         width: 1200,
         height: 630,
-        alt: "STRING — Sistemas Digitales Estratégicos",
+        alt: "El sistema para gimnasios",
       },
     ],
   },
@@ -25,8 +26,7 @@ export const metadata = {
 };
 
 const DEMO_URL = "https://app.gym.stringwebs.com/gym-demo/hoy";
-const WHATSAPP_URL =
-  "https://wa.me/525545524847?text=Hola+Carlos,+me+registr%C3%A9+en+STRING+GYM";
+const WHATSAPP_URL = whatsappUrl("Hola Carlos, me registré en el sistema para gimnasios");
 
 export default function GraciasPage() {
   return (
@@ -52,7 +52,7 @@ export default function GraciasPage() {
             Mientras esperas
           </p>
           <p className="mt-3 flex-1 text-cuerpo-s text-tinta-suave">
-            Explora STRING GYM con datos reales en nuestra demo en vivo.
+            Explora el sistema para gimnasios con datos reales en nuestra demo en vivo.
           </p>
           <Boton href={DEMO_URL} variante="primario" className="mt-6 w-full">
             Ver demo en vivo

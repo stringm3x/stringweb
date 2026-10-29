@@ -1,4 +1,5 @@
 import { test, expect } from "@playwright/test";
+import { whatsappUrl } from "../app/lib/contacto.js";
 
 // Llena y envía /diagnostico a 375 px. Turnstile se sustituye por uno que
 // pasa solo, y la llamada a /api/diagnostico se intercepta para no mandar
@@ -47,7 +48,7 @@ test("llena el formulario, lo envía y muestra la confirmación", async ({ page 
   await expect(page.getByText("Listo. Te respondemos en un día hábil.")).toBeFocused();
   await expect(page.getByRole("link", { name: "Escríbenos por WhatsApp" })).toHaveAttribute(
     "href",
-    "https://wa.me/525545524847"
+    whatsappUrl()
   );
   expect(enviado).toEqual({
     nombre: "Ana López",

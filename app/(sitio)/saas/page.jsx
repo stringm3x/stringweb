@@ -1,6 +1,4 @@
-import WaitlistForm from "./WaitlistForm";
 import {
-  productos,
   problema,
   problemaCierre,
   planes,
@@ -15,24 +13,26 @@ import { Cierre } from "@/app/components/ui/Cierre";
 import { PintarAlScroll } from "@/app/components/PintarAlScroll";
 import { TitularBrochada } from "@/app/components/ui/TitularBrochada";
 
+// Título y descripción de docs/textos.md § Textos que faltaban.
+const DESCRIPCION =
+  "Socios, check-in, cobros y caja para tu gimnasio, probado todos los días en un mostrador de verdad.";
+
 export const metadata = {
-  title: "STRING SaaS — Sistemas listos por nicho",
-  description:
-    "Sistemas listos por nicho, sin desarrollo desde cero. STRING GYM ya está activo — sistema completo de gestión para gimnasios desde $799/mes. Próximamente: STRING BARBER, CLINIC y RESTO.",
+  title: "El sistema para gimnasios",
+  description: DESCRIPCION,
   alternates: {
     canonical: "https://www.stringwebs.com/saas",
   },
   openGraph: {
-    title: "STRING SaaS — Sistemas listos por nicho",
-    description:
-      "STRING GYM: sistema completo de gestión para gimnasios desde $799/mes. 14 días con Pro completo, sin tarjeta.",
+    title: "El sistema para gimnasios · STRING",
+    description: DESCRIPCION,
     url: "https://www.stringwebs.com/saas",
     images: [
       {
         url: "/opengraph-image",
         width: 1200,
         height: 630,
-        alt: "STRING — Sistemas Digitales Estratégicos",
+        alt: "El sistema para gimnasios",
       },
     ],
   },
@@ -41,7 +41,7 @@ export const metadata = {
 const softwareJsonLd = {
   "@context": "https://schema.org",
   "@type": "SoftwareApplication",
-  name: "STRING GYM",
+  name: "El sistema para gimnasios",
   applicationCategory: "BusinessApplication",
   operatingSystem: "Web",
   url: "https://www.stringwebs.com/saas",
@@ -60,8 +60,6 @@ const softwareJsonLd = {
     },
   })),
 };
-
-const proximamente = productos.filter((p) => p.estado === "proximamente");
 
 export default function SaasPage() {
   return (
@@ -181,31 +179,10 @@ export default function SaasPage() {
       </section>
 
       {/* ── CASO ─────────────────────────────────────────────────────────────── */}
-      <Caso mostrarBotonSaas={false} />
-
-      {/* ── PRODUCTOS PRÓXIMOS ──────────────────────────────────────────────── */}
-      <section className="px-6 lg:px-24 py-espacio-6 lg:py-espacio-7">
-        <div className="max-w-contenido mx-auto">
-          <div className="mb-8">
-            <Etiqueta variante="linea">Próximamente</Etiqueta>
-          </div>
-          <div className="grid grid-cols-1 sm:grid-cols-3 gap-6">
-            {proximamente.map((p) => (
-              <TarjetaSistema
-                key={p.id}
-                kicker="PRÓXIMAMENTE"
-                titulo={p.nombre}
-                frase={p.desc}
-              >
-                <WaitlistForm producto={p.id} />
-              </TarjetaSistema>
-            ))}
-          </div>
-        </div>
-      </section>
+      <Caso />
 
       <Cierre
-        ctaTexto="Probar STRING GYM"
+        ctaTexto="Probar el sistema para gimnasios"
         ctaHref="/gym/registro?plan=pro"
         nota="14 días con Pro completo · Sin tarjeta"
       />

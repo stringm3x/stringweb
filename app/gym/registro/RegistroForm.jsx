@@ -168,7 +168,7 @@ export function RegistroForm({ initialPlan = "" }) {
       />
 
       <FormField
-        label="¿Cómo te enteraste de STRING GYM?"
+        label="¿Cómo te enteraste del sistema para gimnasios?"
         name="como_entero"
         register={register}
         error={errors.como_entero?.message}

@@ -1,5 +1,4 @@
 import { Etiqueta } from "@/app/components/ui/Etiqueta";
-import { Boton } from "@/app/components/ui/Boton";
 import { Mancuerna } from "@/app/components/ilustraciones/Mancuerna";
 import { PintarAlScroll } from "@/app/components/PintarAlScroll";
 import { MarcasRegistro } from "@/app/components/ui/MarcasRegistro";
@@ -13,7 +12,7 @@ const FILAS = [
   {
     etiqueta: "SE HIZO",
     texto:
-      "Migración completa a STRING GYM: socios, check-in, caja, inventario y avisos automáticos por WhatsApp.",
+      "Migración completa al sistema para gimnasios: socios, check-in, caja, inventario y avisos automáticos por WhatsApp.",
   },
   {
     etiqueta: "HOY",
@@ -22,8 +21,8 @@ const FILAS = [
   },
 ];
 
-// Caso real de Evolution GYM, reutilizado en la home y en /saas.
-export function Caso({ mostrarBotonSaas = true }) {
+// Caso real de Evolution GYM en /saas.
+export function Caso() {
   return (
     <section className="bg-black px-6 lg:px-24 py-espacio-6 lg:py-espacio-7">
       <div className="max-w-contenido mx-auto">
@@ -39,7 +38,7 @@ export function Caso({ mostrarBotonSaas = true }) {
               <MarcasRegistro className="text-tinta-papel/50" />
             </PintarAlScroll>
             <p className="font-mono uppercase text-etiqueta text-tinta-tenue">
-              El gimnasio del fundador · operando con STRING GYM
+              El gimnasio del fundador · operando con el sistema para gimnasios
             </p>
           </div>
 
@@ -71,11 +70,6 @@ export function Caso({ mostrarBotonSaas = true }) {
                 El fundador opera su propio gimnasio con este sistema, todos
                 los días.
               </p>
-              {mostrarBotonSaas && (
-                <Boton href="/saas" variante="secundario">
-                  Ver STRING GYM
-                </Boton>
-              )}
             </div>
           </div>
         </div>

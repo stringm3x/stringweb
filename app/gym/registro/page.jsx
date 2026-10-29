@@ -5,21 +5,21 @@ import { Boton } from "@/app/components/ui/Boton";
 import { TitularBrochada } from "@/app/components/ui/TitularBrochada";
 
 export const metadata = {
-  title: "Registra tu gimnasio — STRING GYM",
+  title: "Registra tu gimnasio",
   description:
     "Completa tus datos y empieza tu prueba gratuita de 14 días con Pro completo, sin tarjeta.",
   alternates: {
     canonical: "https://www.stringwebs.com/gym/registro",
   },
   openGraph: {
-    title: "Registra tu gimnasio — STRING GYM",
+    title: "Registra tu gimnasio · El sistema para gimnasios",
     url: "https://www.stringwebs.com/gym/registro",
     images: [
       {
         url: "/opengraph-image",
         width: 1200,
         height: 630,
-        alt: "STRING — Sistemas Digitales Estratégicos",
+        alt: "El sistema para gimnasios",
       },
     ],
   },
@@ -54,7 +54,7 @@ export default async function RegistroPage({ searchParams }) {
       </Boton>
 
       <div className="mb-10 mt-6 space-y-4">
-        <Etiqueta variante="linea">STRING GYM</Etiqueta>
+        <Etiqueta variante="linea">El sistema para gimnasios</Etiqueta>
         <div>
           <TitularBrochada lineas={["Crea", "tu cuenta"]} forma="corta" retraso={0.2} />
         </div>
