@@ -132,6 +132,151 @@
   }
 }
 
+/* Sala 1 · Inicio (literatura). Cada pieza se explica en una frase; con
+   menos movimiento todo queda quieto y completo. */
+@layer components {
+  /* El titular: cada letra aparece en su turno. */
+  .tecla {
+    position: relative;
+    animation: tecla-aparece 1ms linear both;
+    animation-delay: var(--tecla-delay);
+  }
+
+  /* El cursor acompaña a la letra que se acaba de escribir. */
+  .tecla::after {
+    content: "";
+    position: absolute;
+    left: 100%;
+    top: 0.12em;
+    width: 0.07em;
+    height: 0.86em;
+    margin-left: 0.04em;
+    background: rgb(var(--acento));
+    opacity: 0;
+    animation: tecla-cursor 45ms steps(1);
+    animation-delay: var(--tecla-delay);
+  }
+
+  /* Al final, el cursor se queda parpadeando como el del logo. */
+  .tecla-fin::after {
+    animation: tecla-cursor-fin 1.1s steps(1) infinite;
+    animation-delay: var(--tecla-delay);
+  }
+
+  /* La ciudad se dibuja sola en 10 s y se borra igual, sin fin. */
+  .ciudad-trazo {
+    fill: none;
+    stroke: rgb(var(--texto));
+    stroke-width: 1.6;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    vector-effect: non-scaling-stroke;
+    stroke-dasharray: 6000;
+    animation: ciudad-trazo 10s cubic-bezier(0.5, 0.05, 0.3, 1) 0.3s infinite alternate;
+  }
+
+  /* La luna se pinta una vez, de un brochazo, al segundo de cargar. */
+  .ciudad-luna {
+    fill: none;
+    stroke: rgb(var(--acento));
+    stroke-width: 34;
+    stroke-linecap: round;
+    stroke-dasharray: 620;
+    animation: ciudad-luna 2.4s cubic-bezier(0.6, 0.05, 0.25, 1) 1s both;
+  }
+
+  /* Rayas secas del pincel, del color del fondo. */
+  .ciudad-seco {
+    fill: none;
+    stroke: rgb(var(--fondo));
+    stroke-width: 2.4;
+    stroke-dasharray: 34 22;
+    stroke-linecap: round;
+  }
+
+  /* Las estrellas brillan despacio, cada una a su ritmo. */
+  .estrella {
+    position: absolute;
+    border-radius: 999px;
+    background: rgb(var(--texto));
+    opacity: 0.35;
+    animation: estrella 5s ease-in-out infinite alternate;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .tecla,
+    .ciudad-trazo,
+    .ciudad-luna,
+    .estrella {
+      animation: none;
+    }
+
+    .tecla::after {
+      animation: none;
+    }
+
+    .tecla-fin::after {
+      animation: none;
+      opacity: 0;
+    }
+  }
+}
+
+@keyframes tecla-aparece {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes tecla-cursor {
+  0%,
+  100% {
+    opacity: 1;
+  }
+}
+
+@keyframes tecla-cursor-fin {
+  0%,
+  49% {
+    opacity: 1;
+  }
+  50%,
+  100% {
+    opacity: 0;
+  }
+}
+
+@keyframes ciudad-trazo {
+  0% {
+    stroke-dashoffset: 6000;
+  }
+  70%,
+  100% {
+    stroke-dashoffset: 0;
+  }
+}
+
+@keyframes ciudad-luna {
+  from {
+    stroke-dashoffset: 620;
+  }
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+@keyframes estrella {
+  from {
+    opacity: 0.25;
+  }
+  to {
+    opacity: 0.9;
+  }
+}
+
 /* Cursor personalizado: activo solo cuando CustomCursor.jsx logra montarse
    (descarta touch y prefers-reduced-motion antes de agregar esta clase). */
 html.custom-cursor-active,

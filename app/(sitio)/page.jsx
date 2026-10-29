@@ -1,6 +1,6 @@
 import React from "react";
 
-import Hero from "@/app/components/home/Hero";
+import { Sala1Inicio } from "@/app/components/salas/Sala1Inicio";
 import Problema from "@/app/components/home/Problema";
 import { Caso } from "@/app/components/Caso";
 import { Cinta } from "@/app/components/ui/Cinta";
@@ -12,7 +12,7 @@ import { Cierre } from "@/app/components/ui/Cierre";
 const Home = () => {
   return (
     <div className="overflow-hidden">
-      <Hero />
+      <Sala1Inicio />
       <Problema />
       <Caso />
       <Cinta texto="STRING" variante="solida" decorativo />
