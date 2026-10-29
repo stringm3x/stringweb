@@ -1,6 +1,6 @@
 # Estado · stringwebs.com
 
-Última actualización: 29 oct 2026 (lote 5). Meta del KB: sitio rehecho del 1 al 7 nov; salir a
+Última actualización: 29 oct 2026 (lote 6). Meta del KB: sitio rehecho del 1 al 7 nov; salir a
 vender el 8 nov.
 
 ## Lotes
@@ -13,6 +13,7 @@ vender el 8 nov.
 | 3 | Salas 5–7 + /nosotros + preguntas + cierre | `lote-3-salas-5-7` | ✅ Hecho, sin fusionar |
 | 4 | Formulario /diagnostico, /saas, contacto, galería en celular, cierre de /nosotros | `lote-4-contacto` | ✅ Hecho, sin fusionar; falta el correo de prueba desde la vista previa |
 | 5 | Calidad: Lighthouse, LCP, CLS, contraste, teclado | `lote-5-calidad` | ✅ Hecho, sin fusionar; LCP por confirmar en producción |
+| 6 | Componentes de calidad: tokens de movimiento, botón con 8 estados, campos, píldoras, tarjeta, barra, menú, transiciones | `lote-6-componentes` | ✅ Hecho, sin fusionar |
 
 Producción sigue con la marca anterior. Nada se fusiona a `main` sin el visto bueno de Carlos.
 
@@ -32,6 +33,9 @@ Producción sigue con la marca anterior. Nada se fusiona a `main` sin el visto b
   animación `tic`, hasta que se rehagan /saas y /gym; luego se borran.
 - `/gym/empezar` redirige con `permanent: true` (308), no 301.
 - `npm run lint` roto: el parser de `eslint-config-next` exige `typescript`.
+- Duraciones sueltas en el legado de /gym y /saas (`TitularBrochada`, `FormField`, `FormSelect`, `app/gym/**`):
+  exentas en `app/tokens.test.js` hasta que se rehagan.
+- Transiciones entre páginas con `experimental.viewTransition` de Next 16.1.
 
 ## Pendientes de Carlos
 
@@ -48,6 +52,14 @@ Producción sigue con la marca anterior. Nada se fusiona a `main` sin el visto b
   Chrome de Lighthouse alterna entre 1.6–2.1 s y 2.6–3.6 s con el mismo código; ver reporte del lote 5).
 - /saas y /gym con el diseño anterior (Anton, `TitularBrochada`, GSAP).
 - Dos `<meta name="viewport">` en el `<head>`.
+
+## Decisiones tomadas en el lote 6
+
+- `docs/calidad.md` manda en componentes. Ajustes de Carlos: borde del campo `#5A5A5E` (3.06:1) y colores sin transición.
+- El arte guarda sus tiempos en `--arte-dur-*`; la tarjeta existe pero no se aplica a los niveles (Carlos, 29 oct).
+- Capturas en `/muestrario`, solo en desarrollo. El número de los pasos de "Cómo trabajamos" vive solo en el dibujo.
+- El foco pasa de verde a color del texto (línea / tinta), según calidad.md.
+- Abierto: la píldora con borde `#3A3A3D` (1.85:1), como dice calidad.md; ver el reporte.
 
 ## Decisiones tomadas en el lote 5
 
