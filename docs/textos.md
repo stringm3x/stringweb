@@ -1,0 +1,267 @@
+# STRING — Textos del sitio
+
+Oct 28, 2026 · @Carlos
+
+Texto final de cada sala de stringwebs.com, listo para el brief de Claude Code. Lo visual manda **STRING — Identidad**; el negocio y las cifras, el **KB de STRING**.
+
+**Cómo leerlo:** edita directo o coméntame sobre la frase que no te suene. Lo que va entre corchetes es una nota para construir, no texto del sitio.
+
+**Reglas que sigue:** frases cortas que afirman, español de México, solo cifras autorizadas, ni clientes ni testimonios inventados, Boaz nunca por su nombre (en público es "el sistema para gimnasios").
+
+## Barra superior
+
+Logo · Sistemas · Productos · Galería · Nosotros · **Solicitar diagnóstico** \[botón verde\]
+
+## Sala 1 · Inicio · Literatura
+
+**Etiqueta:** TALLER DE SOFTWARE · CIUDAD DE MÉXICO
+
+**Titular:** Software hecho con oficio. Y con arte.
+
+Sistemas que contestan, ordenan y trabajan por tu negocio. Desde un local en la Roma hasta una empresa grande, con la misma calidad. Cada uno con su propia obra.
+
+**Solicitar diagnóstico** \[botón verde\] · Ver los niveles \[secundario, baja a la sala 4\]
+
+&#91;El cursor escribe el titular letra por letra. Abajo, la ciudad y la luna; arriba, las estrellas.\]
+
+## Sala 2 · El problema · Escultura
+
+**Etiqueta:** EL PROBLEMA
+
+**Titular:** No es falta de demanda. Es falta de sistema.
+
+Tus clientes te escriben por Instagram y WhatsApp. En el camino se pierden:
+
+- Alguien pregunta el precio y nadie contesta a tiempo.
+- La conversación se pierde entre cientos de chats.
+- El interesado no recibe seguimiento y se enfría.
+- Los pagos viven en un Excel, sin historial.
+- Nadie sabe cuántos clientes siguen y cuántos se fueron.
+- Y tú no sabes cuánto ganas.
+
+**Un sistema quita lo que sobra. Queda tu negocio.**
+
+&#91;Cada línea aparece mientras el bloque se talla al bajar.\]
+
+## Sala 3 · El caso real · Cine
+
+**Etiqueta:** EL CASO REAL
+
+**Titular:** Lo probamos en casa primero.
+
+&#91;Foto real de Carlos, la única foto del sitio. Pendiente: que Carlos la mande.\]
+
+Soy Carlos Avilés, desarrollador y fundador de STRING. Evolution GYM es el gimnasio de mi familia: ahí construí su sistema y lo probamos en el mostrador, con socios de verdad. Funcionó, y se volvió un producto: el sistema para gimnasios de STRING. Cada sistema que hacemos lo reviso yo antes de entregarlo. **Conoce la historia** \[enlace a /nosotros\]
+
+**EN USO TODOS LOS DÍAS EN EL MOSTRADOR · 1 PRODUCTO EN PRODUCCIÓN**
+
+&#91;En Geist Mono, como créditos al final de los fotogramas. Sin cifras de socios al lanzamiento: faltan 15 por registrar. Cuando estén, se recuentan y se agregan "X socios cargados, Y activos".\]
+
+## Sala 4 · Los niveles · Música
+
+**Etiqueta:** LOS NIVELES
+
+**Titular:** Arte y calidad no están peleados.
+
+Todos los niveles reciben la misma calidad. Cambia el alcance.
+
+| Nivel | Si dices… | Qué hace tu sistema | Precio |
+| --- | --- | --- | --- |
+| **Responde** | "Me escriben y no alcanzo a contestar." | Página propia, WhatsApp, formulario y un mensaje automático. Nadie se queda sin respuesta | Desde $8,000 |
+| **Organiza** | "Tengo a mis clientes regados en chats y en Excel." | Lo de Responde, más registro de prospectos, calificación y avisos | Desde $18,000 |
+| **Automatiza** | "Quiero que el sistema siga aunque yo no esté." | Lo de Organiza, más respuesta inmediata, agenda, seguimiento, recordatorios y panel | Desde $28,000 |
+| **Controla** | "Quiero saber cuánto gano y qué está pasando." | Lo de Automatiza, hecho a la medida: sistema de clientes propio, paneles e integraciones | Desde $40,000 |
+| **Empresa** | Para empresas grandes | Un sistema completo, con equipo por proyecto. Se cotiza después del mapa de procesos | Se cotiza |
+
+Toca una cuerda. **Sonido** \[botón; empieza apagado\]
+
+Cada nivel suma un arte. Este sitio tiene las siete.
+
+¿Tienes un gimnasio? Ya existe tu sistema. **Ver el sistema para gimnasios** \[enlace a Productos\]
+
+&#91;Cada nivel es una cuerda con su viñeta de artes acumuladas: Responde, literatura; Organiza, + arquitectura; Automatiza, + danza; Controla, + pintura; Empresa, las siete. Precios en Geist Mono.\]
+
+## Sala 5 · La galería · Pintura
+
+**Etiqueta:** LA GALERÍA
+
+**Titular:** Cada sistema tiene su arte.
+
+Ningún sistema de STRING sale de una plantilla. Cada uno lleva una obra propia, que nace contigo en el boceto.
+
+| Marco | Cartela |
+| --- | --- |
+| STRING | STRING · Ciudad de una línea · 2026 |
+| El sistema para gimnasios \[la lámina: plano técnico sobre papel con la mancha azul, del canvas de Boaz\] | El sistema para gimnasios · Plano técnico sobre papel · 2026 |
+| Tu negocio | Tu negocio · Por crear, contigo · Pronto \[marco vacío\] |
+
+## Sala 6 · Cómo trabajamos · Arquitectura
+
+**Etiqueta:** CÓMO TRABAJAMOS
+
+**Titular:** Primero los cimientos.
+
+1. **Diagnóstico.** Una llamada de 20 a 30 minutos para escucharte: cómo está hoy tu negocio. Es gratis, y el diagnóstico inicial lo tienes en 24 horas.
+2. **Boceto.** De Automatiza en adelante: el mapa de tus procesos, la primera pantalla dibujada y tu obra en boceto. Se acredita completo si contratas el sistema.
+3. **Propuesta.** Por escrito: qué incluye, qué no incluye, precio y continuidad. Vale 7 días.
+4. **Construcción.** El alcance se firma antes de empezar. Lo nuevo se cotiza aparte o va en la siguiente versión. Te mandamos el avance por escrito cada viernes.
+5. **Entrega.** Tu sistema funcionando, con su obra, y te acompañamos en el arranque.
+
+**Nuestro estándar** \[bloque aparte, en Geist Mono las cifras\]
+
+| Qué | Cuándo |
+| --- | --- |
+| Respuesta a tus mensajes | 1 día hábil |
+| Si tu sistema no cobra o no deja entrar | 4 horas hábiles |
+| Resumen de cada llamada | El mismo día, por escrito |
+| Avance del proyecto | Cada viernes, por escrito |
+| Propuesta después del diagnóstico | 2 días hábiles |
+
+Garantizamos tiempos y que tu sistema funcione. Nunca prometemos ventas. Un responsable con nombre: Carlos Avilés.
+
+&#91;Días hábiles: lunes a viernes, de 9 a 19 h. Los pasos se dibujan como un edificio a mano: cimientos, estructura, entrega.\]
+
+## Sala 7 · Continuidad · Danza
+
+**Etiqueta:** CONTINUIDAD
+
+**Titular:** El sistema trabaja aunque tu negocio no esté disponible.
+
+Un sistema no se entrega y se olvida. Lo cuidamos cada mes: que funcione, que esté al día y que crezca contigo. Toda propuesta trae su continuidad, con precio.
+
+- **Cuida:** hosting, mantenimiento y soporte.
+- **Mejora:** lo de Cuida, más ajustes y mejoras cada mes.
+- **Impulsa:** lo de Mejora, más análisis y soporte prioritario.
+
+**Desde $1,800 al mes.**
+
+&#91;Líneas que se mueven a ritmo constante.\]
+
+## /nosotros
+
+&#91;En la portada ya no hay bloque "quién soy": Carlos se presenta en la sala 3, junto a Evolution GYM. Aquí va la historia completa.\]
+
+STRING empezó haciendo sistemas para negocios. Luego construí uno para Evolution GYM, el gimnasio de mi familia. Lo usamos en el mostrador todos los días, lo corregimos con socios de verdad, y se volvió un producto.
+
+Hoy STRING hace dos cosas: sistemas a la medida para negocios con local y empresas, y productos propios para un giro, como el sistema para gimnasios. Lo que aprendemos en uno mejora al otro.
+
+Trabajo con un equipo de desarrolladores de confianza cuando un proyecto lo pide. El trato es siempre conmigo, y la calidad también.
+
+> *¿A quién tengo yo en los cielos? Y fuera de ti nada deseo en la tierra. Mi carne y mi corazón desfallecen: mas la roca de mi corazón y mi porción es Dios para siempre.*
+>
+> SALMOS 73:25–26
+
+&#91;Cierre de /nosotros, después de la historia. Texto de la Reina-Valera 1909, de dominio público. La cita en Geist Mono, como etiqueta.\]
+
+## Preguntas frecuentes
+
+**¿Cuánto cuesta?** Depende del nivel: desde $8,000. El precio exacto sale del diagnóstico, por escrito.
+
+**¿Cuánto tarda?** Responde y Organiza, de 2 a 3 semanas. Automatiza y Controla, de 4 a 6. Empresa, lo que diga su propuesta.
+
+**¿Cómo se paga?** Con anticipo. Responde y Organiza, 50 % al empezar y 50 % al entregar. Automatiza y Controla, en tres pagos: 40, 30 y 30 %.
+
+**¿Me hacen descuento?** No descontamos. Si el precio pesa, ajustamos el alcance.
+
+**¿Me garantizan que voy a vender más?** No. Garantizamos tiempos y que tu sistema funcione. Las ventas son de tu negocio; el sistema hace que no se te escapen.
+
+**¿Qué es el boceto?** El primer paso de Automatiza en adelante: el mapa de tus procesos, la primera pantalla y tu obra en boceto. Si contratas el sistema, se acredita completo.
+
+**¿Qué pasa después de la entrega?** Sigue la continuidad: cuidamos tu sistema cada mes, desde $1,800.
+
+**Tengo un gimnasio. ¿Me sirve?** Para gimnasios ya existe un sistema hecho: **Ver el sistema para gimnasios** \[enlace\].
+
+## Cierre
+
+**Titular:** Cuéntanos qué necesita tu negocio.
+
+**Solicitar diagnóstico** \[botón verde\]
+
+Te respondemos en un día hábil.
+
+¿Prefieres escribir? **Escríbenos por WhatsApp** \[botón secundario, más chico\]
+
+## Formulario de diagnóstico
+
+&#91;Se abre desde todos los botones "Solicitar diagnóstico". Llega a stringwebmx@gmail.com, con el mismo servicio de correo que ya usa Boaz.\]
+
+1. **Nombre**
+2. **WhatsApp**
+3. **Giro de tu negocio:** Barbería o estética · Clínica o consultorio · Restaurante · Gimnasio · Otro
+4. **¿Qué te pasa hoy?**
+   - Me escriben y no alcanzo a contestar.
+   - Tengo a mis clientes regados en chats y en Excel.
+   - Quiero que el sistema siga aunque yo no esté.
+   - Quiero saber cuánto gano y qué está pasando.
+   - Otra cosa: \[espacio libre\]
+
+**Enviar**
+
+Al enviarlo: **Listo. Te respondemos en un día hábil.**
+
+Debajo del botón, chico: Al enviar aceptas nuestro **aviso de privacidad** \[enlace\].
+
+&#91;Cada opción de la pregunta 4 corresponde a un nivel: Responde, Organiza, Automatiza y Controla. Si eligen Gimnasio, el correo lo marca para ofrecer el sistema para gimnasios.\]
+
+## Pie
+
+Logo chico · stringwebmx@gmail.com · WhatsApp \[el número de STRING que ya está en el sitio actual; Claude Code lo toma del repo\] · Hecho en la Ciudad de México · Aviso de privacidad · Términos
+
+## Aviso de privacidad
+
+&#91;Borrador hecho con la Ley Federal de Protección de Datos Personales en Posesión de los Particulares vigente desde el 21 de marzo de 2025. No es asesoría legal: conviene que un abogado lo revise una vez.\]
+
+**Versión corta** \[debajo del formulario\]:
+
+Carlos Avilés (STRING) usa tu nombre, tu WhatsApp, el giro de tu negocio y lo que nos cuentas solo para responder tu solicitud, darte el diagnóstico y, si lo pides, una propuesta. No vendemos ni compartimos tus datos. Lee el **aviso de privacidad completo** \[enlace\].
+
+**Versión completa** \[página /aviso-de-privacidad\]:
+
+**Quién es responsable de tus datos.** Carlos Avilés, persona física que opera STRING, con domicilio en \[domicilio por confirmar\], Ciudad de México. Contacto: stringwebmx@gmail.com.
+
+**Qué datos usamos.** Los que tú nos das en el formulario o por WhatsApp: nombre, número de WhatsApp, giro de tu negocio y lo que nos cuentes sobre él. No pedimos datos sensibles.
+
+**Para qué los usamos.** Para responder tu solicitud, hacer tu diagnóstico, prepararte una propuesta si la pides y darle seguimiento a esa conversación. Estas finalidades son necesarias para atenderte. No usamos tus datos para nada más, ni para enviarte publicidad.
+
+**Con quién se comparten.** Con nadie para su propio uso. Para funcionar, el sitio usa servicios de alojamiento y de correo que guardan la información por cuenta nuestra y no pueden usarla para otra cosa.
+
+**Tus derechos.** Puedes pedir acceder a tus datos, corregirlos, borrarlos u oponerte a su uso, y retirar tu consentimiento. Escríbenos a stringwebmx@gmail.com con tu nombre y lo que pides. Te respondemos en el plazo que marca la ley.
+
+**Cuánto tiempo los guardamos.** Mientras dure la conversación o el proyecto, y después solo lo que la ley exija.
+
+**Cambios a este aviso.** Si cambia, lo publicamos en esta misma página con su nueva fecha.
+
+**Última actualización:** \[fecha de publicación\].
+
+## Términos
+
+&#91;Página /terminos. Mismo aviso: borrador, conviene revisión de abogado.\]
+
+**Quién opera este sitio.** stringwebs.com es el sitio de STRING, operado por Carlos Avilés en la Ciudad de México. Al usarlo aceptas estos términos.
+
+**Lo que dice el sitio es informativo.** Los precios "desde" son de referencia. El precio, el alcance y los tiempos de cada proyecto valen solo en una propuesta por escrito, con su vigencia.
+
+**Lo que garantizamos.** Tiempos de respuesta y que el sistema funcione, según cada propuesta y contrato. No garantizamos ventas ni resultados de negocio.
+
+**Lo que es de STRING.** El diseño, los textos, el arte y el logo de este sitio son de STRING. No se copian sin permiso. El arte de cada cliente en la galería se muestra con su permiso.
+
+**Productos.** El sistema para gimnasios tiene sus propios términos dentro del producto.
+
+**Ley aplicable.** Estos términos se rigen por las leyes de México, y cualquier diferencia se atiende en la Ciudad de México.
+
+**Contacto.** stringwebmx@gmail.com.
+
+**Última actualización:** \[fecha de publicación\].
+
+## Por confirmar antes del brief
+
+- [x] **Foto de Carlos** en la sala 3: foto real (falta que la mande).
+- [x] **Correo y WhatsApp:** stringwebmx@gmail.com y el número de STRING del sitio actual.
+- [x] **Cifras de Evolution GYM:** sin cifras al lanzamiento; se agregan cuando estén los 15 socios que faltan.
+- [x] **Arte de Boaz** en la galería: la lámina.
+- [x] **Nombres de la continuidad:** Cuida · Mejora · Impulsa.
+- [x] **Formulario de diagnóstico:** cuatro campos y botón de WhatsApp aparte.
+- [x] **Aviso de privacidad y términos:** borradores escritos arriba; revisión de abogado cuando se pueda.
+- [x] **Tu fe en /nosotros:** Salmos 73:25–26, al cierre de la historia.
+- [ ] **Domicilio** del responsable para el aviso de privacidad (la ley lo pide).
+- [ ] **Foto de Carlos:** mandarla.

@@ -1,0 +1,71 @@
+{
+  "v": 3,
+  "layout": "files",
+  "createdOnFiles": {
+    "v": 1,
+    "at": "2026-10-28T19:58:00Z"
+  },
+  "title": "STRING · Identidad 2026",
+  "namespace": "String",
+  "libraries": [],
+  "sections": {},
+  "groups": [
+    "Logos"
+  ],
+  "assetGroups": {
+    "Logos": {
+      "name": "Logos",
+      "tile": "l",
+      "order": [
+        "string-noche.svg",
+        "string-pared.svg",
+        "string-una-tinta.svg",
+        "string-firma-gris.svg",
+        "string-icono.svg"
+      ],
+      "files": {
+        "string-noche.svg": {
+          "name": "string-noche.svg",
+          "blob": "39e98ec8dbe1ef2c16513d883a64f7d4",
+          "size": 1950,
+          "type": "image/svg+xml"
+        },
+        "string-pared.svg": {
+          "name": "string-pared.svg",
+          "blob": "aedc233e31e3517e75ad069f7507cacc",
+          "size": 1950,
+          "type": "image/svg+xml"
+        },
+        "string-una-tinta.svg": {
+          "name": "string-una-tinta.svg",
+          "blob": "d49da7e0f257269983a7dae2a9161f52",
+          "size": 1897,
+          "type": "image/svg+xml"
+        },
+        "string-firma-gris.svg": {
+          "name": "string-firma-gris.svg",
+          "blob": "3c810b7700041d45a34efe81b5f4ca58",
+          "size": 1897,
+          "type": "image/svg+xml"
+        },
+        "string-icono.svg": {
+          "name": "string-icono.svg",
+          "blob": "133a57ee87aed692c53cfa7333203436",
+          "size": 297,
+          "type": "image/svg+xml"
+        }
+      }
+    }
+  },
+  "blobs": {},
+  "docs": {
+    "readme": "project/README.md",
+    "sections": []
+  },
+  "lastChange": {
+    "by": "Carlos Avilés",
+    "at": "2026-10-28T21:30:00Z",
+    "via": "claude.ai chat",
+    "note": "Cursor B: bloque verde de terminal con la I en negativo. Cinco logos redibujados; Logo, Portada y Cover con el cursor nuevo"
+  }
+}

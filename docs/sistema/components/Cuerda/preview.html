@@ -1,0 +1,86 @@
+<!-- @dsCard group="Arte" height=240 subtitle="Pasa el cursor o tócala; el sonido empieza apagado" -->
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<title>Cuerda — vista previa</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500&family=Geist+Mono:wght@400;500&display=swap">
+<style>
+  html, body { margin: 0; }
+  body { font-family: var(--font-sans); }
+  .caja { background: var(--fondo); color: var(--texto); padding: var(--space-5); display: flex; flex-direction: column; gap: var(--space-2); }
+  .arriba { display: flex; justify-content: space-between; align-items: center; gap: var(--space-3); }
+  .nota { font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.16em; color: var(--texto-suave); }
+  .sonido { font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.1em; background: transparent; color: var(--texto); border: 1px solid var(--hairline); border-radius: var(--radius-pill); padding: 10px 16px; min-height: 44px; cursor: pointer; }
+  .cuerda { display: block; width: 100%; background: transparent; border: none; padding: 0; cursor: pointer; }
+  .cuerda svg { display: block; width: 100%; height: 90px; overflow: visible; }
+  .cuerda path.linea { fill: none; stroke: var(--acento); stroke-width: 1.6; }
+  .cuerda circle { fill: var(--acento); }
+  .sonido:focus-visible, .cuerda:focus-visible { outline: 2px solid var(--foco); outline-offset: 3px; }
+</style>
+</head>
+<body>
+<div id="root" class="caja">
+  <div class="arriba">
+    <span class="nota">PASA EL CURSOR O TOCA LA CUERDA</span>
+    <button class="sonido" type="button" aria-pressed="false">SONIDO · APAGADO</button>
+  </div>
+  <button class="cuerda" type="button" aria-label="Tocar la cuerda">
+    <svg viewBox="0 0 1000 90" preserveAspectRatio="none" aria-hidden="true">
+      <path class="linea" d="M0 45 L1000 45"></path>
+      <circle cx="0" cy="45" r="6"></circle>
+      <circle cx="1000" cy="45" r="6"></circle>
+    </svg>
+  </button>
+</div>
+<script>
+(function () {
+  var W = 1000, MID = 45, A = 30, F = 110;
+  var linea = document.querySelector('.linea');
+  var cuerda = document.querySelector('.cuerda');
+  var boton = document.querySelector('.sonido');
+  var sonido = false, t0 = 0, activa = false, ctx = null;
+  var quieto = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  function tocarNota(freq) {
+    try {
+      var AC = window.AudioContext || window.webkitAudioContext; if (!AC) return;
+      if (!ctx) ctx = new AC();
+      if (ctx.state === 'suspended') ctx.resume();
+      var sr = ctx.sampleRate, len = Math.floor(sr * 1.8), N = Math.round(sr / freq);
+      var buf = ctx.createBuffer(1, len, sr), d = buf.getChannelData(0);
+      for (var i = 0; i < N; i++) d[i] = Math.random() * 2 - 1;
+      for (var j = N; j < len; j++) d[j] = 0.996 * 0.5 * (d[j - N] + d[j - N + 1]);
+      var src = ctx.createBufferSource(); src.buffer = buf;
+      var g = ctx.createGain(); g.gain.value = 0.22;
+      src.connect(g); g.connect(ctx.destination); src.start();
+    } catch (e) {}
+  }
+  function dibujar(amp) {
+    var s = 'M0 ' + MID;
+    for (var x = 8; x <= W; x += 8) s += ' L' + x + ' ' + (MID + amp * Math.sin(Math.PI * x / W)).toFixed(1);
+    linea.setAttribute('d', s);
+  }
+  function cuadro(now) {
+    var t = now - t0, env = Math.exp(-t / 450);
+    if (env < 0.01) { dibujar(0); activa = false; return; }
+    dibujar(A * env * Math.cos(t / 1000 * Math.PI * 2 * 9));
+    requestAnimationFrame(cuadro);
+  }
+  function tocar() {
+    if (sonido) tocarNota(F);
+    if (quieto) return;
+    t0 = performance.now();
+    if (!activa) { activa = true; requestAnimationFrame(cuadro); }
+  }
+  cuerda.addEventListener('mouseenter', tocar);
+  cuerda.addEventListener('click', tocar);
+  boton.addEventListener('click', function () {
+    sonido = !sonido;
+    boton.textContent = sonido ? 'SONIDO · ENCENDIDO' : 'SONIDO · APAGADO';
+    boton.setAttribute('aria-pressed', String(sonido));
+    if (sonido) tocarNota(196);
+  });
+})();
+</script>
+</body>
+</html>

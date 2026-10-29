@@ -1,0 +1,125 @@
+<!-- @dsCard group="Páginas" height=1700 width=1440 subtitle="La portada de stringwebs.com con la identidad nueva" -->
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<title>Portada — vista previa</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Anton&family=Geist:wght@400;500;600&family=Geist+Mono:wght@400;500&display=swap">
+<style>
+  html, body { margin: 0; }
+  body { font-family: var(--font-sans); background: var(--fondo); color: var(--texto); }
+  a { color: inherit; text-decoration: none; }
+  .noche { background: var(--fondo); color: var(--texto); }
+  .barra { height: 64px; padding: 0 var(--space-7); display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid var(--hairline); }
+  .marca { font-family: var(--font-logo); font-size: 30px; line-height: 1; letter-spacing: 0.01em; }
+  .cursor { color: var(--acento); animation: parpadeo 1.1s steps(1) infinite; }
+  @keyframes parpadeo { 0%, 49% { opacity: 1; } 50%, 100% { opacity: 0.15; } }
+  nav { display: flex; gap: var(--space-5); font-size: 14px; }
+  .pill { border-radius: var(--radius-pill); padding: 12px 22px; font-size: 16px; display: inline-flex; min-height: 44px; box-sizing: border-box; align-items: center; }
+  .pill.principal { background: var(--acento); color: var(--sobre-acento); }
+  .pill.chica { padding: 9px 16px; font-size: 14px; min-height: 0; background: var(--texto); color: var(--fondo); }
+  .inicio { position: relative; height: 820px; overflow: hidden; }
+  .titulos { position: relative; text-align: center; padding-top: 96px; display: flex; flex-direction: column; align-items: center; gap: 20px; }
+  .etiqueta { font-family: var(--font-mono); font-size: 13px; letter-spacing: 0.18em; color: var(--texto-suave); }
+  h1 { margin: 0; font-size: 92px; line-height: 1.02; letter-spacing: -0.035em; font-weight: 600; }
+  h1 em { font-style: normal; color: var(--acento); }
+  .entrada { margin: 0; font-size: 22px; line-height: 1.45; color: var(--texto-suave); max-width: 680px; }
+  .acciones { display: flex; gap: var(--space-4); align-items: center; }
+  .enlace { color: var(--acento); font-size: 16px; }
+  .arte { position: absolute; left: 0; bottom: 0; width: 100%; }
+  .trazo { fill: none; stroke: var(--texto); stroke-width: 1.6; stroke-linejoin: round; stroke-dasharray: 6000; animation: ciudad 10s cubic-bezier(.5,.05,.3,1) .3s infinite alternate; }
+  .luna { fill: none; stroke: var(--acento); stroke-width: 34; stroke-linecap: round; }
+  @keyframes ciudad { 0% { stroke-dashoffset: 6000; } 70%, 100% { stroke-dashoffset: 0; } }
+  @media (prefers-reduced-motion: reduce) { .trazo, .cursor { animation: none; } }
+  .cuerda { padding: var(--space-5) var(--space-7) var(--space-6); }
+  .cuerda svg { display: block; width: 100%; height: 40px; }
+  .galeria { padding: 100px var(--space-7); text-align: center; }
+  .galeria h2, .cierre h2, .principios h2 { margin: 0; font-size: 64px; line-height: 1.02; letter-spacing: -0.035em; font-weight: 600; }
+  .marcos { margin-top: var(--space-6); display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: var(--space-5); text-align: left; }
+  .marco { border: 10px solid var(--texto); background: var(--superficie); padding: 20px; height: 200px; box-sizing: border-box; }
+  .marco div { height: 100%; }
+  .principios { padding: 100px var(--space-7) 40px; }
+  .fila { display: flex; gap: var(--space-6); align-items: center; border-top: 1px solid var(--hairline); padding: 18px 0; }
+  .fila .txt { width: 380px; flex-shrink: 0; display: flex; flex-direction: column; gap: 6px; }
+  .fila .n { font-family: var(--font-mono); font-size: 13px; color: var(--acento); }
+  .fila strong { font-size: 28px; font-weight: 600; letter-spacing: -0.02em; }
+  .fila span.d { font-size: 16px; color: var(--texto-suave); }
+  .fila svg { flex: 1; height: 40px; }
+  .cierre { padding: 80px var(--space-7) 80px; text-align: center; display: flex; flex-direction: column; align-items: center; gap: var(--space-4); }
+  .pie { height: 64px; padding: 0 var(--space-7); display: flex; justify-content: space-between; align-items: center; border-top: 1px solid var(--hairline); font-size: 13px; color: var(--texto-suave); }
+  .logo { height: 1.108em; width: auto; display: inline-block; vertical-align: -0.137em; overflow: visible; }
+  .bloque { fill: var(--acento); animation: bloque 1.1s steps(1) infinite; }
+  @keyframes bloque { 0%, 49% { opacity: 1; } 50%, 100% { opacity: 0; } }
+  @media (prefers-reduced-motion: reduce) { .bloque { animation: none; } }
+</style>
+</head>
+<body>
+<div id="root">
+  <div class="noche" data-theme="noche">
+    <div class="barra">
+      <span class="marca"><svg class="logo" viewBox="-20 -1990 5744 2270" role="img" aria-label="STRING"><g fill="currentColor"><path transform="translate(0 0)" d="M496 16Q255 16 148.5 -104.0Q42 -224 42 -486V-658H390V-438Q390 -377 408.5 -342.5Q427 -308 473 -308Q521 -308 539.5 -336.0Q558 -364 558 -428Q558 -509 542.0 -563.5Q526 -618 486.5 -667.5Q447 -717 377 -783L219 -933Q42 -1100 42 -1315Q42 -1540 146.5 -1658.0Q251 -1776 449 -1776Q691 -1776 792.5 -1647.0Q894 -1518 894 -1255H536V-1376Q536 -1412 515.5 -1432.0Q495 -1452 460 -1452Q418 -1452 398.5 -1428.5Q379 -1405 379 -1368Q379 -1331 399.0 -1288.0Q419 -1245 478 -1189L681 -994Q742 -936 793.0 -871.5Q844 -807 875.0 -721.5Q906 -636 906 -513Q906 -265 814.5 -124.5Q723 16 496 16Z"/><path transform="translate(945 0)" d="M229 0V-1422H20V-1760H790V-1422H581V0Z"/><path transform="translate(1755 0)" d="M78 0V-1760H618Q753 -1760 822.0 -1698.5Q891 -1637 914.5 -1526.5Q938 -1416 938 -1267Q938 -1123 901.5 -1037.0Q865 -951 764 -918Q847 -901 880.5 -835.5Q914 -770 914 -666V0H567V-689Q567 -766 535.5 -784.5Q504 -803 434 -803V0ZM436 -1108H521Q594 -1108 594 -1267Q594 -1370 578.0 -1402.0Q562 -1434 518 -1434H436Z"/><path transform="translate(2979.0 0)" d="M62 0V-1760H402V0Z"/><path transform="translate(3691 0)" d="M78 0V-1760H440L602 -917V-1760H942V0H598L422 -880V0Z"/><path transform="translate(4711 0)" d="M441 16Q64 16 64 -524V-1283Q64 -1776 496 -1776Q674 -1776 769.0 -1704.5Q864 -1633 900.0 -1496.0Q936 -1359 936 -1162H592V-1318Q592 -1375 576.5 -1413.5Q561 -1452 512 -1452Q451 -1452 431.5 -1411.0Q412 -1370 412 -1321V-468Q412 -397 430.5 -352.5Q449 -308 503 -308Q559 -308 577.5 -352.5Q596 -397 596 -470V-721H502V-1025H932V0H791L731 -148Q639 16 441 16Z"/></g><path class="bloque" fill-rule="evenodd" d="M2801 -1960H3621V260H2801Z M2996 -1760H3426V-1610H3286V-150H3426V0H2996V-150H3136V-1610H2996Z"/></svg></span>
+      <nav><a href="#">Sistemas</a><a href="#">Productos</a><a href="#">Galería</a><a href="#">Nosotros</a></nav>
+      <a class="pill chica" href="#">Solicitar diagnóstico</a>
+    </div>
+    <div class="inicio">
+      <div class="titulos">
+        <span class="etiqueta">TALLER DE SOFTWARE · CIUDAD DE MÉXICO</span>
+        <h1>Software hecho con oficio.<br><em>Y con arte.</em></h1>
+        <p class="entrada">Sistemas premium para negocios con local. Cada uno con su propio arte.</p>
+        <div class="acciones"><a class="pill principal" href="#">Solicitar diagnóstico</a><a class="enlace" href="#">Ver la galería ›</a></div>
+      </div>
+      <svg class="arte" viewBox="0 0 1490 400" aria-hidden="true">
+        <path class="luna" id="luna"></path>
+        <path class="trazo" id="trazo"></path>
+      </svg>
+    </div>
+    <div class="cuerda"><svg viewBox="0 0 1000 40" preserveAspectRatio="none" aria-hidden="true"><path d="M0 20 H1000" stroke="var(--acento)" stroke-width="1.6" vector-effect="non-scaling-stroke"></path></svg></div>
+  </div>
+  <div class="galeria" data-theme="pared" style="background: var(--fondo); color: var(--texto);">
+    <span class="etiqueta">LA GALERÍA</span>
+    <h2>Cada sistema<br>tiene su arte.</h2>
+    <div class="marcos">
+      <div class="marco"><div style="background:#000000;"></div></div>
+      <div class="marco"><div style="background:#F4F1EA;"></div></div>
+      <div class="marco"><div style="border: 1.5px dashed var(--texto-suave); box-sizing: border-box;"></div></div>
+    </div>
+  </div>
+  <div class="noche" data-theme="noche">
+    <div class="principios">
+      <span class="etiqueta">TRES CUERDAS</span>
+      <h2 style="margin-bottom: 32px;">Afinado para durar.</h2>
+      <div class="fila"><div class="txt"><span class="n">01</span><strong>Diseño propio.</strong><span class="d">Cada sistema se diseña desde cero.</span></div><svg viewBox="0 0 800 40" preserveAspectRatio="none" aria-hidden="true"><path d="M0 20 H800" stroke="var(--texto)" stroke-width="1.2" vector-effect="non-scaling-stroke"></path></svg></div>
+      <div class="fila"><div class="txt"><span class="n">02</span><strong>Hecho para durar.</strong><span class="d">La entrega es el inicio.</span></div><svg viewBox="0 0 800 40" preserveAspectRatio="none" aria-hidden="true"><path d="M0 20 C200 6 600 34 800 20" stroke="var(--texto)" stroke-width="1.7" fill="none" vector-effect="non-scaling-stroke"></path></svg></div>
+      <div class="fila"><div class="txt"><span class="n">03</span><strong>Probado en casa.</strong><span class="d">Operamos nuestro negocio con nuestro software.</span></div><svg viewBox="0 0 800 40" preserveAspectRatio="none" aria-hidden="true"><path d="M0 20 H800" stroke="var(--texto)" stroke-width="2.2" vector-effect="non-scaling-stroke"></path></svg></div>
+    </div>
+    <div class="cierre">
+      <h2>Cuéntanos qué necesita<br>tu negocio.</h2>
+      <a class="pill principal" href="#">Solicitar diagnóstico</a>
+    </div>
+    <div class="pie"><span class="marca" style="font-size: 20px; color: var(--texto);"><svg class="logo" viewBox="-20 -1990 5744 2270" role="img" aria-label="STRING"><g fill="currentColor"><path transform="translate(0 0)" d="M496 16Q255 16 148.5 -104.0Q42 -224 42 -486V-658H390V-438Q390 -377 408.5 -342.5Q427 -308 473 -308Q521 -308 539.5 -336.0Q558 -364 558 -428Q558 -509 542.0 -563.5Q526 -618 486.5 -667.5Q447 -717 377 -783L219 -933Q42 -1100 42 -1315Q42 -1540 146.5 -1658.0Q251 -1776 449 -1776Q691 -1776 792.5 -1647.0Q894 -1518 894 -1255H536V-1376Q536 -1412 515.5 -1432.0Q495 -1452 460 -1452Q418 -1452 398.5 -1428.5Q379 -1405 379 -1368Q379 -1331 399.0 -1288.0Q419 -1245 478 -1189L681 -994Q742 -936 793.0 -871.5Q844 -807 875.0 -721.5Q906 -636 906 -513Q906 -265 814.5 -124.5Q723 16 496 16Z"/><path transform="translate(945 0)" d="M229 0V-1422H20V-1760H790V-1422H581V0Z"/><path transform="translate(1755 0)" d="M78 0V-1760H618Q753 -1760 822.0 -1698.5Q891 -1637 914.5 -1526.5Q938 -1416 938 -1267Q938 -1123 901.5 -1037.0Q865 -951 764 -918Q847 -901 880.5 -835.5Q914 -770 914 -666V0H567V-689Q567 -766 535.5 -784.5Q504 -803 434 -803V0ZM436 -1108H521Q594 -1108 594 -1267Q594 -1370 578.0 -1402.0Q562 -1434 518 -1434H436Z"/><path transform="translate(2979.0 0)" d="M62 0V-1760H402V0Z"/><path transform="translate(3691 0)" d="M78 0V-1760H440L602 -917V-1760H942V0H598L422 -880V0Z"/><path transform="translate(4711 0)" d="M441 16Q64 16 64 -524V-1283Q64 -1776 496 -1776Q674 -1776 769.0 -1704.5Q864 -1633 900.0 -1496.0Q936 -1359 936 -1162H592V-1318Q592 -1375 576.5 -1413.5Q561 -1452 512 -1452Q451 -1452 431.5 -1411.0Q412 -1370 412 -1321V-468Q412 -397 430.5 -352.5Q449 -308 503 -308Q559 -308 577.5 -352.5Q596 -397 596 -470V-721H502V-1025H932V0H791L731 -148Q639 16 441 16Z"/></g><path class="bloque" fill-rule="evenodd" d="M2801 -1960H3621V260H2801Z M2996 -1760H3426V-1610H3286V-150H3426V0H2996V-150H3136V-1610H2996Z"/></svg></span><span>hola@stringwebs.com · Hecho en la Ciudad de México</span></div>
+  </div>
+</div>
+<script>
+(function () {
+  document.querySelectorAll('a[href="#"]').forEach(function (a) { a.addEventListener('click', function (e) { e.preventDefault(); }); });
+  var P = [], PI = Math.PI;
+  function L(x, y) { P.push([x, y]); }
+  function arc(cx, cy, r, a0, a1, n) { for (var i = 1; i <= n; i++) { var a = a0 + (a1 - a0) * i / n; P.push([cx + r * Math.cos(a), cy + r * Math.sin(a)]); } }
+  L(0,380);L(40,380);L(40,330);L(90,330);L(90,380);L(120,380);L(120,250);L(135,250);
+  arc(175,250,40,PI,PI*1.5,10);L(172,210);L(172,196);L(175,189);L(178,196);L(178,210);L(175,210);
+  arc(175,250,40,PI*1.5,PI*2,10);L(230,250);L(230,380);L(205,380);L(205,305);
+  arc(175,305,30,0,-PI,12);L(145,380);L(280,380);L(280,300);L(305,300);L(305,280);L(330,280);L(330,262);
+  arc(360,262,30,PI,PI*1.5,8);L(357,232);L(357,216);L(360,207);L(363,216);L(363,232);L(360,232);
+  arc(360,262,30,PI*1.5,PI*2,8);L(390,280);L(415,280);L(415,300);L(440,300);L(440,380);
+  L(490,380);L(490,370);L(510,370);L(510,360);L(514,360);L(514,172);L(510,172);L(510,162);L(518,162);L(516,152);L(504,140);L(517,145);L(522,128);L(527,145);L(540,140);L(528,152);L(526,162);L(534,162);L(534,172);L(530,172);L(530,360);L(534,360);L(534,370);L(554,370);L(554,380);
+  L(600,380);L(600,150);L(606,150);L(606,130);L(612,130);L(612,112);L(618,112);L(618,100);L(622,100);L(622,40);L(624,40);L(624,100);L(628,100);L(628,112);L(634,112);L(634,130);L(640,130);L(640,150);L(646,150);L(646,380);
+  L(700,380);L(700,180);L(730,165);L(730,380);L(760,380);L(760,240);L(800,240);L(800,380);L(830,380);L(830,280);L(860,280);L(860,380);
+  L(900,380);L(935,356);L(965,326);L(992,292);L(1015,258);L(1035,228);L(1050,210);L(1060,203);L(1072,209);L(1090,228);L(1112,254);L(1135,280);L(1152,296);L(1172,286);L(1190,272);L(1205,262);L(1218,268);L(1232,258);L(1248,250);L(1265,258);L(1282,262);L(1300,255);L(1318,266);L(1338,288);L(1360,316);L(1382,348);L(1400,380);L(1490,380);
+  document.getElementById('trazo').setAttribute('d', 'M' + P.map(function (p) { return p[0].toFixed(1) + ' ' + p[1].toFixed(1); }).join(' L'));
+  var a0 = -1.95, a1 = a0 + PI * 2 * 0.9, cx = 760, cy = 150, r = 92;
+  function q(a) { return (cx + r * Math.cos(a)).toFixed(1) + ' ' + (cy + r * Math.sin(a)).toFixed(1); }
+  document.getElementById('luna').setAttribute('d', 'M' + q(a0) + ' A' + r + ' ' + r + ' 0 1 1 ' + q(a1));
+})();
+</script>
+</body>
+</html>
