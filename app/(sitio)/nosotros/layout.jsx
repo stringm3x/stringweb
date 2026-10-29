@@ -1,23 +1,17 @@
+// Título y descripción de docs/textos.md § Textos que faltaban.
+const DESCRIPCION =
+  "La historia de STRING: un taller de software que probó su primer sistema en el gimnasio de la familia de su fundador.";
+
 export const metadata = {
   title: "Nosotros",
-  description:
-    "STRING es una agencia de sistemas digitales en México. No vendemos diseño, vendemos estructura: metodología, filosofía y equipo detrás de cada sistema de conversión que construimos.",
+  description: DESCRIPCION,
   alternates: {
     canonical: "https://www.stringwebs.com/nosotros",
   },
   openGraph: {
-    title: "Nosotros | STRING",
-    description:
-      "No vendemos diseño, vendemos estructura. Conoce la metodología y filosofía detrás de STRING.",
+    title: "Nosotros · STRING",
+    description: DESCRIPCION,
     url: "https://www.stringwebs.com/nosotros",
-    images: [
-      {
-        url: "/opengraph-image",
-        width: 1200,
-        height: 630,
-        alt: "STRING — Sistemas Digitales Estratégicos",
-      },
-    ],
   },
 };
 

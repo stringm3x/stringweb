@@ -3,18 +3,24 @@ import { Analytics } from "@vercel/analytics/react";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 import { Providers } from "./provider";
 import { Grano } from "./components/Grano";
+import { CORREO, WHATSAPP_TELEFONO } from "./lib/contacto";
 import "./globals.css";
 
+// Título y descripción de docs/textos.md § Textos que faltaban.
+const TITULO = "STRING — Software hecho con oficio. Y con arte.";
+const DESCRIPCION =
+  "Taller de software en la Ciudad de México. Sistemas que contestan, ordenan y trabajan por tu negocio, desde un local hasta una empresa grande.";
+
+// Las redes sociales solo viven aquí (sameAs), no en el pie.
 const organizationJsonLd = {
   "@context": "https://schema.org",
   "@type": "Organization",
   name: "STRING",
   url: "https://www.stringwebs.com",
-  logo: "https://www.stringwebs.com/marca/string-wordmark-horizontal.png",
-  description:
-    "Agencia de sistemas digitales en México. Sistemas de conversión a medida y STRING SaaS, sistemas listos por nicho.",
-  email: "hola@stringwebs.com",
-  telephone: "+525545524847",
+  logo: "https://www.stringwebs.com/logo/string-noche.svg",
+  description: DESCRIPCION,
+  email: CORREO,
+  telephone: WHATSAPP_TELEFONO,
   address: {
     "@type": "PostalAddress",
     addressLocality: "Ciudad de México",
@@ -45,28 +51,14 @@ const geistMono = Geist_Mono({
 export const metadata = {
   metadataBase: new URL("https://www.stringwebs.com"),
   title: {
-    default: "STRING — Sistemas Digitales Estratégicos",
-    template: "%s | STRING",
+    default: TITULO,
+    template: "%s · STRING",
   },
-  description:
-    "Agencia de sistemas digitales en México. CRM para gimnasios, e-commerce y automatizaciones.",
-  keywords: [
-    "sistemas digitales",
-    "captación de clientes",
-    "automatización de ventas",
-    "sistema de conversión",
-    "landing page que convierte",
-    "CRM automatizado",
-    "agencia digital México",
-    "sistemas de captación CDMX",
-    "automatización WhatsApp",
-    "Next.js México",
-  ],
+  description: DESCRIPCION,
   authors: [{ name: "STRING", url: "https://www.stringwebs.com/" }],
   openGraph: {
-    title: "STRING — Sistemas Digitales Estratégicos",
-    description:
-      "Agencia de sistemas digitales en México. CRM para gimnasios, e-commerce y automatizaciones.",
+    title: TITULO,
+    description: DESCRIPCION,
     url: "https://www.stringwebs.com/",
     siteName: "STRING",
     locale: "es_MX",
@@ -74,10 +66,8 @@ export const metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "STRING — Sistemas Digitales Estratégicos",
-    description:
-      "Agencia de sistemas digitales en México. CRM para gimnasios, e-commerce y automatizaciones.",
-    creator: "@stringmx",
+    title: TITULO,
+    description: DESCRIPCION,
   },
   robots: {
     index: true,
