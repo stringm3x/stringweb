@@ -158,6 +158,28 @@
   }
 }
 
+/* Botón primario (docs/calidad.md § 3). En hover aparece el cursor del
+   logo después del texto: es la firma de STRING y solo vive aquí. Mientras
+   se envía, el cursor escribe. Con menos movimiento aparece fijo. */
+@layer components {
+  .boton-cursor {
+    opacity: 0;
+  }
+
+  .boton-firma:hover .boton-cursor,
+  .boton-cursor-escribe {
+    opacity: 1;
+    animation: logo-bloque var(--parpadeo) steps(1) infinite;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .boton-firma:hover .boton-cursor,
+    .boton-cursor-escribe {
+      animation: none;
+    }
+  }
+}
+
 @keyframes logo-bloque {
   0%,
   49% {
