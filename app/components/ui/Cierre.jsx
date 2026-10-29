@@ -26,11 +26,11 @@ export function Cierre({ ctaTexto, ctaHref, nota }) {
 
         {/* bg-acido explícito: la cinta negra del fondo pasa por detrás y no toca el pie */}
         <div className="mx-auto mt-espacio-7 max-w-md border-t border-black/20 bg-acido pt-espacio-4">
-          {/* Firma de productos (docs/diseno.md): "by STRING" chico, en gris, sin verde. */}
+          {/* Firma de productos (docs/diseno.md): "by STRING" chico y sin verde; encima del verde, negro. */}
           <p className="text-2xl font-semibold tracking-[-0.035em] text-black">
             El sistema para gimnasios
           </p>
-          <p className="mt-1 text-pequeno text-[#5F6368]">by STRING</p>
+          <p className="mt-1 text-pequeno text-black">by STRING</p>
         </div>
       </div>
     </section>
