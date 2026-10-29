@@ -4,61 +4,19 @@ import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { FiAlertCircle } from "react-icons/fi";
 import { diagnosticoSchema } from "@/app/lib/validations/diagnostico-schema";
 import { GIROS, OTRA_COSA, SITUACIONES } from "@/app/lib/diagnostico";
 import { whatsappUrl } from "@/app/lib/contacto";
 import { TurnstileWidget } from "@/app/gym/components/TurnstileWidget";
 import { Boton } from "@/app/components/ui/Boton";
+import { Campo, MensajeError } from "@/app/components/ui/Campo";
+import { Opciones } from "@/app/components/ui/Opciones";
 import { ENLACE } from "@/app/components/salas/estilos";
 
 // Formulario de diagnóstico (docs/textos.md § Formulario de diagnóstico):
 // cuatro preguntas, mensajes de error de § Mensajes de error y el aviso de
 // privacidad corto debajo del botón. Sin animaciones: nada se mueve.
 const ERROR_ENVIO = "No se pudo enviar. Intenta de nuevo o escríbenos por WhatsApp.";
-
-const CAMPO =
-  "w-full rounded-lg border bg-fondo px-4 py-3 text-cuerpo text-texto placeholder:text-texto-suave/70 hover:border-texto";
-
-function borde(error) {
-  return error ? "border-texto" : "border-texto-suave";
-}
-
-function Error({ id, children }) {
-  if (!children) return null;
-  return (
-    <p id={id} className="flex items-center gap-2 text-pequeno text-texto">
-      <FiAlertCircle aria-hidden="true" className="h-4 w-4 flex-shrink-0 text-acento" />
-      {children}
-    </p>
-  );
-}
-
-// Grupo de opciones en píldora: un radio por opción, foco en la píldora.
-function Opciones({ nombre, legenda, opciones, register, error }) {
-  const errorId = `${nombre}-error`;
-  return (
-    <fieldset
-      className="flex flex-col gap-space-3"
-      aria-invalid={!!error}
-      aria-describedby={error ? errorId : undefined}
-    >
-      <legend className="mb-space-3 text-cuerpo font-semibold text-texto">{legenda}</legend>
-      <div className="flex flex-wrap gap-space-2">
-        {opciones.map((opcion) => (
-          <label
-            key={opcion}
-            className={`flex min-h-[44px] cursor-pointer items-center rounded-pill border px-[18px] py-2 text-cuerpo text-texto hover:border-texto has-[:checked]:border-acento has-[:checked]:bg-acento has-[:checked]:text-sobre-acento has-[:focus-visible]:outline has-[:focus-visible]:outline-2 has-[:focus-visible]:outline-offset-[3px] has-[:focus-visible]:outline-[rgb(var(--foco))] ${borde(error)}`}
-          >
-            <input type="radio" value={opcion} {...register(nombre)} className="sr-only" />
-            {opcion}
-          </label>
-        ))}
-      </div>
-      <Error id={errorId}>{error}</Error>
-    </fieldset>
-  );
-}
 
 // Confirmación (docs/textos.md): el foco pasa al mensaje para que se anuncie.
 function Confirmacion() {
@@ -119,44 +77,31 @@ export function FormularioDiagnostico() {
 
   return (
     <form onSubmit={handleSubmit(enviar)} noValidate className="flex flex-col gap-space-5">
-      <div className="flex flex-col gap-space-2">
-        <label htmlFor="nombre" className="text-cuerpo font-semibold text-texto">
-          Nombre
-        </label>
-        <input
-          id="nombre"
-          type="text"
-          autoComplete="name"
-          {...register("nombre")}
-          aria-invalid={!!errors.nombre}
-          aria-describedby={errors.nombre ? "nombre-error" : undefined}
-          className={`${CAMPO} ${borde(errors.nombre)}`}
-        />
-        <Error id="nombre-error">{errors.nombre?.message}</Error>
-      </div>
+      <Campo
+        id="nombre"
+        etiqueta="Nombre"
+        type="text"
+        autoComplete="name"
+        {...register("nombre")}
+        error={errors.nombre?.message}
+      />
 
-      <div className="flex flex-col gap-space-2">
-        <label htmlFor="whatsapp" className="text-cuerpo font-semibold text-texto">
-          WhatsApp
-        </label>
-        <input
-          id="whatsapp"
-          type="tel"
-          inputMode="numeric"
-          autoComplete="tel-national"
-          {...register("whatsapp")}
-          aria-invalid={!!errors.whatsapp}
-          aria-describedby={errors.whatsapp ? "whatsapp-error" : undefined}
-          className={`${CAMPO} font-mono ${borde(errors.whatsapp)}`}
-        />
-        <Error id="whatsapp-error">{errors.whatsapp?.message}</Error>
-      </div>
+      <Campo
+        id="whatsapp"
+        etiqueta="WhatsApp"
+        type="tel"
+        inputMode="numeric"
+        autoComplete="tel-national"
+        {...register("whatsapp")}
+        error={errors.whatsapp?.message}
+        className="font-mono"
+      />
 
       <Opciones
         nombre="giro"
         legenda="Giro de tu negocio"
         opciones={GIROS}
-        register={register}
+        registrar={register}
         error={errors.giro?.message}
       />
 
@@ -164,25 +109,19 @@ export function FormularioDiagnostico() {
         nombre="situacion"
         legenda="¿Qué te pasa hoy?"
         opciones={SITUACIONES}
-        register={register}
+        registrar={register}
         error={errors.situacion?.message}
       />
 
       {esOtraCosa && (
-        <div className="flex flex-col gap-space-2">
-          <label htmlFor="otraCosa" className="text-cuerpo font-semibold text-texto">
-            Otra cosa
-          </label>
-          <textarea
-            id="otraCosa"
-            rows={4}
-            {...register("otraCosa")}
-            aria-invalid={!!errors.otraCosa}
-            aria-describedby={errors.otraCosa ? "otraCosa-error" : undefined}
-            className={`${CAMPO} resize-y ${borde(errors.otraCosa)}`}
-          />
-          <Error id="otraCosa-error">{errors.otraCosa?.message}</Error>
-        </div>
+        <Campo
+          id="otraCosa"
+          etiqueta="Otra cosa"
+          multilinea
+          rows={4}
+          {...register("otraCosa")}
+          error={errors.otraCosa?.message}
+        />
       )}
 
       <div className="flex flex-col gap-space-3">
@@ -191,7 +130,7 @@ export function FormularioDiagnostico() {
           Enviar
         </Boton>
         <div role="alert">
-          <Error id="envio-error">{errorEnvio}</Error>
+          <MensajeError id="envio-error">{errorEnvio}</MensajeError>
         </div>
         <p className="text-pequeno text-texto-suave">
           Carlos Avilés (STRING) usa tu nombre, tu WhatsApp, el giro de tu negocio y lo que nos
