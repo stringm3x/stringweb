@@ -7,7 +7,9 @@ let initialized = false;
 // Todos los tweens GSAP del sitio cuelgan de gsap.globalTimeline por default
 // (ningún archivo pasa un timeline propio). Colapsar su timeScale acá los
 // resuelve casi instantáneamente para quien prefiere menos movimiento, sin
-// tener que tocar cada uno de los componentes que animan con GSAP.
+// tener que tocar cada uno de los componentes que animan con GSAP. GSAP solo
+// queda en /saas y /gym: cada componente que lo usa importa este archivo, y
+// la preferencia se registra al cargarlo.
 export function initMotionPreferences() {
   if (initialized) return;
   initialized = true;
@@ -19,7 +21,4 @@ export function initMotionPreferences() {
   });
 }
 
-export function prefersReducedMotion() {
-  if (typeof window === "undefined") return false;
-  return window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-}
+if (typeof window !== "undefined") initMotionPreferences();

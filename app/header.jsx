@@ -1,9 +1,8 @@
 "use client";
 
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import gsap from "gsap";
 import { FiMenu, FiX } from "react-icons/fi";
 import { Boton } from "./components/ui/Boton";
 import { Logo } from "./components/ui/Logo";
@@ -25,49 +24,12 @@ export default function Header() {
   const [scrolled, setScrolled] = useState(false);
   const pathname = usePathname();
 
-  const panelRef = useRef(null);
-  const fondoRef = useRef(null);
-  const filasRef = useRef([]);
-  const pieRef = useRef(null);
-  const tlRef = useRef(null);
-
   useEffect(() => {
     const handleScroll = () => setScrolled(window.scrollY > 24);
     handleScroll();
     window.addEventListener("scroll", handleScroll, { passive: true });
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
-
-  // El panel (solo celular) entra desde la derecha y sus filas suben en
-  // cascada; al cerrar se reproduce en reversa.
-  useEffect(() => {
-    const ctx = gsap.context(() => {
-      gsap.set(fondoRef.current, { autoAlpha: 0 });
-      gsap.set(panelRef.current, { xPercent: 100, autoAlpha: 0 });
-
-      tlRef.current = gsap
-        .timeline({ paused: true })
-        .to(fondoRef.current, { autoAlpha: 1, duration: 0.3, ease: "power2.out" })
-        .to(
-          panelRef.current,
-          { xPercent: 0, autoAlpha: 1, duration: 0.5, ease: "power3.out" },
-          "<"
-        )
-        .from(
-          filasRef.current.filter(Boolean),
-          { opacity: 0, x: 32, duration: 0.4, stagger: 0.06, ease: "power3.out" },
-          "-=0.25"
-        )
-        .from(pieRef.current, { opacity: 0, y: 12, duration: 0.3 }, "-=0.2");
-    });
-    return () => ctx.revert();
-  }, []);
-
-  useEffect(() => {
-    if (!tlRef.current) return;
-    if (isOpen) tlRef.current.play();
-    else tlRef.current.reverse();
-  }, [isOpen]);
 
   useEffect(() => {
     document.body.style.overflow = isOpen ? "hidden" : "";
@@ -83,6 +45,13 @@ export default function Header() {
   const cerrar = () => setIsOpen(false);
   // Los enlaces a salas de la portada (/#…) no se marcan como página actual.
   const esActiva = (href) => !href.includes("#") && pathname.startsWith(href);
+
+  // El panel (solo celular) entra desde la derecha y sus filas llegan en
+  // cascada, con transiciones CSS; con menos movimiento aparece de golpe.
+  const filaEntra = (index) => ({ transitionDelay: isOpen ? `${250 + index * 60}ms` : "0ms" });
+  const FILA = `transition-[opacity,transform] duration-300 ease-out motion-reduce:transition-none ${
+    isOpen ? "translate-x-0 opacity-100" : "translate-x-8 opacity-0"
+  }`;
 
   return (
     <>
@@ -137,15 +106,15 @@ export default function Header() {
 
       {/* Fondo del menú */}
       <div
-        ref={fondoRef}
         onClick={cerrar}
         aria-hidden="true"
-        className="fixed inset-0 z-40 bg-fondo/90 lg:hidden"
+        className={`fixed inset-0 z-40 bg-fondo/90 transition-[opacity,visibility] duration-300 motion-reduce:transition-none lg:hidden ${
+          isOpen ? "visible opacity-100" : "invisible opacity-0"
+        }`}
       />
 
       {/* Panel del menú (celular) */}
       <div
-        ref={panelRef}
         id="menu-principal"
         role="dialog"
         aria-modal="true"
@@ -153,7 +122,9 @@ export default function Header() {
         aria-hidden={!isOpen}
         inert={!isOpen}
         data-theme="noche"
-        className="fixed bottom-0 right-0 top-0 z-50 flex w-full flex-col border-l border-hairline bg-fondo text-texto sm:w-[440px] lg:hidden"
+        className={`fixed bottom-0 right-0 top-0 z-50 flex w-full flex-col border-l border-hairline bg-fondo text-texto transition-[transform,opacity,visibility] duration-500 ease-out motion-reduce:transition-none sm:w-[440px] lg:hidden ${
+          isOpen ? "visible translate-x-0 opacity-100" : "invisible translate-x-full opacity-0"
+        }`}
       >
         <div className="flex h-[72px] items-center justify-between px-4 sm:px-6">
           <Logo onClick={cerrar} />
@@ -174,8 +145,8 @@ export default function Header() {
               return (
                 <li
                   key={item.href}
-                  ref={(el) => (filasRef.current[index] = el)}
-                  className="border-b border-hairline"
+                  style={filaEntra(index)}
+                  className={`border-b border-hairline ${FILA}`}
                 >
                   <Link
                     href={item.href}
@@ -203,7 +174,10 @@ export default function Header() {
           </ul>
         </nav>
 
-        <div ref={pieRef} className="border-t border-hairline p-4 sm:p-6">
+        <div
+          style={filaEntra(menuItems.length)}
+          className={`border-t border-hairline p-4 sm:p-6 ${FILA}`}
+        >
           <Boton href="/diagnostico" variante="primario" onClick={cerrar} className="w-full">
             Solicitar diagnóstico
           </Boton>

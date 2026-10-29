@@ -2,6 +2,7 @@
 
 import { useEffect, useId, useRef } from "react";
 import gsap from "gsap";
+import "@/app/lib/motionPrefs";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { REVEAL_START } from "@/app/lib/scrollTriggerDefaults";
 

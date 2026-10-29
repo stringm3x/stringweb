@@ -2,6 +2,7 @@
 
 import { useRef, useEffect } from "react";
 import gsap from "gsap";
+import "@/app/lib/motionPrefs";
 import { FiAlertCircle } from "react-icons/fi";
 
 export const FormField = ({

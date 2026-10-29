@@ -1,7 +1,6 @@
 import { Geist, Geist_Mono } from "next/font/google";
 import { Analytics } from "@vercel/analytics/react";
 import { SpeedInsights } from "@vercel/speed-insights/next";
-import { Providers } from "./provider";
 import { Grano } from "./components/Grano";
 import { CORREO, WHATSAPP_TELEFONO } from "./lib/contacto";
 import "./globals.css";
@@ -115,7 +114,7 @@ export default function RootLayout({ children }) {
       <body
         className="font-sans bg-fondo text-texto antialiased"
       >
-        <Providers>{children}</Providers>
+        {children}
         <Grano />
         <Analytics />
         <SpeedInsights />
