@@ -79,8 +79,10 @@
 }
 
 /* Logo (docs/sistema/components/Logo): la I es un cursor de terminal que
-   parpadea cada 1.1 s, de golpe. Apagado, el bloque desaparece y queda la I
-   de Anton en el color de las letras; con menos movimiento queda encendido. */
+   parpadea cada 1.1 s, de golpe. Encendido, el bloque con la I en negativo;
+   apagado, el bloque desaparece y queda la I de Anton en el color de las
+   letras (la I de Anton se apaga a contratiempo para no asomarse por el
+   calado). Con menos movimiento el bloque queda encendido. */
 @layer components {
   .logo-string {
     display: inline-block;
@@ -95,8 +97,14 @@
     animation: logo-bloque 1.1s steps(1) infinite;
   }
 
+  .logo-string .i-anton {
+    opacity: 0;
+    animation: logo-i 1.1s steps(1) infinite;
+  }
+
   @media (prefers-reduced-motion: reduce) {
-    .logo-string .bloque {
+    .logo-string .bloque,
+    .logo-string .i-anton {
       animation: none;
     }
   }
@@ -110,6 +118,17 @@
   50%,
   100% {
     opacity: 0;
+  }
+}
+
+@keyframes logo-i {
+  0%,
+  49% {
+    opacity: 0;
+  }
+  50%,
+  100% {
+    opacity: 1;
   }
 }
 
