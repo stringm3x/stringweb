@@ -1,12 +1,14 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { FiAlertCircle } from "react-icons/fi";
 import { diagnosticoSchema } from "@/app/lib/validations/diagnostico-schema";
 import { GIROS, OTRA_COSA, SITUACIONES } from "@/app/lib/diagnostico";
+import { whatsappUrl } from "@/app/lib/contacto";
+import { TurnstileWidget } from "@/app/gym/components/TurnstileWidget";
 import { Boton } from "@/app/components/ui/Boton";
 import { ENLACE } from "@/app/components/salas/estilos";
 
@@ -58,8 +60,29 @@ function Opciones({ nombre, legenda, opciones, register, error }) {
   );
 }
 
+// Confirmación (docs/textos.md): el foco pasa al mensaje para que se anuncie.
+function Confirmacion() {
+  const ref = useRef(null);
+  useEffect(() => ref.current?.focus(), []);
+  return (
+    <div role="status" className="flex flex-col items-start gap-space-4">
+      <p ref={ref} tabIndex={-1} className="scroll-mt-32 text-[28px] font-semibold leading-[1.15] tracking-[-0.035em] text-texto">
+        Listo. Te respondemos en un día hábil.
+      </p>
+      <Boton href={whatsappUrl()} variante="secundario">
+        Escríbenos por WhatsApp
+      </Boton>
+    </div>
+  );
+}
+
 export function FormularioDiagnostico() {
   const [errorEnvio, setErrorEnvio] = useState(null);
+  const [enviado, setEnviado] = useState(false);
+  const [token, setToken] = useState(null);
+  // Cada token de Turnstile sirve una sola vez: si el envío falla, el widget
+  // se vuelve a montar para dar otro.
+  const [intento, setIntento] = useState(0);
 
   const {
     register,
@@ -80,14 +103,19 @@ export function FormularioDiagnostico() {
       const respuesta = await fetch("/api/diagnostico", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(datos),
+        body: JSON.stringify({ ...datos, turnstileToken: token }),
       });
       const resultado = await respuesta.json().catch(() => ({}));
       if (!respuesta.ok) throw new Error(resultado.message || ERROR_ENVIO);
+      setEnviado(true);
     } catch (error) {
       setErrorEnvio(error.message || ERROR_ENVIO);
+      setToken(null);
+      setIntento((n) => n + 1);
     }
   };
+
+  if (enviado) return <Confirmacion />;
 
   return (
     <form onSubmit={handleSubmit(enviar)} noValidate className="flex flex-col gap-space-5">
@@ -158,7 +186,8 @@ export function FormularioDiagnostico() {
       )}
 
       <div className="flex flex-col gap-space-3">
-        <Boton type="submit" variante="primario" disabled={isSubmitting} className="w-full sm:w-auto sm:self-start">
+        <TurnstileWidget key={intento} onVerify={setToken} onExpire={() => setToken(null)} />
+        <Boton type="submit" variante="primario" disabled={isSubmitting || !token} className="w-full sm:w-auto sm:self-start">
           Enviar
         </Boton>
         <div role="alert">

@@ -29,7 +29,6 @@ export const REQUIRED_SMTP_ENV_VARS = [
   "SMTP_USER",
   "SMTP_PASSWORD",
   "SMTP_FROM",
-  "NOTIFICATION_EMAIL",
 ];
 
 export const getMissingSmtpEnvVars = () =>

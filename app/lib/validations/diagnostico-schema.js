@@ -29,8 +29,10 @@ export const diagnosticoSchema = z
     situacion: z.enum(SITUACIONES, { error: MENSAJES.situacion }),
     otraCosa: z.string().trim().max(1000).optional().default(""),
   })
-  .superRefine((datos, ctx) => {
-    if (datos.situacion === OTRA_COSA && !datos.otraCosa) {
-      ctx.addIssue({ code: "custom", path: ["otraCosa"], message: MENSAJES.otraCosa });
-    }
+  // "when" hace que la regla corra aunque otros campos tengan error, para que
+  // todos los mensajes salgan juntos.
+  .refine((datos) => datos.situacion !== OTRA_COSA || String(datos.otraCosa ?? "").trim(), {
+    path: ["otraCosa"],
+    message: MENSAJES.otraCosa,
+    when: ({ value }) => value?.situacion === OTRA_COSA,
   });

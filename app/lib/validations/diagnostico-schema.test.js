@@ -61,6 +61,12 @@ describe("diagnosticoSchema", () => {
     ).toBe(true);
     expect(diagnosticoSchema.safeParse({ ...valido, otraCosa: undefined }).success).toBe(true);
   });
+
+  it("pide el espacio libre aunque otros campos también tengan error", () => {
+    const datos = { ...valido, nombre: "", situacion: OTRA_COSA, otraCosa: "" };
+    expect(mensajeDe(datos, "nombre")).toBe(MENSAJES.nombre);
+    expect(mensajeDe(datos, "otraCosa")).toBe(MENSAJES.otraCosa);
+  });
 });
 
 describe("nivelSugerido", () => {

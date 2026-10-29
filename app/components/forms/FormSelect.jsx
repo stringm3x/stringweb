@@ -3,9 +3,6 @@
 import { useRef, useEffect } from "react";
 import gsap from "gsap";
 import { FiAlertCircle, FiChevronDown } from "react-icons/fi";
-import { PROJECT_TYPES } from "../../lib/constants/project-types";
-
-const OPCIONES_NIVEL = PROJECT_TYPES.map((t) => ({ value: t.id, label: t.label }));
 
 export const FormSelect = ({
   register,
@@ -13,8 +10,8 @@ export const FormSelect = ({
   name,
   label,
   required,
-  opciones = OPCIONES_NIVEL,
-  placeholder = "Selecciona un nivel",
+  opciones = [],
+  placeholder = "Selecciona una opción",
 }) => {
   const errorRef = useRef(null);
   const errorId = `${name}-error`;
