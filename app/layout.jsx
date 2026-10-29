@@ -35,24 +35,22 @@ const organizationJsonLd = {
 
 // Geist para titulares y texto; Geist Mono para cifras, precios y
 // etiquetas. Anton no se carga: el logo la trae a trazo en su SVG.
-// Las fuentes viven en app/fonts (paquete oficial `geist` 1.8.2, OFL,
-// recortadas al rango latin de Google Fonts) para que el build no dependa
-// de la red.
+// Las fuentes viven en app/fonts (paquete oficial `geist` 1.8.2, OFL): una
+// variable por familia, recortada al rango latin de Google Fonts y a los
+// pesos que usa el sitio, para que el build no dependa de la red y pesen
+// menos que cinco archivos fijos.
 const geistSans = localFont({
   variable: "--font-sans",
-  src: [
-    { path: "./fonts/Geist-Regular-latin.woff2", weight: "400", style: "normal" },
-    { path: "./fonts/Geist-Medium-latin.woff2", weight: "500", style: "normal" },
-    { path: "./fonts/Geist-SemiBold-latin.woff2", weight: "600", style: "normal" },
-  ],
+  src: "./fonts/Geist-Variable-latin.woff2",
+  weight: "400 600",
+  style: "normal",
 });
 
 const geistMono = localFont({
   variable: "--font-mono",
-  src: [
-    { path: "./fonts/GeistMono-Regular-latin.woff2", weight: "400", style: "normal" },
-    { path: "./fonts/GeistMono-Medium-latin.woff2", weight: "500", style: "normal" },
-  ],
+  src: "./fonts/GeistMono-Variable-latin.woff2",
+  weight: "400 500",
+  style: "normal",
 });
 
 export const metadata = {
