@@ -22,7 +22,10 @@ const ERROR_ENVIO = "No se pudo enviar. Intenta de nuevo o escríbenos por Whats
 // se ve que el envío llegó. Con menos movimiento, la confirmación sale ya.
 function esperaDeExito() {
   if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return 0;
-  return parseFloat(getComputedStyle(document.documentElement).getPropertyValue("--dur-lento")) || 0;
+  // El CSS puede llegar minificado (".6s" en vez de "600ms").
+  const valor = getComputedStyle(document.documentElement).getPropertyValue("--dur-lento").trim();
+  const numero = parseFloat(valor) || 0;
+  return valor.endsWith("ms") ? numero : numero * 1000;
 }
 
 // Confirmación (docs/textos.md): el foco pasa al mensaje para que se anuncie.

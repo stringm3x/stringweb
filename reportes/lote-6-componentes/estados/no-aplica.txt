@@ -1,0 +1,5 @@
+boton-texto-noche: cargando, éxito y error
+boton-texto-pared: cargando, éxito y error
+campo: presionado es foco; cargando y éxito no aplican
+opción: éxito es elegida; cargando no aplica
+tarjeta: es un enlace; cargando, deshabilitado, éxito y error no aplican

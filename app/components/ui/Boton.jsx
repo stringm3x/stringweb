@@ -183,11 +183,12 @@ export function Boton({
     );
   }
 
+  // Ocupado, deja de ser de envío: así no manda dos veces.
   return (
     <button
-      type={type}
+      type={ocupado ? "button" : type}
       aria-disabled={ocupado || undefined}
-      onClick={ocupado ? (e) => e.preventDefault() : onClick}
+      onClick={ocupado ? undefined : onClick}
       className={clases}
     >
       {contenido}
