@@ -21,7 +21,7 @@ const Home = () => {
       <Us />
       <Cierre
         ctaTexto="Solicitar diagnóstico"
-        ctaHref="/cotizacion"
+        ctaHref="/diagnostico"
         nota="Respuesta en 24 h · Sin compromiso"
       />
     </div>

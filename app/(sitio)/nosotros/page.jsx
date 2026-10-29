@@ -147,10 +147,10 @@ const PageUs = () => {
           </p>
 
           <div ref={heroCtaRef} className="flex flex-wrap gap-4">
-            <Boton href="/cotizacion" variante="primario">
+            <Boton href="/diagnostico" variante="primario">
               Diagnosticar mi negocio
             </Boton>
-            <Boton href="/servicios" variante="secundario">
+            <Boton href="/#niveles" variante="secundario">
               Ver sistemas
             </Boton>
           </div>
@@ -321,7 +321,7 @@ const PageUs = () => {
 
       <Cierre
         ctaTexto="Solicitar diagnóstico"
-        ctaHref="/cotizacion"
+        ctaHref="/diagnostico"
         nota="Respuesta en 24 h · Sin compromiso"
       />
     </main>

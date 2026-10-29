@@ -10,7 +10,7 @@ const CAMINOS = [
     frase:
       "Para negocios con presupuesto para desarrollo. Proyecto único en 4 niveles, más continuidad mensual.",
     ctaTexto: "Ver Sistemas a Medida",
-    ctaHref: "/servicios",
+    ctaHref: "/#niveles",
   },
   {
     kicker: "CAMINO 02",

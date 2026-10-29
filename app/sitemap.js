@@ -5,15 +5,11 @@ const BASE = "https://www.stringwebs.com";
 const ROUTES = [
   { path: "/", priority: 1.0, changeFrequency: "weekly" },
   { path: "/nosotros", priority: 0.7, changeFrequency: "monthly" },
-  { path: "/servicios", priority: 0.8, changeFrequency: "monthly" },
-  { path: "/servicios/1", priority: 0.7, changeFrequency: "monthly" },
-  { path: "/servicios/2", priority: 0.7, changeFrequency: "monthly" },
-  { path: "/servicios/3", priority: 0.7, changeFrequency: "monthly" },
-  { path: "/servicios/4", priority: 0.7, changeFrequency: "monthly" },
-  { path: "/proyectos", priority: 0.7, changeFrequency: "monthly" },
-  { path: "/cotizacion", priority: 0.8, changeFrequency: "monthly" },
+  { path: "/diagnostico", priority: 0.8, changeFrequency: "monthly" },
   { path: "/saas", priority: 0.9, changeFrequency: "weekly" },
   { path: "/gym/registro", priority: 0.8, changeFrequency: "monthly" },
+  { path: "/aviso-de-privacidad", priority: 0.3, changeFrequency: "yearly" },
+  { path: "/terminos", priority: 0.3, changeFrequency: "yearly" },
 ];
 
 export default function sitemap() {

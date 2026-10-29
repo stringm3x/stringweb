@@ -1,27 +1,22 @@
 import { QuoteForm } from "../../components/forms/QuoteForm";
 import { Toaster } from "react-hot-toast";
 
+// Título y descripción de docs/textos.md § Textos que faltaban. El
+// formulario y su encabezado se rehacen en el lote 4.
+const DESCRIPCION =
+  "Cuatro preguntas para saber qué necesita tu negocio. Te respondemos en un día hábil.";
+
 export const metadata = {
-  title: "Solicitar Diagnóstico | STRING — Sistemas Digitales",
-  description:
-    "Solicita un diagnóstico gratuito de tu presencia digital. Descubre qué nivel del Sistema STRING necesita tu negocio.",
+  title: "Solicitar diagnóstico",
+  description: DESCRIPCION,
   alternates: {
-    canonical: "https://www.stringwebs.com/cotizacion",
+    canonical: "https://www.stringwebs.com/diagnostico",
   },
   openGraph: {
-    title: "Solicitar Diagnóstico | STRING",
-    description:
-      "Sistemas digitales estratégicos para convertir visitas en clientes reales.",
-    url: "https://www.stringwebs.com/cotizacion",
+    title: "Solicitar diagnóstico · STRING",
+    description: DESCRIPCION,
+    url: "https://www.stringwebs.com/diagnostico",
     type: "website",
-    images: [
-      {
-        url: "/opengraph-image",
-        width: 1200,
-        height: 630,
-        alt: "STRING — Sistemas Digitales Estratégicos",
-      },
-    ],
   },
 };
 

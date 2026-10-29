@@ -214,7 +214,7 @@ const Hero = () => {
           ref={ctaRef}
           className="px-6 lg:px-24 mt-8 flex flex-col sm:flex-row items-stretch sm:items-center gap-4"
         >
-          <Boton href="/cotizacion" variante="primario" className="w-full sm:w-auto">
+          <Boton href="/diagnostico" variante="primario" className="w-full sm:w-auto">
             Solicitar diagnóstico
           </Boton>
           <Boton
