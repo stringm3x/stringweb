@@ -253,6 +253,98 @@ Carlos Avilés (STRING) usa tu nombre, tu WhatsApp, el giro de tu negocio y lo q
 
 **Última actualización:** \[fecha de publicación\].
 
+## Textos que faltaban (29 oct)
+
+### Títulos y descripciones
+
+| Página | Título | Descripción |
+| --- | --- | --- |
+| Inicio | STRING — Software hecho con oficio. Y con arte. | Taller de software en la Ciudad de México. Sistemas que contestan, ordenan y trabajan por tu negocio, desde un local hasta una empresa grande. |
+| /nosotros | Nosotros · STRING | La historia de STRING: un taller de software que probó su primer sistema en el gimnasio de la familia de su fundador. |
+| /diagnostico | Solicitar diagnóstico · STRING | Cuatro preguntas para saber qué necesita tu negocio. Te respondemos en un día hábil. |
+| /saas | El sistema para gimnasios · STRING | Socios, check-in, cobros y caja para tu gimnasio, probado todos los días en un mostrador de verdad. |
+| Legales | Aviso de privacidad · STRING / Términos · STRING | — |
+
+Imagen para compartir: el logo sobre noche y debajo "Software hecho con oficio. Y con arte."
+
+### /nosotros
+
+**Etiqueta:** NOSOTROS · **Titular:** La historia de STRING. \[Foto de Carlos arriba, la misma de la sala 3.\]
+
+### /diagnostico
+
+**Etiqueta:** DIAGNÓSTICO
+
+**Titular:** Cuéntanos qué necesita tu negocio.
+
+Cuatro preguntas. Te respondemos en un día hábil, y el diagnóstico inicial lo tienes en 24 horas.
+
+&#91;Debajo, el formulario de la sección Formulario de diagnóstico.\]
+
+### Mensajes de error
+
+| Caso | Mensaje |
+| --- | --- |
+| Nombre vacío | Escribe tu nombre. |
+| WhatsApp incompleto | Escribe tu WhatsApp a 10 dígitos. |
+| Giro sin elegir | Elige el giro de tu negocio. |
+| "¿Qué te pasa hoy?" sin elegir | Elige qué te pasa hoy. |
+| "Otra cosa" vacío | Cuéntanos qué te pasa. |
+| No se pudo enviar | No se pudo enviar. Intenta de nuevo o escríbenos por WhatsApp. |
+| No pasó la verificación | No pudimos confirmar el envío. Recarga la página e intenta de nuevo. |
+
+### Página 404
+
+**Etiqueta:** ERROR 404 · **Titular:** Esta sala no existe.
+
+La página que buscas no está en la galería.
+
+**Volver al inicio** \[botón verde\]
+
+### Correo que recibe Carlos
+
+**Asunto:** Diagnóstico · \[Nombre\] · \[Giro\] · Nivel sugerido: \[Nivel\]
+
+**Cuerpo:**
+
+Nueva solicitud de diagnóstico.
+
+Nombre: \[Nombre\]
+WhatsApp: \[número, como enlace para escribirle directo\]
+Giro: \[Giro\]
+Lo que le pasa: \[la opción elegida, o lo que escribió en "Otra cosa"\]
+Nivel sugerido: \[Responde, Organiza, Automatiza, Controla, o "por definir" si eligió Otra cosa\]
+\[Solo si el giro es Gimnasio:\] Es gimnasio: ofrécele el sistema para gimnasios.
+
+Estándar: respóndele en un día hábil.
+
+### /saas
+
+El texto actual de /saas se queda. Solo cambia: "STRING GYM" pasa a "El sistema para gimnasios" en todo el sitio, se quitan RESTO, CLINIC y BARBER (no existen todavía) y el pie del producto lleva la firma "by STRING". Precios de los planes, sin cambio.
+
+### Textos alternativos de las imágenes
+
+| Imagen | Texto alternativo |
+| --- | --- |
+| Ciudad del inicio | Dibujo de la Ciudad de México de noche, trazada en una sola línea, con una luna verde. |
+| Sala 2 | Dibujo de un celular con una lista ordenada que sale tallado de un bloque de mármol. |
+| Sala 3 | Tira de película con tres cuadros: el fundador, el mostrador del gimnasio y el sistema funcionando en una laptop. |
+| Foto de Carlos | Carlos Avilés, fundador de STRING. |
+| Viñetas de los niveles | \[Decorativas: sin texto alternativo; el nombre del nivel ya lo dice.\] |
+| Sala 5 | Tres cuadros con marco dorado en una galería: la ciudad de STRING, el plano del sistema para gimnasios y un lienzo en blanco para tu negocio. |
+| Sala 6 | Dibujo de un edificio en construcción: cimientos, dos pisos terminados, un piso en obra y una bandera en lo alto. |
+| Sala 7 | Cintas de colores que ondulan en el aire. \[Decorativa si el texto de la sala ya se entiende sin ella.\] |
+| Cuerdas | \[Decorativas: sin texto alternativo.\] |
+
+### Legales
+
+Fecha de última actualización: 7 de noviembre de 2026. Domicilio: pendiente de Carlos.
+
+### Decisiones de este día
+
+- Redes sociales: salen del pie; se quedan solo en los datos para buscadores.
+- RESTO, CLINIC y BARBER: salen de /saas.
+
 ## Por confirmar antes del brief
 
 - [x] **Foto de Carlos** en la sala 3: foto real (falta que la mande).
