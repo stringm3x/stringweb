@@ -118,7 +118,10 @@ export default function SaasPage() {
       <section id="planes" className="px-6 lg:px-24 py-espacio-6 lg:py-espacio-7 scroll-mt-20">
         <div className="max-w-contenido mx-auto">
           <div className="mb-8">
-            <Etiqueta variante="linea">Planes</Etiqueta>
+            {/* h2 para que los h3 de los planes sigan el orden de encabezados. */}
+            <h2>
+              <Etiqueta variante="linea">Planes</Etiqueta>
+            </h2>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6 items-start">

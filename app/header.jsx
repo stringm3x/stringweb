@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { FiMenu, FiX } from "react-icons/fi";
@@ -23,6 +23,10 @@ export default function Header() {
   const [isOpen, setIsOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const pathname = usePathname();
+  const abrirRef = useRef(null);
+  const cerrarRef = useRef(null);
+  const panelRef = useRef(null);
+  const estuvoAbierto = useRef(false);
 
   useEffect(() => {
     const handleScroll = () => setScrolled(window.scrollY > 24);
@@ -31,10 +35,34 @@ export default function Header() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
+  // Menú como diálogo modal: al abrir, el foco entra al botón de cerrar y no
+  // sale del panel con Tab; al cerrar, vuelve al botón que lo abrió.
+  useEffect(() => {
+    if (isOpen) {
+      estuvoAbierto.current = true;
+      cerrarRef.current?.focus();
+    } else if (estuvoAbierto.current) {
+      abrirRef.current?.focus();
+    }
+  }, [isOpen]);
+
   useEffect(() => {
     document.body.style.overflow = isOpen ? "hidden" : "";
     if (!isOpen) return;
-    const onKey = (e) => e.key === "Escape" && setIsOpen(false);
+    const onKey = (e) => {
+      if (e.key === "Escape") return setIsOpen(false);
+      if (e.key !== "Tab" || !panelRef.current) return;
+      const enfocables = panelRef.current.querySelectorAll("a[href], button");
+      const primero = enfocables[0];
+      const ultimo = enfocables[enfocables.length - 1];
+      if (e.shiftKey && document.activeElement === primero) {
+        e.preventDefault();
+        ultimo.focus();
+      } else if (!e.shiftKey && document.activeElement === ultimo) {
+        e.preventDefault();
+        primero.focus();
+      }
+    };
     window.addEventListener("keydown", onKey);
     return () => {
       document.body.style.overflow = "";
@@ -91,6 +119,7 @@ export default function Header() {
               Solicitar diagnóstico
             </Boton>
             <button
+              ref={abrirRef}
               type="button"
               onClick={() => setIsOpen(true)}
               aria-label="Abrir menú"
@@ -115,6 +144,7 @@ export default function Header() {
 
       {/* Panel del menú (celular) */}
       <div
+        ref={panelRef}
         id="menu-principal"
         role="dialog"
         aria-modal="true"
@@ -122,13 +152,18 @@ export default function Header() {
         aria-hidden={!isOpen}
         inert={!isOpen}
         data-theme="noche"
-        className={`fixed bottom-0 right-0 top-0 z-50 flex w-full flex-col border-l border-hairline bg-fondo text-texto transition-[transform,opacity,visibility] duration-500 ease-out motion-reduce:transition-none sm:w-[440px] lg:hidden ${
-          isOpen ? "visible translate-x-0 opacity-100" : "invisible translate-x-full opacity-0"
+        className={`fixed bottom-0 right-0 top-0 z-50 flex w-full flex-col border-l border-hairline bg-fondo text-texto duration-500 ease-out motion-reduce:transition-none sm:w-[440px] lg:hidden ${
+          // Al abrir, visible al instante (para poder recibir el foco); al
+          // cerrar, se oculta cuando termina de salir.
+          isOpen
+            ? "visible translate-x-0 opacity-100 transition-[transform,opacity]"
+            : "invisible translate-x-full opacity-0 transition-[transform,opacity,visibility]"
         }`}
       >
         <div className="flex h-[72px] items-center justify-between px-4 sm:px-6">
           <Logo onClick={cerrar} />
           <button
+            ref={cerrarRef}
             type="button"
             onClick={cerrar}
             aria-label="Cerrar menú"
