@@ -354,6 +354,27 @@
   }
 }
 
+/* Transiciones entre páginas (View Transitions nativo): fundido corto en
+   velocidad normal, para que se note que cambiaste de sala. Con menos
+   movimiento, la página cambia de golpe. */
+@view-transition {
+  navigation: auto;
+}
+
+::view-transition-old(*),
+::view-transition-new(*) {
+  animation-duration: var(--dur-normal);
+  animation-timing-function: var(--curva);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  ::view-transition-group(*),
+  ::view-transition-old(*),
+  ::view-transition-new(*) {
+    animation: none !important;
+  }
+}
+
 /* Movimiento reducido: lleva al mínimo transiciones y animaciones CSS.
    .animate-spin queda exento porque es feedback de carga, no decorativo. */
 @media (prefers-reduced-motion: reduce) {

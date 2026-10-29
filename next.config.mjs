@@ -13,6 +13,11 @@ const nextConfig = {
   },
   compress: true,
   reactStrictMode: true,
+  // Transiciones entre páginas con la API nativa View Transitions, sin
+  // librerías (docs/calidad.md § 3). El fundido vive en globals.css.
+  experimental: {
+    viewTransition: true,
+  },
   compiler: {
     removeConsole: process.env.NODE_ENV === "production",
   },
