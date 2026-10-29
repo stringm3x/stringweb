@@ -33,8 +33,7 @@ Rama `lote-4-contacto` (desde `lote-3-salas-5-7`), 29 oct 2026. Sin fusionar. `n
   `NOTIFICATION_EMAIL` ya no se usa.
 
 **Decisiones a revisar:**
-- Giro y situación en píldoras, no en select. Si el envío falla, Turnstile se recarga (token de un uso).
-- Alt de OG también cambiado en /saas, no solo en /gym.
+- Píldoras, no select; Turnstile se recarga si el envío falla; alt de OG cambiado también en /saas.
 
 **Pendientes:**
 - /saas sigue con el diseño anterior (Anton, TitularBrochada) y su entrada dice "STRING SaaS";
