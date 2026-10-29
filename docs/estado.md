@@ -1,6 +1,6 @@
 # Estado · stringwebs.com
 
-Última actualización: 29 oct 2026 (lote 2). Meta del KB: sitio rehecho del 1 al 7 nov; salir a
+Última actualización: 29 oct 2026 (lote 3). Meta del KB: sitio rehecho del 1 al 7 nov; salir a
 vender el 8 nov.
 
 ## Lotes
@@ -10,7 +10,7 @@ vender el 8 nov.
 | 0 | Lectura y plan, docs en el repo, CLAUDE.md | `lote-0-lectura` | ✅ Hecho, sin fusionar |
 | 1 | Base: tokens, fuentes, logo SVG, contacto, metadata, barra, pie, legales, redirects, sitemap | `lote-1-base` | ✅ Hecho, sin fusionar |
 | 2 | Salas 1–4: inicio, problema, caso real, niveles | `lote-2-salas-1-4` | ✅ Hecho, sin fusionar |
-| 3 | Salas 5–7 + /nosotros + preguntas + cierre | — | ⏳ |
+| 3 | Salas 5–7 + /nosotros + preguntas + cierre | `lote-3-salas-5-7` | ✅ Hecho, sin fusionar |
 | 4 | Formulario /diagnostico y /saas | — | ⏳ |
 | 5 | Calidad: Lighthouse, LCP, CLS, contraste, teclado | — | ⏳ |
 
@@ -47,9 +47,15 @@ Producción sigue con la marca anterior. Nada se fusiona a `main` sin el visto b
 - Lote 4: `FormSuccess.jsx`, `gym/gracias` y `api/quote/email-template.js` a `app/lib/contacto.js`
   (todavía dicen `hola@stringwebs.com`); el título de `/saas` sale con "STRING" dos veces.
 - 404 con el copy de textos y retirar `Grano` y `font-anton` cuando se rehagan las salas.
-- Lote 3: en la portada siguen `PlanesContinuidad`, `Us` (quién soy, se retira) y el `Cierre` viejo.
-- Lote 5: peso de `sala2-escultura.svg` (141 KB) y `sala3-cine.svg` (389 KB); LCP del titular
-  tecleado; las letras dentro de la tira de cine caen en monospace del sistema.
+- Lote 5: peso de los SVG de arte (sala 2 141 KB, 3 389 KB, 5 87 KB, 6 128 KB, 7 269 KB); LCP
+  del titular tecleado; los letreros dentro de los SVG caen en fuente del sistema.
+- Galería en celular: mide 343 px y sus cartelas no se leen (opción: scroll lateral como el cine).
+
+## Decisiones tomadas en el lote 3
+
+- "Días hábiles: lunes a viernes, de 9 a 19 h." visible bajo el estándar (Carlos, 29 oct).
+- Cartelas y pasos dibujados en los SVG, no repetidos en HTML; danza decorativa.
+- Escultura recortada a `viewBox="0 150 560 470"`.
 
 ## Decisiones tomadas en el lote 2
 
