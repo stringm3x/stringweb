@@ -1,7 +1,6 @@
 import localFont from "next/font/local";
 import { Analytics } from "@vercel/analytics/react";
 import { SpeedInsights } from "@vercel/speed-insights/next";
-import { Grano } from "./components/Grano";
 import { CORREO, WHATSAPP_TELEFONO } from "./lib/contacto";
 import "./globals.css";
 
@@ -121,7 +120,6 @@ export default function RootLayout({ children }) {
         className="font-sans bg-fondo text-texto antialiased"
       >
         {children}
-        <Grano />
         <Analytics />
         <SpeedInsights />
       </body>
