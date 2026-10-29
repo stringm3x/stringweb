@@ -15,7 +15,7 @@ export function Cierre() {
         <p className={CUERPO}>Te respondemos en un día hábil.</p>
         <p className={`flex flex-wrap items-center justify-center gap-space-3 ${CUERPO}`}>
           ¿Prefieres escribir?{" "}
-          <Boton href={whatsappUrl()} variante="secundario" compacto className="text-pequeno">
+          <Boton href={whatsappUrl()} variante="secundario">
             Escríbenos por WhatsApp
           </Boton>
         </p>

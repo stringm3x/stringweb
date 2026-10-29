@@ -45,13 +45,12 @@ export function Sala6Trabajo() {
           <div className="flex flex-col gap-space-4">
             <p className={ETIQUETA}>CÓMO TRABAJAMOS</p>
             <h2 className={TITULAR}>Primero los cimientos.</h2>
+            {/* El número de cada paso vive en el dibujo (1 · Diagnóstico…); aquí
+                no se repite. El <ol> guarda el orden para el lector. */}
             <ol className="flex flex-col gap-space-3">
-              {PASOS.map((paso, i) => (
-                <li key={paso.nombre} className={`flex gap-space-3 ${CUERPO}`}>
-                  <span className="w-6 flex-shrink-0 font-mono text-cifra text-texto">{i + 1}.</span>
-                  <p>
-                    <strong className="font-semibold text-texto">{paso.nombre}</strong> {paso.texto}
-                  </p>
+              {PASOS.map((paso) => (
+                <li key={paso.nombre} className={CUERPO}>
+                  <strong className="font-semibold text-texto">{paso.nombre}</strong> {paso.texto}
                 </li>
               ))}
             </ol>

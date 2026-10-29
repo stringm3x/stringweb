@@ -5,14 +5,12 @@ import Link from "next/link";
 // currentColor y el bloque, el acento del tema; el parpadeo vive en
 // globals.css (.logo-string). Se dimensiona con font-size: mide lo mismo
 // que Anton escrita a ese tamaño (mínimo 24 px).
-export function LogoSvg({ className = "" }) {
+// Dentro de un enlace con nombre propio va `decorativo`, para que el lector
+// no diga "STRING" dos veces.
+export function LogoSvg({ className = "", decorativo = false }) {
+  const accesible = decorativo ? { "aria-hidden": true } : { role: "img", "aria-label": "STRING" };
   return (
-    <svg
-      className={`logo-string ${className}`.trim()}
-      viewBox="-20 -1990 5744 2270"
-      role="img"
-      aria-label="STRING"
-    >
+    <svg className={`logo-string ${className}`.trim()} viewBox="-20 -1990 5744 2270" {...accesible}>
       <g fill="currentColor">
         <path transform="translate(0 0)" d="M496 16Q255 16 148.5 -104.0Q42 -224 42 -486V-658H390V-438Q390 -377 408.5 -342.5Q427 -308 473 -308Q521 -308 539.5 -336.0Q558 -364 558 -428Q558 -509 542.0 -563.5Q526 -618 486.5 -667.5Q447 -717 377 -783L219 -933Q42 -1100 42 -1315Q42 -1540 146.5 -1658.0Q251 -1776 449 -1776Q691 -1776 792.5 -1647.0Q894 -1518 894 -1255H536V-1376Q536 -1412 515.5 -1432.0Q495 -1452 460 -1452Q418 -1452 398.5 -1428.5Q379 -1405 379 -1368Q379 -1331 399.0 -1288.0Q419 -1245 478 -1189L681 -994Q742 -936 793.0 -871.5Q844 -807 875.0 -721.5Q906 -636 906 -513Q906 -265 814.5 -124.5Q723 16 496 16Z" />
         <path transform="translate(945 0)" d="M229 0V-1422H20V-1760H790V-1422H581V0Z" />
@@ -39,7 +37,7 @@ export function Logo({ className = "text-[28px]", onClick }) {
       aria-label="STRING, inicio"
       className={`inline-flex items-center leading-none text-texto ${className}`.trim()}
     >
-      <LogoSvg />
+      <LogoSvg decorativo />
     </Link>
   );
 }

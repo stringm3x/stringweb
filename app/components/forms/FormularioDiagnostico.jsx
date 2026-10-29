@@ -18,6 +18,13 @@ import { ENLACE } from "@/app/components/salas/estilos";
 // privacidad corto debajo del botón. Sin animaciones: nada se mueve.
 const ERROR_ENVIO = "No se pudo enviar. Intenta de nuevo o escríbenos por WhatsApp.";
 
+// El botón dice "Enviado" durante --dur-lento antes de la confirmación: así
+// se ve que el envío llegó. Con menos movimiento, la confirmación sale ya.
+function esperaDeExito() {
+  if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return 0;
+  return parseFloat(getComputedStyle(document.documentElement).getPropertyValue("--dur-lento")) || 0;
+}
+
 // Confirmación (docs/textos.md): el foco pasa al mensaje para que se anuncie.
 function Confirmacion() {
   const ref = useRef(null);
@@ -37,6 +44,7 @@ function Confirmacion() {
 export function FormularioDiagnostico() {
   const [errorEnvio, setErrorEnvio] = useState(null);
   const [enviado, setEnviado] = useState(false);
+  const [exito, setExito] = useState(false);
   const [token, setToken] = useState(null);
   // Cada token de Turnstile sirve una sola vez: si el envío falla, el widget
   // se vuelve a montar para dar otro.
@@ -65,7 +73,8 @@ export function FormularioDiagnostico() {
       });
       const resultado = await respuesta.json().catch(() => ({}));
       if (!respuesta.ok) throw new Error(resultado.message || ERROR_ENVIO);
-      setEnviado(true);
+      setExito(true);
+      setTimeout(() => setEnviado(true), esperaDeExito());
     } catch (error) {
       setErrorEnvio(error.message || ERROR_ENVIO);
       setToken(null);
@@ -126,7 +135,13 @@ export function FormularioDiagnostico() {
 
       <div className="flex flex-col gap-space-3">
         <TurnstileWidget key={intento} onVerify={setToken} onExpire={() => setToken(null)} />
-        <Boton type="submit" variante="primario" disabled={isSubmitting || !token} className="w-full sm:w-auto sm:self-start">
+        <Boton
+          type="submit"
+          variante="primario"
+          estado={exito ? "exito" : isSubmitting ? "cargando" : errorEnvio ? "error" : "reposo"}
+          disabled={!token && !isSubmitting && !exito}
+          className="w-full sm:w-auto sm:self-start"
+        >
           Enviar
         </Boton>
         <div role="alert">
