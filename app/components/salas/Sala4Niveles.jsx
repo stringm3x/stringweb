@@ -10,7 +10,7 @@ const CALIBRES = [1.2, 1.5, 1.8, 2.1, 2.4];
 
 export function Sala4Niveles() {
   return (
-    <section id="niveles" data-theme="noche" className={`${SALA} scroll-mt-20`}>
+    <section id="niveles" data-theme="noche" className={`${SALA} scroll-mt-24`}>
       <SonidoProvider>
         <div className="mx-auto flex max-w-contenido flex-col gap-space-5">
           <div className="flex max-w-[760px] flex-col gap-space-4">

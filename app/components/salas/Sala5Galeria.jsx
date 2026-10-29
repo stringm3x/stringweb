@@ -5,7 +5,7 @@ import { CUERPO, ETIQUETA, SALA, TITULAR } from "./estilos";
 // dibujadas en sala5-galeria.svg. La galería no se mueve: es la pausa.
 export function Sala5Galeria() {
   return (
-    <section id="galeria" data-theme="pared" className={`${SALA} scroll-mt-20`}>
+    <section id="galeria" data-theme="pared" className={`${SALA} scroll-mt-24`}>
       <div className="mx-auto flex max-w-contenido flex-col gap-space-5">
         <div className="flex max-w-[760px] flex-col gap-space-4">
           <p className={ETIQUETA}>LA GALERÍA</p>
