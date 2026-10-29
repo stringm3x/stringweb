@@ -1,6 +1,6 @@
 # Estado · stringwebs.com
 
-Última actualización: 29 oct 2026 (lote 1). Meta del KB: sitio rehecho del 1 al 7 nov; salir a
+Última actualización: 29 oct 2026 (lote 2). Meta del KB: sitio rehecho del 1 al 7 nov; salir a
 vender el 8 nov.
 
 ## Lotes
@@ -9,7 +9,7 @@ vender el 8 nov.
 |---|---|---|---|
 | 0 | Lectura y plan, docs en el repo, CLAUDE.md | `lote-0-lectura` | ✅ Hecho, sin fusionar |
 | 1 | Base: tokens, fuentes, logo SVG, contacto, metadata, barra, pie, legales, redirects, sitemap | `lote-1-base` | ✅ Hecho, sin fusionar |
-| 2 | Salas 1–4: inicio, problema, caso real, niveles | — | ⏳ |
+| 2 | Salas 1–4: inicio, problema, caso real, niveles | `lote-2-salas-1-4` | ✅ Hecho, sin fusionar |
 | 3 | Salas 5–7 + /nosotros + preguntas + cierre | — | ⏳ |
 | 4 | Formulario /diagnostico y /saas | — | ⏳ |
 | 5 | Calidad: Lighthouse, LCP, CLS, contraste, teclado | — | ⏳ |
@@ -23,7 +23,7 @@ Producción sigue con la marca anterior. Nada se fusiona a `main` sin el visto b
 | Logo leído "SSTRING" | ✅ `Logo.jsx` con el SVG del sistema | 1 |
 | Meta description con "e-commerce" | ✅ metadata de textos.md; `/proyectos` retirada | 1 |
 | Legales en inglés | ✅ `/aviso-de-privacidad` y `/terminos`; 301 desde las rutas en inglés | 1 |
-| Titular repetido | `app/components/home/Hero.jsx:103`: h1 sr-only + el mismo titular en SVG | 2 |
+| Titular repetido | ✅ un solo `<h1>` tecleado en `salas/TitularTecleado.jsx` | 2 |
 | /saas dice "STRING GYM" | `saas/page.jsx`, `saas-data.js`, `Caso.jsx`, `DosCaminos.jsx`, `Hero.jsx`, `app/gym/*` | 4 |
 
 ## Deuda técnica (no se corrige en el rehecho)
@@ -44,10 +44,18 @@ Producción sigue con la marca anterior. Nada se fusiona a `main` sin el visto b
 
 ## Pendientes para lotes siguientes (del lote 1)
 
-- Lote 2: quitar las cifras de socios de `app/lib/stats.js` y de la sala 3.
 - Lote 4: `FormSuccess.jsx`, `gym/gracias` y `api/quote/email-template.js` a `app/lib/contacto.js`
   (todavía dicen `hola@stringwebs.com`); el título de `/saas` sale con "STRING" dos veces.
 - 404 con el copy de textos y retirar `Grano` y `font-anton` cuando se rehagan las salas.
+- Lote 3: en la portada siguen `PlanesContinuidad`, `Us` (quién soy, se retira) y el `Cierre` viejo.
+- Lote 5: peso de `sala2-escultura.svg` (141 KB) y `sala3-cine.svg` (389 KB); LCP del titular
+  tecleado; las letras dentro de la tira de cine caen en monospace del sistema.
+
+## Decisiones tomadas en el lote 2
+
+- Cifras de socios fuera de `stats.js`, de la portada y de `/saas` (Carlos, 29 oct).
+- Viñeta de Responde reemplazada por la que mandó Carlos (solo el libro, en verde).
+- Cuerdas: La, Re, Sol, Si para Responde a Controla; Empresa toca las cuatro juntas.
 
 ## Decisiones tomadas en el lote 1
 
