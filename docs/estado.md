@@ -1,6 +1,6 @@
 # Estado · stringwebs.com
 
-Última actualización: 29 oct 2026 (lote 4). Meta del KB: sitio rehecho del 1 al 7 nov; salir a
+Última actualización: 29 oct 2026 (lote 5). Meta del KB: sitio rehecho del 1 al 7 nov; salir a
 vender el 8 nov.
 
 ## Lotes
@@ -12,7 +12,7 @@ vender el 8 nov.
 | 2 | Salas 1–4: inicio, problema, caso real, niveles | `lote-2-salas-1-4` | ✅ Hecho, sin fusionar |
 | 3 | Salas 5–7 + /nosotros + preguntas + cierre | `lote-3-salas-5-7` | ✅ Hecho, sin fusionar |
 | 4 | Formulario /diagnostico, /saas, contacto, galería en celular, cierre de /nosotros | `lote-4-contacto` | ✅ Hecho, sin fusionar; falta el correo de prueba desde la vista previa |
-| 5 | Calidad: Lighthouse, LCP, CLS, contraste, teclado | — | ⏳ |
+| 5 | Calidad: Lighthouse, LCP, CLS, contraste, teclado | `lote-5-calidad` | ✅ Hecho, sin fusionar; LCP por confirmar en producción |
 
 Producción sigue con la marca anterior. Nada se fusiona a `main` sin el visto bueno de Carlos.
 
@@ -28,9 +28,8 @@ Producción sigue con la marca anterior. Nada se fusiona a `main` sin el visto b
 
 ## Deuda técnica (no se corrige en el rehecho)
 
-- Nombres de color y tipos de la marca anterior en `tailwind.config.js` (marcados "legado") hasta
-  que se rehagan las salas; luego se borran.
-
+- Nombres de color y tipos de la marca anterior en `tailwind.config.js` (marcados "legado") y la
+  animación `tic`, hasta que se rehagan /saas y /gym; luego se borran.
 - `/gym/empezar` redirige con `permanent: true` (308), no 301.
 - `npm run lint` roto: el parser de `eslint-config-next` exige `typescript`.
 
@@ -43,12 +42,20 @@ Producción sigue con la marca anterior. Nada se fusiona a `main` sin el visto b
   Turnstile, mandar una solicitud de prueba y confirmar que llegó. `NOTIFICATION_EMAIL` ya no se usa.
 - Del KB, abiertos: precio del boceto, si el sonido se queda, recontar cifras de Evolution GYM.
 
-## Pendientes para lotes siguientes (del lote 1)
+## Pendientes para después del lanzamiento
 
-- 404 con el copy de textos y retirar `Grano` y `font-anton` cuando se rehagan las salas.
-- Lote 5: peso de los SVG de arte (sala 2 141 KB, 3 389 KB, 5 87 KB, 6 128 KB, 7 269 KB); LCP
-  del titular tecleado; los letreros dentro de los SVG caen en fuente del sistema.
-- /saas sigue con el diseño anterior (Anton, `TitularBrochada`); `ui/Sello.jsx` sin uso.
+- PageSpeed Insights en producción: confirmar LCP < 2.5 s y rendimiento ≥ 90 en `/` (en la vista previa el
+  Chrome de Lighthouse alterna entre 1.6–2.1 s y 2.6–3.6 s con el mismo código; ver reporte del lote 5).
+- /saas y /gym con el diseño anterior (Anton, `TitularBrochada`, GSAP).
+- Dos `<meta name="viewport">` en el `<head>`.
+
+## Decisiones tomadas en el lote 5
+
+- Fuentes locales en `app/fonts` (paquete `geist` 1.8.2, OFL), variables y recortadas a latin: el build ya no
+  depende de fonts.googleapis.com.
+- Fuera `PageTransition`, cursor propio, Lenis, SplitType, `Grano`, `Mancha` y `Sello`.
+- "by STRING" en negro sobre el verde (diseno.md); cartela del gimnasio a 196 de ancho.
+- Prueba de calidad en `e2e/calidad.spec.js` (axe, menos movimiento, 404, menú con teclado).
 
 ## Decisiones tomadas en el lote 4
 
