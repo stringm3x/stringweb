@@ -5,7 +5,6 @@ import {
   MdOutlineLocalHospital,
   MdOutlineContentCut,
 } from "react-icons/md";
-import { SOCIOS_CARGADOS, SOCIOS_ACTIVOS } from "@/app/lib/stats";
 
 // ── Productos ─────────────────────────────────────────────────────────────────
 export const productos = [
@@ -155,16 +154,11 @@ export const diferenciadores = [
 ];
 
 // ── Caso real ─────────────────────────────────────────────────────────────────
-// Cifras tomadas de app/lib/stats.js — no se duplican los números aquí.
-// 59 (inactivos) y 23 (productos) son solo para demostración, no van al sitio.
+// Sin cifras de socios hasta recontar (CLAUDE.md § Cifras públicas).
 export const casoEvolutionGym = {
   nombre: "Evolution GYM",
   ubicacion: "CDMX",
   badge: "Sistema activo · CDMX · Junio 2026",
-  stats: [
-    { value: SOCIOS_CARGADOS, label: "Socios cargados" },
-    { value: SOCIOS_ACTIVOS, label: "Socios activos hoy" },
-  ],
   activoHoy: [
     "Panel de socios",
     "Check-in por kiosco, manual, QR e historial",
