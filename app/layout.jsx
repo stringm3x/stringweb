@@ -63,14 +63,6 @@ export const metadata = {
     "Next.js México",
   ],
   authors: [{ name: "STRING", url: "https://www.stringwebs.com/" }],
-  icons: {
-    icon: [
-      { url: "/favicon-16x16.png", sizes: "16x16", type: "image/png" },
-      { url: "/favicon-32x32.png", sizes: "32x32", type: "image/png" },
-    ],
-    shortcut: "/favicon-32x32.png",
-    apple: "/apple-icon.png",
-  },
   openGraph: {
     title: "STRING — Sistemas Digitales Estratégicos",
     description:
@@ -119,9 +111,8 @@ export default function RootLayout({ children }) {
   return (
     <html lang="es-MX" className={`dark ${geistSans.variable} ${geistMono.variable}`}>
       <head>
-        <link rel="apple-touch-icon" href="/apple-icon.png" />
         <link rel="manifest" href="/manifest.json" />
-        <meta name="theme-color" content="#50ff05" />
+        <meta name="theme-color" content="#000000" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <meta httpEquiv="Content-Type" content="text/html; charset=utf-8" />
         <meta name="geo.region" content="MX" />

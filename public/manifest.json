@@ -1,21 +1,15 @@
 {
-  "name": "STRING — Sistemas Digitales Estratégicos",
+  "name": "STRING",
   "short_name": "STRING",
-  "description": "Agencia de sistemas digitales en México. Sistemas de conversión a medida y STRING SaaS.",
   "start_url": "/",
   "display": "standalone",
-  "background_color": "#0d0d0d",
-  "theme_color": "#50ff05",
+  "background_color": "#000000",
+  "theme_color": "#000000",
   "icons": [
     {
-      "src": "/favicon-16x16.png",
-      "sizes": "16x16",
-      "type": "image/png"
-    },
-    {
-      "src": "/favicon-32x32.png",
-      "sizes": "32x32",
-      "type": "image/png"
+      "src": "/icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml"
     },
     {
       "src": "/apple-icon.png",

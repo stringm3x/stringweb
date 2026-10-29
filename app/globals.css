@@ -78,6 +78,41 @@
   }
 }
 
+/* Logo (docs/sistema/components/Logo): la I es un cursor de terminal que
+   parpadea cada 1.1 s, de golpe. Apagado, el bloque desaparece y queda la I
+   de Anton en el color de las letras; con menos movimiento queda encendido. */
+@layer components {
+  .logo-string {
+    display: inline-block;
+    height: 1.108em;
+    width: auto;
+    vertical-align: -0.137em;
+    overflow: visible;
+  }
+
+  .logo-string .bloque {
+    fill: rgb(var(--acento));
+    animation: logo-bloque 1.1s steps(1) infinite;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .logo-string .bloque {
+      animation: none;
+    }
+  }
+}
+
+@keyframes logo-bloque {
+  0%,
+  49% {
+    opacity: 1;
+  }
+  50%,
+  100% {
+    opacity: 0;
+  }
+}
+
 /* Cursor personalizado: activo solo cuando CustomCursor.jsx logra montarse
    (descarta touch y prefers-reduced-motion antes de agregar esta clase). */
 html.custom-cursor-active,
