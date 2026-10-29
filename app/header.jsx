@@ -17,7 +17,7 @@ const menuItems = [
 ];
 
 const BOTON_ICONO =
-  "flex h-11 w-11 items-center justify-center rounded-pill border border-hairline text-texto transition-colors duration-200 hover:border-texto";
+  "flex h-11 w-11 items-center justify-center rounded-pill border border-hairline text-texto hover:border-texto";
 
 export default function Header() {
   const [isOpen, setIsOpen] = useState(false);
@@ -74,10 +74,9 @@ export default function Header() {
   // Los enlaces a salas de la portada (/#…) no se marcan como página actual.
   const esActiva = (href) => !href.includes("#") && pathname.startsWith(href);
 
-  // El panel (solo celular) entra desde la derecha y sus filas llegan en
-  // cascada, con transiciones CSS; con menos movimiento aparece de golpe.
-  const filaEntra = (index) => ({ transitionDelay: isOpen ? `${250 + index * 60}ms` : "0ms" });
-  const FILA = `transition-[opacity,transform] duration-300 ease-out motion-reduce:transition-none ${
+  // El panel (solo celular) entra desde la derecha y sus filas con él, con
+  // transiciones CSS; con menos movimiento aparece de golpe.
+  const FILA = `transition-[opacity,transform] duration-normal motion-reduce:transition-none ${
     isOpen ? "translate-x-0 opacity-100" : "translate-x-8 opacity-0"
   }`;
 
@@ -85,7 +84,7 @@ export default function Header() {
     <>
       <header
         data-theme="noche"
-        className={`fixed left-0 right-0 top-0 z-50 text-texto transition-colors duration-300 ${
+        className={`fixed left-0 right-0 top-0 z-50 text-texto ${
           scrolled ? "border-b border-hairline bg-fondo/95" : "bg-transparent"
         }`}
       >
@@ -102,7 +101,7 @@ export default function Header() {
                     <Link
                       href={item.href}
                       aria-current={activa ? "page" : undefined}
-                      className={`block py-2 text-pequeno transition-colors duration-200 ${
+                      className={`block py-2 text-pequeno ${
                         activa ? "text-texto" : "text-texto-suave hover:text-texto"
                       }`}
                     >
@@ -137,7 +136,7 @@ export default function Header() {
       <div
         onClick={cerrar}
         aria-hidden="true"
-        className={`fixed inset-0 z-40 bg-fondo/90 transition-[opacity,visibility] duration-300 motion-reduce:transition-none lg:hidden ${
+        className={`fixed inset-0 z-40 bg-fondo/90 transition-[opacity,visibility] duration-normal motion-reduce:transition-none lg:hidden ${
           isOpen ? "visible opacity-100" : "invisible opacity-0"
         }`}
       />
@@ -152,7 +151,7 @@ export default function Header() {
         aria-hidden={!isOpen}
         inert={!isOpen}
         data-theme="noche"
-        className={`fixed bottom-0 right-0 top-0 z-50 flex w-full flex-col border-l border-hairline bg-fondo text-texto duration-500 ease-out motion-reduce:transition-none sm:w-[440px] lg:hidden ${
+        className={`fixed bottom-0 right-0 top-0 z-50 flex w-full flex-col border-l border-hairline bg-fondo text-texto duration-normal motion-reduce:transition-none sm:w-[440px] lg:hidden ${
           // Al abrir, visible al instante (para poder recibir el foco); al
           // cerrar, se oculta cuando termina de salir.
           isOpen
@@ -180,7 +179,6 @@ export default function Header() {
               return (
                 <li
                   key={item.href}
-                  style={filaEntra(index)}
                   className={`border-b border-hairline ${FILA}`}
                 >
                   <Link
@@ -196,7 +194,7 @@ export default function Header() {
                       {String(index + 1).padStart(2, "0")}
                     </span>
                     <span
-                      className={`flex-1 text-subtitulo transition-colors duration-200 ${
+                      className={`flex-1 text-subtitulo ${
                         activa ? "text-acento" : "text-texto hover:text-acento"
                       }`}
                     >
@@ -210,7 +208,6 @@ export default function Header() {
         </nav>
 
         <div
-          style={filaEntra(menuItems.length)}
           className={`border-t border-hairline p-4 sm:p-6 ${FILA}`}
         >
           <Boton href="/diagnostico" variante="primario" onClick={cerrar} className="w-full">

@@ -38,6 +38,11 @@ module.exports = {
       acento: "rgb(var(--acento) / <alpha-value>)",
       "sobre-acento": "rgb(var(--sobre-acento) / <alpha-value>)",
       foco: "rgb(var(--foco) / <alpha-value>)",
+      "acento-presionado": "rgb(var(--acento-presionado) / <alpha-value>)",
+      alerta: "rgb(var(--alerta) / <alpha-value>)",
+      borde: "rgb(var(--borde) / <alpha-value>)",
+      "borde-hover": "rgb(var(--borde-hover) / <alpha-value>)",
+      placeholder: "rgb(var(--placeholder) / <alpha-value>)",
       "boaz-azul": "rgb(var(--boaz-azul) / <alpha-value>)",
       // Legado de la marca anterior: lo usan las salas que se rehacen en
       // los lotes 2 a 4. No usar en piezas nuevas.
@@ -174,10 +179,23 @@ module.exports = {
         },
       },
       animation: {
-        cinta: "cinta 30s linear infinite",
-        girar: "girar 24s linear infinite",
-        imprimir: "imprimir 0.35s ease-out forwards",
-        tic: "tic 0.5s ease-out 0.4s 1 both",
+        cinta: "cinta var(--legado-dur-cinta) linear infinite",
+        girar: "girar var(--legado-dur-girar) linear infinite",
+        imprimir: "imprimir var(--legado-dur-imprimir) var(--curva) forwards",
+        tic: "tic var(--legado-dur-tic) var(--curva) var(--legado-espera-tic) 1 both",
+      },
+      // Movimiento de docs/calidad.md: las clases duration-rapido/normal/lento
+      // y una sola curva. Las duraciones numéricas de Tailwind quedan solo
+      // para el legado de /gym; el sitio no las usa (tests/tokens.test.js).
+      transitionDuration: {
+        DEFAULT: "var(--dur-rapido)",
+        rapido: "var(--dur-rapido)",
+        normal: "var(--dur-normal)",
+        lento: "var(--dur-lento)",
+      },
+      transitionTimingFunction: {
+        DEFAULT: "var(--curva)",
+        curva: "var(--curva)",
       },
     },
   },

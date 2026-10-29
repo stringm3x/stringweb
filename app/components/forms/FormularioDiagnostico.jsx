@@ -18,7 +18,7 @@ import { ENLACE } from "@/app/components/salas/estilos";
 const ERROR_ENVIO = "No se pudo enviar. Intenta de nuevo o escríbenos por WhatsApp.";
 
 const CAMPO =
-  "w-full rounded-lg border bg-fondo px-4 py-3 text-cuerpo text-texto placeholder:text-texto-suave/70 transition-colors duration-200 hover:border-texto";
+  "w-full rounded-lg border bg-fondo px-4 py-3 text-cuerpo text-texto placeholder:text-texto-suave/70 hover:border-texto";
 
 function borde(error) {
   return error ? "border-texto" : "border-texto-suave";
@@ -48,7 +48,7 @@ function Opciones({ nombre, legenda, opciones, register, error }) {
         {opciones.map((opcion) => (
           <label
             key={opcion}
-            className={`flex min-h-[44px] cursor-pointer items-center rounded-pill border px-[18px] py-2 text-cuerpo text-texto transition-colors duration-200 hover:border-texto has-[:checked]:border-acento has-[:checked]:bg-acento has-[:checked]:text-sobre-acento has-[:focus-visible]:outline has-[:focus-visible]:outline-2 has-[:focus-visible]:outline-offset-[3px] has-[:focus-visible]:outline-[rgb(var(--foco))] ${borde(error)}`}
+            className={`flex min-h-[44px] cursor-pointer items-center rounded-pill border px-[18px] py-2 text-cuerpo text-texto hover:border-texto has-[:checked]:border-acento has-[:checked]:bg-acento has-[:checked]:text-sobre-acento has-[:focus-visible]:outline has-[:focus-visible]:outline-2 has-[:focus-visible]:outline-offset-[3px] has-[:focus-visible]:outline-[rgb(var(--foco))] ${borde(error)}`}
           >
             <input type="radio" value={opcion} {...register(nombre)} className="sr-only" />
             {opcion}

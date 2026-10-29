@@ -76,7 +76,7 @@ export function BotonSonido() {
       type="button"
       onClick={alternar}
       aria-pressed={encendido}
-      className="inline-flex min-h-[44px] items-center gap-space-2 rounded-pill border border-hairline px-[18px] font-mono text-etiqueta uppercase text-texto transition-colors duration-200 hover:border-texto"
+      className="inline-flex min-h-[44px] items-center gap-space-2 rounded-pill border border-hairline px-[18px] font-mono text-etiqueta uppercase text-texto hover:border-texto"
     >
       <span
         aria-hidden="true"

@@ -3,7 +3,7 @@ import Link from "next/link";
 // Botón de docs/sistema/components/Boton: píldora, Geist 17 px, mínimo
 // 44 px de alto. El foco (2 px, 3 px de separación) viene de globals.css.
 const BASE =
-  "inline-flex items-center justify-center gap-2 rounded-pill border font-sans text-cuerpo transition-colors duration-200";
+  "inline-flex items-center justify-center gap-2 rounded-pill border font-sans text-cuerpo";
 
 function clasesVariante(variante, sobrePapel) {
   if (variante === "desactivado") {
@@ -50,7 +50,7 @@ export function Boton({
   const altura = compacto ? "min-h-[44px] !px-[18px]" : "min-h-[44px]";
   // Barrido al pulsar: una brochada clara cruza el botón de izquierda a derecha.
   const clasesBarrido = barrido
-    ? "relative overflow-hidden after:absolute after:inset-0 after:origin-left after:scale-x-0 after:bg-texto/25 after:transition-transform after:duration-300 after:content-[''] active:after:scale-x-100 [&>*]:relative [&>*]:z-10"
+    ? "relative overflow-hidden after:absolute after:inset-0 after:origin-left after:scale-x-0 after:bg-texto/25 after:transition-transform after:duration-normal after:content-[''] active:after:scale-x-100 [&>*]:relative [&>*]:z-10"
     : "";
   const clases = `${BASE} ${altura} ${clasesVariante(varianteEfectiva, sobrePapel)} ${clasesBarrido} ${className}`
     .replace(/\s+/g, " ")
