@@ -1,4 +1,4 @@
-import { Geist, Geist_Mono } from "next/font/google";
+import localFont from "next/font/local";
 import { Analytics } from "@vercel/analytics/react";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 import { Grano } from "./components/Grano";
@@ -35,16 +35,24 @@ const organizationJsonLd = {
 
 // Geist para titulares y texto; Geist Mono para cifras, precios y
 // etiquetas. Anton no se carga: el logo la trae a trazo en su SVG.
-const geistSans = Geist({
+// Las fuentes viven en app/fonts (paquete oficial `geist` 1.8.2, OFL,
+// recortadas al rango latin de Google Fonts) para que el build no dependa
+// de la red.
+const geistSans = localFont({
   variable: "--font-sans",
-  weight: ["400", "500", "600"],
-  subsets: ["latin"],
+  src: [
+    { path: "./fonts/Geist-Regular-latin.woff2", weight: "400", style: "normal" },
+    { path: "./fonts/Geist-Medium-latin.woff2", weight: "500", style: "normal" },
+    { path: "./fonts/Geist-SemiBold-latin.woff2", weight: "600", style: "normal" },
+  ],
 });
 
-const geistMono = Geist_Mono({
+const geistMono = localFont({
   variable: "--font-mono",
-  weight: ["400", "500"],
-  subsets: ["latin"],
+  src: [
+    { path: "./fonts/GeistMono-Regular-latin.woff2", weight: "400", style: "normal" },
+    { path: "./fonts/GeistMono-Medium-latin.woff2", weight: "500", style: "normal" },
+  ],
 });
 
 export const metadata = {
