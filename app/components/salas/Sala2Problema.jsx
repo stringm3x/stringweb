@@ -36,7 +36,7 @@ export function Sala2Problema() {
         <img
           src="/arte/sala2-escultura.svg"
           width={560}
-          height={620}
+          height={470}
           loading="lazy"
           decoding="async"
           alt="Dibujo de un celular con una lista ordenada que sale tallado de un bloque de mármol."
