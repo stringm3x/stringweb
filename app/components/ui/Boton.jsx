@@ -1,31 +1,35 @@
 import Link from "next/link";
 
+// Botón de docs/sistema/components/Boton: píldora, Geist 17 px, mínimo
+// 44 px de alto. El foco (2 px, 3 px de separación) viene de globals.css.
 const BASE =
-  "inline-flex items-center justify-center gap-2 font-mono uppercase text-etiqueta transition-colors duration-200";
+  "inline-flex items-center justify-center gap-2 rounded-pill border font-sans text-cuerpo transition-colors duration-200";
 
 function clasesVariante(variante, sobrePapel) {
   if (variante === "desactivado") {
-    return "py-espacio-2 px-[28px] border-2 bg-fondo-elevado text-tinta-tenue border-linea cursor-not-allowed";
+    return "px-[22px] border-hairline bg-transparent text-texto-suave cursor-not-allowed";
   }
 
   if (variante === "secundario") {
-    return "py-espacio-2 px-[28px] border-2 border-tinta text-tinta bg-transparent hover:bg-tinta hover:text-black";
+    return "px-[22px] border-hairline bg-transparent text-texto hover:border-texto";
   }
 
+  // Enlace de texto: va en acento; el "›" lo pone quien lo usa.
   if (variante === "texto") {
-    return "py-espacio-2 px-0 underline decoration-2 underline-offset-[6px] text-acido hover:text-tinta";
+    return "px-0 border-transparent text-acento hover:underline underline-offset-4";
   }
 
+  // Legado: botón negro sobre una franja verde.
   if (variante === "sobreAcido") {
-    return "py-espacio-2 px-[28px] border-2 border-black bg-black text-acido hover:bg-acido hover:text-black";
+    return "px-[22px] border-black bg-black text-acento hover:bg-black/80";
   }
 
-  // primario
+  // primario. Sobre pared el acento es el verde profundo, con texto blanco.
   if (sobrePapel) {
-    return "py-espacio-2 px-[28px] border-2 border-acido-profundo bg-acido-profundo text-white hover:bg-tinta hover:text-acido-profundo";
+    return "px-[22px] border-transparent bg-[rgb(var(--verde-profundo))] text-white hover:opacity-90";
   }
 
-  return "py-espacio-2 px-[28px] border-2 border-acido bg-acido text-black hover:bg-black hover:text-acido";
+  return "px-[22px] border-transparent bg-acento text-sobre-acento hover:opacity-90";
 }
 
 export function Boton({
@@ -42,10 +46,11 @@ export function Boton({
 }) {
   const estaDesactivado = disabled || variante === "desactivado";
   const varianteEfectiva = estaDesactivado ? "desactivado" : variante;
-  const altura = compacto ? "min-h-[40px]" : "min-h-[48px]";
+  // compacto solo recorta el relleno: el alto mínimo siempre es 44 px.
+  const altura = compacto ? "min-h-[44px] !px-[18px]" : "min-h-[44px]";
   // Barrido al pulsar: una brochada clara cruza el botón de izquierda a derecha.
   const clasesBarrido = barrido
-    ? "relative overflow-hidden after:absolute after:inset-0 after:origin-left after:scale-x-0 after:bg-tinta/25 after:transition-transform after:duration-300 after:content-[''] active:after:scale-x-100 [&>*]:relative [&>*]:z-10"
+    ? "relative overflow-hidden after:absolute after:inset-0 after:origin-left after:scale-x-0 after:bg-texto/25 after:transition-transform after:duration-300 after:content-[''] active:after:scale-x-100 [&>*]:relative [&>*]:z-10"
     : "";
   const clases = `${BASE} ${altura} ${clasesVariante(varianteEfectiva, sobrePapel)} ${clasesBarrido} ${className}`
     .replace(/\s+/g, " ")

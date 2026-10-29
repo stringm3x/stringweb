@@ -4,24 +4,21 @@ import { useState, useEffect, useRef } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import gsap from "gsap";
-import { FiMenu, FiX, FiArrowRight } from "react-icons/fi";
-import { FaWhatsapp } from "react-icons/fa";
+import { FiMenu, FiX } from "react-icons/fi";
 import { Boton } from "./components/ui/Boton";
 import { Logo } from "./components/ui/Logo";
 
+// Barra superior de docs/textos.md: logo · Sistemas · Productos · Galería ·
+// Nosotros · Solicitar diagnóstico.
 const menuItems = [
-  { label: "Inicio", href: "/" },
-  { label: "Servicios", href: "/servicios" },
-  { label: "STRING SaaS", href: "/saas" },
-  { label: "Proyectos", href: "/proyectos" },
+  { label: "Sistemas", href: "/#niveles" },
+  { label: "Productos", href: "/saas" },
+  { label: "Galería", href: "/#galeria" },
   { label: "Nosotros", href: "/nosotros" },
 ];
 
-const WHATSAPP_URL =
-  "https://wa.me/525545524847?text=¡Hola!%20Quiero%20más%20info%20sobre%20STRING";
-
 const BOTON_ICONO =
-  "flex h-10 w-10 items-center justify-center rounded-full border border-linea bg-fondo-elevado text-acido transition-colors duration-200 hover:border-acido";
+  "flex h-11 w-11 items-center justify-center rounded-pill border border-hairline text-texto transition-colors duration-200 hover:border-texto";
 
 export default function Header() {
   const [isOpen, setIsOpen] = useState(false);
@@ -84,16 +81,18 @@ export default function Header() {
   }, [isOpen]);
 
   const cerrar = () => setIsOpen(false);
-  const esActiva = (href) => (href === "/" ? pathname === "/" : pathname.startsWith(href));
+  // Los enlaces a salas de la portada (/#…) no se marcan como página actual.
+  const esActiva = (href) => !href.includes("#") && pathname.startsWith(href);
 
   return (
     <>
       <header
-        className={`fixed left-0 right-0 top-0 z-50 transition-colors duration-300 ${
-          scrolled ? "border-b border-linea bg-fondo/95" : "bg-transparent"
+        data-theme="noche"
+        className={`fixed left-0 right-0 top-0 z-50 text-texto transition-colors duration-300 ${
+          scrolled ? "border-b border-hairline bg-fondo/95" : "bg-transparent"
         }`}
       >
-        <div className="mx-auto flex h-[72px] max-w-pagina items-center justify-between px-6 lg:h-[80px] lg:px-24">
+        <div className="mx-auto flex h-[72px] max-w-pagina items-center justify-between px-4 sm:px-6 lg:h-[80px] lg:px-24">
           <Logo />
 
           {/* Nav de escritorio */}
@@ -106,18 +105,11 @@ export default function Header() {
                     <Link
                       href={item.href}
                       aria-current={activa ? "page" : undefined}
-                      className={`group relative block py-2 font-mono uppercase text-etiqueta transition-colors duration-200 ${
-                        activa ? "text-tinta" : "text-tinta-suave hover:text-tinta"
+                      className={`block py-2 text-pequeno transition-colors duration-200 ${
+                        activa ? "text-texto" : "text-texto-suave hover:text-texto"
                       }`}
                     >
                       {item.label}
-                      {/* La raya acido de Etiqueta linea, como subrayado: fija en la activa, crece al pasar en las demás */}
-                      <span
-                        aria-hidden="true"
-                        className={`absolute -bottom-0.5 left-0 h-[3px] bg-acido transition-[width] duration-300 ${
-                          activa ? "w-7" : "w-0 group-hover:w-7"
-                        }`}
-                      />
                     </Link>
                   </li>
                 );
@@ -126,16 +118,7 @@ export default function Header() {
           </nav>
 
           <div className="flex items-center gap-3">
-            <a
-              href={WHATSAPP_URL}
-              target="_blank"
-              rel="noopener noreferrer"
-              aria-label="WhatsApp"
-              className={BOTON_ICONO}
-            >
-              <FaWhatsapp className="text-lg" />
-            </a>
-            <Boton href="/cotizacion" variante="primario" compacto className="hidden px-5 lg:inline-flex">
+            <Boton href="/diagnostico" variante="primario" compacto className="hidden lg:inline-flex">
               Solicitar diagnóstico
             </Boton>
             <button
@@ -146,7 +129,7 @@ export default function Header() {
               aria-controls="menu-principal"
               className={`${BOTON_ICONO} lg:hidden`}
             >
-              <FiMenu className="text-lg" />
+              <FiMenu className="text-lg" aria-hidden="true" />
             </button>
           </div>
         </div>
@@ -169,9 +152,10 @@ export default function Header() {
         aria-label="Menú principal"
         aria-hidden={!isOpen}
         inert={!isOpen}
-        className="fixed bottom-0 right-0 top-0 z-50 flex w-full flex-col border-l border-linea bg-fondo sm:w-[440px] lg:hidden"
+        data-theme="noche"
+        className="fixed bottom-0 right-0 top-0 z-50 flex w-full flex-col border-l border-hairline bg-fondo text-texto sm:w-[440px] lg:hidden"
       >
-        <div className="flex h-[72px] items-center justify-between px-6">
+        <div className="flex h-[72px] items-center justify-between px-4 sm:px-6">
           <Logo onClick={cerrar} />
           <button
             type="button"
@@ -179,48 +163,39 @@ export default function Header() {
             aria-label="Cerrar menú"
             className={BOTON_ICONO}
           >
-            <FiX className="text-lg" />
+            <FiX className="text-lg" aria-hidden="true" />
           </button>
         </div>
 
-        <nav aria-label="Principal, celular" className="flex-1 overflow-y-auto px-6">
-          <ul className="border-t border-linea">
-            {[...menuItems, { label: "Cotización", href: "/cotizacion" }].map((item, index) => {
+        <nav aria-label="Principal, celular" className="flex-1 overflow-y-auto px-4 sm:px-6">
+          <ul className="border-t border-hairline">
+            {menuItems.map((item, index) => {
               const activa = esActiva(item.href);
               return (
                 <li
                   key={item.href}
                   ref={(el) => (filasRef.current[index] = el)}
-                  className="border-b border-linea"
+                  className="border-b border-hairline"
                 >
                   <Link
                     href={item.href}
                     onClick={cerrar}
                     aria-current={activa ? "page" : undefined}
-                    className="group flex min-h-[64px] items-center gap-5 py-3"
+                    className="flex min-h-[64px] items-center gap-5 py-3"
                   >
                     <span
-                      className={`w-8 flex-shrink-0 font-mono text-etiqueta ${
-                        activa ? "text-acido" : "text-tinta-tenue"
-                      }`}
+                      aria-hidden="true"
+                      className="w-8 flex-shrink-0 font-mono text-etiqueta text-texto-suave"
                     >
                       {String(index + 1).padStart(2, "0")}
                     </span>
                     <span
-                      className={`flex-1 font-anton uppercase text-titular-m transition-colors duration-200 ${
-                        activa ? "text-acido" : "text-tinta group-hover:text-acido"
+                      className={`flex-1 text-subtitulo transition-colors duration-200 ${
+                        activa ? "text-acento" : "text-texto hover:text-acento"
                       }`}
                     >
                       {item.label}
                     </span>
-                    <FiArrowRight
-                      aria-hidden="true"
-                      className={`text-lg transition-all duration-200 ${
-                        activa
-                          ? "translate-x-1 text-acido"
-                          : "text-linea group-hover:translate-x-1 group-hover:text-acido"
-                      }`}
-                    />
                   </Link>
                 </li>
               );
@@ -228,11 +203,8 @@ export default function Header() {
           </ul>
         </nav>
 
-        <div ref={pieRef} className="border-t border-linea p-6">
-          <p className="mb-4 font-mono uppercase text-etiqueta text-tinta-tenue">
-            ¿Listo para construir tu sistema?
-          </p>
-          <Boton href="/cotizacion" variante="primario" onClick={cerrar} className="w-full">
+        <div ref={pieRef} className="border-t border-hairline p-4 sm:p-6">
+          <Boton href="/diagnostico" variante="primario" onClick={cerrar} className="w-full">
             Solicitar diagnóstico
           </Boton>
         </div>
