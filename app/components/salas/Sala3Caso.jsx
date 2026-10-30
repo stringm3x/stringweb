@@ -29,7 +29,7 @@ export function Sala3Caso() {
       <div className="mx-auto flex max-w-contenido flex-col gap-space-5">
         <div className="flex max-w-[760px] flex-col gap-space-4">
           <p className={ETIQUETA}>EL CASO REAL</p>
-          <h2 className={TITULAR}>Lo probamos en casa primero.</h2>
+          <h2 className={TITULAR}>Probado en un negocio real.</h2>
           <p className={CUERPO}>
             Soy Carlos Avilés, desarrollador y fundador de STRING. Evolution GYM es el gimnasio
             de mi familia: ahí construí su sistema y lo probamos en el mostrador, con socios de
