@@ -1,6 +1,6 @@
 # Lote 8 · Sistemas — reporte
 
-Rama `lote-8-sistemas`, 8 commits más este reporte, sin fusionar. `npm run build` limpio, `npm test` 27/27, `npm run test:e2e` 56/56.
+Rama `lote-8-sistemas`, 8 commits más este reporte; fusionada a `main` el 30 oct. `npm run build` limpio, `npm test` 27/27, `npm run test:e2e` 56/56.
 Capturas de las seis páginas a 375 y 1440 px (y /sistemas a 768) en `reportes/lote-8-sistemas/`.
 **Hecho.** `docs/pagina-nivel.md` y los cinco dibujos en el repo; textos.md con Sistemas, Lo que cambia por nivel y Ejemplos y textos
 alternativos de los niveles, palabra por palabra. `/sistemas` y `/sistemas/responde`, `/organiza`, `/automatiza`, `/controla`,
