@@ -41,6 +41,7 @@
     --arte-curva-estrella: ease-in-out;
     --arte-dur-tecla: 1ms;
     --arte-dur-tecla-cursor: 45ms;
+    --arte-espera-tecla: 0.3s;
     /* Danza (sala 7): el vaivén de las cintas, la única animación continua. */
     --arte-dur-danza: 12s;
     --arte-curva-danza: ease-in-out;
@@ -216,6 +217,8 @@
 @layer components {
   /* El titular: cada letra aparece en su turno. */
   .tecla {
+    /* Cada letra espera su turno: un paso del cursor por pulsación. */
+    --tecla-delay: calc(var(--arte-espera-tecla) + var(--arte-dur-tecla-cursor) * var(--tecla-n));
     position: relative;
     animation: tecla-aparece var(--arte-dur-tecla) linear both;
     animation-delay: var(--tecla-delay);
@@ -281,6 +284,8 @@
     background: rgb(var(--texto));
     opacity: 0.35;
     animation: estrella var(--arte-dur-estrella) var(--arte-curva-estrella) infinite alternate;
+    animation-duration: calc(var(--arte-dur-estrella) * var(--ritmo, 1));
+    animation-delay: calc(var(--arte-dur-estrella) * var(--desfase, 0));
   }
 
   @media (prefers-reduced-motion: reduce) {
