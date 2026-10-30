@@ -13,6 +13,8 @@ Aquí solo se habla de él como producto en venta.
 | `docs/sistema/` (Identidad 2026) | Tokens (`tokens.json`), componentes con HTML de referencia (Logo, Botón, Ciudad, Cuerda, Galería, Portada) |
 | `docs/textos.md` (Textos del sitio) | El copy final de cada sala, formulario, pie y legales |
 | `docs/calidad.md` (La calidad en STRING) | Reglas de calidad, tokens de movimiento y `--alerta`, y los estados de cada componente (botón, campo, píldora, tarjeta, barra, menú, transiciones) |
+| `docs/movimiento-salas.md` (El movimiento de las salas) | El movimiento de cada sala: momentos, tipo, capas y estado con menos movimiento |
+| `docs/pagina-nivel.md` (La página de nivel y /sistemas) | La estructura de `/sistemas` y de cada página de nivel, la ficha de la obra y la barra |
 
 Si el código contradice un documento, manda el documento y se reporta. Si dos documentos chocan:
 textos → `textos.md`; componentes, estados y movimiento → `calidad.md`; visual → `diseno.md`;

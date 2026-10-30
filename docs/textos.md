@@ -12,6 +12,8 @@ Texto final de cada sala de stringwebs.com, listo para el brief de Claude Code. 
 
 Logo · Sistemas · Productos · Galería · Nosotros · **Solicitar diagnóstico** \[botón verde\]
 
+\[Cambio del 30 oct (lote 8, docs/pagina-nivel.md): Logo · Sistemas · Tu negocio · Productos · Nosotros · botón. Galería sale de la barra; "Tu negocio" se oculta hasta que exista su página y Productos sigue a /saas.\]
+
 ## Sala 1 · Inicio · Literatura
 
 **Etiqueta:** TALLER DE SOFTWARE · CIUDAD DE MÉXICO
@@ -47,7 +49,7 @@ Tus clientes te escriben por Instagram y WhatsApp. En el camino se pierden:
 
 **Etiqueta:** EL CASO REAL
 
-**Titular:** Lo probamos en casa primero.
+**Titular:** Probado en un negocio real. \[Cambio del 30 oct: antes "Lo probamos en casa primero."\]
 
 &#91;Foto real de Carlos, la única foto del sitio. Pendiente: que Carlos la mande.\]
 
@@ -344,6 +346,107 @@ Fecha de última actualización: 7 de noviembre de 2026. Domicilio: pendiente de
 
 - Redes sociales: salen del pie; se quedan solo en los datos para buscadores.
 - RESTO, CLINIC y BARBER: salen de /saas.
+
+## Sistemas · Fase 3, lote 8 (30 oct, borrador para revisar)
+
+### /sistemas
+
+**Etiqueta:** SISTEMAS
+
+**Titular:** Cinco niveles. La misma calidad.
+
+Empieza por lo que te pasa hoy. Cada nivel incluye todo lo del anterior y suma alcance; ninguno es la versión barata de otro.
+
+\[Las cinco tarjetas de nivel (componente Tarjeta): nombre, la frase del dueño, qué hace en una línea, "Desde" en Geist Mono y "Ver el nivel →".\]
+
+**¿Cuál es el mío?** Si no sabes por dónde empezar, cuéntanos qué te pasa y te decimos qué nivel te toca. **Solicitar diagnóstico** \[botón verde; en la Fase 4, "¿Qué nivel eres?"\]
+
+**Todos los niveles incluyen:**
+
+- El mismo sistema de diseño y el mismo cuidado en cada pantalla.
+- Su propia obra, que nace contigo.
+- Nuestro estándar de servicio: respuesta en un día hábil y avance por escrito cada viernes.
+- Continuidad para que tu sistema siga funcionando, desde $1,800 al mes.
+
+\[Cierre de la portada al final.\]
+
+### Página de nivel · modelo: Responde
+
+**Etiqueta:** NIVEL 1 · RESPONDE
+
+**Titular:** Que nadie se quede sin respuesta.
+
+"Me escriben y no alcanzo a contestar." Si eso te pasa, empieza aquí.
+
+DESDE $8,000 · DE 2 A 3 SEMANAS \[Geist Mono\]
+
+**Qué incluye**
+
+- Una página propia para tu negocio.
+- Tu WhatsApp conectado, a un toque desde la página.
+- Un formulario para que te dejen sus datos.
+- Un mensaje automático: quien te escribe recibe respuesta al instante.
+
+**Para quién es:** para el negocio al que le llegan mensajes por Instagram y WhatsApp y pierde clientes por no contestar a tiempo.
+
+**Cómo se ve** \[vitrina con una pantalla marcada "Ejemplo"\]
+
+**Cómo trabajamos:** diagnóstico gratis, propuesta por escrito, construcción y entrega. Te mandamos el avance cada viernes.
+
+**Cómo se paga:** 50 % al empezar y 50 % al entregar.
+
+**Después de la entrega:** la continuidad cuida tu sistema cada mes, desde $1,800.
+
+**Cuando crezcas:** si ya contestas pero se te pierden en el camino, el siguiente paso es **Organiza →**
+
+\[Cierre de la portada al final.\]
+
+### Las otras cuatro, con la misma estructura
+
+| Nivel | Titular | Incluye (además de lo anterior) | Tiempo | Pago | Siguiente |
+| --- | --- | --- | --- | --- | --- |
+| 2 · Organiza | Cada cliente en su lugar. | Registro de prospectos, calificación y avisos | 2 a 3 semanas | 50 / 50 | Automatiza |
+| 3 · Automatiza | Que el seguimiento lo dé el sistema. | Respuesta inmediata, agenda, seguimiento, recordatorios y panel. Empieza con el boceto | 4 a 6 semanas | 40 / 30 / 30 | Controla |
+| 4 · Controla | Sabe cuánto ganas y qué está pasando. | Desarrollo a la medida: sistema de clientes propio, paneles, integraciones y tienda en línea propia. Empieza con el boceto | 4 a 6 semanas | 40 / 30 / 30 | Empresa |
+| 5 · Empresa | Un sistema completo, con su equipo. | Sistema completo con equipo por proyecto, incluida una tienda en línea grande. Mapa de procesos firmado antes de cotizar | Según su propuesta | Según su propuesta | — |
+
+\[Los precios "Desde" son los de la sala 4. La frase del dueño de cada nivel, también.\]
+
+## Lo que cambia por nivel (30 oct)
+
+Cada página de nivel tiene su dibujo, una línea bajo el dibujo, "Para quién es" y su ejemplo de cómo se ve (siempre marcado "Ejemplo").
+
+| Nivel | Dibujo | Línea bajo el dibujo | Para quién es | Cómo se ve (ejemplo) |
+| --- | --- | --- | --- | --- |
+| Responde | La máquina de escribir | Lo que tu cliente escribe, tu sistema lo contesta al instante. | Para el negocio al que le llegan mensajes por Instagram y WhatsApp y pierde clientes por no contestar a tiempo. | Un WhatsApp con la respuesta automática |
+| Organiza | El edificio por etapas | Cada cliente en su lugar, y un aviso cuando llega uno nuevo. | Para el negocio que ya contesta, pero tiene a sus clientes regados entre chats, libretas y Excel. | Una lista de prospectos con su etapa: nuevo, interesado, cliente |
+| Automatiza | La cinta que une los pasos | Responde, agenda, recuerda y da seguimiento, aunque no estés. | Para el negocio que pierde citas y clientes porque nadie da seguimiento a tiempo. | La agenda del día con un recordatorio enviado |
+| Controla | El cuadro en marco dorado | El cuadro completo de tu negocio, en una sola pantalla. | Para el negocio que ya creció y necesita saber cuánto gana y qué está pasando, o vender en línea con su propia tienda. | Un panel con indicadores, sin cifras reales |
+| Empresa | El escenario con las siete artes | Todo tu equipo y tus áreas, en un solo sistema. | Para la empresa con varias áreas o sucursales, o una tienda en línea grande, que necesita un sistema completo a su medida. | Un mapa de procesos en boceto |
+
+**Ficha de la obra** (columna que acompaña): el nombre, "NIVEL N DE 5 · \[arte\]", la fila de las siete artes con las del nivel encendidas ("N DE 7"; Empresa "7 DE 7"), el "Desde", tiempo, pago, continuidad y el botón. En Empresa: "Se cotiza" en lugar del "Desde".
+
+## Ejemplos y textos alternativos de los niveles (30 oct)
+
+### Cómo se ve (siempre con la etiqueta EJEMPLO)
+
+- **Responde:** WhatsApp. Cliente: "Hola, ¿tienen lugar hoy en la tarde?" · Respuesta automática: "¡Hola! Ya recibimos tu mensaje. En unos minutos te atendemos." · Pie: RESPUESTA AUTOMÁTICA · AL INSTANTE
+- **Organiza:** lista de prospectos: "Ana · Nuevo", "Luis · Interesado", "Sofía · Cliente" · Aviso arriba: "Nuevo prospecto: Marco"
+- **Automatiza:** agenda de hoy: "17:00 · Paty · Corte", "18:30 · Jorge · Barba" · Debajo: "Recordatorio enviado a Paty · mañana 17:00"
+- **Controla:** panel con tres indicadores "Clientes", "Por cobrar", "Este mes", con barras en lugar de cifras, y una gráfica que sube · Pie: SIN DATOS REALES
+- **Empresa:** mapa de procesos en boceto: "Venta → Almacén → Entrega → Cobranza"
+
+### Texto alternativo de cada dibujo
+
+| Nivel | Texto alternativo |
+| --- | --- |
+| Responde | Una máquina de escribir: en la hoja, lo que te escribieron y, debajo, la respuesta que el sistema escribe solo al instante. |
+| Organiza | Un edificio de tres pisos, uno por etapa, con cada cliente en su piso y una campana que avisa cuando llega uno nuevo. |
+| Automatiza | Una cinta que une cuatro pasos: recibido, agenda, recordatorio y seguimiento. |
+| Controla | Un cuadro en marco dorado con el panel de un negocio y una gráfica que sube, y un pincel al lado. |
+| Empresa | Un escenario donde las siete artes están juntas: arco, telón, pantalla de cine, ciudad pintada, un busto, atriles y una cinta. |
+
+\[Cuando crezcas en Empresa: Tarjeta "Ver los cinco niveles" → /sistemas.\]
 
 ## Por confirmar antes del brief
 
