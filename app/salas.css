@@ -9,3 +9,92 @@
      etapas con transiciones (@supports not).
    - Solo transform, opacity y clip-path. Duraciones y curvas de los tokens
      de globals.css; los cortes secos, con paradas repetidas. */
+
+/* Sala 2 · Escultura — "El sistema quita lo que sobra."
+   Sigue al dedo con la línea de tiempo del propio dibujo, así en celular
+   pasa mientras se ve. Final: la piedra ya cayó y las lascas están en el
+   suelo. */
+.piedra {
+  opacity: 0;
+  transform-box: fill-box;
+  transform-origin: center;
+}
+
+@keyframes piedra-cae {
+  from {
+    opacity: 1;
+    transform: none;
+  }
+  60% {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+    transform: translate(var(--dx), var(--dy)) rotate(var(--giro));
+  }
+}
+
+@keyframes aparece {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@supports (animation-timeline: view()) {
+  @media (prefers-reduced-motion: no-preference) {
+    .escultura {
+      view-timeline: --escultura block;
+    }
+
+    /* Al 25 % se agrieta; del 50 % en adelante cae, un pedazo tras otro. */
+    .escultura .piedra {
+      animation: piedra-cae var(--curva) both;
+      animation-timeline: --escultura;
+      animation-range: cover calc(50% + var(--i) * 3%) cover calc(58% + var(--i) * 3%);
+    }
+
+    .escultura .piedra-grieta {
+      animation: aparece var(--curva) both;
+      animation-timeline: --escultura;
+      animation-range: cover 22% cover 32%;
+    }
+
+    .escultura [data-capa="lascas"] {
+      animation: aparece var(--curva) both;
+      animation-timeline: --escultura;
+      animation-range: cover 56% cover 68%;
+    }
+  }
+}
+
+/* Respaldo: 0 bloque entero · 1 grietas · 2 cae cada pedazo en
+   --dur-rapido, uno tras otro. */
+@supports not (animation-timeline: view()) {
+  .escultura[data-etapa] .piedra {
+    opacity: 0;
+    transform: translate(var(--dx), var(--dy)) rotate(var(--giro));
+    transition:
+      transform var(--dur-rapido) var(--curva) calc(var(--dur-rapido) * var(--i)),
+      opacity var(--dur-rapido) var(--curva) calc(var(--dur-rapido) * var(--i));
+  }
+
+  .escultura[data-etapa="0"] .piedra,
+  .escultura[data-etapa="1"] .piedra {
+    opacity: 1;
+    transform: none;
+  }
+
+  .escultura[data-etapa] .piedra-grieta,
+  .escultura[data-etapa] [data-capa="lascas"] {
+    transition: opacity var(--dur-normal) var(--curva);
+  }
+
+  .escultura[data-etapa="0"] .piedra-grieta,
+  .escultura[data-etapa="0"] [data-capa="lascas"],
+  .escultura[data-etapa="1"] [data-capa="lascas"] {
+    opacity: 0;
+  }
+}
