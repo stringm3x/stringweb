@@ -1,6 +1,6 @@
 # Estado · stringwebs.com
 
-Última actualización: 30 oct 2026 (lote 8). Meta del KB: sitio rehecho del 1 al 7 nov; salir a
+Última actualización: 30 oct 2026 (lote 9a). Meta del KB: sitio rehecho del 1 al 7 nov; salir a
 vender el 8 nov.
 
 ## Lotes
@@ -16,6 +16,8 @@ vender el 8 nov.
 | 6 | Componentes de calidad: tokens de movimiento, botón con 8 estados, campos, píldoras, tarjeta, barra, menú, transiciones | `lote-6-componentes` | ✅ Fusionado a `main` (29 oct, visto bueno de Carlos) |
 | 7 | Salas en movimiento (docs/movimiento-salas.md): salas 2–7 con su movimiento, arte en capas, sala 1 con tokens | `lote-7-movimiento` | ✅ Fusionado a `main` (29 oct, visto bueno de Carlos) |
 | 8 | Sistemas (docs/pagina-nivel.md): /sistemas y las cinco páginas de nivel, barra, enlaces de la sala 4, metadatos, redirects | `lote-8-sistemas` | ✅ Fusionado a `main` (30 oct, visto bueno de Carlos) |
+| 9a | /productos (Boaz y a la medida), Boaz por su nombre en todo el sitio, galería con el cuadro de Boaz y sin luna, /saas → /productos#boaz | `lote-9a-productos` | ✅ Hecho; PR abierto, sin fusionar |
+| 9b | La página propia de Boaz y el cuerpo de /gym | — | Pendiente |
 
 Producción sigue con la marca anterior. Nada se fusiona a `main` sin el visto bueno de Carlos.
 
@@ -27,13 +29,12 @@ Producción sigue con la marca anterior. Nada se fusiona a `main` sin el visto b
 | Meta description con "e-commerce" | ✅ metadata de textos.md; `/proyectos` retirada | 1 |
 | Legales en inglés | ✅ `/aviso-de-privacidad` y `/terminos`; 301 desde las rutas en inglés | 1 |
 | Titular repetido | ✅ un solo `<h1>` tecleado en `salas/TitularTecleado.jsx` | 2 |
-| /saas dice "STRING GYM" | ✅ "el sistema para gimnasios" en /saas, `Caso.jsx` y `app/gym/*` | 4 |
+| /saas dice "STRING GYM" | ✅ "el sistema para gimnasios" en /saas, `Caso.jsx` y `app/gym/*` (4); desde el 9a, Boaz por su nombre y /saas → /productos#boaz | 4, 9a |
 
 ## Deuda técnica (no se corrige en el rehecho)
 
 - Nombres de color y tipos de la marca anterior en `tailwind.config.js` (marcados "legado") y la
   animación `tic`, hasta que se rehagan /saas y /gym; luego se borran.
-- `/gym/empezar` redirige con `permanent: true` (308), no 301.
 - `npm run lint` roto: el parser de `eslint-config-next` exige `typescript`.
 - Duraciones sueltas en el legado de /gym y /saas (`TitularBrochada`, `FormField`, `FormSelect`, `app/gym/**`):
   exentas en `app/tokens.test.js` hasta que se rehagan.
@@ -46,8 +47,6 @@ Producción sigue con la marca anterior. Nada se fusiona a `main` sin el visto b
 
 ## Pendientes de Carlos
 
-- **La luna en la galería:** la portada ya va sin luna (30 oct); falta decidir si sale también del cuadro de STRING (sala 5).
-
 - **Domicilio** del responsable para el aviso de privacidad (lo pide la ley) y fecha de publicación.
 - **Foto final** de Carlos para la sala 3 (por ahora `public/foto/carlos-respaldo.jpg`).
 - **`TURNSTILE_SECRET_KEY`** y las SMTP en Vercel (Preview y Production): sin el secreto,
@@ -59,8 +58,25 @@ Producción sigue con la marca anterior. Nada se fusiona a `main` sin el visto b
 
 - PageSpeed Insights en producción: confirmar LCP < 2.5 s y rendimiento ≥ 90 en `/` (en la vista previa el
   Chrome de Lighthouse alterna entre 1.6–2.1 s y 2.6–3.6 s con el mismo código; ver reporte del lote 5).
-- /saas y /gym con el diseño anterior (Anton, `TitularBrochada`, GSAP).
+- LCP de todo el sitio (lote 9a, Lighthouse local en celular): el elemento es el párrafo de entrada y casi todo es
+  retraso de pintado. Portada 2.76 s, /sistemas 2.4 s, /productos 2.76 s. Se mide con PageSpeed en producción (Fase 0).
+- /gym con el diseño anterior (Anton, `TitularBrochada`, GSAP): lote 9b.
+- `Caso.jsx` y `ui/Cierre.jsx`: sin uso desde que se borró /saas (lote 9a); salen en el 9b.
+- El dibujo de Boaz (`LaminaBoaz.jsx` y el cuadro de la galería) es copia de `string-gym-saas`, provisional allá: cuando
+  llegue el del ilustrador, se copia a mano aquí.
 - Dos `<meta name="viewport">` en el `<head>`.
+
+## Decisiones tomadas en el lote 9a
+
+- Boaz sale con su nombre desde el lote 9, con la firma "by STRING" (Carlos, 29 oct; IMPI cuando haya ingresos).
+- `/productos`: encabezado con dos anclas, Boaz sobre pared (`#boaz`), los siguientes, a la medida con vitrina de
+  ejemplos (`#medida`) y el Cierre. Productos en la barra, el menú y el pie.
+- Logotipo positivo de Boaz y escena de la columna, de `string-gym-saas`; firma "by STRING" en #5F6368 a 16 px.
+  Archivo 900 al 62 % (34 KB, local) solo en `/productos`, para los nombres de los planes.
+- `boaz-azul` pasa a `#2979FF` (el de G): solo relleno, nunca texto (3.6:1 sobre papel).
+- `/saas` y `/gym/empezar` → 301 a `/productos#boaz` (sale de la deuda el 308); `/saas` borrada.
+- Galería: cartela "Boaz", cuadro con la columna y el disco, la ciudad de STRING sin luna.
+- La tarjeta se queda con hover en luz (#50FF05), como dice calidad.md.
 
 ## Decisiones tomadas en el lote 8
 

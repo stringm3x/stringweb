@@ -6,13 +6,13 @@ Texto final de cada sala de stringwebs.com, listo para el brief de Claude Code. 
 
 **Cómo leerlo:** edita directo o coméntame sobre la frase que no te suene. Lo que va entre corchetes es una nota para construir, no texto del sitio.
 
-**Reglas que sigue:** frases cortas que afirman, español de México, solo cifras autorizadas, ni clientes ni testimonios inventados, Boaz nunca por su nombre (en público es "el sistema para gimnasios").
+**Reglas que sigue:** frases cortas que afirman, español de México, solo cifras autorizadas, ni clientes ni testimonios inventados, Boaz sale con su nombre desde el lote 9, con la firma "by STRING" (antes, en público, era "el sistema para gimnasios").
 
 ## Barra superior
 
 Logo · Sistemas · Productos · Galería · Nosotros · **Solicitar diagnóstico** \[botón verde\]
 
-\[Cambio del 30 oct (lote 8, docs/pagina-nivel.md): Logo · Sistemas · Tu negocio · Productos · Nosotros · botón. Galería sale de la barra; "Tu negocio" se oculta hasta que exista su página y Productos sigue a /saas.\]
+\[Cambio del 30 oct (lote 8, docs/pagina-nivel.md): Logo · Sistemas · Tu negocio · Productos · Nosotros · botón. Galería sale de la barra; "Tu negocio" se oculta hasta que exista su página. Desde el lote 9a, Productos va a /productos.\]
 
 ## Sala 1 · Inicio · Literatura
 
@@ -53,7 +53,7 @@ Tus clientes te escriben por Instagram y WhatsApp. En el camino se pierden:
 
 &#91;Foto real de Carlos, la única foto del sitio. Pendiente: que Carlos la mande.\]
 
-Soy Carlos Avilés, desarrollador y fundador de STRING. Evolution GYM es el gimnasio de mi familia: ahí construí su sistema y lo probamos en el mostrador, con socios de verdad. Funcionó, y se volvió un producto: el sistema para gimnasios de STRING. Cada sistema que hacemos lo reviso yo antes de entregarlo. **Conoce la historia** \[enlace a /nosotros\]
+Soy Carlos Avilés, desarrollador y fundador de STRING. Evolution GYM es el gimnasio de mi familia: ahí construí su sistema y lo probamos en el mostrador, con socios de verdad. Funcionó, y se volvió un producto: Boaz, el sistema para gimnasios de STRING. Cada sistema que hacemos lo reviso yo antes de entregarlo. **Conoce la historia** \[enlace a /nosotros\]
 
 **EN USO TODOS LOS DÍAS EN EL MOSTRADOR · 1 PRODUCTO EN PRODUCCIÓN**
 
@@ -79,7 +79,7 @@ Toca una cuerda. **Sonido** \[botón; empieza apagado\]
 
 Cada nivel suma un arte. Este sitio tiene las siete.
 
-¿Tienes un gimnasio? Ya existe tu sistema. **Ver el sistema para gimnasios** \[enlace a Productos\]
+¿Tienes un gimnasio? Ya existe tu sistema. **Conoce Boaz** \[enlace a /productos#boaz\]
 
 &#91;Cada nivel es una cuerda con su viñeta de artes acumuladas: Responde, literatura; Organiza, + arquitectura; Automatiza, + danza; Controla, + pintura; Empresa, las siete. Precios en Geist Mono.\]
 
@@ -94,7 +94,7 @@ Ningún sistema de STRING sale de una plantilla. Cada uno lleva una obra propia,
 | Marco | Cartela |
 | --- | --- |
 | STRING | STRING · Ciudad de una línea · 2026 |
-| El sistema para gimnasios \[la lámina: plano técnico sobre papel con la mancha azul, del canvas de Boaz\] | El sistema para gimnasios · Plano técnico sobre papel · 2026 |
+| Boaz \[la escena de la columna con el disco colgado y la mancha azul en el disco, de string-gym-saas\] | Boaz · Plano técnico sobre papel · 2026 |
 | Tu negocio | Tu negocio · Por crear, contigo · Pronto \[marco vacío\] |
 
 ## Sala 6 · Cómo trabajamos · Arquitectura
@@ -145,7 +145,7 @@ Un sistema no se entrega y se olvida. Lo cuidamos cada mes: que funcione, que es
 
 STRING empezó haciendo sistemas para negocios. Luego construí uno para Evolution GYM, el gimnasio de mi familia. Lo usamos en el mostrador todos los días, lo corregimos con socios de verdad, y se volvió un producto.
 
-Hoy STRING hace dos cosas: sistemas a la medida para negocios con local y empresas, y productos propios para un giro, como el sistema para gimnasios. Lo que aprendemos en uno mejora al otro.
+Hoy STRING hace dos cosas: sistemas a la medida para negocios con local y empresas, y productos propios para un giro, como Boaz, nuestro sistema para gimnasios. Lo que aprendemos en uno mejora al otro.
 
 Trabajo con un equipo de desarrolladores de confianza cuando un proyecto lo pide. El trato es siempre conmigo, y la calidad también.
 
@@ -171,7 +171,7 @@ Trabajo con un equipo de desarrolladores de confianza cuando un proyecto lo pide
 
 **¿Qué pasa después de la entrega?** Sigue la continuidad: cuidamos tu sistema cada mes, desde $1,800.
 
-**Tengo un gimnasio. ¿Me sirve?** Para gimnasios ya existe un sistema hecho: **Ver el sistema para gimnasios** \[enlace\].
+**Tengo un gimnasio. ¿Me sirve?** Para gimnasios ya existe un sistema hecho: **Conoce Boaz** \[enlace a /productos#boaz\].
 
 ## Cierre
 
@@ -203,11 +203,11 @@ Al enviarlo: **Listo. Te respondemos en un día hábil.**
 
 Debajo del botón, chico: Al enviar aceptas nuestro **aviso de privacidad** \[enlace\].
 
-&#91;Cada opción de la pregunta 4 corresponde a un nivel: Responde, Organiza, Automatiza y Controla. Si eligen Gimnasio, el correo lo marca para ofrecer el sistema para gimnasios.\]
+&#91;Cada opción de la pregunta 4 corresponde a un nivel: Responde, Organiza, Automatiza y Controla. Si eligen Gimnasio, el correo lo marca para ofrecer Boaz.\]
 
 ## Pie
 
-Logo chico · stringwebmx@gmail.com · WhatsApp \[el número de STRING que ya está en el sitio actual; Claude Code lo toma del repo\] · Hecho en la Ciudad de México · Aviso de privacidad · Términos
+Logo chico · stringwebmx@gmail.com · WhatsApp \[el número de STRING que ya está en el sitio actual; Claude Code lo toma del repo\] · Hecho en la Ciudad de México · Productos \[a /productos, lote 9a\] · Aviso de privacidad · Términos
 
 ## Aviso de privacidad
 
@@ -247,7 +247,7 @@ Carlos Avilés (STRING) usa tu nombre, tu WhatsApp, el giro de tu negocio y lo q
 
 **Lo que es de STRING.** El diseño, los textos, el arte y el logo de este sitio son de STRING. No se copian sin permiso. El arte de cada cliente en la galería se muestra con su permiso.
 
-**Productos.** El sistema para gimnasios tiene sus propios términos dentro del producto.
+**Productos.** Boaz tiene sus propios términos dentro del producto.
 
 **Ley aplicable.** Estos términos se rigen por las leyes de México, y cualquier diferencia se atiende en la Ciudad de México.
 
@@ -264,7 +264,8 @@ Carlos Avilés (STRING) usa tu nombre, tu WhatsApp, el giro de tu negocio y lo q
 | Inicio | STRING — Software hecho con oficio. Y con arte. | Taller de software en la Ciudad de México. Sistemas que contestan, ordenan y trabajan por tu negocio, desde un local hasta una empresa grande. |
 | /nosotros | Nosotros · STRING | La historia de STRING: un taller de software que probó su primer sistema en el gimnasio de la familia de su fundador. |
 | /diagnostico | Solicitar diagnóstico · STRING | Cuatro preguntas para saber qué necesita tu negocio. Te respondemos en un día hábil. |
-| /saas | El sistema para gimnasios · STRING | Socios, check-in, cobros y caja para tu gimnasio, probado todos los días en un mostrador de verdad. |
+| /productos | Productos · STRING | Boaz, el sistema para gimnasios, y sistemas a la medida para negocios con local y empresas. Hechos por STRING en Ciudad de México. |
+| /gym/registro | Boaz · El sistema para gimnasios, by STRING | Socios, check-in, cobros y caja para tu gimnasio, probado en un gimnasio real. |
 | Legales | Aviso de privacidad · STRING / Términos · STRING | — |
 
 Imagen para compartir: el logo sobre noche y debajo "Software hecho con oficio. Y con arte."
@@ -316,11 +317,13 @@ WhatsApp: \[número, como enlace para escribirle directo\]
 Giro: \[Giro\]
 Lo que le pasa: \[la opción elegida, o lo que escribió en "Otra cosa"\]
 Nivel sugerido: \[Responde, Organiza, Automatiza, Controla, o "por definir" si eligió Otra cosa\]
-\[Solo si el giro es Gimnasio:\] Es gimnasio: ofrécele el sistema para gimnasios.
+\[Solo si el giro es Gimnasio:\] Es gimnasio: ofrécele Boaz.
 
 Estándar: respóndele en un día hábil.
 
 ### /saas
+
+\[Lote 9a: /saas se retira y redirige con 301 a /productos#boaz. Lo de abajo queda como historia.\]
 
 El texto actual de /saas se queda. Solo cambia: "STRING GYM" pasa a "El sistema para gimnasios" en todo el sitio, se quitan RESTO, CLINIC y BARBER (no existen todavía) y el pie del producto lleva la firma "by STRING". Precios de los planes, sin cambio.
 
@@ -333,7 +336,8 @@ El texto actual de /saas se queda. Solo cambia: "STRING GYM" pasa a "El sistema 
 | Sala 3 | Tira de película con tres cuadros: el fundador, el mostrador del gimnasio y el sistema funcionando en una laptop. |
 | Foto de Carlos | Carlos Avilés, fundador de STRING. |
 | Viñetas de los niveles | \[Decorativas: sin texto alternativo; el nombre del nivel ya lo dice.\] |
-| Sala 5 | Tres cuadros con marco dorado en una galería: la ciudad de STRING, el plano del sistema para gimnasios y un lienzo en blanco para tu negocio. |
+| Sala 5 | Tres cuadros con marco dorado en una galería: la ciudad de STRING, el plano de Boaz, el sistema para gimnasios, y un lienzo en blanco para tu negocio. |
+| Lámina de Boaz (/productos) | Lámina de Boaz: una columna con un disco colgado, dibujada como plano técnico, con la mancha azul en el disco. |
 | Sala 6 | Dibujo de un edificio en construcción: cimientos, dos pisos terminados, un piso en obra y una bandera en lo alto. |
 | Sala 7 | Cintas de colores que ondulan en el aire. \[Decorativa si el texto de la sala ya se entiende sin ella.\] |
 | Cuerdas | \[Decorativas: sin texto alternativo.\] |
@@ -449,6 +453,109 @@ Cada página de nivel tiene su dibujo, una línea bajo el dibujo, "Para quién e
 \[Cuando crezcas en Empresa: Tarjeta "Ver los cinco niveles" → /sistemas.\]
 
 \[Cuando crezcas en Controla: la tarjeta dice "Empresa + Música, escultura y cine" (Carlos, 30 oct). En los demás, "[Nivel] + [su arte]".\]
+
+## Productos · lote 9 (30 oct)
+
+### /productos
+
+Título: Productos · STRING. Descripción: Boaz, el sistema para gimnasios, y sistemas a la medida para negocios con local y empresas. Hechos por STRING en Ciudad de México.
+
+\[Barra, menú del celular y pie: Productos → /productos, con aria-current en la barra.\]
+
+**Bloque 1 · Encabezado** \[noche\]
+
+PRODUCTOS
+
+# Un sistema listo o uno a tu medida.
+
+STRING hace las dos cosas. Productos propios para un giro, que usas desde el primer día por una mensualidad. Y sistemas construidos para tu negocio, cada uno con su obra. Misma mano, misma calidad.
+
+| Tarjeta | Frase | Enlace |
+| --- | --- | --- |
+| 01 · Productos | Listos para tu giro, por suscripción. | Ver Boaz ↓ \[#boaz\] |
+| 02 · A la medida | Construidos para tu negocio, por proyecto. | Ver la vitrina ↓ \[#medida\] |
+
+**Bloque 2 · Boaz** \[id="boaz", pared, texto tinta\]
+
+01 · PRODUCTOS
+
+## Boaz, el sistema para gimnasios.
+
+\[El logotipo positivo de Boaz en lugar de la palabra; debajo, "el sistema para gimnasios." en Geist 600. Firma: "by" en Geist 14 + STRING de la firma gris a 16 px, en #5F6368. Nunca en verde.\]
+
+Con Boaz, tu gimnasio sabe cuánto entra, ve quién se le va antes de que se vaya y le da a sus socios una razón para volver. En pesos, sin instalación y sin límite de socios.
+
+LA LÁMINA DE BOAZ · PLANO TÉCNICO SOBRE PAPEL \[pie de la lámina, en Geist Mono\]
+
+**CÓMO NACIÓ** Boaz empezó como un sistema a la medida para Evolution GYM, el gimnasio de mi familia. Lo construimos para su recepción: socios, cobros, entradas y caja. Lo corregimos con socios de verdad, en un negocio real, y lo convertimos en un producto que cualquier gimnasio puede usar.
+
+Se llama Boaz: en hebreo, “en él hay fuerza”. EN PRODUCCIÓN DESDE OCTUBRE DE 2026 · EVOLUTION GYM
+
+**LO QUE HACE HOY**
+
+| | Nombre | Frase | Plan |
+| --- | --- | --- | --- |
+| 01 | Socios sin límite. | Altas, planes y vencimientos al día, solos. | |
+| 02 | Entrada con QR. | Check-in en recepción o en kiosco, sin equipo especial. | |
+| 03 | Caja que cuadra. | Cobros, recibos y corte del día. Un cobro nunca se registra dos veces. | |
+| 04 | Quién se te va. | Avisa qué socios llevan 14 días sin venir. | PRO |
+| 05 | Tu negocio en una pantalla. | El Marcador: cuánto entra, cuántos se quedan, cuántos se van. | PRO |
+
+**PLANES** \[Escala no aparece: WhatsApp y alertas están en pausa.\]
+
+| Plan | Frase | Precio |
+| --- | --- | --- |
+| Starter | Sal del cuaderno. | $799 AL MES · O $7,990 AL AÑO |
+| Pro ★ RECOMENDADO | Vende más en el mismo local. | $1,799 AL MES · O $17,990 AL AÑO |
+
+Sin costo de instalación. Sin límite de socios en ningún plan.
+
+**Registra tu gimnasio** \[botón primario de pared → /gym/registro; "Conoce Boaz →" entra en el lote 9b\]
+
+**Bloque 3 · Los siguientes** \[noche\]
+
+LOS SIGUIENTES
+
+## Boaz es el primero.
+
+Los siguientes productos nacen igual: de un sistema hecho para un negocio real, que funcionó y se volvió producto.
+
+\[Marco vacío con borde punteado, decorativo. Sin nombres, giros ni fechas.\]
+
+**Bloque 4 · A la medida** \[id="medida", noche\]
+
+02 · A LA MEDIDA
+
+## Un sistema hecho para tu negocio.
+
+Cuando ningún producto te queda, lo construimos. Desde una barbería que no alcanza a contestar hasta una empresa con varias sucursales. Cada sistema lleva su propia obra y cuelga en nuestra galería.
+
+ASÍ SE VE LO QUE CONSTRUIMOS \[cada tarjeta: píldora EJEMPLO, giro, pantalla en HTML con el pie DATOS DE EJEMPLO, y "Ver el nivel →"\]
+
+| Giro | Pantalla | Titular | Frase | Nivel |
+| --- | --- | --- | --- | --- |
+| RESTAURANTE | “¿Tienen mesa para 4 hoy a las 9?” · “Hola, ya recibimos tu mensaje. En unos minutos te confirmamos.” | Nadie se queda sin respuesta. | Contesta al instante por WhatsApp y toma la reservación. | RESPONDE · DESDE $8,000 |
+| CLÍNICA | Nuevo prospecto por WhatsApp · Consulta general · NUEVO · Limpieza dental · AGENDÓ | Cada paciente nuevo, en su lugar. | Registra a quien pregunta, qué le interesa y si ya agendó. | ORGANIZA · DESDE $18,000 |
+| BARBERÍA | AGENDA DE HOY · 17:00 · Corte · 18:30 · Barba · Recordatorio enviado · mañana 17:00 | La agenda se llena sola. | Agenda la cita, manda el recordatorio y da seguimiento. | AUTOMATIZA · DESDE $28,000 |
+| TIENDA EN LÍNEA | PEDIDOS · #0001 · Pagado · Por enviar · Inventario · QUEDAN 3 | Tu tienda, con tu nombre. | Catálogo, carrito, pagos, inventario y pedidos en un solo sistema. | CONTROLA · DESDE $40,000 |
+| EMPRESA | Venta → Almacén → Entrega → Cobranza | Toda la operación, conectada. | Une venta, almacén, entrega y cobranza, con un panel por sucursal. | EMPRESA · SE COTIZA |
+
+Estos son ejemplos. Cada sistema que entreguemos ocupará su lugar aquí, con su caso y su obra.
+
+**Solicitar diagnóstico** \[primario → /diagnostico\] · Ver los cinco niveles \[texto → /sistemas\]
+
+**Bloque 5 · Cierre:** el mismo de las demás páginas.
+
+### Boaz en todo el sitio
+
+- Sala 3: "…se volvió un producto: Boaz, el sistema para gimnasios de STRING."
+- Sala 4 y Preguntas ("Tengo un gimnasio"): el enlace dice **Conoce Boaz** y va a /productos#boaz.
+- Sala 5: cartela "Boaz · Plano técnico sobre papel · 2026"; el cuadro es la escena de la columna con el disco. La ciudad de STRING va sin luna, como en la portada.
+- /nosotros: "…como Boaz, nuestro sistema para gimnasios."
+- Correo del diagnóstico, giro Gimnasio: "Es gimnasio: ofrécele Boaz."
+- Términos: "Boaz tiene sus propios términos dentro del producto."
+- /gym/registro: título "Boaz · El sistema para gimnasios, by STRING" y descripción "Socios, check-in, cobros y caja para tu gimnasio, probado en un gimnasio real." /gym/gracias conserva "¡Listo!". El cuerpo de /gym cambia en el lote 9b.
+- /saas y /gym/empezar: 301 a /productos#boaz.
 
 ## Por confirmar antes del brief
 
