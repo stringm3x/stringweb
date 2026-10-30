@@ -27,11 +27,11 @@ export const CAPAS = {
     capas: [
       ["galeria-1", 1, 4],
       ["haz-1", 5, 5],
-      ["galeria-2", 6, 48],
-      ["haz-2", 49, 49],
-      ["galeria-3", 50, 91],
-      ["haz-3", 92, 92],
-      ["galeria-4", 93, 133],
+      ["galeria-2", 6, 47],
+      ["haz-2", 48, 48],
+      ["galeria-3", 49, 87],
+      ["haz-3", 88, 88],
+      ["galeria-4", 89, 129],
     ],
   },
   sala6: {

@@ -3,7 +3,7 @@ import { Escenario } from "./Escenario";
 import { CUERPO, ETIQUETA, SALA, TITULAR } from "./estilos";
 
 // Sala 5 · La galería · Pintura (docs/textos.md), sobre pared. Las tres
-// cartelas (STRING, el sistema para gimnasios y Tu negocio) ya vienen
+// cartelas (STRING, Boaz y Tu negocio) ya vienen
 // dibujadas en el arte. En celular conserva su tamaño y se recorre de lado,
 // como la tira de cine. "Cada obra se ilumina en su turno": al entrar, una
 // sola vez, la galería está en penumbra y los reflectores encienden cada
@@ -38,7 +38,7 @@ export function Sala5Galeria() {
               capas={CAPAS}
               ancho={1136}
               alto={500}
-              alt="Tres cuadros con marco dorado en una galería: la ciudad de STRING, el plano del sistema para gimnasios y un lienzo en blanco para tu negocio."
+              alt="Tres cuadros con marco dorado en una galería: la ciudad de STRING, el plano de Boaz, el sistema para gimnasios, y un lienzo en blanco para tu negocio."
             >
               {CUADROS.map((left, i) => (
                 <div

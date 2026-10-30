@@ -38,7 +38,7 @@ export default function NosotrosPage() {
             </p>
             <p>
               Hoy STRING hace dos cosas: sistemas a la medida para negocios con local y empresas, y
-              productos propios para un giro, como el sistema para gimnasios. Lo que aprendemos en
+              productos propios para un giro, como Boaz, nuestro sistema para gimnasios. Lo que aprendemos en
               uno mejora al otro.
             </p>
             <p>

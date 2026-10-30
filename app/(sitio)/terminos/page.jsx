@@ -35,7 +35,7 @@ const APARTADOS = [
   },
   {
     entrada: "Productos.",
-    texto: "El sistema para gimnasios tiene sus propios términos dentro del producto.",
+    texto: "Boaz tiene sus propios términos dentro del producto.",
   },
   {
     entrada: "Ley aplicable.",
