@@ -261,3 +261,190 @@
 .galeria[data-mov="hecho"] [data-capa="haz-3"] {
   animation: aparece var(--dur-lento) var(--curva) calc(var(--dur-lento) * 2) both;
 }
+
+/* Sala 6 · Arquitectura — "El edificio crece al ritmo de los pasos."
+   Sigue al dedo: cada paso de la lista es una línea de tiempo; su capa del
+   dibujo se revela de abajo hacia arriba (clip-path) mientras el paso cruza
+   la línea (74 % de la pantalla en celular, bajo el dibujo pegado; 70 % en
+   escritorio). Paso 1 cimientos · 2 y 3 los pisos · 4 la obra · 5 la
+   bandera. El paso de ahora se marca con una línea en el acento. Cada capa
+   va de --desde (su borde de abajo) a --hasta (su borde de arriba), en %
+   del alto del dibujo; al final queda completa. */
+.arquitectura [data-capa="cimientos"],
+.arquitectura [data-capa="rotulos"] {
+  --desde: 97%;
+  --hasta: 78%;
+}
+
+.arquitectura [data-capa="piso-1"] {
+  --desde: 81%;
+  --hasta: 57%;
+}
+
+.arquitectura [data-capa="piso-2"] {
+  --desde: 67%;
+  --hasta: 44%;
+}
+
+.arquitectura [data-capa="obra"] {
+  --desde: 54%;
+  --hasta: 4%;
+}
+
+.arquitectura [data-capa="bandera"] {
+  --desde: 40%;
+  --hasta: 18%;
+}
+
+@keyframes sube {
+  from {
+    clip-path: inset(var(--desde) 0 0 0);
+  }
+  to {
+    clip-path: inset(var(--hasta) 0 0 0);
+  }
+}
+
+.paso-marca {
+  opacity: 0;
+  transform: scaleY(0);
+  transition:
+    opacity var(--dur-normal) var(--curva),
+    transform var(--dur-normal) var(--curva);
+}
+
+.arquitectura[data-activo="1"] li:nth-child(1) .paso-marca,
+.arquitectura[data-activo="2"] li:nth-child(2) .paso-marca,
+.arquitectura[data-activo="3"] li:nth-child(3) .paso-marca,
+.arquitectura[data-activo="4"] li:nth-child(4) .paso-marca,
+.arquitectura[data-activo="5"] li:nth-child(5) .paso-marca {
+  opacity: 1;
+  transform: none;
+}
+
+@supports (animation-timeline: view()) {
+  @media (prefers-reduced-motion: no-preference) {
+    .arquitectura {
+      timeline-scope: --paso-1, --paso-2, --paso-3, --paso-4, --paso-5;
+    }
+
+    .arquitectura li {
+      view-timeline-inset: 0 26%;
+    }
+
+    .arquitectura li:nth-child(1) {
+      view-timeline-name: --paso-1;
+    }
+    .arquitectura li:nth-child(2) {
+      view-timeline-name: --paso-2;
+    }
+    .arquitectura li:nth-child(3) {
+      view-timeline-name: --paso-3;
+    }
+    .arquitectura li:nth-child(4) {
+      view-timeline-name: --paso-4;
+    }
+    .arquitectura li:nth-child(5) {
+      view-timeline-name: --paso-5;
+    }
+
+    .arquitectura [data-capa="cimientos"],
+    .arquitectura [data-capa="rotulos"],
+    .arquitectura [data-capa^="piso"],
+    .arquitectura [data-capa="obra"],
+    .arquitectura [data-capa="bandera"] {
+      animation: sube var(--curva) both;
+      animation-range: entry 0% entry 100%;
+    }
+
+    .arquitectura [data-capa="cimientos"],
+    .arquitectura [data-capa="rotulos"] {
+      animation-timeline: --paso-1;
+    }
+    .arquitectura [data-capa="piso-1"] {
+      animation-timeline: --paso-2;
+    }
+    .arquitectura [data-capa="piso-2"] {
+      animation-timeline: --paso-3;
+    }
+    .arquitectura [data-capa="obra"] {
+      animation-timeline: --paso-4;
+    }
+    .arquitectura [data-capa="bandera"] {
+      animation-timeline: --paso-5;
+    }
+  }
+}
+
+@media (min-width: 1024px) {
+  @supports (animation-timeline: view()) {
+    .arquitectura li {
+      view-timeline-inset: 0 30%;
+    }
+  }
+}
+
+/* Respaldo: cada capa sube entera, en --dur-lento, cuando su paso cruza. */
+@supports not (animation-timeline: view()) {
+  .arquitectura[data-etapa] [data-capa] {
+    transition: clip-path var(--dur-lento) var(--curva);
+  }
+
+  .arquitectura[data-etapa="0"] :is([data-capa="cimientos"], [data-capa="rotulos"]),
+  .arquitectura:is([data-etapa="0"], [data-etapa="1"]) [data-capa="piso-1"],
+  .arquitectura:is([data-etapa="0"], [data-etapa="1"], [data-etapa="2"]) [data-capa="piso-2"],
+  .arquitectura:is([data-etapa="0"], [data-etapa="1"], [data-etapa="2"], [data-etapa="3"])
+    [data-capa="obra"],
+  .arquitectura:not([data-etapa="5"])[data-etapa] [data-capa="bandera"] {
+    clip-path: inset(var(--desde) 0 0 0);
+  }
+}
+
+/* Sala 7 · Danza — "El sistema sigue trabajando, a su ritmo."
+   La única animación continua: cada cinta se mece y se voltea sobre su
+   línea central (scaleY pasa por cero y deja ver su revés), un ciclo de
+   --arte-dur-danza; cada una arranca un tercio después de la anterior, así
+   en reposo se ven como el dibujo. Pausada fuera de pantalla. */
+.danza [data-capa="cinta-oro"] {
+  --centro: 31%;
+  --i: 0;
+}
+
+.danza [data-capa="cinta-verde"] {
+  --centro: 48%;
+  --i: 1;
+}
+
+.danza [data-capa="cinta-roja"] {
+  --centro: 68%;
+  --i: 2;
+}
+
+@keyframes danza {
+  0%,
+  100% {
+    transform: translateY(0) scaleY(1);
+  }
+  25% {
+    transform: translateY(-3%) scaleY(0);
+  }
+  50% {
+    transform: translateY(0) scaleY(-1);
+  }
+  75% {
+    transform: translateY(3%) scaleY(0);
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .danza [data-capa] {
+    transform-origin: 50% var(--centro);
+    animation: danza var(--arte-dur-danza) var(--arte-curva-danza)
+      calc(var(--arte-dur-danza) * var(--i) / 3) infinite;
+    animation-play-state: paused;
+  }
+
+  .danza[data-visible="si"] [data-capa] {
+    animation-play-state: running;
+  }
+}

@@ -1,8 +1,12 @@
+import { Capas } from "./Capas";
+import { Escenario } from "./Escenario";
 import { CUERPO, ETIQUETA, SALA, TITULAR } from "./estilos";
 
-// Sala 7 · Continuidad · Danza (docs/textos.md), de vuelta en noche.
-// Versión quieta: las cintas son decorativas porque el texto se entiende
-// sin ellas.
+// Sala 7 · Continuidad · Danza (docs/textos.md), de vuelta en noche. Las
+// cintas son decorativas porque el texto se entiende sin ellas. "El sistema
+// sigue trabajando, a su ritmo": se mecen y se voltean despacio, sin parar,
+// solo mientras la sala está en pantalla (app/salas.css, .danza). Con menos
+// movimiento, quietas.
 const PLANES = [
   { nombre: "Cuida:", texto: "hosting, mantenimiento y soporte." },
   { nombre: "Mejora:", texto: "lo de Cuida, más ajustes y mejoras cada mes." },
@@ -29,16 +33,9 @@ export function Sala7Continuidad() {
           </ul>
           <p className="font-mono text-cifra font-medium text-texto">Desde $1,800 al mes.</p>
         </div>
-        {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img
-          src="/arte/sala7-danza.svg"
-          width={1136}
-          height={360}
-          loading="lazy"
-          decoding="async"
-          alt=""
-          className="block h-auto w-full"
-        />
+        <Escenario modo="visible" className="danza">
+          <Capas carpeta="sala7" capas={["cinta-oro", "cinta-roja", "cinta-verde"]} ancho={1136} alto={360} alt="" />
+        </Escenario>
       </div>
     </section>
   );

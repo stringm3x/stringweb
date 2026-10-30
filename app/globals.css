@@ -41,6 +41,9 @@
     --arte-curva-estrella: ease-in-out;
     --arte-dur-tecla: 1ms;
     --arte-dur-tecla-cursor: 45ms;
+    /* Danza (sala 7): el vaivén de las cintas, la única animación continua. */
+    --arte-dur-danza: 12s;
+    --arte-curva-danza: ease-in-out;
 
     /* Legado de /saas y /gym (diseño anterior), hasta que se rehagan. */
     --legado-dur-cinta: 30s;
