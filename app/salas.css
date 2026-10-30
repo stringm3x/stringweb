@@ -154,3 +154,110 @@
     transform: none;
   }
 }
+
+/* Sala 4 · Música — "Mismo instrumento, más cuerdas."
+   Pasa una vez, al entrar, y no suena. Cada cuerda vibra en --dur-normal,
+   una tras otra, y su viñeta se enciende; en Empresa (la quinta) vibran
+   todas juntas. La cuerda curva (.cuerda-afina) solo se ve mientras vibra;
+   la recta se calla en ese instante. Después, solo vibran si se tocan. */
+.cuerda-afina {
+  opacity: 0;
+  transform-box: view-box;
+  transform-origin: 0 32px;
+}
+
+.afinacion[data-mov="espera"] .vineta {
+  opacity: 0.2;
+}
+
+@keyframes cuerda-vibra {
+  0% {
+    opacity: 1;
+    transform: scaleY(0);
+  }
+  20% {
+    transform: scaleY(1);
+  }
+  45% {
+    transform: scaleY(-0.6);
+  }
+  70% {
+    transform: scaleY(0.3);
+  }
+  100% {
+    opacity: 1;
+    transform: scaleY(0);
+  }
+}
+
+@keyframes cuerda-calla {
+  from,
+  to {
+    opacity: 0;
+  }
+}
+
+@keyframes vineta-enciende {
+  from {
+    opacity: 0.2;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.afinacion[data-mov="hecho"] .cuerda-afina {
+  animation:
+    cuerda-vibra var(--dur-normal) var(--curva) calc(var(--dur-normal) * var(--i)),
+    cuerda-vibra var(--dur-normal) var(--curva) calc(var(--dur-normal) * 4);
+}
+
+.afinacion[data-mov="hecho"] .cuerda-recta {
+  animation:
+    cuerda-calla var(--dur-normal) calc(var(--dur-normal) * var(--i)),
+    cuerda-calla var(--dur-normal) calc(var(--dur-normal) * 4);
+}
+
+.afinacion[data-mov="hecho"] .vineta {
+  animation: vineta-enciende var(--dur-normal) var(--curva) calc(var(--dur-normal) * var(--i)) both;
+}
+
+/* Sala 5 · Galería — "Cada obra se ilumina en su turno."
+   Pasa una vez: la galería en penumbra y cada reflector enciende su cuadro
+   en --dur-lento, uno tras otro; el haz aparece con él. */
+.penumbra {
+  opacity: 0;
+}
+
+.galeria[data-mov="espera"] .penumbra {
+  opacity: 1;
+}
+
+.galeria[data-mov="espera"] [data-capa^="haz"] {
+  opacity: 0;
+}
+
+@keyframes penumbra-sale {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
+}
+
+.galeria[data-mov="hecho"] .penumbra {
+  animation: penumbra-sale var(--dur-lento) var(--curva) calc(var(--dur-lento) * var(--i)) both;
+}
+
+.galeria[data-mov="hecho"] [data-capa="haz-1"] {
+  animation: aparece var(--dur-lento) var(--curva) both;
+}
+
+.galeria[data-mov="hecho"] [data-capa="haz-2"] {
+  animation: aparece var(--dur-lento) var(--curva) var(--dur-lento) both;
+}
+
+.galeria[data-mov="hecho"] [data-capa="haz-3"] {
+  animation: aparece var(--dur-lento) var(--curva) calc(var(--dur-lento) * 2) both;
+}
