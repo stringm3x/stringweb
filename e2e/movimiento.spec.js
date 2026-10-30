@@ -42,7 +42,26 @@ test("con menos movimiento cada sala queda en su estado final", async ({ page })
   expect(animaciones).toBe(0);
 });
 
-test("la afinación de la música pasa una sola vez", async ({ page }) => {
+test("en celular cada cuerda se afina al entrar y Empresa las afina todas", async ({ page }) => {
+  await page.goto("/");
+  const ol = page.locator(".afinacion");
+  await expect(ol).toHaveAttribute("data-mov", "por-cuerda");
+  const afinadas = () =>
+    page.$$eval(".afinacion > li", (lis) => lis.map((li) => "afinada" in li.dataset));
+  // Al llegar a Responde se afina (y la de abajo si ya cabe); Empresa no.
+  await llevar(page, ".afinacion > li:nth-child(1)", 0.2);
+  await expect.poll(async () => (await afinadas())[0]).toBe(true);
+  expect((await afinadas())[4]).toBe(false);
+  expect(await opacidad(page, ".vineta")).toEqual(expect.arrayContaining(["0.2"]));
+  await llevar(page, ".afinacion > li:nth-child(5)", 0.3);
+  await expect.poll(afinadas).toEqual([true, true, true, true, true]);
+  await expect(ol).toHaveAttribute("data-empresa", "");
+  await page.waitForTimeout(800);
+  expect(await opacidad(page, ".vineta")).toEqual(["1", "1", "1", "1", "1"]);
+});
+
+test("en escritorio la afinación pasa una sola vez, en cascada", async ({ page }) => {
+  await page.setViewportSize({ width: 1440, height: 900 });
   await page.goto("/");
   const ol = page.locator(".afinacion");
   await expect(ol).toHaveAttribute("data-mov", "espera");
@@ -59,7 +78,25 @@ test("la afinación de la música pasa una sola vez", async ({ page }) => {
   await expect(ol).toHaveAttribute("data-mov", "hecho");
 });
 
-test("la galería se ilumina al entrar", async ({ page }) => {
+test("en celular cada cuadro de la galería se enciende al entrar en la tira", async ({ page }) => {
+  await page.goto("/");
+  const galeria = page.locator(".galeria");
+  await expect(galeria).toHaveAttribute("data-mov", "por-cuadro");
+  await llevar(page, ".galeria", 0.2);
+  await expect(galeria).toHaveAttribute("data-luz", "1");
+  await page.waitForTimeout(800);
+  expect(await opacidad(page, ".penumbra")).toEqual(["0", "1", "1"]);
+  // Deslizar la tira hasta el final enciende los otros dos.
+  await page.$eval("[data-tira]:has(.galeria)", (t) => t.scrollTo({ left: t.scrollWidth }));
+  await expect(galeria).toHaveAttribute("data-luz", /3/);
+  await page.$eval("[data-tira]:has(.galeria)", (t) => t.scrollTo({ left: t.scrollWidth / 2 - t.clientWidth / 2 }));
+  await expect(galeria).toHaveAttribute("data-luz", "1 2 3");
+  await page.waitForTimeout(800);
+  expect(await opacidad(page, ".penumbra")).toEqual(["0", "0", "0"]);
+});
+
+test("en escritorio la galería se ilumina al entrar, por tiempo", async ({ page }) => {
+  await page.setViewportSize({ width: 1440, height: 900 });
   await page.goto("/");
   await expect(page.locator(".galeria")).toHaveAttribute("data-mov", "espera");
   expect(await opacidad(page, ".penumbra")).toEqual(["1", "1", "1"]);

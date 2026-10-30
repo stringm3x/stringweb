@@ -7,7 +7,8 @@ import { CUERPO, ETIQUETA, SALA, TITULAR } from "./estilos";
 // dibujadas en el arte. En celular conserva su tamaño y se recorre de lado,
 // como la tira de cine. "Cada obra se ilumina en su turno": al entrar, una
 // sola vez, la galería está en penumbra y los reflectores encienden cada
-// cuadro, uno tras otro (app/salas.css, .galeria).
+// cuadro, uno tras otro (app/salas.css, .galeria). En celular, cada cuadro
+// se enciende cuando entra en la tira al deslizarla.
 const CAPAS = ["galeria-1", "haz-1", "galeria-2", "haz-2", "galeria-3", "haz-3", "galeria-4"];
 
 // La penumbra de cada cuadro: el marco completo (x = 80, 434, 788; 268 × 250).
@@ -28,9 +29,10 @@ export function Sala5Galeria() {
           role="region"
           aria-label="Cuadros de la galería"
           tabIndex={0}
+          data-tira
           className="-mx-4 overflow-x-auto px-4 sm:mx-0 sm:px-0"
         >
-          <Escenario modo="una-vez" className="galeria min-w-[720px]">
+          <Escenario modo="una-vez" cuadros className="galeria min-w-[720px]">
             <Capas
               carpeta="sala5"
               capas={CAPAS}
@@ -42,6 +44,7 @@ export function Sala5Galeria() {
                 <div
                   key={left}
                   aria-hidden="true"
+                  data-cuadro={i + 1}
                   className="penumbra absolute top-[18.4%] h-[50%] w-[23.6%] bg-texto/60"
                   style={{ left, "--i": i }}
                 />

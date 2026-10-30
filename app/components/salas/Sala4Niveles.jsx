@@ -8,7 +8,8 @@ import { CUERPO, ENLACE, ETIQUETA, SALA, TITULAR } from "./estilos";
 // con su viñeta de artes acumuladas; las cuerdas engordan nivel a nivel,
 // como cuerdas de distinto calibre. "Mismo instrumento, más cuerdas": al
 // entrar, una sola vez y sin sonido, se afinan en cascada y cada viñeta se
-// enciende; en Empresa vibran todas (app/salas.css, .afinacion).
+// enciende; en Empresa vibran todas (app/salas.css, .afinacion). En celular,
+// cada cuerda se afina cuando entra en pantalla.
 const CALIBRES = [1.2, 1.5, 1.8, 2.1, 2.4];
 
 export function Sala4Niveles() {
@@ -22,7 +23,7 @@ export function Sala4Niveles() {
             <p className={CUERPO}>Todos los niveles reciben la misma calidad. Cambia el alcance.</p>
           </div>
 
-          <Escenario as="ol" modo="una-vez" className="afinacion flex flex-col">
+          <Escenario as="ol" modo="una-vez" cuerdas className="afinacion flex flex-col">
             {NIVELES.map((nivel, i) => (
               <li key={nivel.nombre} className="flex flex-col gap-space-3 pt-space-4">
                 <div className="grid gap-space-3 lg:grid-cols-[240px_1fr_240px] lg:items-start lg:gap-space-5">

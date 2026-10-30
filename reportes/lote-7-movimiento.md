@@ -1,6 +1,6 @@
 # Lote 7 · Salas en movimiento — reporte
 
-Rama `lote-7-movimiento`, 8 commits, sin fusionar. `npm run build` limpio, `npm test` 24/24, `npm run test:e2e` 36/36.
+Rama `lote-7-movimiento`, 9 commits, sin fusionar. `npm run build` limpio, `npm test` 24/24, `npm run test:e2e` 38/38.
 Capturas de los momentos de cada sala en `reportes/lote-7-movimiento/` (375 px; sala 6 también a 1440; salas 2 y 3 en WebKit).
 **Hecho.** `docs/movimiento-salas.md` en el repo. Los SVG de las salas 2, 5, 6 y 7 se parten en capas con `scripts/capas-arte.mjs`
 (tramos contiguos, mismo orden de pintado) y se apilan con `Capas.jsx`. `Escenario.jsx` marca atributos con un solo
@@ -10,8 +10,8 @@ y etapas que solo avanzan donde no (Firefox). Sin GSAP, sin escuchar el scroll. 
 **Frase de intención de cada sala**
 - 2 Escultura: la piedra que tapa el hueco se agrieta y cae a pedazos; queda el celular: el sistema quita lo que sobra.
 - 3 Cine: la tira entra como en un proyector y cada cuadro se enciende con corte seco: la historia, cuadro por cuadro.
-- 4 Música: una vez, sin sonido, las cuerdas se afinan en cascada y cada viñeta suma su arte: mismo instrumento, más cuerdas.
-- 5 Galería: en penumbra, cada reflector enciende su cuadro en su turno: cada obra se ilumina.
+- 4 Música: una vez, sin sonido, las cuerdas se afinan en cascada (en celular, cada una al entrar) y cada viñeta suma su arte.
+- 5 Galería: en penumbra, cada reflector enciende su cuadro en su turno (en celular, al entrar en la tira): cada obra se ilumina.
 - 6 Arquitectura: cada piso sube cuando su paso cruza la línea y el paso se marca: el edificio crece al ritmo de los pasos.
 - 7 Danza: las cintas se mecen y se voltean, sin parar y sin prisa: el sistema sigue trabajando, a su ritmo.
 - 1 Inicio: sin cambios visibles; el tecleo y las estrellas ya toman su tiempo de los tokens.
@@ -35,6 +35,6 @@ y etapas que solo avanzan donde no (Firefox). Sin GSAP, sin escuchar el scroll. 
 - Cine: los cuadros y los créditos cambian con `data-activo` (regresan al subir), no con línea de tiempo: un corte seco no la
   necesita y la misma señal centra cada cuadro en celular. La entrada de la tira sí va ligada al scroll.
 - Tokens nuevos de arte: `--arte-dur-danza` (12 s), `--arte-curva-danza` y `--arte-espera-tecla` (0.3 s).
-- Galería en celular: solo se ven el primer cuadro y parte del segundo sin deslizar la tira; el doc pide centrar solo en el cine.
-- Música en celular: la cascada dura 1.5 s y Controla y Empresa quedan bajo el pliegue al dispararse.
+- Ajustes de Carlos en celular: la galería enciende cada cuadro al entrar en la tira (observador con la tira como raíz) y la
+  música afina cada cuerda al entrar en pantalla; Empresa las afina todas. Escritorio igual (`ajuste-*-celular-375.jpg`).
 - Sigue como antes: la vibración al tocar una cuerda redibuja la ruta con JS (`Cuerdas.jsx`), fuera de la regla de solo `transform`.

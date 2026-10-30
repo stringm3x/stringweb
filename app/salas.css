@@ -166,7 +166,8 @@
   transform-origin: 0 32px;
 }
 
-.afinacion[data-mov="espera"] .vineta {
+.afinacion[data-mov="espera"] .vineta,
+.afinacion[data-mov="por-cuerda"] li:not([data-afinada]) .vineta {
   opacity: 0.2;
 }
 
@@ -222,6 +223,60 @@
   animation: vineta-enciende var(--dur-normal) var(--curva) calc(var(--dur-normal) * var(--i)) both;
 }
 
+/* En celular, cada cuerda vibra y enciende su viñeta cuando entra en
+   pantalla; al aparecer Empresa vibran todas otra vez. La segunda vibración
+   lleva otro nombre para no reiniciar la primera. */
+@keyframes cuerda-vibra-todas {
+  0% {
+    opacity: 1;
+    transform: scaleY(0);
+  }
+  20% {
+    transform: scaleY(1);
+  }
+  45% {
+    transform: scaleY(-0.6);
+  }
+  70% {
+    transform: scaleY(0.3);
+  }
+  100% {
+    opacity: 1;
+    transform: scaleY(0);
+  }
+}
+
+@keyframes cuerda-calla-todas {
+  from,
+  to {
+    opacity: 0;
+  }
+}
+
+.afinacion[data-mov="por-cuerda"] li[data-afinada] .cuerda-afina {
+  animation: cuerda-vibra var(--dur-normal) var(--curva);
+}
+
+.afinacion[data-mov="por-cuerda"] li[data-afinada] .cuerda-recta {
+  animation: cuerda-calla var(--dur-normal);
+}
+
+.afinacion[data-mov="por-cuerda"][data-empresa] li[data-afinada] .cuerda-afina {
+  animation:
+    cuerda-vibra var(--dur-normal) var(--curva),
+    cuerda-vibra-todas var(--dur-normal) var(--curva);
+}
+
+.afinacion[data-mov="por-cuerda"][data-empresa] li[data-afinada] .cuerda-recta {
+  animation:
+    cuerda-calla var(--dur-normal),
+    cuerda-calla-todas var(--dur-normal);
+}
+
+.afinacion[data-mov="por-cuerda"] li[data-afinada] .vineta {
+  animation: vineta-enciende var(--dur-normal) var(--curva) both;
+}
+
 /* Sala 5 · Galería — "Cada obra se ilumina en su turno."
    Pasa una vez: la galería en penumbra y cada reflector enciende su cuadro
    en --dur-lento, uno tras otro; el haz aparece con él. */
@@ -229,11 +284,11 @@
   opacity: 0;
 }
 
-.galeria[data-mov="espera"] .penumbra {
+.galeria:is([data-mov="espera"], [data-mov="por-cuadro"]) .penumbra {
   opacity: 1;
 }
 
-.galeria[data-mov="espera"] [data-capa^="haz"] {
+.galeria:is([data-mov="espera"], [data-mov="por-cuadro"]) [data-capa^="haz"] {
   opacity: 0;
 }
 
@@ -260,6 +315,20 @@
 
 .galeria[data-mov="hecho"] [data-capa="haz-3"] {
   animation: aparece var(--dur-lento) var(--curva) calc(var(--dur-lento) * 2) both;
+}
+
+/* Galería en celular: cada cuadro se enciende cuando entra en la tira al
+   deslizarla (data-luz), en --dur-lento, con su haz. */
+.galeria[data-luz~="1"] .penumbra[data-cuadro="1"],
+.galeria[data-luz~="2"] .penumbra[data-cuadro="2"],
+.galeria[data-luz~="3"] .penumbra[data-cuadro="3"] {
+  animation: penumbra-sale var(--dur-lento) var(--curva) both;
+}
+
+.galeria[data-luz~="1"] [data-capa="haz-1"],
+.galeria[data-luz~="2"] [data-capa="haz-2"],
+.galeria[data-luz~="3"] [data-capa="haz-3"] {
+  animation: aparece var(--dur-lento) var(--curva) both;
 }
 
 /* Sala 6 · Arquitectura — "El edificio crece al ritmo de los pasos."
