@@ -3,11 +3,13 @@ import { Boton } from "../ui/Boton";
 import { archivo } from "./archivo";
 import { Entra } from "./Entra";
 import { Firma } from "./Firma";
+import { LaminaBoaz } from "./LaminaBoaz";
 
 // Bloque 2 de /productos (lote 9a): Boaz, la única sala clara de la página.
 // Texto a la izquierda y su lámina a la derecha (en celular, debajo). Listas
-// y planes sin tarjetas, entre reglas. La mancha azul de la lámina es la
-// única nota de color; el botón es el primario de pared (verde profundo).
+// y planes sin tarjetas, entre reglas. El azul solo vive en la marca y la
+// lámina de Boaz; el botón es el primario de pared (verde profundo). El
+// logotipo es el de string-gym-saas (public/marca), sobre su mínimo de 96 px.
 const BOAZ = { fontStretch: "62%" };
 
 const HACE = [
@@ -37,12 +39,14 @@ export function BloqueBoaz() {
           <div className="flex flex-col gap-space-4">
             <p className={ETIQUETA}>01 · PRODUCTOS</p>
             <h2 id="boaz-titulo" className="flex flex-col gap-space-2">
-              <span
-                className={`${archivo.className} block text-[104px] leading-[0.9] md:text-[144px] lg:text-[168px]`}
-                style={BOAZ}
-              >
-                Boaz,
-              </span>
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img
+                src="/marca/boaz-logotipo-positivo.svg"
+                width={378}
+                height={100}
+                alt="Boaz,"
+                className="h-auto w-[280px] md:w-[360px] lg:w-[400px]"
+              />
               <span className="block text-[32px] font-semibold leading-[1.1] tracking-[-0.035em] md:text-[44px]">
                 el sistema para gimnasios.
               </span>
@@ -54,16 +58,8 @@ export function BloqueBoaz() {
             </p>
           </div>
 
-          <figure className="flex flex-col gap-space-2">
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img
-              src="/arte/productos/lamina-boaz.svg"
-              width={224}
-              height={206}
-              alt="Lámina de Boaz: una columna con un disco colgado, dibujada como plano técnico, con la mancha azul en el disco."
-              loading="lazy"
-              className="h-auto w-full border border-texto"
-            />
+          <figure className="flex w-full max-w-[420px] flex-col gap-space-2 lg:justify-self-end">
+            <LaminaBoaz className="h-auto w-full border border-texto bg-fondo text-texto" />
             <figcaption className="font-mono text-etiqueta uppercase text-texto-suave">
               LA LÁMINA DE BOAZ · PLANO TÉCNICO SOBRE PAPEL
             </figcaption>
