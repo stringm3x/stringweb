@@ -11,7 +11,9 @@ import { useEffect, useRef } from "react";
 // - "etapas" (escultura, cine, arquitectura): lo que sigue al dedo usa
 //   animation-timeline en CSS. Donde el navegador no la tiene, este modo pone
 //   data-etapa = cuántos [data-centinela] ya cruzaron la línea (solo avanza,
-//   así nunca queda a medias) y data-activo = el paso de ahora.
+//   así nunca queda a medias) y data-activo = el paso de ahora. Con `activo`,
+//   data-activo se marca siempre: para cambios secos (cuadros del cine, paso
+//   resaltado), que no necesitan línea de tiempo y regresan si se sube.
 // - "visible" (danza): data-visible mientras la sala está en pantalla.
 //
 // Con menos movimiento no marca nada: sin atributos, cada sala queda en su
@@ -20,10 +22,14 @@ import { useEffect, useRef } from "react";
 // `linea` es la altura de la pantalla (en %) donde se cruza una etapa;
 // `lineaAncha`, la de pantallas de 1024 px o más. `centrar` hace que la tira
 // [data-tira] centre el [data-cuadro] de la etapa actual (cine en celular).
+// Cuánto se extiende la raíz por arriba de la pantalla.
+const ARRIBA = 100000;
+
 export function Escenario({
   modo,
   linea = 50,
   lineaAncha = linea,
+  activo = false,
   centrar = false,
   as: Etiqueta = "div",
   children,
@@ -59,7 +65,7 @@ export function Escenario({
 
     if (modo !== "etapas") return;
     const respaldo = !CSS.supports("animation-timeline: view()");
-    if (!respaldo && !centrar) return;
+    if (!respaldo && !activo && !centrar) return;
 
     const ancha = window.matchMedia("(min-width: 1024px)").matches;
     const altura = ancha ? lineaAncha : linea;
@@ -68,34 +74,30 @@ export function Escenario({
     let maximo = 0;
     let actual = -1;
 
-    if (respaldo) {
-      el.dataset.etapa = "0";
-      el.dataset.activo = "0";
-    }
+    if (respaldo) el.dataset.etapa = "0";
+    if (respaldo || activo) el.dataset.activo = "0";
 
-    // La raíz va de arriba de la pantalla hasta la línea: un centinela que
-    // está dentro, o ya pasó por arriba, cruzó.
+    // La raíz va de muy arriba de la pantalla hasta la línea: un centinela
+    // dentro de ella ya cruzó. Así un salto (un enlace, volver arriba) también
+    // avisa, porque siempre entra o sale de la raíz.
     const io = new IntersectionObserver(
       (entradas) => {
         entradas.forEach((e) => {
-          const cruzo = e.isIntersecting || e.boundingClientRect.top < 0;
-          if (cruzo) cruzados.add(e.target);
+          if (e.isIntersecting) cruzados.add(e.target);
           else cruzados.delete(e.target);
         });
         const ahora = cruzados.size;
         maximo = Math.max(maximo, ahora);
-        if (respaldo) {
-          el.dataset.etapa = String(maximo);
-          el.dataset.activo = String(ahora);
-        }
+        if (respaldo) el.dataset.etapa = String(maximo);
+        if (respaldo || activo) el.dataset.activo = String(ahora);
         if (centrar && ahora !== actual) centrarCuadro(el, ahora);
         actual = ahora;
       },
-      { rootMargin: `0px 0px -${100 - altura}% 0px` }
+      { rootMargin: `${ARRIBA}px 0px -${100 - altura}% 0px` }
     );
     centinelas.forEach((c) => io.observe(c));
     return () => io.disconnect();
-  }, [modo, linea, lineaAncha, centrar]);
+  }, [modo, linea, lineaAncha, activo, centrar]);
 
   return (
     <Etiqueta ref={ref} {...resto}>

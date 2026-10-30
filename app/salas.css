@@ -98,3 +98,59 @@
     opacity: 0;
   }
 }
+
+/* Sala 3 · Cine — "La historia se cuenta cuadro por cuadro."
+   La tira entra desde la derecha ligada al scroll. Los cuadros se encienden
+   con corte seco: Escenario marca data-activo (1 entró, 2–4 cuadros, 5
+   créditos) y aquí no hay transición, como un corte de plano. Final: los
+   tres encendidos y los créditos a la vista. */
+.cine-oscuro {
+  opacity: 0;
+}
+
+.cine[data-activo="0"] .cine-oscuro,
+.cine[data-activo="1"] .cine-oscuro,
+.cine[data-activo="2"] [data-cuadro="3"],
+.cine[data-activo="2"] [data-cuadro="4"],
+.cine[data-activo="3"] [data-cuadro="4"] {
+  opacity: 1;
+}
+
+.cine[data-activo] .cine-creditos {
+  opacity: 0;
+  transition: opacity var(--dur-lento) var(--curva);
+}
+
+.cine[data-activo="5"] .cine-creditos {
+  opacity: 1;
+}
+
+@keyframes cine-entra {
+  from {
+    transform: translateX(40%);
+  }
+  to {
+    transform: none;
+  }
+}
+
+@supports (animation-timeline: view()) {
+  @media (prefers-reduced-motion: no-preference) {
+    .cine-entra {
+      animation: cine-entra var(--curva) both;
+      animation-timeline: view();
+      animation-range: entry 0% cover 25%;
+    }
+  }
+}
+
+@supports not (animation-timeline: view()) {
+  .cine[data-activo] .cine-entra {
+    transform: translateX(40%);
+    transition: transform var(--dur-lento) var(--curva);
+  }
+
+  .cine[data-activo]:not([data-activo="0"]) .cine-entra {
+    transform: none;
+  }
+}
