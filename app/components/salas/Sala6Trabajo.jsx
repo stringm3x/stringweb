@@ -1,8 +1,15 @@
+import { Capas } from "./Capas";
+import { Escenario } from "./Escenario";
 import { CUERPO, ETIQUETA, SALA, TITULAR } from "./estilos";
 
 // Sala 6 · Cómo trabajamos · Arquitectura (docs/textos.md), sobre pared.
-// Versión quieta: los pasos, el edificio dibujado a mano y el estándar de
-// servicio con sus cifras en Geist Mono.
+// Los pasos, el edificio dibujado a mano y el estándar de servicio con sus
+// cifras en Geist Mono. "El edificio crece al ritmo de los pasos": cada piso
+// sube cuando su paso cruza la línea y el paso de ahora se marca en la lista
+// (app/salas.css, .arquitectura). El dibujo va pegado bajo la barra, arriba
+// de la lista en celular y en su columna en escritorio, para verlo crecer.
+// Con menos movimiento, el edificio completo y sin paso marcado.
+const CAPAS = ["suelo", "cimientos", "suelo-linea", "piso-1", "piso-2", "obra", "bandera", "rotulos"];
 const PASOS = [
   {
     nombre: "Diagnóstico.",
@@ -41,31 +48,41 @@ export function Sala6Trabajo() {
   return (
     <section data-theme="pared" className={SALA}>
       <div className="mx-auto flex max-w-contenido flex-col gap-space-6">
-        <div className="grid items-center gap-space-6 lg:grid-cols-2">
+        {/* La línea de cada paso: al 74 % de la pantalla en celular (el centro
+            de lo que queda bajo el dibujo) y al 70 % en escritorio, para que el
+            dibujo siga entero cuando llega el último paso. */}
+        <Escenario
+          modo="etapas"
+          activo
+          linea={74}
+          lineaAncha={70}
+          className="arquitectura grid gap-space-6 lg:grid-cols-2"
+        >
           <div className="flex flex-col gap-space-4">
             <p className={ETIQUETA}>CÓMO TRABAJAMOS</p>
             <h2 className={TITULAR}>Primero los cimientos.</h2>
-            {/* El número de cada paso vive en el dibujo (1 · Diagnóstico…); aquí
-                no se repite. El <ol> guarda el orden para el lector. */}
-            <ol className="flex flex-col gap-space-3">
-              {PASOS.map((paso) => (
-                <li key={paso.nombre} className={CUERPO}>
-                  <strong className="font-semibold text-texto">{paso.nombre}</strong> {paso.texto}
-                </li>
-              ))}
-            </ol>
           </div>
-          {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img
-            src="/arte/sala6-arquitectura.svg"
-            width={640}
-            height={590}
-            loading="lazy"
-            decoding="async"
-            alt="Dibujo de un edificio en construcción: cimientos, dos pisos terminados, un piso en obra y una bandera en lo alto."
-            className="mx-auto h-auto w-full max-w-[520px]"
-          />
-        </div>
+          <div className="sticky top-[72px] z-10 bg-fondo py-space-2 lg:col-start-2 lg:row-span-2 lg:row-start-1 lg:top-[104px] lg:self-start">
+            <Capas
+              carpeta="sala6"
+              capas={CAPAS}
+              ancho={640}
+              alto={590}
+              alt="Dibujo de un edificio en construcción: cimientos, dos pisos terminados, un piso en obra y una bandera en lo alto."
+              className="mx-auto w-full max-w-[520px]"
+            />
+          </div>
+          {/* El número de cada paso vive en el dibujo (1 · Diagnóstico…); aquí
+              no se repite. El <ol> guarda el orden para el lector. */}
+          <ol className="flex flex-col gap-space-3 lg:col-start-1">
+            {PASOS.map((paso) => (
+              <li key={paso.nombre} data-centinela className={`relative ${CUERPO}`}>
+                <span aria-hidden="true" className="paso-marca absolute -left-3 bottom-1 top-1 w-[2px] bg-acento" />
+                <strong className="font-semibold text-texto">{paso.nombre}</strong> {paso.texto}
+              </li>
+            ))}
+          </ol>
+        </Escenario>
 
         <div className="flex flex-col gap-space-4 rounded-lg border border-hairline bg-superficie p-space-4 lg:p-space-6">
           <h3 className="text-subtitulo">Nuestro estándar</h3>

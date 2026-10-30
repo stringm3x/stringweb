@@ -21,6 +21,8 @@ const SUELTAS = [
   /\b(duration|delay)-(\d+|\[)/, // clases de Tailwind con número
   /\bease-(in|out|linear)/,
   /\b(duration|delay|transitionDelay|transitionDuration)\s*:\s*[\d"'`]/, // GSAP y estilos en línea
+  /\$\{[^}]+\}m?s\b/, // `${n}ms` o `${n}s` en plantillas
+  /\b(animationDuration|animationDelay)\s*:/, // estilos en línea de animación
 ];
 
 function archivos(dir) {

@@ -18,8 +18,9 @@ function estrellas(cuantas) {
       x: x.toFixed(2),
       y: y.toFixed(2),
       r: (0.6 + azar() * 0.9).toFixed(2),
-      dur: (4 + azar() * 3).toFixed(1),
-      delay: (azar() * 5).toFixed(1),
+      // En veces --arte-dur-estrella (5 s): dura de 4 a 7 s y espera de 0 a 5 s.
+      ritmo: ((4 + azar() * 3) / 5).toFixed(2),
+      desfase: azar().toFixed(2),
     });
   }
   return lista;
@@ -39,8 +40,8 @@ export function Estrellas({ className = "" }) {
             top: `${e.y}%`,
             width: `${e.r * 2}px`,
             height: `${e.r * 2}px`,
-            animationDuration: `${e.dur}s`,
-            animationDelay: `${e.delay}s`,
+            "--ritmo": e.ritmo,
+            "--desfase": e.desfase,
           }}
         />
       ))}

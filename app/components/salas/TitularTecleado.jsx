@@ -3,9 +3,8 @@
 // de pantalla leen la frase completa y el layout no se mueve. Cada letra
 // aparece con su retraso; el cursor la acompaña y al final se queda
 // parpadeando a 1.1 s. Con menos movimiento, la frase sale completa
-// (globals.css, .tecla).
-const PASO_MS = 45;
-const INICIO_MS = 300;
+// (globals.css, .tecla). Cada letra lleva su número de pulsación; el retraso
+// sale de los tokens --arte-espera-tecla y --arte-dur-tecla-cursor.
 
 export function TitularTecleado({ texto, className = "" }) {
   const palabras = texto.split(" ");
@@ -19,7 +18,7 @@ export function TitularTecleado({ texto, className = "" }) {
         const contenido = (
           <span key={p} className="inline-block whitespace-nowrap">
             {[...palabra].map((c) => {
-              const delay = INICIO_MS + indice * PASO_MS;
+              const pulsacion = indice;
               const fin = letra === ultima;
               indice += 1;
               letra += 1;
@@ -28,7 +27,7 @@ export function TitularTecleado({ texto, className = "" }) {
                   key={indice}
                   aria-hidden="true"
                   className={fin ? "tecla tecla-fin" : "tecla"}
-                  style={{ "--tecla-delay": `${delay}ms` }}
+                  style={{ "--tecla-n": pulsacion }}
                 >
                   {c}
                 </span>

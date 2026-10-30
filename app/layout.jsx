@@ -3,6 +3,7 @@ import { Analytics } from "@vercel/analytics/react";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 import { CORREO, WHATSAPP_TELEFONO } from "./lib/contacto";
 import "./globals.css";
+import "./salas.css";
 
 // Título y descripción de docs/textos.md § Textos que faltaban.
 const TITULO = "STRING — Software hecho con oficio. Y con arte.";

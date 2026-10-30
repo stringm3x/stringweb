@@ -1,0 +1,519 @@
+/* El movimiento de las salas (docs/movimiento-salas.md).
+
+   Reglas de este archivo:
+   - El estilo base de cada capa es el ESTADO FINAL. Las animaciones solo
+     dicen de dónde viene. Sin JavaScript o con menos movimiento, cada sala
+     se ve completa y quieta.
+   - Lo que sigue al dedo usa animation-timeline (view). Donde el navegador
+     no la tiene, Escenario.jsx marca data-etapa y aquí se resuelve por
+     etapas con transiciones (@supports not).
+   - Solo transform, opacity y clip-path. Duraciones y curvas de los tokens
+     de globals.css; los cortes secos, con paradas repetidas. */
+
+/* Sala 2 · Escultura — "El sistema quita lo que sobra."
+   Sigue al dedo con la línea de tiempo del propio dibujo, así en celular
+   pasa mientras se ve. Final: la piedra ya cayó y las lascas están en el
+   suelo. */
+.piedra {
+  opacity: 0;
+  transform-box: fill-box;
+  transform-origin: center;
+}
+
+@keyframes piedra-cae {
+  from {
+    opacity: 1;
+    transform: none;
+  }
+  60% {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+    transform: translate(var(--dx), var(--dy)) rotate(var(--giro));
+  }
+}
+
+@keyframes aparece {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@supports (animation-timeline: view()) {
+  @media (prefers-reduced-motion: no-preference) {
+    .escultura {
+      view-timeline: --escultura block;
+    }
+
+    /* Al 25 % se agrieta; del 50 % en adelante cae, un pedazo tras otro. */
+    .escultura .piedra {
+      animation: piedra-cae var(--curva) both;
+      animation-timeline: --escultura;
+      animation-range: cover calc(50% + var(--i) * 3%) cover calc(58% + var(--i) * 3%);
+    }
+
+    .escultura .piedra-grieta {
+      animation: aparece var(--curva) both;
+      animation-timeline: --escultura;
+      animation-range: cover 22% cover 32%;
+    }
+
+    .escultura [data-capa="lascas"] {
+      animation: aparece var(--curva) both;
+      animation-timeline: --escultura;
+      animation-range: cover 56% cover 68%;
+    }
+  }
+}
+
+/* Respaldo: 0 bloque entero · 1 grietas · 2 cae cada pedazo en
+   --dur-rapido, uno tras otro. */
+@supports not (animation-timeline: view()) {
+  .escultura[data-etapa] .piedra {
+    opacity: 0;
+    transform: translate(var(--dx), var(--dy)) rotate(var(--giro));
+    transition:
+      transform var(--dur-rapido) var(--curva) calc(var(--dur-rapido) * var(--i)),
+      opacity var(--dur-rapido) var(--curva) calc(var(--dur-rapido) * var(--i));
+  }
+
+  .escultura[data-etapa="0"] .piedra,
+  .escultura[data-etapa="1"] .piedra {
+    opacity: 1;
+    transform: none;
+  }
+
+  .escultura[data-etapa] .piedra-grieta,
+  .escultura[data-etapa] [data-capa="lascas"] {
+    transition: opacity var(--dur-normal) var(--curva);
+  }
+
+  .escultura[data-etapa="0"] .piedra-grieta,
+  .escultura[data-etapa="0"] [data-capa="lascas"],
+  .escultura[data-etapa="1"] [data-capa="lascas"] {
+    opacity: 0;
+  }
+}
+
+/* Sala 3 · Cine — "La historia se cuenta cuadro por cuadro."
+   La tira entra desde la derecha ligada al scroll. Los cuadros se encienden
+   con corte seco: Escenario marca data-activo (1 entró, 2–4 cuadros, 5
+   créditos) y aquí no hay transición, como un corte de plano. Final: los
+   tres encendidos y los créditos a la vista. */
+.cine-oscuro {
+  opacity: 0;
+}
+
+.cine[data-activo="0"] .cine-oscuro,
+.cine[data-activo="1"] .cine-oscuro,
+.cine[data-activo="2"] [data-cuadro="3"],
+.cine[data-activo="2"] [data-cuadro="4"],
+.cine[data-activo="3"] [data-cuadro="4"] {
+  opacity: 1;
+}
+
+.cine[data-activo] .cine-creditos {
+  opacity: 0;
+  transition: opacity var(--dur-lento) var(--curva);
+}
+
+.cine[data-activo="5"] .cine-creditos {
+  opacity: 1;
+}
+
+@keyframes cine-entra {
+  from {
+    transform: translateX(40%);
+  }
+  to {
+    transform: none;
+  }
+}
+
+@supports (animation-timeline: view()) {
+  @media (prefers-reduced-motion: no-preference) {
+    .cine-entra {
+      animation: cine-entra var(--curva) both;
+      animation-timeline: view();
+      animation-range: entry 0% cover 25%;
+    }
+  }
+}
+
+@supports not (animation-timeline: view()) {
+  .cine[data-activo] .cine-entra {
+    transform: translateX(40%);
+    transition: transform var(--dur-lento) var(--curva);
+  }
+
+  .cine[data-activo]:not([data-activo="0"]) .cine-entra {
+    transform: none;
+  }
+}
+
+/* Sala 4 · Música — "Mismo instrumento, más cuerdas."
+   Pasa una vez, al entrar, y no suena. Cada cuerda vibra en --dur-normal,
+   una tras otra, y su viñeta se enciende; en Empresa (la quinta) vibran
+   todas juntas. La cuerda curva (.cuerda-afina) solo se ve mientras vibra;
+   la recta se calla en ese instante. Después, solo vibran si se tocan. */
+.cuerda-afina {
+  opacity: 0;
+  transform-box: view-box;
+  transform-origin: 0 32px;
+}
+
+.afinacion[data-mov="espera"] .vineta,
+.afinacion[data-mov="por-cuerda"] li:not([data-afinada]) .vineta {
+  opacity: 0.2;
+}
+
+@keyframes cuerda-vibra {
+  0% {
+    opacity: 1;
+    transform: scaleY(0);
+  }
+  20% {
+    transform: scaleY(1);
+  }
+  45% {
+    transform: scaleY(-0.6);
+  }
+  70% {
+    transform: scaleY(0.3);
+  }
+  100% {
+    opacity: 1;
+    transform: scaleY(0);
+  }
+}
+
+@keyframes cuerda-calla {
+  from,
+  to {
+    opacity: 0;
+  }
+}
+
+@keyframes vineta-enciende {
+  from {
+    opacity: 0.2;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.afinacion[data-mov="hecho"] .cuerda-afina {
+  animation:
+    cuerda-vibra var(--dur-normal) var(--curva) calc(var(--dur-normal) * var(--i)),
+    cuerda-vibra var(--dur-normal) var(--curva) calc(var(--dur-normal) * 4);
+}
+
+.afinacion[data-mov="hecho"] .cuerda-recta {
+  animation:
+    cuerda-calla var(--dur-normal) calc(var(--dur-normal) * var(--i)),
+    cuerda-calla var(--dur-normal) calc(var(--dur-normal) * 4);
+}
+
+.afinacion[data-mov="hecho"] .vineta {
+  animation: vineta-enciende var(--dur-normal) var(--curva) calc(var(--dur-normal) * var(--i)) both;
+}
+
+/* En celular, cada cuerda vibra y enciende su viñeta cuando entra en
+   pantalla; al aparecer Empresa vibran todas otra vez. La segunda vibración
+   lleva otro nombre para no reiniciar la primera. */
+@keyframes cuerda-vibra-todas {
+  0% {
+    opacity: 1;
+    transform: scaleY(0);
+  }
+  20% {
+    transform: scaleY(1);
+  }
+  45% {
+    transform: scaleY(-0.6);
+  }
+  70% {
+    transform: scaleY(0.3);
+  }
+  100% {
+    opacity: 1;
+    transform: scaleY(0);
+  }
+}
+
+@keyframes cuerda-calla-todas {
+  from,
+  to {
+    opacity: 0;
+  }
+}
+
+.afinacion[data-mov="por-cuerda"] li[data-afinada] .cuerda-afina {
+  animation: cuerda-vibra var(--dur-normal) var(--curva);
+}
+
+.afinacion[data-mov="por-cuerda"] li[data-afinada] .cuerda-recta {
+  animation: cuerda-calla var(--dur-normal);
+}
+
+.afinacion[data-mov="por-cuerda"][data-empresa] li[data-afinada] .cuerda-afina {
+  animation:
+    cuerda-vibra var(--dur-normal) var(--curva),
+    cuerda-vibra-todas var(--dur-normal) var(--curva);
+}
+
+.afinacion[data-mov="por-cuerda"][data-empresa] li[data-afinada] .cuerda-recta {
+  animation:
+    cuerda-calla var(--dur-normal),
+    cuerda-calla-todas var(--dur-normal);
+}
+
+.afinacion[data-mov="por-cuerda"] li[data-afinada] .vineta {
+  animation: vineta-enciende var(--dur-normal) var(--curva) both;
+}
+
+/* Sala 5 · Galería — "Cada obra se ilumina en su turno."
+   Pasa una vez: la galería en penumbra y cada reflector enciende su cuadro
+   en --dur-lento, uno tras otro; el haz aparece con él. */
+.penumbra {
+  opacity: 0;
+}
+
+.galeria:is([data-mov="espera"], [data-mov="por-cuadro"]) .penumbra {
+  opacity: 1;
+}
+
+.galeria:is([data-mov="espera"], [data-mov="por-cuadro"]) [data-capa^="haz"] {
+  opacity: 0;
+}
+
+@keyframes penumbra-sale {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
+}
+
+.galeria[data-mov="hecho"] .penumbra {
+  animation: penumbra-sale var(--dur-lento) var(--curva) calc(var(--dur-lento) * var(--i)) both;
+}
+
+.galeria[data-mov="hecho"] [data-capa="haz-1"] {
+  animation: aparece var(--dur-lento) var(--curva) both;
+}
+
+.galeria[data-mov="hecho"] [data-capa="haz-2"] {
+  animation: aparece var(--dur-lento) var(--curva) var(--dur-lento) both;
+}
+
+.galeria[data-mov="hecho"] [data-capa="haz-3"] {
+  animation: aparece var(--dur-lento) var(--curva) calc(var(--dur-lento) * 2) both;
+}
+
+/* Galería en celular: cada cuadro se enciende cuando entra en la tira al
+   deslizarla (data-luz), en --dur-lento, con su haz. */
+.galeria[data-luz~="1"] .penumbra[data-cuadro="1"],
+.galeria[data-luz~="2"] .penumbra[data-cuadro="2"],
+.galeria[data-luz~="3"] .penumbra[data-cuadro="3"] {
+  animation: penumbra-sale var(--dur-lento) var(--curva) both;
+}
+
+.galeria[data-luz~="1"] [data-capa="haz-1"],
+.galeria[data-luz~="2"] [data-capa="haz-2"],
+.galeria[data-luz~="3"] [data-capa="haz-3"] {
+  animation: aparece var(--dur-lento) var(--curva) both;
+}
+
+/* Sala 6 · Arquitectura — "El edificio crece al ritmo de los pasos."
+   Sigue al dedo: cada paso de la lista es una línea de tiempo; su capa del
+   dibujo se revela de abajo hacia arriba (clip-path) mientras el paso cruza
+   la línea (74 % de la pantalla en celular, bajo el dibujo pegado; 70 % en
+   escritorio). Paso 1 cimientos · 2 y 3 los pisos · 4 la obra · 5 la
+   bandera. El paso de ahora se marca con una línea en el acento. Cada capa
+   va de --desde (su borde de abajo) a --hasta (su borde de arriba), en %
+   del alto del dibujo; al final queda completa. */
+.arquitectura [data-capa="cimientos"],
+.arquitectura [data-capa="rotulos"] {
+  --desde: 97%;
+  --hasta: 78%;
+}
+
+.arquitectura [data-capa="piso-1"] {
+  --desde: 81%;
+  --hasta: 57%;
+}
+
+.arquitectura [data-capa="piso-2"] {
+  --desde: 67%;
+  --hasta: 44%;
+}
+
+.arquitectura [data-capa="obra"] {
+  --desde: 54%;
+  --hasta: 4%;
+}
+
+.arquitectura [data-capa="bandera"] {
+  --desde: 40%;
+  --hasta: 18%;
+}
+
+@keyframes sube {
+  from {
+    clip-path: inset(var(--desde) 0 0 0);
+  }
+  to {
+    clip-path: inset(var(--hasta) 0 0 0);
+  }
+}
+
+.paso-marca {
+  opacity: 0;
+  transform: scaleY(0);
+  transition:
+    opacity var(--dur-normal) var(--curva),
+    transform var(--dur-normal) var(--curva);
+}
+
+.arquitectura[data-activo="1"] li:nth-child(1) .paso-marca,
+.arquitectura[data-activo="2"] li:nth-child(2) .paso-marca,
+.arquitectura[data-activo="3"] li:nth-child(3) .paso-marca,
+.arquitectura[data-activo="4"] li:nth-child(4) .paso-marca,
+.arquitectura[data-activo="5"] li:nth-child(5) .paso-marca {
+  opacity: 1;
+  transform: none;
+}
+
+@supports (animation-timeline: view()) {
+  @media (prefers-reduced-motion: no-preference) {
+    .arquitectura {
+      timeline-scope: --paso-1, --paso-2, --paso-3, --paso-4, --paso-5;
+    }
+
+    .arquitectura li {
+      view-timeline-inset: 0 26%;
+    }
+
+    .arquitectura li:nth-child(1) {
+      view-timeline-name: --paso-1;
+    }
+    .arquitectura li:nth-child(2) {
+      view-timeline-name: --paso-2;
+    }
+    .arquitectura li:nth-child(3) {
+      view-timeline-name: --paso-3;
+    }
+    .arquitectura li:nth-child(4) {
+      view-timeline-name: --paso-4;
+    }
+    .arquitectura li:nth-child(5) {
+      view-timeline-name: --paso-5;
+    }
+
+    .arquitectura [data-capa="cimientos"],
+    .arquitectura [data-capa="rotulos"],
+    .arquitectura [data-capa^="piso"],
+    .arquitectura [data-capa="obra"],
+    .arquitectura [data-capa="bandera"] {
+      animation: sube var(--curva) both;
+      animation-range: entry 0% entry 100%;
+    }
+
+    .arquitectura [data-capa="cimientos"],
+    .arquitectura [data-capa="rotulos"] {
+      animation-timeline: --paso-1;
+    }
+    .arquitectura [data-capa="piso-1"] {
+      animation-timeline: --paso-2;
+    }
+    .arquitectura [data-capa="piso-2"] {
+      animation-timeline: --paso-3;
+    }
+    .arquitectura [data-capa="obra"] {
+      animation-timeline: --paso-4;
+    }
+    .arquitectura [data-capa="bandera"] {
+      animation-timeline: --paso-5;
+    }
+  }
+}
+
+@media (min-width: 1024px) {
+  @supports (animation-timeline: view()) {
+    .arquitectura li {
+      view-timeline-inset: 0 30%;
+    }
+  }
+}
+
+/* Respaldo: cada capa sube entera, en --dur-lento, cuando su paso cruza. */
+@supports not (animation-timeline: view()) {
+  .arquitectura[data-etapa] [data-capa] {
+    transition: clip-path var(--dur-lento) var(--curva);
+  }
+
+  .arquitectura[data-etapa="0"] :is([data-capa="cimientos"], [data-capa="rotulos"]),
+  .arquitectura:is([data-etapa="0"], [data-etapa="1"]) [data-capa="piso-1"],
+  .arquitectura:is([data-etapa="0"], [data-etapa="1"], [data-etapa="2"]) [data-capa="piso-2"],
+  .arquitectura:is([data-etapa="0"], [data-etapa="1"], [data-etapa="2"], [data-etapa="3"])
+    [data-capa="obra"],
+  .arquitectura:not([data-etapa="5"])[data-etapa] [data-capa="bandera"] {
+    clip-path: inset(var(--desde) 0 0 0);
+  }
+}
+
+/* Sala 7 · Danza — "El sistema sigue trabajando, a su ritmo."
+   La única animación continua: cada cinta se mece y se voltea sobre su
+   línea central (scaleY pasa por cero y deja ver su revés), un ciclo de
+   --arte-dur-danza; cada una arranca un tercio después de la anterior, así
+   en reposo se ven como el dibujo. Pausada fuera de pantalla. */
+.danza [data-capa="cinta-oro"] {
+  --centro: 31%;
+  --i: 0;
+}
+
+.danza [data-capa="cinta-verde"] {
+  --centro: 48%;
+  --i: 1;
+}
+
+.danza [data-capa="cinta-roja"] {
+  --centro: 68%;
+  --i: 2;
+}
+
+@keyframes danza {
+  0%,
+  100% {
+    transform: translateY(0) scaleY(1);
+  }
+  25% {
+    transform: translateY(-3%) scaleY(0);
+  }
+  50% {
+    transform: translateY(0) scaleY(-1);
+  }
+  75% {
+    transform: translateY(3%) scaleY(0);
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .danza [data-capa] {
+    transform-origin: 50% var(--centro);
+    animation: danza var(--arte-dur-danza) var(--arte-curva-danza)
+      calc(var(--arte-dur-danza) * var(--i) / 3) infinite;
+    animation-play-state: paused;
+  }
+
+  .danza[data-visible="si"] [data-capa] {
+    animation-play-state: running;
+  }
+}

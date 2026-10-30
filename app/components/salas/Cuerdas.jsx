@@ -88,7 +88,9 @@ export function BotonSonido() {
 }
 
 // Una cuerda: línea a lo ancho que vibra como seno y se apaga en ~2 s.
-export function Cuerda({ nombre, notas, calibre }) {
+// `orden` es su lugar en la afinación de la sala 4: una segunda ruta, curva,
+// que CSS hace vibrar con scaleY mientras la recta se calla (app/salas.css).
+export function Cuerda({ nombre, notas, calibre, orden = 0 }) {
   const { tocarNotas } = useContext(Sonido);
   const lineaRef = useRef(null);
   const marco = useRef(0);
@@ -143,7 +145,18 @@ export function Cuerda({ nombre, notas, calibre }) {
       >
         <path
           ref={lineaRef}
+          className="cuerda-recta"
+          style={{ "--i": orden }}
           d={`M0 ${MEDIO} L${ANCHO} ${MEDIO}`}
+          fill="none"
+          stroke="rgb(var(--texto))"
+          strokeWidth={calibre}
+          vectorEffect="non-scaling-stroke"
+        />
+        <path
+          className="cuerda-afina"
+          style={{ "--i": orden }}
+          d={`M0 ${MEDIO} Q${ANCHO / 2} ${MEDIO + AMPLITUD * 1.4} ${ANCHO} ${MEDIO}`}
           fill="none"
           stroke="rgb(var(--texto))"
           strokeWidth={calibre}

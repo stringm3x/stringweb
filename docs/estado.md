@@ -1,6 +1,6 @@
 # Estado · stringwebs.com
 
-Última actualización: 29 oct 2026 (lote 6). Meta del KB: sitio rehecho del 1 al 7 nov; salir a
+Última actualización: 29 oct 2026 (lote 7). Meta del KB: sitio rehecho del 1 al 7 nov; salir a
 vender el 8 nov.
 
 ## Lotes
@@ -14,6 +14,7 @@ vender el 8 nov.
 | 4 | Formulario /diagnostico, /saas, contacto, galería en celular, cierre de /nosotros | `lote-4-contacto` | ✅ Hecho, sin fusionar; falta el correo de prueba desde la vista previa |
 | 5 | Calidad: Lighthouse, LCP, CLS, contraste, teclado | `lote-5-calidad` | ✅ Hecho, sin fusionar; LCP por confirmar en producción |
 | 6 | Componentes de calidad: tokens de movimiento, botón con 8 estados, campos, píldoras, tarjeta, barra, menú, transiciones | `lote-6-componentes` | ✅ Fusionado a `main` (29 oct, visto bueno de Carlos) |
+| 7 | Salas en movimiento (docs/movimiento-salas.md): salas 2–7 con su movimiento, arte en capas, sala 1 con tokens | `lote-7-movimiento` | ✅ Fusionado a `main` (29 oct, visto bueno de Carlos) |
 
 Producción sigue con la marca anterior. Nada se fusiona a `main` sin el visto bueno de Carlos.
 
@@ -35,6 +36,9 @@ Producción sigue con la marca anterior. Nada se fusiona a `main` sin el visto b
 - `npm run lint` roto: el parser de `eslint-config-next` exige `typescript`.
 - Duraciones sueltas en el legado de /gym y /saas (`TitularBrochada`, `FormField`, `FormSelect`, `app/gym/**`):
   exentas en `app/tokens.test.js` hasta que se rehagan.
+- La vibración al tocar una cuerda (sala 4) redibuja la ruta con JS en cada fotograma (`Cuerdas.jsx`), no con `transform`.
+- Las capas de `public/arte/sala{2,5,6,7}/` salen de los SVG originales con `node scripts/capas-arte.mjs`; si cambia un dibujo,
+  se vuelve a correr (`app/arte-capas.test.js` avisa si no coinciden).
 - Las transiciones entre páginas dependen del flag experimental `experimental.viewTransition` de Next 16.1
   (`next.config.mjs`). Sin él, la navegación debe seguir funcionando, solo sin fundido: comprobado el 29 oct con
   el flag apagado (build limpio; barra, logo y botón navegan sin errores). Revisar al subir de versión de Next.
@@ -54,6 +58,16 @@ Producción sigue con la marca anterior. Nada se fusiona a `main` sin el visto b
   Chrome de Lighthouse alterna entre 1.6–2.1 s y 2.6–3.6 s con el mismo código; ver reporte del lote 5).
 - /saas y /gym con el diseño anterior (Anton, `TitularBrochada`, GSAP).
 - Dos `<meta name="viewport">` en el `<head>`.
+
+## Decisiones tomadas en el lote 7
+
+- Sala 6: el dibujo va pegado bajo la barra (arriba de la lista en celular, en su columna en escritorio). Sala 7: volteo con
+  `scaleY`, sin arte nuevo (Carlos, 29 oct).
+- Movimiento en `app/salas.css` con `animation-timeline` y respaldo por etapas (`Escenario.jsx`); el final es el estilo base.
+- Cine: cuadros y créditos con corte seco por `data-activo`; en celular cada cuadro se centra en la tira.
+- En celular, la galería enciende cada cuadro al entrar en la tira y la música afina cada cuerda al entrar en pantalla (Carlos).
+- Sala 2: piedra y grietas dibujadas nuevas (aprobadas con el lote). Tokens de arte nuevos: `--arte-dur-danza`, `--arte-curva-danza`,
+  `--arte-espera-tecla`.
 
 ## Decisiones tomadas en el lote 6
 
