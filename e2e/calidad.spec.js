@@ -3,7 +3,7 @@ import AxeBuilder from "@axe-core/playwright";
 
 // Repaso de calidad (lote 5): accesibilidad con axe, movimiento reducido,
 // la 404 y el menú del celular con teclado, a 375 px.
-const PAGINAS = ["/", "/nosotros", "/diagnostico", "/saas", "/aviso-de-privacidad", "/terminos", "/no-existe"];
+const PAGINAS = ["/", "/sistemas", "/sistemas/responde", "/sistemas/empresa", "/nosotros", "/diagnostico", "/saas", "/aviso-de-privacidad", "/terminos", "/no-existe"];
 
 test.beforeEach(async ({ page }) => {
   // Turnstile no se carga en las pruebas: es un iframe de terceros.

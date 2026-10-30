@@ -7,12 +7,13 @@ import { FiMenu, FiX } from "react-icons/fi";
 import { Boton } from "./components/ui/Boton";
 import { Logo } from "./components/ui/Logo";
 
-// Barra superior de docs/textos.md: logo · Sistemas · Productos · Galería ·
-// Nosotros · Solicitar diagnóstico.
+// Barra superior (docs/pagina-nivel.md, 30 oct): logo · Sistemas · Tu negocio
+// · Productos · Nosotros · Solicitar diagnóstico. Galería sale de la barra.
+// "Tu negocio" se oculta hasta que exista su página; entonces entra aquí,
+// después de Sistemas. Productos sigue a /saas mientras no exista /productos.
 const menuItems = [
-  { label: "Sistemas", href: "/#niveles" },
+  { label: "Sistemas", href: "/sistemas" },
   { label: "Productos", href: "/saas" },
-  { label: "Galería", href: "/#galeria" },
   { label: "Nosotros", href: "/nosotros" },
 ];
 

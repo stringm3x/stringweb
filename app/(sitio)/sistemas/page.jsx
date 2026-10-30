@@ -7,6 +7,21 @@ import { NIVELES } from "@/app/lib/niveles";
 // /sistemas (docs/pagina-nivel.md, textos de docs/textos.md § Sistemas): la
 // puerta a los cinco niveles. Solo componentes ya aprobados: las cinco
 // Tarjetas, el botón de diagnóstico y el Cierre de la portada.
+const ENTRADA =
+  "Empieza por lo que te pasa hoy. Cada nivel incluye todo lo del anterior y suma alcance; ninguno es la versión barata de otro.";
+
+// Título derivado como en las demás páginas; descripción, la entrada (Carlos, 30 oct).
+export const metadata = {
+  title: "Sistemas",
+  description: ENTRADA,
+  alternates: { canonical: "https://www.stringwebs.com/sistemas" },
+  openGraph: {
+    title: "Sistemas · STRING",
+    description: ENTRADA,
+    url: "https://www.stringwebs.com/sistemas",
+  },
+};
+
 const INCLUYEN = [
   "El mismo sistema de diseño y el mismo cuidado en cada pantalla.",
   "Su propia obra, que nace contigo.",
@@ -24,10 +39,7 @@ export default function SistemasPage() {
             <h1 className="text-balance text-[44px] font-semibold leading-[1.02] tracking-[-0.035em] md:text-[60px] lg:text-[76px]">
               Cinco niveles. La misma calidad.
             </h1>
-            <p className="text-cuerpo-l text-texto-suave">
-              Empieza por lo que te pasa hoy. Cada nivel incluye todo lo del anterior y suma
-              alcance; ninguno es la versión barata de otro.
-            </p>
+            <p className="text-cuerpo-l text-texto-suave">{ENTRADA}</p>
           </header>
 
           {/* Empresa cierra la cuadrícula: dos columnas junto a Controla en

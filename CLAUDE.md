@@ -109,22 +109,24 @@ frecuentes, cierre y pie. Sin bloque "quién soy" en la portada: Carlos se prese
 Al lanzar: literatura, música y pintura completas; escultura, cine, arquitectura y danza en versión
 quieta (`public/arte/`). Sala 3 sin cifras de socios hasta recontar.
 
-Barra: logo · Sistemas (`/#niveles`) · Productos (`/saas`) · Galería (`/#galeria`) · Nosotros ·
-"Solicitar diagnóstico" (`/diagnostico`).
+Barra (lote 8, `docs/pagina-nivel.md`): logo · Sistemas (`/sistemas`) · Tu negocio (oculto hasta que exista) ·
+Productos (`/saas` mientras no exista `/productos`) · Nosotros · "Solicitar diagnóstico" (`/diagnostico`).
+Galería ya no va en la barra; sigue como sala 5 (`/#galeria`).
 
 ## Rutas
 
-Páginas: `/`, `/nosotros`, `/diagnostico`, `/aviso-de-privacidad`, `/terminos`, `/saas` (copy:
-"El sistema para gimnasios"), 404. Se conservan `/gym/registro` y `/gym/gracias` (envían a
-`app.gym.stringwebs.com`; no se toca ese envío). No se crean `/sistemas`, `/galeria`, `/estandar`
-ni `/preguntas`.
+Páginas: `/`, `/sistemas` y `/sistemas/responde`, `/organiza`, `/automatiza`, `/controla`,
+`/empresa` (lote 8, `docs/pagina-nivel.md`), `/nosotros`, `/diagnostico`, `/aviso-de-privacidad`,
+`/terminos`, `/saas` (copy: "El sistema para gimnasios"), 404. Se conservan `/gym/registro` y
+`/gym/gracias` (envían a `app.gym.stringwebs.com`; no se toca ese envío). No se crean `/galeria`,
+`/estandar` ni `/preguntas`. `/#niveles` sigue como ancla de la portada.
 
 Redirects (en `next.config.mjs`, con `statusCode: 301`, no `permanent: true`, que emite 308).
 Sin cadenas: cada ruta vieja apunta al destino final.
 
 | Vieja | Destino |
 |---|---|
-| `/servicios`, `/servicios/:id`, `/Services`, `/Services/:id` | `/#niveles` |
+| `/servicios`, `/servicios/:id`, `/Services`, `/Services/:id` | `/sistemas` |
 | `/proyectos`, `/Proyects` | `/#galeria` |
 | `/cotizacion`, `/quote` | `/diagnostico` |
 | `/Us` | `/nosotros` |
@@ -169,6 +171,8 @@ fotos de stock y superlativos sin respaldo.
 ## Mapa del repo
 
 - Portada: `app/(sitio)/page.jsx` + `app/components/home/*.jsx` (se rehace por salas).
+- Sistemas: `app/(sitio)/sistemas/` + `app/components/sistemas/*.jsx` (una sola página de nivel); los datos
+  de los cinco niveles viven en `app/lib/niveles.js` (también los usa la sala 4).
 - Layout, metadata y JSON-LD: `app/layout.jsx`. Barra: `app/header.jsx`. Pie: `app/Footer.jsx`.
 - UI compartida: `app/components/ui/`; formularios: `app/components/forms/`.
 - Copy hardcodeado en JSX con algunos arrays en `data.js`; no hay CMS.
