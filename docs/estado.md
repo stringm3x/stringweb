@@ -35,7 +35,9 @@ Producción sigue con la marca anterior. Nada se fusiona a `main` sin el visto b
 - `npm run lint` roto: el parser de `eslint-config-next` exige `typescript`.
 - Duraciones sueltas en el legado de /gym y /saas (`TitularBrochada`, `FormField`, `FormSelect`, `app/gym/**`):
   exentas en `app/tokens.test.js` hasta que se rehagan.
-- Transiciones entre páginas con `experimental.viewTransition` de Next 16.1.
+- Las transiciones entre páginas dependen del flag experimental `experimental.viewTransition` de Next 16.1
+  (`next.config.mjs`). Sin él, la navegación debe seguir funcionando, solo sin fundido: comprobado el 29 oct con
+  el flag apagado (build limpio; barra, logo y botón navegan sin errores). Revisar al subir de versión de Next.
 
 ## Pendientes de Carlos
 
@@ -59,7 +61,8 @@ Producción sigue con la marca anterior. Nada se fusiona a `main` sin el visto b
 - El arte guarda sus tiempos en `--arte-dur-*`; la tarjeta existe pero no se aplica a los niveles (Carlos, 29 oct).
 - Capturas en `/muestrario`, solo en desarrollo. El número de los pasos de "Cómo trabajamos" vive solo en el dibujo.
 - El foco pasa de verde a color del texto (línea / tinta), según calidad.md.
-- Abierto: la píldora con borde `#3A3A3D` (1.85:1), como dice calidad.md; ver el reporte.
+- Píldoras con borde `#5A5A5E` (3:1), igual que el campo, y el cursor ▍ del primario también en presionado y
+  foco, para el celular (Carlos, 29 oct; calidad.md al día).
 
 ## Decisiones tomadas en el lote 5
 

@@ -33,7 +33,7 @@ Menú con fundido y 8 px: se puso encima. Fundido entre páginas: cambiaste de s
 
 **Excepciones y avisos**
 - El grep deja fuera el legado de /gym y /saas (`app/gym/**`, `TitularBrochada`, `FormField`, `FormSelect`) y las constantes en JS del arte (tecleo, estrellas, cuerdas).
-- La píldora conserva `#3A3A3D` (1.85:1), como pide calidad.md, porque el texto identifica el control. Si la quieres a 3:1, se cambia en un token.
+- Ajustes de Carlos: píldora con borde `#5A5A5E` (3:1); cursor ▍ también en presionado y foco (`estados/…-presionado-dedo.png`, toque a 375 px).
 - `BotonSonido` (sala 4) sigue igual: es un interruptor del arte. /gym hereda el botón: fuera `barrido`; "Enviando…" → "Enviando ▍".
-- `experimental.viewTransition` (Next 16.1) funciona en el build, pero es experimental. `/muestrario`: solo en desarrollo (404 en
+- `experimental.viewTransition` (Next 16.1) es experimental; con el flag apagado la navegación funciona igual (deuda en estado.md). `/muestrario`: solo en desarrollo (404 en
   producción, fuera del sitemap); en las capturas de páginas sale la "N" del modo dev.
