@@ -1,0 +1,11 @@
+/* El movimiento de las salas (docs/movimiento-salas.md).
+
+   Reglas de este archivo:
+   - El estilo base de cada capa es el ESTADO FINAL. Las animaciones solo
+     dicen de dónde viene. Sin JavaScript o con menos movimiento, cada sala
+     se ve completa y quieta.
+   - Lo que sigue al dedo usa animation-timeline (view). Donde el navegador
+     no la tiene, Escenario.jsx marca data-etapa y aquí se resuelve por
+     etapas con transiciones (@supports not).
+   - Solo transform, opacity y clip-path. Duraciones y curvas de los tokens
+     de globals.css; los cortes secos, con paradas repetidas. */
