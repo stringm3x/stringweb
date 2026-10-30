@@ -13,6 +13,8 @@ Aquí solo se habla de él como producto en venta.
 | `docs/sistema/` (Identidad 2026) | Tokens (`tokens.json`), componentes con HTML de referencia (Logo, Botón, Ciudad, Cuerda, Galería, Portada) |
 | `docs/textos.md` (Textos del sitio) | El copy final de cada sala, formulario, pie y legales |
 | `docs/calidad.md` (La calidad en STRING) | Reglas de calidad, tokens de movimiento y `--alerta`, y los estados de cada componente (botón, campo, píldora, tarjeta, barra, menú, transiciones) |
+| `docs/movimiento-salas.md` (El movimiento de las salas) | El movimiento de cada sala: momentos, tipo, capas y estado con menos movimiento |
+| `docs/pagina-nivel.md` (La página de nivel y /sistemas) | La estructura de `/sistemas` y de cada página de nivel, la ficha de la obra y la barra |
 
 Si el código contradice un documento, manda el documento y se reporta. Si dos documentos chocan:
 textos → `textos.md`; componentes, estados y movimiento → `calidad.md`; visual → `diseno.md`;
@@ -91,7 +93,7 @@ LCP < 2.5 s, CLS < 0.1, contraste ≥ 4.5:1. Si una no se cumple, se dice en el 
 - **Movimiento.** `--dur-rapido` 150 ms · `--dur-normal` 300 ms · `--dur-lento` 600 ms · `--curva`
   `cubic-bezier(.2, 0, 0, 1)` · `--parpadeo` 1.1 s `steps(1)`. El arte usa `--arte-dur-*`.
 - **Alerta** solo para errores: `#FF6B5A` sobre noche, `#B3261E` sobre pared.
-- **Arte.** La ciudad de una línea, la luna, las cuerdas (sonido opcional, apagado al cargar), la
+- **Arte.** La ciudad de una línea (sin luna desde el 30 oct), las cuerdas (sonido opcional, apagado al cargar), la
   galería y las estrellas. Dibujo de línea; nada de 3D ni video. Única foto: Carlos, sala 3.
   Paleta del arte: la del 29 oct en `docs/diseno.md`. La brochada, el grano y el grabado del sitio
   anterior se retiran.
@@ -107,22 +109,24 @@ frecuentes, cierre y pie. Sin bloque "quién soy" en la portada: Carlos se prese
 Al lanzar: literatura, música y pintura completas; escultura, cine, arquitectura y danza en versión
 quieta (`public/arte/`). Sala 3 sin cifras de socios hasta recontar.
 
-Barra: logo · Sistemas (`/#niveles`) · Productos (`/saas`) · Galería (`/#galeria`) · Nosotros ·
-"Solicitar diagnóstico" (`/diagnostico`).
+Barra (lote 8, `docs/pagina-nivel.md`): logo · Sistemas (`/sistemas`) · Tu negocio (oculto hasta que exista) ·
+Productos (`/saas` mientras no exista `/productos`) · Nosotros · "Solicitar diagnóstico" (`/diagnostico`).
+Galería ya no va en la barra; sigue como sala 5 (`/#galeria`).
 
 ## Rutas
 
-Páginas: `/`, `/nosotros`, `/diagnostico`, `/aviso-de-privacidad`, `/terminos`, `/saas` (copy:
-"El sistema para gimnasios"), 404. Se conservan `/gym/registro` y `/gym/gracias` (envían a
-`app.gym.stringwebs.com`; no se toca ese envío). No se crean `/sistemas`, `/galeria`, `/estandar`
-ni `/preguntas`.
+Páginas: `/`, `/sistemas` y `/sistemas/responde`, `/organiza`, `/automatiza`, `/controla`,
+`/empresa` (lote 8, `docs/pagina-nivel.md`), `/nosotros`, `/diagnostico`, `/aviso-de-privacidad`,
+`/terminos`, `/saas` (copy: "El sistema para gimnasios"), 404. Se conservan `/gym/registro` y
+`/gym/gracias` (envían a `app.gym.stringwebs.com`; no se toca ese envío). No se crean `/galeria`,
+`/estandar` ni `/preguntas`. `/#niveles` sigue como ancla de la portada.
 
 Redirects (en `next.config.mjs`, con `statusCode: 301`, no `permanent: true`, que emite 308).
 Sin cadenas: cada ruta vieja apunta al destino final.
 
 | Vieja | Destino |
 |---|---|
-| `/servicios`, `/servicios/:id`, `/Services`, `/Services/:id` | `/#niveles` |
+| `/servicios`, `/servicios/:id`, `/Services`, `/Services/:id` | `/sistemas` |
 | `/proyectos`, `/Proyects` | `/#galeria` |
 | `/cotizacion`, `/quote` | `/diagnostico` |
 | `/Us` | `/nosotros` |
@@ -167,6 +171,8 @@ fotos de stock y superlativos sin respaldo.
 ## Mapa del repo
 
 - Portada: `app/(sitio)/page.jsx` + `app/components/home/*.jsx` (se rehace por salas).
+- Sistemas: `app/(sitio)/sistemas/` + `app/components/sistemas/*.jsx` (una sola página de nivel); los datos
+  de los cinco niveles viven en `app/lib/niveles.js` (también los usa la sala 4).
 - Layout, metadata y JSON-LD: `app/layout.jsx`. Barra: `app/header.jsx`. Pie: `app/Footer.jsx`.
 - UI compartida: `app/components/ui/`; formularios: `app/components/forms/`.
 - Copy hardcodeado en JSX con algunos arrays en `data.js`; no hay CMS.

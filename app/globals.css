@@ -34,9 +34,6 @@
     --arte-dur-ciudad: 10s;
     --arte-curva-ciudad: cubic-bezier(0.5, 0.05, 0.3, 1);
     --arte-espera-ciudad: 0.3s;
-    --arte-dur-luna: 2.4s;
-    --arte-curva-luna: cubic-bezier(0.6, 0.05, 0.25, 1);
-    --arte-espera-luna: 1s;
     --arte-dur-estrella: 5s;
     --arte-curva-estrella: ease-in-out;
     --arte-dur-tecla: 1ms;
@@ -258,25 +255,6 @@
       infinite alternate;
   }
 
-  /* La luna se pinta una vez, de un brochazo, al segundo de cargar. */
-  .ciudad-luna {
-    fill: none;
-    stroke: rgb(var(--acento));
-    stroke-width: 34;
-    stroke-linecap: round;
-    stroke-dasharray: 620;
-    animation: ciudad-luna var(--arte-dur-luna) var(--arte-curva-luna) var(--arte-espera-luna) both;
-  }
-
-  /* Rayas secas del pincel, del color del fondo. */
-  .ciudad-seco {
-    fill: none;
-    stroke: rgb(var(--fondo));
-    stroke-width: 2.4;
-    stroke-dasharray: 34 22;
-    stroke-linecap: round;
-  }
-
   /* Las estrellas brillan despacio, cada una a su ritmo. */
   .estrella {
     position: absolute;
@@ -291,7 +269,6 @@
   @media (prefers-reduced-motion: reduce) {
     .tecla,
     .ciudad-trazo,
-    .ciudad-luna,
     .estrella {
       animation: none;
     }
@@ -343,15 +320,6 @@
   }
   70%,
   100% {
-    stroke-dashoffset: 0;
-  }
-}
-
-@keyframes ciudad-luna {
-  from {
-    stroke-dashoffset: 620;
-  }
-  to {
     stroke-dashoffset: 0;
   }
 }

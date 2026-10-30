@@ -1,9 +1,9 @@
 // La Ciudad de docs/sistema/components/Ciudad: la Ciudad de México en una
 // sola línea (Monumento a la Revolución, Bellas Artes, el Ángel, la Torre
-// Latinoamericana, edificios del centro, Popocatépetl e Iztaccíhuatl) y la
-// luna de un brochazo detrás de la Torre Latino. El trazo se calcula aquí,
-// en el servidor, con las mismas coordenadas del preview. El movimiento
-// vive en globals.css (.ciudad-*).
+// Latinoamericana, edificios del centro, Popocatépetl e Iztaccíhuatl). Sin
+// la luna desde el 30 oct (Carlos). El trazo se calcula aquí, en el
+// servidor, con las mismas coordenadas del preview. El movimiento vive en
+// globals.css (.ciudad-trazo).
 const PI = Math.PI;
 
 function trazoCiudad() {
@@ -28,17 +28,7 @@ function trazoCiudad() {
   return "M" + P.map(([x, y]) => `${x.toFixed(1)} ${y.toFixed(1)}`).join(" L");
 }
 
-// Un círculo pintado de un trazo que no se cierra (90 % de la vuelta).
-function brocha(cx, cy, r) {
-  const a0 = -1.95;
-  const a1 = a0 + PI * 2 * 0.9;
-  const p = (a) => `${(cx + r * Math.cos(a)).toFixed(1)} ${(cy + r * Math.sin(a)).toFixed(1)}`;
-  return `M${p(a0)} A${r} ${r} 0 1 1 ${p(a1)}`;
-}
-
 const TRAZO = trazoCiudad();
-const LUNA = brocha(720, 140, 92);
-const SECO = `${brocha(720, 140, 84)} ${brocha(720, 140, 100)}`;
 
 export function Ciudad({ className = "" }) {
   return (
@@ -46,11 +36,9 @@ export function Ciudad({ className = "" }) {
       viewBox="0 0 1490 400"
       preserveAspectRatio="xMidYMax slice"
       role="img"
-      aria-label="Dibujo de la Ciudad de México de noche, trazada en una sola línea, con una luna verde."
+      aria-label="Dibujo de la Ciudad de México de noche, trazada en una sola línea."
       className={`block w-full ${className}`.trim()}
     >
-      <path className="ciudad-luna" d={LUNA} />
-      <path className="ciudad-seco" d={SECO} />
       <path className="ciudad-trazo" d={TRAZO} />
     </svg>
   );

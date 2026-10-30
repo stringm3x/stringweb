@@ -1,6 +1,6 @@
 # Estado · stringwebs.com
 
-Última actualización: 29 oct 2026 (lote 7). Meta del KB: sitio rehecho del 1 al 7 nov; salir a
+Última actualización: 30 oct 2026 (lote 8). Meta del KB: sitio rehecho del 1 al 7 nov; salir a
 vender el 8 nov.
 
 ## Lotes
@@ -15,6 +15,7 @@ vender el 8 nov.
 | 5 | Calidad: Lighthouse, LCP, CLS, contraste, teclado | `lote-5-calidad` | ✅ Hecho, sin fusionar; LCP por confirmar en producción |
 | 6 | Componentes de calidad: tokens de movimiento, botón con 8 estados, campos, píldoras, tarjeta, barra, menú, transiciones | `lote-6-componentes` | ✅ Fusionado a `main` (29 oct, visto bueno de Carlos) |
 | 7 | Salas en movimiento (docs/movimiento-salas.md): salas 2–7 con su movimiento, arte en capas, sala 1 con tokens | `lote-7-movimiento` | ✅ Fusionado a `main` (29 oct, visto bueno de Carlos) |
+| 8 | Sistemas (docs/pagina-nivel.md): /sistemas y las cinco páginas de nivel, barra, enlaces de la sala 4, metadatos, redirects | `lote-8-sistemas` | ✅ Fusionado a `main` (30 oct, visto bueno de Carlos) |
 
 Producción sigue con la marca anterior. Nada se fusiona a `main` sin el visto bueno de Carlos.
 
@@ -45,6 +46,8 @@ Producción sigue con la marca anterior. Nada se fusiona a `main` sin el visto b
 
 ## Pendientes de Carlos
 
+- **La luna en la galería:** la portada ya va sin luna (30 oct); falta decidir si sale también del cuadro de STRING (sala 5).
+
 - **Domicilio** del responsable para el aviso de privacidad (lo pide la ley) y fecha de publicación.
 - **Foto final** de Carlos para la sala 3 (por ahora `public/foto/carlos-respaldo.jpg`).
 - **`TURNSTILE_SECRET_KEY`** y las SMTP en Vercel (Preview y Production): sin el secreto,
@@ -58,6 +61,16 @@ Producción sigue con la marca anterior. Nada se fusiona a `main` sin el visto b
   Chrome de Lighthouse alterna entre 1.6–2.1 s y 2.6–3.6 s con el mismo código; ver reporte del lote 5).
 - /saas y /gym con el diseño anterior (Anton, `TitularBrochada`, GSAP).
 - Dos `<meta name="viewport">` en el `<head>`.
+
+## Decisiones tomadas en el lote 8
+
+- La barra queda Sistemas (`/sistemas`) · Productos (`/saas`) · Nosotros; Galería sale; "Tu negocio" se oculta hasta que exista.
+- `/servicios`, `/servicios/:id`, `/Services` y `/Services/:id` → 301 a `/sistemas`; `/#niveles` sigue como ancla de la portada.
+- Página de nivel: un solo componente con los datos de `app/lib/niveles.js`; "Qué incluye" con las frases de la tabla de textos.md;
+  "Cuando crezcas" solo con la tarjeta (Controla: "Empresa + Música, escultura y cine"; Empresa: "Ver los cinco niveles");
+  ejemplos y alt de Carlos; cuerdas en `hairline`. Título y descripción derivados.
+- Sala 3: titular "Probado en un negocio real." (textos.md, 30 oct).
+- La portada sin la luna verde: fuera del dibujo de la ciudad, con su CSS y sus tokens; alt sin "con una luna verde" (Carlos, 30 oct).
 
 ## Decisiones tomadas en el lote 7
 

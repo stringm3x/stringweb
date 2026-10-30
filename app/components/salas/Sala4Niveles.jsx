@@ -28,7 +28,12 @@ export function Sala4Niveles() {
               <li key={nivel.nombre} className="flex flex-col gap-space-3 pt-space-4">
                 <div className="grid gap-space-3 lg:grid-cols-[240px_1fr_240px] lg:items-start lg:gap-space-5">
                   <div className="flex flex-col gap-space-1">
-                    <h3 className="text-subtitulo">{nivel.nombre}</h3>
+                    <h3 className="text-subtitulo">
+                      {/* Cada nivel lleva a su página (lote 8). */}
+                      <Link href={`/sistemas/${nivel.slug}`} className="underline-offset-4 hover:underline">
+                        {nivel.nombre}
+                      </Link>
+                    </h3>
                     <p className="font-mono text-cifra text-texto">{nivel.precio}</p>
                   </div>
                   <div className="flex flex-col gap-space-2">

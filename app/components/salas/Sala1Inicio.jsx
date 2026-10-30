@@ -4,7 +4,7 @@ import { Estrellas } from "./Estrellas";
 import { TitularTecleado } from "./TitularTecleado";
 
 // Sala 1 · Inicio · Literatura (docs/textos.md). Arriba las estrellas; el
-// texto al centro; abajo la ciudad y la luna, en su propia franja.
+// texto al centro; abajo la ciudad, en su propia franja.
 export function Sala1Inicio() {
   return (
     <section

@@ -517,3 +517,12 @@
     animation-play-state: running;
   }
 }
+
+/* Página de nivel (docs/pagina-nivel.md): el dibujo aparece con un fundido
+   en --dur-lento. Casi siempre está a la vista al cargar, así que entra con
+   la página; con menos movimiento, visible desde el inicio. */
+@media (prefers-reduced-motion: no-preference) {
+  .nivel-dibujo img {
+    animation: aparece var(--dur-lento) var(--curva) both;
+  }
+}
