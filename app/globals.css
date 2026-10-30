@@ -92,8 +92,9 @@
   }
 
   :root {
-    /* Solo para mostrar al sistema para gimnasios en la galería. */
-    --boaz-azul: 30 68 255;
+    /* Solo para mostrar a Boaz (#2979FF): solo relleno (mancha), nunca
+       texto: 3.6:1 sobre papel. */
+    --boaz-azul: 41 121 255;
 
     /* Materiales del arte (paleta del 29 oct, docs/diseno.md). Nunca en
        texto, botones ni enlaces. */

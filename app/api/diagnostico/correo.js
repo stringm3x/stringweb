@@ -29,7 +29,7 @@ export function armarCorreo(datos) {
     `Giro: ${datos.giro}`,
     `Lo que le pasa: ${loQueLePasa}`,
     `Nivel sugerido: ${nivel}`,
-    ...(esGimnasio ? ["Es gimnasio: ofrécele el sistema para gimnasios."] : []),
+    ...(esGimnasio ? ["Es gimnasio: ofrécele Boaz."] : []),
     "",
     "Estándar: respóndele en un día hábil.",
   ];
@@ -46,7 +46,7 @@ export function armarCorreo(datos) {
   ${fila("Giro", escapar(datos.giro))}
   ${fila("Lo que le pasa", escapar(loQueLePasa).replace(/\r?\n/g, "<br>"))}
   ${fila("Nivel sugerido", escapar(nivel))}
-  ${esGimnasio ? `<p style="margin:0 0 8px"><strong>Es gimnasio: ofrécele el sistema para gimnasios.</strong></p>` : ""}
+  ${esGimnasio ? `<p style="margin:0 0 8px"><strong>Es gimnasio: ofrécele Boaz.</strong></p>` : ""}
   <p style="margin:16px 0 0">Estándar: respóndele en un día hábil.</p>
 </body>
 </html>`;

@@ -5,21 +5,21 @@ import { Boton } from "@/app/components/ui/Boton";
 import { TitularBrochada } from "@/app/components/ui/TitularBrochada";
 
 export const metadata = {
-  title: "Registra tu gimnasio",
-  description:
-    "Completa tus datos y empieza tu prueba gratuita de 14 días con Pro completo, sin tarjeta.",
+  title: { absolute: "Boaz · El sistema para gimnasios, by STRING" },
+  description: "Socios, check-in, cobros y caja para tu gimnasio, probado en un gimnasio real.",
   alternates: {
     canonical: "https://www.stringwebs.com/gym/registro",
   },
   openGraph: {
-    title: "Registra tu gimnasio · El sistema para gimnasios",
+    title: "Boaz · El sistema para gimnasios, by STRING",
+    description: "Socios, check-in, cobros y caja para tu gimnasio, probado en un gimnasio real.",
     url: "https://www.stringwebs.com/gym/registro",
     images: [
       {
         url: "/opengraph-image",
         width: 1200,
         height: 630,
-        alt: "El sistema para gimnasios",
+        alt: "Boaz · El sistema para gimnasios, by STRING",
       },
     ],
   },

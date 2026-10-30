@@ -95,7 +95,7 @@ Como en un museo: **las paredes y los letreros son sobrios, y el color vive en l
 | Estuco | #EFE3CC (lado #D9C7A6) | Fachada del edificio |
 | Vidrio | #BFD6DE | Ventanas |
 | Acero | #A9AEB4 | Hojas y metales |
-| Azul de Boaz | Solo dentro de su lámina | Marco del sistema para gimnasios |
+| Azul de Boaz `#2979FF` | Solo en su logo, su lámina y su cuadro; solo relleno, nunca texto (3.6:1 sobre papel) | Boaz en /productos y en la galería |
 
 **Reglas:** el color nunca va en texto ni en botones; los materiales no compiten con el verde (si una obra tiene verde, es de STRING); y el arte sigue en su franja, sin tapar información.
 
@@ -113,7 +113,7 @@ Como en un museo: **las paredes y los letreros son neutros, y el color vive en l
 | Amarillo de obra | #E0A526 | La grúa |
 
 - El color **nunca** va en texto, botones ni enlaces.
-- El azul de Boaz aparece **solo dentro de su lámina**, en la galería.
+- El azul de Boaz aparece **solo en su logo y su lámina**: en /productos y en su cuadro de la galería.
 - Todo sigue dibujado a mano, con línea y rayado; el color rellena, no reemplaza la línea.
 
 ## Tipografía
@@ -166,7 +166,7 @@ Arriba va la **barra superior** (noche): logo, Sistemas · Productos · Galería
 | 2 · El problema (noche) | Escultura | "No es falta de demanda. Es falta de sistema." | Un bloque en línea que se talla al bajar: el sistema quita lo que sobra |
 | 3 · El caso real (noche) | Cine | La historia de Evolution GYM y sus cifras autorizadas | Fotogramas al hacer scroll; las cifras en Geist Mono, como créditos |
 | 4 · Los niveles (noche) | Música | Responde · Organiza · Automatiza · Controla · Empresa | Entrada: "Arte y calidad no están peleados." Cada nivel es una cuerda que suena al tocarla (si el visitante enciende el sonido), con una viñeta en línea de sus artes acumuladas (ver abajo) |
-| 5 · La galería (pared) | Pintura | La obra de cada sistema | "Cada sistema tiene su arte." Tres marcos: STRING, "El sistema para gimnasios" y "Tu negocio", vacío, esperando la obra del cliente |
+| 5 · La galería (pared) | Pintura | La obra de cada sistema | "Cada sistema tiene su arte." Tres marcos: STRING, Boaz y "Tu negocio", vacío, esperando la obra del cliente |
 | 6 · Cómo trabajamos (pared) | Arquitectura | Proceso, el boceto y el estándar de servicio | El proceso como edificio dibujado a mano: cimientos, estructura, entrega. A mano, nunca con regla: el plano técnico es de Boaz |
 | 7 · Continuidad (noche) | Danza | El cuidado mensual | Líneas que se mueven a ritmo constante: el sistema sigue vivo |
 
@@ -212,14 +212,14 @@ STRING es la galería; cada producto es una obra con su propio arte. No comparte
 | --- | --- | --- | --- |
 | Fondo | Noche | Papel claro | Propio |
 | Color | Verde | Azul eléctrico | Propio |
-| Arte | La ciudad de una línea, la luna, las cuerdas | Plano técnico, mancha azul, Hércules en grabado | Propio, nace del nicho |
+| Arte | La ciudad de una línea (sin luna desde el 30 oct), las cuerdas | Plano técnico, mancha azul, Hércules en grabado | Propio, nace del nicho |
 | Firma | El logo con el cursor | "by STRING" chico, en gris | "by STRING" chico, en gris |
 
 **Lo que comparten todos:** dibujo de línea como base del arte, cifras en mono, nada inventado en pantalla y contraste mínimo de 4.5:1.
 
 Cada sistema a la medida también lleva su arte. Es parte del servicio: el cliente recibe un sistema con una obra propia, no una plantilla. Se define con él en el diagnóstico.
 
-**Ojo con Boaz:** el nombre sigue siendo interno hasta la consulta en el IMPI. Mientras tanto, en la galería pública su marco dice "El sistema para gimnasios".
+**Boaz:** Boaz sale con su nombre desde el lote 9, con la firma "by STRING" (decisión de Carlos, 29 oct; el registro en el IMPI se hace cuando haya ingresos). Su cartela en la galería dice "Boaz". Logo y lámina: los de `string-gym-saas` (`public/marca/` y `components/dibujos/escena-columna.ts`, provisional allá hasta que llegue el ilustrador).
 
 ## Reglas que no se rompen
 
@@ -241,7 +241,7 @@ Cada sistema a la medida también lleva su arte. Es parte del servicio: el clien
 - [ ] ~~Afinar el cursor~~ **Hecho 28 oct:** bloque de terminal con la I en negativo (camino B). Los cinco archivos del logo y los componentes Logo, Portada y portada del sistema ya están redibujados en STRING · Identidad 2026
 - [ ] ~~Confirmar el ícono~~ **Hecho 28 oct:** el bloque verde con la I en negativo, en cuadrado noche
 - [ ] Pasar el dibujo de la ciudad a una versión final hecha a mano
-- [ ] ~~Elegir el arte de Boaz para su marco~~ **Hecho 28 oct:** la lámina (plano técnico sobre papel con la mancha azul)
+- [ ] ~~Elegir el arte de Boaz para su marco~~ **Hecho 28 oct:** la lámina (plano técnico sobre papel con la mancha azul). **30 oct (lote 9a):** el cuadro pasa a la escena real de la columna con el disco
 - [ ] Decidir si el sonido se queda en el sitio real
 - [ ] Dibujar en versión sencilla las cuatro salas nuevas: escultura, cine, arquitectura y danza
 - [ ] Recontar las cifras de Evolution GYM antes de publicar

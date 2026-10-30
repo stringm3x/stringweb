@@ -92,7 +92,7 @@ describe("POST /api/diagnostico", () => {
     const correo = sendMail.mock.calls[0][0];
     expect(correo.subject).toBe("Diagnóstico · Ana López · Gimnasio · Nivel sugerido: por definir");
     expect(correo.text).toContain("Lo que le pasa: Quiero <b>cobrar</b> en línea");
-    expect(correo.text).toContain("Es gimnasio: ofrécele el sistema para gimnasios.");
+    expect(correo.text).toContain("Es gimnasio: ofrécele Boaz.");
     expect(correo.html).toContain("Quiero &lt;b&gt;cobrar&lt;/b&gt; en línea");
   });
 

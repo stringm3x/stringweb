@@ -55,8 +55,8 @@ const PREGUNTAS = [
     r: (
       <>
         Para gimnasios ya existe un sistema hecho:{" "}
-        <Link href="/saas" className={`font-semibold ${ENLACE}`}>
-          Ver el sistema para gimnasios
+        <Link href="/productos#boaz" className={`font-semibold ${ENLACE}`}>
+          Conoce Boaz
         </Link>
         .
       </>

@@ -33,7 +33,7 @@ export function Sala3Caso() {
           <p className={CUERPO}>
             Soy Carlos Avilés, desarrollador y fundador de STRING. Evolution GYM es el gimnasio
             de mi familia: ahí construí su sistema y lo probamos en el mostrador, con socios de
-            verdad. Funcionó, y se volvió un producto: el sistema para gimnasios de STRING. Cada
+            verdad. Funcionó, y se volvió un producto: Boaz, el sistema para gimnasios de STRING. Cada
             sistema que hacemos lo reviso yo antes de entregarlo.{" "}
             <Link href="/nosotros" className={`font-semibold ${ENLACE}`}>
               Conoce la historia

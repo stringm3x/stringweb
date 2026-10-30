@@ -1,7 +1,8 @@
 # CLAUDE.md — stringwebs.com
 
 Este repo es SOLO el sitio público de STRING (stringwebs.com): código, estructura, copy y diseño.
-El sistema para gimnasios (código, base de datos, `app.gym.stringwebs.com`) vive en otro repo.
+Boaz, el sistema para gimnasios (código, base de datos, `app.gym.stringwebs.com`), vive en otro repo
+(`string-gym-saas`).
 Aquí solo se habla de él como producto en venta.
 
 ## Fuentes de verdad (solo lectura)
@@ -30,7 +31,7 @@ tiene su marca y STRING lo firma.
 - **Sistemas a la medida:** cinco niveles, una sola familia, misma calidad; cambia el alcance.
   En el sitio solo se muestra el "desde": Responde $8,000 · Organiza $18,000 · Automatiza $28,000 ·
   Controla $40,000 · Empresa se cotiza. Continuidad: Cuida · Mejora · Impulsa, desde $1,800 al mes.
-- **Productos:** el sistema para gimnasios (único en producción). Barberías, clínicas y
+- **Productos:** Boaz, el sistema para gimnasios (único en producción). Barberías, clínicas y
   restaurantes no existen todavía: nunca se presentan como disponibles.
 
 Si un precio en el código no coincide con estos, se reporta. No se corrige por cuenta propia.
@@ -62,7 +63,8 @@ LCP < 2.5 s, CLS < 0.1, contraste ≥ 4.5:1. Si una no se cumple, se dice en el 
 - Un solo acento en la interfaz: el verde. El color cálido vive solo en el arte.
 - Anton solo en el logo, y el logo va como SVG en línea.
 - Precios y cifras en Geist Mono, tal como en `docs/textos.md`. Nada inventado.
-- Boaz nunca por su nombre: en público es "el sistema para gimnasios".
+- Boaz sale con su nombre desde el lote 9, con la firma "by STRING" (decisión de Carlos, 29 oct; el
+  registro en el IMPI se hace cuando haya ingresos). Su logo y su lámina vienen de `string-gym-saas`.
 - Nunca se publica en producción sin el visto bueno de Carlos.
 - No se toca `app.gym.stringwebs.com` ni su base de datos.
 
@@ -110,14 +112,14 @@ Al lanzar: literatura, música y pintura completas; escultura, cine, arquitectur
 quieta (`public/arte/`). Sala 3 sin cifras de socios hasta recontar.
 
 Barra (lote 8, `docs/pagina-nivel.md`): logo · Sistemas (`/sistemas`) · Tu negocio (oculto hasta que exista) ·
-Productos (`/saas` mientras no exista `/productos`) · Nosotros · "Solicitar diagnóstico" (`/diagnostico`).
+Productos (`/productos`, lote 9a) · Nosotros · "Solicitar diagnóstico" (`/diagnostico`).
 Galería ya no va en la barra; sigue como sala 5 (`/#galeria`).
 
 ## Rutas
 
 Páginas: `/`, `/sistemas` y `/sistemas/responde`, `/organiza`, `/automatiza`, `/controla`,
 `/empresa` (lote 8, `docs/pagina-nivel.md`), `/nosotros`, `/diagnostico`, `/aviso-de-privacidad`,
-`/terminos`, `/saas` (copy: "El sistema para gimnasios"), 404. Se conservan `/gym/registro` y
+`/terminos`, `/productos` (lote 9a: Boaz en `#boaz` y a la medida en `#medida`), 404. Se conservan `/gym/registro` y
 `/gym/gracias` (envían a `app.gym.stringwebs.com`; no se toca ese envío). No se crean `/galeria`,
 `/estandar` ni `/preguntas`. `/#niveles` sigue como ancla de la portada.
 
@@ -132,7 +134,7 @@ Sin cadenas: cada ruta vieja apunta al destino final.
 | `/Us` | `/nosotros` |
 | `/privacy-policy` | `/aviso-de-privacidad` |
 | `/terms` | `/terminos` |
-| `/gym/empezar` | `/saas#planes` (hoy 308: deuda técnica, ver `docs/estado.md`) |
+| `/saas`, `/gym/empezar` | `/productos#boaz` |
 
 En el mismo cambio de una ruta se actualizan enlaces internos, nav, pie, `app/sitemap.js`, el
 canonical y los datos estructurados.
@@ -173,6 +175,8 @@ fotos de stock y superlativos sin respaldo.
 - Portada: `app/(sitio)/page.jsx` + `app/components/home/*.jsx` (se rehace por salas).
 - Sistemas: `app/(sitio)/sistemas/` + `app/components/sistemas/*.jsx` (una sola página de nivel); los datos
   de los cinco niveles viven en `app/lib/niveles.js` (también los usa la sala 4).
+- Productos: `app/(sitio)/productos/` + `app/components/productos/*.jsx`. Archivo 900 (solo ahí) en
+  `app/fonts/`; logotipo de Boaz en `public/marca/`.
 - Layout, metadata y JSON-LD: `app/layout.jsx`. Barra: `app/header.jsx`. Pie: `app/Footer.jsx`.
 - UI compartida: `app/components/ui/`; formularios: `app/components/forms/`.
 - Copy hardcodeado en JSX con algunos arrays en `data.js`; no hay CMS.

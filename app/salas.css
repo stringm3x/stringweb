@@ -526,3 +526,31 @@
     animation: aparece var(--dur-lento) var(--curva) both;
   }
 }
+
+/* /productos (lote 9a): cada bloque entra una vez, sube 16 px y aparece en
+   --dur-lento. El encabezado entra con la página y solo sube: si empezara
+   en opacidad 0, el navegador no contaría su h1 como LCP. Los demás entran
+   al llegar (app/components/productos/Entra.jsx). Con menos movimiento,
+   quietos. */
+@keyframes entra-sube {
+  from {
+    transform: translateY(16px);
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .entra-carga {
+    animation: entra-sube var(--dur-lento) var(--curva) both;
+  }
+
+  .entra {
+    transition:
+      opacity var(--dur-lento) var(--curva),
+      transform var(--dur-lento) var(--curva);
+  }
+
+  .entra[data-mov="espera"] {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+}

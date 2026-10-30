@@ -1,6 +1,6 @@
 # STRING
 
-**STRING hace software con oficio y con arte: cada sistema que construye tiene su propia obra.** Es un taller de software de la Ciudad de México y la casa de sus productos (el primero, el sistema para gimnasios Boaz). Este sistema de diseño manda sobre todo lo visual de la casa; lo visual de Boaz vive en su propio sistema.
+**STRING hace software con oficio y con arte: cada sistema que construye tiene su propia obra.** Es un taller de software de la Ciudad de México y la casa de sus productos (el primero, Boaz, el sistema para gimnasios). Este sistema de diseño manda sobre todo lo visual de la casa; lo visual de Boaz vive en su propio sistema.
 
 ## Esencia
 
@@ -49,7 +49,7 @@ STRING vive de noche con una sola luz verde; la galería es su pared clara. Hay 
 - `texto`, `texto-suave`: todo el texto y el dibujo de línea.
 - `acento`: **el único acento**. Si hay dos verdes compitiendo, sobra uno. Sobre claro siempre el verde profundo.
 - `sobre-acento`: el texto encima de un botón verde.
-- `boaz-azul`: solo para mostrar a Boaz, nunca en piezas propias.
+- `boaz-azul` (`#2979FF`): solo para mostrar a Boaz, solo relleno (mancha), nunca texto: 3.6:1 sobre papel. Nunca en piezas propias.
 
 Contraste mínimo del sistema: 4.5:1 en texto. Cada token dice su contraste en su nota.
 
@@ -95,7 +95,7 @@ STRING es la galería; cada producto es una obra con su propio arte. No comparte
 
 - **Dentro de un producto**, STRING firma "by STRING" chico y todo en gris (logo *firma gris*).
 - **Cada sistema a la medida lleva su arte**, definido con el cliente en el diagnóstico.
-- **Boaz:** el nombre es interno hasta la consulta en el IMPI. En la galería pública su marco dice "El sistema para gimnasios".
+- **Boaz:** Boaz sale con su nombre desde el lote 9, con la firma "by STRING". Su cartela en la galería dice "Boaz".
 
 ## Reglas que no se rompen
 
