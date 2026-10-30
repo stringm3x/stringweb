@@ -41,7 +41,7 @@ function Crezcas({ nivel }) {
         <img src={siguiente.vineta} width={300} height={44} alt="" className="h-auto w-[240px]" />
         <span className="flex items-center justify-between gap-space-3">
           <span className="text-[22px] font-semibold">
-            {siguiente.nombre} + {siguiente.arte}
+            {siguiente.nombre} + {siguiente.suma}
           </span>
           <span aria-hidden="true">→</span>
         </span>

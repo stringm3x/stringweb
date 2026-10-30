@@ -448,6 +448,8 @@ Cada página de nivel tiene su dibujo, una línea bajo el dibujo, "Para quién e
 
 \[Cuando crezcas en Empresa: Tarjeta "Ver los cinco niveles" → /sistemas.\]
 
+\[Cuando crezcas en Controla: la tarjeta dice "Empresa + Música, escultura y cine" (Carlos, 30 oct). En los demás, "[Nivel] + [su arte]".\]
+
 ## Por confirmar antes del brief
 
 - [x] **Foto de Carlos** en la sala 3: foto real (falta que la mande).
