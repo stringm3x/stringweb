@@ -42,7 +42,6 @@ module.exports = {
       alerta: "rgb(var(--alerta) / <alpha-value>)",
       borde: "rgb(var(--borde) / <alpha-value>)",
       "borde-hover": "rgb(var(--borde-hover) / <alpha-value>)",
-      "borde-suave": "rgb(var(--borde-suave) / <alpha-value>)",
       placeholder: "rgb(var(--placeholder) / <alpha-value>)",
       "boaz-azul": "rgb(var(--boaz-azul) / <alpha-value>)",
       // Legado de la marca anterior: lo usan las salas que se rehacen en

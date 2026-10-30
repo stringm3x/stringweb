@@ -19,7 +19,7 @@ export function Opciones({ nombre, legenda, opciones, registrar, error, disabled
       <legend className="mb-space-3 text-[14px] font-medium text-texto">{legenda}</legend>
       <div className="flex flex-wrap gap-space-2">
         {opciones.map((opcion) => (
-          <label key={opcion} className={`${PILDORA} ${error ? "border-alerta" : "border-borde-suave"}`}>
+          <label key={opcion} className={`${PILDORA} ${error ? "border-alerta" : "border-borde"}`}>
             <input type="radio" value={opcion} {...registrar(nombre)} className="sr-only" />
             <FiCheck aria-hidden="true" className="hidden h-4 w-4 flex-shrink-0 group-has-[:checked]/opcion:block" />
             {opcion}

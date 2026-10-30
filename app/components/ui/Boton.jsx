@@ -51,7 +51,8 @@ function clasesVariante(variante, estado, interactivo) {
   }`;
 }
 
-// El cursor ▍ del logo: en hover del primario y mientras se envía. Va fuera
+// El cursor ▍ del logo: en hover, presionado y foco del primario, y
+// mientras se envía. Va fuera
 // del flujo, en el relleno, para que el texto no se mueva al aparecer.
 function Cursor({ escribe = false }) {
   return (

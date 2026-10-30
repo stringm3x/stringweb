@@ -52,16 +52,16 @@ Píldora, alto mínimo 48 px (44 px en barra), Geist 600 16 px, padding horizont
 | Estado | Primario (noche) | Secundario | De texto |
 |---|---|---|---|
 | Reposo | Fondo `#50FF05`, texto negro | Borde 1 px `#5A5A5E`, texto línea | Texto línea, subrayado 1 px `#5A5A5E` a 6 px, flecha → |
-| Hover | **Aparece el cursor ▍ del logo después del texto, parpadeando a 1.1 s** | Borde línea, fondo línea al 6 % | Subrayado en línea; la flecha avanza 4 px (normal) |
-| Presionado | `scale(.97)`, fondo `#46E000` (rápido) | `scale(.97)` | Texto neblina |
-| Foco | Contorno 2 px línea, separación 3 px | Igual | Igual |
+| Hover | **Aparece el cursor ▍ del logo después del texto, parpadeando a 1.1 s** (también en presionado y en foco, para que se vea en celular, donde no hay hover) | Borde línea, fondo línea al 6 % | Subrayado en línea; la flecha avanza 4 px (normal) |
+| Presionado | `scale(.97)`, fondo `#46E000` (rápido), con el cursor ▍ | `scale(.97)` | Texto neblina |
+| Foco | Contorno 2 px línea, separación 3 px; en el primario, con el cursor ▍ | Igual | Igual |
 | Cargando | Texto "Enviando" + el cursor ▍ parpadeando, como si escribiera | Igual, en línea | No aplica |
 | Deshabilitado | Opacidad 40 %, cursor not-allowed | Igual | Igual |
 | Éxito | Palomita + "Enviado" | Borde y texto en luz | No aplica |
 | Error | Fondo transparente, borde y texto alerta, ícono + "Intenta de nuevo" | Borde y texto alerta | No aplica |
 
 - **Sobre pared**, el primario usa verde profundo `#1A7F00` con texto pared `#F4F2EC`; presionado `#156900`; foco en tinta; error en alerta de pared.
-- **El cursor en hover es solo del primario**: es la firma de STRING y no se usa en ningún otro componente.
+- **El cursor (hover, presionado y foco) es solo del primario**: es la firma de STRING y no se usa en ningún otro componente.
 - Con menos movimiento, el cursor aparece fijo, sin parpadear, y no hay `scale`.
 
 ### Campo de texto
@@ -78,7 +78,7 @@ Borde 1 px `#5A5A5E`, radio 12 px, alto 48 px, Geist 16 px, etiqueta visible arr
 
 ### Opción en píldora
 
-Borde 1 px `#3A3A3D`, alto 44 px, Geist 500 15 px. Hover: borde línea. **Elegida: fondo luz, texto negro y palomita**, con `aria-pressed` o radio real. Foco: contorno 2 px línea.
+Borde 1 px `#5A5A5E` (3.06:1 sobre noche, igual que el campo), alto 44 px, Geist 500 15 px. Hover: borde línea. **Elegida: fondo luz, texto negro y palomita**, con `aria-pressed` o radio real. Foco: contorno 2 px línea.
 
 ### Tarjeta (niveles, enlaces a páginas)
 

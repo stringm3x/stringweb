@@ -264,3 +264,32 @@ test.describe("páginas", () => {
     });
   }
 });
+
+// En el celular el cursor ▍ del primario sale al presionar con el dedo.
+// Un toque largo de Chrome (synthesizeTapGesture) deja el botón en :active.
+test.describe("con el dedo", () => {
+  test.use({ isMobile: true, hasTouch: true });
+
+  test("el primario muestra el cursor al presionar a 375 px", async ({ page }) => {
+    await page.setViewportSize({ width: 375, height: 812 });
+    await page.goto("/muestrario");
+    const muestra = page.locator('[data-muestra="primario-noche-reposo"]');
+    const boton = muestra.locator("button");
+    const caja = await boton.boundingBox();
+    const cdp = await page.context().newCDPSession(page);
+    const toque = cdp.send("Input.synthesizeTapGesture", {
+      x: caja.x + caja.width / 2,
+      y: caja.y + caja.height / 2,
+      duration: 2000,
+      gestureSourceType: "touch",
+    });
+    await expect.poll(() => boton.evaluate((e) => e.matches(":active"))).toBe(true);
+    await muestra.screenshot({
+      path: `${CAPTURAS}/estados/boton-primario-noche-3-presionado-dedo.png`,
+      animations: "disabled",
+    });
+    // Con la animación quieta, el cursor queda encendido.
+    expect(await muestra.locator(".boton-cursor").evaluate((e) => getComputedStyle(e).opacity)).toBe("1");
+    await toque;
+  });
+});
