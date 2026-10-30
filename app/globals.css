@@ -18,6 +18,39 @@
     --grafito: 95 99 104;
   }
 
+  /* Movimiento (docs/calidad.md § 2). Ninguna duración ni curva suelta:
+     todo sale de aquí. Rápido es la respuesta a la mano; normal, algo que
+     cambia de lugar; lento, algo que se cuenta. */
+  :root {
+    --dur-rapido: 150ms;
+    --dur-normal: 300ms;
+    --dur-lento: 600ms;
+    --curva: cubic-bezier(0.2, 0, 0, 1);
+    --parpadeo: 1.1s;
+    /* Con menos movimiento, lo que queda dura casi nada. */
+    --dur-quieto: 0.01ms;
+
+    /* Tiempos del arte de las salas: se quedan como estaban. */
+    --arte-dur-ciudad: 10s;
+    --arte-curva-ciudad: cubic-bezier(0.5, 0.05, 0.3, 1);
+    --arte-espera-ciudad: 0.3s;
+    --arte-dur-luna: 2.4s;
+    --arte-curva-luna: cubic-bezier(0.6, 0.05, 0.25, 1);
+    --arte-espera-luna: 1s;
+    --arte-dur-estrella: 5s;
+    --arte-curva-estrella: ease-in-out;
+    --arte-dur-tecla: 1ms;
+    --arte-dur-tecla-cursor: 45ms;
+
+    /* Legado de /saas y /gym (diseño anterior), hasta que se rehagan. */
+    --legado-dur-cinta: 30s;
+    --legado-dur-girar: 24s;
+    --legado-dur-imprimir: 0.35s;
+    --legado-dur-tic: 0.5s;
+    --legado-espera-tic: 0.4s;
+    --legado-dur-giro: 1s;
+  }
+
   /* Tema Noche: el principal. */
   :root,
   [data-theme="noche"] {
@@ -27,8 +60,16 @@
     --texto-suave: var(--neblina);
     --hairline: 42 42 44;
     --acento: var(--luz);
+    --acento-presionado: 70 224 0;
     --sobre-acento: 0 0 0;
-    --foco: var(--acento);
+    /* El foco va en el color del texto: línea sobre noche. */
+    --foco: var(--texto);
+    /* Solo para errores, nunca como adorno (docs/calidad.md). */
+    --alerta: 255 107 90;
+    /* Contorno de botones secundarios, campos y píldoras: 3.06:1 sobre noche. */
+    --borde: 90 90 94;
+    --borde-hover: var(--neblina);
+    --placeholder: 122 122 128;
   }
 
   /* Tema Pared: la galería y los impresos. */
@@ -39,7 +80,14 @@
     --texto-suave: var(--grafito);
     --hairline: 217 217 214;
     --acento: var(--verde-profundo);
-    --sobre-acento: 255 255 255;
+    --acento-presionado: 21 105 0;
+    /* Sobre el verde profundo, texto pared (4.6:1). */
+    --sobre-acento: var(--pared);
+    --foco: var(--texto);
+    --alerta: 179 38 30;
+    --borde: var(--grafito);
+    --borde-hover: var(--tinta);
+    --placeholder: var(--grafito);
   }
 
   :root {
@@ -94,17 +142,45 @@
 
   .logo-string .bloque {
     fill: rgb(var(--acento));
-    animation: logo-bloque 1.1s steps(1) infinite;
+    animation: logo-bloque var(--parpadeo) steps(1) infinite;
   }
 
   .logo-string .i-anton {
     opacity: 0;
-    animation: logo-i 1.1s steps(1) infinite;
+    animation: logo-i var(--parpadeo) steps(1) infinite;
   }
 
   @media (prefers-reduced-motion: reduce) {
     .logo-string .bloque,
     .logo-string .i-anton {
+      animation: none;
+    }
+  }
+}
+
+/* Botón primario (docs/calidad.md § 3). En hover, presionado y foco
+   aparece el cursor del logo después del texto (presionado, para que se vea
+   en el celular, donde no hay hover): es la firma de STRING y solo vive
+   aquí. Mientras se envía, el cursor escribe. Con menos movimiento aparece
+   fijo. */
+@layer components {
+  .boton-cursor {
+    opacity: 0;
+  }
+
+  .boton-firma:hover .boton-cursor,
+  .boton-firma:active .boton-cursor,
+  .boton-firma:focus-visible .boton-cursor,
+  .boton-cursor-escribe {
+    opacity: 1;
+    animation: logo-bloque var(--parpadeo) steps(1) infinite;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .boton-firma:hover .boton-cursor,
+    .boton-firma:active .boton-cursor,
+    .boton-firma:focus-visible .boton-cursor,
+    .boton-cursor-escribe {
       animation: none;
     }
   }
@@ -138,7 +214,7 @@
   /* El titular: cada letra aparece en su turno. */
   .tecla {
     position: relative;
-    animation: tecla-aparece 1ms linear both;
+    animation: tecla-aparece var(--arte-dur-tecla) linear both;
     animation-delay: var(--tecla-delay);
   }
 
@@ -153,13 +229,13 @@
     margin-left: 0.04em;
     background: rgb(var(--acento));
     opacity: 0;
-    animation: tecla-cursor 45ms steps(1);
+    animation: tecla-cursor var(--arte-dur-tecla-cursor) steps(1);
     animation-delay: var(--tecla-delay);
   }
 
   /* Al final, el cursor se queda parpadeando como el del logo. */
   .tecla-fin::after {
-    animation: tecla-cursor-fin 1.1s steps(1) infinite;
+    animation: tecla-cursor-fin var(--parpadeo) steps(1) infinite;
     animation-delay: var(--tecla-delay);
   }
 
@@ -172,7 +248,8 @@
     stroke-linejoin: round;
     vector-effect: non-scaling-stroke;
     stroke-dasharray: 6000;
-    animation: ciudad-trazo 10s cubic-bezier(0.5, 0.05, 0.3, 1) 0.3s infinite alternate;
+    animation: ciudad-trazo var(--arte-dur-ciudad) var(--arte-curva-ciudad) var(--arte-espera-ciudad)
+      infinite alternate;
   }
 
   /* La luna se pinta una vez, de un brochazo, al segundo de cargar. */
@@ -182,7 +259,7 @@
     stroke-width: 34;
     stroke-linecap: round;
     stroke-dasharray: 620;
-    animation: ciudad-luna 2.4s cubic-bezier(0.6, 0.05, 0.25, 1) 1s both;
+    animation: ciudad-luna var(--arte-dur-luna) var(--arte-curva-luna) var(--arte-espera-luna) both;
   }
 
   /* Rayas secas del pincel, del color del fondo. */
@@ -200,7 +277,7 @@
     border-radius: 999px;
     background: rgb(var(--texto));
     opacity: 0.35;
-    animation: estrella 5s ease-in-out infinite alternate;
+    animation: estrella var(--arte-dur-estrella) var(--arte-curva-estrella) infinite alternate;
   }
 
   @media (prefers-reduced-motion: reduce) {
@@ -280,20 +357,41 @@
   }
 }
 
+/* Transiciones entre páginas (View Transitions nativo): fundido corto en
+   velocidad normal, para que se note que cambiaste de sala. Con menos
+   movimiento, la página cambia de golpe. */
+@view-transition {
+  navigation: auto;
+}
+
+::view-transition-old(*),
+::view-transition-new(*) {
+  animation-duration: var(--dur-normal);
+  animation-timing-function: var(--curva);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  ::view-transition-group(*),
+  ::view-transition-old(*),
+  ::view-transition-new(*) {
+    animation: none !important;
+  }
+}
+
 /* Movimiento reducido: lleva al mínimo transiciones y animaciones CSS.
    .animate-spin queda exento porque es feedback de carga, no decorativo. */
 @media (prefers-reduced-motion: reduce) {
   *,
   *::before,
   *::after {
-    animation-duration: 0.01ms !important;
+    animation-duration: var(--dur-quieto) !important;
     animation-iteration-count: 1 !important;
-    transition-duration: 0.01ms !important;
+    transition-duration: var(--dur-quieto) !important;
     scroll-behavior: auto !important;
   }
 
   .animate-spin {
-    animation-duration: 1s !important;
+    animation-duration: var(--legado-dur-giro) !important;
     animation-iteration-count: infinite !important;
   }
 }

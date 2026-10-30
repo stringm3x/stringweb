@@ -180,8 +180,8 @@ export function RegistroForm({ initialPlan = "" }) {
       </div>
 
       <div className="pt-2">
-        <Boton type="submit" variante="primario" barrido disabled={isSubmitting} className="w-full">
-          {isSubmitting ? "Enviando…" : "Empezar mi prueba gratuita"}
+        <Boton type="submit" variante="primario" estado={isSubmitting ? "cargando" : "reposo"} className="w-full">
+          Empezar mi prueba gratuita
         </Boton>
         <p className="mt-4 text-center font-mono uppercase text-etiqueta text-tinta-tenue">
           Sin tarjeta de crédito · Te contactamos en menos de 24 horas

@@ -12,9 +12,11 @@ Aquí solo se habla de él como producto en venta.
 | `docs/diseno.md` (STRING — Identidad) | Todo lo visual: logo, color, tipografía, arte, salas |
 | `docs/sistema/` (Identidad 2026) | Tokens (`tokens.json`), componentes con HTML de referencia (Logo, Botón, Ciudad, Cuerda, Galería, Portada) |
 | `docs/textos.md` (Textos del sitio) | El copy final de cada sala, formulario, pie y legales |
+| `docs/calidad.md` (La calidad en STRING) | Reglas de calidad, tokens de movimiento y `--alerta`, y los estados de cada componente (botón, campo, píldora, tarjeta, barra, menú, transiciones) |
 
 Si el código contradice un documento, manda el documento y se reporta. Si dos documentos chocan:
-textos → `textos.md`; visual → `diseno.md`; negocio y cifras → KB. Si no se resuelve, se pregunta.
+textos → `textos.md`; componentes, estados y movimiento → `calidad.md`; visual → `diseno.md`;
+negocio y cifras → KB. Si no se resuelve, se pregunta.
 Estado del trabajo y deuda técnica: `docs/estado.md`. Reportes por lote: `reportes/`.
 
 ## Qué es STRING
@@ -51,6 +53,9 @@ LCP < 2.5 s, CLS < 0.1, contraste ≥ 4.5:1. Si una no se cumple, se dice en el 
 - Stack actual, sin migrar. Celular primero.
 - El arte nunca tapa texto, botones ni precios; sin arte, la página sigue vendiendo.
 - Con menos movimiento (`prefers-reduced-motion`) todo queda quieto; el sonido empieza apagado.
+- Solo se anima `transform`, `opacity` y `clip-path`; los cambios de color son instantáneos.
+  Ninguna duración ni curva suelta: todas salen de los tokens (`docs/calidad.md` § 2).
+- Cada componente tiene sus 8 estados (`docs/calidad.md` § 3) y pasa la lista "Antes de publicar".
 - Todo usable con teclado y foco visible.
 - Un solo acento en la interfaz: el verde. El color cálido vive solo en el arte.
 - Anton solo en el logo, y el logo va como SVG en línea.
@@ -81,8 +86,11 @@ LCP < 2.5 s, CLS < 0.1, contraste ≥ 4.5:1. Si una no se cumple, se dice en el 
 - **Tipografía.** Anton solo en el logo (ya va a trazo en el SVG, no hace falta cargarla). Geist
   para titulares (600, -0.035 em) y texto (17–22 px). Geist Mono para cifras, precios y etiquetas
   en mayúsculas.
-- **Botones** en píldora, mínimo 44 px de alto; uno principal verde por pantalla ("Solicitar
-  diagnóstico"); foco de 2 px con 3 px de separación.
+- **Botones** en píldora, mínimo 48 px de alto (44 px en la barra); uno principal verde por pantalla
+  ("Solicitar diagnóstico"); foco de 2 px en línea (tinta sobre pared) con 3 px de separación.
+- **Movimiento.** `--dur-rapido` 150 ms · `--dur-normal` 300 ms · `--dur-lento` 600 ms · `--curva`
+  `cubic-bezier(.2, 0, 0, 1)` · `--parpadeo` 1.1 s `steps(1)`. El arte usa `--arte-dur-*`.
+- **Alerta** solo para errores: `#FF6B5A` sobre noche, `#B3261E` sobre pared.
 - **Arte.** La ciudad de una línea, la luna, las cuerdas (sonido opcional, apagado al cargar), la
   galería y las estrellas. Dibujo de línea; nada de 3D ni video. Única foto: Carlos, sala 3.
   Paleta del arte: la del 29 oct en `docs/diseno.md`. La brochada, el grano y el grabado del sitio

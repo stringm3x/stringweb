@@ -1,105 +1,198 @@
 import Link from "next/link";
+import { FiAlertCircle, FiCheck } from "react-icons/fi";
 
-// Botón de docs/sistema/components/Boton: píldora, Geist 17 px, mínimo
-// 44 px de alto. El foco (2 px, 3 px de separación) viene de globals.css.
+// Botón de docs/calidad.md § 3: primario, secundario y de texto, con sus
+// ocho estados. Los colores salen del tema (noche o pared), así que sobre
+// pared el primario es verde profundo sin pedirlo. El foco (2 px en el
+// color del texto, 3 px de separación) viene de globals.css. Los colores
+// cambian de golpe; solo se anima el transform.
+const TEXTOS = {
+  cargando: "Enviando",
+  exito: "Enviado",
+  error: "Intenta de nuevo",
+};
+
+const ALTO = {
+  normal: "min-h-[48px]",
+  compacto: "min-h-[44px]", // en la barra
+  grande: "min-h-[52px]", // en el menú del celular
+};
+
 const BASE =
-  "inline-flex items-center justify-center gap-2 rounded-pill border font-sans text-cuerpo transition-colors duration-200";
+  "group/boton relative inline-flex items-center justify-center gap-2 rounded-pill border font-sans text-[16px] font-semibold leading-[1.25] transition-transform duration-rapido";
 
-function clasesVariante(variante, sobrePapel) {
-  if (variante === "desactivado") {
-    return "px-[22px] border-hairline bg-transparent text-texto-suave cursor-not-allowed";
+// Presionado: se hunde un poco. Con menos movimiento no hay scale.
+const PRESIONA = "active:scale-[.97] motion-reduce:active:scale-100";
+
+function clasesVariante(variante, estado, interactivo) {
+  if (variante === "texto") {
+    return `px-0 border-transparent text-texto ${interactivo ? "active:text-texto-suave" : ""}`;
+  }
+
+  // Legado de /saas y /gym: botón negro sobre una franja verde.
+  if (variante === "sobreAcido") {
+    return "px-6 border-black bg-black text-acento hover:bg-black/80";
+  }
+
+  if (estado === "error") {
+    return `px-6 border-alerta bg-transparent text-alerta ${interactivo ? PRESIONA : ""}`;
   }
 
   if (variante === "secundario") {
-    return "px-[22px] border-hairline bg-transparent text-texto hover:border-texto";
+    if (estado === "exito") return "px-6 border-acento bg-transparent text-acento";
+    return `px-6 border-borde bg-transparent text-texto ${
+      interactivo ? `hover:border-texto hover:bg-texto/[.06] ${PRESIONA}` : ""
+    }`;
   }
 
-  // Enlace de texto: va en acento; el "›" lo pone quien lo usa.
+  // primario
+  return `px-6 border-transparent bg-acento text-sobre-acento ${
+    interactivo ? `boton-firma active:bg-acento-presionado ${PRESIONA}` : ""
+  }`;
+}
+
+// El cursor ▍ del logo: en hover, presionado y foco del primario, y
+// mientras se envía. Va fuera
+// del flujo, en el relleno, para que el texto no se mueva al aparecer.
+function Cursor({ escribe = false }) {
+  return (
+    <span
+      aria-hidden="true"
+      className={`boton-cursor absolute left-full top-[0.1em] ml-[0.2em] h-[1em] w-[0.36em] bg-current ${
+        escribe ? "boton-cursor-escribe" : ""
+      }`}
+    />
+  );
+}
+
+function Contenido({ variante, estado, flecha, children }) {
   if (variante === "texto") {
-    return "px-0 border-transparent text-acento hover:underline underline-offset-4";
+    return (
+      <>
+        <span className="underline decoration-borde decoration-1 underline-offset-[6px] group-hover/boton:decoration-texto">
+          {children}
+        </span>
+        {flecha && (
+          <span
+            aria-hidden="true"
+            className="inline-block transition-transform duration-normal group-hover/boton:translate-x-1 motion-reduce:group-hover/boton:translate-x-0"
+          >
+            →
+          </span>
+        )}
+      </>
+    );
   }
 
-  // Legado: botón negro sobre una franja verde.
-  if (variante === "sobreAcido") {
-    return "px-[22px] border-black bg-black text-acento hover:bg-black/80";
+  if (estado === "cargando") {
+    return (
+      <span aria-live="polite" className="relative">
+        {TEXTOS.cargando}
+        <Cursor escribe />
+      </span>
+    );
   }
 
-  // primario. Sobre pared el acento es el verde profundo, con texto blanco.
-  if (sobrePapel) {
-    return "px-[22px] border-transparent bg-[rgb(var(--verde-profundo))] text-white hover:opacity-90";
+  if (estado === "exito" || estado === "error") {
+    const Icono = estado === "exito" ? FiCheck : FiAlertCircle;
+    return (
+      <>
+        <Icono aria-hidden="true" className="h-4 w-4 flex-shrink-0" />
+        <span aria-live="polite">{TEXTOS[estado]}</span>
+      </>
+    );
   }
 
-  return "px-[22px] border-transparent bg-acento text-sobre-acento hover:opacity-90";
+  if (variante === "primario") {
+    return (
+      <span className="relative">
+        {children}
+        <Cursor />
+      </span>
+    );
+  }
+
+  return children;
 }
 
 export function Boton({
   variante = "primario",
+  estado = "reposo",
   href,
   onClick,
   children,
   type = "button",
   disabled = false,
-  sobrePapel = false,
   compacto = false,
-  barrido = false,
+  grande = false,
+  flecha = true,
   className = "",
 }) {
-  const estaDesactivado = disabled || variante === "desactivado";
-  const varianteEfectiva = estaDesactivado ? "desactivado" : variante;
-  // compacto solo recorta el relleno: el alto mínimo siempre es 44 px.
-  const altura = compacto ? "min-h-[44px] !px-[18px]" : "min-h-[44px]";
-  // Barrido al pulsar: una brochada clara cruza el botón de izquierda a derecha.
-  const clasesBarrido = barrido
-    ? "relative overflow-hidden after:absolute after:inset-0 after:origin-left after:scale-x-0 after:bg-texto/25 after:transition-transform after:duration-300 after:content-[''] active:after:scale-x-100 [&>*]:relative [&>*]:z-10"
-    : "";
-  const clases = `${BASE} ${altura} ${clasesVariante(varianteEfectiva, sobrePapel)} ${clasesBarrido} ${className}`
+  // El de texto no tiene cargando ni éxito ni error (docs/calidad.md).
+  const estadoEfectivo = variante === "texto" ? "reposo" : estado;
+  // Mientras se envía o ya se envió, el botón no repite la acción, pero no
+  // se deshabilita: conserva el foco y se anuncia el cambio.
+  const ocupado = estadoEfectivo === "cargando" || estadoEfectivo === "exito";
+  const interactivo = !disabled && !ocupado;
+
+  const alto = ALTO[compacto ? "compacto" : grande ? "grande" : "normal"];
+  const clases = `${BASE} ${variante === "texto" ? "min-h-[44px]" : alto} ${clasesVariante(
+    variante,
+    estadoEfectivo,
+    interactivo
+  )} ${disabled ? "cursor-not-allowed opacity-40" : ""} ${className}`
     .replace(/\s+/g, " ")
     .trim();
 
+  const contenido = (
+    <Contenido variante={variante} estado={estadoEfectivo} flecha={flecha}>
+      {children}
+    </Contenido>
+  );
+
   // Un enlace nunca se deshabilita (se vuelve span), pero un botón de
   // formulario sí: conserva la semántica de <button disabled>.
-  if (estaDesactivado) {
-    if (!href) {
+  if (href) {
+    if (!interactivo) {
       return (
-        <button type={type} disabled className={clases}>
-          {children}
-        </button>
+        <span aria-disabled="true" className={clases}>
+          {contenido}
+        </span>
       );
     }
-    return (
-      <span aria-disabled="true" className={clases}>
-        {children}
-      </span>
-    );
-  }
 
-  if (href) {
-    const esExterno = /^https?:\/\//.test(href);
-
-    if (esExterno) {
+    if (/^https?:\/\//.test(href)) {
       return (
-        <a
-          href={href}
-          target="_blank"
-          rel="noopener noreferrer"
-          onClick={onClick}
-          className={clases}
-        >
-          {children}
+        <a href={href} target="_blank" rel="noopener noreferrer" onClick={onClick} className={clases}>
+          {contenido}
         </a>
       );
     }
 
     return (
       <Link href={href} onClick={onClick} className={clases}>
-        {children}
+        {contenido}
       </Link>
     );
   }
 
+  if (disabled) {
+    return (
+      <button type={type} disabled className={clases}>
+        {contenido}
+      </button>
+    );
+  }
+
+  // Ocupado, deja de ser de envío: así no manda dos veces.
   return (
-    <button type={type} onClick={onClick} className={clases}>
-      {children}
+    <button
+      type={ocupado ? "button" : type}
+      aria-disabled={ocupado || undefined}
+      onClick={ocupado ? undefined : onClick}
+      className={clases}
+    >
+      {contenido}
     </button>
   );
 }

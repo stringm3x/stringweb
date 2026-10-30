@@ -48,7 +48,7 @@ export default async function RegistroPage({ searchParams }) {
   return (
     <section className="mx-auto max-w-pagina px-6 pt-32 pb-espacio-6 md:pt-40 md:pb-espacio-7 lg:px-24">
       <div className="max-w-2xl">
-      <Boton href="/saas#planes" variante="texto">
+      <Boton href="/saas#planes" variante="texto" flecha={false}>
         <FiArrowLeft className="h-3.5 w-3.5" />
         Ver planes
       </Boton>

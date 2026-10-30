@@ -6,7 +6,7 @@ import { CORREO, whatsappUrl } from "./lib/contacto";
 // de México · Aviso de privacidad · Términos. Las redes solo viven en el
 // JSON-LD de app/layout.jsx.
 const enlace =
-  "inline-flex min-h-[44px] items-center text-pequeno text-texto-suave transition-colors duration-200 hover:text-texto";
+  "inline-flex min-h-[44px] items-center text-pequeno text-texto-suave hover:text-texto";
 
 const Footer = () => {
   return (

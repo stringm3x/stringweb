@@ -78,5 +78,6 @@ test("si el envío falla, avisa y deja intentar de nuevo", async ({ page }) => {
   await expect(
     page.getByText("No se pudo enviar. Intenta de nuevo o escríbenos por WhatsApp.")
   ).toBeVisible();
-  await expect(page.getByRole("button", { name: "Enviar" })).toBeEnabled();
+  // El botón queda en error (docs/calidad.md) y deja volver a enviar.
+  await expect(page.getByRole("button", { name: "Intenta de nuevo" })).toBeEnabled();
 });

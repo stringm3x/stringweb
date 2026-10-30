@@ -17,7 +17,7 @@ const menuItems = [
 ];
 
 const BOTON_ICONO =
-  "flex h-11 w-11 items-center justify-center rounded-pill border border-hairline text-texto transition-colors duration-200 hover:border-texto";
+  "flex h-11 w-11 items-center justify-center rounded-pill border border-hairline text-texto hover:border-texto";
 
 export default function Header() {
   const [isOpen, setIsOpen] = useState(false);
@@ -74,21 +74,20 @@ export default function Header() {
   // Los enlaces a salas de la portada (/#…) no se marcan como página actual.
   const esActiva = (href) => !href.includes("#") && pathname.startsWith(href);
 
-  // El panel (solo celular) entra desde la derecha y sus filas llegan en
-  // cascada, con transiciones CSS; con menos movimiento aparece de golpe.
-  const filaEntra = (index) => ({ transitionDelay: isOpen ? `${250 + index * 60}ms` : "0ms" });
-  const FILA = `transition-[opacity,transform] duration-300 ease-out motion-reduce:transition-none ${
-    isOpen ? "translate-x-0 opacity-100" : "translate-x-8 opacity-0"
-  }`;
-
   return (
     <>
       <header
         data-theme="noche"
-        className={`fixed left-0 right-0 top-0 z-50 text-texto transition-colors duration-300 ${
-          scrolled ? "border-b border-hairline bg-fondo/95" : "bg-transparent"
-        }`}
+        className="fixed left-0 right-0 top-0 z-50 text-texto"
       >
+        {/* Al bajar, el fondo aparece detrás de la barra: dice "ya no estás
+            arriba" sin tapar la sala. Arriba de todo, transparente. */}
+        <div
+          aria-hidden="true"
+          className={`absolute inset-0 -z-10 border-b border-hairline bg-fondo/[.88] transition-opacity duration-normal ${
+            scrolled ? "opacity-100" : "opacity-0"
+          }`}
+        />
         <div className="mx-auto flex h-[72px] max-w-pagina items-center justify-between px-4 sm:px-6 lg:h-[80px] lg:px-24">
           <Logo />
 
@@ -102,7 +101,7 @@ export default function Header() {
                     <Link
                       href={item.href}
                       aria-current={activa ? "page" : undefined}
-                      className={`block py-2 text-pequeno transition-colors duration-200 ${
+                      className={`block py-2 text-pequeno ${
                         activa ? "text-texto" : "text-texto-suave hover:text-texto"
                       }`}
                     >
@@ -133,16 +132,8 @@ export default function Header() {
         </div>
       </header>
 
-      {/* Fondo del menú */}
-      <div
-        onClick={cerrar}
-        aria-hidden="true"
-        className={`fixed inset-0 z-40 bg-fondo/90 transition-[opacity,visibility] duration-300 motion-reduce:transition-none lg:hidden ${
-          isOpen ? "visible opacity-100" : "invisible opacity-0"
-        }`}
-      />
-
-      {/* Panel del menú (celular) */}
+      {/* Menú del celular: pantalla completa. Entra con un fundido y sube
+          8 px, para decir que se puso encima de la página. */}
       <div
         ref={panelRef}
         id="menu-principal"
@@ -152,12 +143,12 @@ export default function Header() {
         aria-hidden={!isOpen}
         inert={!isOpen}
         data-theme="noche"
-        className={`fixed bottom-0 right-0 top-0 z-50 flex w-full flex-col border-l border-hairline bg-fondo text-texto duration-500 ease-out motion-reduce:transition-none sm:w-[440px] lg:hidden ${
+        className={`fixed inset-0 z-50 flex flex-col bg-fondo text-texto duration-normal motion-reduce:transition-none lg:hidden ${
           // Al abrir, visible al instante (para poder recibir el foco); al
           // cerrar, se oculta cuando termina de salir.
           isOpen
-            ? "visible translate-x-0 opacity-100 transition-[transform,opacity]"
-            : "invisible translate-x-full opacity-0 transition-[transform,opacity,visibility]"
+            ? "visible translate-y-0 opacity-100 transition-[transform,opacity]"
+            : "invisible translate-y-2 opacity-0 transition-[transform,opacity,visibility]"
         }`}
       >
         <div className="flex h-[72px] items-center justify-between px-4 sm:px-6">
@@ -178,11 +169,7 @@ export default function Header() {
             {menuItems.map((item, index) => {
               const activa = esActiva(item.href);
               return (
-                <li
-                  key={item.href}
-                  style={filaEntra(index)}
-                  className={`border-b border-hairline ${FILA}`}
-                >
+                <li key={item.href} className="border-b border-hairline">
                   <Link
                     href={item.href}
                     onClick={cerrar}
@@ -196,7 +183,7 @@ export default function Header() {
                       {String(index + 1).padStart(2, "0")}
                     </span>
                     <span
-                      className={`flex-1 text-subtitulo transition-colors duration-200 ${
+                      className={`flex-1 text-[32px] font-semibold leading-[1.1] tracking-[-0.035em] ${
                         activa ? "text-acento" : "text-texto hover:text-acento"
                       }`}
                     >
@@ -209,11 +196,8 @@ export default function Header() {
           </ul>
         </nav>
 
-        <div
-          style={filaEntra(menuItems.length)}
-          className={`border-t border-hairline p-4 sm:p-6 ${FILA}`}
-        >
-          <Boton href="/diagnostico" variante="primario" onClick={cerrar} className="w-full">
+        <div className="border-t border-hairline p-4 sm:p-6">
+          <Boton href="/diagnostico" variante="primario" grande onClick={cerrar} className="w-full">
             Solicitar diagnóstico
           </Boton>
         </div>
