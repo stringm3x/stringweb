@@ -226,7 +226,7 @@ test("cambiar de página usa View Transitions sin errores", async ({ page }) => 
     .getByRole("navigation", { name: "Principal" })
     .getByRole("link", { name: "Productos" })
     .click();
-  await page.waitForURL("**/saas");
+  await page.waitForURL("**/productos");
   await expect
     .poll(() => page.evaluate(() => window.__transiciones))
     .toBeGreaterThan(0);
@@ -245,7 +245,7 @@ test.describe("páginas", () => {
         "/",
         "/nosotros",
         "/diagnostico",
-        "/saas",
+        "/productos",
         "/aviso-de-privacidad",
         "/terminos",
         "/no-existe",

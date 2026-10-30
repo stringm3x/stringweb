@@ -3,7 +3,7 @@ import { Logo } from "./components/ui/Logo";
 import { CORREO, whatsappUrl } from "./lib/contacto";
 
 // Pie de docs/textos.md: logo chico · correo · WhatsApp · Hecho en la Ciudad
-// de México · Aviso de privacidad · Términos. Las redes solo viven en el
+// de México · Productos · Aviso de privacidad · Términos. Las redes solo viven en el
 // JSON-LD de app/layout.jsx.
 const enlace =
   "inline-flex min-h-[44px] items-center text-pequeno text-texto-suave hover:text-texto";
@@ -30,6 +30,11 @@ const Footer = () => {
           </li>
           <li className="inline-flex min-h-[44px] items-center text-pequeno text-texto-suave">
             Hecho en la Ciudad de México
+          </li>
+          <li>
+            <Link href="/productos" className={enlace}>
+              Productos
+            </Link>
           </li>
           <li>
             <Link href="/aviso-de-privacidad" className={enlace}>

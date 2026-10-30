@@ -26,15 +26,9 @@ const nextConfig = {
     // statusCode: 301 en vez de permanent: true porque permanent emite 308.
     const r301 = (source, destination) => ({ source, destination, statusCode: 301 });
     return [
-      {
-        // /gym/empezar duplicaba los planes que ya muestra /saas#planes
-        // (con más contexto: problema, comparativa, caso real) — se consolida
-        // en un solo lugar en vez de mantener dos páginas de precios.
-        // Sigue en 308: deuda técnica (docs/estado.md).
-        source: "/gym/empezar",
-        destination: "/saas#planes",
-        permanent: true,
-      },
+      // /gym/empezar duplicaba los planes de Boaz; desde el lote 9a va
+      // directo a /productos#boaz, sin pasar por /saas.
+      r301("/gym/empezar", "/productos#boaz"),
       r301("/servicios", "/sistemas"),
       r301("/servicios/:id", "/sistemas"),
       r301("/Services", "/sistemas"),
@@ -46,6 +40,8 @@ const nextConfig = {
       r301("/Us", "/nosotros"),
       r301("/privacy-policy", "/aviso-de-privacidad"),
       r301("/terms", "/terminos"),
+      // /saas se volvió /productos (lote 9a): Boaz vive en su bloque.
+      r301("/saas", "/productos#boaz"),
     ];
   },
 };

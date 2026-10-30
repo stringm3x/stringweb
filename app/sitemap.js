@@ -10,7 +10,7 @@ const ROUTES = [
   ...NIVELES.map((n) => ({ path: `/sistemas/${n.slug}`, priority: 0.8, changeFrequency: "monthly" })),
   { path: "/nosotros", priority: 0.7, changeFrequency: "monthly" },
   { path: "/diagnostico", priority: 0.8, changeFrequency: "monthly" },
-  { path: "/saas", priority: 0.9, changeFrequency: "weekly" },
+  { path: "/productos", priority: 0.9, changeFrequency: "weekly" },
   { path: "/gym/registro", priority: 0.8, changeFrequency: "monthly" },
   { path: "/aviso-de-privacidad", priority: 0.3, changeFrequency: "yearly" },
   { path: "/terminos", priority: 0.3, changeFrequency: "yearly" },
