@@ -93,7 +93,7 @@ LCP < 2.5 s, CLS < 0.1, contraste ≥ 4.5:1. Si una no se cumple, se dice en el 
 - **Movimiento.** `--dur-rapido` 150 ms · `--dur-normal` 300 ms · `--dur-lento` 600 ms · `--curva`
   `cubic-bezier(.2, 0, 0, 1)` · `--parpadeo` 1.1 s `steps(1)`. El arte usa `--arte-dur-*`.
 - **Alerta** solo para errores: `#FF6B5A` sobre noche, `#B3261E` sobre pared.
-- **Arte.** La ciudad de una línea, la luna, las cuerdas (sonido opcional, apagado al cargar), la
+- **Arte.** La ciudad de una línea (sin luna desde el 30 oct), las cuerdas (sonido opcional, apagado al cargar), la
   galería y las estrellas. Dibujo de línea; nada de 3D ni video. Única foto: Carlos, sala 3.
   Paleta del arte: la del 29 oct en `docs/diseno.md`. La brochada, el grano y el grabado del sitio
   anterior se retiran.

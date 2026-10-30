@@ -24,7 +24,7 @@ Sistemas que contestan, ordenan y trabajan por tu negocio. Desde un local en la 
 
 **Solicitar diagnóstico** \[botón verde\] · Ver los niveles \[secundario, baja a la sala 4\]
 
-&#91;El cursor escribe el titular letra por letra. Abajo, la ciudad y la luna; arriba, las estrellas.\]
+&#91;El cursor escribe el titular letra por letra. Abajo, la ciudad y la luna; arriba, las estrellas. 30 oct: la luna sale del dibujo (Carlos).\]
 
 ## Sala 2 · El problema · Escultura
 
@@ -328,7 +328,7 @@ El texto actual de /saas se queda. Solo cambia: "STRING GYM" pasa a "El sistema 
 
 | Imagen | Texto alternativo |
 | --- | --- |
-| Ciudad del inicio | Dibujo de la Ciudad de México de noche, trazada en una sola línea, con una luna verde. |
+| Ciudad del inicio | Dibujo de la Ciudad de México de noche, trazada en una sola línea. \[30 oct: sin la luna verde, que sale del dibujo (Carlos).\] |
 | Sala 2 | Dibujo de un celular con una lista ordenada que sale tallado de un bloque de mármol. |
 | Sala 3 | Tira de película con tres cuadros: el fundador, el mostrador del gimnasio y el sistema funcionando en una laptop. |
 | Foto de Carlos | Carlos Avilés, fundador de STRING. |
