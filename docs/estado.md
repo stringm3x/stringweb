@@ -14,7 +14,7 @@ vender el 8 nov.
 | 4 | Formulario /diagnostico, /saas, contacto, galería en celular, cierre de /nosotros | `lote-4-contacto` | ✅ Hecho, sin fusionar; falta el correo de prueba desde la vista previa |
 | 5 | Calidad: Lighthouse, LCP, CLS, contraste, teclado | `lote-5-calidad` | ✅ Hecho, sin fusionar; LCP por confirmar en producción |
 | 6 | Componentes de calidad: tokens de movimiento, botón con 8 estados, campos, píldoras, tarjeta, barra, menú, transiciones | `lote-6-componentes` | ✅ Fusionado a `main` (29 oct, visto bueno de Carlos) |
-| 7 | Salas en movimiento (docs/movimiento-salas.md): salas 2–7 con su movimiento, arte en capas, sala 1 con tokens | `lote-7-movimiento` | ✅ Hecho, sin fusionar; falta que Carlos lo revise en la vista previa (y la piedra nueva de la sala 2) |
+| 7 | Salas en movimiento (docs/movimiento-salas.md): salas 2–7 con su movimiento, arte en capas, sala 1 con tokens | `lote-7-movimiento` | ✅ Fusionado a `main` (29 oct, visto bueno de Carlos) |
 
 Producción sigue con la marca anterior. Nada se fusiona a `main` sin el visto bueno de Carlos.
 
@@ -66,7 +66,7 @@ Producción sigue con la marca anterior. Nada se fusiona a `main` sin el visto b
 - Movimiento en `app/salas.css` con `animation-timeline` y respaldo por etapas (`Escenario.jsx`); el final es el estilo base.
 - Cine: cuadros y créditos con corte seco por `data-activo`; en celular cada cuadro se centra en la tira.
 - En celular, la galería enciende cada cuadro al entrar en la tira y la música afina cada cuerda al entrar en pantalla (Carlos).
-- Sala 2: piedra y grietas dibujadas nuevas (por revisar). Tokens de arte nuevos: `--arte-dur-danza`, `--arte-curva-danza`,
+- Sala 2: piedra y grietas dibujadas nuevas (aprobadas con el lote). Tokens de arte nuevos: `--arte-dur-danza`, `--arte-curva-danza`,
   `--arte-espera-tecla`.
 
 ## Decisiones tomadas en el lote 6
