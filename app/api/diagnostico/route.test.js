@@ -96,6 +96,22 @@ describe("POST /api/diagnostico", () => {
     expect(correo.html).toContain("Quiero &lt;b&gt;cobrar&lt;/b&gt; en línea");
   });
 
+  it("marca la tienda en línea y la empresa, como el gimnasio (lote 11)", async () => {
+    // Una respuesta de Turnstile por solicitud: su cuerpo se lee una vez.
+    turnstileResponde(true);
+    await pedir({ ...valido, giro: "Tienda en línea" });
+    turnstileResponde(true);
+    await pedir({ ...valido, giro: "Empresa mediana o grande" });
+
+    const [tienda, empresa] = sendMail.mock.calls.map(([correo]) => correo);
+    expect(tienda.text).toContain(
+      "Es tienda en línea: la tienda propia va en Controla (desde $40,000). Si solo vende por redes, empieza en Responde u Organiza."
+    );
+    expect(empresa.text).toContain("Es empresa: se cotiza. Ofrécele el boceto y pide el mapa de procesos antes de cotizar.");
+    expect(empresa.html).toContain("<strong>Es empresa: se cotiza.");
+    expect(tienda.text).not.toContain("Es gimnasio");
+  });
+
   it("si el correo falla responde con el mensaje de textos.md", async () => {
     turnstileResponde(true);
     sendMail.mockRejectedValue(new Error("SMTP caído"));
