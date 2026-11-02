@@ -2,6 +2,7 @@ import { CUERPO, ETIQUETA, SALA, TITULAR } from "../salas/estilos";
 import { Boton } from "../ui/Boton";
 import { Tarjeta } from "../ui/Tarjeta";
 import { Entra } from "../ui/Entra";
+import { Hilo } from "../ui/Hilo";
 
 // Bloque 4 de /productos (lote 9a): a la medida. La vitrina enseña cómo se
 // ve lo que construimos con ejemplos, nunca como clientes: cada tarjeta
@@ -122,6 +123,7 @@ const VITRINA = [
 export function Medida() {
   return (
     <section id="medida" data-theme="noche" aria-labelledby="medida-titulo" className={`${SALA} scroll-mt-16`}>
+      <Hilo sala />
       <Entra className="mx-auto flex max-w-contenido flex-col gap-space-6">
         <div className="flex max-w-[760px] flex-col gap-space-4">
           <p className={ETIQUETA}>02 · A LA MEDIDA</p>

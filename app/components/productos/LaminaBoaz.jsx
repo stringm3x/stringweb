@@ -10,17 +10,18 @@ const COTA = {
   letterSpacing: "0.18em",
 };
 
-export function LaminaBoaz({ className = "" }) {
+// `decorativa` (lote 12): dentro de la tarjeta de /productos, que ya se nombra
+// sola; `viewBox` la recorta.
+export function LaminaBoaz({ className = "", decorativa = false, viewBox = "0 0 600 900" }) {
+  const nombre = decorativa
+    ? { "aria-hidden": true }
+    : {
+        role: "img",
+        "aria-label":
+          "Lámina de Boaz: una columna con un disco colgado, dibujada como plano técnico, con la mancha azul en el disco.",
+      };
   return (
-    <svg
-      viewBox="0 0 600 900"
-      fill="none"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-      role="img"
-      aria-label="Lámina de Boaz: una columna con un disco colgado, dibujada como plano técnico, con la mancha azul en el disco."
-      className={className}
-    >
+    <svg viewBox={viewBox} fill="none" strokeLinecap="round" strokeLinejoin="round" {...nombre} className={className}>
       <g stroke="#C4C0B6">
         <path d="M240 70 L240 900 M260 470 L600 470 M470 230 L470 720" strokeWidth="0.5" strokeDasharray="8 3 2 3" />
         <path d="M70 160 L70 880 M62 160 L78 160" strokeWidth="0.5" />

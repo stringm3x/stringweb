@@ -72,6 +72,7 @@ export const GIMNASIOS = {
   nombre: "Gimnasios",
   frase: "Ya existe tu sistema: Boaz.",
   href: "/boaz",
+  dibujo: "/arte/giros/gimnasios.svg",
   cta: "CONOCE BOAZ",
 };
 

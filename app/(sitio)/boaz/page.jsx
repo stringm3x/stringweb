@@ -291,7 +291,7 @@ export default function BoazPage() {
       <ComoNacio />
       <Planes />
       <Preguntas />
-      <Cierre />
+      <Cierre hilo={false} />
     </div>
   );
 }

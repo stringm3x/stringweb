@@ -3,6 +3,7 @@ import localFont from "next/font/local";
 import { Cierre } from "@/app/components/salas/Cierre";
 import { CUERPO, ENLACE, ETIQUETA, SALA, TITULAR } from "@/app/components/salas/estilos";
 import { Entra } from "@/app/components/ui/Entra";
+import { Hilo } from "@/app/components/ui/Hilo";
 
 // /nosotros (lote 10, docs/textos.md § Nosotros · lote 10): un recorrido de
 // cuatro paradas (historia, método, equipo y fe) con la foto de Carlos, la
@@ -160,7 +161,8 @@ export default function NosotrosPage() {
       </div>
 
       {/* 01 · La historia */}
-      <section id="historia" data-theme="noche" className={`${PARADA} border-t border-hairline`}>
+      <section id="historia" data-theme="noche" className={PARADA}>
+        <Hilo sala />
         <div className="mx-auto grid max-w-contenido gap-space-7 lg:grid-cols-2">
           <Entra className="flex max-w-[640px] flex-col gap-space-4">
             <p className={ETIQUETA}>01 · LA HISTORIA</p>
@@ -205,6 +207,7 @@ export default function NosotrosPage() {
 
       {/* 02 · El método */}
       <section id="metodo" data-theme="noche" className={PARADA}>
+        <Hilo sala />
         <div className="mx-auto grid max-w-contenido items-start gap-space-7 lg:grid-cols-2">
           <Entra className="flex flex-col gap-space-4">
             <p className={ETIQUETA}>02 · EL MÉTODO</p>
@@ -251,6 +254,7 @@ export default function NosotrosPage() {
 
       {/* 03 · El equipo */}
       <section id="equipo" data-theme="noche" className={PARADA}>
+        <Hilo sala />
         <div className="mx-auto grid max-w-contenido items-center gap-space-7 lg:grid-cols-2">
           <Entra className="flex max-w-[640px] flex-col gap-space-4">
             <p className={ETIQUETA}>03 · EL EQUIPO</p>
@@ -283,7 +287,8 @@ export default function NosotrosPage() {
       </section>
 
       {/* 04 · La fe */}
-      <section id="fe" data-theme="noche" className={`${PARADA} border-t border-hairline`}>
+      <section id="fe" data-theme="noche" className={PARADA}>
+        <Hilo sala />
         <Entra as="figure" className="mx-auto flex max-w-[880px] flex-col items-center gap-space-5 text-center">
           <p className={ETIQUETA}>04 · LA FE</p>
           <blockquote className={`${geistItalica.className} text-[26px] leading-[1.35] tracking-[-0.01em] text-texto md:text-[36px]`}>

@@ -3,11 +3,12 @@ import { CUERPO, ETIQUETA, SALA, TITULAR } from "@/app/components/salas/estilos"
 import { Tarjetas } from "@/app/components/tu-negocio/TarjetaGiro";
 import { Boton } from "@/app/components/ui/Boton";
 import { Entra } from "@/app/components/ui/Entra";
+import { Hilo } from "@/app/components/ui/Hilo";
 import { GIMNASIOS, GRANDES, LOCAL } from "@/app/lib/giros";
 
 // /tu-negocio (lote 11, docs/textos.md § Tu negocio · lote 11): los giros en
 // dos grupos. Los negocios con local van con la cuerda de 2 px y Gimnasios
-// lleva a Boaz; las empresas, separadas por una línea, con la de 3 px.
+// lleva a Boaz; las empresas, separadas por el hilo (lote 12), con la de 3 px.
 const DESCRIPCION =
   "Sistemas para barberías, clínicas, restaurantes, tiendas en línea y empresas. Elige tu giro y ve tu escalera de niveles.";
 
@@ -41,7 +42,8 @@ export default function TuNegocioPage() {
             <Tarjetas giros={[...LOCAL, GIMNASIOS]} />
           </section>
 
-          <Entra as="section" aria-labelledby="empresas" className="flex flex-col gap-space-5 border-t border-hairline pt-space-6">
+          <Entra as="section" aria-labelledby="empresas" className="relative flex flex-col gap-space-5 pt-space-6">
+            <Hilo />
             <div className="flex flex-col gap-space-2 sm:flex-row sm:items-center sm:justify-between">
               <h2 id="empresas" className={ETIQUETA}>
                 EMPRESAS MEDIANAS Y GRANDES

@@ -38,6 +38,7 @@ export const NIVELES = [
     paraQuien:
       "Para el negocio al que le llegan mensajes por Instagram y WhatsApp y pierde clientes por no contestar a tiempo.",
     dibujo: "/arte/niveles/responde.svg",
+    dibujoChico: "/arte/niveles/chica/responde.svg",
     alt: "Una máquina de escribir: en la hoja, lo que te escribieron y, debajo, la respuesta que el sistema escribe solo al instante.",
     lineaDibujo: "Lo que tu cliente escribe, tu sistema lo contesta al instante.",
     ejemplo: "Un WhatsApp con la respuesta automática",
@@ -65,6 +66,7 @@ export const NIVELES = [
     paraQuien:
       "Para el negocio que ya contesta, pero tiene a sus clientes regados entre chats, libretas y Excel.",
     dibujo: "/arte/niveles/organiza.svg",
+    dibujoChico: "/arte/niveles/chica/organiza.svg",
     alt: "Un edificio de tres pisos, uno por etapa, con cada cliente en su piso y una campana que avisa cuando llega uno nuevo.",
     lineaDibujo: "Cada cliente en su lugar, y un aviso cuando llega uno nuevo.",
     ejemplo: "Una lista de prospectos con su etapa: nuevo, interesado, cliente",
@@ -93,6 +95,7 @@ export const NIVELES = [
     ],
     paraQuien: "Para el negocio que pierde citas y clientes porque nadie da seguimiento a tiempo.",
     dibujo: "/arte/niveles/automatiza.svg",
+    dibujoChico: "/arte/niveles/chica/automatiza.svg",
     alt: "Una cinta que une cuatro pasos: recibido, agenda, recordatorio y seguimiento.",
     lineaDibujo: "Responde, agenda, recuerda y da seguimiento, aunque no estés.",
     ejemplo: "La agenda del día con un recordatorio enviado",
@@ -125,6 +128,7 @@ export const NIVELES = [
     paraQuien:
       "Para el negocio que ya creció y necesita saber cuánto gana y qué está pasando, o vender en línea con su propia tienda.",
     dibujo: "/arte/niveles/controla.svg",
+    dibujoChico: "/arte/niveles/chica/controla.svg",
     alt: "Un cuadro en marco dorado con el panel de un negocio y una gráfica que sube, y un pincel al lado.",
     lineaDibujo: "El cuadro completo de tu negocio, en una sola pantalla.",
     ejemplo: "Un panel con indicadores, sin cifras reales",
@@ -154,6 +158,7 @@ export const NIVELES = [
     paraQuien:
       "Para la empresa con varias áreas o sucursales, o una tienda en línea grande, que necesita un sistema completo a su medida.",
     dibujo: "/arte/niveles/empresa.svg",
+    dibujoChico: "/arte/niveles/chica/empresa.svg",
     alt: "Un escenario donde las siete artes están juntas: arco, telón, pantalla de cine, ciudad pintada, un busto, atriles y una cinta.",
     lineaDibujo: "Todo tu equipo y tus áreas, en un solo sistema.",
     ejemplo: "Un mapa de procesos en boceto",
