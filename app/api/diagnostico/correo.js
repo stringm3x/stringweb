@@ -1,4 +1,4 @@
-import { GIRO_GIMNASIO, OTRA_COSA, nivelSugerido } from "@/app/lib/diagnostico";
+import { MARCAS_GIRO, OTRA_COSA, nivelSugerido } from "@/app/lib/diagnostico";
 
 // El correo que recibe Carlos (docs/textos.md § Correo que recibe Carlos),
 // en texto y en HTML sencillo. Recibe los datos ya validados por el schema.
@@ -15,7 +15,7 @@ export function armarCorreo(datos) {
   const nivel = nivelSugerido(datos.situacion);
   const loQueLePasa = datos.situacion === OTRA_COSA ? datos.otraCosa : datos.situacion;
   const enlaceWhatsapp = `https://wa.me/52${datos.whatsapp}`;
-  const esGimnasio = datos.giro === GIRO_GIMNASIO;
+  const marca = MARCAS_GIRO[datos.giro];
 
   const asunto = enUnaLinea(
     `Diagnóstico · ${datos.nombre} · ${datos.giro} · Nivel sugerido: ${nivel}`
@@ -29,7 +29,7 @@ export function armarCorreo(datos) {
     `Giro: ${datos.giro}`,
     `Lo que le pasa: ${loQueLePasa}`,
     `Nivel sugerido: ${nivel}`,
-    ...(esGimnasio ? ["Es gimnasio: ofrécele Boaz."] : []),
+    ...(marca ? [marca] : []),
     "",
     "Estándar: respóndele en un día hábil.",
   ];
@@ -46,7 +46,7 @@ export function armarCorreo(datos) {
   ${fila("Giro", escapar(datos.giro))}
   ${fila("Lo que le pasa", escapar(loQueLePasa).replace(/\r?\n/g, "<br>"))}
   ${fila("Nivel sugerido", escapar(nivel))}
-  ${esGimnasio ? `<p style="margin:0 0 8px"><strong>Es gimnasio: ofrécele Boaz.</strong></p>` : ""}
+  ${marca ? `<p style="margin:0 0 8px"><strong>${escapar(marca)}</strong></p>` : ""}
   <p style="margin:16px 0 0">Estándar: respóndele en un día hábil.</p>
 </body>
 </html>`;

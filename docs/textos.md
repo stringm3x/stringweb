@@ -191,7 +191,7 @@ Te respondemos en un día hábil.
 
 1. **Nombre**
 2. **WhatsApp**
-3. **Giro de tu negocio:** Barbería o estética · Clínica o consultorio · Restaurante · Gimnasio · Otro
+3. **Giro de tu negocio:** Barbería o estética · Clínica o consultorio · Restaurante · Gimnasio · Tienda en línea · Empresa mediana o grande · Otro \[las dos antes de Otro, desde el lote 11\]
 4. **¿Qué te pasa hoy?**
    - Me escriben y no alcanzo a contestar.
    - Tengo a mis clientes regados en chats y en Excel.
@@ -324,6 +324,8 @@ Giro: \[Giro\]
 Lo que le pasa: \[la opción elegida, o lo que escribió en "Otra cosa"\]
 Nivel sugerido: \[Responde, Organiza, Automatiza, Controla, o "por definir" si eligió Otra cosa\]
 \[Solo si el giro es Gimnasio:\] Es gimnasio: ofrécele Boaz.
+\[Solo si el giro es Tienda en línea:\] Es tienda en línea: la tienda propia va en Controla (desde $40,000). Si solo vende por redes, empieza en Responde u Organiza.
+\[Solo si el giro es Empresa mediana o grande:\] Es empresa: se cotiza. Ofrécele el boceto y pide el mapa de procesos antes de cotizar.
 
 Estándar: respóndele en un día hábil.
 

@@ -9,8 +9,8 @@ import { CUERPO, ENLACE, ETIQUETA, SALA, TITULAR } from "./estilos";
 // como cuerdas de distinto calibre. "Mismo instrumento, más cuerdas": al
 // entrar, una sola vez y sin sonido, se afinan en cascada y cada viñeta se
 // enciende; en Empresa vibran todas (app/salas.css, .afinacion). En celular,
-// cada cuerda se afina cuando entra en pantalla.
-const CALIBRES = [1.2, 1.5, 1.8, 2.1, 2.4];
+// cada cuerda se afina cuando entra en pantalla. El calibre de cada cuerda
+// vive en app/lib/niveles.js.
 
 export function Sala4Niveles() {
   return (
@@ -54,7 +54,7 @@ export function Sala4Niveles() {
                     style={{ "--i": i }}
                   />
                 </div>
-                <Cuerda nombre={nivel.nombre} notas={nivel.notas} calibre={CALIBRES[i]} orden={i} />
+                <Cuerda nombre={nivel.nombre} notas={nivel.notas} calibre={nivel.calibre} orden={i} />
               </li>
             ))}
           </Escenario>
