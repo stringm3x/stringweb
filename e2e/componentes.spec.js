@@ -98,6 +98,7 @@ test("capturas de los 8 estados de cada componente", async ({ page }) => {
   NO_APLICA.push("opción: éxito es elegida; cargando no aplica");
 
   await interactivos(page, "tarjeta-reposo", "tarjeta", "a");
+  await interactivos(page, "tarjeta-dibujo", "tarjeta-dibujo", "a");
   NO_APLICA.push(
     "tarjeta: es un enlace; cargando, deshabilitado, éxito y error no aplican",
   );

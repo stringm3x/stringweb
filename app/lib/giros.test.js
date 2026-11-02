@@ -93,3 +93,16 @@ describe("fondo claro", () => {
     expect(claros).toEqual([...PERMITIDOS].sort());
   });
 });
+
+// Lote 12: cada tarjeta de giro lleva su dibujo, en noche y en línea.
+describe("dibujos de las tarjetas", () => {
+  it("los nueve giros y Gimnasios tienen su dibujo, sin la lámina ni el azul de Boaz", () => {
+    for (const giro of [...GIROS, GIMNASIOS]) {
+      const archivo = path.join(RAIZ, "public", giro.dibujo);
+      expect(fs.existsSync(archivo), giro.dibujo).toBe(true);
+      const svg = fs.readFileSync(archivo, "utf8");
+      expect(svg, giro.dibujo).toContain('viewBox="0 0 520 372"');
+      expect(svg.toLowerCase(), giro.dibujo).not.toMatch(/#2979ff|#f4f2ec|#004aad/);
+    }
+  });
+});

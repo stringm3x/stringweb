@@ -52,3 +52,15 @@ describe("niveles", () => {
     expect(faltan).toEqual([]);
   });
 });
+
+// Lote 12: el dibujo chico de cada nivel, para su tarjeta: existe y no lleva
+// texto adentro.
+describe("dibujos chicos", () => {
+  it("cada nivel tiene el suyo, sin <text>", () => {
+    for (const nivel of NIVELES) {
+      const archivo = path.resolve(__dirname, "../../public", `.${nivel.dibujoChico}`);
+      expect(fs.existsSync(archivo), nivel.slug).toBe(true);
+      expect(fs.readFileSync(archivo, "utf8"), nivel.slug).not.toContain("<text");
+    }
+  });
+});
