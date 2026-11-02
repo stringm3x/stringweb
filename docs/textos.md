@@ -51,7 +51,7 @@ Tus clientes te escriben por Instagram y WhatsApp. En el camino se pierden:
 
 **Titular:** Probado en un negocio real. \[Cambio del 30 oct: antes "Lo probamos en casa primero."\]
 
-&#91;Foto real de Carlos, la única foto del sitio. Pendiente: que Carlos la mande.\]
+&#91;Foto real de Carlos, la única foto del sitio. Pendiente: que Carlos la mande.\] \[Lote 10 (2 nov): la foto sale de la sala 3 y pasa a /nosotros. En su lugar, la tira queda toda dibujada; ver § Nosotros · lote 10.\]
 
 Soy Carlos Avilés, desarrollador y fundador de STRING. Evolution GYM es el gimnasio de mi familia: ahí construí su sistema y lo probamos en el mostrador, con socios de verdad. Funcionó, y se volvió un producto: Boaz, el sistema para gimnasios de STRING. Cada sistema que hacemos lo reviso yo antes de entregarlo. **Conoce la historia** \[enlace a /nosotros\]
 
@@ -140,6 +140,8 @@ Un sistema no se entrega y se olvida. Lo cuidamos cada mes: que funcione, que es
 &#91;Líneas que se mueven a ritmo constante.\]
 
 ## /nosotros
+
+\[Lote 10: lo sustituye § Nosotros · lote 10. Lo de abajo queda como historia.\]
 
 &#91;En la portada ya no hay bloque "quién soy": Carlos se presenta en la sala 3, junto a Evolution GYM. Aquí va la historia completa.\]
 
@@ -262,7 +264,7 @@ Carlos Avilés (STRING) usa tu nombre, tu WhatsApp, el giro de tu negocio y lo q
 | Página | Título | Descripción |
 | --- | --- | --- |
 | Inicio | STRING — Software hecho con oficio. Y con arte. | Taller de software en la Ciudad de México. Sistemas que contestan, ordenan y trabajan por tu negocio, desde un local hasta una empresa grande. |
-| /nosotros | Nosotros · STRING | La historia de STRING: un taller de software que probó su primer sistema en el gimnasio de la familia de su fundador. |
+| /nosotros | Nosotros · STRING | STRING es un taller de software en Ciudad de México. La historia, el método, el equipo y la fe detrás de cada sistema. \[Lote 10.\] |
 | /diagnostico | Solicitar diagnóstico · STRING | Cuatro preguntas para saber qué necesita tu negocio. Te respondemos en un día hábil. |
 | /productos | Productos · STRING | Boaz, el sistema para gimnasios, y sistemas a la medida para negocios con local y empresas. Hechos por STRING en Ciudad de México. |
 | /gym/registro | Boaz · El sistema para gimnasios, by STRING | Socios, check-in, cobros y caja para tu gimnasio, probado en un gimnasio real. |
@@ -271,6 +273,8 @@ Carlos Avilés (STRING) usa tu nombre, tu WhatsApp, el giro de tu negocio y lo q
 Imagen para compartir: el logo sobre noche y debajo "Software hecho con oficio. Y con arte."
 
 ### /nosotros
+
+\[Lote 10: lo sustituye § Nosotros · lote 10.\]
 
 **Etiqueta:** NOSOTROS · **Titular:** La historia de STRING. \[Foto de Carlos arriba, la misma de la sala 3.\]
 
@@ -333,8 +337,8 @@ El texto actual de /saas se queda. Solo cambia: "STRING GYM" pasa a "El sistema 
 | --- | --- |
 | Ciudad del inicio | Dibujo de la Ciudad de México de noche, trazada en una sola línea. \[30 oct: sin la luna verde, que sale del dibujo (Carlos).\] |
 | Sala 2 | Dibujo de un celular con una lista ordenada que sale tallado de un bloque de mármol. |
-| Sala 3 | Tira de película con tres cuadros: el fundador, el mostrador del gimnasio y el sistema funcionando en una laptop. |
-| Foto de Carlos | Carlos Avilés, fundador de STRING. |
+| Sala 3 | Tira de película con tres cuadros dibujados: la entrada del gimnasio, el mostrador del gimnasio y el sistema funcionando en una laptop. \[Lote 10.\] |
+| Foto de Carlos | Carlos Avilés, fundador de STRING \[Lote 10: solo en /nosotros.\] |
 | Viñetas de los niveles | \[Decorativas: sin texto alternativo; el nombre del nivel ya lo dice.\] |
 | Sala 5 | Tres cuadros con marco dorado en una galería: la ciudad de STRING, el plano de Boaz, el sistema para gimnasios, y un lienzo en blanco para tu negocio. |
 | Lámina de Boaz (/productos) | Lámina de Boaz: una columna con un disco colgado, dibujada como plano técnico, con la mancha azul en el disco. |
@@ -671,6 +675,93 @@ Titular: ¡Listo! Ya tenemos tu registro.
 Te escribimos por WhatsApp en un día hábil para activar tu prueba.
 Escríbenos por WhatsApp \[botón secundario, con el mensaje que lleva hoy, cambiando "el sistema para gimnasios" por Boaz\] · Volver a Boaz \[→ /boaz\]
 
+## Nosotros · lote 10 (aprobados el 2 nov)
+
+\[Sustituyen a los textos anteriores de /nosotros. /nosotros es un recorrido de cuatro paradas: historia, método, equipo y fe. La foto de Carlos sale de la sala 3 y vive aquí: es la única foto del sitio.\]
+
+Título: Nosotros · STRING
+Descripción: STRING es un taller de software en Ciudad de México. La historia, el método, el equipo y la fe detrás de cada sistema.
+
+### /nosotros · encabezado
+
+\[Noche · dos columnas: texto a la izquierda, foto a la derecha.\]
+Etiqueta: NOSOTROS
+Titular (h1): Un taller de software en Ciudad de México.
+Entrada: Soy Carlos Avilés, desarrollador y fundador de STRING. Hago sistemas con oficio y con arte, y reviso cada uno antes de entregarlo. Este es el recorrido: de dónde venimos, cómo trabajamos, quién construye y qué nos sostiene.
+Índice (anclas, Geist Mono): 01 HISTORIA · 02 MÉTODO · 03 EQUIPO · 04 FE
+Foto: proporción 5:6, borde de 1 px. Pie en mono: CARLOS AVILÉS · FUNDADOR · CDMX. Texto alternativo: "Carlos Avilés, fundador de STRING".
+\[El borde va en hairline, como la cuerda del lote 8: #3A3A3D no es token (Carlos, 2 nov).\]
+
+### /nosotros · 01 · la historia (id="historia")
+
+\[Noche · texto a la izquierda, línea de tiempo a la derecha.\]
+Etiqueta: 01 · LA HISTORIA
+Titular: Empezamos haciendo sistemas para negocios.
+
+STRING empezó construyendo sistemas para negocios con local. Luego hice uno para Evolution GYM, el gimnasio de mi familia. Lo usamos en recepción, lo corregimos con socios de verdad y se volvió Boaz, nuestro primer producto.
+
+Hoy STRING hace dos cosas: sistemas a la medida para negocios y empresas, y productos propios para un giro. Lo que aprendemos en uno mejora al otro.
+
+\[Línea de tiempo dibujada: una línea con cuatro nodos, el último relleno en verde, con texto real en HTML debajo.\]
+- EL INICIO — Sistemas a la medida para negocios.
+- EVOLUTION GYM — Un sistema para el gimnasio de mi familia, probado en su mostrador.
+- OCTUBRE DE 2026 — Boaz entra a producción.
+- HOY \[en verde\] — Dos líneas: productos propios y sistemas a la medida.
+
+### /nosotros · 02 · el método (id="metodo")
+
+\[Pared · lista a la izquierda, cinco planos a la derecha.\]
+Etiqueta: 02 · EL MÉTODO
+Titular: Primero escucho. Luego dibujo. Luego construyo.
+
+\[Lista numerada en mono, separada por líneas.\]
+01 Escucho. Una llamada de 20 a 30 minutos, gratis, para entender cómo se siente tu negocio. No es una venta.
+02 Propongo por escrito. En 2 días hábiles: qué incluye, qué no incluye, cuánto cuesta y cuánto tarda.
+03 Firmamos el alcance. Nada se construye sin un documento firmado. Lo nuevo se cotiza aparte.
+04 Construyo y te cuento. Avance por escrito cada viernes.
+05 Entrego revisado. Cada sistema lo reviso yo antes de entregarlo. Después, la continuidad lo cuida.
+
+Lo que garantizo: tiempos y funcionamiento, por escrito. Lo que no garantizo: ventas. Nadie puede.
+
+Nuestro estándar de servicio \[enlace → /#como-trabajamos, la sala 6\]
+
+\[Dibujo decorativo, sin texto alternativo: cinco planos en línea, a mano, que se completan uno a uno. 01 contorno punteado, 02 contorno con una franja, 03 con columnas, 04 con contenido, 05 completo con la marca en verde profundo #1A7F00 y una palomita.\]
+
+### /nosotros · 03 · el equipo (id="equipo")
+
+\[Noche · texto a la izquierda, mesa a la derecha.\]
+Etiqueta: 03 · EL EQUIPO
+Titular: Hablas conmigo, de principio a fin.
+
+Como fundador, respondo por cada sistema. Cuando un proyecto lo pide, sumo desarrolladores de confianza, con contrato por proyecto.
+- El código vive en STRING, nunca en la cuenta de otra persona.
+- La calidad es la misma: el mismo sistema de diseño y mi revisión final.
+- El trato es siempre conmigo. Nadie subcontrata tu proyecto.
+
+\[Dibujo: una mesa de trabajo en línea, a mano, con perspectiva: una laptop abierta (pantalla en verde), una lámpara y dos sillas.\]
+Texto alternativo: "Una mesa de trabajo dibujada en línea, con una laptop abierta, una lámpara y dos sillas".
+
+### /nosotros · 04 · la fe (id="fe")
+
+\[Noche · centrada, sin dibujo, sin titular.\]
+Etiqueta: 04 · LA FE
+
+> *¿A quién tengo yo en los cielos? Y fuera de ti nada deseo en la tierra. Mi carne y mi corazón desfallecen: mas la roca de mi corazón y mi porción es Dios para siempre.*
+>
+> SALMOS 73:25–26
+
+\[Cita en blockquote, Geist itálica grande; referencia en mono. Reina-Valera 1909, dominio público.\]
+
+### /nosotros · cierre
+
+\[El mismo de las demás páginas.\]
+
+### Sala 3 · la tira sin foto
+
+\[Sale la foto. La tira queda con tres cuadros dibujados en línea, a mano, con perspectiva y sombra rayada, como los dibujos del lote 8. Sin personas reales ni logotipo del gimnasio. Cuadro 1: la entrada del gimnasio. Cuadro 2: el mostrador de Evolution GYM, redibujado en línea. Cuadro 3: el sistema en una laptop, sin cambio (Carlos, 2 nov). El texto de la sala no cambia.\]
+
+Texto alternativo: Tira de película con tres cuadros dibujados: la entrada del gimnasio, el mostrador del gimnasio y el sistema funcionando en una laptop.
+
 ## Por confirmar antes del brief
 
 - [x] **Foto de Carlos** en la sala 3: foto real (falta que la mande).
@@ -682,4 +773,4 @@ Escríbenos por WhatsApp \[botón secundario, con el mensaje que lleva hoy, camb
 - [x] **Aviso de privacidad y términos:** borradores escritos arriba; revisión de abogado cuando se pueda.
 - [x] **Tu fe en /nosotros:** Salmos 73:25–26, al cierre de la historia.
 - [ ] **Domicilio** del responsable para el aviso de privacidad (la ley lo pide).
-- [ ] **Foto de Carlos:** mandarla.
+- [x] **Foto de Carlos:** la de respaldo es la final; vive en /nosotros (Carlos, 2 nov).
