@@ -1,6 +1,6 @@
 # Estado · stringwebs.com
 
-Última actualización: 2 nov 2026 (lote 11). Meta del KB: sitio rehecho del 1 al 7 nov; salir a
+Última actualización: 2 nov 2026 (lote 12). Meta del KB: sitio rehecho del 1 al 7 nov; salir a
 vender el 8 nov.
 
 ## Lotes
@@ -19,7 +19,8 @@ vender el 8 nov.
 | 9a | /productos (Boaz y a la medida), Boaz por su nombre en todo el sitio, galería con el cuadro de Boaz y sin luna, /saas → /productos#boaz | `lote-9a-productos` | ✅ Fusionado a `main` (30 oct, visto bueno de Carlos) |
 | 9b | /boaz con la identidad de Boaz, /gym/registro y /gym/gracias rehechos, Conoce Boaz → /boaz, /saas y /gym/empezar → /boaz, limpieza del legado | `lote-9b-boaz` | ✅ Fusionado a `main` (2 nov, PR #4, visto bueno de Carlos) |
 | 10 | /nosotros como recorrido (historia, método, equipo, fe) con la foto de Carlos; la sala 3 sin foto, con la entrada y el mostrador en línea; `Entra` a `ui/`; ancla `#como-trabajamos` | `lote-10-nosotros` | ✅ Fusionado a `main` (2 nov, PR #5, visto bueno de Carlos) |
-| 11 | Tu negocio: /tu-negocio, /tu-negocio/empresas y nueve giros (dos plantillas, `app/lib/giros.js`), nueve dibujos, barra, menú, pie y sitemap; dos giros nuevos en el formulario con su marca en el correo; el fondo claro solo para Boaz (sala 6 y método de /nosotros en noche) | `lote-11-tu-negocio` | ✅ Hecho; PR abierto, sin fusionar |
+| 11 | Tu negocio: /tu-negocio, /tu-negocio/empresas y nueve giros (dos plantillas, `app/lib/giros.js`), nueve dibujos, barra, menú, pie y sitemap; dos giros nuevos en el formulario con su marca en el correo; el fondo claro solo para Boaz (sala 6 y método de /nosotros en noche) | `lote-11-tu-negocio` | ✅ Fusionado a `main` (2 nov, PR #6) |
+| 12 | Refinar: la tarjeta con su dibujo (giros, /productos, /sistemas, "Cuando crezcas"); dibujos nuevos de Gimnasios, "A la medida" y los cinco niveles en chico; el hilo entre secciones (máximo 2–3 por página); generadores en `scripts/dibujos/` y los dibujos por svgo | `lote-12-refinar` | ✅ Hecho; Carlos pidió subirlo a `main` (2 nov) |
 
 Producción sigue con la marca anterior. Nada se fusiona a `main` sin el visto bueno de Carlos.
 
@@ -43,10 +44,13 @@ Producción sigue con la marca anterior. Nada se fusiona a `main` sin el visto b
 - `e2e/componentes.spec.js` reescribe las capturas de `reportes/lote-6-componentes/` cada vez que corre (lote 11: se
   regresaron a mano); debería escribirlas fuera del repo.
 - LCP simulado de 2.2–2.9 s en celular en todo el sitio (Lighthouse), con el LCP observado en ~0.1 s: va en un lote
-  propio, medido con PageSpeed en producción (`reportes/lote-10-reporte.md`).
+  propio, medido con PageSpeed en producción (`reportes/lote-10-reporte.md`). Lote 12: /tu-negocio pasó de 2.31 a
+  ~2.54 s (el párrafo de entrada; los dibujos de las tarjetas se piden temprano aunque sean perezosos).
 - `app/tokens.test.js` todavía exenta `app/gym/` y los archivos legado borrados en el 9b: la exención sale en
   el mismo lote que los colores legado.
 - La vibración al tocar una cuerda (sala 4) redibuja la ruta con JS en cada fotograma (`Cuerdas.jsx`), no con `transform`.
+- Los dibujos de `public/arte/giros/`, `productos/` y `niveles/chica/` salen de `scripts/dibujos/` (`giros.mjs`, `dibujar.mjs`)
+  y después pasan por svgo con `scripts/dibujos/svgo.config.mjs`; si cambia uno, se corren los dos pasos.
 - Las capas de `public/arte/sala{2,5,6,7}/` salen de los SVG originales con `node scripts/capas-arte.mjs`; si cambia un dibujo,
   se vuelve a correr (`app/arte-capas.test.js` avisa si no coinciden).
 - Las transiciones entre páginas dependen del flag experimental `experimental.viewTransition` de Next 16.1

@@ -925,6 +925,8 @@ TU NEGOCIO · CADENAS Y FRANQUICIAS · Todas tus sucursales en un solo panel.
 
 Todos en línea, a mano, en noche, con un solo toque verde, en el estilo del lote 8. Uno por giro. Sin personas reales ni logotipos.
 
+**Lote 12 · tarjetas con dibujo.** Los dibujos nuevos (Gimnasios, "A la medida" y los cinco niveles en chico) y la lámina de Boaz dentro de su tarjeta son decorativos: van en la zona de dibujo de un enlace que ya se nombra con su texto, así que **no llevan alt** (`alt=""` / `aria-hidden`). Tampoco el número de la zona ("01", "01 · PRODUCTOS"): es decorativo y no entra al nombre del enlace. El texto de las tarjetas no cambia.
+
 ## Por confirmar antes del brief
 
 - [x] **Foto de Carlos** en la sala 3: foto real (falta que la mande).

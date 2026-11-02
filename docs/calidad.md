@@ -84,6 +84,16 @@ Borde 1 px `#5A5A5E` (3.06:1 sobre noche, igual que el campo), alto 44 px, Geist
 
 Borde 1 px `#2A2A2C`, radio 16 px, padding 28 px, con una **cuerda** de 2 px arriba. Hover: borde luz, la cuerda se enciende en luz y la tarjeta sube 2 px (normal). Es un `<a>` completo, con foco visible.
 
+**Con dibujo (lote 12).** Dos partes. Arriba, la zona de dibujo: 180 px fijos sobre noche, con el número en Geist Mono neblina arriba a la izquierda ("01", o "01 · PRODUCTOS") y una línea de suelo de 1 px `#2E2E32` a 22 px del fondo, con 24 px de margen; el dibujo (520 × 372) se apoya en ella con su propio suelo (`DibujoTarjeta`). Abajo, la cuerda (2 px, o 3 px en las empresas) y el texto con su padding de 28 px. Los estados son los mismos: reposo, hover (sube 2 px en normal, borde y cuerda en luz), presionado, foco (contorno 2 px línea, 3 px de separación; el `overflow` no lo recorta), y con menos movimiento no sube; cargando, deshabilitado, éxito y error no aplican. Los dibujos no llevan alt y cargan perezosos, con su ancho y alto: no mueven el layout. Solo la tarjeta de Boaz en /productos pone su zona en pared, con su lámina y su azul; el número va en grafito.
+
+Dónde va: /tu-negocio y /tu-negocio/empresas (los giros), /productos (las dos puertas), /sistemas y "Cuando crezcas" (el dibujo chico de cada nivel, que sustituye a la viñeta). Sin dibujo: la vitrina de /productos, los niveles de los giros grandes y "Ver los cinco niveles".
+
+### Hilo (lote 12)
+
+Una cuerda fina a mano, `#5A5A5E` (borde) de 1.2 px, que ondula suave a lo ancho del contenido, en lugar de la línea recta de arriba de una sección. Decorativa (`aria-hidden`) y de alto fijo (24 px), sobre el borde superior de su sección: no mueve el layout. Al entrar en pantalla se dibuja de izquierda a derecha con `clip-path` (lento, curva); si ya estaba a la vista, o con menos movimiento, queda quieta y completa. Sin sonido.
+
+Máximo 2–3 por página, solo en los cambios grandes: arriba del Cierre (menos en /boaz, que es de Boaz), en /tu-negocio antes de las empresas, en /nosotros entre sus cuatro paradas y en /productos entre "Siguientes" y "A la medida". Lo demás conserva la línea recta: secciones internas de los niveles y de los giros grandes, /sistemas, /tu-negocio/empresas, "¿No ves tu giro?", las filas y listas, la barra y el pie.
+
 ### Barra
 
 Arriba de todo: fondo transparente. Al bajar: fondo noche al 88 % y línea inferior `#2A2A2C`, con transición normal. Enlaces en neblina; el de la página actual en línea.
