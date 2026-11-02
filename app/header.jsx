@@ -13,7 +13,8 @@ import { Logo } from "./components/ui/Logo";
 // después de Sistemas.
 const menuItems = [
   { label: "Sistemas", href: "/sistemas" },
-  { label: "Productos", href: "/productos" },
+  // Boaz y su registro viven dentro de Productos.
+  { label: "Productos", href: "/productos", tambien: ["/boaz", "/gym"] },
   { label: "Nosotros", href: "/nosotros" },
 ];
 
@@ -73,7 +74,8 @@ export default function Header() {
 
   const cerrar = () => setIsOpen(false);
   // Los enlaces a salas de la portada (/#…) no se marcan como página actual.
-  const esActiva = (href) => !href.includes("#") && pathname.startsWith(href);
+  const esActiva = ({ href, tambien = [] }) =>
+    !href.includes("#") && [href, ...tambien].some((ruta) => pathname.startsWith(ruta));
 
   return (
     <>
@@ -96,7 +98,7 @@ export default function Header() {
           <nav aria-label="Principal" className="hidden lg:block">
             <ul className="flex items-center gap-8">
               {menuItems.map((item) => {
-                const activa = esActiva(item.href);
+                const activa = esActiva(item);
                 return (
                   <li key={item.href}>
                     <Link
@@ -168,7 +170,7 @@ export default function Header() {
         <nav aria-label="Principal, celular" className="flex-1 overflow-y-auto px-4 sm:px-6">
           <ul className="border-t border-hairline">
             {menuItems.map((item, index) => {
-              const activa = esActiva(item.href);
+              const activa = esActiva(item);
               return (
                 <li key={item.href} className="border-b border-hairline">
                   <Link
