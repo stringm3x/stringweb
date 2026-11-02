@@ -204,7 +204,7 @@ export default function NosotrosPage() {
       </section>
 
       {/* 02 · El método */}
-      <section id="metodo" data-theme="pared" className={PARADA}>
+      <section id="metodo" data-theme="noche" className={PARADA}>
         <div className="mx-auto grid max-w-contenido items-start gap-space-7 lg:grid-cols-2">
           <Entra className="flex flex-col gap-space-4">
             <p className={ETIQUETA}>02 · EL MÉTODO</p>

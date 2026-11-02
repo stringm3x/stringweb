@@ -2,7 +2,7 @@ import { Capas } from "./Capas";
 import { Escenario } from "./Escenario";
 import { CUERPO, ETIQUETA, SALA, TITULAR } from "./estilos";
 
-// Sala 6 · Cómo trabajamos · Arquitectura (docs/textos.md), sobre pared.
+// Sala 6 · Cómo trabajamos · Arquitectura (docs/textos.md), en noche (lote 11).
 // Los pasos, el edificio dibujado a mano y el estándar de servicio con sus
 // cifras en Geist Mono. "El edificio crece al ritmo de los pasos": cada piso
 // sube cuando su paso cruza la línea y el paso de ahora se marca en la lista
@@ -46,7 +46,7 @@ const ESTANDAR = [
 
 export function Sala6Trabajo() {
   return (
-    <section id="como-trabajamos" data-theme="pared" className={`${SALA} scroll-mt-24`}>
+    <section id="como-trabajamos" data-theme="noche" className={`${SALA} scroll-mt-24`}>
       <div className="mx-auto flex max-w-contenido flex-col gap-space-6">
         {/* La línea de cada paso: al 74 % de la pantalla en celular (el centro
             de lo que queda bajo el dibujo) y al 70 % en escritorio, para que el

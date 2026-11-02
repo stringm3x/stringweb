@@ -44,7 +44,7 @@ export const CAPAS = {
       ["piso-2", 24, 40],
       ["obra", 41, 52],
       ["bandera", 53, 55],
-      ["rotulos", 56, 57],
+      ["rotulos", 56, 56],
     ],
   },
   sala7: {
