@@ -1,24 +1,23 @@
 "use client";
 
 import { useState } from "react";
+import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import toast from "react-hot-toast";
+import { FiAlertCircle } from "react-icons/fi";
 import { solicitudSchema } from "../../lib/validations/solicitud-schema";
 import { TurnstileWidget } from "../components/TurnstileWidget";
-import { FormField } from "@/app/components/forms/FormField";
-import { FormSelect } from "@/app/components/forms/FormSelect";
-import { Boton } from "@/app/components/ui/Boton";
+import { BotonBoaz } from "@/app/components/boaz/BotonBoaz";
+import { CampoBoaz } from "@/app/components/boaz/CampoBoaz";
 
 const ENDPOINT = "https://app.gym.stringwebs.com/api/solicitudes";
 
 // El value es el id interno del plan (lo valida el SaaS): se mantiene "basico"
-// aunque se muestre como "Starter".
+// aunque se muestre como "Starter". Escala sale del selector (lote 9b).
 const PLAN_OPTIONS = [
-  { value: "basico", label: "Starter — $799/mes" },
-  { value: "pro", label: "Pro — $1,799/mes" },
-  { value: "escala", label: "Escala — $2,999/mes" },
+  { value: "basico", label: "Starter · $799 al mes" },
+  { value: "pro", label: "Pro · $1,799 al mes (recomendado)" },
 ];
 
 const MIEMBROS_OPTIONS = [
@@ -29,10 +28,19 @@ const MIEMBROS_OPTIONS = [
   { value: "500", label: "Más de 500" },
 ];
 
+// Textos de docs/textos.md § "Boaz · lote 9b". "Completa la verificación de
+// seguridad." es el aviso que ya existía cuando falta Turnstile.
+const ERROR_ENVIO =
+  "No pudimos registrar tu gimnasio. Revisa tu conexión e intenta de nuevo; lo que escribiste se queda.";
+const SIN_VERIFICACION = "Completa la verificación de seguridad.";
+
+const ENLACE = "font-semibold text-acento underline-offset-4 hover:text-acento-presionado hover:underline";
+
 export function RegistroForm({ initialPlan = "" }) {
   const router = useRouter();
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [token, setToken] = useState("");
+  const [aviso, setAviso] = useState("");
 
   const {
     register,
@@ -45,7 +53,7 @@ export function RegistroForm({ initialPlan = "" }) {
       email: "",
       telefono: "",
       nombre_gym: "",
-      plan_interes: initialPlan || "",
+      plan_interes: initialPlan || "pro",
       ciudad: "",
       miembros_aprox: "",
       como_entero: "",
@@ -55,10 +63,11 @@ export function RegistroForm({ initialPlan = "" }) {
   const onSubmit = async (data) => {
     if (isSubmitting) return;
     if (!token) {
-      toast.error("Completa la verificación de seguridad.");
+      setAviso(SIN_VERIFICACION);
       return;
     }
 
+    setAviso("");
     setIsSubmitting(true);
     try {
       const body = {
@@ -68,9 +77,7 @@ export function RegistroForm({ initialPlan = "" }) {
         nombre_gym: data.nombre_gym,
         plan_interes: data.plan_interes,
         ciudad: data.ciudad || undefined,
-        miembros_aprox: data.miembros_aprox
-          ? Number(data.miembros_aprox)
-          : undefined,
+        miembros_aprox: data.miembros_aprox ? Number(data.miembros_aprox) : undefined,
         como_entero: data.como_entero || undefined,
         turnstile_token: token,
       };
@@ -80,113 +87,89 @@ export function RegistroForm({ initialPlan = "" }) {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(body),
       });
-
-      if (!res.ok) {
-        const result = await res.json().catch(() => ({}));
-        throw new Error(result.error || "No se pudo enviar tu solicitud.");
-      }
+      if (!res.ok) throw new Error();
 
       router.push("/gym/gracias");
-    } catch (err) {
-      toast.error(err.message || "Error al enviar. Intenta de nuevo.");
+    } catch {
+      // Lo que escribieron se queda: el formulario no se limpia.
+      setAviso(ERROR_ENVIO);
       setIsSubmitting(false);
     }
   };
 
+  const campo = (name) => ({ register: register(name), error: errors[name]?.message });
+
   return (
-    <form
-      onSubmit={handleSubmit(onSubmit)}
-      className="space-y-6 border-2 border-linea bg-fondo-elevado p-8 md:p-10"
-      noValidate
-    >
-      <div className="grid gap-6 md:grid-cols-2">
-        <FormField
-          label="Nombre completo"
-          name="nombre"
-          register={register}
-          error={errors.nombre?.message}
-          placeholder="Juan Pérez"
-          required
-        />
-        <FormField
-          label="Email"
-          name="email"
+    <form onSubmit={handleSubmit(onSubmit)} aria-labelledby="registro-t1" className="flex max-w-[560px] flex-col gap-5" noValidate>
+      <div className="grid gap-5 sm:grid-cols-2">
+        <CampoBoaz id="nombre" etiqueta="Tu nombre" placeholder="Ana Ruiz" autoComplete="name" {...campo("nombre")} />
+        <CampoBoaz
+          id="email"
+          etiqueta="Correo"
           type="email"
-          register={register}
-          error={errors.email?.message}
-          placeholder="juan@email.com"
-          required
+          placeholder="tu@correo.com"
+          autoComplete="email"
+          {...campo("email")}
         />
       </div>
-
-      <div className="grid gap-6 md:grid-cols-2">
-        <FormField
-          label="Teléfono"
-          name="telefono"
+      <div className="grid gap-5 sm:grid-cols-2">
+        <CampoBoaz
+          id="telefono"
+          etiqueta="WhatsApp"
           type="tel"
-          register={register}
-          error={errors.telefono?.message}
-          placeholder="+52 55 0000 0000"
-          required
+          inputMode="tel"
+          placeholder="55 1234 5678"
+          autoComplete="tel"
+          mono
+          {...campo("telefono")}
         />
-        <FormField
-          label="Nombre del gimnasio"
-          name="nombre_gym"
-          register={register}
-          error={errors.nombre_gym?.message}
-          placeholder="Iron Gym"
-          required
-        />
+        <CampoBoaz id="nombre_gym" etiqueta="Nombre de tu gimnasio" autoComplete="organization" {...campo("nombre_gym")} />
       </div>
-
-      <div className="grid gap-6 md:grid-cols-2">
-        <FormSelect
-          label="Plan de interés"
-          name="plan_interes"
-          register={register}
-          error={errors.plan_interes?.message}
-          opciones={PLAN_OPTIONS}
-          placeholder="Selecciona un plan"
-          required
-        />
-        <FormField
-          label="Ciudad"
-          name="ciudad"
-          register={register}
-          error={errors.ciudad?.message}
-          placeholder="Ciudad de México"
-        />
-      </div>
-
-      <FormSelect
-        label="¿Cuántos miembros tienes?"
-        name="miembros_aprox"
-        register={register}
-        error={errors.miembros_aprox?.message}
-        opciones={MIEMBROS_OPTIONS}
-        placeholder={null}
+      <CampoBoaz
+        id="plan_interes"
+        etiqueta="¿Qué plan te interesa?"
+        opciones={PLAN_OPTIONS}
+        ayuda="La prueba es con Pro completo."
+        {...campo("plan_interes")}
       />
-
-      <FormField
-        label="¿Cómo te enteraste del sistema para gimnasios?"
-        name="como_entero"
-        register={register}
-        error={errors.como_entero?.message}
-        placeholder="Instagram, un amigo, Google..."
-      />
-
-      <div className="pt-2">
-        <TurnstileWidget onVerify={setToken} onExpire={() => setToken("")} />
+      <div className="grid gap-5 sm:grid-cols-2">
+        <CampoBoaz id="ciudad" etiqueta="Ciudad" autoComplete="address-level2" {...campo("ciudad")} />
+        <CampoBoaz
+          id="miembros_aprox"
+          etiqueta="¿Cuántos socios tienes hoy?"
+          opciones={MIEMBROS_OPTIONS}
+          {...campo("miembros_aprox")}
+        />
       </div>
+      <CampoBoaz id="como_entero" etiqueta="¿Cómo supiste de Boaz?" opcional="(opcional)" {...campo("como_entero")} />
 
-      <div className="pt-2">
-        <Boton type="submit" variante="primario" estado={isSubmitting ? "cargando" : "reposo"} className="w-full">
-          Empezar mi prueba gratuita
-        </Boton>
-        <p className="mt-4 text-center font-mono uppercase text-etiqueta text-tinta-tenue">
-          Sin tarjeta de crédito · Te contactamos en menos de 24 horas
+      <TurnstileWidget onVerify={setToken} onExpire={() => setToken("")} />
+
+      {aviso && (
+        <p role="alert" className="flex items-start gap-2.5 border-t border-alerta pt-3 text-[14px] text-alerta">
+          <FiAlertCircle aria-hidden="true" className="mt-0.5 h-4 w-4 flex-shrink-0" />
+          {aviso}
         </p>
+      )}
+
+      <div>
+        <BotonBoaz type="submit" estado={isSubmitting ? "cargando" : "reposo"} textoCargando="Registrando">
+          Registrar mi gimnasio
+        </BotonBoaz>
       </div>
+      <p className="text-[13px] text-texto-suave">
+        Al enviar aceptas nuestro{" "}
+        <Link href="/aviso-de-privacidad" className={ENLACE}>
+          aviso de privacidad
+        </Link>
+        .
+      </p>
+      <p className="text-[15px] text-texto-suave">
+        ¿Tienes dudas?{" "}
+        <Link href="/boaz#planes" className={ENLACE}>
+          Ver planes
+        </Link>
+      </p>
     </form>
   );
 }

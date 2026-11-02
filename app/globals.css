@@ -91,6 +91,41 @@
     --placeholder: var(--grafito);
   }
 
+  /* Tema Boaz (lote 9b): /boaz y /gym, con la identidad de G. Papel,
+     tinta, gris cálido y el azul de botones y enlaces (#1F5FD6: 5.1:1
+     sobre papel; blanco encima, 5.7:1). El #2979FF solo como mancha. */
+  [data-theme="boaz"] {
+    --fondo: var(--pared);
+    --superficie: 251 250 246;
+    --texto: 26 26 26;
+    --texto-suave: 92 90 85;
+    --hairline: 214 209 196;
+    --acento: 31 95 214;
+    --acento-presionado: 23 74 170;
+    --sobre-acento: 255 255 255;
+    --foco: 31 95 214;
+    --alerta: 176 52 42;
+    --borde: 43 43 43;
+    --borde-hover: 26 26 26;
+    --placeholder: 92 90 85;
+    /* Contorno de los campos: 4.1:1 sobre su fondo. */
+    --campo: 125 122 114;
+    /* G (KB de Boaz, § 8): el hover del botón cambia de color en 120 ms.
+       Es la única transición de color del sitio y vive solo en este tema. */
+    --boaz-dur-color: 120ms;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    [data-theme="boaz"] {
+      --boaz-dur-color: 0ms;
+    }
+  }
+
+  /* El foco de Boaz va a 2 px de separación (G), no a 3. */
+  [data-theme="boaz"] :focus-visible {
+    outline-offset: 2px;
+  }
+
   :root {
     /* Solo para mostrar a Boaz (#2979FF): solo relleno (mancha), nunca
        texto: 3.6:1 sobre papel. */

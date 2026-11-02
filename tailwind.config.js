@@ -44,6 +44,8 @@ module.exports = {
       "borde-hover": "rgb(var(--borde-hover) / <alpha-value>)",
       placeholder: "rgb(var(--placeholder) / <alpha-value>)",
       "boaz-azul": "rgb(var(--boaz-azul) / <alpha-value>)",
+      // Contorno de los campos de Boaz (tema boaz).
+      campo: "rgb(var(--campo) / <alpha-value>)",
       // Legado de la marca anterior: lo usan las salas que se rehacen en
       // los lotes 2 a 4. No usar en piezas nuevas.
       "fondo-elevado": "#0f1310",
@@ -136,6 +138,8 @@ module.exports = {
       fontFamily: {
         sans: ["var(--font-sans)", "system-ui", "-apple-system", "Segoe UI", "sans-serif"],
         mono: ["var(--font-mono)", "ui-monospace", "SF Mono", "Menlo", "monospace"],
+        // Ubuntu Mono de Boaz: solo en /boaz y /gym (app/components/boaz/fuentes.js).
+        "boaz-mono": ["var(--font-boaz-mono)", "ui-monospace", "monospace"],
         // Legado: Anton ya no se carga (solo vive a trazo en el logo SVG).
         // Lo que aún dice font-anton cae en Geist hasta rehacer su sala.
         anton: ["var(--font-sans)", "system-ui", "sans-serif"],
@@ -192,6 +196,8 @@ module.exports = {
         rapido: "var(--dur-rapido)",
         normal: "var(--dur-normal)",
         lento: "var(--dur-lento)",
+        // Solo en el tema boaz: el color del botón de Boaz (G).
+        "boaz-color": "var(--boaz-dur-color)",
       },
       transitionTimingFunction: {
         DEFAULT: "var(--curva)",

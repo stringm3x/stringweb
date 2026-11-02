@@ -29,11 +29,6 @@ function clasesVariante(variante, estado, interactivo) {
     return `px-0 border-transparent text-texto ${interactivo ? "active:text-texto-suave" : ""}`;
   }
 
-  // Legado de /saas y /gym: botón negro sobre una franja verde.
-  if (variante === "sobreAcido") {
-    return "px-6 border-black bg-black text-acento hover:bg-black/80";
-  }
-
   if (estado === "error") {
     return `px-6 border-alerta bg-transparent text-alerta ${interactivo ? PRESIONA : ""}`;
   }
