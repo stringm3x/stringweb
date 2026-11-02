@@ -81,6 +81,7 @@ Lo general (tokens, curva, qué se puede animar, menos movimiento) está en `doc
 - **Tipo:** sigue al dedo. Cada piso sube cuando su paso llega al centro de la pantalla, y **el paso activo se resalta en la lista** de la izquierda.
 - **Capas:** cimientos, cada piso, la obra (andamio, ladrillos y grúa) y la bandera; se revelan con `clip-path` de abajo hacia arriba.
 - **Menos movimiento:** el edificio completo, sin paso resaltado.
+- **Desde el lote 11, en noche:** el mismo movimiento; el arte va recoloreado (trazo en línea, la bandera en luz).
 
 ## Sala 7 · Danza — "El sistema sigue trabajando, a su ritmo."
 
@@ -92,3 +93,9 @@ Lo general (tokens, curva, qué se puede animar, menos movimiento) está en `doc
 ## Sala 1 · Inicio
 
 Ya tiene su movimiento (el titular que se escribe, la ciudad que se dibuja, las estrellas). Solo se revisa que use los tokens.
+
+## Tu negocio (lote 11) — "Cada escalón suma calibre."
+
+- **Tipo:** al llegar, una vez. La escalera (y los cuatro puntos de un giro grande) entra con `Entra`, y cada cuerda se
+  descubre de izquierda a derecha con `clip-path`, en `--dur-lento`, un escalón tras otro (`app/salas.css`, `.giro-cuerda`).
+- **Menos movimiento:** todas las cuerdas ya dibujadas; nada se mueve.

@@ -12,7 +12,7 @@ Texto final de cada sala de stringwebs.com, listo para el brief de Claude Code. 
 
 Logo · Sistemas · Productos · Galería · Nosotros · **Solicitar diagnóstico** \[botón verde\]
 
-\[Cambio del 30 oct (lote 8, docs/pagina-nivel.md): Logo · Sistemas · Tu negocio · Productos · Nosotros · botón. Galería sale de la barra; "Tu negocio" se oculta hasta que exista su página. Desde el lote 9a, Productos va a /productos.\]
+\[Cambio del 30 oct (lote 8, docs/pagina-nivel.md): Logo · Sistemas · Tu negocio · Productos · Nosotros · botón. Galería sale de la barra; "Tu negocio" se oculta hasta que exista su página. Desde el lote 9a, Productos va a /productos. Desde el lote 11, Tu negocio va a /tu-negocio.\]
 
 ## Sala 1 · Inicio · Literatura
 
@@ -191,7 +191,7 @@ Te respondemos en un día hábil.
 
 1. **Nombre**
 2. **WhatsApp**
-3. **Giro de tu negocio:** Barbería o estética · Clínica o consultorio · Restaurante · Gimnasio · Otro
+3. **Giro de tu negocio:** Barbería o estética · Clínica o consultorio · Restaurante · Gimnasio · Tienda en línea · Empresa mediana o grande · Otro \[las dos antes de Otro, desde el lote 11\]
 4. **¿Qué te pasa hoy?**
    - Me escriben y no alcanzo a contestar.
    - Tengo a mis clientes regados en chats y en Excel.
@@ -210,6 +210,8 @@ Debajo del botón, chico: Al enviar aceptas nuestro **aviso de privacidad** \[en
 ## Pie
 
 Logo chico · stringwebmx@gmail.com · WhatsApp \[el número de STRING que ya está en el sitio actual; Claude Code lo toma del repo\] · Hecho en la Ciudad de México · Productos \[a /productos, lote 9a\] · Aviso de privacidad · Términos
+
+\[Desde el lote 11: Sistemas · Tu negocio · Productos · Nosotros, antes de los legales.\]
 
 ## Aviso de privacidad
 
@@ -322,6 +324,8 @@ Giro: \[Giro\]
 Lo que le pasa: \[la opción elegida, o lo que escribió en "Otra cosa"\]
 Nivel sugerido: \[Responde, Organiza, Automatiza, Controla, o "por definir" si eligió Otra cosa\]
 \[Solo si el giro es Gimnasio:\] Es gimnasio: ofrécele Boaz.
+\[Solo si el giro es Tienda en línea:\] Es tienda en línea: la tienda propia va en Controla (desde $40,000). Si solo vende por redes, empieza en Responde u Organiza.
+\[Solo si el giro es Empresa mediana o grande:\] Es empresa: se cotiza. Ofrécele el boceto y pide el mapa de procesos antes de cotizar.
 
 Estándar: respóndele en un día hábil.
 
@@ -710,7 +714,7 @@ Hoy STRING hace dos cosas: sistemas a la medida para negocios y empresas, y prod
 
 ### /nosotros · 02 · el método (id="metodo")
 
-\[Pared · lista a la izquierda, cinco planos a la derecha.\]
+\[Noche (desde el lote 11; antes, pared) · lista a la izquierda, cinco planos a la derecha.\]
 Etiqueta: 02 · EL MÉTODO
 Titular: Primero escucho. Luego dibujo. Luego construyo.
 
@@ -725,7 +729,7 @@ Lo que garantizo: tiempos y funcionamiento, por escrito. Lo que no garantizo: ve
 
 Nuestro estándar de servicio \[enlace → /#como-trabajamos, la sala 6\]
 
-\[Dibujo decorativo, sin texto alternativo: cinco planos en línea, a mano, que se completan uno a uno. 01 contorno punteado, 02 contorno con una franja, 03 con columnas, 04 con contenido, 05 completo con la marca en verde profundo #1A7F00 y una palomita.\]
+\[Dibujo decorativo, sin texto alternativo: cinco planos en línea, a mano, que se completan uno a uno. 01 contorno punteado, 02 contorno con una franja, 03 con columnas, 04 con contenido, 05 completo con la marca en verde profundo #1A7F00 y una palomita. Desde el lote 11, en noche: trazo en línea y la marca en luz #50FF05.\]
 
 ### /nosotros · 03 · el equipo (id="equipo")
 
@@ -761,6 +765,165 @@ Etiqueta: 04 · LA FE
 \[Sale la foto. La tira queda con tres cuadros dibujados en línea, a mano, con perspectiva y sombra rayada, como los dibujos del lote 8. Sin personas reales ni logotipo del gimnasio. Cuadro 1: la entrada del gimnasio. Cuadro 2: el mostrador de Evolution GYM, redibujado en línea. Cuadro 3: el sistema en una laptop, sin cambio (Carlos, 2 nov). El texto de la sala no cambia.\]
 
 Texto alternativo: Tira de película con tres cuadros dibujados: la entrada del gimnasio, el mostrador del gimnasio y el sistema funcionando en una laptop.
+
+## Tu negocio · lote 11 (aprobados el 2 nov)
+
+\[Una página por giro, en dos grupos: negocios con local y empresas medianas y grandes. Todo en noche, con el verde como único acento; sin pared ni el azul de Boaz.\]
+
+### /tu-negocio
+
+Título: Tu negocio · STRING
+Descripción: Sistemas para barberías, clínicas, restaurantes, tiendas en línea y empresas. Elige tu giro y ve tu escalera de niveles.
+
+Etiqueta: TU NEGOCIO
+Titular: Elige tu giro. Te mostramos tu escalera.
+Entrada: De una barbería que no alcanza a contestar a una empresa con varias sucursales. Misma calidad en cada escalón; cambia el alcance.
+
+**Grupo 1 · NEGOCIOS CON LOCAL** \[tarjetas con cuerda; "DESDE $8,000 →" en mono\]
+
+- Barberías y estéticas — Tu agenda llena, sin vivir en el WhatsApp. → /tu-negocio/barberias
+- Clínicas y consultorios — Cada paciente atendido a tiempo. → /tu-negocio/clinicas
+- Restaurantes — Reservas y pedidos sin perder un mensaje. → /tu-negocio/restaurantes
+- Tiendas en línea — Tu tienda, con tu nombre. → /tu-negocio/tiendas
+- Gimnasios — Ya existe tu sistema: Boaz. — "CONOCE BOAZ →" → /boaz \[tarjeta igual a las demás, en noche\]
+
+**Grupo 2 · EMPRESAS MEDIANAS Y GRANDES** \[separado por una línea; cuerda de 3 px; "DESDE $40,000 →", Cadenas "SE COTIZA →"\]
+
+Enlace a la derecha de la etiqueta: Ver cómo trabajamos con empresas → /tu-negocio/empresas
+
+- Distribuidoras y mayoristas — Pedidos, inventario, rutas y cobranza en un sistema. → /tu-negocio/distribuidoras
+- Inmobiliarias — Cada prospecto, cada propiedad, cada cita. → /tu-negocio/inmobiliarias
+- Escuelas y academias — Inscripciones, pagos y avisos sin papeles. → /tu-negocio/escuelas
+- Hoteles — Reservas, huéspedes y pagos en un solo lugar. → /tu-negocio/hoteles
+- Cadenas y franquicias — Todas tus sucursales en un solo panel. → /tu-negocio/cadenas
+
+Cierre: ¿No ves tu giro? · Trabajamos con cualquier negocio con local. · Solicitar diagnóstico
+
+### Plantilla · giro con local
+
+"← TU NEGOCIO" · Etiqueta · Titular · cita del dueño + "Si eso te pasa, esta es tu escalera." · dibujo en línea a la derecha.
+
+Escalera: cinco filas (Tu escalera / Lo que te pasa / Lo que hace tu sistema), cada una con su cuerda, que engrosa de Responde a Empresa, y enlace a la página de su nivel.
+
+Nota debajo: Lo que hace cada sistema es un ejemplo para tu giro. El tuyo se define en la llamada de diagnóstico.
+
+Cierre de siempre.
+
+### /tu-negocio/barberias
+
+TU NEGOCIO · BARBERÍAS Y ESTÉTICAS · Tu agenda llena, sin vivir en el WhatsApp.
+"Me escriben para agendar mientras estoy cortando." · dibujo: tijeras y peine
+
+- Responde · desde $8,000 | Te escriben mientras cortas y no alcanzas a contestar. | Contesta al instante con tus horarios y precios.
+- Organiza · desde $18,000 | Tus clientes están regados en chats. | Cada cliente en su lugar: quién preguntó y quién ya vino.
+- Automatiza · desde $28,000 | Se te olvidan las citas o te dejan plantado. | Agenda la cita, manda el recordatorio y da seguimiento.
+- Controla · desde $40,000 | No sabes cuánto deja cada silla. | Un panel con tus citas, tus ventas y lo que entra cada semana.
+- Empresa · se cotiza | Tienes varias sucursales. | Un sistema completo para todas, con equipo por proyecto.
+
+### /tu-negocio/clinicas
+
+TU NEGOCIO · CLÍNICAS Y CONSULTORIOS · Cada paciente atendido a tiempo.
+"Me preguntan precios y horarios todo el día, y entre consultas no alcanzo." · dibujo: estetoscopio y agenda
+
+- Responde · desde $8,000 | Preguntan por precios y nadie contesta a tiempo. | Contesta al instante con tus servicios y tu horario.
+- Organiza · desde $18,000 | Los interesados se pierden entre chats y llamadas. | Registra a quien pregunta, qué le interesa y si ya agendó.
+- Automatiza · desde $28,000 | Los pacientes faltan a su cita. | Agenda, recuerda la cita y da seguimiento después de la consulta.
+- Controla · desde $40,000 | No ves cuántos pacientes vuelven ni cuánto entra. | Un panel con tus citas, tus pacientes y lo que entra.
+- Empresa · se cotiza | Tienes varios consultorios o especialistas. | Un sistema completo para toda la clínica, con equipo por proyecto.
+
+### /tu-negocio/restaurantes
+
+TU NEGOCIO · RESTAURANTES · Reservas y pedidos sin perder un mensaje.
+"En la hora pico no hay quien conteste el WhatsApp." · dibujo: mesa puesta
+
+- Responde · desde $8,000 | Preguntan por mesa o por el menú y nadie contesta. | Contesta al instante y toma la reservación.
+- Organiza · desde $18,000 | Las reservas viven en una libreta y en chats. | Todas las reservas y pedidos en un solo lugar.
+- Automatiza · desde $28,000 | Te reservan y no llegan. | Confirma la reservación y recuerda la hora.
+- Controla · desde $40,000 | No sabes qué días y qué platillos te dejan más. | Un panel con tus reservas, tus pedidos y lo que entra.
+- Empresa · se cotiza | Tienes varias sucursales. | Un sistema completo para todas, con equipo por proyecto.
+
+### /tu-negocio/tiendas
+
+TU NEGOCIO · TIENDAS EN LÍNEA · Tu tienda, con tu nombre.
+"Vendo por Instagram y llevo los pedidos en una libreta." · dibujo: caja de envío
+
+- Responde · desde $8,000 | Preguntan precio y existencias y no alcanzas a contestar. | Contesta al instante con tu catálogo y tus precios.
+- Organiza · desde $18,000 | Los pedidos llegan por chats distintos. | Cada pedido y cada cliente en un solo lugar.
+- Automatiza · desde $28,000 | Nadie da seguimiento al que preguntó y no compró. | Da seguimiento y avisa al cliente cómo va su pedido.
+- Controla · desde $40,000 | Quieres vender sin depender de las redes. | Tu tienda en línea propia: catálogo, carrito, pagos, inventario y pedidos.
+- Empresa · se cotiza | Tienes un catálogo grande o varias sucursales. | Una tienda grande, conectada con tus sistemas, con equipo por proyecto.
+
+### /tu-negocio/empresas
+
+Etiqueta: TU NEGOCIO · EMPRESAS
+Titular: Toda la operación, conectada.
+Para empresas con varias áreas o sucursales que necesitan un solo sistema. Se cotiza después de un mapa de procesos firmado.
+
+Cuatro pasos:
+
+01 Diagnóstico — Una llamada para entender cómo opera tu empresa. Gratis.
+02 El boceto — Mapa de procesos, primera pantalla dibujada y la obra de tu sistema en boceto. Se acredita completo si contratas el sistema.
+03 Propuesta — Alcance, fases, equipo por proyecto y precio, por escrito.
+04 Construcción — Avance por escrito cada viernes. Tú hablas siempre conmigo.
+
+Debajo, las cinco tarjetas del grupo 2. Empresa · se cotiza · Solicitar diagnóstico.
+
+### Plantilla · giro grande
+
+"← TU NEGOCIO · EMPRESAS" · Etiqueta · Titular · cita del dueño · dibujo en línea.
+
+LO QUE HARÍA TU SISTEMA: cuatro puntos numerados (el 04 con cuerda verde) + "Son ejemplos. Tu sistema se define en el mapa de procesos."
+
+Dos niveles: Controla · desde $40,000 · Una operación, un panel. / Empresa · se cotiza · Varias áreas o sucursales, con equipo por proyecto.
+
+CÓMO TRABAJAMOS CON EMPRESAS: los cuatro pasos de arriba + Solicitar diagnóstico.
+
+### /tu-negocio/distribuidoras
+
+TU NEGOCIO · DISTRIBUIDORAS Y MAYORISTAS · Del pedido a la cobranza, sin perder nada.
+"Los pedidos llegan por WhatsApp, el inventario está en Excel y la cobranza en la cabeza de alguien." · dibujo: almacén y camioneta
+
+01 Pedidos de tus clientes en un solo lugar. 02 Inventario por almacén, al día. 03 Rutas de entrega y quién entregó qué. 04 Cuentas por cobrar: quién debe y desde cuándo.
+
+### /tu-negocio/inmobiliarias
+
+TU NEGOCIO · INMOBILIARIAS · Cada prospecto, cada propiedad, cada cita.
+"Mis asesores pierden prospectos y no sé quién atendió a quién." · dibujo: fachada con letrero
+
+01 Respuesta inmediata a quien pregunta por una propiedad. 02 Cada prospecto con su asesor y su etapa. 03 Citas de visita con recordatorio. 04 Un panel por asesor y por propiedad.
+
+### /tu-negocio/escuelas
+
+TU NEGOCIO · ESCUELAS Y ACADEMIAS · Inscripciones, pagos y avisos sin papeles.
+"Las inscripciones van en hojas, las colegiaturas en Excel y los avisos por cinco grupos de WhatsApp." · dibujo: pupitre y pizarrón
+
+01 Inscripciones en línea. 02 Colegiaturas: quién pagó y quién debe. 03 Avisos a las familias desde un solo lugar. 04 Un panel con alumnos, grupos y lo que entra.
+
+### /tu-negocio/hoteles
+
+TU NEGOCIO · HOTELES · Reservas, huéspedes y pagos en un solo lugar.
+"Las reservas llegan por teléfono, WhatsApp y correo, y alguien las pasa a mano." · dibujo: llave con llavero y cama
+
+01 Reservas directas desde tu página, sin comisión por cada una. 02 Disponibilidad por habitación, al día. 03 Datos y estancias de tus huéspedes. 04 Pagos y un panel de ocupación.
+
+### /tu-negocio/cadenas
+
+TU NEGOCIO · CADENAS Y FRANQUICIAS · Todas tus sucursales en un solo panel.
+"Cada sucursal lleva sus números a su manera y yo me entero a fin de mes." · dibujo: tres fachadas iguales
+
+01 Ventas e inventario de cada sucursal. 02 Los mismos procesos en todas. 03 Accesos por rol: dueño, gerente, sucursal. 04 Un panel con todas, comparadas.
+
+### Títulos de cada giro
+
+"{Giro} · Tu negocio · STRING". Descripción: el titular + la cita del dueño.
+
+### Barra y enlaces
+
+"Tu negocio" entra a la barra, al menú del celular y al pie: Sistemas · Tu negocio · Productos · Nosotros. Las once páginas van al sitemap.
+
+### Dibujos
+
+Todos en línea, a mano, en noche, con un solo toque verde, en el estilo del lote 8. Uno por giro. Sin personas reales ni logotipos.
 
 ## Por confirmar antes del brief
 

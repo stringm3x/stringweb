@@ -1,3 +1,4 @@
+import { GIROS } from "./lib/giros";
 import { NIVELES } from "./lib/niveles";
 
 const BASE = "https://www.stringwebs.com";
@@ -8,6 +9,9 @@ const ROUTES = [
   { path: "/", priority: 1.0, changeFrequency: "weekly" },
   { path: "/sistemas", priority: 0.9, changeFrequency: "monthly" },
   ...NIVELES.map((n) => ({ path: `/sistemas/${n.slug}`, priority: 0.8, changeFrequency: "monthly" })),
+  { path: "/tu-negocio", priority: 0.9, changeFrequency: "monthly" },
+  { path: "/tu-negocio/empresas", priority: 0.8, changeFrequency: "monthly" },
+  ...GIROS.map((g) => ({ path: `/tu-negocio/${g.slug}`, priority: 0.8, changeFrequency: "monthly" })),
   { path: "/nosotros", priority: 0.7, changeFrequency: "monthly" },
   { path: "/diagnostico", priority: 0.8, changeFrequency: "monthly" },
   { path: "/productos", priority: 0.9, changeFrequency: "weekly" },

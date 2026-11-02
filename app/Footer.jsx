@@ -3,10 +3,18 @@ import { Logo } from "./components/ui/Logo";
 import { CORREO, whatsappUrl } from "./lib/contacto";
 
 // Pie de docs/textos.md: logo chico · correo · WhatsApp · Hecho en la Ciudad
-// de México · Productos · Aviso de privacidad · Términos. Las redes solo viven en el
+// de México · Sistemas · Tu negocio · Productos · Nosotros (lote 11) · Aviso
+// de privacidad · Términos. Las redes solo viven en el
 // JSON-LD de app/layout.jsx.
 const enlace =
   "inline-flex min-h-[44px] items-center text-pequeno text-texto-suave hover:text-texto";
+
+const PAGINAS = [
+  { label: "Sistemas", href: "/sistemas" },
+  { label: "Tu negocio", href: "/tu-negocio" },
+  { label: "Productos", href: "/productos" },
+  { label: "Nosotros", href: "/nosotros" },
+];
 
 const Footer = () => {
   return (
@@ -31,11 +39,13 @@ const Footer = () => {
           <li className="inline-flex min-h-[44px] items-center text-pequeno text-texto-suave">
             Hecho en la Ciudad de México
           </li>
-          <li>
-            <Link href="/productos" className={enlace}>
-              Productos
-            </Link>
-          </li>
+          {PAGINAS.map((pagina) => (
+            <li key={pagina.href}>
+              <Link href={pagina.href} className={enlace}>
+                {pagina.label}
+              </Link>
+            </li>
+          ))}
           <li>
             <Link href="/aviso-de-privacidad" className={enlace}>
               Aviso de privacidad

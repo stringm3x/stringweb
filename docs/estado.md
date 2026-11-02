@@ -1,6 +1,6 @@
 # Estado · stringwebs.com
 
-Última actualización: 2 nov 2026 (lote 10). Meta del KB: sitio rehecho del 1 al 7 nov; salir a
+Última actualización: 2 nov 2026 (lote 11). Meta del KB: sitio rehecho del 1 al 7 nov; salir a
 vender el 8 nov.
 
 ## Lotes
@@ -18,7 +18,8 @@ vender el 8 nov.
 | 8 | Sistemas (docs/pagina-nivel.md): /sistemas y las cinco páginas de nivel, barra, enlaces de la sala 4, metadatos, redirects | `lote-8-sistemas` | ✅ Fusionado a `main` (30 oct, visto bueno de Carlos) |
 | 9a | /productos (Boaz y a la medida), Boaz por su nombre en todo el sitio, galería con el cuadro de Boaz y sin luna, /saas → /productos#boaz | `lote-9a-productos` | ✅ Fusionado a `main` (30 oct, visto bueno de Carlos) |
 | 9b | /boaz con la identidad de Boaz, /gym/registro y /gym/gracias rehechos, Conoce Boaz → /boaz, /saas y /gym/empezar → /boaz, limpieza del legado | `lote-9b-boaz` | ✅ Fusionado a `main` (2 nov, PR #4, visto bueno de Carlos) |
-| 10 | /nosotros como recorrido (historia, método, equipo, fe) con la foto de Carlos; la sala 3 sin foto, con la entrada y el mostrador en línea; `Entra` a `ui/`; ancla `#como-trabajamos` | `lote-10-nosotros` | ✅ Hecho; PR abierto, sin fusionar |
+| 10 | /nosotros como recorrido (historia, método, equipo, fe) con la foto de Carlos; la sala 3 sin foto, con la entrada y el mostrador en línea; `Entra` a `ui/`; ancla `#como-trabajamos` | `lote-10-nosotros` | ✅ Fusionado a `main` (2 nov, PR #5, visto bueno de Carlos) |
+| 11 | Tu negocio: /tu-negocio, /tu-negocio/empresas y nueve giros (dos plantillas, `app/lib/giros.js`), nueve dibujos, barra, menú, pie y sitemap; dos giros nuevos en el formulario con su marca en el correo; el fondo claro solo para Boaz (sala 6 y método de /nosotros en noche) | `lote-11-tu-negocio` | ✅ Hecho; PR abierto, sin fusionar |
 
 Producción sigue con la marca anterior. Nada se fusiona a `main` sin el visto bueno de Carlos.
 
@@ -39,6 +40,8 @@ Producción sigue con la marca anterior. Nada se fusiona a `main` sin el visto b
   `ui/TarjetaSistema.jsx` e `ilustraciones/Mancuerna.jsx`, que nadie importa (ya estaban sin uso antes del 9b).
   Se borran en otro lote, junto con esos dos archivos y la exención en `app/tokens.test.js`.
 - `npm run lint` roto: el parser de `eslint-config-next` exige `typescript`.
+- `e2e/componentes.spec.js` reescribe las capturas de `reportes/lote-6-componentes/` cada vez que corre (lote 11: se
+  regresaron a mano); debería escribirlas fuera del repo.
 - LCP simulado de 2.2–2.9 s en celular en todo el sitio (Lighthouse), con el LCP observado en ~0.1 s: va en un lote
   propio, medido con PageSpeed en producción (`reportes/lote-10-reporte.md`).
 - `app/tokens.test.js` todavía exenta `app/gym/` y los archivos legado borrados en el 9b: la exención sale en
@@ -69,6 +72,18 @@ Producción sigue con la marca anterior. Nada se fusiona a `main` sin el visto b
 - El dibujo de Boaz (`LaminaBoaz.jsx` y el cuadro de la galería) es copia de `string-gym-saas`, provisional allá: cuando
   llegue el del ilustrador, se copia a mano aquí.
 - Dos `<meta name="viewport">` en el `<head>`.
+
+## Decisiones tomadas en el lote 11
+
+- El fondo claro es de Boaz (Carlos, 2 nov): pared solo en /boaz, /gym, `#boaz` de /productos y la galería. La sala 6 y
+  el método de /nosotros pasan a noche con su arte recoloreado; la tierra de la sala 6 se oscurece (`#2A2620`) y el
+  rótulo 1 lleva fondo de tierra para pasar 4.5:1. `app/lib/giros.test.js` falla si la pared vuelve a otra página.
+- Tu negocio: dos plantillas (giro con local con escalera de cinco niveles; giro grande con cuatro puntos y dos niveles)
+  y los datos en `app/lib/giros.js`; los precios salen de `NIVELES`. Los calibres de las cuerdas viven en `niveles.js`.
+- Dibujos de los giros decorativos (`alt=""`): el texto ya lo dice todo. "← TU NEGOCIO" también en /empresas.
+- Los giros grandes no llevan el Cierre de siempre (su plantilla termina con el botón); /tu-negocio cierra con
+  "¿No ves tu giro?". `Tarjeta` suma la prop `cuerda` (3 px en las empresas).
+- Formulario: "Tienda en línea" y "Empresa mediana o grande" antes de "Otro", cada una con su marca en el correo.
 
 ## Decisiones tomadas en el lote 9b
 

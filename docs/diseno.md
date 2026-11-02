@@ -64,13 +64,15 @@ Hay seis versiones y cada una tiene su lugar. Fuera de esta tabla, el logo no se
 
 STRING vive de noche con una sola luz verde; la galería es su pared clara. El verde es el único acento: si hay dos verdes compitiendo, sobra uno.
 
+**El fondo claro es de Boaz (decisión de Carlos, 2 nov).** La pared y el papel se quedan solo en /boaz, /gym, el bloque de Boaz en /productos (`#boaz`) y la galería (sala 5). Todo lo demás va en noche, también la sala 6 y el método de /nosotros; su arte se recolorea para la noche (trazo en línea, verde en luz).
+
 | Token | Hex | Uso | Contraste |
 | --- | --- | --- | --- |
 | Noche | #000000 | Fondo principal del sitio y del logo | — |
 | Línea | #F5F5F3 | Texto y dibujo sobre noche | 19.2:1 sobre noche |
 | Luz | #50FF05 | La I del logo, botones, cuerdas, luna | 15.6:1 sobre noche |
 | Neblina | #9A9A9F | Texto secundario y etiquetas sobre noche | 7.5:1 sobre noche |
-| Pared | #F4F2EC | Fondo de la galería y de impresos | — |
+| Pared | #F4F2EC | Fondo de la galería, de Boaz y de impresos | — |
 | Tinta | #111214 | Texto sobre pared | 16.7:1 sobre pared |
 | Verde profundo | #1A7F00 | La I y los enlaces sobre pared | 4.6:1 sobre pared |
 | Grafito | #5F6368 | Texto secundario sobre pared | 5.4:1 sobre pared |
@@ -160,7 +162,7 @@ Referencia viva: lienzo STRING — Territorios, página Premium, tablero Premium
 
 **El sitio son siete salas, cada una hecha con el lenguaje de una de las siete bellas artes.** El cursor ya era literatura, las cuerdas música y la ciudad con la galería pintura; las otras cuatro artes dan forma al problema, al caso, al proceso y a la continuidad. Guiño de casa: el Palacio de Bellas Artes está en la ciudad dibujada.
 
-Arriba va la **barra superior** (noche): logo, Sistemas · Productos · Galería · Nosotros, y el botón "Solicitar diagnóstico". Luego, las salas, alternando noche y pared clara para que el arte respire:
+Arriba va la **barra superior** (noche): logo, Sistemas · Productos · Galería · Nosotros, y el botón "Solicitar diagnóstico". Luego, las salas, en noche; solo la galería va sobre pared clara, para que el arte respire (desde el 2 nov, la sala 6 también va en noche):
 
 | Sala | Arte | Qué vende | Cómo se ve |
 | --- | --- | --- | --- |
@@ -169,7 +171,7 @@ Arriba va la **barra superior** (noche): logo, Sistemas · Productos · Galería
 | 3 · El caso real (noche) | Cine | La historia de Evolution GYM y sus cifras autorizadas | Fotogramas al hacer scroll; las cifras en Geist Mono, como créditos |
 | 4 · Los niveles (noche) | Música | Responde · Organiza · Automatiza · Controla · Empresa | Entrada: "Arte y calidad no están peleados." Cada nivel es una cuerda que suena al tocarla (si el visitante enciende el sonido), con una viñeta en línea de sus artes acumuladas (ver abajo) |
 | 5 · La galería (pared) | Pintura | La obra de cada sistema | "Cada sistema tiene su arte." Tres marcos: STRING, Boaz y "Tu negocio", vacío, esperando la obra del cliente |
-| 6 · Cómo trabajamos (pared) | Arquitectura | Proceso, el boceto y el estándar de servicio | El proceso como edificio dibujado a mano: cimientos, estructura, entrega. A mano, nunca con regla: el plano técnico es de Boaz |
+| 6 · Cómo trabajamos (noche) | Arquitectura | Proceso, el boceto y el estándar de servicio | El proceso como edificio dibujado a mano: cimientos, estructura, entrega. A mano, nunca con regla: el plano técnico es de Boaz |
 | 7 · Continuidad (noche) | Danza | El cuidado mensual | Líneas que se mueven a ritmo constante: el sistema sigue vivo |
 
 ### Los niveles suman artes

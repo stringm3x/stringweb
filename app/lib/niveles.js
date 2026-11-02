@@ -168,4 +168,11 @@ export const NIVELES = [
   },
 ];
 
+// El calibre de la cuerda de cada nivel: engorda de Responde a Empresa, como
+// cuerdas de distinto grueso. Lo usan la sala 4 y la escalera de Tu negocio.
+const CALIBRES = [1.2, 1.5, 1.8, 2.1, 2.4];
+NIVELES.forEach((nivel, i) => {
+  nivel.calibre = CALIBRES[i];
+});
+
 export const nivelPorSlug = (slug) => NIVELES.find((n) => n.slug === slug);

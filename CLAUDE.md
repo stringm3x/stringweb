@@ -86,7 +86,8 @@ LCP < 2.5 s, CLS < 0.1, contraste ≥ 4.5:1. Si una no se cumple, se dice en el 
 - **Color.** Noche `#000000` · Línea `#F5F5F3` (texto sobre noche) · Luz `#50FF05` (el acento) ·
   Neblina `#9A9A9F` (secundario sobre noche) · Pared `#F4F2EC` · Tinta `#111214` (texto sobre
   pared) · Verde profundo `#1A7F00` (acento sobre pared, nunca en texto < 14 px) · Grafito `#5F6368`.
-  `#50FF05` solo sobre noche. Texto encima del verde: negro. El azul `#004aad` y el dorado
+  `#50FF05` solo sobre noche. Texto encima del verde: negro. **El fondo claro es de Boaz** (Carlos, 2 nov): pared
+  solo en `/boaz`, `/gym`, `#boaz` de `/productos` y la galería (sala 5); todo lo demás en noche (lote 11). El azul `#004aad` y el dorado
   `#f6c75e` del sitio anterior se retiran con el rehecho.
 - **Tipografía.** Anton solo en el logo (ya va a trazo en el SVG, no hace falta cargarla). Geist
   para titulares (600, -0.035 em) y texto (17–22 px). Geist Mono para cifras, precios y etiquetas
@@ -112,7 +113,7 @@ frecuentes, cierre y pie. Sin bloque "quién soy" en la portada: Carlos se prese
 Al lanzar: literatura, música y pintura completas; escultura, cine, arquitectura y danza en versión
 quieta (`public/arte/`). Sala 3 sin cifras de socios hasta recontar.
 
-Barra (lote 8, `docs/pagina-nivel.md`): logo · Sistemas (`/sistemas`) · Tu negocio (oculto hasta que exista) ·
+Barra (lote 8, `docs/pagina-nivel.md`): logo · Sistemas (`/sistemas`) · Tu negocio (`/tu-negocio`, lote 11) ·
 Productos (`/productos`, lote 9a) · Nosotros · "Solicitar diagnóstico" (`/diagnostico`).
 Galería ya no va en la barra; sigue como sala 5 (`/#galeria`).
 
@@ -120,7 +121,9 @@ Galería ya no va en la barra; sigue como sala 5 (`/#galeria`).
 
 Páginas: `/`, `/sistemas` y `/sistemas/responde`, `/organiza`, `/automatiza`, `/controla`,
 `/empresa` (lote 8, `docs/pagina-nivel.md`), `/nosotros`, `/diagnostico`, `/aviso-de-privacidad`,
-`/terminos`, `/productos` (lote 9a: Boaz en `#boaz` y a la medida en `#medida`), `/boaz` (lote 9b), 404. Se conservan
+`/terminos`, `/productos` (lote 9a: Boaz en `#boaz` y a la medida en `#medida`), `/boaz` (lote 9b), `/tu-negocio`,
+`/tu-negocio/empresas` y los nueve giros (`/tu-negocio/barberias`, `/clinicas`, `/restaurantes`, `/tiendas`,
+`/distribuidoras`, `/inmobiliarias`, `/escuelas`, `/hoteles`, `/cadenas`; lote 11), 404. Se conservan
 `/gym/registro` y `/gym/gracias`, con la identidad de Boaz desde el lote 9b (envían a `app.gym.stringwebs.com`; no se
 toca ese envío). No se crean `/galeria`,
 `/estandar` ni `/preguntas`. `/#niveles` sigue como ancla de la portada.
@@ -181,6 +184,8 @@ fotos de stock y superlativos sin respaldo.
   precarga en /productos); logotipo de Boaz en `public/marca/`.
 - Boaz: `app/(sitio)/boaz/`, `app/gym/` y `app/components/boaz/*` (tema `data-theme="boaz"` en `globals.css`,
   botón y campo propios, Ubuntu Mono y Archivo con precarga solo ahí).
+- Tu negocio: `app/(sitio)/tu-negocio/` + `app/components/tu-negocio/*.jsx` (una plantilla para los giros con local y
+  otra para los grandes); los datos de los giros viven en `app/lib/giros.js` y sus dibujos en `public/arte/giros/`.
 - Layout, metadata y JSON-LD: `app/layout.jsx`. Barra: `app/header.jsx`. Pie: `app/Footer.jsx`.
 - UI compartida: `app/components/ui/`; formularios: `app/components/forms/`.
 - Copy hardcodeado en JSX con algunos arrays en `data.js`; no hay CMS.

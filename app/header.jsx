@@ -9,10 +9,10 @@ import { Logo } from "./components/ui/Logo";
 
 // Barra superior (docs/pagina-nivel.md, 30 oct): logo · Sistemas · Tu negocio
 // · Productos · Nosotros · Solicitar diagnóstico. Galería sale de la barra.
-// "Tu negocio" se oculta hasta que exista su página; entonces entra aquí,
-// después de Sistemas.
+// "Tu negocio" entra desde el lote 11, después de Sistemas.
 const menuItems = [
   { label: "Sistemas", href: "/sistemas" },
+  { label: "Tu negocio", href: "/tu-negocio" },
   // Boaz y su registro viven dentro de Productos.
   { label: "Productos", href: "/productos", tambien: ["/boaz", "/gym"] },
   { label: "Nosotros", href: "/nosotros" },
