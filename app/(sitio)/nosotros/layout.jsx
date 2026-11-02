@@ -1,6 +1,6 @@
-// Título y descripción de docs/textos.md § Textos que faltaban.
+// Título y descripción de docs/textos.md § Nosotros · lote 10.
 const DESCRIPCION =
-  "La historia de STRING: un taller de software que probó su primer sistema en el gimnasio de la familia de su fundador.";
+  "STRING es un taller de software en Ciudad de México. La historia, el método, el equipo y la fe detrás de cada sistema.";
 
 export const metadata = {
   title: "Nosotros",

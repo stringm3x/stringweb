@@ -1,20 +1,16 @@
-import Image from "next/image";
 import Link from "next/link";
 import { SAAS_EN_PRODUCCION } from "@/app/lib/stats";
 import { Escenario } from "./Escenario";
 import { CUERPO, ENLACE, ETIQUETA, SALA, TITULAR } from "./estilos";
 
 // Sala 3 · El caso real · Cine (docs/textos.md). La tira de tres fotogramas
-// con la foto de Carlos en el primero y los créditos en Geist Mono. Sin
+// dibujados (la entrada del gimnasio, el mostrador y el producto; la foto de
+// Carlos vive en /nosotros desde el lote 10) y los créditos en Geist Mono. Sin
 // cifras de socios hasta recontar. "La historia se cuenta cuadro por
 // cuadro": la tira entra desde la derecha y los cuadros se encienden con
 // corte seco al bajar; luego los créditos (app/salas.css, .cine). Con menos
 // movimiento, los tres encendidos.
 const CREDITOS = `EN USO TODOS LOS DÍAS EN EL MOSTRADOR · ${SAAS_EN_PRODUCCION} PRODUCTO EN PRODUCCIÓN`;
-
-// El primer fotograma dentro de la tira (sala3-cine.svg, 1136 × 300), en %,
-// un poco hacia dentro para que se vea el borde del cuadro.
-const FOTOGRAMA = { left: "3.6%", top: "17.2%", width: "28.85%", height: "65.6%" };
 
 // Los tres cuadros completos, con su borde, para apagarlos (x = 32, 400, 764).
 const CUADROS = ["3.0%", "35.3%", "67.2%"];
@@ -60,19 +56,9 @@ export function Sala3Caso() {
                   height={300}
                   loading="lazy"
                   decoding="async"
-                  alt="Tira de película con tres cuadros: el fundador, el mostrador del gimnasio y el sistema funcionando en una laptop."
+                  alt="Tira de película con tres cuadros dibujados: la entrada del gimnasio, el mostrador del gimnasio y el sistema funcionando en una laptop."
                   className="block h-auto w-full"
                 />
-                <div className="absolute overflow-hidden" style={FOTOGRAMA}>
-                  {/* TODO(dato): foto de respaldo hasta que Carlos mande la final. */}
-                  <Image
-                    src="/foto/carlos-respaldo.jpg"
-                    alt="Carlos Avilés, fundador de STRING."
-                    fill
-                    sizes="(min-width: 1024px) 360px, 210px"
-                    className="object-cover"
-                  />
-                </div>
                 {CUADROS.map((left, i) => (
                   <div
                     key={left}

@@ -2,10 +2,11 @@
 
 import { useEffect, useRef } from "react";
 
-// Entrada de cada bloque de /productos (lote 9a): sube y aparece una vez, en
-// --dur-lento con la curva del sistema (app/salas.css, .entra). Si al montar
-// el bloque ya está en pantalla (o se llegó por un ancla), no se esconde:
-// nada aparece y desaparece. Sin JavaScript o con menos movimiento, quieto.
+// Entrada de cada bloque de /productos (lote 9a) y de cada parada de
+// /nosotros (lote 10): sube y aparece una vez, en --dur-lento con la curva
+// del sistema (app/salas.css, .entra). Si al montar el bloque ya está en
+// pantalla (o se llegó por un ancla), no se esconde: nada aparece y
+// desaparece. Sin JavaScript o con menos movimiento, quieto.
 export function Entra({ as: Etiqueta = "div", className = "", children, ...resto }) {
   const ref = useRef(null);
 

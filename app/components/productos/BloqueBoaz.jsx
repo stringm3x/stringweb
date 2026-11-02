@@ -1,7 +1,7 @@
 import { CUERPO, ETIQUETA, SALA } from "../salas/estilos";
 import { Boton } from "../ui/Boton";
 import { archivo } from "./archivo";
-import { Entra } from "./Entra";
+import { Entra } from "../ui/Entra";
 import { Firma } from "./Firma";
 import { LaminaBoaz } from "./LaminaBoaz";
 

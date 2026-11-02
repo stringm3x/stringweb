@@ -1,7 +1,7 @@
 import { CUERPO, ETIQUETA, SALA, TITULAR } from "../salas/estilos";
 import { Boton } from "../ui/Boton";
 import { Tarjeta } from "../ui/Tarjeta";
-import { Entra } from "./Entra";
+import { Entra } from "../ui/Entra";
 
 // Bloque 4 de /productos (lote 9a): a la medida. La vitrina enseña cómo se
 // ve lo que construimos con ejemplos, nunca como clientes: cada tarjeta

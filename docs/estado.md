@@ -1,6 +1,6 @@
 # Estado · stringwebs.com
 
-Última actualización: 2 nov 2026 (lote 9b). Meta del KB: sitio rehecho del 1 al 7 nov; salir a
+Última actualización: 2 nov 2026 (lote 10). Meta del KB: sitio rehecho del 1 al 7 nov; salir a
 vender el 8 nov.
 
 ## Lotes
@@ -17,7 +17,8 @@ vender el 8 nov.
 | 7 | Salas en movimiento (docs/movimiento-salas.md): salas 2–7 con su movimiento, arte en capas, sala 1 con tokens | `lote-7-movimiento` | ✅ Fusionado a `main` (29 oct, visto bueno de Carlos) |
 | 8 | Sistemas (docs/pagina-nivel.md): /sistemas y las cinco páginas de nivel, barra, enlaces de la sala 4, metadatos, redirects | `lote-8-sistemas` | ✅ Fusionado a `main` (30 oct, visto bueno de Carlos) |
 | 9a | /productos (Boaz y a la medida), Boaz por su nombre en todo el sitio, galería con el cuadro de Boaz y sin luna, /saas → /productos#boaz | `lote-9a-productos` | ✅ Fusionado a `main` (30 oct, visto bueno de Carlos) |
-| 9b | /boaz con la identidad de Boaz, /gym/registro y /gym/gracias rehechos, Conoce Boaz → /boaz, /saas y /gym/empezar → /boaz, limpieza del legado | `lote-9b-boaz` | ✅ Hecho; PR abierto, sin fusionar |
+| 9b | /boaz con la identidad de Boaz, /gym/registro y /gym/gracias rehechos, Conoce Boaz → /boaz, /saas y /gym/empezar → /boaz, limpieza del legado | `lote-9b-boaz` | ✅ Fusionado a `main` (2 nov, PR #4, visto bueno de Carlos) |
+| 10 | /nosotros como recorrido (historia, método, equipo, fe) con la foto de Carlos; la sala 3 sin foto, con la entrada y el mostrador en línea; `Entra` a `ui/`; ancla `#como-trabajamos` | `lote-10-nosotros` | ✅ Hecho; PR abierto, sin fusionar |
 
 Producción sigue con la marca anterior. Nada se fusiona a `main` sin el visto bueno de Carlos.
 
@@ -38,6 +39,8 @@ Producción sigue con la marca anterior. Nada se fusiona a `main` sin el visto b
   `ui/TarjetaSistema.jsx` e `ilustraciones/Mancuerna.jsx`, que nadie importa (ya estaban sin uso antes del 9b).
   Se borran en otro lote, junto con esos dos archivos y la exención en `app/tokens.test.js`.
 - `npm run lint` roto: el parser de `eslint-config-next` exige `typescript`.
+- LCP simulado de 2.2–2.9 s en celular en todo el sitio (Lighthouse), con el LCP observado en ~0.1 s: va en un lote
+  propio, medido con PageSpeed en producción (`reportes/lote-10-reporte.md`).
 - `app/tokens.test.js` todavía exenta `app/gym/` y los archivos legado borrados en el 9b: la exención sale en
   el mismo lote que los colores legado.
 - La vibración al tocar una cuerda (sala 4) redibuja la ruta con JS en cada fotograma (`Cuerdas.jsx`), no con `transform`.
@@ -50,7 +53,6 @@ Producción sigue con la marca anterior. Nada se fusiona a `main` sin el visto b
 ## Pendientes de Carlos
 
 - **Domicilio** del responsable para el aviso de privacidad (lo pide la ley) y fecha de publicación.
-- **Foto final** de Carlos para la sala 3 (por ahora `public/foto/carlos-respaldo.jpg`).
 - **`TURNSTILE_SECRET_KEY`** y las SMTP en Vercel (Preview y Production): sin el secreto,
   `/api/diagnostico` rechaza todo fuera de desarrollo. Permitir el dominio de la vista previa en
   Turnstile, mandar una solicitud de prueba y confirmar que llegó. `NOTIFICATION_EMAIL` ya no se usa.

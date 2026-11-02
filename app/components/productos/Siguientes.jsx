@@ -1,5 +1,5 @@
 import { CUERPO, ETIQUETA, SALA, TITULAR } from "../salas/estilos";
-import { Entra } from "./Entra";
+import { Entra } from "../ui/Entra";
 
 // Bloque 3 de /productos (lote 9a): los siguientes productos. El marco
 // punteado es decorativo: sin nombres, giros ni fechas.
