@@ -126,6 +126,8 @@ Tres letras, cada una con un solo trabajo. Anton es la firma; Geist hace el rest
 | Geist | Titulares y texto | Titulares en semibold (600), apretados (-0.035 em), cortos. Texto en regular, 17 a 22 px |
 | Geist Mono | Cifras, precios, etiquetas | Toda cifra de dinero o de datos va en mono. Etiquetas en mayúsculas con espacio amplio |
 
+**Excepción de Boaz (lote 9b):** Dentro de la identidad de Boaz, las cifras y etiquetas van en Ubuntu Mono, y los titulares en Archivo 900 al 62 % (`/boaz` y `/gym`; Archivo también en los nombres de planes de `/productos`). Botones, enlaces y subtítulos de Boaz siguen en Geist 600.
+
 **Escala de la portada:** titular principal 96 px · titulares de sección 56 a 72 px · subtítulos 21 a 24 px · texto 17 px · etiquetas 12 a 13 px.
 
 Las tres son gratuitas en Google Fonts.

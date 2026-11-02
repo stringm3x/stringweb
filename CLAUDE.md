@@ -62,7 +62,8 @@ LCP < 2.5 s, CLS < 0.1, contraste ≥ 4.5:1. Si una no se cumple, se dice en el 
 - Todo usable con teclado y foco visible.
 - Un solo acento en la interfaz: el verde. El color cálido vive solo en el arte.
 - Anton solo en el logo, y el logo va como SVG en línea.
-- Precios y cifras en Geist Mono, tal como en `docs/textos.md`. Nada inventado.
+- Precios y cifras en Geist Mono, tal como en `docs/textos.md`. Nada inventado. Excepción: Dentro de la identidad de Boaz, las cifras y etiquetas van en Ubuntu Mono
+  (`/boaz` y `/gym`, lote 9b).
 - Boaz sale con su nombre desde el lote 9, con la firma "by STRING" (decisión de Carlos, 29 oct; el
   registro en el IMPI se hace cuando haya ingresos). Su logo y su lámina vienen de `string-gym-saas`.
 - Nunca se publica en producción sin el visto bueno de Carlos.
@@ -119,8 +120,9 @@ Galería ya no va en la barra; sigue como sala 5 (`/#galeria`).
 
 Páginas: `/`, `/sistemas` y `/sistemas/responde`, `/organiza`, `/automatiza`, `/controla`,
 `/empresa` (lote 8, `docs/pagina-nivel.md`), `/nosotros`, `/diagnostico`, `/aviso-de-privacidad`,
-`/terminos`, `/productos` (lote 9a: Boaz en `#boaz` y a la medida en `#medida`), 404. Se conservan `/gym/registro` y
-`/gym/gracias` (envían a `app.gym.stringwebs.com`; no se toca ese envío). No se crean `/galeria`,
+`/terminos`, `/productos` (lote 9a: Boaz en `#boaz` y a la medida en `#medida`), `/boaz` (lote 9b), 404. Se conservan
+`/gym/registro` y `/gym/gracias`, con la identidad de Boaz desde el lote 9b (envían a `app.gym.stringwebs.com`; no se
+toca ese envío). No se crean `/galeria`,
 `/estandar` ni `/preguntas`. `/#niveles` sigue como ancla de la portada.
 
 Redirects (en `next.config.mjs`, con `statusCode: 301`, no `permanent: true`, que emite 308).
@@ -134,7 +136,7 @@ Sin cadenas: cada ruta vieja apunta al destino final.
 | `/Us` | `/nosotros` |
 | `/privacy-policy` | `/aviso-de-privacidad` |
 | `/terms` | `/terminos` |
-| `/saas`, `/gym/empezar` | `/productos#boaz` |
+| `/saas`, `/gym/empezar` | `/boaz` |
 
 En el mismo cambio de una ruta se actualizan enlaces internos, nav, pie, `app/sitemap.js`, el
 canonical y los datos estructurados.
@@ -175,8 +177,10 @@ fotos de stock y superlativos sin respaldo.
 - Portada: `app/(sitio)/page.jsx` + `app/components/home/*.jsx` (se rehace por salas).
 - Sistemas: `app/(sitio)/sistemas/` + `app/components/sistemas/*.jsx` (una sola página de nivel); los datos
   de los cinco niveles viven en `app/lib/niveles.js` (también los usa la sala 4).
-- Productos: `app/(sitio)/productos/` + `app/components/productos/*.jsx`. Archivo 900 (solo ahí) en
-  `app/fonts/`; logotipo de Boaz en `public/marca/`.
+- Productos: `app/(sitio)/productos/` + `app/components/productos/*.jsx`. Archivo 900 en `app/fonts/` (sin
+  precarga en /productos); logotipo de Boaz en `public/marca/`.
+- Boaz: `app/(sitio)/boaz/`, `app/gym/` y `app/components/boaz/*` (tema `data-theme="boaz"` en `globals.css`,
+  botón y campo propios, Ubuntu Mono y Archivo con precarga solo ahí).
 - Layout, metadata y JSON-LD: `app/layout.jsx`. Barra: `app/header.jsx`. Pie: `app/Footer.jsx`.
 - UI compartida: `app/components/ui/`; formularios: `app/components/forms/`.
 - Copy hardcodeado en JSX con algunos arrays en `data.js`; no hay CMS.

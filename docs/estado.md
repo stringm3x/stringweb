@@ -1,6 +1,6 @@
 # Estado · stringwebs.com
 
-Última actualización: 30 oct 2026 (lote 9a). Meta del KB: sitio rehecho del 1 al 7 nov; salir a
+Última actualización: 2 nov 2026 (lote 9b). Meta del KB: sitio rehecho del 1 al 7 nov; salir a
 vender el 8 nov.
 
 ## Lotes
@@ -16,8 +16,8 @@ vender el 8 nov.
 | 6 | Componentes de calidad: tokens de movimiento, botón con 8 estados, campos, píldoras, tarjeta, barra, menú, transiciones | `lote-6-componentes` | ✅ Fusionado a `main` (29 oct, visto bueno de Carlos) |
 | 7 | Salas en movimiento (docs/movimiento-salas.md): salas 2–7 con su movimiento, arte en capas, sala 1 con tokens | `lote-7-movimiento` | ✅ Fusionado a `main` (29 oct, visto bueno de Carlos) |
 | 8 | Sistemas (docs/pagina-nivel.md): /sistemas y las cinco páginas de nivel, barra, enlaces de la sala 4, metadatos, redirects | `lote-8-sistemas` | ✅ Fusionado a `main` (30 oct, visto bueno de Carlos) |
-| 9a | /productos (Boaz y a la medida), Boaz por su nombre en todo el sitio, galería con el cuadro de Boaz y sin luna, /saas → /productos#boaz | `lote-9a-productos` | ✅ Hecho; PR abierto, sin fusionar |
-| 9b | La página propia de Boaz y el cuerpo de /gym | — | Pendiente |
+| 9a | /productos (Boaz y a la medida), Boaz por su nombre en todo el sitio, galería con el cuadro de Boaz y sin luna, /saas → /productos#boaz | `lote-9a-productos` | ✅ Fusionado a `main` (30 oct, visto bueno de Carlos) |
+| 9b | /boaz con la identidad de Boaz, /gym/registro y /gym/gracias rehechos, Conoce Boaz → /boaz, /saas y /gym/empezar → /boaz, limpieza del legado | `lote-9b-boaz` | ✅ Hecho; PR abierto, sin fusionar |
 
 Producción sigue con la marca anterior. Nada se fusiona a `main` sin el visto bueno de Carlos.
 
@@ -33,11 +33,13 @@ Producción sigue con la marca anterior. Nada se fusiona a `main` sin el visto b
 
 ## Deuda técnica (no se corrige en el rehecho)
 
-- Nombres de color y tipos de la marca anterior en `tailwind.config.js` (marcados "legado") y la
-  animación `tic`, hasta que se rehagan /saas y /gym; luego se borran.
+- Nombres de color y tipos de la marca anterior en `tailwind.config.js` (marcados "legado"), sus animaciones
+  (`tic`, `cinta`, `girar`, `imprimir`) y los tokens `--legado-*` de `globals.css`. Desde el lote 9b solo los usan
+  `ui/TarjetaSistema.jsx` e `ilustraciones/Mancuerna.jsx`, que nadie importa (ya estaban sin uso antes del 9b).
+  Se borran en otro lote, junto con esos dos archivos y la exención en `app/tokens.test.js`.
 - `npm run lint` roto: el parser de `eslint-config-next` exige `typescript`.
-- Duraciones sueltas en el legado de /gym y /saas (`TitularBrochada`, `FormField`, `FormSelect`, `app/gym/**`):
-  exentas en `app/tokens.test.js` hasta que se rehagan.
+- `app/tokens.test.js` todavía exenta `app/gym/` y los archivos legado borrados en el 9b: la exención sale en
+  el mismo lote que los colores legado.
 - La vibración al tocar una cuerda (sala 4) redibuja la ruta con JS en cada fotograma (`Cuerdas.jsx`), no con `transform`.
 - Las capas de `public/arte/sala{2,5,6,7}/` salen de los SVG originales con `node scripts/capas-arte.mjs`; si cambia un dibujo,
   se vuelve a correr (`app/arte-capas.test.js` avisa si no coinciden).
@@ -60,11 +62,23 @@ Producción sigue con la marca anterior. Nada se fusiona a `main` sin el visto b
   Chrome de Lighthouse alterna entre 1.6–2.1 s y 2.6–3.6 s con el mismo código; ver reporte del lote 5).
 - LCP de todo el sitio (lote 9a, Lighthouse local en celular): el elemento es el párrafo de entrada y casi todo es
   retraso de pintado. Portada 2.76 s, /sistemas 2.4 s, /productos 2.76 s. Se mide con PageSpeed en producción (Fase 0).
-- /gym con el diseño anterior (Anton, `TitularBrochada`, GSAP): lote 9b.
-- `Caso.jsx` y `ui/Cierre.jsx`: sin uso desde que se borró /saas (lote 9a); salen en el 9b.
+- LCP de /boaz (lote 9b, Lighthouse local): 2.41–2.84 s, el mismo hallazgo de todo el sitio.
+- PageSpeed de /boaz: no se pudo en el preview (protección de Vercel y cuota diaria de la API); medir en producción.
 - El dibujo de Boaz (`LaminaBoaz.jsx` y el cuadro de la galería) es copia de `string-gym-saas`, provisional allá: cuando
   llegue el del ilustrador, se copia a mano aquí.
 - Dos `<meta name="viewport">` en el `<head>`.
+
+## Decisiones tomadas en el lote 9b
+
+- /boaz con la identidad de Boaz (G, camino A) dentro del sitio: tema `data-theme="boaz"`, papel, tinta, `#1F5FD6` en
+  botones y enlaces, `#2979FF` solo como mancha. Barra y pie del sitio sin cambio; franja noche bajo la barra.
+- Dentro de la identidad de Boaz, las cifras y etiquetas van en Ubuntu Mono (excepción en CLAUDE.md y diseno.md).
+- Botón propio de Boaz, sin cursor; hover en `--boaz-dur-color` (120 ms, G; 0 con menos movimiento).
+- Archivo con precarga solo en /boaz y /gym (sin ella, CLS 0.056); /productos sigue sin precarga.
+- /gym/registro: mismos campos y envío, Escala fuera, selector de plan en Pro, error en línea. Gracias: "¡Listo!".
+- /productos deja solo "Conoce Boaz →" (sale "Registra tu gimnasio"). /saas y /gym/empezar → 301 a /boaz.
+- Borrados: Caso, ui/Cierre, CintasCierre, MarcasRegistro, PintarAlScroll, TitularBrochada, FormField, FormSelect,
+  Etiqueta, motionPrefs y la variante `sobreAcido`.
 
 ## Decisiones tomadas en el lote 9a
 

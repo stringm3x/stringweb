@@ -79,7 +79,7 @@ Toca una cuerda. **Sonido** \[botón; empieza apagado\]
 
 Cada nivel suma un arte. Este sitio tiene las siete.
 
-¿Tienes un gimnasio? Ya existe tu sistema. **Conoce Boaz** \[enlace a /productos#boaz\]
+¿Tienes un gimnasio? Ya existe tu sistema. **Conoce Boaz** \[enlace a /boaz, desde el lote 9b\]
 
 &#91;Cada nivel es una cuerda con su viñeta de artes acumuladas: Responde, literatura; Organiza, + arquitectura; Automatiza, + danza; Controla, + pintura; Empresa, las siete. Precios en Geist Mono.\]
 
@@ -171,7 +171,7 @@ Trabajo con un equipo de desarrolladores de confianza cuando un proyecto lo pide
 
 **¿Qué pasa después de la entrega?** Sigue la continuidad: cuidamos tu sistema cada mes, desde $1,800.
 
-**Tengo un gimnasio. ¿Me sirve?** Para gimnasios ya existe un sistema hecho: **Conoce Boaz** \[enlace a /productos#boaz\].
+**Tengo un gimnasio. ¿Me sirve?** Para gimnasios ya existe un sistema hecho: **Conoce Boaz** \[enlace a /boaz, desde el lote 9b\].
 
 ## Cierre
 
@@ -323,7 +323,7 @@ Estándar: respóndele en un día hábil.
 
 ### /saas
 
-\[Lote 9a: /saas se retira y redirige con 301 a /productos#boaz. Lo de abajo queda como historia.\]
+\[Lote 9a: /saas se retira. Desde el lote 9b redirige con 301 a /boaz. Lo de abajo queda como historia.\]
 
 El texto actual de /saas se queda. Solo cambia: "STRING GYM" pasa a "El sistema para gimnasios" en todo el sitio, se quitan RESTO, CLINIC y BARBER (no existen todavía) y el pie del producto lleva la firma "by STRING". Precios de los planes, sin cambio.
 
@@ -510,7 +510,7 @@ Se llama Boaz: en hebreo, “en él hay fuerza”. EN PRODUCCIÓN DESDE OCTUBRE 
 
 Sin costo de instalación. Sin límite de socios en ningún plan.
 
-**Registra tu gimnasio** \[botón primario de pared → /gym/registro; "Conoce Boaz →" entra en el lote 9b\]
+**Conoce Boaz →** \[enlace de texto → /boaz. Lote 9b: sale el botón "Registra tu gimnasio"; el registro vive en /boaz\]
 
 **Bloque 3 · Los siguientes** \[noche\]
 
@@ -549,13 +549,127 @@ Estos son ejemplos. Cada sistema que entreguemos ocupará su lugar aquí, con su
 ### Boaz en todo el sitio
 
 - Sala 3: "…se volvió un producto: Boaz, el sistema para gimnasios de STRING."
-- Sala 4 y Preguntas ("Tengo un gimnasio"): el enlace dice **Conoce Boaz** y va a /productos#boaz.
+- Sala 4 y Preguntas ("Tengo un gimnasio"): el enlace dice **Conoce Boaz** y va a /boaz (lote 9b; en el 9a iba a /productos#boaz).
 - Sala 5: cartela "Boaz · Plano técnico sobre papel · 2026"; el cuadro es la escena de la columna con el disco. La ciudad de STRING va sin luna, como en la portada.
 - /nosotros: "…como Boaz, nuestro sistema para gimnasios."
 - Correo del diagnóstico, giro Gimnasio: "Es gimnasio: ofrécele Boaz."
 - Términos: "Boaz tiene sus propios términos dentro del producto."
 - /gym/registro: título "Boaz · El sistema para gimnasios, by STRING" y descripción "Socios, check-in, cobros y caja para tu gimnasio, probado en un gimnasio real." /gym/gracias conserva "¡Listo!". El cuerpo de /gym cambia en el lote 9b.
-- /saas y /gym/empezar: 301 a /productos#boaz.
+- /saas y /gym/empezar: 301 a /boaz (lote 9b; en el 9a, a /productos#boaz).
+
+## Boaz · lote 9b (aprobados el 2 nov)
+
+\[Identidad de Boaz (G): papel, tinta, azul #1F5FD6 en botones y enlaces, #2979FF solo como mancha. Titulares en Archivo 900 al 62 %, texto en Geist, cifras y etiquetas en Ubuntu Mono.\]
+
+### /boaz · encabezado
+
+Título: Boaz · El sistema para gimnasios, by STRING
+Descripción: Socios, check-in, cobros y caja para tu gimnasio, probado en un gimnasio real. En pesos, sin instalación y sin límite de socios.
+Etiqueta: EL SISTEMA PARA GIMNASIOS
+Titular: \[logotipo de Boaz\] Sabe cuánto entra. Ve quién se va.
+Entrada: Boaz es el sistema con el que tu gimnasio sabe cuánto entra, ve quién se le va antes de que se vaya y le da a sus socios una razón para volver. En pesos, sin instalación y sin límite de socios.
+Botón: Registra tu gimnasio \[→ /gym/registro\] · Enlace: Ver planes \[→ #planes\]
+Debajo: Prueba de 14 días con Pro completo. Sin tarjeta.
+Firma: by STRING \[chica, en gris\]
+
+### /boaz · lo que hace hoy
+
+Etiqueta: LO QUE HACE HOY
+Titular: Todo el mostrador, en una pantalla.
+\[Cada función lleva su plan en mono.\]
+
+01 · El mostrador
+- Socios sin límite — Altas, planes y vencimientos al día, solos. — STARTER
+- Entrada con QR — Check-in en recepción, con lector o en kiosco. Sin equipo especial. — STARTER
+- Caja que cuadra — Cobros, recibo en PDF y corte del día. Un cobro nunca se registra dos veces. — STARTER
+- Tu Excel, adentro — Importa tus socios desde Excel o CSV y expórtalos cuando quieras. — STARTER
+- Notas que te recuerdan — Anota y elige el día en que Boaz te lo vuelve a mostrar. — STARTER
+
+02 · La operación
+- Inventario y punto de venta — Vende agua, suplementos y lo que tengas, con existencias al día. — PRO
+- Pagos a plazos — Membresías en cuotas, con quién debe y desde cuándo. — PRO
+- Tu equipo, cada quien con su acceso — Dueño, gerente, recepción y entrenador ven solo lo suyo. — PRO
+
+03 · El negocio
+- El Marcador — Cuánto entra, cuántos se quedan, cuántos se van. — PRO
+- Quién se te va — Avisa qué socios llevan 14 días sin venir. — PRO
+- Lo que dicen tus socios — Opiniones desde el portal, para que las leas tú. — PRO
+
+04 · Para tus socios
+- Su QR — Cada socio tiene el suyo, en el celular. — STARTER
+- Su portal — Su membresía, sus clases, sus recibos y su congelación, sin preguntarte. — PRO
+
+Sellos \[mono\]: Sin límite de socios · Sin instalación · Sin equipo especial para el QR
+\[Clases con reservas NO va.\]
+
+### /boaz · cómo nació
+
+Etiqueta: CÓMO NACIÓ
+Titular: Nació en el mostrador de un gimnasio real.
+Boaz empezó como un sistema a la medida para Evolution GYM, el gimnasio de mi familia. Lo construimos para su recepción: socios, cobros, entradas y caja. Lo corregimos con socios de verdad y lo convertimos en un producto que cualquier gimnasio puede usar. Se llama Boaz: en hebreo, “en él hay fuerza”.
+\[mono\] EN PRODUCCIÓN DESDE OCTUBRE DE 2026 · EVOLUTION GYM
+
+### /boaz · planes (id="planes")
+
+Etiqueta: PLANES
+Titular: Un precio al mes. Sin sorpresas.
+
+| | Starter | Pro ★ RECOMENDADO |
+| --- | --- | --- |
+| Frase | Sal del cuaderno. | Vende más en el mismo local. |
+| Al mes | $799 | $1,799 |
+| Al año | $7,990 | $17,990 |
+| Para quién | Un local, una persona en el mostrador. | Mostrador con equipo, clases y portal para tus socios. |
+| Incluye | 01 El mostrador y el QR de cada socio. | Todo Starter, más 02 La operación, 03 El negocio y el portal de tus socios. |
+| Soporte | Por WhatsApp, en 48 horas. | Por WhatsApp, en 24 horas. |
+
+\[Escala no aparece.\]
+Sin costo de instalación. Sin límite de socios en ningún plan.
+Botón: Registra tu gimnasio · Debajo: Prueba de 14 días con Pro completo. Sin tarjeta.
+
+### /boaz · preguntas
+
+Etiqueta: PREGUNTAS
+- ¿Tengo que instalar algo? — No. Boaz se abre en el navegador de tu computadora, tableta o celular.
+- ¿Cuántos socios puedo tener? — Los que quieras. Ningún plan tiene límite.
+- ¿Puedo pasar mis socios desde Excel? — Sí. Descargas la plantilla, la llenas e importas a todos de una vez.
+- ¿Necesito un lector o un torniquete? — No. La entrada se registra a mano, con el QR del socio o con un kiosco en una tableta.
+- ¿Mis datos se mezclan con los de otro gimnasio? — No. Cada gimnasio ve solo lo suyo; lo probamos antes de abrir Boaz.
+- ¿Qué pasa cuando termina la prueba? — Eliges tu plan y sigues con todo lo que cargaste. Como no dejaste tarjeta, no se cobra nada si no sigues.
+- ¿Quién está detrás? — STRING, un taller de software en Ciudad de México. Te atiende Carlos Avilés, con nombre. Conoce STRING \[→ /nosotros\]
+
+### /boaz · cierre
+
+Titular: Pruébalo 14 días en tu mostrador.
+Botón: Registra tu gimnasio · ¿Prefieres escribir? Escríbenos por WhatsApp \[botón secundario\]
+
+### /gym/registro
+
+\[Mismos campos y mismo envío. Escala sale del selector.\]
+Etiqueta: BOAZ · PRUEBA DE 14 DÍAS
+Titular: Registra tu gimnasio.
+Entrada: 14 días con Pro completo, sin tarjeta.
+Etiquetas de los campos (ejemplo entre paréntesis):
+- Tu nombre (Ana Ruiz)
+- Correo (tu@correo.com)
+- WhatsApp (55 1234 5678)
+- Nombre de tu gimnasio
+- ¿Qué plan te interesa? — Starter · $799 al mes / Pro · $1,799 al mes (recomendado). Ayuda: La prueba es con Pro completo.
+- Ciudad
+- ¿Cuántos socios tienes hoy? \[selector por rangos de hoy, sin texto de ayuda\]
+- ¿Cómo supiste de Boaz? (opcional)
+
+Botón: Registrar mi gimnasio \[cargando: "Registrando"\]
+Debajo: la versión corta del aviso de privacidad. ¿Tienes dudas? Ver planes \[→ /boaz#planes\]
+Error del envío: No pudimos registrar tu gimnasio. Revisa tu conexión e intenta de nuevo; lo que escribiste se queda.
+
+### /gym/gracias
+
+Pestaña: ¡Listo! \[metadata del 9a, sin cambio\]
+Etiqueta: BOAZ · REGISTRO RECIBIDO
+Titular: ¡Listo! Ya tenemos tu registro.
+Te escribimos por WhatsApp en un día hábil para activar tu prueba.
+Escríbenos por WhatsApp \[botón secundario, con el mensaje que lleva hoy, cambiando "el sistema para gimnasios" por Boaz\] · Volver a Boaz \[→ /boaz\]
 
 ## Por confirmar antes del brief
 
