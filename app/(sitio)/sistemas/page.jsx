@@ -1,12 +1,13 @@
 import { Cierre } from "@/app/components/salas/Cierre";
 import { CUERPO, ETIQUETA } from "@/app/components/salas/estilos";
 import { Boton } from "@/app/components/ui/Boton";
-import { Tarjeta } from "@/app/components/ui/Tarjeta";
+import { DibujoTarjeta, Tarjeta, dosCifras } from "@/app/components/ui/Tarjeta";
 import { NIVELES } from "@/app/lib/niveles";
 
 // /sistemas (docs/pagina-nivel.md, textos de docs/textos.md § Sistemas): la
 // puerta a los cinco niveles. Solo componentes ya aprobados: las cinco
-// Tarjetas, el botón de diagnóstico y el Cierre de la portada.
+// Tarjetas, con el dibujo chico de cada nivel (lote 12), el botón de
+// diagnóstico y el Cierre de la portada.
 const ENTRADA =
   "Empieza por lo que te pasa hoy. Cada nivel incluye todo lo del anterior y suma alcance; ninguno es la versión barata de otro.";
 
@@ -47,15 +48,18 @@ export default function SistemasPage() {
           <ul className="grid gap-space-5 md:grid-cols-2 lg:grid-cols-3">
             {NIVELES.map((nivel) => (
               <li key={nivel.slug} className={`flex ${nivel.siguiente ? "" : "md:col-span-2"}`}>
-                <Tarjeta href={`/sistemas/${nivel.slug}`} className="flex w-full flex-col gap-space-3">
+                <Tarjeta
+                  href={`/sistemas/${nivel.slug}`}
+                  dibujo={<DibujoTarjeta src={nivel.dibujoChico} />}
+                  numero={dosCifras(nivel.numero)}
+                  className="w-full"
+                >
                   <h2 className="text-subtitulo">{nivel.nombre}</h2>
                   <p className="text-cuerpo text-texto">
                     {nivel.cita ? `“${nivel.dices}”` : nivel.dices}
                   </p>
                   <p className={CUERPO}>{nivel.hace}</p>
-                  {/* eslint-disable-next-line @next/next/no-img-element */}
-                  <img src={nivel.vineta} width={300} height={44} alt="" className="mt-auto h-auto w-[240px]" />
-                  <p className="font-mono text-cifra text-texto">{nivel.precio}</p>
+                  <p className="mt-auto font-mono text-cifra text-texto">{nivel.precio}</p>
                   <p className="flex items-center gap-space-2 text-cuerpo font-semibold text-texto">
                     Ver el nivel <span aria-hidden="true">→</span>
                   </p>

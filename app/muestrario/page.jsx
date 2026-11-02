@@ -2,7 +2,7 @@ import { notFound } from "next/navigation";
 import { Boton } from "@/app/components/ui/Boton";
 import { Campo } from "@/app/components/ui/Campo";
 import { Opciones } from "@/app/components/ui/Opciones";
-import { Tarjeta } from "@/app/components/ui/Tarjeta";
+import { DibujoTarjeta, Tarjeta } from "@/app/components/ui/Tarjeta";
 
 // Muestrario de componentes (docs/calidad.md § 3), solo en desarrollo: de
 // aquí salen las capturas de los 8 estados (e2e/componentes.spec.js). En
@@ -109,6 +109,17 @@ export default function Muestrario() {
           <h2 className="text-subtitulo">Tarjeta</h2>
           <Fila id="tarjeta-reposo" nombre="Reposo · hover · presionado · foco">
             <Tarjeta href="/muestrario#tarjeta" className="w-[300px]">
+              <p className="text-subtitulo">Tarjeta de ejemplo</p>
+              <p className="text-cuerpo text-texto-suave">Enlace a una página.</p>
+            </Tarjeta>
+          </Fila>
+          <Fila id="tarjeta-dibujo" nombre="Con dibujo · reposo · hover · presionado · foco">
+            <Tarjeta
+              href="/muestrario#tarjeta-dibujo"
+              dibujo={<DibujoTarjeta src="/arte/giros/barberias.svg" />}
+              numero="01"
+              className="w-[340px]"
+            >
               <p className="text-subtitulo">Tarjeta de ejemplo</p>
               <p className="text-cuerpo text-texto-suave">Enlace a una página.</p>
             </Tarjeta>

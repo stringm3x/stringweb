@@ -1,7 +1,7 @@
 import { NIVELES, nivelPorSlug } from "@/app/lib/niveles";
 import { Cierre } from "../salas/Cierre";
 import { CUERPO, ETIQUETA } from "../salas/estilos";
-import { Tarjeta } from "../ui/Tarjeta";
+import { DibujoTarjeta, Tarjeta, dosCifras } from "../ui/Tarjeta";
 import { Ejemplo } from "./Ejemplo";
 import { FichaObra } from "./FichaObra";
 
@@ -36,9 +36,11 @@ function Crezcas({ nivel }) {
   return (
     <>
       {nivel.crezcas && <p className={CUERPO}>{nivel.crezcas}</p>}
-      <Tarjeta href={`/sistemas/${siguiente.slug}`} className="flex flex-col gap-space-3">
-        {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img src={siguiente.vineta} width={300} height={44} alt="" className="h-auto w-[240px]" />
+      <Tarjeta
+        href={`/sistemas/${siguiente.slug}`}
+        dibujo={<DibujoTarjeta src={siguiente.dibujoChico} />}
+        numero={dosCifras(siguiente.numero)}
+      >
         <span className="flex items-center justify-between gap-space-3">
           <span className="text-[22px] font-semibold">
             {siguiente.nombre} + {siguiente.suma}

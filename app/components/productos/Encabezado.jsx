@@ -1,8 +1,11 @@
 import { ETIQUETA } from "../salas/estilos";
-import { Tarjeta } from "../ui/Tarjeta";
+import { DibujoTarjeta, Tarjeta } from "../ui/Tarjeta";
+import { LaminaBoaz } from "./LaminaBoaz";
 
 // Bloque 1 de /productos (lote 9a): las dos líneas de STRING. Las tarjetas
-// son anclas dentro de la página. Entra con la página (.entra-carga).
+// son anclas dentro de la página. Entra con la página (.entra-carga). Desde el
+// lote 12 cada puerta lleva su dibujo: la lámina de Boaz sobre su papel y la
+// pantalla con su obra.
 const LINEAS = [
   { numero: "01", nombre: "Productos", frase: "Listos para tu giro, por suscripción.", enlace: "Ver Boaz", href: "#boaz" },
   {
@@ -13,6 +16,12 @@ const LINEAS = [
     href: "#medida",
   },
 ];
+
+// La lámina, recortada a la columna y su disco para que se lea en 180 px.
+const DIBUJOS = {
+  "#boaz": <LaminaBoaz decorativa viewBox="40 120 580 410" className="absolute inset-x-0 top-0 mx-auto h-full w-auto text-texto" />,
+  "#medida": <DibujoTarjeta src="/arte/productos/medida.svg" />,
+};
 
 export function Encabezado() {
   return (
@@ -33,8 +42,13 @@ export function Encabezado() {
         <ul className="grid gap-space-5 md:grid-cols-2">
           {LINEAS.map((linea) => (
             <li key={linea.href} className="flex">
-              <Tarjeta href={linea.href} className="flex w-full flex-col gap-space-3">
-                <p className="font-mono text-etiqueta uppercase text-texto-suave">{linea.numero}</p>
+              <Tarjeta
+                href={linea.href}
+                dibujo={DIBUJOS[linea.href]}
+                numero={`${linea.numero} · ${linea.nombre}`}
+                papel={linea.href === "#boaz"}
+                className="w-full"
+              >
                 <p className="text-subtitulo">{linea.nombre}</p>
                 <p className="text-cuerpo text-texto-suave">{linea.frase}</p>
                 <p className="mt-auto flex items-center gap-space-2 text-cuerpo font-semibold text-texto">
