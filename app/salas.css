@@ -606,3 +606,22 @@
     clip-path: inset(0 100% 0 0);
   }
 }
+
+/* El hilo entre secciones (lote 12, app/components/ui/Hilo.jsx): no sube ni
+   aparece como los demás .entra; solo se dibuja de izquierda a derecha
+   (clip-path), en --dur-lento con la curva. Con menos movimiento, completo. */
+.entra.hilo[data-mov] {
+  opacity: 1;
+  transform: none;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .entra.hilo[data-mov="hecho"] .hilo-trazo {
+    clip-path: inset(0);
+    transition: clip-path var(--dur-lento) var(--curva);
+  }
+
+  .entra.hilo[data-mov="espera"] .hilo-trazo {
+    clip-path: inset(0 100% 0 0);
+  }
+}

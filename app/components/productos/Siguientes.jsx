@@ -5,7 +5,7 @@ import { Entra } from "../ui/Entra";
 // punteado es decorativo: sin nombres, giros ni fechas.
 export function Siguientes() {
   return (
-    <section data-theme="noche" aria-labelledby="siguientes" className={`${SALA} border-b border-hairline`}>
+    <section data-theme="noche" aria-labelledby="siguientes" className={SALA}>
       <Entra className="mx-auto grid max-w-contenido items-center gap-space-6 md:grid-cols-2">
         <div className="flex flex-col gap-space-4">
           <p className={ETIQUETA}>LOS SIGUIENTES</p>
