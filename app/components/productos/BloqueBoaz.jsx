@@ -8,7 +8,7 @@ import { LaminaBoaz } from "./LaminaBoaz";
 // Bloque 2 de /productos (lote 9a): Boaz, la única sala clara de la página.
 // Texto a la izquierda y su lámina a la derecha (en celular, debajo). Listas
 // y planes sin tarjetas, entre reglas. El azul solo vive en la marca y la
-// lámina de Boaz; el botón es el primario de pared (verde profundo). El
+// lámina de Boaz. Desde el lote 9b, el bloque lleva a /boaz con "Conoce Boaz →". El
 // logotipo es el de string-gym-saas (public/marca), sobre su mínimo de 96 px.
 const BOAZ = { fontStretch: "62%" };
 
@@ -138,8 +138,8 @@ export function BloqueBoaz() {
         </div>
 
         <div>
-          <Boton href="/gym/registro" variante="primario">
-            Registra tu gimnasio
+          <Boton href="/boaz" variante="texto">
+            Conoce Boaz
           </Boton>
         </div>
       </Entra>

@@ -66,7 +66,7 @@ export function Sala4Niveles() {
             <p className={CUERPO}>Cada nivel suma un arte. Este sitio tiene las siete.</p>
             <p className={CUERPO}>
               ¿Tienes un gimnasio? Ya existe tu sistema.{" "}
-              <Link href="/productos#boaz" className={`font-semibold ${ENLACE}`}>
+              <Link href="/boaz" className={`font-semibold ${ENLACE}`}>
                 Conoce Boaz
               </Link>
             </p>
