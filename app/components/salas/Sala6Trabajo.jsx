@@ -46,7 +46,7 @@ const ESTANDAR = [
 
 export function Sala6Trabajo() {
   return (
-    <section data-theme="pared" className={SALA}>
+    <section id="como-trabajamos" data-theme="pared" className={`${SALA} scroll-mt-24`}>
       <div className="mx-auto flex max-w-contenido flex-col gap-space-6">
         {/* La línea de cada paso: al 74 % de la pantalla en celular (el centro
             de lo que queda bajo el dibujo) y al 70 % en escritorio, para que el

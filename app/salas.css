@@ -530,7 +530,7 @@
 /* /productos (lote 9a): cada bloque entra una vez, sube 16 px y aparece en
    --dur-lento. El encabezado entra con la página y solo sube: si empezara
    en opacidad 0, el navegador no contaría su h1 como LCP. Los demás entran
-   al llegar (app/components/productos/Entra.jsx). Con menos movimiento,
+   al llegar (app/components/ui/Entra.jsx). Con menos movimiento,
    quietos. */
 @keyframes entra-sube {
   from {
@@ -552,5 +552,39 @@
   .entra[data-mov="espera"] {
     opacity: 0;
     transform: translateY(16px);
+  }
+}
+
+/* /nosotros (lote 10): cada parada entra con .entra (app/components/ui/
+   Entra.jsx). Al llegar, la línea de tiempo se dibuja de un extremo al otro
+   (clip-path) y sus nodos aparecen uno a uno; los cinco planos se completan
+   uno tras otro. Si la parada ya estaba a la vista, o con menos movimiento,
+   todo queda quieto y ya dibujado. */
+@media (prefers-reduced-motion: no-preference) {
+  .entra .nosotros-linea {
+    clip-path: inset(0);
+    transition: clip-path var(--dur-lento) var(--curva) var(--dur-normal);
+  }
+
+  .entra .nosotros-linea-v {
+    transition: clip-path var(--dur-normal) var(--curva) calc(var(--dur-normal) * (var(--i) + 1));
+  }
+
+  .entra .nosotros-nodo,
+  .entra .nosotros-plano {
+    transition: opacity var(--dur-normal) var(--curva) calc(var(--dur-normal) * (var(--i) + 1));
+  }
+
+  .entra[data-mov="espera"] .nosotros-linea {
+    clip-path: inset(0 100% 0 0);
+  }
+
+  .entra[data-mov="espera"] .nosotros-linea-v {
+    clip-path: inset(0 0 100% 0);
+  }
+
+  .entra[data-mov="espera"] .nosotros-nodo,
+  .entra[data-mov="espera"] .nosotros-plano {
+    opacity: 0;
   }
 }

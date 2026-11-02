@@ -50,7 +50,6 @@ Producción sigue con la marca anterior. Nada se fusiona a `main` sin el visto b
 ## Pendientes de Carlos
 
 - **Domicilio** del responsable para el aviso de privacidad (lo pide la ley) y fecha de publicación.
-- **Foto final** de Carlos para la sala 3 (por ahora `public/foto/carlos-respaldo.jpg`).
 - **`TURNSTILE_SECRET_KEY`** y las SMTP en Vercel (Preview y Production): sin el secreto,
   `/api/diagnostico` rechaza todo fuera de desarrollo. Permitir el dominio de la vista previa en
   Turnstile, mandar una solicitud de prueba y confirmar que llegó. `NOTIFICATION_EMAIL` ya no se usa.
