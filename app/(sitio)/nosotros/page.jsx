@@ -6,8 +6,9 @@ import { Entra } from "@/app/components/ui/Entra";
 
 // /nosotros (lote 10, docs/textos.md § Nosotros · lote 10): un recorrido de
 // cuatro paradas (historia, método, equipo y fe) con la foto de Carlos, la
-// única del sitio. El encabezado entra con la página y solo sube; cada
-// parada sube y aparece al llegar (Entra). La línea de tiempo se dibuja y
+// única del sitio. El encabezado entra con la página y solo sube; en cada
+// parada, el texto y el dibujo suben y aparecen cada uno al llegar (Entra):
+// en celular el dibujo va debajo y se anima cuando se ve, no antes. La línea de tiempo se dibuja y
 // los planos se completan uno a uno (app/salas.css, .nosotros-*). Con menos
 // movimiento, todo quieto y ya dibujado. Después, el Cierre de las demás
 // páginas.
@@ -160,8 +161,8 @@ export default function NosotrosPage() {
 
       {/* 01 · La historia */}
       <section id="historia" data-theme="noche" className={`${PARADA} border-t border-hairline`}>
-        <Entra className="mx-auto grid max-w-contenido gap-space-7 lg:grid-cols-2">
-          <div className="flex max-w-[640px] flex-col gap-space-4">
+        <div className="mx-auto grid max-w-contenido gap-space-7 lg:grid-cols-2">
+          <Entra className="flex max-w-[640px] flex-col gap-space-4">
             <p className={ETIQUETA}>01 · LA HISTORIA</p>
             <h2 className={TITULAR}>Empezamos haciendo sistemas para negocios.</h2>
             <div className={`flex flex-col gap-space-4 ${CUERPO}`}>
@@ -175,9 +176,9 @@ export default function NosotrosPage() {
                 propios para un giro. Lo que aprendemos en uno mejora al otro.
               </p>
             </div>
-          </div>
+          </Entra>
 
-          <div className="relative self-center">
+          <Entra className="relative self-center">
             <Linea />
             <ol className="relative grid gap-space-5 md:grid-cols-4 md:gap-space-3">
               {LINEA_DE_TIEMPO.map((hito, i) => {
@@ -198,14 +199,14 @@ export default function NosotrosPage() {
                 );
               })}
             </ol>
-          </div>
-        </Entra>
+          </Entra>
+        </div>
       </section>
 
       {/* 02 · El método */}
       <section id="metodo" data-theme="pared" className={PARADA}>
-        <Entra className="mx-auto grid max-w-contenido items-start gap-space-7 lg:grid-cols-2">
-          <div className="flex flex-col gap-space-4">
+        <div className="mx-auto grid max-w-contenido items-start gap-space-7 lg:grid-cols-2">
+          <Entra className="flex flex-col gap-space-4">
             <p className={ETIQUETA}>02 · EL MÉTODO</p>
             <h2 className={TITULAR}>Primero escucho. Luego dibujo. Luego construyo.</h2>
             <ol className="mt-space-2 flex flex-col border-b border-hairline">
@@ -227,9 +228,9 @@ export default function NosotrosPage() {
                 Nuestro estándar de servicio <span aria-hidden="true">→</span>
               </a>
             </p>
-          </div>
+          </Entra>
 
-          <ol aria-hidden="true" className="grid grid-cols-2 gap-space-4">
+          <Entra as="ol" aria-hidden="true" className="grid grid-cols-2 gap-space-4">
             {[1, 2, 3, 4, 5].map((k) => (
               <li key={k} style={{ "--i": k - 1 }} className={`nosotros-plano ${k === 5 ? "col-span-2" : ""}`}>
                 {/* eslint-disable-next-line @next/next/no-img-element */}
@@ -244,14 +245,14 @@ export default function NosotrosPage() {
                 />
               </li>
             ))}
-          </ol>
-        </Entra>
+          </Entra>
+        </div>
       </section>
 
       {/* 03 · El equipo */}
       <section id="equipo" data-theme="noche" className={PARADA}>
-        <Entra className="mx-auto grid max-w-contenido items-center gap-space-7 lg:grid-cols-2">
-          <div className="flex max-w-[640px] flex-col gap-space-4">
+        <div className="mx-auto grid max-w-contenido items-center gap-space-7 lg:grid-cols-2">
+          <Entra className="flex max-w-[640px] flex-col gap-space-4">
             <p className={ETIQUETA}>03 · EL EQUIPO</p>
             <h2 className={TITULAR}>Hablas conmigo, de principio a fin.</h2>
             <p className={CUERPO}>
@@ -265,18 +266,20 @@ export default function NosotrosPage() {
                 </li>
               ))}
             </ul>
-          </div>
-          {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img
-            src="/arte/nosotros/mesa.svg"
-            width={424}
-            height={284}
-            alt="Una mesa de trabajo dibujada en línea, con una laptop abierta, una lámpara y dos sillas"
-            loading="lazy"
-            decoding="async"
-            className="block h-auto w-full max-w-[560px] justify-self-center"
-          />
-        </Entra>
+          </Entra>
+          <Entra className="w-full max-w-[560px] justify-self-center">
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img
+              src="/arte/nosotros/mesa.svg"
+              width={424}
+              height={284}
+              alt="Una mesa de trabajo dibujada en línea, con una laptop abierta, una lámpara y dos sillas"
+              loading="lazy"
+              decoding="async"
+              className="block h-auto w-full"
+            />
+          </Entra>
+        </div>
       </section>
 
       {/* 04 · La fe */}
