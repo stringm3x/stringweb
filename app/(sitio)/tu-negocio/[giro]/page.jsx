@@ -2,6 +2,7 @@ import { notFound } from "next/navigation";
 import { PaginaGiroGrande } from "@/app/components/tu-negocio/PaginaGiroGrande";
 import { PaginaGiroLocal } from "@/app/components/tu-negocio/PaginaGiroLocal";
 import { GIROS, giroPorSlug } from "@/app/lib/giros";
+import { compartir } from "@/app/lib/compartir";
 
 // /tu-negocio/<giro> (lote 11): los nueve giros se generan al construir, cada
 // uno con la plantilla de su grupo; cualquier otro es 404. /tu-negocio/empresas
@@ -23,7 +24,7 @@ export async function generateMetadata({ params }) {
     title: `${giro.nombre} · Tu negocio`,
     description,
     alternates: { canonical: url },
-    openGraph: { title: `${giro.nombre} · Tu negocio · STRING`, description, url },
+    ...compartir({ titulo: `${giro.nombre} · Tu negocio · STRING`, descripcion: description, url, imagenPropia: true }),
   };
 }
 

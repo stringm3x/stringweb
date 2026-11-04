@@ -30,3 +30,63 @@ test("los números del menú y de las tarjetas no entran al nombre del enlace", 
     expect(arbol, ruta).not.toMatch(/- link "0\d/);
   }
 });
+
+// Cada página lleva sus propios títulos para compartir: Twitter igual a Open
+// Graph, distintos de los de la portada, y con imagen.
+const RUTAS = [
+  "/sistemas",
+  ...["responde", "organiza", "automatiza", "controla", "empresa"].map((n) => `/sistemas/${n}`),
+  "/tu-negocio",
+  "/tu-negocio/empresas",
+  ...["barberias", "clinicas", "restaurantes", "tiendas", "distribuidoras", "inmobiliarias", "escuelas", "hoteles", "cadenas"].map(
+    (g) => `/tu-negocio/${g}`
+  ),
+  "/nosotros",
+  "/diagnostico",
+  "/productos",
+  "/boaz",
+  "/gym/registro",
+  "/gym/gracias",
+  "/aviso-de-privacidad",
+  "/terminos",
+];
+
+// TODO(textos): docs/textos.md § Títulos y descripciones deja "—" en los
+// legales; mientras no tengan descripción propia, comparten la de la portada.
+// Rutas con su propio opengraph-image.jsx: su imagen no es la de la portada.
+const IMAGEN_PROPIA = ["/sistemas", "/tu-negocio"];
+
+const SIN_DESCRIPCION = ["/aviso-de-privacidad", "/terminos"];
+
+async function etiquetas(request, ruta) {
+  const html = await (await request.get(ruta)).text();
+  const meta = (atributo, nombre) =>
+    html.match(new RegExp(`<meta ${atributo}="${nombre}" content="([^"]*)"`))?.[1] ?? null;
+  return {
+    ogTitulo: meta("property", "og:title"),
+    ogDescripcion: meta("property", "og:description"),
+    ogImagen: meta("property", "og:image"),
+    twTitulo: meta("name", "twitter:title"),
+    twDescripcion: meta("name", "twitter:description"),
+    twImagen: meta("name", "twitter:image"),
+  };
+}
+
+test("cada página comparte su propio título, descripción e imagen", async ({ request }) => {
+  const portada = await etiquetas(request, "/");
+  expect(portada.twTitulo).toBe(portada.ogTitulo);
+  for (const ruta of RUTAS) {
+    const e = await etiquetas(request, ruta);
+    expect(e.ogTitulo, ruta).toBeTruthy();
+    expect(e.twTitulo, ruta).toBe(e.ogTitulo);
+    expect(e.twDescripcion, ruta).toBe(e.ogDescripcion);
+    expect(e.twTitulo, ruta).not.toBe(portada.twTitulo);
+    if (!SIN_DESCRIPCION.includes(ruta)) expect(e.twDescripcion, ruta).not.toBe(portada.twDescripcion);
+    expect(e.ogImagen, ruta).toBeTruthy();
+    expect(e.twImagen, ruta).toBeTruthy();
+    expect(e.twImagen, ruta).toBe(e.ogImagen);
+    if (IMAGEN_PROPIA.some((r) => ruta.startsWith(r))) {
+      expect(new URL(e.ogImagen).pathname, ruta).toMatch(new RegExp(`^${ruta}/opengraph-image`));
+    }
+  }
+});

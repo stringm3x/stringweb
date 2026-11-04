@@ -4,6 +4,7 @@ import { ARCHIVO, ETIQUETA_BOAZ, archivo } from "@/app/components/boaz/fuentes";
 import { Logotipo } from "@/app/components/boaz/Logotipo";
 import { LaminaBoaz } from "@/app/components/productos/LaminaBoaz";
 import { whatsappUrl } from "@/app/lib/contacto";
+import { compartir } from "@/app/lib/compartir";
 
 export const metadata = {
   title: "¡Listo!",
@@ -11,18 +12,11 @@ export const metadata = {
   alternates: {
     canonical: "https://www.stringwebs.com/gym/gracias",
   },
-  openGraph: {
-    title: "¡Listo!",
+  ...compartir({
+    titulo: "¡Listo!",
+    descripcion: "Recibimos tu solicitud. Te contactamos pronto.",
     url: "https://www.stringwebs.com/gym/gracias",
-    images: [
-      {
-        url: "/opengraph-image",
-        width: 1200,
-        height: 630,
-        alt: "El sistema para gimnasios",
-      },
-    ],
-  },
+  }),
   robots: "noindex, nofollow",
 };
 

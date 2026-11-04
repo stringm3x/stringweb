@@ -1,6 +1,7 @@
 import { notFound } from "next/navigation";
 import { PaginaNivel, SLUGS } from "@/app/components/sistemas/PaginaNivel";
 import { nivelPorSlug } from "@/app/lib/niveles";
+import { compartir } from "@/app/lib/compartir";
 
 // /sistemas/<nivel> (docs/pagina-nivel.md): las cinco páginas se generan al
 // construir; cualquier otro nivel es 404.
@@ -21,7 +22,7 @@ export async function generateMetadata({ params }) {
     title: nivel.nombre,
     description: nivel.paraQuien,
     alternates: { canonical: url },
-    openGraph: { title: `${nivel.nombre} · STRING`, description: nivel.paraQuien, url },
+    ...compartir({ titulo: `${nivel.nombre} · STRING`, descripcion: nivel.paraQuien, url, imagenPropia: true }),
   };
 }
 

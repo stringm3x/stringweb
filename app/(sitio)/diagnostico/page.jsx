@@ -1,5 +1,6 @@
 import { FormularioDiagnostico } from "@/app/components/forms/FormularioDiagnostico";
 import { CUERPO, ETIQUETA } from "@/app/components/salas/estilos";
+import { compartir } from "@/app/lib/compartir";
 
 // /diagnostico (docs/textos.md § Textos que faltaban): etiqueta, titular,
 // intro y debajo el formulario de cuatro preguntas.
@@ -12,12 +13,11 @@ export const metadata = {
   alternates: {
     canonical: "https://www.stringwebs.com/diagnostico",
   },
-  openGraph: {
-    title: "Solicitar diagnóstico · STRING",
-    description: DESCRIPCION,
+  ...compartir({
+    titulo: "Solicitar diagnóstico · STRING",
+    descripcion: DESCRIPCION,
     url: "https://www.stringwebs.com/diagnostico",
-    type: "website",
-  },
+  }),
 };
 
 export default function DiagnosticoPage() {

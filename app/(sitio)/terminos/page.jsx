@@ -1,15 +1,14 @@
 import { PaginaLegal } from "../../components/ui/PaginaLegal";
 import { CORREO } from "../../lib/contacto";
+import { compartir } from "../../lib/compartir";
 
+// TODO(textos): sin descripción propia (docs/textos.md deja "—" en los legales).
 export const metadata = {
   title: "Términos",
   alternates: {
     canonical: "https://www.stringwebs.com/terminos",
   },
-  openGraph: {
-    title: "Términos · STRING",
-    url: "https://www.stringwebs.com/terminos",
-  },
+  ...compartir({ titulo: "Términos · STRING", url: "https://www.stringwebs.com/terminos" }),
 };
 
 const APARTADOS = [
