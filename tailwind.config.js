@@ -46,21 +46,8 @@ module.exports = {
       "boaz-azul": "rgb(var(--boaz-azul) / <alpha-value>)",
       // Contorno de los campos de Boaz (tema boaz).
       campo: "rgb(var(--campo) / <alpha-value>)",
-      // Legado de la marca anterior: lo usan las salas que se rehacen en
-      // los lotes 2 a 4. No usar en piezas nuevas.
-      "fondo-elevado": "#0f1310",
-      papel: "#f7f5ef",
-      tinta: "#ffffff",
-      "tinta-papel": "#111111",
-      "tinta-suave": "#a8b3a6",
-      "tinta-tenue": "#7c8a7d",
-      acido: "#50ff05",
-      "acido-profundo": "#2f7a05",
-      linea: "#242b24",
     },
     boxShadow: {
-      acido: "8px 8px 0 #50ff05",
-      tinta: "8px 8px 0 #111111",
       none: "none",
     },
     borderRadius: {
@@ -140,9 +127,6 @@ module.exports = {
         mono: ["var(--font-mono)", "ui-monospace", "SF Mono", "Menlo", "monospace"],
         // Ubuntu Mono de Boaz: solo en /boaz y /gym (app/components/boaz/fuentes.js).
         "boaz-mono": ["var(--font-boaz-mono)", "ui-monospace", "monospace"],
-        // Legado: Anton ya no se carga (solo vive a trazo en el logo SVG).
-        // Lo que aún dice font-anton cae en Geist hasta rehacer su sala.
-        anton: ["var(--font-sans)", "system-ui", "sans-serif"],
       },
       fontSize: {
         // Escala de tokens.json.
@@ -154,43 +138,12 @@ module.exports = {
         pequeno: ["14px", { lineHeight: "1.45" }],
         etiqueta: ["12px", { lineHeight: "1.4", letterSpacing: "0.16em", fontWeight: "500" }],
         cifra: ["16px", { lineHeight: "1.4" }],
-        // Legado de la marca anterior.
-        "titular-xl": ["88px", { lineHeight: "80px", letterSpacing: "0.01em" }],
-        "titular-l": ["56px", { lineHeight: "52px", letterSpacing: "0.01em" }],
-        "titular-m": ["34px", { lineHeight: "34px", letterSpacing: "0.01em" }],
+        // Lo usan los párrafos de entrada de las páginas internas.
         "cuerpo-l": ["19px", { lineHeight: "30px" }],
-        "cuerpo-s": ["14px", { lineHeight: "22px" }],
-        dato: ["15px", { lineHeight: "20px", letterSpacing: "0.04em" }],
-      },
-      keyframes: {
-        cinta: {
-          from: { transform: "translateX(0)" },
-          to: { transform: "translateX(-50%)" },
-        },
-        girar: {
-          from: { transform: "rotate(0deg)" },
-          to: { transform: "rotate(360deg)" },
-        },
-        // Flash de "impresión": papel que se desvanece sobre la lámina.
-        imprimir: {
-          from: { opacity: "0.9" },
-          to: { opacity: "0" },
-        },
-        tic: {
-          "0%, 100%": { transform: "scale(1)" },
-          "40%": { transform: "scale(0.88)" },
-          "70%": { transform: "scale(1.06)" },
-        },
-      },
-      animation: {
-        cinta: "cinta var(--legado-dur-cinta) linear infinite",
-        girar: "girar var(--legado-dur-girar) linear infinite",
-        imprimir: "imprimir var(--legado-dur-imprimir) var(--curva) forwards",
-        tic: "tic var(--legado-dur-tic) var(--curva) var(--legado-espera-tic) 1 both",
       },
       // Movimiento de docs/calidad.md: las clases duration-rapido/normal/lento
-      // y una sola curva. Las duraciones numéricas de Tailwind quedan solo
-      // para el legado de /gym; el sitio no las usa (tests/tokens.test.js).
+      // y una sola curva. Las duraciones numéricas de Tailwind no se usan
+      // (app/tokens.test.js).
       transitionDuration: {
         DEFAULT: "var(--dur-rapido)",
         rapido: "var(--dur-rapido)",
