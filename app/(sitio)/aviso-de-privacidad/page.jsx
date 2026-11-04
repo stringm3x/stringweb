@@ -1,15 +1,22 @@
 import { PaginaLegal } from "../../components/ui/PaginaLegal";
 import { CORREO } from "../../lib/contacto";
+import { compartir } from "../../lib/compartir";
+
+// Descripción de docs/textos.md § Títulos y descripciones (lote 13).
+const DESCRIPCION =
+  "Cómo usa STRING los datos que dejas en el formulario: quién es el responsable, para qué los usamos y cómo ejercer tus derechos.";
 
 export const metadata = {
   title: "Aviso de privacidad",
+  description: DESCRIPCION,
   alternates: {
     canonical: "https://www.stringwebs.com/aviso-de-privacidad",
   },
-  openGraph: {
-    title: "Aviso de privacidad · STRING",
+  ...compartir({
+    titulo: "Aviso de privacidad · STRING",
+    descripcion: DESCRIPCION,
     url: "https://www.stringwebs.com/aviso-de-privacidad",
-  },
+  }),
 };
 
 // TODO(domicilio): falta el domicilio del responsable (lo pide la ley).

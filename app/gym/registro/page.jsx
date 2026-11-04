@@ -2,6 +2,7 @@ import { RegistroForm } from "./RegistroForm";
 import { ARCHIVO, ETIQUETA_BOAZ, archivo } from "@/app/components/boaz/fuentes";
 import { Logotipo } from "@/app/components/boaz/Logotipo";
 import { LaminaBoaz } from "@/app/components/productos/LaminaBoaz";
+import { compartir } from "@/app/lib/compartir";
 
 export const metadata = {
   title: { absolute: "Boaz · El sistema para gimnasios, by STRING" },
@@ -9,19 +10,11 @@ export const metadata = {
   alternates: {
     canonical: "https://www.stringwebs.com/gym/registro",
   },
-  openGraph: {
-    title: "Boaz · El sistema para gimnasios, by STRING",
-    description: "Socios, check-in, cobros y caja para tu gimnasio, probado en un gimnasio real.",
+  ...compartir({
+    titulo: "Boaz · El sistema para gimnasios, by STRING",
+    descripcion: "Socios, check-in, cobros y caja para tu gimnasio, probado en un gimnasio real.",
     url: "https://www.stringwebs.com/gym/registro",
-    images: [
-      {
-        url: "/opengraph-image",
-        width: 1200,
-        height: 630,
-        alt: "Boaz · El sistema para gimnasios, by STRING",
-      },
-    ],
-  },
+  }),
   robots: {
     index: true,
     follow: false,

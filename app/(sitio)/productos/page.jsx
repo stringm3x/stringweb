@@ -3,6 +3,7 @@ import { Encabezado } from "@/app/components/productos/Encabezado";
 import { Medida } from "@/app/components/productos/Medida";
 import { Siguientes } from "@/app/components/productos/Siguientes";
 import { Cierre } from "@/app/components/salas/Cierre";
+import { compartir } from "@/app/lib/compartir";
 
 // /productos (lote 9a): las dos líneas de STRING. Encabezado con las dos
 // anclas, Boaz (#boaz, sobre pared), los siguientes productos, a la medida
@@ -14,11 +15,7 @@ export const metadata = {
   title: "Productos",
   description: DESCRIPCION,
   alternates: { canonical: "https://www.stringwebs.com/productos" },
-  openGraph: {
-    title: "Productos · STRING",
-    description: DESCRIPCION,
-    url: "https://www.stringwebs.com/productos",
-  },
+  ...compartir({ titulo: "Productos · STRING", descripcion: DESCRIPCION, url: "https://www.stringwebs.com/productos" }),
 };
 
 export default function ProductosPage() {

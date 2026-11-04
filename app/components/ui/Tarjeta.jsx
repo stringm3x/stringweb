@@ -51,7 +51,8 @@ export function Tarjeta({ href, cuerda = 2, dibujo, numero, papel = false, child
 
 // Un dibujo de línea de public/arte (520 × 372, suelo en y = 312), apoyado en
 // la línea de suelo de la zona: 170 px de alto y 14 px desde arriba ponen su
-// suelo a 157 px, sobre la línea. Lo que queda debajo se recorta.
+// suelo a 157 px, sobre la línea. Lo que queda debajo se recorta. Va con
+// prioridad baja (lote 13): no compite con el texto de entrada por el LCP.
 export function DibujoTarjeta({ src }) {
   return (
     // eslint-disable-next-line @next/next/no-img-element
@@ -61,6 +62,7 @@ export function DibujoTarjeta({ src }) {
       height={372}
       alt=""
       loading="lazy"
+      fetchPriority="low"
       decoding="async"
       className="absolute left-1/2 top-[14px] h-[170px] w-auto max-w-none -translate-x-1/2"
     />

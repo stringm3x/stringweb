@@ -1,6 +1,6 @@
 # Estado · stringwebs.com
 
-Última actualización: 2 nov 2026 (lote 12). Meta del KB: sitio rehecho del 1 al 7 nov; salir a
+Última actualización: 4 nov 2026 (lote 13). Meta del KB: sitio rehecho del 1 al 7 nov; salir a
 vender el 8 nov.
 
 ## Lotes
@@ -20,9 +20,10 @@ vender el 8 nov.
 | 9b | /boaz con la identidad de Boaz, /gym/registro y /gym/gracias rehechos, Conoce Boaz → /boaz, /saas y /gym/empezar → /boaz, limpieza del legado | `lote-9b-boaz` | ✅ Fusionado a `main` (2 nov, PR #4, visto bueno de Carlos) |
 | 10 | /nosotros como recorrido (historia, método, equipo, fe) con la foto de Carlos; la sala 3 sin foto, con la entrada y el mostrador en línea; `Entra` a `ui/`; ancla `#como-trabajamos` | `lote-10-nosotros` | ✅ Fusionado a `main` (2 nov, PR #5, visto bueno de Carlos) |
 | 11 | Tu negocio: /tu-negocio, /tu-negocio/empresas y nueve giros (dos plantillas, `app/lib/giros.js`), nueve dibujos, barra, menú, pie y sitemap; dos giros nuevos en el formulario con su marca en el correo; el fondo claro solo para Boaz (sala 6 y método de /nosotros en noche) | `lote-11-tu-negocio` | ✅ Fusionado a `main` (2 nov, PR #6) |
-| 12 | Refinar: la tarjeta con su dibujo (giros, /productos, /sistemas, "Cuando crezcas"); dibujos nuevos de Gimnasios, "A la medida" y los cinco niveles en chico; el hilo entre secciones (máximo 2–3 por página); generadores en `scripts/dibujos/` y los dibujos por svgo | `lote-12-refinar` | ✅ Hecho; Carlos pidió subirlo a `main` (2 nov) |
+| 12 | Refinar: la tarjeta con su dibujo (giros, /productos, /sistemas, "Cuando crezcas"); dibujos nuevos de Gimnasios, "A la medida" y los cinco niveles en chico; el hilo entre secciones (máximo 2–3 por página); generadores en `scripts/dibujos/` y los dibujos por svgo | `lote-12-refinar` | ✅ Fusionado a `main` (PR #7, 242149e) |
+| 13 | Pulido para salir a vender: /nosotros en producción revisado (sirve el lote 10); la firma se anuncia "by STRING" y las cotas de la lámina no se leen; cada página comparte su propio título, descripción e imagen (`app/lib/compartir.js`); `fetchpriority="low"` en el dibujo de la tarjeta; domicilio listo para un solo cambio; descripciones propias de los legales | `lote-13-pulido` | ✅ Fusionado a `main` (PR #8, visto bueno de Carlos, 4 nov); desarrollo en pausa |
 
-Producción sigue con la marca anterior. Nada se fusiona a `main` sin el visto bueno de Carlos.
+Producción sirve `main` con el lote 12 (revisado con curl el 4 nov, `reportes/lote-13-reporte.md`). Nada se fusiona a `main` sin el visto bueno de Carlos.
 
 ## Arreglos del KB Parte 7
 
@@ -45,7 +46,12 @@ Producción sigue con la marca anterior. Nada se fusiona a `main` sin el visto b
   regresaron a mano); debería escribirlas fuera del repo.
 - LCP simulado de 2.2–2.9 s en celular en todo el sitio (Lighthouse), con el LCP observado en ~0.1 s: va en un lote
   propio, medido con PageSpeed en producción (`reportes/lote-10-reporte.md`). Lote 12: /tu-negocio pasó de 2.31 a
-  ~2.54 s (el párrafo de entrada; los dibujos de las tarjetas se piden temprano aunque sean perezosos).
+  ~2.54 s. Lote 13: no son los dibujos (ya salían con prioridad Low; con `fetchpriority="low"` sigue en 1.96–2.53 s).
+  El LCP del párrafo es Render Delay (~2.1 s) y cae sobre el TTI simulado (2.55 s): lo amarran los 17 scripts
+  (228 KB) de la página. El arreglo es de JS, no de imágenes (`reportes/lote-13-reporte.md`).
+- Imágenes del sitio anterior en `public/` que ya nadie usa (`us2.png`, `mision2.png`, `vision.png`, `hero.png`,
+  `s-reverse.png`, `string.png`, `string-green-Photoroom.png`, `sonido.png`, `public/serv/`, `public/proyects/`):
+  se sirven si alguien tiene la URL, pero ninguna página las enlaza. Se borran en otro lote (lote 13).
 - `app/tokens.test.js` todavía exenta `app/gym/` y los archivos legado borrados en el 9b: la exención sale en
   el mismo lote que los colores legado.
 - La vibración al tocar una cuerda (sala 4) redibuja la ruta con JS en cada fotograma (`Cuerdas.jsx`), no con `transform`.
@@ -59,7 +65,9 @@ Producción sigue con la marca anterior. Nada se fusiona a `main` sin el visto b
 
 ## Pendientes de Carlos
 
-- **Domicilio** del responsable para el aviso de privacidad (lo pide la ley) y fecha de publicación.
+- **Domicilio** del responsable para el aviso de privacidad (lo pide la ley) y fecha de publicación. Listo para
+  un solo cambio: `DOMICILIO` en `app/(sitio)/aviso-de-privacidad/page.jsx` y la frase en `docs/textos.md`
+  (§ Aviso de privacidad, "Quién es responsable de tus datos").
 - **`TURNSTILE_SECRET_KEY`** y las SMTP en Vercel (Preview y Production): sin el secreto,
   `/api/diagnostico` rechaza todo fuera de desarrollo. Permitir el dominio de la vista previa en
   Turnstile, mandar una solicitud de prueba y confirmar que llegó. `NOTIFICATION_EMAIL` ya no se usa.
@@ -76,6 +84,17 @@ Producción sigue con la marca anterior. Nada se fusiona a `main` sin el visto b
 - El dibujo de Boaz (`LaminaBoaz.jsx` y el cuadro de la galería) es copia de `string-gym-saas`, provisional allá: cuando
   llegue el del ilustrador, se copia a mano aquí.
 - Dos `<meta name="viewport">` en el `<head>`.
+
+## Decisiones tomadas en el lote 13
+
+- La revisión externa que vio el /nosotros viejo leyó una copia en caché: producción, `stringweb.vercel.app` y
+  cualquier User-Agent sirven el lote 10. No hubo nada que corregir en Vercel ni en los redirects.
+- La firma se lee con un solo texto para lectores ("by STRING"); lo visible va `aria-hidden`. Las cotas de la
+  lámina van en un `<g aria-hidden>`: la lámina se nombra por su `aria-label` o se oculta entera.
+- Los metadatos para compartir salen de `app/lib/compartir.js` (Open Graph y Twitter iguales). Una imagen en la
+  configuración le gana al `opengraph-image.jsx` del segmento: las páginas con imagen propia pasan `imagenPropia`.
+- `fetchpriority="low"` en el dibujo de la tarjeta se queda (lo pidió Carlos) aunque no movió el LCP. Tampoco
+  empeoró /sistemas, donde el primer dibujo sí es el elemento LCP: 2.45 s antes y después.
 
 ## Decisiones tomadas en el lote 11
 

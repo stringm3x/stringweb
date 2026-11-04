@@ -1,15 +1,22 @@
 import { PaginaLegal } from "../../components/ui/PaginaLegal";
 import { CORREO } from "../../lib/contacto";
+import { compartir } from "../../lib/compartir";
+
+// Descripción de docs/textos.md § Títulos y descripciones (lote 13).
+const DESCRIPCION =
+  "Las condiciones para usar stringwebs.com: qué dice el sitio, qué garantizamos y qué es de STRING.";
 
 export const metadata = {
   title: "Términos",
+  description: DESCRIPCION,
   alternates: {
     canonical: "https://www.stringwebs.com/terminos",
   },
-  openGraph: {
-    title: "Términos · STRING",
+  ...compartir({
+    titulo: "Términos · STRING",
+    descripcion: DESCRIPCION,
     url: "https://www.stringwebs.com/terminos",
-  },
+  }),
 };
 
 const APARTADOS = [

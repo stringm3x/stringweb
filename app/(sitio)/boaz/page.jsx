@@ -6,6 +6,7 @@ import { Logotipo } from "@/app/components/boaz/Logotipo";
 import { Firma } from "@/app/components/productos/Firma";
 import { LaminaBoaz } from "@/app/components/productos/LaminaBoaz";
 import { whatsappUrl } from "@/app/lib/contacto";
+import { compartir } from "@/app/lib/compartir";
 
 // /boaz (lote 9b, camino A): la página de Boaz con su identidad (G) dentro
 // del sitio. Papel, tinta, azul de botones y enlaces; #2979FF solo como
@@ -18,7 +19,7 @@ export const metadata = {
   title: { absolute: TITULO },
   description: DESCRIPCION,
   alternates: { canonical: "https://www.stringwebs.com/boaz" },
-  openGraph: { title: TITULO, description: DESCRIPCION, url: "https://www.stringwebs.com/boaz" },
+  ...compartir({ titulo: TITULO, descripcion: DESCRIPCION, url: "https://www.stringwebs.com/boaz" }),
 };
 
 const ENVOLTURA = "mx-auto max-w-[1312px] px-5 sm:px-6 lg:px-16";

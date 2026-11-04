@@ -41,12 +41,15 @@ export function LaminaBoaz({ className = "", decorativa = false, viewBox = "0 0 
         <circle cx="470" cy="390" r="28" strokeWidth="0.9" />
         <circle cx="470" cy="390" r="19" fill="#F4F2EC" strokeWidth="1.4" />
       </g>
-      <text x="61" y="520" transform="rotate(-90 61 520)" fill="#5F6368" style={COTA}>
-        H · 586
-      </text>
-      <text x="378" y="558" fill="#5F6368" style={COTA}>
-        Ø 450 · 20 KG
-      </text>
+      {/* Las cotas son dibujo: el lector no las lee (lote 13). */}
+      <g aria-hidden="true">
+        <text x="61" y="520" transform="rotate(-90 61 520)" fill="#5F6368" style={COTA}>
+          H · 586
+        </text>
+        <text x="378" y="558" fill="#5F6368" style={COTA}>
+          Ø 450 · 20 KG
+        </text>
+      </g>
     </svg>
   );
 }

@@ -5,6 +5,7 @@ import { Boton } from "@/app/components/ui/Boton";
 import { Entra } from "@/app/components/ui/Entra";
 import { Hilo } from "@/app/components/ui/Hilo";
 import { GIMNASIOS, GRANDES, LOCAL } from "@/app/lib/giros";
+import { compartir } from "@/app/lib/compartir";
 
 // /tu-negocio (lote 11, docs/textos.md § Tu negocio · lote 11): los giros en
 // dos grupos. Los negocios con local van con la cuerda de 2 px y Gimnasios
@@ -16,7 +17,12 @@ export const metadata = {
   title: "Tu negocio",
   description: DESCRIPCION,
   alternates: { canonical: "https://www.stringwebs.com/tu-negocio" },
-  openGraph: { title: "Tu negocio · STRING", description: DESCRIPCION, url: "https://www.stringwebs.com/tu-negocio" },
+  ...compartir({
+    titulo: "Tu negocio · STRING",
+    descripcion: DESCRIPCION,
+    url: "https://www.stringwebs.com/tu-negocio",
+    imagenPropia: true,
+  }),
 };
 
 export default function TuNegocioPage() {

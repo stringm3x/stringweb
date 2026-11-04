@@ -5,6 +5,7 @@ import { Tarjetas } from "@/app/components/tu-negocio/TarjetaGiro";
 import { Boton } from "@/app/components/ui/Boton";
 import { Entra } from "@/app/components/ui/Entra";
 import { GRANDES, precioDe } from "@/app/lib/giros";
+import { compartir } from "@/app/lib/compartir";
 
 // /tu-negocio/empresas (lote 11, docs/textos.md § Tu negocio · lote 11): cómo
 // trabajamos con empresas, en cuatro pasos; debajo, los cinco giros grandes y
@@ -17,11 +18,12 @@ export const metadata = {
   title: "Empresas · Tu negocio",
   description: ENTRADA,
   alternates: { canonical: "https://www.stringwebs.com/tu-negocio/empresas" },
-  openGraph: {
-    title: "Empresas · Tu negocio · STRING",
-    description: ENTRADA,
+  ...compartir({
+    titulo: "Empresas · Tu negocio · STRING",
+    descripcion: ENTRADA,
     url: "https://www.stringwebs.com/tu-negocio/empresas",
-  },
+    imagenPropia: true,
+  }),
 };
 
 export default function EmpresasPage() {
