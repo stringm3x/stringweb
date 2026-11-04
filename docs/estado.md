@@ -21,7 +21,7 @@ vender el 8 nov.
 | 10 | /nosotros como recorrido (historia, método, equipo, fe) con la foto de Carlos; la sala 3 sin foto, con la entrada y el mostrador en línea; `Entra` a `ui/`; ancla `#como-trabajamos` | `lote-10-nosotros` | ✅ Fusionado a `main` (2 nov, PR #5, visto bueno de Carlos) |
 | 11 | Tu negocio: /tu-negocio, /tu-negocio/empresas y nueve giros (dos plantillas, `app/lib/giros.js`), nueve dibujos, barra, menú, pie y sitemap; dos giros nuevos en el formulario con su marca en el correo; el fondo claro solo para Boaz (sala 6 y método de /nosotros en noche) | `lote-11-tu-negocio` | ✅ Fusionado a `main` (2 nov, PR #6) |
 | 12 | Refinar: la tarjeta con su dibujo (giros, /productos, /sistemas, "Cuando crezcas"); dibujos nuevos de Gimnasios, "A la medida" y los cinco niveles en chico; el hilo entre secciones (máximo 2–3 por página); generadores en `scripts/dibujos/` y los dibujos por svgo | `lote-12-refinar` | ✅ Fusionado a `main` (PR #7, 242149e) |
-| 13 | Pulido para salir a vender: /nosotros en producción revisado (sirve el lote 10); la firma se anuncia "by STRING" y las cotas de la lámina no se leen; cada página comparte su propio título, descripción e imagen (`app/lib/compartir.js`); `fetchpriority="low"` en el dibujo de la tarjeta; domicilio listo para un solo cambio | `lote-13-pulido` | 🔶 PR abierto, espera el visto bueno de Carlos |
+| 13 | Pulido para salir a vender: /nosotros en producción revisado (sirve el lote 10); la firma se anuncia "by STRING" y las cotas de la lámina no se leen; cada página comparte su propio título, descripción e imagen (`app/lib/compartir.js`); `fetchpriority="low"` en el dibujo de la tarjeta; domicilio listo para un solo cambio; descripciones propias de los legales | `lote-13-pulido` | ✅ Fusionado a `main` (PR #8, visto bueno de Carlos, 4 nov); desarrollo en pausa |
 
 Producción sirve `main` con el lote 12 (revisado con curl el 4 nov, `reportes/lote-13-reporte.md`). Nada se fusiona a `main` sin el visto bueno de Carlos.
 
@@ -52,8 +52,6 @@ Producción sirve `main` con el lote 12 (revisado con curl el 4 nov, `reportes/l
 - Imágenes del sitio anterior en `public/` que ya nadie usa (`us2.png`, `mision2.png`, `vision.png`, `hero.png`,
   `s-reverse.png`, `string.png`, `string-green-Photoroom.png`, `sonido.png`, `public/serv/`, `public/proyects/`):
   se sirven si alguien tiene la URL, pero ninguna página las enlaza. Se borran en otro lote (lote 13).
-- Los legales (`/aviso-de-privacidad`, `/terminos`) no tienen descripción propia (`docs/textos.md`: "—"): al
-  compartirlos sale la de la portada. `TODO(textos)` en las dos páginas y en `e2e/pulido.spec.js` (lote 13).
 - `app/tokens.test.js` todavía exenta `app/gym/` y los archivos legado borrados en el 9b: la exención sale en
   el mismo lote que los colores legado.
 - La vibración al tocar una cuerda (sala 4) redibuja la ruta con JS en cada fotograma (`Cuerdas.jsx`), no con `transform`.

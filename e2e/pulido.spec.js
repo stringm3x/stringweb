@@ -51,12 +51,8 @@ const RUTAS = [
   "/terminos",
 ];
 
-// TODO(textos): docs/textos.md § Títulos y descripciones deja "—" en los
-// legales; mientras no tengan descripción propia, comparten la de la portada.
 // Rutas con su propio opengraph-image.jsx: su imagen no es la de la portada.
 const IMAGEN_PROPIA = ["/sistemas", "/tu-negocio"];
-
-const SIN_DESCRIPCION = ["/aviso-de-privacidad", "/terminos"];
 
 async function etiquetas(request, ruta) {
   const html = await (await request.get(ruta)).text();
@@ -81,7 +77,7 @@ test("cada página comparte su propio título, descripción e imagen", async ({ 
     expect(e.twTitulo, ruta).toBe(e.ogTitulo);
     expect(e.twDescripcion, ruta).toBe(e.ogDescripcion);
     expect(e.twTitulo, ruta).not.toBe(portada.twTitulo);
-    if (!SIN_DESCRIPCION.includes(ruta)) expect(e.twDescripcion, ruta).not.toBe(portada.twDescripcion);
+    expect(e.twDescripcion, ruta).not.toBe(portada.twDescripcion);
     expect(e.ogImagen, ruta).toBeTruthy();
     expect(e.twImagen, ruta).toBeTruthy();
     expect(e.twImagen, ruta).toBe(e.ogImagen);

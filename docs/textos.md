@@ -270,7 +270,8 @@ Carlos Avilés (STRING) usa tu nombre, tu WhatsApp, el giro de tu negocio y lo q
 | /diagnostico | Solicitar diagnóstico · STRING | Cuatro preguntas para saber qué necesita tu negocio. Te respondemos en un día hábil. |
 | /productos | Productos · STRING | Boaz, el sistema para gimnasios, y sistemas a la medida para negocios con local y empresas. Hechos por STRING en Ciudad de México. |
 | /gym/registro | Boaz · El sistema para gimnasios, by STRING | Socios, check-in, cobros y caja para tu gimnasio, probado en un gimnasio real. |
-| Legales | Aviso de privacidad · STRING / Términos · STRING | — |
+| /aviso-de-privacidad | Aviso de privacidad · STRING | Cómo usa STRING los datos que dejas en el formulario: quién es el responsable, para qué los usamos y cómo ejercer tus derechos. \[Lote 13.\] |
+| /terminos | Términos · STRING | Las condiciones para usar stringwebs.com: qué dice el sitio, qué garantizamos y qué es de STRING. \[Lote 13.\] |
 
 Imagen para compartir: el logo sobre noche y debajo "Software hecho con oficio. Y con arte."
 

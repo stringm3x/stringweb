@@ -45,8 +45,7 @@ Rama `lote-13-pulido` desde `main` (`242149e`). Commits: `5f402cc` accesibilidad
   configuración le gana al archivo (se comprobó: sin esa opción, /sistemas perdía la suya).
 - /gym/registro: el `alt` de su imagen pasa de "Boaz · El sistema para gimnasios, by STRING" al de la imagen que de
   verdad se muestra ("STRING — Software hecho con oficio. Y con arte.").
-- **TODO(textos):** `/aviso-de-privacidad` y `/terminos` no tienen descripción (`docs/textos.md`: "—"), así que al
-  compartirlos sale la de la portada. La prueba los exenta solo de esa comprobación.
+- Los legales llevan descripción propia (Carlos, 4 nov), copiada a `docs/textos.md` § Títulos y descripciones.
 - `e2e/pulido.spec.js` recorre las rutas del sitemap y /gym/gracias: `twitter:title` = `og:title`,
   `twitter:description` = `og:description`, distintos de la portada, `twitter:image` = `og:image`, y la imagen propia
   donde la hay.
