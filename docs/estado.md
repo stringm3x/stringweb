@@ -1,6 +1,6 @@
 # Estado · stringwebs.com
 
-Última actualización: 4 nov 2026 (lote 13). Meta del KB: sitio rehecho del 1 al 7 nov; salir a
+Última actualización: 4 nov 2026 (lote 14). Meta del KB: sitio rehecho del 1 al 7 nov; salir a
 vender el 8 nov.
 
 ## Lotes
@@ -22,6 +22,7 @@ vender el 8 nov.
 | 11 | Tu negocio: /tu-negocio, /tu-negocio/empresas y nueve giros (dos plantillas, `app/lib/giros.js`), nueve dibujos, barra, menú, pie y sitemap; dos giros nuevos en el formulario con su marca en el correo; el fondo claro solo para Boaz (sala 6 y método de /nosotros en noche) | `lote-11-tu-negocio` | ✅ Fusionado a `main` (2 nov, PR #6) |
 | 12 | Refinar: la tarjeta con su dibujo (giros, /productos, /sistemas, "Cuando crezcas"); dibujos nuevos de Gimnasios, "A la medida" y los cinco niveles en chico; el hilo entre secciones (máximo 2–3 por página); generadores en `scripts/dibujos/` y los dibujos por svgo | `lote-12-refinar` | ✅ Fusionado a `main` (PR #7, 242149e) |
 | 13 | Pulido para salir a vender: /nosotros en producción revisado (sirve el lote 10); la firma se anuncia "by STRING" y las cotas de la lámina no se leen; cada página comparte su propio título, descripción e imagen (`app/lib/compartir.js`); `fetchpriority="low"` en el dibujo de la tarjeta; domicilio listo para un solo cambio; descripciones propias de los legales | `lote-13-pulido` | ✅ Fusionado a `main` (PR #8, visto bueno de Carlos, 4 nov); desarrollo en pausa |
+| 14 | Limpieza: fuera las imágenes del sitio anterior (`public/serv/`, `proyects/`, `design/`, los PNG sueltos y los del logo anterior en `marca/`), `TarjetaSistema`, `Mancuerna` y `scrollTriggerDefaults`, el legado de `tailwind.config.js` y `globals.css`, la exención de `app/tokens.test.js` (incluida `app/gym/`, que ya cumple) y las dependencias `gsap` y `react-hot-toast` | `lote-14-limpieza` | 🟡 Hecho, sin fusionar |
 
 Producción sirve `main` con el lote 12 (revisado con curl el 4 nov, `reportes/lote-13-reporte.md`). Nada se fusiona a `main` sin el visto bueno de Carlos.
 
@@ -37,10 +38,6 @@ Producción sirve `main` con el lote 12 (revisado con curl el 4 nov, `reportes/l
 
 ## Deuda técnica (no se corrige en el rehecho)
 
-- Nombres de color y tipos de la marca anterior en `tailwind.config.js` (marcados "legado"), sus animaciones
-  (`tic`, `cinta`, `girar`, `imprimir`) y los tokens `--legado-*` de `globals.css`. Desde el lote 9b solo los usan
-  `ui/TarjetaSistema.jsx` e `ilustraciones/Mancuerna.jsx`, que nadie importa (ya estaban sin uso antes del 9b).
-  Se borran en otro lote, junto con esos dos archivos y la exención en `app/tokens.test.js`.
 - `npm run lint` roto: el parser de `eslint-config-next` exige `typescript`.
 - `e2e/componentes.spec.js` reescribe las capturas de `reportes/lote-6-componentes/` cada vez que corre (lote 11: se
   regresaron a mano); debería escribirlas fuera del repo.
@@ -49,11 +46,6 @@ Producción sirve `main` con el lote 12 (revisado con curl el 4 nov, `reportes/l
   ~2.54 s. Lote 13: no son los dibujos (ya salían con prioridad Low; con `fetchpriority="low"` sigue en 1.96–2.53 s).
   El LCP del párrafo es Render Delay (~2.1 s) y cae sobre el TTI simulado (2.55 s): lo amarran los 17 scripts
   (228 KB) de la página. El arreglo es de JS, no de imágenes (`reportes/lote-13-reporte.md`).
-- Imágenes del sitio anterior en `public/` que ya nadie usa (`us2.png`, `mision2.png`, `vision.png`, `hero.png`,
-  `s-reverse.png`, `string.png`, `string-green-Photoroom.png`, `sonido.png`, `public/serv/`, `public/proyects/`):
-  se sirven si alguien tiene la URL, pero ninguna página las enlaza. Se borran en otro lote (lote 13).
-- `app/tokens.test.js` todavía exenta `app/gym/` y los archivos legado borrados en el 9b: la exención sale en
-  el mismo lote que los colores legado.
 - La vibración al tocar una cuerda (sala 4) redibuja la ruta con JS en cada fotograma (`Cuerdas.jsx`), no con `transform`.
 - Los dibujos de `public/arte/giros/`, `productos/` y `niveles/chica/` salen de `scripts/dibujos/` (`giros.mjs`, `dibujar.mjs`)
   y después pasan por svgo con `scripts/dibujos/svgo.config.mjs`; si cambia uno, se corren los dos pasos.
