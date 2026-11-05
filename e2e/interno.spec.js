@@ -24,6 +24,12 @@ test("sin sesión, /interno/diagnostico redirige a /interno/entrar", async ({ pa
   await expect(page.getByRole("heading", { level: 1, name: "Entrar" })).toBeVisible();
 });
 
+test("el banco del diagnóstico (/muestrario/diagnostico) da 404 en producción (lote 20)", async ({ request }) => {
+  const res = await request.get("/muestrario/diagnostico", { maxRedirects: 0 });
+  expect(res.status()).toBe(404);
+  expect(await res.text()).not.toMatch(/Nada de esto se guarda/);
+});
+
 test("/interno y rutas que no existen también van a la entrada", async ({ request }) => {
   for (const ruta of ["/interno", "/interno/no-existe"]) {
     const res = await request.get(ruta, { maxRedirects: 0 });
