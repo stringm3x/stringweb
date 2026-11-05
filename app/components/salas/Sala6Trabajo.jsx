@@ -1,15 +1,32 @@
-import { Capas } from "./Capas";
 import { Escenario } from "./Escenario";
 import { CUERPO, ETIQUETA, SALA, TITULAR } from "./estilos";
 
 // Sala 6 · Cómo trabajamos · Arquitectura (docs/textos.md), en noche (lote 11).
-// Los pasos, el edificio dibujado a mano y el estándar de servicio con sus
-// cifras en Geist Mono. "El edificio crece al ritmo de los pasos": cada piso
-// sube cuando su paso cruza la línea y el paso de ahora se marca en la lista
-// (app/salas.css, .arquitectura). El dibujo va pegado bajo la barra, arriba
-// de la lista en celular y en su columna en escritorio, para verlo crecer.
-// Con menos movimiento, el edificio completo y sin paso marcado.
-const CAPAS = ["suelo", "cimientos", "suelo-linea", "piso-1", "piso-2", "obra", "bandera", "rotulos"];
+// Los pasos, el dibujo de la obra y el estándar de servicio con sus cifras en
+// Geist Mono. El dibujo (lote 19, scripts/dibujos/sala6.mjs) es un edificio
+// que se completa de izquierda a derecha en cinco tramos, uno por paso; está
+// quieto. Va pegado bajo la barra, arriba de la lista en celular y en su
+// columna en escritorio. El paso de ahora se marca en la lista (app/salas.css,
+// .paso-marca); con menos movimiento, sin paso marcado.
+//
+// Las etiquetas de los tramos van en HTML, en una fila alineada con el
+// dibujo: los tramos ocupan del 7.8 % al 92.2 % de su ancho (px-[7.8%]). En
+// escritorio ancho (1280 px o más), número, nombre y subtítulo; abajo de eso,
+// donde no caben sin encimarse, solo el número y, debajo, la lista: en
+// celular, fuera de lo pegado; de 1024 a 1279 px, bajo el dibujo en su
+// columna. Son aria-hidden: el dibujo lleva su descripción y los
+// nombres ya se leen en la lista de pasos.
+const TRAMOS = [
+  { nombre: "Diagnóstico", que: "Cimientos" },
+  { nombre: "Boceto", que: "Plano" },
+  { nombre: "Propuesta", que: "Estructura" },
+  { nombre: "Construcción", que: "Muros" },
+  { nombre: "Entrega", que: "Luz" },
+];
+const DESCRIPCION =
+  "Dibujo de un edificio que se completa de izquierda a derecha en cinco tramos: el cimiento con dos estacas y cinta de obra; el plano en línea punteada; la estructura de madera; los muros con andamio; y el tramo terminado, con las ventanas encendidas y una bandera verde.";
+const NUMERO = "font-mono text-etiqueta text-acento";
+const SUBTITULO = "font-mono text-etiqueta uppercase text-texto-suave";
 const PASOS = [
   {
     nombre: "Diagnóstico.",
@@ -63,17 +80,34 @@ export function Sala6Trabajo() {
             <h2 className={TITULAR}>Primero los cimientos.</h2>
           </div>
           <div className="sticky top-[72px] z-10 bg-fondo py-space-2 lg:col-start-2 lg:row-span-2 lg:row-start-1 lg:top-[104px] lg:self-start">
-            <Capas
-              carpeta="sala6"
-              capas={CAPAS}
-              ancho={640}
-              alto={590}
-              alt="Dibujo de un edificio en construcción: cimientos, dos pisos terminados, un piso en obra y una bandera en lo alto."
-              className="mx-auto w-full max-w-[520px]"
-            />
+            <div className="mx-auto max-w-[592px]">
+              <div role="img" aria-label={DESCRIPCION}>
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img
+                  src="/arte/sala6-obra.svg"
+                  width={592}
+                  height={320}
+                  alt=""
+                  loading="lazy"
+                  decoding="async"
+                  className="block h-auto w-full"
+                />
+              </div>
+              <ol aria-hidden="true" className="grid grid-cols-5 px-[7.8%] pt-space-2 text-center">
+                {TRAMOS.map((t, i) => (
+                  <li key={t.nombre} className="flex flex-col items-center gap-space-1 whitespace-nowrap">
+                    <span className={NUMERO}>{i + 1}</span>
+                    <span className="hidden text-pequeno font-semibold text-texto xl:block">{t.nombre}</span>
+                    <span className={`hidden xl:block ${SUBTITULO}`}>{t.que}</span>
+                  </li>
+                ))}
+              </ol>
+              <Leyenda className="mt-space-3 hidden lg:flex xl:hidden" />
+            </div>
           </div>
-          {/* El número de cada paso vive en el dibujo (1 · Diagnóstico…); aquí
-              no se repite. El <ol> guarda el orden para el lector. */}
+          <Leyenda className="-mt-space-3 flex lg:hidden" />
+          {/* El número de cada paso vive en las etiquetas del dibujo; aquí no
+              se repite. El <ol> guarda el orden para el lector. */}
           <ol className="flex flex-col gap-space-3 lg:col-start-1">
             {PASOS.map((paso) => (
               <li key={paso.nombre} data-centinela className={`relative ${CUERPO}`}>
@@ -105,5 +139,20 @@ export function Sala6Trabajo() {
         </div>
       </div>
     </section>
+  );
+}
+
+// La lista de los tramos, para cuando la fila solo lleva el número.
+function Leyenda({ className }) {
+  return (
+    <ol aria-hidden="true" className={`flex-col gap-space-1 ${className}`}>
+      {TRAMOS.map((t, i) => (
+        <li key={t.nombre} className="text-pequeno">
+          <span className={NUMERO}>{i + 1}</span>{" "}
+          <span className="font-semibold text-texto">{t.nombre}</span>{" "}
+          <span className="text-texto-suave">·</span> <span className={SUBTITULO}>{t.que}</span>
+        </li>
+      ))}
+    </ol>
   );
 }

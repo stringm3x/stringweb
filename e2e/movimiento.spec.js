@@ -34,10 +34,6 @@ test("con menos movimiento cada sala queda en su estado final", async ({ page })
   expect(await opacidad(page, ".galeria [data-capa^='haz']")).toEqual(["1", "1", "1"]);
   expect(await opacidad(page, ".penumbra")).toEqual(["0", "0", "0"]);
   expect(await opacidad(page, ".paso-marca")).toEqual(["0", "0", "0", "0", "0"]);
-  const recortes = await page.$$eval(".arquitectura [data-capa]", (els) =>
-    els.map((e) => getComputedStyle(e).clipPath)
-  );
-  expect(recortes.every((c) => c === "none")).toBe(true);
   const animaciones = await page.evaluate(() => document.getAnimations().length);
   expect(animaciones).toBe(0);
 });
@@ -124,7 +120,7 @@ test("la arquitectura marca el paso de ahora", async ({ page }) => {
   await expect(obra).toHaveAttribute("data-activo", "0");
   // El tercer paso ya cruzó la línea (74 % de la pantalla) y el cuarto no.
   await page.evaluate(() => {
-    const li = document.querySelectorAll(".arquitectura li")[2];
+    const li = document.querySelectorAll(".arquitectura [data-centinela]")[2];
     const r = li.getBoundingClientRect();
     scrollTo(0, r.top + scrollY - innerHeight * 0.74 + 10);
   });
