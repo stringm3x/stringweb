@@ -1,13 +1,13 @@
 import localFont from "next/font/local";
 import Medicion from "./components/Medicion";
 import { CORREO, WHATSAPP_TELEFONO } from "./lib/contacto";
+import { PORTADA } from "./lib/compartir";
 import "./globals.css";
 import "./salas.css";
 
-// Título y descripción de docs/textos.md § Textos que faltaban.
-const TITULO = "STRING — Software hecho con oficio. Y con arte.";
-const DESCRIPCION =
-  "Taller de software en la Ciudad de México. Sistemas que contestan, ordenan y trabajan por tu negocio, desde un local hasta una empresa grande.";
+// Título y descripción por omisión: los de la portada (lote 18).
+const TITULO = PORTADA.titulo;
+const DESCRIPCION = PORTADA.descripcion;
 
 // Las redes sociales solo viven aquí (sameAs), no en el pie.
 const organizationJsonLd = {

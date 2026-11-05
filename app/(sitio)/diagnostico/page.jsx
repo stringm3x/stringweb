@@ -1,24 +1,17 @@
 import { FormularioDiagnostico } from "@/app/components/forms/FormularioDiagnostico";
 import { CUERPO, ETIQUETA } from "@/app/components/salas/estilos";
-import { compartir } from "@/app/lib/compartir";
+import { metadatosPagina } from "@/app/lib/compartir";
 
 // /diagnostico (docs/textos.md § Textos que faltaban): etiqueta, titular,
 // intro y debajo el formulario de cuatro preguntas.
 const DESCRIPCION =
   "Cuatro preguntas para saber qué necesita tu negocio. Te respondemos en un día hábil.";
 
-export const metadata = {
-  title: "Solicitar diagnóstico",
-  description: DESCRIPCION,
-  alternates: {
-    canonical: "https://www.stringwebs.com/diagnostico",
-  },
-  ...compartir({
-    titulo: "Solicitar diagnóstico · STRING",
-    descripcion: DESCRIPCION,
-    url: "https://www.stringwebs.com/diagnostico",
-  }),
-};
+export const metadata = metadatosPagina({
+  titulo: "Solicitar diagnóstico · STRING",
+  descripcion: DESCRIPCION,
+  ruta: "/diagnostico",
+});
 
 export default function DiagnosticoPage() {
   return (

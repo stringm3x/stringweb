@@ -5,7 +5,7 @@ import { Boton } from "@/app/components/ui/Boton";
 import { Entra } from "@/app/components/ui/Entra";
 import { Hilo } from "@/app/components/ui/Hilo";
 import { GIMNASIOS, GRANDES, LOCAL } from "@/app/lib/giros";
-import { compartir } from "@/app/lib/compartir";
+import { metadatosPagina } from "@/app/lib/compartir";
 
 // /tu-negocio (lote 11, docs/textos.md § Tu negocio · lote 11): los giros en
 // dos grupos. Los negocios con local van con la cuerda de 2 px y Gimnasios
@@ -13,17 +13,12 @@ import { compartir } from "@/app/lib/compartir";
 const DESCRIPCION =
   "Sistemas para barberías, clínicas, restaurantes, tiendas en línea y empresas. Elige tu giro y ve tu escalera de niveles.";
 
-export const metadata = {
-  title: "Tu negocio",
-  description: DESCRIPCION,
-  alternates: { canonical: "https://www.stringwebs.com/tu-negocio" },
-  ...compartir({
-    titulo: "Tu negocio · STRING",
-    descripcion: DESCRIPCION,
-    url: "https://www.stringwebs.com/tu-negocio",
-    imagenPropia: true,
-  }),
-};
+export const metadata = metadatosPagina({
+  titulo: "Tu negocio · STRING",
+  descripcion: DESCRIPCION,
+  ruta: "/tu-negocio",
+  imagenPropia: true,
+});
 
 export default function TuNegocioPage() {
   return (

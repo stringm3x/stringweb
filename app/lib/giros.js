@@ -1,4 +1,5 @@
 import { nivelPorSlug } from "./niveles";
+import { DESDE, IVA } from "./precios";
 
 // Tu negocio (lote 11, docs/textos.md § Tu negocio · lote 11): los giros en
 // dos grupos, palabra por palabra. Los giros con local llevan su escalera de
@@ -179,5 +180,19 @@ const completar = (grupo, desde) => (giro) => ({
 export const LOCAL = GIROS_LOCAL.map(completar("local", "responde"));
 export const GRANDES = GIROS_GRANDES.map(completar("grande", "controla"));
 export const GIROS = [...LOCAL, ...GRANDES];
+
+// Lo que sale en Google (lote 18, docs/textos.md § SEO · lote 18). Sin la
+// cita: fuera de la página parecería un testimonio. Los giros con local
+// nombran la ciudad y el precio desde Responde; los grandes, ninguno.
+GIROS.forEach((giro) => {
+  const nombre = giro.nombre.toLowerCase();
+  if (giro.grupo === "local") {
+    giro.tituloSeo = `Sistema para ${nombre} en CDMX · STRING`;
+    giro.descripcionSeo = `${giro.titular} Un sistema para ${nombre} en la Ciudad de México, desde ${DESDE.responde} con ${IVA}.`;
+  } else {
+    giro.tituloSeo = `Sistema para ${nombre} · STRING`;
+    giro.descripcionSeo = `${giro.titular} Un sistema a la medida para ${nombre}, con el alcance que necesita tu operación.`;
+  }
+});
 
 export const giroPorSlug = (slug) => GIROS.find((g) => g.slug === slug);

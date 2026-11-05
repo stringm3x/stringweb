@@ -6,7 +6,7 @@ import { Logotipo } from "@/app/components/boaz/Logotipo";
 import { Firma } from "@/app/components/productos/Firma";
 import { LaminaBoaz } from "@/app/components/productos/LaminaBoaz";
 import { whatsappUrl } from "@/app/lib/contacto";
-import { compartir } from "@/app/lib/compartir";
+import { metadatosPagina } from "@/app/lib/compartir";
 import { BOAZ } from "@/app/lib/precios";
 import { IvaIncluido } from "@/app/components/ui/IvaIncluido";
 
@@ -15,14 +15,13 @@ import { IvaIncluido } from "@/app/components/ui/IvaIncluido";
 // mancha. Titulares en Archivo 900 al 62 %, texto en Geist, etiquetas y
 // precios en Ubuntu Mono. Sin tarjetas ni sombras: reglas de 1 px. La
 // lámina va quieta. Barra y pie del sitio, sin cambio.
-const TITULO = "Boaz · El sistema para gimnasios, by STRING";
+const TITULO = "Boaz · Sistema para gimnasios en México, by STRING";
 
-export const metadata = {
-  title: { absolute: TITULO },
-  description: DESCRIPCION,
-  alternates: { canonical: "https://www.stringwebs.com/boaz" },
-  ...compartir({ titulo: TITULO, descripcion: DESCRIPCION, url: "https://www.stringwebs.com/boaz" }),
-};
+export const metadata = metadatosPagina({
+  titulo: TITULO,
+  descripcion: `${DESCRIPCION} Desde ${BOAZ.starter.mes} al mes.`,
+  ruta: "/boaz",
+});
 
 const ENVOLTURA = "mx-auto max-w-[1312px] px-5 sm:px-6 lg:px-16";
 const TIT = `${archivo.className} leading-[0.92] tracking-[-0.005em] text-texto`;

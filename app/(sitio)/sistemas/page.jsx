@@ -3,9 +3,9 @@ import { CUERPO, ETIQUETA } from "@/app/components/salas/estilos";
 import { Boton } from "@/app/components/ui/Boton";
 import { DibujoTarjeta, Tarjeta, dosCifras } from "@/app/components/ui/Tarjeta";
 import { NIVELES } from "@/app/lib/niveles";
-import { CONTINUIDAD_DESDE, SE_COTIZA } from "@/app/lib/precios";
+import { CONTINUIDAD_DESDE, DESDE, IVA, SE_COTIZA } from "@/app/lib/precios";
 import { IvaIncluido } from "@/app/components/ui/IvaIncluido";
-import { compartir } from "@/app/lib/compartir";
+import { metadatosPagina } from "@/app/lib/compartir";
 
 // /sistemas (docs/pagina-nivel.md, textos de docs/textos.md § Sistemas): la
 // puerta a los cinco niveles. Solo componentes ya aprobados: las cinco
@@ -14,18 +14,13 @@ import { compartir } from "@/app/lib/compartir";
 const ENTRADA =
   "Empieza por lo que te pasa hoy. Cada nivel incluye todo lo del anterior y suma alcance; ninguno es la versión barata de otro.";
 
-// Título derivado como en las demás páginas; descripción, la entrada (Carlos, 30 oct).
-export const metadata = {
-  title: "Sistemas",
-  description: ENTRADA,
-  alternates: { canonical: "https://www.stringwebs.com/sistemas" },
-  ...compartir({
-    titulo: "Sistemas · STRING",
-    descripcion: ENTRADA,
-    url: "https://www.stringwebs.com/sistemas",
-    imagenPropia: true,
-  }),
-};
+// Título y descripción de Google (lote 18, docs/textos.md § SEO · lote 18).
+export const metadata = metadatosPagina({
+  titulo: "Sistemas a la medida para tu negocio · STRING",
+  descripcion: `Cinco niveles de sistema a la medida, desde ${DESDE.responde} con ${IVA}. Empieza por lo que te pasa hoy; cada nivel suma alcance.`,
+  ruta: "/sistemas",
+  imagenPropia: true,
+});
 
 const INCLUYEN = [
   "El mismo sistema de diseño y el mismo cuidado en cada pantalla.",

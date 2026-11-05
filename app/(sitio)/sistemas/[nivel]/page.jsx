@@ -1,7 +1,7 @@
 import { notFound } from "next/navigation";
 import { PaginaNivel, SLUGS } from "@/app/components/sistemas/PaginaNivel";
 import { nivelPorSlug } from "@/app/lib/niveles";
-import { compartir } from "@/app/lib/compartir";
+import { metadatosPagina } from "@/app/lib/compartir";
 
 // /sistemas/<nivel> (docs/pagina-nivel.md): las cinco páginas se generan al
 // construir; cualquier otro nivel es 404.
@@ -11,19 +11,17 @@ export function generateStaticParams() {
   return SLUGS.map((nivel) => ({ nivel }));
 }
 
-// Título derivado ("Responde · STRING") y descripción: su "Para quién es"
-// (Carlos, 30 oct).
+// Título y descripción de Google (lote 18): viven en niveles.js.
 export async function generateMetadata({ params }) {
   const { nivel: slug } = await params;
   const nivel = nivelPorSlug(slug);
   if (!nivel) return {};
-  const url = `https://www.stringwebs.com/sistemas/${nivel.slug}`;
-  return {
-    title: nivel.nombre,
-    description: nivel.paraQuien,
-    alternates: { canonical: url },
-    ...compartir({ titulo: `${nivel.nombre} · STRING`, descripcion: nivel.paraQuien, url, imagenPropia: true }),
-  };
+  return metadatosPagina({
+    titulo: nivel.tituloSeo,
+    descripcion: nivel.descripcionSeo,
+    ruta: `/sistemas/${nivel.slug}`,
+    imagenPropia: true,
+  });
 }
 
 export default async function NivelPage({ params }) {

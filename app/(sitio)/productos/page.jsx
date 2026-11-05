@@ -3,7 +3,7 @@ import { Encabezado } from "@/app/components/productos/Encabezado";
 import { Medida } from "@/app/components/productos/Medida";
 import { Siguientes } from "@/app/components/productos/Siguientes";
 import { Cierre } from "@/app/components/salas/Cierre";
-import { compartir } from "@/app/lib/compartir";
+import { metadatosPagina } from "@/app/lib/compartir";
 
 // /productos (lote 9a): las dos líneas de STRING. Encabezado con las dos
 // anclas, Boaz (#boaz, sobre pared), los siguientes productos, a la medida
@@ -11,12 +11,11 @@ import { compartir } from "@/app/lib/compartir";
 const DESCRIPCION =
   "Boaz, el sistema para gimnasios, y sistemas a la medida para negocios con local y empresas. Hechos por STRING en Ciudad de México.";
 
-export const metadata = {
-  title: "Productos",
-  description: DESCRIPCION,
-  alternates: { canonical: "https://www.stringwebs.com/productos" },
-  ...compartir({ titulo: "Productos · STRING", descripcion: DESCRIPCION, url: "https://www.stringwebs.com/productos" }),
-};
+export const metadata = metadatosPagina({
+  titulo: "Productos: Boaz y sistemas a la medida · STRING",
+  descripcion: DESCRIPCION,
+  ruta: "/productos",
+});
 
 export default function ProductosPage() {
   return (

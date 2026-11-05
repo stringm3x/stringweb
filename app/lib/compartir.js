@@ -31,3 +31,26 @@ export function compartir({ titulo, descripcion, url, imagenPropia = false }) {
     },
   };
 }
+
+export const SITIO = "https://www.stringwebs.com";
+
+// Metadata completa de una página (lote 18): el título va absoluto (sin la
+// plantilla del layout), y Google, Open Graph y Twitter leen el mismo título
+// y la misma descripción, escritos una sola vez.
+export function metadatosPagina({ titulo, descripcion, ruta, imagenPropia = false }) {
+  const url = ruta === "/" ? `${SITIO}/` : `${SITIO}${ruta}`;
+  return {
+    title: { absolute: titulo },
+    description: descripcion,
+    alternates: { canonical: url },
+    ...compartir({ titulo, descripcion, url, imagenPropia }),
+  };
+}
+
+// La portada (lote 18, docs/textos.md § SEO · lote 18). La usa también el
+// layout raíz como título y descripción por omisión.
+export const PORTADA = {
+  titulo: "STRING · Taller de software en la Ciudad de México",
+  descripcion:
+    "Taller de software de Carlos Avilés en la Ciudad de México. Sistemas que contestan, ordenan y trabajan por tu negocio, desde un local hasta una empresa grande.",
+};

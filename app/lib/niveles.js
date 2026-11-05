@@ -5,7 +5,7 @@
 // niveles". Los precios "desde" salen de app/lib/precios.js; si cambian, manda
 // el KB. Cada nivel es una cuerda con su nota (docs/sistema/components/Cuerda):
 // La, Re, Sol y Si; Empresa las toca juntas, como la orquesta completa.
-import { precioNivel } from "./precios";
+import { DESDE, IVA, SE_COTIZA, precioNivel } from "./precios";
 
 const LA = 110;
 const RE = 146.8;
@@ -24,6 +24,7 @@ export const NIVELES = [
   {
     nombre: "Responde",
     slug: "responde",
+    tituloSeo: "Responde: sistema que contesta WhatsApp e Instagram · STRING",
     numero: 1,
     arte: "Literatura",
     suma: "Literatura",
@@ -57,6 +58,7 @@ export const NIVELES = [
   {
     nombre: "Organiza",
     slug: "organiza",
+    tituloSeo: "Organiza: tus clientes en un solo sistema · STRING",
     numero: 2,
     arte: "Arquitectura",
     suma: "Arquitectura",
@@ -84,6 +86,7 @@ export const NIVELES = [
   {
     nombre: "Automatiza",
     slug: "automatiza",
+    tituloSeo: "Automatiza: citas y seguimiento sin perder clientes · STRING",
     numero: 3,
     arte: "Danza",
     suma: "Danza",
@@ -113,6 +116,7 @@ export const NIVELES = [
   {
     nombre: "Controla",
     slug: "controla",
+    tituloSeo: "Controla: panel de ventas y tienda en línea · STRING",
     numero: 4,
     arte: "Pintura",
     suma: "Pintura",
@@ -146,6 +150,7 @@ export const NIVELES = [
   {
     nombre: "Empresa",
     slug: "empresa",
+    tituloSeo: "Empresa: sistema a la medida para empresas · STRING",
     numero: 5,
     arte: "Las siete",
     suma: "Música, escultura y cine",
@@ -180,6 +185,13 @@ export const NIVELES = [
 const CALIBRES = [1.2, 1.5, 1.8, 2.1, 2.4];
 NIVELES.forEach((nivel, i) => {
   nivel.calibre = CALIBRES[i];
+});
+
+// Lo que sale en Google (lote 18, docs/textos.md § SEO · lote 18): el título
+// de cada nivel y su descripción, "para quién" más el precio de precios.js.
+NIVELES.forEach((nivel) => {
+  const precio = DESDE[nivel.slug] ? `Desde ${DESDE[nivel.slug]}, ${IVA}.` : `${SE_COTIZA}.`;
+  nivel.descripcionSeo = `${nivel.paraQuien} ${precio}`;
 });
 
 export const nivelPorSlug = (slug) => NIVELES.find((n) => n.slug === slug);
