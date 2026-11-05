@@ -3,6 +3,7 @@ import { Boton } from "../ui/Boton";
 import { Tarjeta } from "../ui/Tarjeta";
 import { Entra } from "../ui/Entra";
 import { Hilo } from "../ui/Hilo";
+import { IvaIncluido } from "../ui/IvaIncluido";
 import { DESDE } from "@/app/lib/precios";
 
 // Bloque 4 de /productos (lote 9a): a la medida. La vitrina enseña cómo se
@@ -156,7 +157,10 @@ export function Medida() {
                   </div>
                   <h4 className="text-subtitulo">{caso.titular}</h4>
                   <p className="text-cuerpo text-texto-suave">{caso.frase}</p>
-                  <p className="mt-auto font-mono text-etiqueta text-texto">{caso.precio}</p>
+                  <p className="mt-auto font-mono text-etiqueta text-texto">
+                    {caso.precio}
+                    {caso.nivel !== "empresa" && <> <IvaIncluido /></>}
+                  </p>
                   <p className="flex items-center gap-space-2 text-cuerpo font-semibold text-texto">
                     Ver el nivel <span aria-hidden="true">→</span>
                   </p>

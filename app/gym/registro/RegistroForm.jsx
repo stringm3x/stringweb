@@ -10,7 +10,7 @@ import { solicitudSchema } from "../../lib/validations/solicitud-schema";
 import { TurnstileWidget } from "../components/TurnstileWidget";
 import { BotonBoaz } from "@/app/components/boaz/BotonBoaz";
 import { CampoBoaz } from "@/app/components/boaz/CampoBoaz";
-import { BOAZ } from "@/app/lib/precios";
+import { BOAZ, IVA } from "@/app/lib/precios";
 
 const ENDPOINT = "https://app.gym.stringwebs.com/api/solicitudes";
 
@@ -130,7 +130,12 @@ export function RegistroForm({ initialPlan = "" }) {
         id="plan_interes"
         etiqueta="¿Qué plan te interesa?"
         opciones={PLAN_OPTIONS}
-        ayuda="La prueba es con Pro completo."
+        ayuda={
+          <>
+            La prueba es con Pro completo.
+            <span className="block">Precios con {IVA}.</span>
+          </>
+        }
         {...campo("plan_interes")}
       />
       <div className="grid gap-5 sm:grid-cols-2">

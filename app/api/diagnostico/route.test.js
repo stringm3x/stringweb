@@ -105,7 +105,7 @@ describe("POST /api/diagnostico", () => {
 
     const [tienda, empresa] = sendMail.mock.calls.map(([correo]) => correo);
     expect(tienda.text).toContain(
-      "Es tienda en línea: la tienda propia va en Controla (desde $40,000). Si solo vende por redes, empieza en Responde u Organiza."
+      "Es tienda en línea: la tienda propia va en Controla (desde $46,500). Si solo vende por redes, empieza en Responde u Organiza."
     );
     expect(empresa.text).toContain("Es empresa: se cotiza. Ofrécele el boceto y pide el mapa de procesos antes de cotizar.");
     expect(empresa.html).toContain("<strong>Es empresa: se cotiza.");

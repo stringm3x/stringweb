@@ -3,7 +3,8 @@ import { CUERPO, ETIQUETA } from "@/app/components/salas/estilos";
 import { Boton } from "@/app/components/ui/Boton";
 import { DibujoTarjeta, Tarjeta, dosCifras } from "@/app/components/ui/Tarjeta";
 import { NIVELES } from "@/app/lib/niveles";
-import { CONTINUIDAD_DESDE } from "@/app/lib/precios";
+import { CONTINUIDAD_DESDE, SE_COTIZA } from "@/app/lib/precios";
+import { IvaIncluido } from "@/app/components/ui/IvaIncluido";
 import { compartir } from "@/app/lib/compartir";
 
 // /sistemas (docs/pagina-nivel.md, textos de docs/textos.md § Sistemas): la
@@ -62,7 +63,10 @@ export default function SistemasPage() {
                     {nivel.cita ? `“${nivel.dices}”` : nivel.dices}
                   </p>
                   <p className={CUERPO}>{nivel.hace}</p>
-                  <p className="mt-auto font-mono text-cifra text-texto">{nivel.precio}</p>
+                  <p className="mt-auto font-mono text-cifra text-texto">
+                    {nivel.precio}
+                    {nivel.precio !== SE_COTIZA && <> <IvaIncluido /></>}
+                  </p>
                   <p className="flex items-center gap-space-2 text-cuerpo font-semibold text-texto">
                     Ver el nivel <span aria-hidden="true">→</span>
                   </p>

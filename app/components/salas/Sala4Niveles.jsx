@@ -1,5 +1,7 @@
 import Link from "next/link";
 import { NIVELES } from "@/app/lib/niveles";
+import { SE_COTIZA } from "@/app/lib/precios";
+import { IvaIncluido } from "@/app/components/ui/IvaIncluido";
 import { BotonSonido, Cuerda, SonidoProvider } from "./Cuerdas";
 import { Escenario } from "./Escenario";
 import { CUERPO, ENLACE, ETIQUETA, SALA, TITULAR } from "./estilos";
@@ -34,7 +36,10 @@ export function Sala4Niveles() {
                         {nivel.nombre}
                       </Link>
                     </h3>
-                    <p className="font-mono text-cifra text-texto">{nivel.precio}</p>
+                    <p className="font-mono text-cifra text-texto">
+                      {nivel.precio}
+                      {nivel.precio !== SE_COTIZA && <> <IvaIncluido /></>}
+                    </p>
                   </div>
                   <div className="flex flex-col gap-space-2">
                     <p className="text-cuerpo text-texto">

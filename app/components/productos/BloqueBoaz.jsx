@@ -5,6 +5,7 @@ import { Entra } from "../ui/Entra";
 import { Firma } from "./Firma";
 import { LaminaBoaz } from "./LaminaBoaz";
 import { BOAZ as PRECIOS_BOAZ } from "@/app/lib/precios";
+import { IvaIncluido } from "../ui/IvaIncluido";
 
 // Bloque 2 de /productos (lote 9a): Boaz, la única sala clara de la página.
 // Texto a la izquierda y su lámina a la derecha (en celular, debajo). Listas
@@ -129,9 +130,12 @@ export function BloqueBoaz() {
                 <p className="text-cuerpo text-texto">{plan.frase}</p>
                 <p className="font-mono text-texto">
                   <span className="text-[28px] leading-tight">{plan.mes}</span>{" "}
-                  <span className="text-etiqueta uppercase">AL MES</span>
+                  <span className="text-etiqueta uppercase">AL MES</span>{" "}
+                  <IvaIncluido />
                 </p>
-                <p className="font-mono text-etiqueta uppercase text-texto-suave">O {plan.anual} AL AÑO</p>
+                <p className="font-mono text-etiqueta text-texto-suave">
+                  <span className="uppercase">O {plan.anual} AL AÑO</span> <IvaIncluido />
+                </p>
               </li>
             ))}
           </ul>

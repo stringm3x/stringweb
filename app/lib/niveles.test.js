@@ -7,10 +7,10 @@ import { NIVELES, nivelPorSlug } from "./niveles";
 // palabra de docs/textos.md.
 const TEXTOS = fs.readFileSync(path.resolve(__dirname, "../../docs/textos.md"), "utf8");
 const PRECIOS = {
-  responde: "Desde $8,000",
-  organiza: "Desde $18,000",
-  automatiza: "Desde $28,000",
-  controla: "Desde $40,000",
+  responde: "Desde $9,500",
+  organiza: "Desde $21,000",
+  automatiza: "Desde $32,500",
+  controla: "Desde $46,500",
   empresa: "Se cotiza",
 };
 

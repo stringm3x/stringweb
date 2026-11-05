@@ -29,8 +29,9 @@ construye sistemas a la medida, con calidad premium y con arte. STRING es la cas
 tiene su marca y STRING lo firma.
 
 - **Sistemas a la medida:** cinco niveles, una sola familia, misma calidad; cambia el alcance.
-  En el sitio solo se muestra el "desde": Responde $8,000 · Organiza $18,000 · Automatiza $28,000 ·
-  Controla $40,000 · Empresa se cotiza. Continuidad: Cuida · Mejora · Impulsa, desde $1,800 al mes.
+  En el sitio solo se muestra el "desde": Responde $9,500 · Organiza $21,000 · Automatiza $32,500 ·
+  Controla $46,500 · Empresa se cotiza. Continuidad: Cuida · Mejora · Impulsa, desde $2,100 al mes.
+  Todos con IVA incluido (4 nov); en pantalla, la etiqueta "IVA incluido" junto a cada precio.
 - **Productos:** Boaz, el sistema para gimnasios (único en producción). Barberías, clínicas y
   restaurantes no existen todavía: nunca se presentan como disponibles.
 
