@@ -69,19 +69,10 @@ Lo general (tokens, curva, qué se puede animar, menos movimiento) está en `doc
 - **Capas:** una capa de penumbra por cuadro, que baja su `opacity`; el haz de luz de cada reflector aparece con su cuadro.
 - **Menos movimiento:** los tres encendidos.
 
-## Sala 6 · Arquitectura — "El edificio crece al ritmo de los pasos."
+## Sala 6 · Arquitectura
 
-| Momento | Qué se ve |
-|---|---|
-| Paso 1 | Solo los cimientos, bajo tierra |
-| Pasos 2 y 3 | Suben los dos primeros pisos |
-| Paso 4 | El piso en obra, con andamio, ladrillos y grúa |
-| Paso 5 | La bandera en lo alto |
-
-- **Tipo:** sigue al dedo. Cada piso sube cuando su paso llega al centro de la pantalla, y **el paso activo se resalta en la lista** de la izquierda.
-- **Capas:** cimientos, cada piso, la obra (andamio, ladrillos y grúa) y la bandera; se revelan con `clip-path` de abajo hacia arriba.
-- **Menos movimiento:** el edificio completo, sin paso resaltado.
-- **Desde el lote 11, en noche:** el mismo movimiento; el arte va recoloreado (trazo en línea, la bandera en luz).
+Dibujo quieto desde el lote 19 (la obra de izquierda a derecha, en cinco tramos). Se conserva la raya verde que
+marca el paso en la lista; sin ella con movimiento reducido. Si se anima, va en el lote de animar salas.
 
 ## Sala 7 · Danza — "El sistema sigue trabajando, a su ritmo."
 

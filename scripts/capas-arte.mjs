@@ -34,19 +34,6 @@ export const CAPAS = {
       ["galeria-4", 89, 129],
     ],
   },
-  sala6: {
-    original: "sala6-arquitectura.svg",
-    capas: [
-      ["suelo", 1, 2],
-      ["cimientos", 3, 5],
-      ["suelo-linea", 6, 6],
-      ["piso-1", 7, 23],
-      ["piso-2", 24, 40],
-      ["obra", 41, 52],
-      ["bandera", 53, 55],
-      ["rotulos", 56, 56],
-    ],
-  },
   sala7: {
     original: "sala7-danza.svg",
     capas: [
