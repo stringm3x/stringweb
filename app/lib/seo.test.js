@@ -2,6 +2,7 @@ import { describe, expect, it } from "vitest";
 import { GIROS } from "./giros";
 import { NIVELES } from "./niveles";
 import { PORTADA } from "./compartir";
+import sitemap from "../sitemap";
 
 // Los títulos y descripciones de Google (lote 18), tal como los aprobó
 // Carlos (docs/textos.md § SEO · lote 18).
@@ -99,5 +100,22 @@ describe("SEO (lote 18)", () => {
       expect(largo(t), t).toBeLessThanOrEqual(60);
       expect(largo(d), d).toBeLessThanOrEqual(160);
     });
+  });
+
+  it("sitemap: lastmod fijo por ruta, no la fecha del build", () => {
+    const a = sitemap();
+    expect(sitemap()).toEqual(a);
+    a.forEach((e) => {
+      expect(e.lastModified, e.url).toMatch(/^\d{4}-\d{2}-\d{2}$/);
+      expect(Number.isNaN(Date.parse(e.lastModified)), e.url).toBe(false);
+    });
+    const rutas = a.map((e) => new URL(e.url).pathname);
+    expect(new Set(rutas).size).toBe(rutas.length);
+    [...NIVELES.map((n) => `/sistemas/${n.slug}`), ...GIROS.map((g) => `/tu-negocio/${g.slug}`)].forEach((r) =>
+      expect(rutas).toContain(r),
+    );
+    ["/", "/sistemas", "/tu-negocio", "/tu-negocio/empresas", "/boaz", "/gym/registro", "/productos", "/nosotros", "/diagnostico", "/aviso-de-privacidad", "/terminos"].forEach((r) =>
+      expect(rutas).toContain(r),
+    );
   });
 });

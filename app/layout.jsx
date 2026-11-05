@@ -60,12 +60,6 @@ export const metadata = {
       "max-snippet": -1,
     },
   },
-  alternates: {
-    canonical: "https://www.stringwebs.com/",
-    languages: {
-      "es-MX": "https://www.stringwebs.com/",
-    },
-  },
   category: "technology",
   generator: "Next.js",
   applicationName: "STRING",
@@ -83,8 +77,6 @@ export default function RootLayout({ children }) {
       <head>
         <link rel="manifest" href="/manifest.json" />
         <meta name="theme-color" content="#000000" />
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <meta httpEquiv="Content-Type" content="text/html; charset=utf-8" />
         <meta name="geo.region" content="MX" />
         <meta name="geo.placename" content="Ciudad de México" />
       </head>

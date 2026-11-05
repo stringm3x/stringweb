@@ -3,6 +3,12 @@ import Footer from "./Footer";
 import { Boton } from "./components/ui/Boton";
 import { CUERPO, ETIQUETA } from "./components/salas/estilos";
 
+// Su propio título (lote 18): el titular de la 404. Sin canonical: el layout
+// raíz ya no trae uno que heredar.
+export const metadata = {
+  title: { absolute: "Esta sala no existe · STRING" },
+};
+
 // Página 404 (docs/textos.md § Textos que faltaban): sobre noche, con la
 // etiqueta, el titular y el botón verde de vuelta al inicio.
 export default function NotFound() {

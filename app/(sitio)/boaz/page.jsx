@@ -23,6 +23,7 @@ export const metadata = metadatosPagina({
   titulo: TITULO,
   descripcion: `${DESCRIPCION} Desde ${BOAZ.starter.mes} al mes.`,
   ruta: "/boaz",
+  imagenPropia: true,
 });
 
 const ENVOLTURA = "mx-auto max-w-[1312px] px-5 sm:px-6 lg:px-16";
