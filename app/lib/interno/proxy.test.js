@@ -37,6 +37,7 @@ function conVariables() {
   vi.stubEnv("NEXT_PUBLIC_SUPABASE_URL", "https://prueba.supabase.co");
   vi.stubEnv("NEXT_PUBLIC_SUPABASE_ANON_KEY", "clave-publica");
   vi.stubEnv("INTERNO_USUARIO_ID", CARLOS);
+  vi.stubEnv("INTERNO_SECRETO", "s".repeat(32));
 }
 
 function esRedirectAEntrar(res) {
@@ -55,6 +56,7 @@ beforeEach(() => {
   vi.stubEnv("NEXT_PUBLIC_SUPABASE_ANON_KEY", "");
   vi.stubEnv("NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY", "");
   vi.stubEnv("INTERNO_USUARIO_ID", "");
+  vi.stubEnv("INTERNO_SECRETO", "");
 });
 afterEach(() => vi.unstubAllEnvs());
 

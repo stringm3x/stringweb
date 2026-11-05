@@ -61,8 +61,9 @@ Producción sirve `main` con el lote 12 (revisado con curl el 4 nov, `reportes/l
 ## Pendientes de Carlos
 
 - **/interno (lote 16):** crear el proyecto de Supabase de STRING; apagar el registro de usuarios; crear su
-  usuario y copiar el UUID; activar MFA TOTP; poner las tres variables en `.env.local` y en Vercel
-  (Preview y Production); correr `scripts/interno/enrolar-totp.mjs` una vez.
+  usuario y copiar el UUID; activar MFA TOTP; poner las cuatro variables en `.env.local` y en Vercel
+  (Preview y Production; `INTERNO_SECRETO` se genera con `openssl rand -base64 48`); revisar en
+  Auth → Rate Limits los límites de verificación; correr `scripts/interno/enrolar-totp.mjs` una vez.
 - **Domicilio** del responsable para el aviso de privacidad (lo pide la ley) y fecha de publicación. Listo para
   un solo cambio: `DOMICILIO` en `app/(sitio)/aviso-de-privacidad/page.jsx` y la frase en `docs/textos.md`
   (§ Aviso de privacidad, "Quién es responsable de tus datos").
@@ -78,17 +79,26 @@ Producción sirve `main` con el lote 12 (revisado con curl el 4 nov, `reportes/l
   agrega a `public/robots.txt` (listarla ahí la anunciaría).
 - Supabase: proyecto propio de STRING (nunca el de Boaz), sin service role. Variables:
   `NEXT_PUBLIC_SUPABASE_URL`, `NEXT_PUBLIC_SUPABASE_ANON_KEY` (o `NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY`) e
-  `INTERNO_USUARIO_ID`. Si falta una, nadie entra.
+  `INTERNO_USUARIO_ID`, más `INTERNO_SECRETO` (solo servidor, 32 caracteres o más; firma la cuenta de
+  intentos del código). Si falta una, nadie entra.
 - Cada página, server action y route handler de `/interno` llama a `exigirCarlos()`, salvo estas tres
   acciones de la entrada:
   - "Entrar" (contraseña): si el usuario que inicia sesión no es `INTERNO_USUARIO_ID`, cierra la sesión
-    de inmediato y responde el error genérico.
-  - "Verificar" (código): vuelve a comprobar el UUID y que la sesión quede en aal2; si no, cierra la
-    sesión y responde el error genérico.
+    de inmediato y responde el error genérico. Si es Carlos, la cuenta de códigos fallidos empieza en 0.
+  - "Verificar" (código): exige la sesión aal1 de Carlos antes y aal2 de Carlos después; con otro UUID,
+    cierra la sesión. Formato malo (no son 6 dígitos): solo error de validación, no llega a Supabase ni
+    cierra la sesión. Código incorrecto: sigue en aal1 y deja reintentar; al quinto fallido seguido,
+    cierra la sesión y vuelve a correo y contraseña. La cuenta vive en la cookie httpOnly
+    `interno-intentos`, firmada con `INTERNO_SECRETO` y ligada a la sesión (`session_id`) y al usuario,
+    con 15 minutos de vida; si no se puede validar (falta, alterada, de otra sesión o caducada), cuenta
+    como límite alcanzado.
   - "Salir": solo cierra la sesión.
 
   El error es siempre el mismo ("No se pudo entrar. Revisa los datos."): no revela si el correo existe,
-  si la contraseña falló o si el usuario no es el permitido.
+  si la contraseña o el código fallaron o si el usuario no es el permitido.
+- Límite conocido de la cuenta de intentos: sin estado en el servidor (no hay tablas en este lote), una
+  cookie válida guardada y reenviada dentro de la misma sesión no se distingue. La frenan la contraseña
+  (hace falta para tener la sesión aal1) y los límites de verificación de Supabase (Auth → Rate Limits).
 - **Alta del TOTP** (una sola vez, en la Mac de Carlos): `node scripts/interno/enrolar-totp.mjs`. Lee las
   variables de `.env.local`, pide correo y contraseña (oculta), revisa que el UUID sea `INTERNO_USUARIO_ID`
   y muestra en pantalla el URI `otpauth://` para la app de códigos; luego pide el primer código y lo

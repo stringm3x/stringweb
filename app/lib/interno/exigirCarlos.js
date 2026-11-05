@@ -1,5 +1,6 @@
 import "server-only";
 import { notFound, redirect } from "next/navigation";
+import { connection } from "next/server";
 import { leerConfig, RUTA_ENTRAR } from "./config";
 import { crearClienteServidor } from "./servidor";
 import { evaluarSesion } from "./sesion";
@@ -16,6 +17,9 @@ import { evaluarSesion } from "./sesion";
 // revocada, la cookie que quede ya no sirve. En una server action, además,
 // se borra.
 export async function exigirCarlos() {
+  // Siempre en cada petición: sin esto, sin variables en el build, Next
+  // prerenderiza el redirect como página estática con caché larga.
+  await connection();
   const config = leerConfig();
   if (!config) redirect(RUTA_ENTRAR);
 
