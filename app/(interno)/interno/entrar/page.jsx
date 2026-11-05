@@ -19,7 +19,7 @@ export default async function EntrarPage({ searchParams }) {
   const describe = conError ? ID_ERROR : undefined;
 
   return (
-    <main className="mx-auto flex min-h-screen w-full max-w-[440px] flex-col justify-center px-4 py-space-6">
+    <main className="mx-auto flex min-h-screen w-full max-w-[420px] flex-col justify-center px-4 py-space-6">
       <p className={ETIQUETA}>STRING · Interno</p>
       <h1 className="mt-space-2 text-subtitulo">Entrar</h1>
 
@@ -30,7 +30,7 @@ export default async function EntrarPage({ searchParams }) {
       )}
 
       {paso === "codigo" ? (
-        <form action={verificar} className="mt-space-5 flex flex-col gap-space-4">
+        <form action={verificar} className="mt-space-4 flex flex-col gap-space-4">
           <Campo
             id="codigo"
             name="codigo"
@@ -48,7 +48,7 @@ export default async function EntrarPage({ searchParams }) {
           <BotonEnviar>Verificar</BotonEnviar>
         </form>
       ) : (
-        <form action={entrar} className="mt-space-5 flex flex-col gap-space-4">
+        <form action={entrar} className="mt-space-4 flex flex-col gap-space-4">
           <Campo
             id="correo"
             name="correo"
