@@ -1,6 +1,5 @@
 import localFont from "next/font/local";
 import Medicion from "./components/Medicion";
-import { CORREO, WHATSAPP_TELEFONO } from "./lib/contacto";
 import { PORTADA } from "./lib/compartir";
 import "./globals.css";
 import "./salas.css";
@@ -8,29 +7,6 @@ import "./salas.css";
 // Título y descripción por omisión: los de la portada (lote 18).
 const TITULO = PORTADA.titulo;
 const DESCRIPCION = PORTADA.descripcion;
-
-// Las redes sociales solo viven aquí (sameAs), no en el pie.
-const organizationJsonLd = {
-  "@context": "https://schema.org",
-  "@type": "Organization",
-  name: "STRING",
-  url: "https://www.stringwebs.com",
-  logo: "https://www.stringwebs.com/logo/string-noche.svg",
-  description: DESCRIPCION,
-  email: CORREO,
-  telephone: WHATSAPP_TELEFONO,
-  address: {
-    "@type": "PostalAddress",
-    addressLocality: "Ciudad de México",
-    addressCountry: "MX",
-  },
-  areaServed: "MX",
-  sameAs: [
-    "https://www.instagram.com/stringwebmx/",
-    "https://www.facebook.com/profile.php?id=61576042750915",
-    "https://www.tiktok.com/@stringmx",
-  ],
-};
 
 // Geist para titulares y texto; Geist Mono para cifras, precios y
 // etiquetas. Anton no se carga: el logo la trae a trazo en su SVG.
@@ -111,10 +87,6 @@ export default function RootLayout({ children }) {
         <meta httpEquiv="Content-Type" content="text/html; charset=utf-8" />
         <meta name="geo.region" content="MX" />
         <meta name="geo.placename" content="Ciudad de México" />
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationJsonLd) }}
-        />
       </head>
       <body
         className="font-sans bg-fondo text-texto antialiased"

@@ -2,7 +2,9 @@ import { notFound } from "next/navigation";
 import { PaginaGiroGrande } from "@/app/components/tu-negocio/PaginaGiroGrande";
 import { PaginaGiroLocal } from "@/app/components/tu-negocio/PaginaGiroLocal";
 import { GIROS, giroPorSlug } from "@/app/lib/giros";
+import { JsonLd } from "@/app/components/JsonLd";
 import { metadatosPagina } from "@/app/lib/compartir";
+import { migas } from "@/app/lib/jsonld";
 
 // /tu-negocio/<giro> (lote 11): los nueve giros se generan al construir, cada
 // uno con la plantilla de su grupo; cualquier otro es 404. /tu-negocio/empresas
@@ -30,5 +32,10 @@ export default async function GiroPage({ params }) {
   const { giro: slug } = await params;
   const giro = giroPorSlug(slug);
   if (!giro) notFound();
-  return giro.grupo === "local" ? <PaginaGiroLocal giro={giro} /> : <PaginaGiroGrande giro={giro} />;
+  return (
+    <>
+      <JsonLd datos={migas([["Inicio", "/"], ["Tu negocio", "/tu-negocio"], [giro.nombre, giro.href]])} />
+      {giro.grupo === "local" ? <PaginaGiroLocal giro={giro} /> : <PaginaGiroGrande giro={giro} />}
+    </>
+  );
 }

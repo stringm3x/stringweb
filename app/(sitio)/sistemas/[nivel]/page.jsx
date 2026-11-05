@@ -1,7 +1,9 @@
 import { notFound } from "next/navigation";
 import { PaginaNivel, SLUGS } from "@/app/components/sistemas/PaginaNivel";
 import { nivelPorSlug } from "@/app/lib/niveles";
+import { JsonLd } from "@/app/components/JsonLd";
 import { metadatosPagina } from "@/app/lib/compartir";
+import { migas } from "@/app/lib/jsonld";
 
 // /sistemas/<nivel> (docs/pagina-nivel.md): las cinco páginas se generan al
 // construir; cualquier otro nivel es 404.
@@ -27,5 +29,11 @@ export async function generateMetadata({ params }) {
 export default async function NivelPage({ params }) {
   const { nivel } = await params;
   if (!SLUGS.includes(nivel)) notFound();
-  return <PaginaNivel slug={nivel} />;
+  const { nombre } = nivelPorSlug(nivel);
+  return (
+    <>
+      <JsonLd datos={migas([["Inicio", "/"], ["Sistemas", "/sistemas"], [nombre, `/sistemas/${nivel}`]])} />
+      <PaginaNivel slug={nivel} />
+    </>
+  );
 }

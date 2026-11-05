@@ -49,6 +49,11 @@ test("/interno/entrar: noindex sin canonical, Open Graph ni Twitter", async ({ p
   await expect(page.locator('meta[name^="twitter:"]')).toHaveCount(0);
 });
 
+test("/interno/entrar sin datos estructurados (lote 18)", async ({ page }) => {
+  await page.goto("/interno/entrar");
+  await expect(page.locator('script[type="application/ld+json"]')).toHaveCount(0);
+});
+
 test("/interno/entrar sin la barra ni el pie del sitio", async ({ page }) => {
   await page.goto("/interno/entrar");
   await expect(page.locator("footer")).toHaveCount(0);

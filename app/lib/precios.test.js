@@ -72,7 +72,7 @@ describe("precios", () => {
       [...Object.values(DESDE), CONTINUIDAD_DESDE, ...Object.values(CONTINUIDAD), ...Object.values(BOAZ).flatMap((p) => [p.mes, p.anual])]
         .map((p) => p.replace(/[$,]/g, "")),
     );
-    const conJsonLd = FUENTES.filter(({ texto }) => texto.includes("ld+json"));
+    const conJsonLd = FUENTES.filter(({ texto }) => /ld\+json|schema\.org/.test(texto));
     expect(conJsonLd.length).toBeGreaterThan(0);
     conJsonLd.forEach(({ ruta, texto }) => {
       const cifras = [

@@ -6,7 +6,9 @@ import { Logotipo } from "@/app/components/boaz/Logotipo";
 import { Firma } from "@/app/components/productos/Firma";
 import { LaminaBoaz } from "@/app/components/productos/LaminaBoaz";
 import { whatsappUrl } from "@/app/lib/contacto";
+import { JsonLd } from "@/app/components/JsonLd";
 import { metadatosPagina } from "@/app/lib/compartir";
+import { aplicacionBoaz } from "@/app/lib/jsonld";
 import { BOAZ } from "@/app/lib/precios";
 import { IvaIncluido } from "@/app/components/ui/IvaIncluido";
 
@@ -292,6 +294,7 @@ export default function BoazPage() {
       {/* La barra del sitio es noche y transparente arriba: esta franja
           noche, de su alto, la deja leerse sobre el papel. */}
       <div aria-hidden="true" className="h-[72px] bg-black lg:h-20" />
+      <JsonLd datos={aplicacionBoaz()} />
       <Encabezado />
       <LoQueHace />
       <ComoNacio />
