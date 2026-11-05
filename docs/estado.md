@@ -68,8 +68,7 @@ Producción sirve `main` con el lote 14 (17d1efa: deploy de Vercel en Production
 - **`TURNSTILE_SECRET_KEY`** y las SMTP en Vercel (Preview y Production): sin el secreto,
   `/api/diagnostico` rechaza todo fuera de desarrollo. Permitir el dominio de la vista previa en
   Turnstile, mandar una solicitud de prueba y confirmar que llegó. `NOTIFICATION_EMAIL` ya no se usa.
-- Del KB, abiertos: precio del boceto, si el sonido se queda, recontar cifras de Evolution GYM.
-- `docs/kb/` está desactualizado frente al KB del proyecto (edición 10: precios con IVA). Reemplazar la copia.
+- Del KB, abiertos: si el sonido se queda, recontar cifras de Evolution GYM.
 - Facebook (profile.php?id=61576042750915) y TikTok (@stringmx) salieron del sameAs en el lote 18. Vuelven al JSON-LD
   solo si Carlos los mantiene activos con su foto y el nombre de STRING.
 - **Dominio sin www** (reconocimiento del lote 18): `https://stringwebs.com` redirige a www con **307** (temporal) y
