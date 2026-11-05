@@ -132,7 +132,7 @@ toca ese envío). No se crean `/galeria`,
 `/interno/entrar` y `/interno/diagnostico`. Solo entra Carlos (UUID `INTERNO_USUARIO_ID`, contraseña +
 TOTP, sesión aal2, validado en el servidor); si falta algo, no se entra. Sin sitemap, menú, pie,
 canonical, Open Graph ni redirect; `noindex` en la metadata y `X-Robots-Tag: noindex, nofollow` +
-`Cache-Control: private, no-store` desde `proxy.js`. `public/robots.txt` no la menciona. Sin Header
+Cache-Control con `no-store` (`private` cuando Next lo permite) desde `proxy.js`. `public/robots.txt` no la menciona. Sin Header
 ni Footer del sitio y sin medición (Analytics y Speed Insights la descartan).
 Supabase: proyecto propio de STRING, nunca la base de Boaz. Solo se usa en `app/(interno)/` y
 `app/lib/interno/`; única excepción, `scripts/interno/enrolar-totp.mjs` (alta del TOTP, se corre a

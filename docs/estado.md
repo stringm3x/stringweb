@@ -74,7 +74,7 @@ Producción sirve `main` con el lote 12 (revisado con curl el 4 nov, `reportes/l
 ## Ruta privada /interno (lote 16)
 
 - `/interno/*` es privada: fuera del sitemap, la barra, el menú y el pie; sin canonical, Open Graph ni
-  redirect; `noindex` en la metadata y en `X-Robots-Tag`, `Cache-Control: private, no-store`. No se
+  redirect; `noindex` en la metadata y en `X-Robots-Tag`, Cache-Control con `no-store` (`private` cuando Next lo permite). No se
   agrega a `public/robots.txt` (listarla ahí la anunciaría).
 - Supabase: proyecto propio de STRING (nunca el de Boaz), sin service role. Variables:
   `NEXT_PUBLIC_SUPABASE_URL`, `NEXT_PUBLIC_SUPABASE_ANON_KEY` (o `NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY`) e
