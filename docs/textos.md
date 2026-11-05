@@ -954,6 +954,180 @@ Herramienta privada de Carlos en `/interno` (no es parte del sitio público: sin
 
 - Título: "Diagnóstico"
 
+## Interno · lote 20 · /interno/diagnostico (5 nov)
+
+Guía en pantalla para la llamada o la visita. No guarda nada. Textos finales aprobados por ventas (5 nov). Fuente en el
+código: `app/lib/interno/diagnostico/contenido.js` y `resumen.js`; precios desde `app/lib/precios.js` y
+`app/lib/interno/precios-interno.js` (boceto, precio fundador y mínimo de Empresa, que no se publican).
+
+### Aviso fijo arriba
+
+Nada de esto se guarda. Al cerrar la página, se borra.
+
+### Pasos
+
+PASO N DE 5 · 1 Prospecto · 2 Situación y problema · 3 Cuánto le cuesta y qué quiere · 4 Nivel sugerido · 5 Resumen
+para WhatsApp
+
+Navegación: "Anterior" · "Saltar" · "Siguiente". Puntos: "Pregunta N, contestada" / "Pregunta N, saltada" /
+"Pregunta N, sin contestar". Campo por pregunta: "Nota" (opcional).
+
+### Paso 1 · Prospecto
+
+- "Nombre del dueño" · "Negocio" · "Su WhatsApp" (opcional, 10 dígitos)
+- Aviso si no son 10: "El número lleva 10 dígitos. Sin él, WhatsApp te deja elegir el chat."
+- "Giro": Barbería o estética · Clínica o consultorio · Restaurante · Tienda en línea · Empresa mediana o grande · Gimnasio
+- "¿Cómo te conoció?": Visita · Formulario · WhatsApp · Recomendación
+- Botones: "Empezar preguntas" · "Visita rápida · 3 preguntas"
+
+### Preguntas comunes
+
+- S1 · ¿Cómo te llegan hoy los clientes nuevos? → Instagram · WhatsApp · De paso · Recomendación · Otro (varias)
+- S2 · ¿Dónde apuntas a tus clientes y lo que te pagan? → Cuaderno · Excel · WhatsApp · Un sistema · En la cabeza
+- P1 · ¿Se te quedan mensajes sin contestar, o contestas tarde? → Sí · A veces · No
+- P2 · ¿Sabes cuántos clientes tienes activos y cuánto entró este mes? → Sí · Más o menos · No
+- I · Con todo eso, ¿cuántos clientes sientes que se te van al mes, y cuánto te deja cada uno? → texto. Ayuda: "Escribe
+  lo que dijo, tal cual"
+- N · Si pudieras resolver una sola cosa este mes, ¿cuál sería? → Que nadie se quede sin respuesta · Tener a mis
+  clientes en un solo lugar · Que el seguimiento siga aunque yo no esté · Saber cuánto gano y qué está pasando · No sé
+
+Orden: S1, S2, P1, P2 → S y P del giro → I del giro → I común → N. Gimnasio: S, P e I de gimnasio y la N. Visita rápida:
+la P del giro, S2 y la N (gimnasio: la P de gimnasio y la N).
+
+### Preguntas por giro (Situación / Problema / Implicación)
+
+| Giro | S (texto corto, opcional) | P | I (texto, tal cual) |
+| --- | --- | --- | --- |
+| Barbería o estética | ¿Cómo te agendan hoy: WhatsApp, teléfono o llegan sin cita? | ¿Te dejan plantado sin avisar? | ¿Cuántas citas se te caen a la semana, y cuánto cobras en promedio? |
+| Clínica o consultorio | ¿Quién confirma las citas y cómo? | ¿Hay pacientes que ya no regresan a su siguiente cita? | ¿Cuántos a la semana, más o menos, y cuánto vale una consulta? |
+| Restaurante | ¿Te piden por WhatsApp, por teléfono o por apps de reparto? | ¿En hora pico se quedan pedidos o mensajes sin contestar? | ¿Cuántos pedidos sientes que se te van en un fin de semana? |
+| Tienda en línea | ¿Dónde vendes hoy: Instagram, Mercado Libre, tu página? | ¿Llevas el inventario a mano o en Excel? | ¿Te ha pasado vender algo que ya no tenías? ¿Cada cuándo? |
+| Empresa mediana o grande | ¿Cuántas áreas o sucursales son? | ¿Qué proceso se hace hoy en Excel, en papel o por correo? (texto) | ¿Cuántas personas y cuántas horas a la semana se van en eso? |
+| Gimnasio | ¿Cuántos socios activos tienes y cómo les cobras? | ¿Sabes quién se te vence esta semana y quién dejó de venir? | ¿Cuántos socios sientes que se te van al mes sin renovar? |
+
+P con Sí · A veces · No (Empresa: texto).
+
+### Problema en sus palabras (viñetas del resumen)
+
+Las P con problema, en este orden: la del giro, P1, P2. Máximo 3. Si Carlos escribió una nota: "frase: nota".
+
+- P1 (Sí / a veces): Se te quedan mensajes sin contestar, o contestas tarde.
+- P2 (más o menos / no): No tienes a la mano cuántos clientes activos tienes ni cuánto entró este mes.
+- Barbería (Sí / a veces): Te dejan plantado sin avisar.
+- Clínica (Sí / a veces): Hay pacientes que ya no regresan a su siguiente cita.
+- Restaurante (Sí / a veces): En hora pico se quedan pedidos o mensajes sin contestar.
+- Tienda (Sí / a veces): Llevas el inventario a mano o en Excel.
+- Empresa (texto): Hoy [lo que dijo] se hace a mano, entre Excel, papel y correo.
+- Gimnasio (no / a veces): No sabes a tiempo quién se te vence ni quién dejó de venir.
+
+### Paso 4 · Nivel sugerido
+
+- "Eso que me cuentas es [Nivel]" · "Cambiar nivel" · "Cuando crezca: [nivel]" (solo en pantalla)
+- "Ofrecer boceto · [precio]" (apagado; solo Automatiza, Controla y Empresa)
+- Empresa, en la tarjeta (solo para Carlos): "Se cotiza · nunca menos de $80,000"
+- Gimnasio: "Ofrecer precio fundador · $799 fijo 12 meses" (apagado) y el recordatorio "Pro se paga con 2 o 3 socios
+  que no se van"
+- "Siguiente paso": Llamada · Demo · Propuesta · Visita · "¿Qué día?"
+
+La razón bajo el nivel (solo en pantalla):
+
+- Es un gimnasio: Boaz ya lo resuelve.
+- Es una empresa mediana o grande.
+- Quiere saber cuánto gana y qué está pasando. / Vende en línea.
+- Quiere que el seguimiento siga aunque no esté.
+- Quiere tener a sus clientes en un solo lugar.
+- Quiere que nadie se quede sin respuesta.
+- N = "No sé": "Por lo que marcó: se le caen citas, pacientes o pedidos." · "Por lo que marcó: apunta a sus clientes en
+  cuaderno, Excel, WhatsApp o en la cabeza." · "Por lo que marcó: se le quedan mensajes sin contestar." · "No marcó
+  nada: se sugiere lo más chico. Vuelve a hacer la pregunta de qué quiere resolver primero."
+
+### Lo que resuelve cada nivel ("Para eso te sugiero [nivel]: …")
+
+- Responde: una página con formulario y un mensaje automático en WhatsApp, para que nadie que te escriba se quede sin
+  respuesta.
+- Organiza: junta en un solo lugar a los clientes que hoy tienes regados entre chats, libretas y Excel, y te avisa a
+  quién darle seguimiento.
+- Automatiza: agenda, recordatorios y seguimiento automáticos, para que el sistema siga trabajando aunque tú no estés.
+- Controla: un sistema a tu medida con un panel para ver cuánto vendes y qué está pasando, y si lo necesitas, tu propia
+  tienda en línea.
+- Empresa: un sistema completo a tu medida, para todas tus áreas o sucursales, que empieza por el mapa de tus procesos.
+
+"Lo que más te urge es…": que nadie se quede sin respuesta · tener a tus clientes en un solo lugar · que el seguimiento
+siga aunque tú no estés · saber cuánto ganas y qué está pasando.
+
+### Resumen general
+
+{…} = solo si aplica; […] = se llena. Las líneas sin datos no salen.
+
+```
+Hola, [nombre]. Soy Carlos, de STRING. Gracias por el tiempo de hoy.
+
+Te dejo por escrito lo que platicamos de [negocio]:
+- [problema 1, en sus palabras]
+- [problema 2, en sus palabras]
+{Si dijo cuánto le cuesta:} - Me comentaste que esto te cuesta [lo que dijo, tal cual].
+
+Lo que más te urge es [lo que eligió en la N]. Para eso te sugiero [nivel]: [lo que resuelve].
+Arranca desde [precio] con IVA incluido, y su cuidado mensual desde [continuidad].
+
+{Si Carlos activó el boceto:} Para empezar sin arriesgar, el primer paso es el boceto: el mapa de cómo funciona tu negocio y la primera pantalla de tu sistema. Cuesta [precio del boceto] con IVA incluido y se descuenta completo si decides seguir en los 30 días siguientes.
+
+[LÍNEA DE CIERRE]
+
+Carlos · STRING
+```
+
+- N = "No sé" (o saltada): "Para lo que me contaste te sugiero [nivel]: …".
+- Sin nombre: "Hola." Sin negocio: "tu negocio". Sin viñetas ni costo, no sale "Te dejo por escrito…".
+- Lo que le cuesta: la I del giro y la común, tal cual, separadas por "; ".
+- **Empresa**, en lugar de "Arranca desde…": "Por el tamaño, lo cotizo a tu medida después de mapear tus procesos. El
+  cuidado mensual va incluido en la cotización." Boceto de Empresa: "Para empezar, el primer paso es el boceto: el mapa
+  de tus procesos y la primera pantalla. Cuesta desde $7,500 con IVA incluido y se descuenta completo si decides seguir
+  en los 30 días siguientes." El mínimo de $80,000 nunca va en el resumen ni en los datos.
+
+Línea de cierre ([día] en es-MX: "el jueves 12 de noviembre"):
+
+| Siguiente paso | Con día | Sin día |
+| --- | --- | --- |
+| Ninguno | En 2 días hábiles te mando la propuesta por escrito, con lo que incluye y lo que no. Cualquier duda, aquí estoy. | — |
+| Llamada | Quedamos en hablar [día]. Cualquier duda, aquí estoy. | ¿Qué día te acomoda para seguir platicando? Cualquier duda, aquí estoy. |
+| Demo | Quedamos [día] para mostrarte cómo funcionaría. Cualquier duda, aquí estoy. | Me gustaría mostrarte cómo funcionaría en tu negocio. ¿Qué día te acomoda para verlo juntos? Cualquier duda, aquí estoy. |
+| Propuesta | Quedamos [día] para revisar tu propuesta: te la mando antes por escrito, con lo que incluye y lo que no. Cualquier duda, aquí estoy. | En 2 días hábiles te mando la propuesta por escrito, con lo que incluye y lo que no, y la revisamos juntos cuando te acomode. Cualquier duda, aquí estoy. |
+| Visita | Paso a verte [día]. Cualquier duda, aquí estoy. | Me paso a verte para seguir platicando. ¿Qué día y a qué hora te acomoda? Cualquier duda, aquí estoy. |
+
+### Resumen de gimnasio
+
+```
+Hola, [nombre]. Soy Carlos, el creador de Boaz. Gracias por el tiempo de hoy.
+
+Me quedo con lo que me contaste de [gimnasio]: [problema principal, en sus palabras].
+Eso es justo lo que Boaz resuelve: sabes cuánto entra, quién se te vence y quién dejó de venir.
+
+Te propongo probarlo 14 días con Pro completo, sin tarjeta. Yo te ayudo a cargar a tus socios para que lo veas con tus propios datos.
+¿Te queda bien [día] para dejarlo listo juntos?
+
+Pro cuesta $1,299 al mes, IVA incluido.
+{Si Carlos activó el precio fundador:} Como eres de los primeros 5 gimnasios, te queda en $799 al mes, fijo por 12 meses.
+
+Si prefieres empezar por tu cuenta: stringwebs.com/gym/registro
+
+Carlos · Boaz by STRING
+```
+
+- Sin día: "¿Qué día te queda bien para dejarlo listo juntos?"
+- Sin problema ni nota, el párrafo "Me quedo con… / Eso es justo…" no sale. Sin nombre: "Hola." Sin negocio: "tu gimnasio".
+
+### Paso 5 · Resumen para WhatsApp
+
+- El resumen se puede editar. Si se edita y luego cambia una respuesta: "Volver a armar el resumen".
+- "Abrir en WhatsApp" (principal) · "Copiar" → "Copiado" (2 s) · "Nuevo diagnóstico"
+- "Datos para la propuesta" · "Copiar datos". Líneas: Negocio · Dueño · Nivel · Continuidad · Boceto · Problemas · Le
+  cuesta · Siguiente paso · Cómo nos conoció (las que tengan datos).
+
+### Confirmación
+
+"¿Seguro? Se borra todo lo del diagnóstico." · "Cancelar" · "Sí, borrar"
+
 ## Por confirmar antes del brief
 
 - [x] **Foto de Carlos** en la sala 3: foto real (falta que la mande).

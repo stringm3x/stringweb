@@ -1,6 +1,6 @@
 # Estado · stringwebs.com
 
-Última actualización: 4 nov 2026 (lote 19). Meta del KB: sitio rehecho del 1 al 7 nov; salir a
+Última actualización: 5 nov 2026 (lote 20). Meta del KB: sitio rehecho del 1 al 7 nov; salir a
 vender el 8 nov.
 
 ## Lotes
@@ -27,6 +27,7 @@ vender el 8 nov.
 | 17 | Precios con IVA incluido (decisión del 4 nov): una sola fuente en `app/lib/precios.js`; Responde $9,500 · Organiza $21,000 · Automatiza $32,500 · Controla $46,500 · continuidad $2,100 al mes · Boaz Pro $1,299 al mes y $12,990 al año; la etiqueta "IVA incluido" (`ui/IvaIncluido.jsx`) junto a cada precio y una línea de ayuda en /gym/registro; prueba de que no quedan precios viejos, ni Escala ni el paquete GYM, y de que el JSON-LD no trae precios distintos | `lote-17-precios-iva` | ✅ Fusionado a main (PR #11, visto bueno de Carlos, 4 nov) |
 | 18 | SEO: título y descripción propios en cada ruta, desde los datos (`niveles.js`, `giros.js`) y `metadatosPagina()` en `app/lib/compartir.js`, todos absolutos; JSON-LD por página (`app/lib/jsonld.js`): ProfessionalService en `/` sin domicilio, SoftwareApplication de Boaz con los precios de `precios.js` y migas en niveles y giros, nada en la 404 ni en /interno; sitemap con `lastmod` fijo por ruta; head sin `viewport` ni `http-equiv` repetidos ni hreflang; 404 con su título; favicon (`favicon.ico` y PNG de 48 px); og:image propia de /boaz; /gym/registro index, follow | `lote-18-seo` | ✅ Fusionado a main (PR #12, visto bueno de Carlos, 4 nov) |
 | 19 | Sala 6, dibujo nuevo: "La obra, de izquierda a derecha", un edificio que se completa en cinco tramos (cimientos, plano, estructura, muros, luz), quieto, con la paleta del arte del 29 oct; generador `scripts/dibujos/sala6.mjs`; etiquetas en HTML alineadas con los tramos (completas desde 1280 px; abajo, número y lista) y `aria-hidden`, el dibujo con su descripción; la raya del paso se queda; fuera las capas viejas y su CSS | `lote-19-sala6` | ✅ Fusionado a main (PR #14, visto bueno de Carlos, 4 nov) |
+| 20 | /interno/diagnostico, versión 1 (guía sin guardar): una pregunta por pantalla para la llamada o la visita, seis giros (gimnasio → Boaz Pro), `sugerirNivel` puro, nivel en tarjeta con boceto o precio fundador, siguiente paso con día, resumen para WhatsApp editable con "Abrir en WhatsApp" y datos para la propuesta; saltar y volver por los puntos; visita rápida; "Salir" y "Nuevo diagnóstico" con confirmación, beforeunload y Wake Lock. No guarda nada. Precios que no se publican en `app/lib/interno/precios-interno.js`. Banco en `/muestrario/diagnostico` (404 en producción) | `lote-20-diagnostico` | ✅ Fusionado a main (PR #16, visto bueno de Carlos, 5 nov). Probado por Carlos en el Preview desde el celular con su sesión |
 
 Producción sirve `main` con el lote 14 (17d1efa: deploy de Vercel en Production y curl a /, /sistemas, /productos y /boaz, 4 nov). Nada se fusiona a `main` sin el visto bueno de Carlos.
 
@@ -124,7 +125,7 @@ Producción sirve `main` con el lote 14 (17d1efa: deploy de Vercel en Production
 - PageSpeed de /boaz: no se pudo en el preview (protección de Vercel y cuota diaria de la API); medir en producción.
 - El dibujo de Boaz (`LaminaBoaz.jsx` y el cuadro de la galería) es copia de `string-gym-saas`, provisional allá: cuando
   llegue el del ilustrador, se copia a mano aquí.
-- **Lote 20 · rendimiento** (hallazgos del reconocimiento del lote 18, punto 10): el LCP simulado de `/` es 2.8 s y el
+- **Lote 21 · rendimiento** (hallazgos del reconocimiento del lote 18, punto 10): el LCP simulado de `/` es 2.8 s y el
   observado 66 ms, igual al FCP; el elemento es el párrafo de entrada y el 84 % es retraso de pintado, porque
   Lighthouse cuenta los ~180 KB comprimidos de JS que terminan antes del primer pintado. Candidatos, sin cambiar
   el diseño: diferir `components/Medicion.jsx` (Analytics y Speed Insights) hasta después de `load`; cargar el
@@ -133,10 +134,26 @@ Producción sirve `main` con el lote 14 (17d1efa: deploy de Vercel en Production
   en todo el sitio desde `layout.jsx`); la portada pesa 164 KB de HTML desde el lote 19 (SVG en línea); en `/sistemas` el LCP es
   una imagen con `loading="lazy" fetchpriority="low"` en la primera pantalla. Medir con PageSpeed en producción
   antes y después.
-- **Lote 21 · enlaces a los giros** (copy por aprobar): cada giro con local recibe un solo enlace interno (desde
+- **Lote 22 · enlaces a los giros** (copy por aprobar): cada giro con local recibe un solo enlace interno (desde
   /tu-negocio) y la portada no enlaza a ningún giro; /productos y /tu-negocio solo reciben enlaces de la barra y el
   pie. Enlazar desde la portada y desde cada nivel hacia sus giros; los textos de los enlaces no están en
   `docs/textos.md` y se aprueban antes.
+
+## Decisiones tomadas en el lote 20
+
+- Contenido y textos finales de la herramienta: los del prompt del lote y los aprobados por ventas (5 nov), literales
+  en `docs/textos.md` § Interno · lote 20.
+- Boceto, precio fundador y el mínimo de Empresa ($80,000) viven en `app/lib/interno/precios-interno.js`, no en
+  `precios.js`: no se publican. El mínimo solo sale en la tarjeta del paso 4; nunca en el resumen ni en los datos.
+- P2 común y la P de gimnasio ("¿Sabes…?") son problema con "Más o menos" / "A veces" / "No". La P de Empresa es texto.
+- En el descarte por "No sé", Automatiza solo con la P de barbería, clínica o restaurante en Sí / A veces.
+- Las pruebas en navegador corren en `/muestrario/diagnostico` (mismo componente y barra, sin `exigirCarlos()`), que
+  da 404 fuera de desarrollo; `e2e/interno.spec.js` lo comprueba contra el build de producción.
+- "Saltar" borra la respuesta y deja la nota; "Siguiente" sin respuesta también la marca saltada. Los botones del
+  paso 1 esperan al giro. Cambiar de giro borra las respuestas del giro anterior y el nivel elegido a mano.
+- JS de las páginas públicas: `/`, `/sistemas`, `/boaz` y los giros, idénticos. `/diagnostico` (formulario
+  público) +74 B gzip por un nuevo corte de chunks compartidos (`Boton`, `Campo`, `precios.js`), sin código de
+  /interno: aceptado por Carlos (5 nov).
 
 ## Decisiones tomadas en el lote 19
 
