@@ -40,6 +40,7 @@ Producción sirve `main` con el lote 12 (revisado con curl el 4 nov, `reportes/l
 ## Deuda técnica (no se corrige en el rehecho)
 
 - `npm run lint` roto: el parser de `eslint-config-next` exige `typescript`.
+- npm audit: 27 avisos previos (next, vite, eslint…), ninguno de @supabase. Revisar en un lote propio.
 - `e2e/componentes.spec.js` reescribe las capturas de `reportes/lote-6-componentes/` cada vez que corre (lote 11: se
   regresaron a mano); debería escribirlas fuera del repo.
 - e2e inestable: `refinar.spec.js` compara 180 px exactos y falla por subpíxel (180.000244) cuando la suite corre en paralelo. Cambiar a una tolerancia (toBeCloseTo o ±0.5 px) en un lote propio.
