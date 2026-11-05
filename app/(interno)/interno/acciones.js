@@ -23,6 +23,29 @@ import { evaluarSesion } from "@/app/lib/interno/sesion";
 // redirect() lanza; por eso va fuera de los try.
 const CON_ERROR = `${RUTA_ENTRAR}?error=1`;
 
+// Solo en desarrollo: en la consola del servidor, el código y el estado HTTP
+// de los errores de Supabase y el estado del flujo. Nunca el código TOTP, el
+// secreto, los tokens ni la cookie.
+const EN_DESARROLLO = process.env.NODE_ENV !== "production";
+function registrar(paso, datos) {
+  if (!EN_DESARROLLO) return;
+  try {
+    console.warn(`[interno] ${paso}`, JSON.stringify(datos));
+  } catch {
+    // Registrar nunca cambia el resultado.
+  }
+}
+const errorBreve = (e) => ({ code: e?.code ?? null, status: e?.status ?? null });
+
+// El factor TOTP VERIFICADO de Carlos, leído de `all` (no del primero de la
+// lista ni de uno sin verificar). El script de alta deja uno solo; si hubiera
+// más, el más reciente.
+function factorTotpVerificado(factores) {
+  const verificados = (factores?.all ?? []).filter((f) => f.factor_type === "totp" && f.status === "verified");
+  if (verificados.length > 1) registrar("verificar: varios TOTP verificados", { cuantos: verificados.length });
+  return verificados.sort((a, b) => String(b.created_at ?? "").localeCompare(String(a.created_at ?? "")))[0] ?? null;
+}
+
 async function cerrarSesion(supabase) {
   try {
     await supabase?.auth.signOut();
@@ -83,8 +106,8 @@ export async function entrar(formData) {
 }
 
 // "Verificar" (código).
-// - Formato malo (no son 6 dígitos): solo error de validación; no llega a
-//   Supabase ni cierra la sesión.
+// - Se quitan espacios, guiones y todo lo que no sea dígito. Si no quedan 6
+//   dígitos: solo error de validación; no llega a Supabase ni cierra la sesión.
 // - Antes: exige la sesión aal1 de Carlos; con otro UUID o sin sesión, la
 //   cierra.
 // - Código incorrecto: sigue en aal1, suma un intento y deja reintentar; al
@@ -92,8 +115,15 @@ export async function entrar(formData) {
 //   cookie de intentos no se puede validar, cuenta como límite alcanzado.
 // - Después: exige aal2 de Carlos; si no, cierra la sesión.
 export async function verificar(formData) {
-  const codigo = String(formData.get("codigo") ?? "").replace(/\s/g, "");
-  if (!/^\d{6}$/.test(codigo)) redirect(CON_ERROR);
+  // El autollenado a veces mete "756 606" o "756-606": fuera todo lo que no
+  // sea dígito y luego se exigen 6.
+  const escrito = String(formData.get("codigo") ?? "");
+  const codigo = escrito.replace(/\D/g, "");
+  if (!/^\d{6}$/.test(codigo)) {
+    // Ni el código ni parte de él: solo cuántos dígitos quedaron.
+    registrar("verificar: formato", { digitos: codigo.length, traiaOtros: escrito.length !== codigo.length });
+    redirect(CON_ERROR);
+  }
 
   const config = leerConfig();
   if (!config) redirect(CON_ERROR);
@@ -103,32 +133,56 @@ export async function verificar(formData) {
   try {
     supabase = await crearClienteServidor(config);
     const antes = await evaluarSesion(supabase, config.usuarioId);
+    registrar("verificar: sesión antes", { estado: antes.estado });
     // Ya en aal2 (p. ej. doble envío): no hay nada que verificar.
     if (antes.estado === "ok") resultado = "listo";
     else if (antes.estado === "aal1") {
       const sid = await sesionId(supabase);
       const almacen = await cookies();
-      const n = leerIntentos(almacen.get(COOKIE_INTENTOS)?.value, config.secreto, { sid, uid: config.usuarioId });
+      const valorIntentos = almacen.get(COOKIE_INTENTOS)?.value;
+      const n = leerIntentos(valorIntentos, config.secreto, { sid, uid: config.usuarioId });
+      registrar("verificar: intentos leídos", { n, hayCookie: Boolean(valorIntentos), haySid: Boolean(sid) });
 
       if (n !== null && n < MAX_INTENTOS) {
         const { data: factores, error: errorFactores } = await supabase.auth.mfa.listFactors();
-        const factor = errorFactores ? null : factores?.totp?.[0];
+        if (errorFactores) registrar("listFactors", errorBreve(errorFactores));
+        const factor = errorFactores ? null : factorTotpVerificado(factores);
+        if (!factor) registrar("verificar: sin factor TOTP verificado", { factores: factores?.all?.length ?? 0 });
+
         if (factor) {
-          const { error } = await supabase.auth.mfa.challengeAndVerify({ factorId: factor.id, code: codigo });
-          if (!error) {
-            const despues = await evaluarSesion(supabase, config.usuarioId);
-            if (despues.estado === "ok") resultado = "listo";
-          } else if (n + 1 < MAX_INTENTOS) {
-            await guardarIntentos(n + 1, sid, config);
-            resultado = "reintentar";
+          // Challenge y verify por separado, con el id de ese challenge, para
+          // saber cuál de los dos falla.
+          const { data: reto, error: errorReto } = await supabase.auth.mfa.challenge({ factorId: factor.id });
+          if (errorReto || !reto?.id) {
+            registrar("challenge", errorBreve(errorReto));
+          } else {
+            const { error: errorVerify } = await supabase.auth.mfa.verify({
+              factorId: factor.id,
+              challengeId: reto.id,
+              code: codigo,
+            });
+            if (!errorVerify) {
+              const despues = await evaluarSesion(supabase, config.usuarioId);
+              registrar("verificar: sesión después", { estado: despues.estado });
+              if (despues.estado === "ok") resultado = "listo";
+            } else {
+              registrar("verify", errorBreve(errorVerify));
+              if (n + 1 < MAX_INTENTOS) {
+                await guardarIntentos(n + 1, sid, config);
+                registrar("verificar: intentos escritos", { n: n + 1 });
+                resultado = "reintentar";
+              }
+            }
           }
         }
       }
     }
-  } catch {
+  } catch (e) {
+    registrar("verificar: excepción", { nombre: e?.name ?? null, ...errorBreve(e) });
     resultado = "cerrar";
   }
 
+  registrar("verificar: resultado", { resultado });
   if (resultado === "reintentar") redirect(CON_ERROR);
 
   await borrarIntentos();

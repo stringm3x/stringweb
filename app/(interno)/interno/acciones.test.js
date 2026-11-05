@@ -56,12 +56,24 @@ vi.mock("@supabase/ssr", () => ({
           async getAuthenticatorAssuranceLevel() {
             return { data: { currentLevel: sb.nivel }, error: null };
           },
+          // Un factor sin verificar va primero: la acción no debe usarlo.
           async listFactors() {
-            return { data: { all: [], totp: [{ id: "f1" }] }, error: null };
+            const sinVerificar = { id: "f0", factor_type: "totp", status: "unverified", created_at: "2026-11-04T21:00:00Z" };
+            const verificado = { id: "f1", factor_type: "totp", status: "verified", created_at: "2026-11-04T20:00:00Z" };
+            return { data: { all: [sinVerificar, verificado], totp: [verificado] }, error: null };
           },
-          challengeAndVerify: vi.fn(async ({ code }) => {
+          challenge: vi.fn(async ({ factorId }) => {
+            sb.retos.push(factorId);
+            if (sb.fallaReto) return { data: null, error: { code: "mfa_factor_not_found", status: 404 } };
+            return { data: { id: `reto-${sb.retos.length}`, type: "totp" }, error: null };
+          }),
+          verify: vi.fn(async ({ factorId, challengeId, code }) => {
             sb.verificaciones++;
-            if (code !== "123456") return { data: null, error: { message: "Invalid TOTP code entered" } };
+            sb.ultimoVerify = { factorId, challengeId };
+            if (factorId !== "f1" || challengeId !== `reto-${sb.retos.length}`) {
+              return { data: null, error: { code: "mfa_challenge_expired", status: 422 } };
+            }
+            if (code !== "123456") return { data: null, error: { code: "mfa_verification_failed", status: 422 } };
             sb.nivel = "aal2";
             return { data: {}, error: null };
           }),
@@ -99,7 +111,7 @@ const enAal1DeCarlos = (intentos = 0) => {
 beforeEach(() => {
   galletas = new Map();
   clientesCreados = 0;
-  sb = { usuario: null, nivel: null, sid: "sesion-1", quienEntra: CARLOS, verificaciones: 0 };
+  sb = { usuario: null, nivel: null, sid: "sesion-1", quienEntra: CARLOS, verificaciones: 0, retos: [], fallaReto: false };
   vi.stubEnv("NEXT_PUBLIC_SUPABASE_URL", "https://prueba.supabase.co");
   vi.stubEnv("NEXT_PUBLIC_SUPABASE_ANON_KEY", "clave-publica");
   vi.stubEnv("INTERNO_USUARIO_ID", CARLOS);
@@ -141,6 +153,36 @@ describe("Verificar (código)", () => {
     expect(galletas.has(COOKIE_INTENTOS)).toBe(false);
   });
 
+  it("usa el factor TOTP verificado y el id de su challenge", async () => {
+    enAal1DeCarlos();
+    expect(await destino(verificar, { codigo: "123456" })).toBe("/interno/diagnostico");
+    expect(sb.retos).toEqual(["f1"]);
+    expect(sb.ultimoVerify).toEqual({ factorId: "f1", challengeId: "reto-1" });
+  });
+
+  it("si el challenge falla, no verifica y cierra la sesión (falla cerrado)", async () => {
+    enAal1DeCarlos();
+    sb.fallaReto = true;
+    expect(await destino(verificar, { codigo: "123456" })).toBe("/interno/entrar?error=1");
+    expect(sb.verificaciones).toBe(0);
+    expect(sb.usuario).toBeNull();
+  });
+
+  it("en desarrollo registra code y status, nunca el código, el secreto ni la cookie", async () => {
+    const espia = vi.spyOn(console, "warn").mockImplementation(() => {});
+    enAal1DeCarlos();
+    await destino(verificar, { codigo: "000000" });
+    await destino(verificar, { codigo: "12a456" });
+    const todo = espia.mock.calls.flat().join(" ");
+    espia.mockRestore();
+    expect(todo).toContain('"code":"mfa_verification_failed"');
+    expect(todo).toContain('"status":422');
+    expect(todo).toContain('"n":1');
+    for (const prohibido of ["000000", "12a456", SECRETO, galletas.get(COOKIE_INTENTOS), "ZmlybWE"]) {
+      expect(todo).not.toContain(prohibido);
+    }
+  });
+
   it("código malo: sigue en aal1, error genérico y suma un intento", async () => {
     enAal1DeCarlos();
     const antes = galletas.get(COOKIE_INTENTOS);
@@ -168,7 +210,16 @@ describe("Verificar (código)", () => {
     expect(sb.verificaciones).toBe(5);
   });
 
-  it.each([["12345"], ["1234567"], ["12a456"], [""]])("formato malo (%j): no llama a Supabase ni cierra la sesión", async (codigo) => {
+  it.each([["123 456"], ["123-456"], [" 12 34 56 "], ["123\u00a0456"]])(
+    "limpia el autollenado (%j): quedan 6 dígitos y entra",
+    async (codigo) => {
+      enAal1DeCarlos();
+      expect(await destino(verificar, { codigo })).toBe("/interno/diagnostico");
+      expect(sb.verificaciones).toBe(1);
+    }
+  );
+
+  it.each([["12345"], ["1234567"], ["12a456"], ["123 45"], [""]])("formato malo (%j): no llama a Supabase ni cierra la sesión", async (codigo) => {
     enAal1DeCarlos();
     expect(await destino(verificar, { codigo })).toBe("/interno/entrar?error=1");
     expect(clientesCreados).toBe(0);
