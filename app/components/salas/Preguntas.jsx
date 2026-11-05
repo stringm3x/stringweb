@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { CUERPO, ENLACE, SALA, TITULAR } from "./estilos";
+import { CONTINUIDAD_DESDE, DESDE } from "@/app/lib/precios";
 
 // Preguntas frecuentes (docs/textos.md). <details> abre y cierra sin JS y
 // se usa con teclado; precios y porcentajes en Geist Mono.
@@ -12,7 +13,7 @@ const PREGUNTAS = [
     p: "¿Cuánto cuesta?",
     r: (
       <>
-        Depende del nivel: desde <Cifra>$8,000</Cifra>. El precio exacto sale del diagnóstico,
+        Depende del nivel: desde <Cifra>{DESDE.responde}</Cifra>. El precio exacto sale del diagnóstico,
         por escrito.
       </>
     ),
@@ -46,7 +47,7 @@ const PREGUNTAS = [
     p: "¿Qué pasa después de la entrega?",
     r: (
       <>
-        Sigue la continuidad: cuidamos tu sistema cada mes, desde <Cifra>$1,800</Cifra>.
+        Sigue la continuidad: cuidamos tu sistema cada mes, desde <Cifra>{CONTINUIDAD_DESDE}</Cifra>.
       </>
     ),
   },

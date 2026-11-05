@@ -10,14 +10,15 @@ import { solicitudSchema } from "../../lib/validations/solicitud-schema";
 import { TurnstileWidget } from "../components/TurnstileWidget";
 import { BotonBoaz } from "@/app/components/boaz/BotonBoaz";
 import { CampoBoaz } from "@/app/components/boaz/CampoBoaz";
+import { BOAZ } from "@/app/lib/precios";
 
 const ENDPOINT = "https://app.gym.stringwebs.com/api/solicitudes";
 
 // El value es el id interno del plan (lo valida el SaaS): se mantiene "basico"
 // aunque se muestre como "Starter". Escala sale del selector (lote 9b).
 const PLAN_OPTIONS = [
-  { value: "basico", label: "Starter · $799 al mes" },
-  { value: "pro", label: "Pro · $1,799 al mes (recomendado)" },
+  { value: "basico", label: `Starter · ${BOAZ.starter.mes} al mes` },
+  { value: "pro", label: `Pro · ${BOAZ.pro.mes} al mes (recomendado)` },
 ];
 
 const MIEMBROS_OPTIONS = [

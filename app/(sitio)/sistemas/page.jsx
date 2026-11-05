@@ -3,6 +3,7 @@ import { CUERPO, ETIQUETA } from "@/app/components/salas/estilos";
 import { Boton } from "@/app/components/ui/Boton";
 import { DibujoTarjeta, Tarjeta, dosCifras } from "@/app/components/ui/Tarjeta";
 import { NIVELES } from "@/app/lib/niveles";
+import { CONTINUIDAD_DESDE } from "@/app/lib/precios";
 import { compartir } from "@/app/lib/compartir";
 
 // /sistemas (docs/pagina-nivel.md, textos de docs/textos.md § Sistemas): la
@@ -29,7 +30,7 @@ const INCLUYEN = [
   "El mismo sistema de diseño y el mismo cuidado en cada pantalla.",
   "Su propia obra, que nace contigo.",
   "Nuestro estándar de servicio: respuesta en un día hábil y avance por escrito cada viernes.",
-  "Continuidad para que tu sistema siga funcionando, desde $1,800 al mes.",
+  `Continuidad para que tu sistema siga funcionando, desde ${CONTINUIDAD_DESDE} al mes.`,
 ];
 
 export default function SistemasPage() {

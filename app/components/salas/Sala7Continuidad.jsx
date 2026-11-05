@@ -1,6 +1,7 @@
 import { Capas } from "./Capas";
 import { Escenario } from "./Escenario";
 import { CUERPO, ETIQUETA, SALA, TITULAR } from "./estilos";
+import { CONTINUIDAD_DESDE } from "@/app/lib/precios";
 
 // Sala 7 · Continuidad · Danza (docs/textos.md), de vuelta en noche. Las
 // cintas son decorativas porque el texto se entiende sin ellas. "El sistema
@@ -31,7 +32,7 @@ export function Sala7Continuidad() {
               </li>
             ))}
           </ul>
-          <p className="font-mono text-cifra font-medium text-texto">Desde $1,800 al mes.</p>
+          <p className="font-mono text-cifra font-medium text-texto">Desde {CONTINUIDAD_DESDE} al mes.</p>
         </div>
         <Escenario modo="visible" className="danza">
           <Capas carpeta="sala7" capas={["cinta-oro", "cinta-roja", "cinta-verde"]} ancho={1136} alto={360} alt="" />

@@ -1,4 +1,5 @@
 import { NIVELES } from "./niveles";
+import { DESDE } from "./precios";
 
 // Opciones del formulario de diagnóstico (docs/textos.md § Formulario de
 // diagnóstico). Cada respuesta de "¿Qué te pasa hoy?" es la frase de un
@@ -21,7 +22,7 @@ export const GIRO_GIMNASIO = "Gimnasio";
 export const MARCAS_GIRO = {
   [GIRO_GIMNASIO]: "Es gimnasio: ofrécele Boaz.",
   "Tienda en línea":
-    "Es tienda en línea: la tienda propia va en Controla (desde $40,000). Si solo vende por redes, empieza en Responde u Organiza.",
+    `Es tienda en línea: la tienda propia va en Controla (desde ${DESDE.controla}). Si solo vende por redes, empieza en Responde u Organiza.`,
   "Empresa mediana o grande": "Es empresa: se cotiza. Ofrécele el boceto y pide el mapa de procesos antes de cotizar.",
 };
 export const OTRA_COSA = "Otra cosa";

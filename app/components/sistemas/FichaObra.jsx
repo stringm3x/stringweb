@@ -1,6 +1,7 @@
 import { Boton } from "../ui/Boton";
 import { ETIQUETA } from "../salas/estilos";
 import { ArtesQueSuma } from "./ArtesQueSuma";
+import { CONTINUIDAD_DESDE } from "@/app/lib/precios";
 
 // La ficha de la obra (docs/pagina-nivel.md y docs/textos.md): nombre,
 // lugar entre los cinco, las artes que suma, el "Desde", tiempo, pago y
@@ -45,7 +46,7 @@ export function FichaObra({ nivel }) {
         {[
           ["Tiempo", nivel.tiempo],
           ["Pago", nivel.pago],
-          ["Después", "Desde $1,800 al mes"],
+          ["Después", `Desde ${CONTINUIDAD_DESDE} al mes`],
         ].map(([que, cual]) => (
           <div key={que} className="flex items-baseline justify-between gap-space-3 border-t border-hairline py-space-2">
             <dt className="text-texto-suave">{que}</dt>
