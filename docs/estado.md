@@ -1,6 +1,6 @@
 # Estado · stringwebs.com
 
-Última actualización: 4 nov 2026 (lote 18). Meta del KB: sitio rehecho del 1 al 7 nov; salir a
+Última actualización: 4 nov 2026 (lote 19). Meta del KB: sitio rehecho del 1 al 7 nov; salir a
 vender el 8 nov.
 
 ## Lotes
@@ -26,6 +26,7 @@ vender el 8 nov.
 | 16 | Cimientos de `/interno` (herramienta privada de Carlos): Supabase propio de STRING, `exigirCarlos()`, `proxy.js` con noindex y sin caché, entrada con contraseña + TOTP, `/interno/diagnostico` vacío, medición fuera de /interno. Sin tablas ni datos de prospectos. Supabase de STRING configurado y TOTP dado de alta (4 nov) | `lote-16-interno-cimientos` | ✅ Fusionado a main (PR #10, visto bueno de Carlos, 4 nov) |
 | 17 | Precios con IVA incluido (decisión del 4 nov): una sola fuente en `app/lib/precios.js`; Responde $9,500 · Organiza $21,000 · Automatiza $32,500 · Controla $46,500 · continuidad $2,100 al mes · Boaz Pro $1,299 al mes y $12,990 al año; la etiqueta "IVA incluido" (`ui/IvaIncluido.jsx`) junto a cada precio y una línea de ayuda en /gym/registro; prueba de que no quedan precios viejos, ni Escala ni el paquete GYM, y de que el JSON-LD no trae precios distintos | `lote-17-precios-iva` | ✅ Fusionado a main (PR #11, visto bueno de Carlos, 4 nov) |
 | 18 | SEO: título y descripción propios en cada ruta, desde los datos (`niveles.js`, `giros.js`) y `metadatosPagina()` en `app/lib/compartir.js`, todos absolutos; JSON-LD por página (`app/lib/jsonld.js`): ProfessionalService en `/` sin domicilio, SoftwareApplication de Boaz con los precios de `precios.js` y migas en niveles y giros, nada en la 404 ni en /interno; sitemap con `lastmod` fijo por ruta; head sin `viewport` ni `http-equiv` repetidos ni hreflang; 404 con su título; favicon (`favicon.ico` y PNG de 48 px); og:image propia de /boaz; /gym/registro index, follow | `lote-18-seo` | ✅ Fusionado a main (PR #12, visto bueno de Carlos, 4 nov) |
+| 19 | Sala 6, dibujo nuevo: "La obra, de izquierda a derecha", un edificio que se completa en cinco tramos (cimientos, plano, estructura, muros, luz), quieto, con la paleta del arte del 29 oct; generador `scripts/dibujos/sala6.mjs`; etiquetas en HTML alineadas con los tramos (completas desde 1280 px; abajo, número y lista) y `aria-hidden`, el dibujo con su descripción; la raya del paso se queda; fuera las capas viejas y su CSS | `lote-19-sala6` | 🔶 PR abierto a main, sin fusionar (falta el visto bueno de Carlos) |
 
 Producción sirve `main` con el lote 14 (17d1efa: deploy de Vercel en Production y curl a /, /sistemas, /productos y /boaz, 4 nov). Nada se fusiona a `main` sin el visto bueno de Carlos.
 
@@ -52,9 +53,9 @@ Producción sirve `main` con el lote 14 (17d1efa: deploy de Vercel en Production
   El LCP del párrafo es Render Delay (~2.1 s) y cae sobre el TTI simulado (2.55 s): lo amarran los 17 scripts
   (228 KB) de la página. El arreglo es de JS, no de imágenes (`reportes/lote-13-reporte.md`).
 - La vibración al tocar una cuerda (sala 4) redibuja la ruta con JS en cada fotograma (`Cuerdas.jsx`), no con `transform`.
-- Los dibujos de `public/arte/giros/`, `productos/` y `niveles/chica/` salen de `scripts/dibujos/` (`giros.mjs`, `dibujar.mjs`)
+- Los dibujos de `public/arte/giros/`, `productos/`, `niveles/chica/` y `sala6-obra.svg` salen de `scripts/dibujos/` (`giros.mjs`, `dibujar.mjs`, `sala6.mjs`)
   y después pasan por svgo con `scripts/dibujos/svgo.config.mjs`; si cambia uno, se corren los dos pasos.
-- Las capas de `public/arte/sala{2,5,6,7}/` salen de los SVG originales con `node scripts/capas-arte.mjs`; si cambia un dibujo,
+- Las capas de `public/arte/sala{2,5,7}/` salen de los SVG originales con `node scripts/capas-arte.mjs`; si cambia un dibujo,
   se vuelve a correr (`app/arte-capas.test.js` avisa si no coinciden).
 - Las transiciones entre páginas dependen del flag experimental `experimental.viewTransition` de Next 16.1
   (`next.config.mjs`). Sin él, la navegación debe seguir funcionando, solo sin fundido: comprobado el 29 oct con
@@ -123,19 +124,31 @@ Producción sirve `main` con el lote 14 (17d1efa: deploy de Vercel en Production
 - PageSpeed de /boaz: no se pudo en el preview (protección de Vercel y cuota diaria de la API); medir en producción.
 - El dibujo de Boaz (`LaminaBoaz.jsx` y el cuadro de la galería) es copia de `string-gym-saas`, provisional allá: cuando
   llegue el del ilustrador, se copia a mano aquí.
-- **Lote 19 · rendimiento** (hallazgos del reconocimiento del lote 18, punto 10): el LCP simulado de `/` es 2.8 s y el
+- **Lote 20 · rendimiento** (hallazgos del reconocimiento del lote 18, punto 10): el LCP simulado de `/` es 2.8 s y el
   observado 66 ms, igual al FCP; el elemento es el párrafo de entrada y el 84 % es retraso de pintado, porque
   Lighthouse cuenta los ~180 KB comprimidos de JS que terminan antes del primer pintado. Candidatos, sin cambiar
   el diseño: diferir `components/Medicion.jsx` (Analytics y Speed Insights) hasta después de `load`; cargar el
   audio de `salas/Cuerdas.jsx` solo al activar el sonido; revisar si lo de cliente de `salas/Escenario.jsx` puede
   ser CSS; cambiar `react-icons` de `header.jsx` por dos SVG en línea; `salas.css` solo en la portada (hoy entra
-  en todo el sitio desde `layout.jsx`); la portada pesa 154 KB de HTML (SVG en línea); en `/sistemas` el LCP es
+  en todo el sitio desde `layout.jsx`); la portada pesa 164 KB de HTML desde el lote 19 (SVG en línea); en `/sistemas` el LCP es
   una imagen con `loading="lazy" fetchpriority="low"` en la primera pantalla. Medir con PageSpeed en producción
   antes y después.
-- **Lote 20 · enlaces a los giros** (copy por aprobar): cada giro con local recibe un solo enlace interno (desde
+- **Lote 21 · enlaces a los giros** (copy por aprobar): cada giro con local recibe un solo enlace interno (desde
   /tu-negocio) y la portada no enlaza a ningún giro; /productos y /tu-negocio solo reciben enlaces de la barra y el
   pie. Enlazar desde la portada y desde cada nivel hacia sus giros; los textos de los enlaces no están en
   `docs/textos.md` y se aprueban antes.
+
+## Decisiones tomadas en el lote 19
+
+- El dibujo de la sala 6 sigue la composición del lienzo de Carlos con los colores de la paleta del 29 oct
+  (`docs/diseno.md`). Lo que la tabla no trae (tierra, rayas del cimiento, separadores) va en los neutros de `giros.mjs`.
+  En el tramo 4, marcos y reflejo de los vidrios en mármol sombra, para que el vidrio se lea contra el muro.
+- Sala 6 quieta: el edificio ya no crece con el scroll; la raya del paso en la lista se queda. Así lo dice
+  `docs/movimiento-salas.md` § Sala 6; si se anima, va en el lote de animar salas.
+- Etiquetas de los tramos en HTML: número, nombre y subtítulo desde 1280 px; de 1024 a 1279 px y en celular, número y
+  lista (a 1024 px los nombres se enciman). Son `aria-hidden`; el dibujo lleva `role="img"` y su descripción.
+- "AJAMOS" junto al logo al pasar por la sala 6 es intencional (barra al 88 %, `docs/calidad.md` § Barra); si se
+  quiere ocultar, lote propio de la barra.
 
 ## Decisiones tomadas en el lote 18
 
