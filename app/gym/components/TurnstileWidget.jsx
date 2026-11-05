@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef } from "react";
+import { tokenSinClave } from "@/app/lib/turnstile-cliente";
 
 // Widget de Cloudflare Turnstile (render explícito). Llama a onVerify(token)
 // cuando el usuario pasa el reto y a onExpire() al expirar/fallar.
@@ -18,8 +19,10 @@ export function TurnstileWidget({ onVerify, onExpire }) {
   useEffect(() => {
     const siteKey = process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY;
     if (!siteKey) {
-      // Sin key configurada no bloqueamos el flujo en desarrollo.
-      onVerifyRef.current?.("dev-no-turnstile");
+      // Sin clave: token de prueba solo en desarrollo (app/lib/turnstile-cliente.js).
+      const token = tokenSinClave();
+      if (token) onVerifyRef.current?.(token);
+      else console.error("Falta NEXT_PUBLIC_TURNSTILE_SITE_KEY: el formulario no se puede enviar.");
       return;
     }
 
