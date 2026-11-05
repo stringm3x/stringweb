@@ -108,7 +108,16 @@ const { data: sesion, error: errorEntrar } = await supabase.auth.signInWithPassw
   email: correo,
   password: contrasena,
 });
-if (errorEntrar || !sesion?.user) salir("No se pudo entrar. Revisa los datos.");
+if (errorEntrar || !sesion?.user) {
+  // Solo el código y el estado HTTP de Supabase (p. ej. invalid_credentials,
+  // email_not_confirmed), para saber qué arreglar. Nunca el mensaje completo,
+  // la contraseña, el token ni el URI.
+  const limpio = (v) => (v === undefined || v === null ? "?" : String(v).replace(/[^\w.-]/g, "").slice(0, 64) || "?");
+  const detalle = errorEntrar
+    ? `código: ${limpio(errorEntrar.code)} · estado: ${limpio(errorEntrar.status)}`
+    : "código: sin_usuario · estado: ?";
+  salir(`No se pudo entrar. Revisa los datos.\n(${detalle})`);
+}
 if (sesion.user.id !== USUARIO_ID) {
   await cerrarYSalir("Este usuario no es INTERNO_USUARIO_ID. No se dio de alta nada.");
 }
