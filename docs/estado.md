@@ -1,6 +1,6 @@
 # Estado · stringwebs.com
 
-Última actualización: 5 nov 2026 (lote 20). Meta del KB: sitio rehecho del 1 al 7 nov; salir a
+Última actualización: 5 nov 2026 (lote 20 y arreglo de formularios). Meta del KB: sitio rehecho del 1 al 7 nov; salir a
 vender el 8 nov.
 
 ## Lotes
@@ -28,6 +28,7 @@ vender el 8 nov.
 | 18 | SEO: título y descripción propios en cada ruta, desde los datos (`niveles.js`, `giros.js`) y `metadatosPagina()` en `app/lib/compartir.js`, todos absolutos; JSON-LD por página (`app/lib/jsonld.js`): ProfessionalService en `/` sin domicilio, SoftwareApplication de Boaz con los precios de `precios.js` y migas en niveles y giros, nada en la 404 ni en /interno; sitemap con `lastmod` fijo por ruta; head sin `viewport` ni `http-equiv` repetidos ni hreflang; 404 con su título; favicon (`favicon.ico` y PNG de 48 px); og:image propia de /boaz; /gym/registro index, follow | `lote-18-seo` | ✅ Fusionado a main (PR #12, visto bueno de Carlos, 4 nov) |
 | 19 | Sala 6, dibujo nuevo: "La obra, de izquierda a derecha", un edificio que se completa en cinco tramos (cimientos, plano, estructura, muros, luz), quieto, con la paleta del arte del 29 oct; generador `scripts/dibujos/sala6.mjs`; etiquetas en HTML alineadas con los tramos (completas desde 1280 px; abajo, número y lista) y `aria-hidden`, el dibujo con su descripción; la raya del paso se queda; fuera las capas viejas y su CSS | `lote-19-sala6` | ✅ Fusionado a main (PR #14, visto bueno de Carlos, 4 nov) |
 | 20 | /interno/diagnostico, versión 1 (guía sin guardar): una pregunta por pantalla para la llamada o la visita, seis giros (gimnasio → Boaz Pro), `sugerirNivel` puro, nivel en tarjeta con boceto o precio fundador, siguiente paso con día, resumen para WhatsApp editable con "Abrir en WhatsApp" y datos para la propuesta; saltar y volver por los puntos; visita rápida; "Salir" y "Nuevo diagnóstico" con confirmación, beforeunload y Wake Lock. No guarda nada. Precios que no se publican en `app/lib/interno/precios-interno.js`. Banco en `/muestrario/diagnostico` (404 en producción) | `lote-20-diagnostico` | ✅ Fusionado a main (PR #16, visto bueno de Carlos, 5 nov). Probado por Carlos en el Preview desde el celular con su sesión |
+| — | Arreglo de formularios: /diagnostico y /gym/registro caídos en producción (4–5 nov) porque Vercel no tenía `NEXT_PUBLIC_TURNSTILE_SITE_KEY` (el widget mandaba un token falso y el servidor respondía 403). Carlos puso en Vercel (Production y Preview) `NEXT_PUBLIC_TURNSTILE_SITE_KEY`, `TURNSTILE_SECRET_KEY` y las SMTP y redesplegó sin caché. En código: el widget ya no da token falso en producción (`app/lib/turnstile-cliente.js`) | `arreglo-formularios` | ✅ Fusionado a main (PR #15, visto bueno de Carlos, 5 nov). Formularios probados en producción (5 nov) |
 
 Producción sirve `main` con el lote 14 (17d1efa: deploy de Vercel en Production y curl a /, /sistemas, /productos y /boaz, 4 nov). Nada se fusiona a `main` sin el visto bueno de Carlos.
 
@@ -67,9 +68,6 @@ Producción sirve `main` con el lote 14 (17d1efa: deploy de Vercel en Production
 - **Domicilio** del responsable para el aviso de privacidad (lo pide la ley) y fecha de publicación. Listo para
   un solo cambio: `DOMICILIO` en `app/(sitio)/aviso-de-privacidad/page.jsx` y la frase en `docs/textos.md`
   (§ Aviso de privacidad, "Quién es responsable de tus datos").
-- **`TURNSTILE_SECRET_KEY`** y las SMTP en Vercel (Preview y Production): sin el secreto,
-  `/api/diagnostico` rechaza todo fuera de desarrollo. Permitir el dominio de la vista previa en
-  Turnstile, mandar una solicitud de prueba y confirmar que llegó. `NOTIFICATION_EMAIL` ya no se usa.
 - Del KB, abiertos: si el sonido se queda, recontar cifras de Evolution GYM.
 - Facebook (profile.php?id=61576042750915) y TikTok (@stringmx) salieron del sameAs en el lote 18. Vuelven al JSON-LD
   solo si Carlos los mantiene activos con su foto y el nombre de STRING.
