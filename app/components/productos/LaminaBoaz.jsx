@@ -4,6 +4,12 @@
 // aquí también. Quieta: sin el vaivén del disco. El contorno toma
 // currentColor (tinta sobre pared), las cotas van en Geist Mono y el disco
 // es la única mancha de color.
+//
+// OJO: la og:image de /boaz (app/(sitio)/boaz/opengraph-image.jsx) llama a
+// esta función y pasa su árbol a SVG con un serializador mínimo: solo
+// elementos SVG con atributos simples; <text> se omite y los `style` se
+// ignoran. Si aquí entra un hook, un componente propio o un elemento nuevo,
+// revisa esa imagen (e2e/seo.spec.js la pide y falla si el generador truena).
 const COTA = {
   fontFamily: "var(--font-mono), ui-monospace, monospace",
   fontSize: "11px",

@@ -2,23 +2,16 @@ import { RegistroForm } from "./RegistroForm";
 import { ARCHIVO, ETIQUETA_BOAZ, archivo } from "@/app/components/boaz/fuentes";
 import { Logotipo } from "@/app/components/boaz/Logotipo";
 import { LaminaBoaz } from "@/app/components/productos/LaminaBoaz";
-import { compartir } from "@/app/lib/compartir";
+import { metadatosPagina } from "@/app/lib/compartir";
 
+// Index y follow (lote 18): la página donde un gimnasio empieza con Boaz.
 export const metadata = {
-  title: { absolute: "Boaz · El sistema para gimnasios, by STRING" },
-  description: "Socios, check-in, cobros y caja para tu gimnasio, probado en un gimnasio real.",
-  alternates: {
-    canonical: "https://www.stringwebs.com/gym/registro",
-  },
-  ...compartir({
-    titulo: "Boaz · El sistema para gimnasios, by STRING",
+  ...metadatosPagina({
+    titulo: "Registra tu gimnasio en Boaz · by STRING",
     descripcion: "Socios, check-in, cobros y caja para tu gimnasio, probado en un gimnasio real.",
-    url: "https://www.stringwebs.com/gym/registro",
+    ruta: "/gym/registro",
   }),
-  robots: {
-    index: true,
-    follow: false,
-  },
+  robots: { index: true, follow: true },
 };
 
 // El id interno del plan Starter sigue siendo "basico": lo valida el SaaS

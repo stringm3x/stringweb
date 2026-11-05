@@ -1,6 +1,6 @@
 # Estado · stringwebs.com
 
-Última actualización: 4 nov 2026 (lote 17). Meta del KB: sitio rehecho del 1 al 7 nov; salir a
+Última actualización: 4 nov 2026 (lote 18). Meta del KB: sitio rehecho del 1 al 7 nov; salir a
 vender el 8 nov.
 
 ## Lotes
@@ -25,6 +25,7 @@ vender el 8 nov.
 | 14 | Limpieza: fuera las imágenes del sitio anterior (`public/serv/`, `proyects/`, `design/`, los PNG sueltos y los del logo anterior en `marca/`), `TarjetaSistema`, `Mancuerna` y `scrollTriggerDefaults`, el legado de `tailwind.config.js` y `globals.css`, la exención de `app/tokens.test.js` (incluida `app/gym/`, que ya cumple) y las dependencias `gsap` y `react-hot-toast` | `lote-14-limpieza` | ✅ Fusionado a `main` (PR #9, 17d1efa, visto bueno de Carlos, 4 nov) |
 | 16 | Cimientos de `/interno` (herramienta privada de Carlos): Supabase propio de STRING, `exigirCarlos()`, `proxy.js` con noindex y sin caché, entrada con contraseña + TOTP, `/interno/diagnostico` vacío, medición fuera de /interno. Sin tablas ni datos de prospectos. Supabase de STRING configurado y TOTP dado de alta (4 nov) | `lote-16-interno-cimientos` | ✅ Fusionado a main (PR #10, visto bueno de Carlos, 4 nov) |
 | 17 | Precios con IVA incluido (decisión del 4 nov): una sola fuente en `app/lib/precios.js`; Responde $9,500 · Organiza $21,000 · Automatiza $32,500 · Controla $46,500 · continuidad $2,100 al mes · Boaz Pro $1,299 al mes y $12,990 al año; la etiqueta "IVA incluido" (`ui/IvaIncluido.jsx`) junto a cada precio y una línea de ayuda en /gym/registro; prueba de que no quedan precios viejos, ni Escala ni el paquete GYM, y de que el JSON-LD no trae precios distintos | `lote-17-precios-iva` | ✅ Fusionado a main (PR #11, visto bueno de Carlos, 4 nov) |
+| 18 | SEO: título y descripción propios en cada ruta, desde los datos (`niveles.js`, `giros.js`) y `metadatosPagina()` en `app/lib/compartir.js`, todos absolutos; JSON-LD por página (`app/lib/jsonld.js`): ProfessionalService en `/` sin domicilio, SoftwareApplication de Boaz con los precios de `precios.js` y migas en niveles y giros, nada en la 404 ni en /interno; sitemap con `lastmod` fijo por ruta; head sin `viewport` ni `http-equiv` repetidos ni hreflang; 404 con su título; favicon (`favicon.ico` y PNG de 48 px); og:image propia de /boaz; /gym/registro index, follow | `lote-18-seo` | ✅ Fusionado a main (PR #12, visto bueno de Carlos, 4 nov) |
 
 Producción sirve `main` con el lote 14 (17d1efa: deploy de Vercel en Production y curl a /, /sistemas, /productos y /boaz, 4 nov). Nada se fusiona a `main` sin el visto bueno de Carlos.
 
@@ -69,6 +70,16 @@ Producción sirve `main` con el lote 14 (17d1efa: deploy de Vercel en Production
   Turnstile, mandar una solicitud de prueba y confirmar que llegó. `NOTIFICATION_EMAIL` ya no se usa.
 - Del KB, abiertos: precio del boceto, si el sonido se queda, recontar cifras de Evolution GYM.
 - `docs/kb/` está desactualizado frente al KB del proyecto (edición 10: precios con IVA). Reemplazar la copia.
+- Facebook (profile.php?id=61576042750915) y TikTok (@stringmx) salieron del sameAs en el lote 18. Vuelven al JSON-LD
+  solo si Carlos los mantiene activos con su foto y el nombre de STRING.
+- **Dominio sin www** (reconocimiento del lote 18): `https://stringwebs.com` redirige a www con **307** (temporal) y
+  `http://stringwebs.com` encadena 308 → 307. En Vercel → Domains, poner la redirección del apex en 308 (o 301). No
+  es código.
+- **Google Search Console**: verificar la propiedad de dominio con un registro TXT en el DNS (cubre www, sin www,
+  http y https) y enviar `https://www.stringwebs.com/sitemap.xml`. Después, el Rich Results Test de `/`, `/boaz`,
+  un nivel y un giro (en el lote 18 solo se validó contra el vocabulario de schema.org, en local).
+- **Perfil de Negocio de Google** como negocio de área de servicio (sin domicilio público), para las búsquedas
+  locales por giro. Lo decide Carlos; Google pide el domicilio en privado para verificar.
 
 ## Ruta privada /interno (lote 16)
 
@@ -113,7 +124,38 @@ Producción sirve `main` con el lote 14 (17d1efa: deploy de Vercel en Production
 - PageSpeed de /boaz: no se pudo en el preview (protección de Vercel y cuota diaria de la API); medir en producción.
 - El dibujo de Boaz (`LaminaBoaz.jsx` y el cuadro de la galería) es copia de `string-gym-saas`, provisional allá: cuando
   llegue el del ilustrador, se copia a mano aquí.
-- Dos `<meta name="viewport">` en el `<head>`.
+- **Lote 19 · rendimiento** (hallazgos del reconocimiento del lote 18, punto 10): el LCP simulado de `/` es 2.8 s y el
+  observado 66 ms, igual al FCP; el elemento es el párrafo de entrada y el 84 % es retraso de pintado, porque
+  Lighthouse cuenta los ~180 KB comprimidos de JS que terminan antes del primer pintado. Candidatos, sin cambiar
+  el diseño: diferir `components/Medicion.jsx` (Analytics y Speed Insights) hasta después de `load`; cargar el
+  audio de `salas/Cuerdas.jsx` solo al activar el sonido; revisar si lo de cliente de `salas/Escenario.jsx` puede
+  ser CSS; cambiar `react-icons` de `header.jsx` por dos SVG en línea; `salas.css` solo en la portada (hoy entra
+  en todo el sitio desde `layout.jsx`); la portada pesa 154 KB de HTML (SVG en línea); en `/sistemas` el LCP es
+  una imagen con `loading="lazy" fetchpriority="low"` en la primera pantalla. Medir con PageSpeed en producción
+  antes y después.
+- **Lote 20 · enlaces a los giros** (copy por aprobar): cada giro con local recibe un solo enlace interno (desde
+  /tu-negocio) y la portada no enlaza a ningún giro; /productos y /tu-negocio solo reciben enlaces de la barra y el
+  pie. Enlazar desde la portada y desde cada nivel hacia sus giros; los textos de los enlaces no están en
+  `docs/textos.md` y se aprueban antes.
+
+## Decisiones tomadas en el lote 18
+
+- Títulos y descripciones aprobados por Carlos (4 nov), en `docs/textos.md` § SEO · lote 18. Viven en los datos:
+  `tituloSeo` y `descripcionSeo` en `niveles.js` y `giros.js`; el resto, en la metadata de cada página con
+  `metadatosPagina()`. La portada, en `PORTADA` (`app/lib/compartir.js`), que también usa el layout por omisión.
+- El JSON-LD ya no sale del layout raíz: cada página pinta el suyo con `components/JsonLd.jsx`, y así la 404 y
+  /interno quedan sin él. ProfessionalService solo en `/`, con `founder` Carlos Avilés, ciudad sin calle y
+  `sameAs` solo Instagram. Logo del JSON-LD: `public/logo/string-pared.png` (pared, 852×516), generado desde
+  `string-pared.svg`.
+- Sin FAQPage: Google solo la muestra a sitios de gobierno y salud. Sin `aggregateRating` ni `review`: no hay
+  reseñas reales.
+- `lastmod` del sitemap: una fecha fija por ruta en `app/sitemap.js` (la del último lote que cambió la ruta). Al
+  cambiar una página, se actualiza a mano.
+- `public/logo/string-pared.png`, `app/icon1.png` y `app/favicon.ico` salen de `node scripts/generar-imagenes-seo.mjs`
+  (se corre a mano si cambia el logo o el ícono).
+- La og:image de /boaz llama a `LaminaBoaz` y la pasa a SVG con un serializador mínimo (sin las cotas: el generador
+  no pinta `<text>`); el texto va en Geist porque el generador no lee woff2. Si `LaminaBoaz` cambia, revisar la imagen
+  (`e2e/seo.spec.js` falla si el generador truena; comprobado).
 
 ## Decisiones tomadas en el lote 13
 

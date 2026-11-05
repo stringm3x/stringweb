@@ -5,7 +5,7 @@ import { Tarjetas } from "@/app/components/tu-negocio/TarjetaGiro";
 import { Boton } from "@/app/components/ui/Boton";
 import { Entra } from "@/app/components/ui/Entra";
 import { GRANDES, precioDe } from "@/app/lib/giros";
-import { compartir } from "@/app/lib/compartir";
+import { metadatosPagina } from "@/app/lib/compartir";
 
 // /tu-negocio/empresas (lote 11, docs/textos.md § Tu negocio · lote 11): cómo
 // trabajamos con empresas, en cuatro pasos; debajo, los cinco giros grandes y
@@ -14,17 +14,12 @@ import { compartir } from "@/app/lib/compartir";
 const ENTRADA =
   "Para empresas con varias áreas o sucursales que necesitan un solo sistema. Se cotiza después de un mapa de procesos firmado.";
 
-export const metadata = {
-  title: "Empresas · Tu negocio",
-  description: ENTRADA,
-  alternates: { canonical: "https://www.stringwebs.com/tu-negocio/empresas" },
-  ...compartir({
-    titulo: "Empresas · Tu negocio · STRING",
-    descripcion: ENTRADA,
-    url: "https://www.stringwebs.com/tu-negocio/empresas",
-    imagenPropia: true,
-  }),
-};
+export const metadata = metadatosPagina({
+  titulo: "Sistemas para empresas con áreas o sucursales · STRING",
+  descripcion: ENTRADA,
+  ruta: "/tu-negocio/empresas",
+  imagenPropia: true,
+});
 
 export default function EmpresasPage() {
   return (

@@ -265,6 +265,8 @@ Carlos Avilés (STRING) usa tu nombre, tu WhatsApp, el giro de tu negocio y lo q
 
 ### Títulos y descripciones
 
+\[Desde el lote 18, los títulos y descripciones vigentes de todas las páginas están en § SEO · lote 18, al final. Esta tabla queda como historia.\]
+
 | Página | Título | Descripción |
 | --- | --- | --- |
 | Inicio | STRING — Software hecho con oficio. Y con arte. | Taller de software en la Ciudad de México. Sistemas que contestan, ordenan y trabajan por tu negocio, desde un local hasta una empresa grande. |
@@ -981,3 +983,60 @@ Decisión del 4 nov: todos los precios públicos de STRING y Boaz van con IVA in
 Preguntas frecuentes: "…desde $9,500 (IVA incluido)." y "…cada mes, desde $2,100 (IVA incluido)."
 
 /gym/registro, debajo del selector de plan: Precios con IVA incluido.
+
+## SEO · lote 18 (aprobados el 4 nov)
+
+Lo que ve Google al buscar el sitio. Todos los títulos van completos (sin plantilla). Open Graph y Twitter llevan el
+mismo título y la misma descripción. Los precios salen de `app/lib/precios.js`: si cambian ahí, cambian aquí.
+
+### Títulos y descripciones
+
+| Ruta | Título | Descripción |
+| --- | --- | --- |
+| / | STRING · Taller de software en la Ciudad de México | Taller de software de Carlos Avilés en la Ciudad de México. Sistemas que contestan, ordenan y trabajan por tu negocio, desde un local hasta una empresa grande. |
+| /sistemas | Sistemas a la medida para tu negocio · STRING | Cinco niveles de sistema a la medida, desde $9,500 con IVA incluido. Empieza por lo que te pasa hoy; cada nivel suma alcance. |
+| /sistemas/responde | Responde: sistema que contesta WhatsApp e Instagram · STRING | Para el negocio al que le llegan mensajes por Instagram y WhatsApp y pierde clientes por no contestar a tiempo. Desde $9,500, IVA incluido. |
+| /sistemas/organiza | Organiza: tus clientes en un solo sistema · STRING | Para el negocio que ya contesta, pero tiene a sus clientes regados entre chats, libretas y Excel. Desde $21,000, IVA incluido. |
+| /sistemas/automatiza | Automatiza: citas y seguimiento sin perder clientes · STRING | Para el negocio que pierde citas y clientes porque nadie da seguimiento a tiempo. Desde $32,500, IVA incluido. |
+| /sistemas/controla | Controla: panel de ventas y tienda en línea · STRING | Para el negocio que ya creció y necesita saber cuánto gana y qué está pasando, o vender en línea con su propia tienda. Desde $46,500, IVA incluido. |
+| /sistemas/empresa | Empresa: sistema a la medida para empresas · STRING | Para la empresa con varias áreas o sucursales, o una tienda en línea grande, que necesita un sistema completo a su medida. Se cotiza. |
+| /tu-negocio | Tu negocio · STRING | Sistemas para barberías, clínicas, restaurantes, tiendas en línea y empresas. Elige tu giro y ve tu escalera de niveles. |
+| /tu-negocio/empresas | Sistemas para empresas con áreas o sucursales · STRING | Para empresas con varias áreas o sucursales que necesitan un solo sistema. Se cotiza después de un mapa de procesos firmado. |
+| /tu-negocio/barberias | Sistema para barberías y estéticas en CDMX · STRING | Tu agenda llena, sin vivir en el WhatsApp. Un sistema para barberías y estéticas en la Ciudad de México, desde $9,500 con IVA incluido. |
+| /tu-negocio/clinicas | Sistema para clínicas y consultorios en CDMX · STRING | Cada paciente atendido a tiempo. Un sistema para clínicas y consultorios en la Ciudad de México, desde $9,500 con IVA incluido. |
+| /tu-negocio/restaurantes | Sistema para restaurantes en CDMX · STRING | Reservas y pedidos sin perder un mensaje. Un sistema para restaurantes en la Ciudad de México, desde $9,500 con IVA incluido. |
+| /tu-negocio/tiendas | Sistema para tiendas en línea en CDMX · STRING | Tu tienda, con tu nombre. Un sistema para tiendas en línea en la Ciudad de México, desde $9,500 con IVA incluido. |
+| /tu-negocio/distribuidoras | Sistema para distribuidoras y mayoristas · STRING | Del pedido a la cobranza, sin perder nada. Un sistema a la medida para distribuidoras y mayoristas, con el alcance que necesita tu operación. |
+| /tu-negocio/inmobiliarias | Sistema para inmobiliarias · STRING | Cada prospecto, cada propiedad, cada cita. Un sistema a la medida para inmobiliarias, con el alcance que necesita tu operación. |
+| /tu-negocio/escuelas | Sistema para escuelas y academias · STRING | Inscripciones, pagos y avisos sin papeles. Un sistema a la medida para escuelas y academias, con el alcance que necesita tu operación. |
+| /tu-negocio/hoteles | Sistema para hoteles · STRING | Reservas, huéspedes y pagos en un solo lugar. Un sistema a la medida para hoteles, con el alcance que necesita tu operación. |
+| /tu-negocio/cadenas | Sistema para cadenas y franquicias · STRING | Todas tus sucursales en un solo panel. Un sistema a la medida para cadenas y franquicias, con el alcance que necesita tu operación. |
+| /boaz | Boaz · Sistema para gimnasios en México, by STRING | Socios, check-in, cobros y caja para tu gimnasio, probado en un gimnasio real. En pesos, sin instalación y sin límite de socios. Desde $799 al mes. |
+| /gym/registro | Registra tu gimnasio en Boaz · by STRING | Socios, check-in, cobros y caja para tu gimnasio, probado en un gimnasio real. |
+| /nosotros | Nosotros · Carlos Avilés y el taller STRING | STRING es un taller de software en Ciudad de México. La historia, el método, el equipo y la fe detrás de cada sistema. |
+| /productos | Productos: Boaz y sistemas a la medida · STRING | Boaz, el sistema para gimnasios, y sistemas a la medida para negocios con local y empresas. Hechos por STRING en Ciudad de México. |
+| /diagnostico | Solicitar diagnóstico · STRING | Cuatro preguntas para saber qué necesita tu negocio. Te respondemos en un día hábil. |
+| /aviso-de-privacidad | Aviso de privacidad · STRING | Cómo usa STRING los datos que dejas en el formulario: quién es el responsable, para qué los usamos y cómo ejercer tus derechos. |
+| /terminos | Términos · STRING | Las condiciones para usar stringwebs.com: qué dice el sitio, qué garantizamos y qué es de STRING. |
+| 404 | Esta sala no existe · STRING | \[sin descripción propia\] |
+
+\[Reglas: ningún título pasa de 60 caracteres ni descripción de 160. Las descripciones de los giros no llevan la cita del
+dueño entre comillas: fuera de la página parecería un testimonio. Los giros con local nombran la ciudad y el precio
+desde Responde; los de empresas medianas y grandes, ninguno de los dos. /gym/gracias conserva "¡Listo!" y su noindex.\]
+
+### Imagen para compartir de /boaz
+
+Sobre papel: el logotipo de Boaz y debajo "El sistema para gimnasios" \[Geist\]; a la derecha, la lámina de la columna
+y el disco, sin las cotas.
+
+Texto alternativo: Boaz, el sistema para gimnasios, con la lámina de la columna y el disco.
+
+### Datos estructurados (lo que Google lee y no se ve)
+
+- **STRING** (en la portada): taller de software en la Ciudad de México, fundado por Carlos Avilés; correo
+  stringwebmx@gmail.com y el teléfono de WhatsApp; atiende la Ciudad de México; Instagram @stringwebmx. Sin domicilio
+  de calle.
+- **Boaz** (en /boaz): aplicación web para negocios. Starter $799 al mes y Pro $1,299 al mes, en pesos y con IVA
+  incluido. Sin reseñas ni calificaciones.
+- **Migas** en niveles y giros: Inicio › Sistemas › \[nivel\] e Inicio › Tu negocio › \[giro\].
+
