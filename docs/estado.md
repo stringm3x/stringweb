@@ -23,6 +23,7 @@ vender el 8 nov.
 | 12 | Refinar: la tarjeta con su dibujo (giros, /productos, /sistemas, "Cuando crezcas"); dibujos nuevos de Gimnasios, "A la medida" y los cinco niveles en chico; el hilo entre secciones (máximo 2–3 por página); generadores en `scripts/dibujos/` y los dibujos por svgo | `lote-12-refinar` | ✅ Fusionado a `main` (PR #7, 242149e) |
 | 13 | Pulido para salir a vender: /nosotros en producción revisado (sirve el lote 10); la firma se anuncia "by STRING" y las cotas de la lámina no se leen; cada página comparte su propio título, descripción e imagen (`app/lib/compartir.js`); `fetchpriority="low"` en el dibujo de la tarjeta; domicilio listo para un solo cambio; descripciones propias de los legales | `lote-13-pulido` | ✅ Fusionado a `main` (PR #8, visto bueno de Carlos, 4 nov); desarrollo en pausa |
 | 14 | Limpieza: fuera las imágenes del sitio anterior (`public/serv/`, `proyects/`, `design/`, los PNG sueltos y los del logo anterior en `marca/`), `TarjetaSistema`, `Mancuerna` y `scrollTriggerDefaults`, el legado de `tailwind.config.js` y `globals.css`, la exención de `app/tokens.test.js` (incluida `app/gym/`, que ya cumple) y las dependencias `gsap` y `react-hot-toast` | `lote-14-limpieza` | ✅ Hecho, sin fusionar |
+| 16 | Cimientos de `/interno` (herramienta privada de Carlos): Supabase propio de STRING, `exigirCarlos()`, `proxy.js` con noindex y sin caché, entrada con contraseña + TOTP, `/interno/diagnostico` vacío, medición fuera de /interno. Sin tablas ni datos de prospectos | `lote-16-interno-cimientos` | 🚧 En curso, sin fusionar |
 
 Producción sirve `main` con el lote 12 (revisado con curl el 4 nov, `reportes/lote-13-reporte.md`). Nada se fusiona a `main` sin el visto bueno de Carlos.
 
@@ -58,6 +59,9 @@ Producción sirve `main` con el lote 12 (revisado con curl el 4 nov, `reportes/l
 
 ## Pendientes de Carlos
 
+- **/interno (lote 16):** crear el proyecto de Supabase de STRING; apagar el registro de usuarios; crear su
+  usuario y copiar el UUID; activar MFA TOTP; poner las tres variables en `.env.local` y en Vercel
+  (Preview y Production); correr `scripts/interno/enrolar-totp.mjs` una vez.
 - **Domicilio** del responsable para el aviso de privacidad (lo pide la ley) y fecha de publicación. Listo para
   un solo cambio: `DOMICILIO` en `app/(sitio)/aviso-de-privacidad/page.jsx` y la frase en `docs/textos.md`
   (§ Aviso de privacidad, "Quién es responsable de tus datos").
@@ -65,6 +69,30 @@ Producción sirve `main` con el lote 12 (revisado con curl el 4 nov, `reportes/l
   `/api/diagnostico` rechaza todo fuera de desarrollo. Permitir el dominio de la vista previa en
   Turnstile, mandar una solicitud de prueba y confirmar que llegó. `NOTIFICATION_EMAIL` ya no se usa.
 - Del KB, abiertos: precio del boceto, si el sonido se queda, recontar cifras de Evolution GYM.
+
+## Ruta privada /interno (lote 16)
+
+- `/interno/*` es privada: fuera del sitemap, la barra, el menú y el pie; sin canonical, Open Graph ni
+  redirect; `noindex` en la metadata y en `X-Robots-Tag`, `Cache-Control: private, no-store`. No se
+  agrega a `public/robots.txt` (listarla ahí la anunciaría).
+- Supabase: proyecto propio de STRING (nunca el de Boaz), sin service role. Variables:
+  `NEXT_PUBLIC_SUPABASE_URL`, `NEXT_PUBLIC_SUPABASE_ANON_KEY` (o `NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY`) e
+  `INTERNO_USUARIO_ID`. Si falta una, nadie entra.
+- Cada página, server action y route handler de `/interno` llama a `exigirCarlos()`, salvo estas tres
+  acciones de la entrada:
+  - "Entrar" (contraseña): si el usuario que inicia sesión no es `INTERNO_USUARIO_ID`, cierra la sesión
+    de inmediato y responde el error genérico.
+  - "Verificar" (código): vuelve a comprobar el UUID y que la sesión quede en aal2; si no, cierra la
+    sesión y responde el error genérico.
+  - "Salir": solo cierra la sesión.
+
+  El error es siempre el mismo ("No se pudo entrar. Revisa los datos."): no revela si el correo existe,
+  si la contraseña falló o si el usuario no es el permitido.
+- **Alta del TOTP** (una sola vez, en la Mac de Carlos): `node scripts/interno/enrolar-totp.mjs`. Lee las
+  variables de `.env.local`, pide correo y contraseña (oculta), revisa que el UUID sea `INTERNO_USUARIO_ID`
+  y muestra en pantalla el URI `otpauth://` para la app de códigos; luego pide el primer código y lo
+  verifica. No escribe nada a disco ni a logs. El URI es secreto: no se comparte, no se captura y no se
+  pega en ningún lado. Si ya hay un factor verificado, no crea otro. Nada del sitio importa el script.
 
 ## Pendientes para después del lanzamiento
 

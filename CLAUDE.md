@@ -128,6 +128,24 @@ Páginas: `/`, `/sistemas` y `/sistemas/responde`, `/organiza`, `/automatiza`, `
 toca ese envío). No se crean `/galeria`,
 `/estandar` ni `/preguntas`. `/#niveles` sigue como ancla de la portada.
 
+**Ruta privada: `/interno/*`** (lote 16). Herramienta de Carlos para las llamadas con prospectos:
+`/interno/entrar` y `/interno/diagnostico`. Solo entra Carlos (UUID `INTERNO_USUARIO_ID`, contraseña +
+TOTP, sesión aal2, validado en el servidor); si falta algo, no se entra. Sin sitemap, menú, pie,
+canonical, Open Graph ni redirect; `noindex` en la metadata y `X-Robots-Tag: noindex, nofollow` +
+`Cache-Control: private, no-store` desde `proxy.js`. `public/robots.txt` no la menciona. Sin Header
+ni Footer del sitio y sin medición (Analytics y Speed Insights la descartan).
+Supabase: proyecto propio de STRING, nunca la base de Boaz. Solo se usa en `app/(interno)/` y
+`app/lib/interno/`; única excepción, `scripts/interno/enrolar-totp.mjs` (alta del TOTP, se corre a
+mano; nada lo importa). Cada página, server action y route handler de `/interno` llama a
+`exigirCarlos()`, salvo estas tres acciones de la entrada:
+- "Entrar" (contraseña): si el usuario que inicia sesión no es `INTERNO_USUARIO_ID`, cierra la sesión
+  de inmediato y responde el error genérico.
+- "Verificar" (código): vuelve a comprobar el UUID y que la sesión quede en aal2; si no, cierra la
+  sesión y responde el error genérico.
+- "Salir": solo cierra la sesión.
+El error es siempre el mismo ("No se pudo entrar. Revisa los datos."): no revela si el correo
+existe, si la contraseña falló o si el usuario no es el permitido.
+
 Redirects (en `next.config.mjs`, con `statusCode: 301`, no `permanent: true`, que emite 308).
 Sin cadenas: cada ruta vieja apunta al destino final.
 
