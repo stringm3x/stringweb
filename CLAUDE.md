@@ -166,7 +166,7 @@ fotos de stock y superlativos sin respaldo.
 
 ## Stack y comandos
 
-- Next.js 16.1 (App Router), React 19, Tailwind 3.4, GSAP, react-hook-form + zod, nodemailer.
+- Next.js 16.1 (App Router), React 19, Tailwind 3.4, react-hook-form + zod, nodemailer.
 - **JavaScript puro. No migrar a TypeScript.**
 - `npm run dev` · `npm run build` · `npm test` (Vitest; hoy solo cubre `quote-schema`).
 - `npm run lint` está roto (el parser exige `typescript`): deuda técnica, no se arregla de paso.

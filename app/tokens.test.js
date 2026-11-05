@@ -6,15 +6,6 @@ import path from "path";
 // tokens de app/globals.css (las líneas que definen --variables).
 const RAIZ = path.resolve(__dirname, "..");
 
-// Legado de /saas y /gym con el diseño anterior: no se toca en el rehecho
-// (docs/estado.md). Se borra de aquí cuando se rehagan.
-const LEGADO = [
-  "app/gym/",
-  "app/components/ui/TitularBrochada.jsx",
-  "app/components/forms/FormField.jsx",
-  "app/components/forms/FormSelect.jsx",
-];
-
 const SUELTAS = [
   /\b\d*\.?\d+m?s\b/, // 150ms, 0.3s
   /cubic-bezier\(/,
@@ -43,7 +34,6 @@ describe("tokens de movimiento", () => {
     const sueltas = [];
     for (const ruta of rutas) {
       const relativa = path.relative(RAIZ, ruta);
-      if (LEGADO.some((l) => relativa.startsWith(l))) continue;
       fs.readFileSync(ruta, "utf8")
         .split("\n")
         .forEach((linea, i) => {

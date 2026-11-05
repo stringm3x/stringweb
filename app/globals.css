@@ -42,14 +42,6 @@
     /* Danza (sala 7): el vaivén de las cintas, la única animación continua. */
     --arte-dur-danza: 12s;
     --arte-curva-danza: ease-in-out;
-
-    /* Legado de /saas y /gym (diseño anterior), hasta que se rehagan. */
-    --legado-dur-cinta: 30s;
-    --legado-dur-girar: 24s;
-    --legado-dur-imprimir: 0.35s;
-    --legado-dur-tic: 0.5s;
-    --legado-espera-tic: 0.4s;
-    --legado-dur-giro: 1s;
   }
 
   /* Tema Noche: el principal. */
@@ -145,10 +137,6 @@
     --arte-concreto: #eae1cf;
     --arte-vidrio: #cfdce0;
     --arte-amarillo-obra: #e0a526;
-
-    /* Legado: las ilustraciones viejas piden Anton por variable. Anton ya
-       no se carga; caen en Geist hasta que se rehagan las salas. */
-    --font-anton-sans: var(--font-sans);
   }
 
   html,
@@ -390,8 +378,7 @@
   }
 }
 
-/* Movimiento reducido: lleva al mínimo transiciones y animaciones CSS.
-   .animate-spin queda exento porque es feedback de carga, no decorativo. */
+/* Movimiento reducido: lleva al mínimo transiciones y animaciones CSS. */
 @media (prefers-reduced-motion: reduce) {
   *,
   *::before,
@@ -400,10 +387,5 @@
     animation-iteration-count: 1 !important;
     transition-duration: var(--dur-quieto) !important;
     scroll-behavior: auto !important;
-  }
-
-  .animate-spin {
-    animation-duration: var(--legado-dur-giro) !important;
-    animation-iteration-count: infinite !important;
   }
 }
