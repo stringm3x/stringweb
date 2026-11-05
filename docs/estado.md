@@ -1,6 +1,6 @@
 # Estado · stringwebs.com
 
-Última actualización: 4 nov 2026 (lote 14). Meta del KB: sitio rehecho del 1 al 7 nov; salir a
+Última actualización: 4 nov 2026 (lote 16). Meta del KB: sitio rehecho del 1 al 7 nov; salir a
 vender el 8 nov.
 
 ## Lotes
@@ -22,9 +22,10 @@ vender el 8 nov.
 | 11 | Tu negocio: /tu-negocio, /tu-negocio/empresas y nueve giros (dos plantillas, `app/lib/giros.js`), nueve dibujos, barra, menú, pie y sitemap; dos giros nuevos en el formulario con su marca en el correo; el fondo claro solo para Boaz (sala 6 y método de /nosotros en noche) | `lote-11-tu-negocio` | ✅ Fusionado a `main` (2 nov, PR #6) |
 | 12 | Refinar: la tarjeta con su dibujo (giros, /productos, /sistemas, "Cuando crezcas"); dibujos nuevos de Gimnasios, "A la medida" y los cinco niveles en chico; el hilo entre secciones (máximo 2–3 por página); generadores en `scripts/dibujos/` y los dibujos por svgo | `lote-12-refinar` | ✅ Fusionado a `main` (PR #7, 242149e) |
 | 13 | Pulido para salir a vender: /nosotros en producción revisado (sirve el lote 10); la firma se anuncia "by STRING" y las cotas de la lámina no se leen; cada página comparte su propio título, descripción e imagen (`app/lib/compartir.js`); `fetchpriority="low"` en el dibujo de la tarjeta; domicilio listo para un solo cambio; descripciones propias de los legales | `lote-13-pulido` | ✅ Fusionado a `main` (PR #8, visto bueno de Carlos, 4 nov); desarrollo en pausa |
-| 14 | Limpieza: fuera las imágenes del sitio anterior (`public/serv/`, `proyects/`, `design/`, los PNG sueltos y los del logo anterior en `marca/`), `TarjetaSistema`, `Mancuerna` y `scrollTriggerDefaults`, el legado de `tailwind.config.js` y `globals.css`, la exención de `app/tokens.test.js` (incluida `app/gym/`, que ya cumple) y las dependencias `gsap` y `react-hot-toast` | `lote-14-limpieza` | ✅ Hecho, sin fusionar |
+| 14 | Limpieza: fuera las imágenes del sitio anterior (`public/serv/`, `proyects/`, `design/`, los PNG sueltos y los del logo anterior en `marca/`), `TarjetaSistema`, `Mancuerna` y `scrollTriggerDefaults`, el legado de `tailwind.config.js` y `globals.css`, la exención de `app/tokens.test.js` (incluida `app/gym/`, que ya cumple) y las dependencias `gsap` y `react-hot-toast` | `lote-14-limpieza` | ✅ Fusionado a `main` (PR #9, 17d1efa, visto bueno de Carlos, 4 nov) |
+| 16 | Cimientos de `/interno` (herramienta privada de Carlos): Supabase propio de STRING, `exigirCarlos()`, `proxy.js` con noindex y sin caché, entrada con contraseña + TOTP, `/interno/diagnostico` vacío, medición fuera de /interno. Sin tablas ni datos de prospectos | `lote-16-interno-cimientos` | ✅ Fusionado a main (PR #10, visto bueno de Carlos, 4 nov) |
 
-Producción sirve `main` con el lote 12 (revisado con curl el 4 nov, `reportes/lote-13-reporte.md`). Nada se fusiona a `main` sin el visto bueno de Carlos.
+Producción sirve `main` con el lote 14 (17d1efa: deploy de Vercel en Production y curl a /, /sistemas, /productos y /boaz, 4 nov). Nada se fusiona a `main` sin el visto bueno de Carlos.
 
 ## Arreglos del KB Parte 7
 
@@ -39,6 +40,7 @@ Producción sirve `main` con el lote 12 (revisado con curl el 4 nov, `reportes/l
 ## Deuda técnica (no se corrige en el rehecho)
 
 - `npm run lint` roto: el parser de `eslint-config-next` exige `typescript`.
+- npm audit: 27 avisos previos (next, vite, eslint…), ninguno de @supabase. Revisar en un lote propio.
 - `e2e/componentes.spec.js` reescribe las capturas de `reportes/lote-6-componentes/` cada vez que corre (lote 11: se
   regresaron a mano); debería escribirlas fuera del repo.
 - e2e inestable: `refinar.spec.js` compara 180 px exactos y falla por subpíxel (180.000244) cuando la suite corre en paralelo. Cambiar a una tolerancia (toBeCloseTo o ±0.5 px) en un lote propio.
@@ -58,6 +60,11 @@ Producción sirve `main` con el lote 12 (revisado con curl el 4 nov, `reportes/l
 
 ## Pendientes de Carlos
 
+- **/interno (lote 16):** crear el proyecto de Supabase de STRING; apagar el registro de usuarios; crear su
+  usuario y copiar el UUID; activar MFA TOTP; poner las cuatro variables en `.env.local` y en Vercel
+  (Preview y Production). `INTERNO_SECRETO` es solo de servidor (sin `NEXT_PUBLIC_`), se genera con
+  `openssl rand -base64 32` y lleva un valor distinto en `.env.local`, en Preview y en Production; revisar en
+  Auth → Rate Limits los límites de verificación; correr `scripts/interno/enrolar-totp.mjs` una vez.
 - **Domicilio** del responsable para el aviso de privacidad (lo pide la ley) y fecha de publicación. Listo para
   un solo cambio: `DOMICILIO` en `app/(sitio)/aviso-de-privacidad/page.jsx` y la frase en `docs/textos.md`
   (§ Aviso de privacidad, "Quién es responsable de tus datos").
@@ -65,6 +72,39 @@ Producción sirve `main` con el lote 12 (revisado con curl el 4 nov, `reportes/l
   `/api/diagnostico` rechaza todo fuera de desarrollo. Permitir el dominio de la vista previa en
   Turnstile, mandar una solicitud de prueba y confirmar que llegó. `NOTIFICATION_EMAIL` ya no se usa.
 - Del KB, abiertos: precio del boceto, si el sonido se queda, recontar cifras de Evolution GYM.
+
+## Ruta privada /interno (lote 16)
+
+- `/interno/*` es privada: fuera del sitemap, la barra, el menú y el pie; sin canonical, Open Graph ni
+  redirect; `noindex` en la metadata y en `X-Robots-Tag`, Cache-Control con `no-store` (`private` cuando Next lo permite). No se
+  agrega a `public/robots.txt` (listarla ahí la anunciaría).
+- Supabase: proyecto propio de STRING (nunca el de Boaz), sin service role. Variables:
+  `NEXT_PUBLIC_SUPABASE_URL`, `NEXT_PUBLIC_SUPABASE_ANON_KEY` (o `NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY`) e
+  `INTERNO_USUARIO_ID`, más `INTERNO_SECRETO` (solo servidor, 32 caracteres o más; firma la cuenta de
+  intentos del código). Si falta una, nadie entra.
+- Cada página, server action y route handler de `/interno` llama a `exigirCarlos()`, salvo estas tres
+  acciones de la entrada:
+  - "Entrar" (contraseña): si el usuario que inicia sesión no es `INTERNO_USUARIO_ID`, cierra la sesión
+    de inmediato y responde el error genérico. Si es Carlos, la cuenta de códigos fallidos empieza en 0.
+  - "Verificar" (código): exige la sesión aal1 de Carlos antes y aal2 de Carlos después; con otro UUID,
+    cierra la sesión. Formato malo (no son 6 dígitos): solo error de validación, no llega a Supabase ni
+    cierra la sesión. Código incorrecto: sigue en aal1 y deja reintentar; al quinto fallido seguido,
+    cierra la sesión y vuelve a correo y contraseña. La cuenta vive en la cookie httpOnly
+    `interno-intentos`, firmada con `INTERNO_SECRETO` y ligada a la sesión (`session_id`) y al usuario,
+    con 15 minutos de vida; si no se puede validar (falta, alterada, de otra sesión o caducada), cuenta
+    como límite alcanzado.
+  - "Salir": solo cierra la sesión.
+
+  El error es siempre el mismo ("No se pudo entrar. Revisa los datos."): no revela si el correo existe,
+  si la contraseña o el código fallaron o si el usuario no es el permitido.
+- Límite conocido de la cuenta de intentos: sin estado en el servidor (no hay tablas en este lote), una
+  cookie válida guardada y reenviada dentro de la misma sesión no se distingue. La frenan la contraseña
+  (hace falta para tener la sesión aal1) y los límites de verificación de Supabase (Auth → Rate Limits).
+- **Alta del TOTP** (una sola vez, en la Mac de Carlos): `node scripts/interno/enrolar-totp.mjs`. Lee las
+  variables de `.env.local`, pide correo y contraseña (oculta), revisa que el UUID sea `INTERNO_USUARIO_ID`
+  y muestra en pantalla el URI `otpauth://` para la app de códigos; luego pide el primer código y lo
+  verifica. No escribe nada a disco ni a logs. El URI es secreto: no se comparte, no se captura y no se
+  pega en ningún lado. Si ya hay un factor verificado, no crea otro. Nada del sitio importa el script.
 
 ## Pendientes para después del lanzamiento
 

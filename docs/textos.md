@@ -928,6 +928,25 @@ Todos en línea, a mano, en noche, con un solo toque verde, en el estilo del lot
 
 **Lote 12 · tarjetas con dibujo.** Los dibujos nuevos (Gimnasios, "A la medida" y los cinco niveles en chico) y la lámina de Boaz dentro de su tarjeta son decorativos: van en la zona de dibujo de un enlace que ya se nombra con su texto, así que **no llevan alt** (`alt=""` / `aria-hidden`). Tampoco el número de la zona ("01", "01 · PRODUCTOS"): es decorativo y no entra al nombre del enlace. El texto de las tarjetas no cambia.
 
+## Interno · lote 16 (4 nov)
+
+Herramienta privada de Carlos en `/interno` (no es parte del sitio público: sin barra, pie ni metadatos para compartir).
+
+### /interno/entrar
+
+- Título: "Entrar"
+- Campos: "Correo" · "Contraseña" · "Código de 6 dígitos"
+- Botones: "Entrar" (correo y contraseña) · "Verificar" (código)
+- Error: "No se pudo entrar. Revisa los datos."
+
+### Barra de /interno
+
+"STRING · Interno" · "Salir"
+
+### /interno/diagnostico
+
+- Título: "Diagnóstico"
+
 ## Por confirmar antes del brief
 
 - [x] **Foto de Carlos** en la sala 3: foto real (falta que la mande).

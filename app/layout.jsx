@@ -1,6 +1,5 @@
 import localFont from "next/font/local";
-import { Analytics } from "@vercel/analytics/react";
-import { SpeedInsights } from "@vercel/speed-insights/next";
+import Medicion from "./components/Medicion";
 import { CORREO, WHATSAPP_TELEFONO } from "./lib/contacto";
 import "./globals.css";
 import "./salas.css";
@@ -121,8 +120,7 @@ export default function RootLayout({ children }) {
         className="font-sans bg-fondo text-texto antialiased"
       >
         {children}
-        <Analytics />
-        <SpeedInsights />
+        <Medicion />
       </body>
     </html>
   );
