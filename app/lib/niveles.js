@@ -2,9 +2,11 @@
 // qué hace, precio, viñeta y nota) y, desde el lote 8, su página
 // (/sistemas/<slug>, docs/pagina-nivel.md) con las secciones "Sistemas",
 // "Lo que cambia por nivel" y "Ejemplos y textos alternativos de los
-// niveles". Los precios "desde" coinciden con CLAUDE.md; si cambian, manda
+// niveles". Los precios "desde" salen de app/lib/precios.js; si cambian, manda
 // el KB. Cada nivel es una cuerda con su nota (docs/sistema/components/Cuerda):
 // La, Re, Sol y Si; Empresa las toca juntas, como la orquesta completa.
+import { precioNivel } from "./precios";
+
 const LA = 110;
 const RE = 146.8;
 const SOL = 196;
@@ -48,7 +50,7 @@ export const NIVELES = [
     dices: "Me escriben y no alcanzo a contestar.",
     cita: true,
     hace: "Página propia, WhatsApp, formulario y un mensaje automático. Nadie se queda sin respuesta",
-    precio: "Desde $8,000",
+    precio: precioNivel("responde"),
     vineta: "/arte/sala4-vineta-responde.svg",
     notas: [LA],
   },
@@ -75,7 +77,7 @@ export const NIVELES = [
     dices: "Tengo a mis clientes regados en chats y en Excel.",
     cita: true,
     hace: "Lo de Responde, más registro de prospectos, calificación y avisos",
-    precio: "Desde $18,000",
+    precio: precioNivel("organiza"),
     vineta: "/arte/sala4-vineta-organiza.svg",
     notas: [RE],
   },
@@ -104,7 +106,7 @@ export const NIVELES = [
     dices: "Quiero que el sistema siga aunque yo no esté.",
     cita: true,
     hace: "Lo de Organiza, más respuesta inmediata, agenda, seguimiento, recordatorios y panel",
-    precio: "Desde $28,000",
+    precio: precioNivel("automatiza"),
     vineta: "/arte/sala4-vineta-automatiza.svg",
     notas: [SOL],
   },
@@ -137,7 +139,7 @@ export const NIVELES = [
     dices: "Quiero saber cuánto gano y qué está pasando.",
     cita: true,
     hace: "Lo de Automatiza, hecho a la medida: sistema de clientes propio, paneles e integraciones",
-    precio: "Desde $40,000",
+    precio: precioNivel("controla"),
     vineta: "/arte/sala4-vineta-controla.svg",
     notas: [SI],
   },
@@ -167,7 +169,7 @@ export const NIVELES = [
     dices: "Para empresas grandes",
     cita: false,
     hace: "Un sistema completo, con equipo por proyecto. Se cotiza después del mapa de procesos",
-    precio: "Se cotiza",
+    precio: precioNivel("empresa"),
     vineta: "/arte/sala4-vineta-empresa.svg",
     notas: [LA, RE, SOL, SI],
   },

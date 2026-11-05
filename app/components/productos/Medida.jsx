@@ -3,6 +3,8 @@ import { Boton } from "../ui/Boton";
 import { Tarjeta } from "../ui/Tarjeta";
 import { Entra } from "../ui/Entra";
 import { Hilo } from "../ui/Hilo";
+import { IvaIncluido } from "../ui/IvaIncluido";
+import { DESDE } from "@/app/lib/precios";
 
 // Bloque 4 de /productos (lote 9a): a la medida. La vitrina enseña cómo se
 // ve lo que construimos con ejemplos, nunca como clientes: cada tarjeta
@@ -18,7 +20,7 @@ const VITRINA = [
     nivel: "responde",
     titular: "Nadie se queda sin respuesta.",
     frase: "Contesta al instante por WhatsApp y toma la reservación.",
-    precio: "RESPONDE · DESDE $8,000",
+    precio: `RESPONDE · DESDE ${DESDE.responde}`,
     pantalla: (
       <>
         <p className="max-w-[85%] self-start rounded-lg rounded-bl-none bg-hairline px-space-3 py-space-2 text-pequeno text-texto">
@@ -35,7 +37,7 @@ const VITRINA = [
     nivel: "organiza",
     titular: "Cada paciente nuevo, en su lugar.",
     frase: "Registra a quien pregunta, qué le interesa y si ya agendó.",
-    precio: "ORGANIZA · DESDE $18,000",
+    precio: `ORGANIZA · DESDE ${DESDE.organiza}`,
     pantalla: (
       <>
         <p className="flex items-center gap-space-2 self-start rounded-pill border border-hairline px-space-3 py-space-1 text-pequeno text-texto">
@@ -61,7 +63,7 @@ const VITRINA = [
     nivel: "automatiza",
     titular: "La agenda se llena sola.",
     frase: "Agenda la cita, manda el recordatorio y da seguimiento.",
-    precio: "AUTOMATIZA · DESDE $28,000",
+    precio: `AUTOMATIZA · DESDE ${DESDE.automatiza}`,
     pantalla: (
       <>
         <p className={PIE}>AGENDA DE HOY</p>
@@ -86,7 +88,7 @@ const VITRINA = [
     nivel: "controla",
     titular: "Tu tienda, con tu nombre.",
     frase: "Catálogo, carrito, pagos, inventario y pedidos en un solo sistema.",
-    precio: "CONTROLA · DESDE $40,000",
+    precio: `CONTROLA · DESDE ${DESDE.controla}`,
     pantalla: (
       <>
         <p className={PIE}>PEDIDOS</p>
@@ -155,7 +157,10 @@ export function Medida() {
                   </div>
                   <h4 className="text-subtitulo">{caso.titular}</h4>
                   <p className="text-cuerpo text-texto-suave">{caso.frase}</p>
-                  <p className="mt-auto font-mono text-etiqueta text-texto">{caso.precio}</p>
+                  <p className="mt-auto font-mono text-etiqueta text-texto">
+                    {caso.precio}
+                    {caso.nivel !== "empresa" && <> <IvaIncluido /></>}
+                  </p>
                   <p className="flex items-center gap-space-2 text-cuerpo font-semibold text-texto">
                     Ver el nivel <span aria-hidden="true">→</span>
                   </p>

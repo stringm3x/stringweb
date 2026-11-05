@@ -164,7 +164,7 @@ export const NIVELES_GRANDES = [
   { nivel: "empresa", texto: "Varias áreas o sucursales, con equipo por proyecto." },
 ];
 
-// "desde $8,000" o "se cotiza", tal como en el copy: en minúscula.
+// "desde $9,500" o "se cotiza", tal como en el copy: en minúscula.
 export const precioDe = (slug) => nivelPorSlug(slug).precio.replace(/^./, (c) => c.toLowerCase());
 
 const completar = (grupo, desde) => (giro) => ({

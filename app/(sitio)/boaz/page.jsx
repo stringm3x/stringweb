@@ -7,6 +7,8 @@ import { Firma } from "@/app/components/productos/Firma";
 import { LaminaBoaz } from "@/app/components/productos/LaminaBoaz";
 import { whatsappUrl } from "@/app/lib/contacto";
 import { compartir } from "@/app/lib/compartir";
+import { BOAZ } from "@/app/lib/precios";
+import { IvaIncluido } from "@/app/components/ui/IvaIncluido";
 
 // /boaz (lote 9b, camino A): la página de Boaz con su identidad (G) dentro
 // del sitio. Papel, tinta, azul de botones y enlaces; #2979FF solo como
@@ -190,10 +192,12 @@ function Planes() {
                   Al mes
                 </th>
                 <td className={CELDA}>
-                  <span className="font-boaz-mono text-[32px] font-bold leading-none tracking-[-0.02em] sm:text-[44px]">$799</span>
+                  <span className="font-boaz-mono text-[32px] font-bold leading-none tracking-[-0.02em] sm:text-[44px]">{BOAZ.starter.mes}</span>
+                  <IvaIncluido boaz className="mt-2 block" />
                 </td>
                 <td className={`${CELDA} ${PRO}`}>
-                  <span className="font-boaz-mono text-[32px] font-bold leading-none tracking-[-0.02em] sm:text-[44px]">$1,799</span>
+                  <span className="font-boaz-mono text-[32px] font-bold leading-none tracking-[-0.02em] sm:text-[44px]">{BOAZ.pro.mes}</span>
+                  <IvaIncluido boaz className="mt-2 block" />
                 </td>
               </tr>
               <tr>
@@ -201,10 +205,12 @@ function Planes() {
                   Al año
                 </th>
                 <td className={CELDA}>
-                  <span className="font-boaz-mono text-[20px] sm:text-[22px]">$7,990</span>
+                  <span className="font-boaz-mono text-[20px] sm:text-[22px]">{BOAZ.starter.anual}</span>
+                  <IvaIncluido boaz className="mt-1 block" />
                 </td>
                 <td className={`${CELDA} ${PRO}`}>
-                  <span className="font-boaz-mono text-[20px] sm:text-[22px]">$17,990</span>
+                  <span className="font-boaz-mono text-[20px] sm:text-[22px]">{BOAZ.pro.anual}</span>
+                  <IvaIncluido boaz className="mt-1 block" />
                 </td>
               </tr>
               {FILAS_PLANES.map(([rotulo, starter, pro]) => (

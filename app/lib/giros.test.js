@@ -51,9 +51,9 @@ describe("giros", () => {
     }
   });
 
-  it("las tarjetas dicen desde cuánto: $8,000 con local, $40,000 las grandes y Cadenas se cotiza", () => {
-    LOCAL.forEach((g) => expect(g.cta).toBe("DESDE $8,000"));
-    GRANDES.forEach((g) => expect(g.cta).toBe(g.slug === "cadenas" ? "SE COTIZA" : "DESDE $40,000"));
+  it("las tarjetas dicen desde cuánto: $9,500 con local, $46,500 las grandes y Cadenas se cotiza", () => {
+    LOCAL.forEach((g) => expect(g.cta).toBe("DESDE $9,500"));
+    GRANDES.forEach((g) => expect(g.cta).toBe(g.slug === "cadenas" ? "SE COTIZA" : "DESDE $46,500"));
   });
 
   it("cada giro tiene su dibujo", () => {

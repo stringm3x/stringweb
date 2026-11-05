@@ -4,6 +4,8 @@ import { archivo } from "./archivo";
 import { Entra } from "../ui/Entra";
 import { Firma } from "./Firma";
 import { LaminaBoaz } from "./LaminaBoaz";
+import { BOAZ as PRECIOS_BOAZ } from "@/app/lib/precios";
+import { IvaIncluido } from "../ui/IvaIncluido";
 
 // Bloque 2 de /productos (lote 9a): Boaz, la única sala clara de la página.
 // Texto a la izquierda y su lámina a la derecha (en celular, debajo). Listas
@@ -25,8 +27,8 @@ const HACE = [
 ];
 
 const PLANES = [
-  { nombre: "Starter", frase: "Sal del cuaderno.", mes: "$799", anual: "$7,990" },
-  { nombre: "Pro", frase: "Vende más en el mismo local.", mes: "$1,799", anual: "$17,990", recomendado: true },
+  { nombre: "Starter", frase: "Sal del cuaderno.", mes: PRECIOS_BOAZ.starter.mes, anual: PRECIOS_BOAZ.starter.anual },
+  { nombre: "Pro", frase: "Vende más en el mismo local.", mes: PRECIOS_BOAZ.pro.mes, anual: PRECIOS_BOAZ.pro.anual, recomendado: true },
 ];
 
 const SUBTITULO = "font-mono text-etiqueta uppercase text-texto";
@@ -128,9 +130,12 @@ export function BloqueBoaz() {
                 <p className="text-cuerpo text-texto">{plan.frase}</p>
                 <p className="font-mono text-texto">
                   <span className="text-[28px] leading-tight">{plan.mes}</span>{" "}
-                  <span className="text-etiqueta uppercase">AL MES</span>
+                  <span className="text-etiqueta uppercase">AL MES</span>{" "}
+                  <IvaIncluido />
                 </p>
-                <p className="font-mono text-etiqueta uppercase text-texto-suave">O {plan.anual} AL AÑO</p>
+                <p className="font-mono text-etiqueta text-texto-suave">
+                  <span className="uppercase">O {plan.anual} AL AÑO</span> <IvaIncluido />
+                </p>
               </li>
             ))}
           </ul>

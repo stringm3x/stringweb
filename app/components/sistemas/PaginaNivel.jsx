@@ -1,7 +1,9 @@
 import { NIVELES, nivelPorSlug } from "@/app/lib/niveles";
+import { SE_COTIZA } from "@/app/lib/precios";
 import { Cierre } from "../salas/Cierre";
 import { CUERPO, ETIQUETA } from "../salas/estilos";
 import { DibujoTarjeta, Tarjeta, dosCifras } from "../ui/Tarjeta";
+import { IvaIncluido } from "../ui/IvaIncluido";
 import { Ejemplo } from "./Ejemplo";
 import { FichaObra } from "./FichaObra";
 
@@ -47,7 +49,10 @@ function Crezcas({ nivel }) {
           </span>
           <span aria-hidden="true">→</span>
         </span>
-        <span className="font-mono text-cifra text-texto-suave">{siguiente.precio}</span>
+        <span className="font-mono text-cifra text-texto-suave">
+          {siguiente.precio}
+          {siguiente.precio !== SE_COTIZA && <> <IvaIncluido /></>}
+        </span>
       </Tarjeta>
     </>
   );
@@ -56,9 +61,13 @@ function Crezcas({ nivel }) {
 export function PaginaNivel({ slug }) {
   const nivel = nivelPorSlug(slug);
   const cotiza = nivel.precio === "Se cotiza";
-  const resumen = cotiza
-    ? "SE COTIZA · SEGÚN SU PROPUESTA"
-    : `${nivel.precio} · DE ${nivel.tiempo}`.toUpperCase();
+  const resumen = cotiza ? (
+    "SE COTIZA · SEGÚN SU PROPUESTA"
+  ) : (
+    <>
+      {nivel.precio.toUpperCase()} <IvaIncluido /> · DE {nivel.tiempo.toUpperCase()}
+    </>
+  );
 
   return (
     <>

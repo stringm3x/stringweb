@@ -1,7 +1,7 @@
 import { DibujoTarjeta, Tarjeta, dosCifras } from "../ui/Tarjeta";
 
 // La tarjeta de un giro (lote 11): nombre, su frase y, en mono, desde cuánto
-// ("DESDE $8,000 →"), "SE COTIZA →" o "CONOCE BOAZ →". Los giros grandes van
+// ("DESDE $9,500 →"), "SE COTIZA →" o "CONOCE BOAZ →". Los giros grandes van
 // con la cuerda de 3 px. Arriba, su dibujo y su número (lote 12).
 export function TarjetaGiro({ giro, cuerda, numero }) {
   return (

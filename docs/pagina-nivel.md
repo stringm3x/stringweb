@@ -33,7 +33,7 @@ Dos columnas: contenido a la izquierda (fluido) y la **ficha de la obra** a la d
 - "Artes que suma": la fila de las siete viñetas, encendidas solo las del nivel (la última que suma en verde); debajo `N DE 7 · EMPRESA LAS TIENE TODAS` (en Empresa: `7 DE 7`).
 - Línea fina.
 - "Desde" + precio en Geist Mono 36 px (Empresa: "Se cotiza").
-- Lista de definición: Tiempo, Pago, Después (continuidad desde $1,800 al mes), todo en Mono donde hay cifras.
+- Lista de definición: Tiempo, Pago, Después (continuidad desde $2,100 al mes), todo en Mono donde hay cifras.
 - Botón primario "Solicitar diagnóstico" a todo el ancho.
 
 **Al final:** el Cierre de la portada.

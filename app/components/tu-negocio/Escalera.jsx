@@ -3,6 +3,7 @@ import { precioDe } from "@/app/lib/giros";
 import { nivelPorSlug } from "@/app/lib/niveles";
 import { CUERPO, ETIQUETA } from "../salas/estilos";
 import { Entra } from "../ui/Entra";
+import { IvaIncluido } from "../ui/IvaIncluido";
 import { CuerdaFija } from "./CuerdaFija";
 
 // La escalera de un giro con local (lote 11): cinco escalones, de Responde a
@@ -40,7 +41,10 @@ export function Escalera({ filas }) {
                       {nivel.nombre}
                     </Link>
                   </h3>
-                  <p className="font-mono text-cifra text-texto">{precioDe(f.nivel)}</p>
+                  <p className="font-mono text-cifra text-texto">
+                    {precioDe(f.nivel)}
+                    {f.nivel !== "empresa" && <> <IvaIncluido /></>}
+                  </p>
                 </div>
                 <div className="flex flex-col gap-space-1">
                   <p className={ROTULO}>Lo que te pasa</p>

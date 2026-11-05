@@ -3,6 +3,7 @@ import { nivelPorSlug } from "@/app/lib/niveles";
 import { CUERPO, ETIQUETA } from "../salas/estilos";
 import { Boton } from "../ui/Boton";
 import { Entra } from "../ui/Entra";
+import { IvaIncluido } from "../ui/IvaIncluido";
 import { Tarjeta } from "../ui/Tarjeta";
 import { CabeceraGiro } from "./CabeceraGiro";
 import { CuerdaFija } from "./CuerdaFija";
@@ -48,7 +49,10 @@ export function PaginaGiroGrande({ giro }) {
                 <li key={slug} className="flex">
                   <Tarjeta href={`/sistemas/${slug}`} cuerda={3} className="flex w-full flex-col gap-space-3">
                     <h3 className="text-subtitulo">{nivel.nombre}</h3>
-                    <p className="font-mono text-cifra text-texto">{precioDe(slug)}</p>
+                    <p className="font-mono text-cifra text-texto">
+                      {precioDe(slug)}
+                      {slug !== "empresa" && <> <IvaIncluido /></>}
+                    </p>
                     <p className={CUERPO}>{texto}</p>
                     <p className="mt-auto flex items-center gap-space-2 text-cuerpo font-semibold text-texto">
                       Ver el nivel <span aria-hidden="true">→</span>

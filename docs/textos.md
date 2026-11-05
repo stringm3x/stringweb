@@ -69,11 +69,13 @@ Todos los niveles reciben la misma calidad. Cambia el alcance.
 
 | Nivel | Si dices… | Qué hace tu sistema | Precio |
 | --- | --- | --- | --- |
-| **Responde** | "Me escriben y no alcanzo a contestar." | Página propia, WhatsApp, formulario y un mensaje automático. Nadie se queda sin respuesta | Desde $8,000 |
-| **Organiza** | "Tengo a mis clientes regados en chats y en Excel." | Lo de Responde, más registro de prospectos, calificación y avisos | Desde $18,000 |
-| **Automatiza** | "Quiero que el sistema siga aunque yo no esté." | Lo de Organiza, más respuesta inmediata, agenda, seguimiento, recordatorios y panel | Desde $28,000 |
-| **Controla** | "Quiero saber cuánto gano y qué está pasando." | Lo de Automatiza, hecho a la medida: sistema de clientes propio, paneles e integraciones | Desde $40,000 |
+| **Responde** | "Me escriben y no alcanzo a contestar." | Página propia, WhatsApp, formulario y un mensaje automático. Nadie se queda sin respuesta | Desde $9,500 |
+| **Organiza** | "Tengo a mis clientes regados en chats y en Excel." | Lo de Responde, más registro de prospectos, calificación y avisos | Desde $21,000 |
+| **Automatiza** | "Quiero que el sistema siga aunque yo no esté." | Lo de Organiza, más respuesta inmediata, agenda, seguimiento, recordatorios y panel | Desde $32,500 |
+| **Controla** | "Quiero saber cuánto gano y qué está pasando." | Lo de Automatiza, hecho a la medida: sistema de clientes propio, paneles e integraciones | Desde $46,500 |
 | **Empresa** | Para empresas grandes | Un sistema completo, con equipo por proyecto. Se cotiza después del mapa de procesos | Se cotiza |
+
+\[Junto a cada "Desde": la etiqueta IVA incluido. "Se cotiza" no la lleva.\]
 
 Toca una cuerda. **Sonido** \[botón; empieza apagado\]
 
@@ -135,7 +137,7 @@ Un sistema no se entrega y se olvida. Lo cuidamos cada mes: que funcione, que es
 - **Mejora:** lo de Cuida, más ajustes y mejoras cada mes.
 - **Impulsa:** lo de Mejora, más análisis y soporte prioritario.
 
-**Desde $1,800 al mes.**
+**Desde $2,100 al mes.** IVA incluido \[etiqueta\]
 
 &#91;Líneas que se mueven a ritmo constante.\]
 
@@ -159,7 +161,7 @@ Trabajo con un equipo de desarrolladores de confianza cuando un proyecto lo pide
 
 ## Preguntas frecuentes
 
-**¿Cuánto cuesta?** Depende del nivel: desde $8,000. El precio exacto sale del diagnóstico, por escrito.
+**¿Cuánto cuesta?** Depende del nivel: desde $9,500 (IVA incluido). El precio exacto sale del diagnóstico, por escrito.
 
 **¿Cuánto tarda?** Responde y Organiza, de 2 a 3 semanas. Automatiza y Controla, de 4 a 6. Empresa, lo que diga su propuesta.
 
@@ -171,7 +173,7 @@ Trabajo con un equipo de desarrolladores de confianza cuando un proyecto lo pide
 
 **¿Qué es el boceto?** El primer paso de Automatiza en adelante: el mapa de tus procesos, la primera pantalla y tu obra en boceto. Si contratas el sistema, se acredita completo.
 
-**¿Qué pasa después de la entrega?** Sigue la continuidad: cuidamos tu sistema cada mes, desde $1,800.
+**¿Qué pasa después de la entrega?** Sigue la continuidad: cuidamos tu sistema cada mes, desde $2,100 (IVA incluido).
 
 **Tengo un gimnasio. ¿Me sirve?** Para gimnasios ya existe un sistema hecho: **Conoce Boaz** \[enlace a /boaz, desde el lote 9b\].
 
@@ -325,7 +327,7 @@ Giro: \[Giro\]
 Lo que le pasa: \[la opción elegida, o lo que escribió en "Otra cosa"\]
 Nivel sugerido: \[Responde, Organiza, Automatiza, Controla, o "por definir" si eligió Otra cosa\]
 \[Solo si el giro es Gimnasio:\] Es gimnasio: ofrécele Boaz.
-\[Solo si el giro es Tienda en línea:\] Es tienda en línea: la tienda propia va en Controla (desde $40,000). Si solo vende por redes, empieza en Responde u Organiza.
+\[Solo si el giro es Tienda en línea:\] Es tienda en línea: la tienda propia va en Controla (desde $46,500). Si solo vende por redes, empieza en Responde u Organiza.
 \[Solo si el giro es Empresa mediana o grande:\] Es empresa: se cotiza. Ofrécele el boceto y pide el mapa de procesos antes de cotizar.
 
 Estándar: respóndele en un día hábil.
@@ -379,7 +381,7 @@ Empieza por lo que te pasa hoy. Cada nivel incluye todo lo del anterior y suma a
 - El mismo sistema de diseño y el mismo cuidado en cada pantalla.
 - Su propia obra, que nace contigo.
 - Nuestro estándar de servicio: respuesta en un día hábil y avance por escrito cada viernes.
-- Continuidad para que tu sistema siga funcionando, desde $1,800 al mes.
+- Continuidad para que tu sistema siga funcionando, desde $2,100 al mes.
 
 \[Cierre de la portada al final.\]
 
@@ -391,7 +393,7 @@ Empieza por lo que te pasa hoy. Cada nivel incluye todo lo del anterior y suma a
 
 "Me escriben y no alcanzo a contestar." Si eso te pasa, empieza aquí.
 
-DESDE $8,000 · DE 2 A 3 SEMANAS \[Geist Mono\]
+DESDE $9,500 IVA incluido · DE 2 A 3 SEMANAS \[Geist Mono; "IVA incluido" es la etiqueta\]
 
 **Qué incluye**
 
@@ -408,7 +410,7 @@ DESDE $8,000 · DE 2 A 3 SEMANAS \[Geist Mono\]
 
 **Cómo se paga:** 50 % al empezar y 50 % al entregar.
 
-**Después de la entrega:** la continuidad cuida tu sistema cada mes, desde $1,800.
+**Después de la entrega:** la continuidad cuida tu sistema cada mes, desde $2,100.
 
 **Cuando crezcas:** si ya contestas pero se te pierden en el camino, el siguiente paso es **Organiza →**
 
@@ -515,7 +517,9 @@ Se llama Boaz: en hebreo, “en él hay fuerza”. EN PRODUCCIÓN DESDE OCTUBRE 
 | Plan | Frase | Precio |
 | --- | --- | --- |
 | Starter | Sal del cuaderno. | $799 AL MES · O $7,990 AL AÑO |
-| Pro ★ RECOMENDADO | Vende más en el mismo local. | $1,799 AL MES · O $17,990 AL AÑO |
+| Pro ★ RECOMENDADO | Vende más en el mismo local. | $1,299 AL MES · O $12,990 AL AÑO |
+
+\[Junto a cada precio, mensual y anual: la etiqueta IVA incluido.\]
 
 Sin costo de instalación. Sin límite de socios en ningún plan.
 
@@ -543,10 +547,10 @@ ASÍ SE VE LO QUE CONSTRUIMOS \[cada tarjeta: píldora EJEMPLO, giro, pantalla e
 
 | Giro | Pantalla | Titular | Frase | Nivel |
 | --- | --- | --- | --- | --- |
-| RESTAURANTE | “¿Tienen mesa para 4 hoy a las 9?” · “Hola, ya recibimos tu mensaje. En unos minutos te confirmamos.” | Nadie se queda sin respuesta. | Contesta al instante por WhatsApp y toma la reservación. | RESPONDE · DESDE $8,000 |
-| CLÍNICA | Nuevo prospecto por WhatsApp · Consulta general · NUEVO · Limpieza dental · AGENDÓ | Cada paciente nuevo, en su lugar. | Registra a quien pregunta, qué le interesa y si ya agendó. | ORGANIZA · DESDE $18,000 |
-| BARBERÍA | AGENDA DE HOY · 17:00 · Corte · 18:30 · Barba · Recordatorio enviado · mañana 17:00 | La agenda se llena sola. | Agenda la cita, manda el recordatorio y da seguimiento. | AUTOMATIZA · DESDE $28,000 |
-| TIENDA EN LÍNEA | PEDIDOS · #0001 · Pagado · Por enviar · Inventario · QUEDAN 3 | Tu tienda, con tu nombre. | Catálogo, carrito, pagos, inventario y pedidos en un solo sistema. | CONTROLA · DESDE $40,000 |
+| RESTAURANTE | “¿Tienen mesa para 4 hoy a las 9?” · “Hola, ya recibimos tu mensaje. En unos minutos te confirmamos.” | Nadie se queda sin respuesta. | Contesta al instante por WhatsApp y toma la reservación. | RESPONDE · DESDE $9,500 |
+| CLÍNICA | Nuevo prospecto por WhatsApp · Consulta general · NUEVO · Limpieza dental · AGENDÓ | Cada paciente nuevo, en su lugar. | Registra a quien pregunta, qué le interesa y si ya agendó. | ORGANIZA · DESDE $21,000 |
+| BARBERÍA | AGENDA DE HOY · 17:00 · Corte · 18:30 · Barba · Recordatorio enviado · mañana 17:00 | La agenda se llena sola. | Agenda la cita, manda el recordatorio y da seguimiento. | AUTOMATIZA · DESDE $32,500 |
+| TIENDA EN LÍNEA | PEDIDOS · #0001 · Pagado · Por enviar · Inventario · QUEDAN 3 | Tu tienda, con tu nombre. | Catálogo, carrito, pagos, inventario y pedidos en un solo sistema. | CONTROLA · DESDE $46,500 |
 | EMPRESA | Venta → Almacén → Entrega → Cobranza | Toda la operación, conectada. | Une venta, almacén, entrega y cobranza, con un panel por sucursal. | EMPRESA · SE COTIZA |
 
 Estos son ejemplos. Cada sistema que entreguemos ocupará su lugar aquí, con su caso y su obra.
@@ -626,12 +630,13 @@ Titular: Un precio al mes. Sin sorpresas.
 | | Starter | Pro ★ RECOMENDADO |
 | --- | --- | --- |
 | Frase | Sal del cuaderno. | Vende más en el mismo local. |
-| Al mes | $799 | $1,799 |
-| Al año | $7,990 | $17,990 |
+| Al mes | $799 | $1,299 |
+| Al año | $7,990 | $12,990 |
 | Para quién | Un local, una persona en el mostrador. | Mostrador con equipo, clases y portal para tus socios. |
 | Incluye | 01 El mostrador y el QR de cada socio. | Todo Starter, más 02 La operación, 03 El negocio y el portal de tus socios. |
 | Soporte | Por WhatsApp, en 48 horas. | Por WhatsApp, en 24 horas. |
 
+\[Bajo cada precio, mensual y anual: la etiqueta IVA incluido.\]
 \[Escala no aparece.\]
 Sin costo de instalación. Sin límite de socios en ningún plan.
 Botón: Registra tu gimnasio · Debajo: Prueba de 14 días con Pro completo. Sin tarjeta.
@@ -663,7 +668,7 @@ Etiquetas de los campos (ejemplo entre paréntesis):
 - Correo (tu@correo.com)
 - WhatsApp (55 1234 5678)
 - Nombre de tu gimnasio
-- ¿Qué plan te interesa? — Starter · $799 al mes / Pro · $1,799 al mes (recomendado). Ayuda: La prueba es con Pro completo.
+- ¿Qué plan te interesa? — Starter · $799 al mes / Pro · $1,299 al mes (recomendado). Ayuda: La prueba es con Pro completo. Segunda línea de ayuda: Precios con IVA incluido.
 - Ciudad
 - ¿Cuántos socios tienes hoy? \[selector por rangos de hoy, sin texto de ayuda\]
 - ¿Cómo supiste de Boaz? (opcional)
@@ -780,7 +785,7 @@ Etiqueta: TU NEGOCIO
 Titular: Elige tu giro. Te mostramos tu escalera.
 Entrada: De una barbería que no alcanza a contestar a una empresa con varias sucursales. Misma calidad en cada escalón; cambia el alcance.
 
-**Grupo 1 · NEGOCIOS CON LOCAL** \[tarjetas con cuerda; "DESDE $8,000 →" en mono\]
+**Grupo 1 · NEGOCIOS CON LOCAL** \[tarjetas con cuerda; "DESDE $9,500 →" en mono\]
 
 - Barberías y estéticas — Tu agenda llena, sin vivir en el WhatsApp. → /tu-negocio/barberias
 - Clínicas y consultorios — Cada paciente atendido a tiempo. → /tu-negocio/clinicas
@@ -788,7 +793,7 @@ Entrada: De una barbería que no alcanza a contestar a una empresa con varias su
 - Tiendas en línea — Tu tienda, con tu nombre. → /tu-negocio/tiendas
 - Gimnasios — Ya existe tu sistema: Boaz. — "CONOCE BOAZ →" → /boaz \[tarjeta igual a las demás, en noche\]
 
-**Grupo 2 · EMPRESAS MEDIANAS Y GRANDES** \[separado por una línea; cuerda de 3 px; "DESDE $40,000 →", Cadenas "SE COTIZA →"\]
+**Grupo 2 · EMPRESAS MEDIANAS Y GRANDES** \[separado por una línea; cuerda de 3 px; "DESDE $46,500 →", Cadenas "SE COTIZA →"\]
 
 Enlace a la derecha de la etiqueta: Ver cómo trabajamos con empresas → /tu-negocio/empresas
 
@@ -815,10 +820,10 @@ Cierre de siempre.
 TU NEGOCIO · BARBERÍAS Y ESTÉTICAS · Tu agenda llena, sin vivir en el WhatsApp.
 "Me escriben para agendar mientras estoy cortando." · dibujo: tijeras y peine
 
-- Responde · desde $8,000 | Te escriben mientras cortas y no alcanzas a contestar. | Contesta al instante con tus horarios y precios.
-- Organiza · desde $18,000 | Tus clientes están regados en chats. | Cada cliente en su lugar: quién preguntó y quién ya vino.
-- Automatiza · desde $28,000 | Se te olvidan las citas o te dejan plantado. | Agenda la cita, manda el recordatorio y da seguimiento.
-- Controla · desde $40,000 | No sabes cuánto deja cada silla. | Un panel con tus citas, tus ventas y lo que entra cada semana.
+- Responde · desde $9,500 | Te escriben mientras cortas y no alcanzas a contestar. | Contesta al instante con tus horarios y precios.
+- Organiza · desde $21,000 | Tus clientes están regados en chats. | Cada cliente en su lugar: quién preguntó y quién ya vino.
+- Automatiza · desde $32,500 | Se te olvidan las citas o te dejan plantado. | Agenda la cita, manda el recordatorio y da seguimiento.
+- Controla · desde $46,500 | No sabes cuánto deja cada silla. | Un panel con tus citas, tus ventas y lo que entra cada semana.
 - Empresa · se cotiza | Tienes varias sucursales. | Un sistema completo para todas, con equipo por proyecto.
 
 ### /tu-negocio/clinicas
@@ -826,10 +831,10 @@ TU NEGOCIO · BARBERÍAS Y ESTÉTICAS · Tu agenda llena, sin vivir en el WhatsA
 TU NEGOCIO · CLÍNICAS Y CONSULTORIOS · Cada paciente atendido a tiempo.
 "Me preguntan precios y horarios todo el día, y entre consultas no alcanzo." · dibujo: estetoscopio y agenda
 
-- Responde · desde $8,000 | Preguntan por precios y nadie contesta a tiempo. | Contesta al instante con tus servicios y tu horario.
-- Organiza · desde $18,000 | Los interesados se pierden entre chats y llamadas. | Registra a quien pregunta, qué le interesa y si ya agendó.
-- Automatiza · desde $28,000 | Los pacientes faltan a su cita. | Agenda, recuerda la cita y da seguimiento después de la consulta.
-- Controla · desde $40,000 | No ves cuántos pacientes vuelven ni cuánto entra. | Un panel con tus citas, tus pacientes y lo que entra.
+- Responde · desde $9,500 | Preguntan por precios y nadie contesta a tiempo. | Contesta al instante con tus servicios y tu horario.
+- Organiza · desde $21,000 | Los interesados se pierden entre chats y llamadas. | Registra a quien pregunta, qué le interesa y si ya agendó.
+- Automatiza · desde $32,500 | Los pacientes faltan a su cita. | Agenda, recuerda la cita y da seguimiento después de la consulta.
+- Controla · desde $46,500 | No ves cuántos pacientes vuelven ni cuánto entra. | Un panel con tus citas, tus pacientes y lo que entra.
 - Empresa · se cotiza | Tienes varios consultorios o especialistas. | Un sistema completo para toda la clínica, con equipo por proyecto.
 
 ### /tu-negocio/restaurantes
@@ -837,10 +842,10 @@ TU NEGOCIO · CLÍNICAS Y CONSULTORIOS · Cada paciente atendido a tiempo.
 TU NEGOCIO · RESTAURANTES · Reservas y pedidos sin perder un mensaje.
 "En la hora pico no hay quien conteste el WhatsApp." · dibujo: mesa puesta
 
-- Responde · desde $8,000 | Preguntan por mesa o por el menú y nadie contesta. | Contesta al instante y toma la reservación.
-- Organiza · desde $18,000 | Las reservas viven en una libreta y en chats. | Todas las reservas y pedidos en un solo lugar.
-- Automatiza · desde $28,000 | Te reservan y no llegan. | Confirma la reservación y recuerda la hora.
-- Controla · desde $40,000 | No sabes qué días y qué platillos te dejan más. | Un panel con tus reservas, tus pedidos y lo que entra.
+- Responde · desde $9,500 | Preguntan por mesa o por el menú y nadie contesta. | Contesta al instante y toma la reservación.
+- Organiza · desde $21,000 | Las reservas viven en una libreta y en chats. | Todas las reservas y pedidos en un solo lugar.
+- Automatiza · desde $32,500 | Te reservan y no llegan. | Confirma la reservación y recuerda la hora.
+- Controla · desde $46,500 | No sabes qué días y qué platillos te dejan más. | Un panel con tus reservas, tus pedidos y lo que entra.
 - Empresa · se cotiza | Tienes varias sucursales. | Un sistema completo para todas, con equipo por proyecto.
 
 ### /tu-negocio/tiendas
@@ -848,10 +853,10 @@ TU NEGOCIO · RESTAURANTES · Reservas y pedidos sin perder un mensaje.
 TU NEGOCIO · TIENDAS EN LÍNEA · Tu tienda, con tu nombre.
 "Vendo por Instagram y llevo los pedidos en una libreta." · dibujo: caja de envío
 
-- Responde · desde $8,000 | Preguntan precio y existencias y no alcanzas a contestar. | Contesta al instante con tu catálogo y tus precios.
-- Organiza · desde $18,000 | Los pedidos llegan por chats distintos. | Cada pedido y cada cliente en un solo lugar.
-- Automatiza · desde $28,000 | Nadie da seguimiento al que preguntó y no compró. | Da seguimiento y avisa al cliente cómo va su pedido.
-- Controla · desde $40,000 | Quieres vender sin depender de las redes. | Tu tienda en línea propia: catálogo, carrito, pagos, inventario y pedidos.
+- Responde · desde $9,500 | Preguntan precio y existencias y no alcanzas a contestar. | Contesta al instante con tu catálogo y tus precios.
+- Organiza · desde $21,000 | Los pedidos llegan por chats distintos. | Cada pedido y cada cliente en un solo lugar.
+- Automatiza · desde $32,500 | Nadie da seguimiento al que preguntó y no compró. | Da seguimiento y avisa al cliente cómo va su pedido.
+- Controla · desde $46,500 | Quieres vender sin depender de las redes. | Tu tienda en línea propia: catálogo, carrito, pagos, inventario y pedidos.
 - Empresa · se cotiza | Tienes un catálogo grande o varias sucursales. | Una tienda grande, conectada con tus sistemas, con equipo por proyecto.
 
 ### /tu-negocio/empresas
@@ -875,7 +880,7 @@ Debajo, las cinco tarjetas del grupo 2. Empresa · se cotiza · Solicitar diagn�
 
 LO QUE HARÍA TU SISTEMA: cuatro puntos numerados (el 04 con cuerda verde) + "Son ejemplos. Tu sistema se define en el mapa de procesos."
 
-Dos niveles: Controla · desde $40,000 · Una operación, un panel. / Empresa · se cotiza · Varias áreas o sucursales, con equipo por proyecto.
+Dos niveles: Controla · desde $46,500 · Una operación, un panel. / Empresa · se cotiza · Varias áreas o sucursales, con equipo por proyecto.
 
 CÓMO TRABAJAMOS CON EMPRESAS: los cuatro pasos de arriba + Solicitar diagnóstico.
 
@@ -959,3 +964,20 @@ Herramienta privada de Carlos en `/interno` (no es parte del sitio público: sin
 - [x] **Tu fe en /nosotros:** Salmos 73:25–26, al cierre de la historia.
 - [ ] **Domicilio** del responsable para el aviso de privacidad (la ley lo pide).
 - [x] **Foto de Carlos:** la de respaldo es la final; vive en /nosotros (Carlos, 2 nov).
+
+## Precios con IVA incluido · lote 17 (4 nov)
+
+Decisión del 4 nov: todos los precios públicos de STRING y Boaz van con IVA incluido.
+
+- Niveles: Responde desde $9,500 · Organiza desde $21,000 · Automatiza desde $32,500 · Controla desde $46,500 · Empresa se cotiza (sin mínimo publicado).
+- Continuidad: desde $2,100 al mes. Si se nombran los planes: Cuida desde $2,100 · Mejora desde $3,500 · Impulsa desde $5,800 al mes (hoy no se muestran con precio).
+- Boaz: Starter $799 al mes · $7,990 al año; Pro $1,299 al mes · $12,990 al año. Escala y Pro fundador no aparecen. El boceto sigue sin precio.
+- El paquete GYM a medida no aparece en el sitio: los gimnasios van a Boaz.
+
+**Etiqueta:** IVA incluido \[Geist Mono —Ubuntu Mono dentro de Boaz—, tamaño de etiqueta, color secundario\]
+
+\[Va junto a cada "Desde" de los niveles (sala 4, /sistemas, página de nivel y su ficha, /tu-negocio, ejemplos de /productos), al "Desde" de la continuidad (sala 7 y ficha) y a cada precio de Boaz (mensual y anual, en /productos y /boaz). "Se cotiza" no la lleva. En texto corrido solo cambia la cifra, sin etiqueta; las CTA "DESDE $9,500 →" tampoco la llevan.\]
+
+Preguntas frecuentes: "…desde $9,500 (IVA incluido)." y "…cada mes, desde $2,100 (IVA incluido)."
+
+/gym/registro, debajo del selector de plan: Precios con IVA incluido.
