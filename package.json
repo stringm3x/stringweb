@@ -8,7 +8,8 @@
     "start": "next start",
     "lint": "eslint .",
     "test": "vitest run",
-    "test:e2e": "playwright test"
+    "test:e2e": "playwright test",
+    "test:e2e:interno": "playwright test -c playwright.produccion.config.mjs"
   },
   "dependencies": {
     "@hookform/resolvers": "^5.2.2",

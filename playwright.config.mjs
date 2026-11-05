@@ -4,6 +4,8 @@ import { defineConfig, devices } from "@playwright/test";
 // si ya hay uno en el 3000, lo reutilizan.
 export default defineConfig({
   testDir: "./e2e",
+  // /interno se prueba contra producción: playwright.produccion.config.mjs.
+  testIgnore: "interno.spec.js",
   use: { baseURL: "http://localhost:3000" },
   projects: [{ name: "celular", use: { ...devices["iPhone 13"], browserName: "chromium", viewport: { width: 375, height: 812 } } }],
   webServer: {
