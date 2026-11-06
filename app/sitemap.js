@@ -12,6 +12,7 @@ const BASE = "https://www.stringwebs.com";
 const LOTE_13 = "2026-11-04"; // legales y /diagnostico: su descripción propia
 const LOTE_17 = "2026-11-04"; // /tu-negocio: los precios con IVA de las tarjetas
 const LOTE_18 = "2026-11-04"; // títulos, descripciones y JSON-LD
+const LOTE_21 = "2026-11-06"; // /boaz: Escala próximamente y Programa Fundadores
 
 const ROUTES = [
   { path: "/", priority: 1.0, changeFrequency: "weekly", lastmod: LOTE_18 },
@@ -23,7 +24,7 @@ const ROUTES = [
   { path: "/nosotros", priority: 0.7, changeFrequency: "monthly", lastmod: LOTE_18 },
   { path: "/diagnostico", priority: 0.8, changeFrequency: "monthly", lastmod: LOTE_13 },
   { path: "/productos", priority: 0.9, changeFrequency: "weekly", lastmod: LOTE_18 },
-  { path: "/boaz", priority: 0.9, changeFrequency: "weekly", lastmod: LOTE_18 },
+  { path: "/boaz", priority: 0.9, changeFrequency: "weekly", lastmod: LOTE_21 },
   // index, follow desde el lote 18: se queda.
   { path: "/gym/registro", priority: 0.8, changeFrequency: "monthly", lastmod: LOTE_18 },
   { path: "/aviso-de-privacidad", priority: 0.3, changeFrequency: "yearly", lastmod: LOTE_13 },

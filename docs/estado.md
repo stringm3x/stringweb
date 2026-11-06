@@ -1,6 +1,6 @@
 # Estado · stringwebs.com
 
-Última actualización: 5 nov 2026 (lote 20 y arreglo de formularios). Meta del KB: sitio rehecho del 1 al 7 nov; salir a
+Última actualización: 6 nov 2026 (lote 21). Meta del KB: sitio rehecho del 1 al 7 nov; salir a
 vender el 8 nov.
 
 ## Lotes
@@ -29,6 +29,7 @@ vender el 8 nov.
 | 19 | Sala 6, dibujo nuevo: "La obra, de izquierda a derecha", un edificio que se completa en cinco tramos (cimientos, plano, estructura, muros, luz), quieto, con la paleta del arte del 29 oct; generador `scripts/dibujos/sala6.mjs`; etiquetas en HTML alineadas con los tramos (completas desde 1280 px; abajo, número y lista) y `aria-hidden`, el dibujo con su descripción; la raya del paso se queda; fuera las capas viejas y su CSS | `lote-19-sala6` | ✅ Fusionado a main (PR #14, visto bueno de Carlos, 4 nov) |
 | 20 | /interno/diagnostico, versión 1 (guía sin guardar): una pregunta por pantalla para la llamada o la visita, seis giros (gimnasio → Boaz Pro), `sugerirNivel` puro, nivel en tarjeta con boceto o precio fundador, siguiente paso con día, resumen para WhatsApp editable con "Abrir en WhatsApp" y datos para la propuesta; saltar y volver por los puntos; visita rápida; "Salir" y "Nuevo diagnóstico" con confirmación, beforeunload y Wake Lock. No guarda nada. Precios que no se publican en `app/lib/interno/precios-interno.js`. Banco en `/muestrario/diagnostico` (404 en producción) | `lote-20-diagnostico` | ✅ Fusionado a main (PR #16, visto bueno de Carlos, 5 nov). Probado por Carlos en el Preview desde el celular con su sesión |
 | — | Arreglo de formularios: /diagnostico y /gym/registro caídos en producción (4–5 nov) porque Vercel no tenía `NEXT_PUBLIC_TURNSTILE_SITE_KEY` (el widget mandaba un token falso y el servidor respondía 403). Carlos puso en Vercel (Production y Preview) `NEXT_PUBLIC_TURNSTILE_SITE_KEY`, `TURNSTILE_SECRET_KEY` y las SMTP y redesplegó sin caché. En código: el widget ya no da token falso en producción (`app/lib/turnstile-cliente.js`) | `arreglo-formularios` | ✅ Fusionado a main (PR #15, visto bueno de Carlos, 5 nov). Formularios probados en producción (5 nov) |
+| 21 | /boaz: Escala "Próximamente" (tercera columna, no se contrata, botón a WhatsApp) y Programa Fundadores (Pro a $799 fijo 12 meses, cinco lugares, "Quiero ser fundador" a WhatsApp). `BOAZ_ESCALA` y `BOAZ_FUNDADOR` en `precios.js`, aparte de `BOAZ`; /interno toma el fundador de ahí. Lugares (0–5) y estado de Escala a mano en `app/lib/boaz-lanzamiento.js`. El "Registra tu gimnasio" del pie de Planes pasa a secundario. Banco en `/muestrario/boaz` (404 en producción). Nada cambia en /gym/registro, /productos ni el JSON-LD | `lote-21-boaz-fundadores` | 🔶 PR abierto, sin fusionar (espera el visto bueno de Carlos) |
 
 Producción sirve `main` con el lote 14 (17d1efa: deploy de Vercel en Production y curl a /, /sistemas, /productos y /boaz, 4 nov). Nada se fusiona a `main` sin el visto bueno de Carlos.
 
@@ -123,7 +124,7 @@ Producción sirve `main` con el lote 14 (17d1efa: deploy de Vercel en Production
 - PageSpeed de /boaz: no se pudo en el preview (protección de Vercel y cuota diaria de la API); medir en producción.
 - El dibujo de Boaz (`LaminaBoaz.jsx` y el cuadro de la galería) es copia de `string-gym-saas`, provisional allá: cuando
   llegue el del ilustrador, se copia a mano aquí.
-- **Lote 21 · rendimiento** (hallazgos del reconocimiento del lote 18, punto 10): el LCP simulado de `/` es 2.8 s y el
+- **Lote 22 · rendimiento** (hallazgos del reconocimiento del lote 18, punto 10): el LCP simulado de `/` es 2.8 s y el
   observado 66 ms, igual al FCP; el elemento es el párrafo de entrada y el 84 % es retraso de pintado, porque
   Lighthouse cuenta los ~180 KB comprimidos de JS que terminan antes del primer pintado. Candidatos, sin cambiar
   el diseño: diferir `components/Medicion.jsx` (Analytics y Speed Insights) hasta después de `load`; cargar el
@@ -132,17 +133,31 @@ Producción sirve `main` con el lote 14 (17d1efa: deploy de Vercel en Production
   en todo el sitio desde `layout.jsx`); la portada pesa 164 KB de HTML desde el lote 19 (SVG en línea); en `/sistemas` el LCP es
   una imagen con `loading="lazy" fetchpriority="low"` en la primera pantalla. Medir con PageSpeed en producción
   antes y después.
-- **Lote 22 · enlaces a los giros** (copy por aprobar): cada giro con local recibe un solo enlace interno (desde
+- **Lote 23 · enlaces a los giros** (copy por aprobar): cada giro con local recibe un solo enlace interno (desde
   /tu-negocio) y la portada no enlaza a ningún giro; /productos y /tu-negocio solo reciben enlaces de la barra y el
   pie. Enlazar desde la portada y desde cada nivel hacia sus giros; los textos de los enlaces no están en
   `docs/textos.md` y se aprueban antes.
+
+## Decisiones tomadas en el lote 21
+
+- Escala y el Pro fundador viven en `precios.js` como `BOAZ_ESCALA` y `BOAZ_FUNDADOR`, aparte de `BOAZ`: /productos,
+  /gym/registro y el JSON-LD leen `BOAZ` y no pueden arrastrarlos. `precios.test.js` deja "Escala" solo en
+  `components/boaz/datos.js` y `PlanEscala.jsx`; `jsonld.test.js` exige exactamente dos offers (Starter y Pro).
+- Lugares de fundadores y estado de Escala: `app/lib/boaz-lanzamiento.js`, a mano. Un valor que no vale rompe el build.
+  Escala pasa a "pruebas" el día que haya número verificado y socios reales recibiendo mensajes.
+- La regla punteada de Escala queda a la altura de la sólida de la tabla (la píldora y su margen miden 28 px, como
+  "★ RECOMENDADO" en Pro); abajo, Escala lleva su propio ritmo.
+- El número de la casilla azul (#2979FF) va en negro (#000, 5.3:1): la tinta da 4.4:1 (Carlos, 6 nov).
+- Un solo azul por pantalla (propuesta A, Carlos): el "Registra tu gimnasio" del pie de Planes pasa a secundario; el del
+  encabezado y el del cierre siguen primarios.
 
 ## Decisiones tomadas en el lote 20
 
 - Contenido y textos finales de la herramienta: los del prompt del lote y los aprobados por ventas (5 nov), literales
   en `docs/textos.md` § Interno · lote 20.
 - Boceto, precio fundador y el mínimo de Empresa ($80,000) viven en `app/lib/interno/precios-interno.js`, no en
-  `precios.js`: no se publican. El mínimo solo sale en la tarjeta del paso 4; nunca en el resumen ni en los datos.
+  `precios.js`: no se publican. \[Lote 21: el precio fundador se vuelve público y pasa a `precios.js`; /interno lo toma
+  de ahí.\] El mínimo solo sale en la tarjeta del paso 4; nunca en el resumen ni en los datos.
 - P2 común y la P de gimnasio ("¿Sabes…?") son problema con "Más o menos" / "A veces" / "No". La P de Empresa es texto.
 - En el descarte por "No sé", Automatiza solo con la P de barbería, clínica o restaurante en Sí / A veces.
 - Las pruebas en navegador corren en `/muestrario/diagnostico` (mismo componente y barra, sin `exigirCarlos()`), que

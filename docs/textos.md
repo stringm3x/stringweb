@@ -639,7 +639,7 @@ Titular: Un precio al mes. Sin sorpresas.
 | Soporte | Por WhatsApp, en 48 horas. | Por WhatsApp, en 24 horas. |
 
 \[Bajo cada precio, mensual y anual: la etiqueta IVA incluido.\]
-\[Escala no aparece.\]
+\[Escala no aparece.\] \[Lote 21: Escala sale junto a Pro como "Próximamente" y el botón de este pie pasa a secundario; ver § Boaz · lote 21.\]
 Sin costo de instalación. Sin límite de socios en ningún plan.
 Botón: Registra tu gimnasio · Debajo: Prueba de 14 días con Pro completo. Sin tarjeta.
 
@@ -686,6 +686,61 @@ Etiqueta: BOAZ · REGISTRO RECIBIDO
 Titular: ¡Listo! Ya tenemos tu registro.
 Te escribimos por WhatsApp en un día hábil para activar tu prueba.
 Escríbenos por WhatsApp \[botón secundario, con el mensaje que lleva hoy, cambiando "el sistema para gimnasios" por Boaz\] · Volver a Boaz \[→ /boaz\]
+
+## Boaz · lote 21 (aprobados el 6 nov)
+
+\[Decisión de Carlos, 6 nov. Escala sale SOLO en /boaz, como "Próximamente", y no se puede contratar. El Pro fundador es público solo en su sección de /boaz. Ninguno de los dos va en /gym/registro, /productos, el JSON-LD ni otro lugar. Identidad de Boaz: papel, Archivo para nombres de plan y títulos, Geist para el texto, Ubuntu Mono para cifras y etiquetas, sin verde, sin tarjetas ni sombras. Un solo azul por pantalla: "Quiero ser fundador". Cifras de `app/lib/precios.js`; lugares y estado de Escala de `app/lib/boaz-lanzamiento.js`. La palabra "bot" no aparece en ningún texto público.\]
+
+### /boaz · planes · Escala
+
+\[Tercera columna junto a Starter y Pro desde 1024 px; en celular, debajo de Pro. Regla bajo el encabezado punteada (#7D7A72) y precio en color suave (#5C5A55). Voz neutra de producto.\]
+
+Píldora (con borde, mono 11 px, mayúsculas): PRÓXIMAMENTE · EN DESARROLLO \[con el estado "pruebas": PRÓXIMAMENTE · EN PRUEBAS EN UN GIMNASIO REAL\]
+Nombre: Escala
+Frase: El sistema trabaja y te avisa.
+Precio: $1,999 AL MES
+Debajo: IVA INCLUIDO · $19,990 AL AÑO
+Escala incluye todo Pro, y además:
+- WhatsApp con recordatorios y avisos automáticos: vencimiento, socio que dejó de venir y recibos.
+- Bandeja de WhatsApp para contestar a tus socios.
+- Alertas para el dueño.
+- Nutrición en el portal del socio.
+- Soporte en 4 horas hábiles si el sistema no cobra o no deja entrar.
+- Una llamada cada trimestre.
+
+Botón (secundario, con borde): Avísame cuando salga \[abre WhatsApp con: "Hola Carlos, quiero que me avises cuando salga Boaz Escala."\]
+Debajo (mono 11): TODAVÍA NO SE PUEDE CONTRATAR · SE ABRE WHATSAPP
+\[Nunca "Contratar" ni un enlace a /gym/registro desde Escala.\]
+
+\[Pie de la tabla: "Registra tu gimnasio" pasa a botón secundario con borde; el azul de esa pantalla es "Quiero ser fundador".\]
+
+### /boaz · Programa Fundadores
+
+\[Sección propia, justo después de los planes. Primera persona (Carlos). Dos columnas en escritorio (5fr / 7fr); en celular, una columna: título, intro, cifra, lugares, lista, a cambio, botón.\]
+
+Etiqueta: PROGRAMA FUNDADORES
+Cifra (Ubuntu Mono 700, 160 px en escritorio y 112 px en celular, bajo una cota): $799
+AL MES · FIJO 12 MESES
+EN VEZ DE $1,299 · IVA INCLUIDO \[suave\]
+Casillas 01 a 05 (decorativas): tomadas en tinta con el número en papel; la siguiente libre en mancha #2979FF con borde tinta y el número en negro; las demás con borde #7D7A72.
+Lugares (lo que se lee):
+- con 2 a 5: QUEDAN {n} DE 5 LUGARES
+- con 1: QUEDA 1 DE 5 LUGARES
+- con 0: LOS 5 LUGARES ESTÁN TOMADOS
+
+Título: 5 gimnasios fundadores.
+Intro: Busco cinco gimnasios para hacer crecer Boaz con ellos.
+- 01 Pro a $799 al mes, fijo 12 meses, en vez de $1,299. IVA incluido.
+- 02 Escala gratis 6 meses, desde el día que se active.
+- 03 Yo cargo a tus socios y dejo todo listo.
+- 04 Si en el primer mes no te sirve, te devuelvo tu dinero.
+- 05 Línea directa conmigo. Los fundadores opinan primero sobre lo que sigue, en la llamada mensual.
+
+A CAMBIO · pagas desde el primer mes, me das tu opinión y tu testimonio, y apareces como gimnasio fundador. Si cancelas, pierdes el precio de fundador. \["A CAMBIO ·" en mono; el resto en Geist, suave\]
+
+Botón (primario azul, 52 px): Quiero ser fundador \[abre WhatsApp con: "Hola Carlos, quiero ser fundador de Boaz. Mi gimnasio es: "\]
+Debajo (mono 11): SE ABRE WHATSAPP CON CARLOS
+\[Con 0 lugares, en lugar del botón y su línea:\] Los 5 lugares ya tienen dueño. · Botón secundario: Registra tu gimnasio \[→ /gym/registro\]
 
 ## Nosotros · lote 10 (aprobados el 2 nov)
 
@@ -958,7 +1013,7 @@ Herramienta privada de Carlos en `/interno` (no es parte del sitio público: sin
 
 Guía en pantalla para la llamada o la visita. No guarda nada. Textos finales aprobados por ventas (5 nov). Fuente en el
 código: `app/lib/interno/diagnostico/contenido.js` y `resumen.js`; precios desde `app/lib/precios.js` y
-`app/lib/interno/precios-interno.js` (boceto, precio fundador y mínimo de Empresa, que no se publican).
+`app/lib/interno/precios-interno.js` (boceto, precio fundador y mínimo de Empresa, que no se publican). \[Lote 21: el precio fundador pasa a `app/lib/precios.js`; precios-interno.js lo toma de ahí.\]
 
 ### Aviso fijo arriba
 
@@ -1147,7 +1202,7 @@ Decisión del 4 nov: todos los precios públicos de STRING y Boaz van con IVA in
 
 - Niveles: Responde desde $9,500 · Organiza desde $21,000 · Automatiza desde $32,500 · Controla desde $46,500 · Empresa se cotiza (sin mínimo publicado).
 - Continuidad: desde $2,100 al mes. Si se nombran los planes: Cuida desde $2,100 · Mejora desde $3,500 · Impulsa desde $5,800 al mes (hoy no se muestran con precio).
-- Boaz: Starter $799 al mes · $7,990 al año; Pro $1,299 al mes · $12,990 al año. Escala y Pro fundador no aparecen. El boceto sigue sin precio.
+- Boaz: Starter $799 al mes · $7,990 al año; Pro $1,299 al mes · $12,990 al año. Escala y Pro fundador no aparecen. El boceto sigue sin precio. \[Lote 21: los dos salen solo en /boaz; ver § Boaz · lote 21.\]
 - El paquete GYM a medida no aparece en el sitio: los gimnasios van a Boaz.
 
 **Etiqueta:** IVA incluido \[Geist Mono —Ubuntu Mono dentro de Boaz—, tamaño de etiqueta, color secundario\]
