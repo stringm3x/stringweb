@@ -1,5 +1,8 @@
-// Textos de /boaz (docs/textos.md § "Boaz · lote 9b", aprobados el 2 nov),
-// palabra por palabra.
+// Textos de /boaz (docs/textos.md § "Boaz · lote 9b", aprobados el 2 nov, y
+// § "Boaz · lote 21"), palabra por palabra.
+
+import { TOTAL_FUNDADORES } from "@/app/lib/boaz-lanzamiento";
+import { BOAZ, BOAZ_FUNDADOR, IVA } from "@/app/lib/precios";
 
 export const DESCRIPCION =
   "Socios, check-in, cobros y caja para tu gimnasio, probado en un gimnasio real. En pesos, sin instalación y sin límite de socios.";
@@ -96,4 +99,29 @@ export const ESCALA = {
   boton: "Avísame cuando salga",
   nota: "TODAVÍA NO SE PUEDE CONTRATAR · SE ABRE WHATSAPP",
   mensaje: "Hola Carlos, quiero que me avises cuando salga Boaz Escala.",
+};
+
+// Programa Fundadores (lote 21): voz de Carlos, en primera persona. Las cifras
+// salen de precios.js y el total de lugares de app/lib/boaz-lanzamiento.js.
+export const FUNDADORES = {
+  etiqueta: "PROGRAMA FUNDADORES",
+  titulo: `${TOTAL_FUNDADORES} gimnasios fundadores.`,
+  intro: "Busco cinco gimnasios para hacer crecer Boaz con ellos.",
+  plazo: `AL MES · FIJO ${BOAZ_FUNDADOR.meses} MESES`,
+  enVezDe: `EN VEZ DE ${BOAZ.pro.mes} · ${IVA.toUpperCase()}`,
+  puntos: [
+    `Pro a ${BOAZ_FUNDADOR.mes} al mes, fijo ${BOAZ_FUNDADOR.meses} meses, en vez de ${BOAZ.pro.mes}. ${IVA}.`,
+    "Escala gratis 6 meses, desde el día que se active.",
+    "Yo cargo a tus socios y dejo todo listo.",
+    "Si en el primer mes no te sirve, te devuelvo tu dinero.",
+    "Línea directa conmigo. Los fundadores opinan primero sobre lo que sigue, en la llamada mensual.",
+  ],
+  aCambio: "A CAMBIO ·",
+  aCambioTexto:
+    "pagas desde el primer mes, me das tu opinión y tu testimonio, y apareces como gimnasio fundador. Si cancelas, pierdes el precio de fundador.",
+  boton: "Quiero ser fundador",
+  nota: "SE ABRE WHATSAPP CON CARLOS",
+  mensaje: "Hola Carlos, quiero ser fundador de Boaz. Mi gimnasio es: ",
+  sinLugares: `Los ${TOTAL_FUNDADORES} lugares ya tienen dueño.`,
+  registro: "Registra tu gimnasio",
 };

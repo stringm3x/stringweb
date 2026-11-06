@@ -2,6 +2,7 @@ import Link from "next/link";
 import { BotonBoaz } from "@/app/components/boaz/BotonBoaz";
 import { DESCRIPCION, FILAS_PLANES, GRUPOS, NOTA_PRUEBA, PREGUNTAS, SELLOS } from "@/app/components/boaz/datos";
 import { ARCHIVO, ETIQUETA_BOAZ, archivo, ubuntuMono } from "@/app/components/boaz/fuentes";
+import { Fundadores } from "@/app/components/boaz/Fundadores";
 import { Logotipo } from "@/app/components/boaz/Logotipo";
 import { PlanEscala } from "@/app/components/boaz/PlanEscala";
 import { Firma } from "@/app/components/productos/Firma";
@@ -248,6 +249,17 @@ function Planes() {
   );
 }
 
+// Lote 21: el Programa Fundadores, justo después de los planes.
+function ProgramaFundadores() {
+  return (
+    <section id="fundadores" aria-labelledby="boaz-fundadores" className={`${ENVOLTURA} scroll-mt-20`}>
+      <div className={SECCION}>
+        <Fundadores />
+      </div>
+    </section>
+  );
+}
+
 function Preguntas() {
   return (
     <section aria-labelledby="boaz-t5" className={ENVOLTURA}>
@@ -309,6 +321,7 @@ export default function BoazPage() {
       <LoQueHace />
       <ComoNacio />
       <Planes />
+      <ProgramaFundadores />
       <Preguntas />
       <Cierre hilo={false} />
     </div>

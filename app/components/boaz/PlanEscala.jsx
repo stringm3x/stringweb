@@ -13,10 +13,10 @@ import { BOAZ_ESCALA, IVA } from "@/app/lib/precios";
 // tabla, con la regla punteada a la altura de la sólida (la píldora y su margen
 // miden 28 px, lo mismo que "★ RECOMENDADO" con el suyo en Pro); abajo de 1024,
 // debajo de Pro. Nunca "Contratar" ni un enlace a /gym/registro.
-export function PlanEscala({ estado = ESCALA_ESTADO }) {
+export function PlanEscala({ estado = ESCALA_ESTADO, idTitulo = "boaz-escala" }) {
   return (
     <section
-      aria-labelledby="boaz-escala"
+      aria-labelledby={idTitulo}
       data-plan="escala"
       className="mt-14 lg:mt-[9px] lg:border-l lg:border-hairline lg:pl-6"
     >
@@ -24,7 +24,7 @@ export function PlanEscala({ estado = ESCALA_ESTADO }) {
         <p className="inline-flex rounded-pill border border-borde px-3 py-[3px] font-boaz-mono text-[11px] uppercase leading-4 tracking-[0.14em]">
           {ESCALA.pildora[estado]}
         </p>
-        <h3 id="boaz-escala" className={`${archivo.className} mt-1 text-[40px] leading-none sm:text-[56px]`} style={ARCHIVO}>
+        <h3 id={idTitulo} className={`${archivo.className} mt-1 text-[40px] leading-none sm:text-[56px]`} style={ARCHIVO}>
           {ESCALA.nombre}
         </h3>
         <p className="mt-2.5 text-[17px]">{ESCALA.frase}</p>
