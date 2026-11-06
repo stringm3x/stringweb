@@ -167,7 +167,7 @@ Sin cadenas: cada ruta vieja apunta al destino final.
 | `/proyectos`, `/Proyects` | `/#galeria` |
 | `/cotizacion`, `/quote` | `/diagnostico` |
 | `/Us` | `/nosotros` |
-| `/privacy-policy` | `/aviso-de-privacidad` |
+| `/privacy-policy`, `/privacidad` | `/aviso-de-privacidad` |
 | `/terms` | `/terminos` |
 | `/saas`, `/gym/empezar` | `/boaz` |
 

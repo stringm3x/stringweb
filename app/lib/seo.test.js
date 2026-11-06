@@ -117,5 +117,7 @@ describe("SEO (lote 18)", () => {
     ["/", "/sistemas", "/tu-negocio", "/tu-negocio/empresas", "/boaz", "/gym/registro", "/productos", "/nosotros", "/diagnostico", "/aviso-de-privacidad", "/terminos"].forEach((r) =>
       expect(rutas).toContain(r),
     );
+    // /privacidad es solo un redirect: no va al sitemap.
+    expect(rutas).not.toContain("/privacidad");
   });
 });

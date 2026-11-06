@@ -64,3 +64,13 @@ test("/boaz comparte su propia imagen", async ({ page, request }) => {
   expect(res.status()).toBe(200);
   expect(res.headers()["content-type"]).toBe("image/png");
 });
+
+test("/privacidad va al aviso de privacidad con 301", async ({ request }) => {
+  // Boaz (string-gym-saas) enlaza a /privacidad.
+  const r = await request.get("/privacidad", { maxRedirects: 0 });
+  expect(r.status()).toBe(301);
+  expect(r.headers().location).toMatch(/\/aviso-de-privacidad$/);
+  const destino = await request.get("/privacidad");
+  expect(destino.status()).toBe(200);
+  expect(new URL(destino.url()).pathname).toBe("/aviso-de-privacidad");
+});
