@@ -46,6 +46,10 @@ describe("JSON-LD (lote 18)", () => {
     ];
     expect(b.offers.map((o) => [o.name, o.price])).toEqual(esperado);
     expect(esperado).toEqual([["Starter", "799"], ["Pro", "1299"]]);
+    // Lote 21: exactamente dos offers; ni Escala ni el Pro fundador.
+    expect(b.offers).toHaveLength(2);
+    b.offers.forEach((o) => expect(o.name).not.toMatch(/escala|fundador/i));
+    expect(JSON.stringify(b)).not.toMatch(/Escala|fundador|1999|19990/i);
     b.offers.forEach((o) => {
       expect(o.priceCurrency).toBe("MXN");
       expect(o.priceSpecification.price).toBe(o.price);

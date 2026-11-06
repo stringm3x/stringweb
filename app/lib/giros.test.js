@@ -77,6 +77,8 @@ describe("fondo claro", () => {
     "app/(sitio)/boaz/page.jsx",
     "app/gym/layout.jsx",
     "app/muestrario/page.jsx",
+    // Lote 21: el banco de Fundadores y Escala (404 en producción).
+    "app/muestrario/boaz/page.jsx",
   ];
   const archivos = (dir) =>
     fs.readdirSync(dir, { withFileTypes: true }).flatMap((e) => {

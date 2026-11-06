@@ -2,7 +2,9 @@ import Link from "next/link";
 import { BotonBoaz } from "@/app/components/boaz/BotonBoaz";
 import { DESCRIPCION, FILAS_PLANES, GRUPOS, NOTA_PRUEBA, PREGUNTAS, SELLOS } from "@/app/components/boaz/datos";
 import { ARCHIVO, ETIQUETA_BOAZ, archivo, ubuntuMono } from "@/app/components/boaz/fuentes";
+import { Fundadores } from "@/app/components/boaz/Fundadores";
 import { Logotipo } from "@/app/components/boaz/Logotipo";
+import { PlanEscala } from "@/app/components/boaz/PlanEscala";
 import { Firma } from "@/app/components/productos/Firma";
 import { LaminaBoaz } from "@/app/components/productos/LaminaBoaz";
 import { whatsappUrl } from "@/app/lib/contacto";
@@ -164,76 +166,95 @@ function Planes() {
             Un precio al mes. Sin sorpresas.
           </h2>
         </div>
-        <div className="-mx-5 overflow-x-auto px-5 sm:mx-0 sm:px-0">
-          <table className="mt-2 w-full min-w-[350px] border-collapse">
-            <thead>
-              <tr>
-                <th scope="col" className="w-[22%] border-b border-borde pb-5">
-                  <span className="sr-only">Plan</span>
-                </th>
-                <th scope="col" className="border-b border-borde pb-5 pr-4 text-left align-top font-normal sm:pr-6">
-                  <span className={`${NOMBRE} block`} style={ARCHIVO}>
-                    Starter
-                  </span>
-                  <span className="mt-2.5 block text-[17px]">Sal del cuaderno.</span>
-                </th>
-                <th scope="col" className={`border-b border-borde pb-5 text-left align-top font-normal ${PRO}`}>
-                  <span className={`${NOMBRE} block`} style={ARCHIVO}>
-                    Pro
-                  </span>
-                  <span className="mt-2.5 block text-[17px]">Vende más en el mismo local.</span>
-                  <span className="mt-2.5 inline-flex items-center gap-2 font-boaz-mono text-[12px] tracking-[0.16em]">
-                    <i aria-hidden="true" className="inline-block h-2.5 w-2.5 rounded-full bg-boaz-azul" />★ RECOMENDADO
-                  </span>
-                </th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <th scope="row" className={ROTULO}>
-                  Al mes
-                </th>
-                <td className={CELDA}>
-                  <span className="font-boaz-mono text-[32px] font-bold leading-none tracking-[-0.02em] sm:text-[44px]">{BOAZ.starter.mes}</span>
-                  <IvaIncluido boaz className="mt-2 block" />
-                </td>
-                <td className={`${CELDA} ${PRO}`}>
-                  <span className="font-boaz-mono text-[32px] font-bold leading-none tracking-[-0.02em] sm:text-[44px]">{BOAZ.pro.mes}</span>
-                  <IvaIncluido boaz className="mt-2 block" />
-                </td>
-              </tr>
-              <tr>
-                <th scope="row" className={ROTULO}>
-                  Al año
-                </th>
-                <td className={CELDA}>
-                  <span className="font-boaz-mono text-[20px] sm:text-[22px]">{BOAZ.starter.anual}</span>
-                  <IvaIncluido boaz className="mt-1 block" />
-                </td>
-                <td className={`${CELDA} ${PRO}`}>
-                  <span className="font-boaz-mono text-[20px] sm:text-[22px]">{BOAZ.pro.anual}</span>
-                  <IvaIncluido boaz className="mt-1 block" />
-                </td>
-              </tr>
-              {FILAS_PLANES.map(([rotulo, starter, pro]) => (
-                <tr key={rotulo}>
-                  <th scope="row" className={ROTULO}>
-                    {rotulo}
+        {/* Lote 21: Escala a la derecha de la tabla desde 1024 px; abajo de
+            1024, debajo de Pro. La tabla de Starter y Pro no cambia. */}
+        <div className="lg:grid lg:grid-cols-[minmax(0,1fr)_280px] lg:gap-6 xl:grid-cols-[minmax(0,1fr)_340px]">
+          <div className="-mx-5 overflow-x-auto px-5 sm:mx-0 sm:px-0">
+            <table className="mt-2 w-full min-w-[350px] border-collapse">
+              <thead>
+                <tr>
+                  <th scope="col" className="w-[22%] border-b border-borde pb-5">
+                    <span className="sr-only">Plan</span>
                   </th>
-                  <td className={CELDA}>{starter}</td>
-                  <td className={`${CELDA} ${PRO}`}>{pro}</td>
+                  <th scope="col" className="border-b border-borde pb-5 pr-4 text-left align-top font-normal sm:pr-6">
+                    <span className={`${NOMBRE} block`} style={ARCHIVO}>
+                      Starter
+                    </span>
+                    <span className="mt-2.5 block text-[17px]">Sal del cuaderno.</span>
+                  </th>
+                  <th scope="col" className={`border-b border-borde pb-5 text-left align-top font-normal ${PRO}`}>
+                    <span className={`${NOMBRE} block`} style={ARCHIVO}>
+                      Pro
+                    </span>
+                    <span className="mt-2.5 block text-[17px]">Vende más en el mismo local.</span>
+                    <span className="mt-2.5 inline-flex items-center gap-2 font-boaz-mono text-[12px] tracking-[0.16em]">
+                      <i aria-hidden="true" className="inline-block h-2.5 w-2.5 rounded-full bg-boaz-azul" />★ RECOMENDADO
+                    </span>
+                  </th>
                 </tr>
-              ))}
-            </tbody>
-          </table>
+              </thead>
+              <tbody>
+                <tr>
+                  <th scope="row" className={ROTULO}>
+                    Al mes
+                  </th>
+                  <td className={CELDA}>
+                    <span className="font-boaz-mono text-[32px] font-bold leading-none tracking-[-0.02em] sm:text-[44px]">{BOAZ.starter.mes}</span>
+                    <IvaIncluido boaz className="mt-2 block" />
+                  </td>
+                  <td className={`${CELDA} ${PRO}`}>
+                    <span className="font-boaz-mono text-[32px] font-bold leading-none tracking-[-0.02em] sm:text-[44px]">{BOAZ.pro.mes}</span>
+                    <IvaIncluido boaz className="mt-2 block" />
+                  </td>
+                </tr>
+                <tr>
+                  <th scope="row" className={ROTULO}>
+                    Al año
+                  </th>
+                  <td className={CELDA}>
+                    <span className="font-boaz-mono text-[20px] sm:text-[22px]">{BOAZ.starter.anual}</span>
+                    <IvaIncluido boaz className="mt-1 block" />
+                  </td>
+                  <td className={`${CELDA} ${PRO}`}>
+                    <span className="font-boaz-mono text-[20px] sm:text-[22px]">{BOAZ.pro.anual}</span>
+                    <IvaIncluido boaz className="mt-1 block" />
+                  </td>
+                </tr>
+                {FILAS_PLANES.map(([rotulo, starter, pro]) => (
+                  <tr key={rotulo}>
+                    <th scope="row" className={ROTULO}>
+                      {rotulo}
+                    </th>
+                    <td className={CELDA}>{starter}</td>
+                    <td className={`${CELDA} ${PRO}`}>{pro}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+          <PlanEscala />
         </div>
         <div className="mt-8 flex flex-wrap items-center justify-between gap-5">
           <p className="text-texto-suave">Sin costo de instalación. Sin límite de socios en ningún plan.</p>
           <div className="flex flex-wrap items-center gap-x-5 gap-y-3">
-            <BotonBoaz href="/gym/registro">Registra tu gimnasio</BotonBoaz>
+            {/* Secundario (lote 21): el azul de esta pantalla es "Quiero ser fundador". */}
+            <BotonBoaz href="/gym/registro" variante="secundario">
+              Registra tu gimnasio
+            </BotonBoaz>
             <p className={NOTA}>{NOTA_PRUEBA}</p>
           </div>
         </div>
+      </div>
+    </section>
+  );
+}
+
+// Lote 21: el Programa Fundadores, justo después de los planes.
+function ProgramaFundadores() {
+  return (
+    <section id="fundadores" aria-labelledby="boaz-fundadores" className={`${ENVOLTURA} scroll-mt-20`}>
+      <div className={SECCION}>
+        <Fundadores />
       </div>
     </section>
   );
@@ -300,6 +321,7 @@ export default function BoazPage() {
       <LoQueHace />
       <ComoNacio />
       <Planes />
+      <ProgramaFundadores />
       <Preguntas />
       <Cierre hilo={false} />
     </div>

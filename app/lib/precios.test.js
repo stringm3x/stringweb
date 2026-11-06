@@ -1,7 +1,7 @@
 import { describe, expect, it } from "vitest";
 import fs from "fs";
 import path from "path";
-import { BOAZ, CONTINUIDAD, CONTINUIDAD_DESDE, DESDE, IVA, SE_COTIZA, precioNivel } from "./precios";
+import { BOAZ, BOAZ_ESCALA, BOAZ_FUNDADOR, CONTINUIDAD, CONTINUIDAD_DESDE, DESDE, IVA, SE_COTIZA, precioNivel } from "./precios";
 
 // Lote 17: precios con IVA incluido (decisión del 4 nov). precios.js es la
 // fuente única; ningún archivo público de app/ guarda los precios viejos, ni
@@ -48,6 +48,16 @@ describe("precios", () => {
     });
   });
 
+  // Lote 21 (6 nov): Escala y el Pro fundador viven aparte de BOAZ, para que
+  // /productos, /gym/registro y el JSON-LD, que leen BOAZ, no los arrastren.
+  it("Escala y el Pro fundador están aparte de BOAZ", () => {
+    expect(BOAZ_ESCALA).toEqual({ mes: "$1,999", anual: "$19,990" });
+    expect(BOAZ_FUNDADOR).toEqual({ mes: "$799", meses: 12 });
+    expect(Object.keys(BOAZ)).toEqual(["starter", "pro"]);
+    expect(Object.values(BOAZ)).not.toContain(BOAZ_ESCALA);
+    expect(Object.values(BOAZ)).not.toContain(BOAZ_FUNDADOR);
+  });
+
   it("ningún archivo de app/ fuera de /interno guarda un precio viejo", () => {
     expect(FUENTES.length).toBeGreaterThan(50);
     const hallados = FUENTES.flatMap(({ ruta, texto }) => [
@@ -57,14 +67,30 @@ describe("precios", () => {
     expect(hallados).toEqual([]);
   });
 
-  it("Escala, Pro fundador y el paquete GYM no aparecen en las páginas públicas", () => {
+  // Lote 21 (6 nov): Escala sale SOLO en /boaz, como "Próximamente". Sus
+  // textos viven en estos archivos; en cualquier otro (/gym/registro,
+  // /productos, JSON-LD...) sigue prohibida.
+  const CON_ESCALA = new Set(["components/boaz/datos.js", "components/boaz/PlanEscala.jsx"]);
+
+  it("Escala solo aparece en los archivos de /boaz", () => {
+    const hallados = FUENTES.filter(({ ruta, texto }) => !CON_ESCALA.has(ruta) && /\bEscala\b/.test(sinComentarios(texto)));
+    expect(hallados.map(({ ruta }) => ruta)).toEqual([]);
+    CON_ESCALA.forEach((ruta) => expect(FUENTES.some((f) => f.ruta === ruta), ruta).toBe(true));
+  });
+
+  it("Pro fundador y el paquete GYM no aparecen en las páginas públicas", () => {
     const hallados = FUENTES.flatMap(({ ruta, texto }) => {
       const codigo = sinComentarios(texto);
-      return [/\bEscala\b/, /Pro fundador/i, /paquete\s+gym/i, /paquete[^.\n]{0,40}gimnasio/i]
+      return [/Pro fundador/i, /paquete\s+gym/i, /paquete[^.\n]{0,40}gimnasio/i]
         .filter((re) => re.test(codigo))
         .map((re) => `${ruta}: ${re}`);
     });
     expect(hallados).toEqual([]);
+  });
+
+  it("solo /boaz usa los precios de Escala", () => {
+    const usan = FUENTES.filter(({ texto }) => /BOAZ_ESCALA|1,999|19,990/.test(sinComentarios(texto))).map(({ ruta }) => ruta);
+    expect(usan.sort()).toEqual(["components/boaz/PlanEscala.jsx", "lib/precios.js"]);
   });
 
   it("el JSON-LD no trae precios distintos a los de precios.js", () => {
@@ -80,6 +106,8 @@ describe("precios", () => {
         ...[...texto.matchAll(/["']?(?:price|lowPrice|highPrice)["']?\s*:\s*["']?([\d,.]+)/g)].map((m) => m[1]),
       ].map((c) => c.replace(/,/g, "").replace(/\.0+$/, ""));
       cifras.forEach((c) => expect(validos.has(c), `${ruta}: ${c}`).toBe(true));
+      // Escala nunca entra al JSON-LD (el fundador se prueba por sus offers en jsonld.test.js).
+      expect(texto, ruta).not.toMatch(/1,?999|19,?990|BOAZ_ESCALA|BOAZ_FUNDADOR/);
     });
   });
 });

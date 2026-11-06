@@ -34,6 +34,13 @@ tiene su marca y STRING lo firma.
   Todos con IVA incluido (4 nov); en pantalla, la etiqueta "IVA incluido" junto a cada precio.
 - **Productos:** Boaz, el sistema para gimnasios (único en producción). Barberías, clínicas y
   restaurantes no existen todavía: nunca se presentan como disponibles.
+- **Boaz Escala y Pro fundador (lote 21, decisión de Carlos, 6 nov).** Excepción a "nada que no exista aparece en
+  pantalla": Escala ($1,999 al mes · $19,990 al año) aparece SOLO en `/boaz`, como "Próximamente", y no se puede
+  contratar (nunca "Contratar" ni enlace a `/gym/registro` desde Escala; su botón abre WhatsApp). El Pro fundador
+  ($799 al mes, fijo 12 meses, 5 lugares) es público SOLO en su sección de `/boaz`. Ninguno de los dos aparece en
+  `/gym/registro`, `/productos`, el JSON-LD (offers solo Starter y Pro) ni en ningún otro lugar. Cifras en
+  `app/lib/precios.js` (`BOAZ_ESCALA`, `BOAZ_FUNDADOR`, aparte de `BOAZ`); lugares restantes y estado de Escala
+  ("desarrollo" o "pruebas") a mano en `app/lib/boaz-lanzamiento.js`. La palabra "bot" no aparece en textos públicos.
 
 Si un precio en el código no coincide con estos, se reporta. No se corrige por cuenta propia.
 
