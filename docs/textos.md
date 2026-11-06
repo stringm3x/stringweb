@@ -165,9 +165,9 @@ Trabajo con un equipo de desarrolladores de confianza cuando un proyecto lo pide
 
 **¿Cuánto tarda?** Responde y Organiza, de 2 a 3 semanas. Automatiza y Controla, de 4 a 6. Empresa, lo que diga su propuesta.
 
-**¿Cómo se paga?** Con anticipo. Responde y Organiza, 50 % al empezar y 50 % al entregar. Automatiza y Controla, en tres pagos: 40, 30 y 30 %.
+**¿Cómo se paga?** Con anticipo. Responde y Organiza, 50 % al empezar y 50 % al entregar. Automatiza y Controla, en tres pagos: 40, 30 y 30 %. También puedes pagar a meses con tarjeta de crédito o, en Responde y Organiza, con un plan mensual.
 
-**¿Me hacen descuento?** No descontamos. Si el precio pesa, ajustamos el alcance.
+**¿Me hacen descuento?** No descontamos. Si el precio pesa, ajustamos el alcance o lo pagas a meses.
 
 **¿Me garantizan que voy a vender más?** No. Garantizamos tiempos y que tu sistema funcione. Las ventas son de tu negocio; el sistema hace que no se te escapen.
 
@@ -410,7 +410,7 @@ DESDE $9,500 IVA incluido · DE 2 A 3 SEMANAS \[Geist Mono; "IVA incluido" es la
 
 **Cómo trabajamos:** diagnóstico gratis, propuesta por escrito, construcción y entrega. Te mandamos el avance cada viernes.
 
-**Cómo se paga:** 50 % al empezar y 50 % al entregar.
+**Cómo se paga:** 50 % al empezar y 50 % al entregar. \[Debajo, en secundario:\] También a meses con tarjeta o en plan mensual
 
 **Después de la entrega:** la continuidad cuida tu sistema cada mes, desde $2,100.
 
@@ -422,9 +422,9 @@ DESDE $9,500 IVA incluido · DE 2 A 3 SEMANAS \[Geist Mono; "IVA incluido" es la
 
 | Nivel | Titular | Incluye (además de lo anterior) | Tiempo | Pago | Siguiente |
 | --- | --- | --- | --- | --- | --- |
-| 2 · Organiza | Cada cliente en su lugar. | Registro de prospectos, calificación y avisos | 2 a 3 semanas | 50 / 50 | Automatiza |
-| 3 · Automatiza | Que el seguimiento lo dé el sistema. | Respuesta inmediata, agenda, seguimiento, recordatorios y panel. Empieza con el boceto | 4 a 6 semanas | 40 / 30 / 30 | Controla |
-| 4 · Controla | Sabe cuánto ganas y qué está pasando. | Desarrollo a la medida: sistema de clientes propio, paneles, integraciones y tienda en línea propia. Empieza con el boceto | 4 a 6 semanas | 40 / 30 / 30 | Empresa |
+| 2 · Organiza | Cada cliente en su lugar. | Registro de prospectos, calificación y avisos | 2 a 3 semanas | 50 / 50 · También a meses con tarjeta o en plan mensual | Automatiza |
+| 3 · Automatiza | Que el seguimiento lo dé el sistema. | Respuesta inmediata, agenda, seguimiento, recordatorios y panel. Empieza con el boceto | 4 a 6 semanas | 40 / 30 / 30 · También a meses con tarjeta | Controla |
+| 4 · Controla | Sabe cuánto ganas y qué está pasando. | Desarrollo a la medida: sistema de clientes propio, paneles, integraciones y tienda en línea propia. Empieza con el boceto | 4 a 6 semanas | 40 / 30 / 30 · También a meses con tarjeta | Empresa |
 | 5 · Empresa | Un sistema completo, con su equipo. | Sistema completo con equipo por proyecto, incluida una tienda en línea grande. Mapa de procesos firmado antes de cotizar | Según su propuesta | Según su propuesta | — |
 
 \[Los precios "Desde" son los de la sala 4. La frase del dueño de cada nivel, también.\]
@@ -442,6 +442,8 @@ Cada página de nivel tiene su dibujo, una línea bajo el dibujo, "Para quién e
 | Empresa | El escenario con las siete artes | Todo tu equipo y tus áreas, en un solo sistema. | Para la empresa con varias áreas o sucursales, o una tienda en línea grande, que necesita un sistema completo a su medida. | Un mapa de procesos en boceto |
 
 **Ficha de la obra** (columna que acompaña): el nombre, "NIVEL N DE 5 · \[arte\]", la fila de las siete artes con las del nivel encendidas ("N DE 7"; Empresa "7 DE 7"), el "Desde", tiempo, pago, continuidad y el botón. En Empresa: "Se cotiza" en lugar del "Desde".
+
+**Pago y Después en la ficha (6 nov).** La fila "Pago" deja su esquema y agrega una línea debajo, en secundario: Responde y Organiza, "También a meses con tarjeta o en plan mensual"; Automatiza y Controla, "También a meses con tarjeta"; Empresa, sin línea ("Según su propuesta"). La fila "Después": Responde y Organiza, "Desde $2,100 al mes" (IVA incluido); Automatiza y Controla, "Desde $3,500 al mes" (IVA incluido; su continuidad es Mejora); Empresa, "Según su propuesta", sin cifra. Responde, Organiza, /sistemas y las preguntas frecuentes siguen en $2,100. \[En el sitio se dice "a meses con tarjeta"; nunca "sin intereses", "comisión" ni "Mercado Pago", ni montos del plan mensual, precio a meses o precio del boceto.\]
 
 ## Ejemplos y textos alternativos de los niveles (30 oct)
 

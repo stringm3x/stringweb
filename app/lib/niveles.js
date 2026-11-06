@@ -32,6 +32,7 @@ export const NIVELES = [
     titular: "Que nadie se quede sin respuesta.",
     tiempo: "2 a 3 semanas",
     pago: "50 % al empezar y 50 % al entregar",
+    pagoTambien: "También a meses con tarjeta o en plan mensual",
     incluye: [
       punto("Una página propia", " para tu negocio."),
       punto("Tu WhatsApp conectado", ", a un toque desde la página."),
@@ -66,6 +67,7 @@ export const NIVELES = [
     titular: "Cada cliente en su lugar.",
     tiempo: "2 a 3 semanas",
     pago: "50 / 50",
+    pagoTambien: "También a meses con tarjeta o en plan mensual",
     incluye: [punto("Registro de prospectos", ", calificación y avisos.")],
     paraQuien:
       "Para el negocio que ya contesta, pero tiene a sus clientes regados entre chats, libretas y Excel.",
@@ -94,6 +96,7 @@ export const NIVELES = [
     titular: "Que el seguimiento lo dé el sistema.",
     tiempo: "4 a 6 semanas",
     pago: "40 / 30 / 30",
+    pagoTambien: "También a meses con tarjeta",
     incluye: [
       punto("Respuesta inmediata", ", agenda, seguimiento, recordatorios y panel."),
       punto("Empieza con el boceto."),
@@ -124,6 +127,7 @@ export const NIVELES = [
     titular: "Sabe cuánto ganas y qué está pasando.",
     tiempo: "4 a 6 semanas",
     pago: "40 / 30 / 30",
+    pagoTambien: "También a meses con tarjeta",
     incluye: [
       punto(
         "Desarrollo a la medida:",
@@ -158,6 +162,7 @@ export const NIVELES = [
     titular: "Un sistema completo, con su equipo.",
     tiempo: "Según su propuesta",
     pago: "Según su propuesta",
+    pagoTambien: null,
     incluye: [
       punto("Sistema completo", " con equipo por proyecto, incluida una tienda en línea grande."),
       punto("Mapa de procesos firmado", " antes de cotizar."),

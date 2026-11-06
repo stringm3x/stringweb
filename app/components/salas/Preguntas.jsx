@@ -27,13 +27,14 @@ const PREGUNTAS = [
     r: (
       <>
         Con anticipo. Responde y Organiza, <Cifra>50 %</Cifra> al empezar y <Cifra>50 %</Cifra>{" "}
-        al entregar. Automatiza y Controla, en tres pagos: <Cifra>40, 30 y 30 %</Cifra>.
+        al entregar. Automatiza y Controla, en tres pagos: <Cifra>40, 30 y 30 %</Cifra>. También puedes pagar a
+        meses con tarjeta de crédito o, en Responde y Organiza, con un plan mensual.
       </>
     ),
   },
   {
     p: "¿Me hacen descuento?",
-    r: "No descontamos. Si el precio pesa, ajustamos el alcance.",
+    r: "No descontamos. Si el precio pesa, ajustamos el alcance o lo pagas a meses.",
   },
   {
     p: "¿Me garantizan que voy a vender más?",

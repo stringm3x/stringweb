@@ -13,11 +13,12 @@ const LOTE_13 = "2026-11-04"; // legales y /diagnostico: su descripción propia
 const LOTE_17 = "2026-11-04"; // /tu-negocio: los precios con IVA de las tarjetas
 const LOTE_18 = "2026-11-04"; // títulos, descripciones y JSON-LD
 const LOTE_21 = "2026-11-06"; // /boaz: Escala próximamente y Programa Fundadores
+const LOTE_22 = "2026-11-06"; // portada y fichas de nivel: formas de pago y continuidad por nivel
 
 const ROUTES = [
-  { path: "/", priority: 1.0, changeFrequency: "weekly", lastmod: LOTE_18 },
+  { path: "/", priority: 1.0, changeFrequency: "weekly", lastmod: LOTE_22 },
   { path: "/sistemas", priority: 0.9, changeFrequency: "monthly", lastmod: LOTE_18 },
-  ...NIVELES.map((n) => ({ path: `/sistemas/${n.slug}`, priority: 0.8, changeFrequency: "monthly", lastmod: LOTE_18 })),
+  ...NIVELES.map((n) => ({ path: `/sistemas/${n.slug}`, priority: 0.8, changeFrequency: "monthly", lastmod: LOTE_22 })),
   { path: "/tu-negocio", priority: 0.9, changeFrequency: "monthly", lastmod: LOTE_17 },
   { path: "/tu-negocio/empresas", priority: 0.8, changeFrequency: "monthly", lastmod: LOTE_18 },
   ...GIROS.map((g) => ({ path: `/tu-negocio/${g.slug}`, priority: 0.8, changeFrequency: "monthly", lastmod: LOTE_18 })),

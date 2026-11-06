@@ -1,7 +1,7 @@
 import { Boton } from "../ui/Boton";
 import { ETIQUETA } from "../salas/estilos";
 import { ArtesQueSuma } from "./ArtesQueSuma";
-import { CONTINUIDAD_DESDE } from "@/app/lib/precios";
+import { continuidadNivel } from "@/app/lib/precios";
 import { IvaIncluido } from "../ui/IvaIncluido";
 
 // La ficha de la obra (docs/pagina-nivel.md y docs/textos.md): nombre,
@@ -11,6 +11,9 @@ import { IvaIncluido } from "../ui/IvaIncluido";
 export function FichaObra({ nivel }) {
   const cuantas = nivel.artes === 7 ? "7 DE 7" : `${nivel.artes} DE 7 · EMPRESA LAS TIENE TODAS`;
   const cotiza = nivel.precio === "Se cotiza";
+  // Continuidad por nivel (6 nov): Mejora en Automatiza y Controla, Cuida en
+  // Responde y Organiza; Empresa sin cifra, como su fila de Pago.
+  const despues = continuidadNivel(nivel.slug);
   return (
     <aside
       aria-label="Ficha de la obra"
@@ -47,8 +50,16 @@ export function FichaObra({ nivel }) {
       <dl className="flex flex-col text-pequeno">
         {[
           ["Tiempo", nivel.tiempo],
-          ["Pago", nivel.pago],
-          ["Después", <>Desde {CONTINUIDAD_DESDE} al mes <IvaIncluido /></>],
+          [
+            "Pago",
+            <>
+              {nivel.pago}
+              {nivel.pagoTambien && (
+                <span className="block font-sans text-texto-suave">{nivel.pagoTambien}</span>
+              )}
+            </>,
+          ],
+          ["Después", despues ? <>Desde {despues} al mes <IvaIncluido /></> : "Según su propuesta"],
         ].map(([que, cual]) => (
           <div key={que} className="flex items-baseline justify-between gap-space-3 border-t border-hairline py-space-2">
             <dt className="text-texto-suave">{que}</dt>

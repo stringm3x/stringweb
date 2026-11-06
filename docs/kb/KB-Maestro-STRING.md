@@ -1,9 +1,9 @@
 # STRING · KB Maestro
 
-**Edición 11 · 4 de noviembre de 2026 · Autor: Carlos Avilés · CDMX, México**
+**Edición 15 · 6 de noviembre de 2026 · Autor: Carlos Avilés · CDMX, México**
 
 > Documento maestro de STRING: la casa. Fuente de verdad única para qué es STRING, sus líneas y productos, el negocio, la venta, la marca, el sitio y las cifras públicas.
-> Sustituye a la edición 10. **Novedad (ed. 11): el sitio se pone al día con el plan de ventas.** En producción los lotes 13 a 18: limpieza de código (14), cimientos de la herramienta privada `/interno` con Supabase propio y TOTP (16), **precios con IVA incluido en todo el sitio** (17) y **SEO** (18: títulos y descripciones por ruta, JSON-LD, sitemap, favicon e imagen de Boaz para compartir). Siguen el lote 19 (rendimiento) y el contenido de la herramienta de diagnóstico. Antes (ed. 10): sale el plan de ventas, con precios nuevos con IVA, boceto, pagos, método SPIN y Carlos como la cara de STRING. Antes (ed. 9): desarrollo en pausa tras el lote 13. Estado y siguiente paso en la Parte 10.
+> Sustituye a la edición 14. **Novedad (ed. 15):** formas de pago aprobadas y contrato de sistemas; el mantenimiento en el sitio no cambia; la línea de formas de pago va al sitio después de abrir la cuenta de Mercado Pago; **Boaz no tiene términos propios** (detalle en KB Boaz, Parte 16 § Legal). Antes (ed. 14, chat de ventas): Boaz va primero** (5 fundadores antes del 20 de diciembre); STRING se vende si llega solo. **El Plan de Ventas se retira:** lo reemplazan la **Guía de ventas · Boaz** y la **Guía de ventas · STRING** (para estudiar); las decisiones viven en los KB. **Formas de pago aprobadas** (contado, meses con tarjeta, plan mensual) y contrato con anexo de plan mensual. Antes (ed. 13): **Carlos sale a vender.** El sitio, los formularios y la herramienta de diagnóstico están en producción y probados (`/interno` ya entra en producción: faltaban 3 variables en Vercel Production). El desarrollo queda en pausa; los pendientes confirmados están en la Parte 10. Antes (ed. 12): todo al día en `main` (`fdd7c25`).** Lote 19: sala 6 con dibujo nuevo (la obra de izquierda a derecha). Lote 20: **la herramienta de diagnóstico ya funciona** en `/interno/diagnostico` (versión 1, sin guardar datos). Arreglo de formularios: `/diagnostico` y `/gym/registro` no enviaban en producción porque faltaban las claves de Turnstile en Vercel; ya envían. Antes (ed. 11): el sitio se pone al día con el plan de ventas.** En producción los lotes 13 a 18: limpieza de código (14), cimientos de la herramienta privada `/interno` con Supabase propio y TOTP (16), **precios con IVA incluido en todo el sitio** (17) y **SEO** (18: títulos y descripciones por ruta, JSON-LD, sitemap, favicon e imagen de Boaz para compartir). Siguen el lote 19 (rendimiento) y el contenido de la herramienta de diagnóstico. Antes (ed. 10): sale el plan de ventas, con precios nuevos con IVA, boceto, pagos, método SPIN y Carlos como la cara de STRING. Antes (ed. 9): desarrollo en pausa tras el lote 13. Estado y siguiente paso en la Parte 10.
 
 > 🧭 **¿Chat nuevo?** Lee la Parte 1 (qué es STRING), la Parte 6 (la marca) y la Parte 10 (estado y siguiente paso). Con eso basta para retomar.
 
@@ -26,7 +26,7 @@
 | **STRING — Territorios** (lienzo) | Historial visual de todas las exploraciones. Páginas clave: "Premium + arte" y "La palabra con su detalle", opción 01 |
 | **KB del chat creativo** (`claude/KB-Chat-Creativo-STRING.md`) | Cómo se llegó a la identidad y cómo decide Carlos en diseño |
 | **KB Boaz** (`KB-Maestro-Boaz.md`) | El producto Boaz: planes, qué existe, código, entornos, ramas |
-| **Visión Boaz** (`Vision-Boaz.md`) | Hacia dónde va Boaz |
+| **Visión Boaz** (KB Boaz, Parte 15) | Hacia dónde va Boaz. `Vision-Boaz.md` se perdió y se rehízo dentro del KB Boaz |
 | **Diseño de Boaz** (`Boaz-Direccion-de-diseno-G.md`) | Todo lo visual de Boaz |
 | Sistema anterior de STRING (Anton + brochada) | **Solo consulta.** Reemplazado por Identidad 2026 |
 | **STRING y Boaz · Lo que se rescata de Codeblock** (doc) | **Solo consulta.** Lo decidido ya está en este KB |
@@ -36,7 +36,9 @@
 | **Lienzos de diseño** | Salas: https://claude.ai/artifact/D4xjaWwRuNCyN75ceCcBKp · Componentes: https://claude.ai/artifact/Ao5aw4HEyCV8s1nPdXfDaQ · Movimiento: https://claude.ai/artifact/JxrLvwmNGof8vVTVdjR4Lf · Página de nivel: https://claude.ai/artifact/V7Fnmygn6q5Y1za9B19cks · **Productos** (camino A elegido): https://claude.ai/artifact/PmHq9tou26MHVMPa5Q2RvV |
 | **En el repo `stringweb`** | `CLAUDE.md` (reglas de Claude Code, rutas, `/interno`, precios) · `docs/calidad.md` · `docs/movimiento-salas.md` · `docs/pagina-nivel.md` · `docs/estado.md` (estado técnico, lotes y pendientes) · `docs/diseno.md` y `docs/textos.md` (copias de los docs) · `docs/kb/` (copia de este KB) · `app/lib/precios.js` (fuente única de precios) · `reportes/` (un reporte por lote, hasta `lote-18-reporte.md`) |
 | **Método de trabajo · Chat principal + Claude Code** (doc) · https://claude.ai/artifact/WHzRwTwVFJpTMNPc2AgVDG | Cómo se trabaja con Claude Code: lotes, plantilla de prompt, puntos de control |
-| **Plan de Ventas — STRING y Boaz** (doc) · https://claude.ai/artifact/1xMBhaDVu2fLzVTTKYcgfz | **Fuente de verdad de ventas:** cliente ideal, método, precios, pagos, canales, metas a 90 días, aprender a vender |
+| **Guía de ventas · STRING** (doc) · https://claude.ai/artifact/NUrHAUfXquxbBepBJevdj5 | Lo que Carlos estudia para vender STRING: niveles, continuidad, boceto, pagos, SPIN, propuesta, objeciones, seguimiento. Las decisiones mandan desde este KB |
+| **Guía de ventas · Boaz** (doc) · https://claude.ai/artifact/affc137e-7f26-4a04-9834-d39b5b1fe282 | Lo que Carlos estudia para vender Boaz. Las decisiones mandan desde el KB Boaz |
+| ~~Plan de Ventas — STRING y Boaz~~ | **Retirado (6 nov):** reemplazado por las dos guías |
 
 ---
 
@@ -165,7 +167,7 @@ No prometer ventas garantizadas: **se garantizan tiempos y funcionamiento, nunca
 
 - **Nombre:** Boaz (hebreo, "en él hay fuerza"; columna del templo de Salomón). **Sale con su nombre** (decisión de Carlos, 29 oct); **en el sitio desde el lote 9a**. El registro en el IMPI se hace cuando haya ingresos; se recomienda antes la búsqueda gratuita en Marcanet.
 - **En público se dice "cuánto entra", no "cuánto gana"**, hasta que exista Finanzas.
-- **Detalle:** KB Boaz. **Visión:** Visión Boaz.
+- **Detalle:** KB Boaz. **Visión:** KB Boaz, Parte 15. **Venta:** Guía de ventas · Boaz.
 
 | Plan | Frase | Precio | Anual |
 |---|---|---|---|
@@ -173,13 +175,13 @@ No prometer ventas garantizadas: **se garantizan tiempos y funcionamiento, nunca
 | **Pro** ★ | "Vende más en el mismo local." | **$1,299/mes** | $12,990 |
 | **Escala** | "El sistema trabaja y te avisa." | **$1,999/mes** | $19,990 |
 
-**Precios con IVA incluido (4 nov).** Pro es el plan objetivo de venta. Pro fundador: $799 fijo 12 meses para los primeros 5 gimnasios (**solo en visita, no va en el sitio**). Escala no se vende hasta cumplir sus tres condiciones (KB Boaz, Parte 2). Pro sube a $1,499 para clientes nuevos con 5 gimnasios pagando y 2 testimonios. **En el sitio desde el lote 17:** Starter $799 · Pro $1,299, con "IVA incluido".
+**Precios con IVA incluido (4 nov).** Pro es el plan objetivo de venta. **Programa Fundadores (5 gimnasios, antes del 20 dic):** Pro $799 fijo 12 meses + Escala 6 meses gratis desde que se active; **va en /boaz**, en primera persona (decisión del chat de ventas, 5–6 nov); **en línea, verificado el 6 nov** ("Quedan 5 de 5 lugares"). Gimnasio 6+: Pro $1,299 + 3 meses de Escala. Segunda generación solo si se llenan antes del 20 dic. Detalle en KB Boaz, Parte 2. Escala no se vende hasta cumplir sus condiciones (KB Boaz, Parte 2); en el sitio aparece como **"En desarrollo"**, sin botón de compra. Pro sube a $1,499 para clientes nuevos con 5 gimnasios pagando y 2 testimonios. **En el sitio desde el lote 17:** Starter $799 · Pro $1,299, con "IVA incluido".
 
 **Estado:**
 
 - **En producción desde el 13 de octubre** con Evolution GYM. Cobro seguro y aislamiento entre gimnasios probados.
 - **Se usa poco todavía** (en pruebas en recepción). En público: "En producción desde octubre de 2026", no "todos los días".
-- **Pausado:** WhatsApp automático, alertas, bot e inbox. **Escala no se vende como entregable** hasta activarlos, y **no aparece en el sitio**.
+- **Pausado:** WhatsApp automático, alertas, bot e inbox. **Escala no se vende como entregable** hasta activarlos; en el sitio va como "En desarrollo" (cambia a "En pruebas en un gimnasio real" cuando corra el piloto en Evolution).
 - **No existe y no se vende:** sucursales, landing propia, biométrico, rutinas con IA, CFDI.
 - **Siguiente fase:** "listo para piloto" (respaldos, gimnasio de demostración, bienvenida y portal), luego **Finanzas: "el número del lunes"**.
 - **Registro en el sitio:** `/gym/registro` registra un gimnasio para una prueba de 14 días con Pro completo, sin tarjeta.
@@ -267,7 +269,7 @@ Pieza pagada para **Automatiza, Controla y Empresa**: mapa de procesos + primera
 | **Mejora** | Desde $3,500/mes | Optimización mensual y ajustes |
 | **Impulsa** | Desde $5,800/mes | Análisis, mejoras, soporte prioritario |
 
-Precios con IVA incluido (4 nov). En el sitio solo aparece "Desde $2,100 al mes"; los planes van por nombre, sin precio.
+Precios con IVA incluido (4 nov). **Continuidad sugerida por nivel (5 nov, chat de ventas):** Responde y Organiza → Cuida; Automatiza y Controla → Mejora; Empresa → Impulsa (Impulsa encima de Controla encarece la entrada; se ofrece cuando el sistema ya opera). En el sitio solo aparece "Desde $2,100 al mes"; los planes van por nombre, sin precio.
 
 **Nombres (28 oct):** verbos, como los niveles. Antes Base, Crecimiento y Escalamiento; se cambiaron porque "Escalamiento" chocaba con el plan Escala de Boaz.
 
@@ -281,9 +283,17 @@ El proyecto es la puerta; la continuidad es el negocio. **Toda propuesta incluye
 
 1. Diagnóstico gratuito. 2. Llamada de 20–30 min **de escucha**: cómo se siente su negocio, no un pitch. De Automatiza en adelante, la llamada lleva al **boceto**. 3. Propuesta con nivel y continuidad. 4. Propuesta formal: incluye, **no incluye**, precio, vigencia de 7 días. 5. Anticipo: N1–N2 50/50; N3–N4 40/30/30.
 
-**Método de venta (4 nov):** tono Apple (asesor tranquilo, sin presión, presentar un solo nivel) y **venta consultiva con SPIN**: Situación, Problema, Implicación (cuánto le cuesta el problema al mes) y Necesidad. El dueño habla el 70 % de la llamada; la propuesta usa su propio número ("pierdes ~$6,000 al mes y esto cuesta $9,500"). Seguimiento al día 2 y al día 6. Detalle en el Plan de Ventas.
+**Método de venta (4 nov):** tono Apple (asesor tranquilo, sin presión, presentar un solo nivel) y **venta consultiva con SPIN**: Situación, Problema, Implicación (cuánto le cuesta el problema al mes) y Necesidad. El dueño habla el 70 % de la llamada; la propuesta usa su propio número ("pierdes ~$6,000 al mes y esto cuesta $9,500"). Seguimiento al día 2 y al día 6. Detalle en la **Guía de ventas · STRING**.
 
-**Pagos y financiamiento (aprobado 4 nov):** por defecto, contado con anticipo. Primera opción para financiar: **meses con tarjeta** por pasarela (STRING recibe el total; la comisión se suma al precio de esa modalidad; revisar comisiones vigentes antes de usarla). **Financiamiento propio**, solo si la tarjeta no es opción: (1) anticipo mínimo del 40 % que cubra los costos; (2) plazo máximo de 6 meses; (3) precio a plazos un poco mayor que el de contado; (4) contrato firmado, revisado por abogado; (5) código y hosting a nombre de STRING hasta el último pago; (6) si deja de pagar, se pausa el servicio; (7) nunca sin anticipo pagado.
+**Formas de pago (aprobado 6 nov; reemplaza al financiamiento propio de 6 meses del 4 nov).** Tres formas, ofrecidas en este orden según lo que diga el cliente, nunca las tres juntas:
+
+1. **Contado con anticipo** (todos los niveles): Responde y Organiza 50/50 (al empezar y al entregar); Automatiza y Controla 40/30/30; Empresa en su propuesta. Después, su continuidad.
+2. **Meses con tarjeta de crédito** (todos los niveles), si no le alcanza de contado y tiene tarjeta: link de pago de **Mercado Pago** (o Clip) a 3 o 6 meses. STRING recibe el total en 1–2 días; si el cliente no paga, es asunto del banco. El precio de esta modalidad suma la comisión de la plataforma (~10 % a 3 meses; ej. Responde ≈ $10,400). Revisar la comisión del día en la app antes de cotizar.
+3. **Plan mensual**, solo si no tiene tarjeta, y **por ahora solo Responde y Organiza** (Automatiza y Controla se abren después de los primeros clientes; Empresa nunca). Anticipo + 12 mensualidades que ya incluyen la continuidad; la parte del sistema ~20 % más cara que de contado. Responde: $2,000 + $2,900/mes × 12, luego Cuida $2,100. Organiza: $5,000 + $3,700/mes × 12, luego Cuida $2,100. Reglas: cargo automático; código y hosting de STRING hasta el último pago; con un mes de atraso se pausa el servicio; contrato firmado; nunca sin anticipo pagado.
+
+El boceto no entra al plan mensual: siempre de contado.
+
+**Contratos (6 nov):** un solo contrato de prestación de servicios para sistemas a la medida (alcance, precio, tiempos, continuidad, propiedad del código, confidencialidad), con un **anexo de plan mensual** solo cuando se usa esa forma (calendario de pagos, cargo automático, pausa por atraso, código de STRING hasta liquidar). Contado y tarjeta no llevan anexo. Borrador por Claude; revisión de abogado cuando haya ingreso.
 
 N1–N2: 4 fases, 2–3 semanas. N3–N4: 7 fases, 4–6 semanas, **mapa de procesos firmado antes de código.** Empresa: fases y tiempos en su propuesta.
 
@@ -420,9 +430,13 @@ Después: quién soy · preguntas · llamado final, sin arte nuevo (la pausa ant
 | Continuidad | Desde $2,100 al mes |
 | Boaz | Starter $799 · Pro $1,299 al mes ($7,990 y $12,990 al año) |
 
-**Etiqueta "IVA incluido"** (lote 17): en mono chico junto a cada "desde" y cada precio de Boaz (Ubuntu Mono en Boaz, Geist Mono en el resto). En las preguntas frecuentes, "(IVA incluido)" después de la cifra. En `/gym/registro`, la línea "Precios con IVA incluido." debajo del selector. **No van en el sitio:** Escala, Pro fundador, el paquete GYM ni el precio del boceto.
+**Etiqueta "IVA incluido"** (lote 17): en mono chico junto a cada "desde" y cada precio de Boaz (Ubuntu Mono en Boaz, Geist Mono en el resto). En las preguntas frecuentes, "(IVA incluido)" después de la cifra. En `/gym/registro`, la línea "Precios con IVA incluido." debajo del selector. **No van en el sitio:** el paquete GYM ni el precio del boceto. **Cambio (5–6 nov, chat de ventas):** Escala aparece como "En desarrollo" sin precio de compra, y el Programa Fundadores tiene su sección en /boaz (los construye dev).
 
 El boceto aparece sin precio: "se acredita completo si contratas el sistema".
+
+**Formas de pago en el sitio (decidido 6 nov, por construir):** una sola línea, "Paga de contado, a meses con tarjeta de crédito o en un plan mensual.", junto a los precios de los niveles y en preguntas frecuentes. **Solo después de abrir la cuenta de Mercado Pago.** Sin montos del plan mensual, sin comisión ni precio a meses, sin precio del boceto. **El mantenimiento no cambia**, salvo una corrección (aprobada 6 nov): en las páginas de **Automatiza y Controla** la fila "Después" pasa a **"Desde $3,500 al mes"** (su continuidad es Mejora); Responde, Organiza, /sistemas y preguntas frecuentes siguen en "Desde $2,100 al mes". Textos exactos (aprobados 6 nov): pregunta "¿Cómo se paga?" → "Con anticipo. Responde y Organiza, 50 % al empezar y 50 % al entregar. Automatiza y Controla, en tres pagos: 40, 30 y 30 %. También puedes pagar a meses con tarjeta de crédito o, en Responde y Organiza, con un plan mensual." · fila "Pago" de los niveles: "También a meses con tarjeta o en plan mensual" (Responde y Organiza), "También a meses con tarjeta" (Automatiza y Controla) · "¿Me hacen descuento?" → "No descontamos. Si el precio pesa, ajustamos el alcance o lo pagas a meses." En el sitio se dice "a meses con tarjeta", nunca "sin intereses".
+
+**Legales del sitio y Boaz (6 nov):** `/terminos` dice "Boaz tiene sus propios términos dentro del producto" (`docs/textos.md:256`), pero ese texto no existe; y Boaz enlaza a `/privacidad`, que da 404. Se corrige cuando existan los Términos y el Aviso de Boaz (KB Boaz, Parte 16 § Legal).
 
 ### Herramienta privada de diagnóstico (`/interno`)
 
@@ -430,7 +444,10 @@ Página interna solo para Carlos, para usar durante la llamada o la visita: dato
 
 - **Cimientos en producción (lote 16, `4fca720`):** `/interno/entrar` y `/interno/diagnostico` (vacía). **Supabase propio de STRING** (nunca el de Boaz), un solo usuario (UUID en `INTERNO_USUARIO_ID`), **contraseña + TOTP** (sesión aal2), validado en el servidor con `exigirCarlos()`; si falta algo, nadie entra. Hasta 5 códigos malos antes de cerrar la sesión. `noindex`, `X-Robots-Tag`, `Cache-Control: no-store`, fuera del sitemap, del menú, del pie y de la medición. Supabase configurado y TOTP dado de alta (4 nov). Detalle en `CLAUDE.md` y `docs/estado.md`.
 - **Variables (4):** `NEXT_PUBLIC_SUPABASE_URL`, la clave anon o publishable, `INTERNO_USUARIO_ID` e `INTERNO_SECRETO` (un valor distinto por entorno, `openssl rand -base64 32`). Alta del TOTP: `node scripts/interno/enrolar-totp.mjs`.
-- **Lo que falta, en orden:** el chat de ventas define el contenido (preguntas por giro, reglas del nivel, plantilla del resumen) → Carlos lo prueba en 3–5 llamadas → el aviso de privacidad cubre los datos de prospectos (requiere el domicilio) → lote del flujo (pasos 1, 2, 4 y 5, primera tabla, la cuenta de intentos pasa a la base) → calculadora e historial. La precarga desde `/diagnostico` va en un lote aparte.
+- **Versión 1 en producción (lote 20, `22e77ed`; producción con sesión real probada el 5 nov):** guía de 5 pasos en el celular (prospecto → preguntas SPIN de una en una, con saltar y volver → nivel sugerido + siguiente paso → resumen para WhatsApp). 6 preguntas comunes + 3 por giro; la N ("si pudieras resolver una sola cosa") decide el nivel; gimnasio va a Boaz Pro y Empresa por el giro; Controla y Empresa nunca salen por descarte. Boceto y precio fundador con interruptor apagado. "Abrir en WhatsApp", visita rápida de 3 preguntas, confirmación antes de borrar y pantalla encendida. **No guarda nada.** Contenido y textos aprobados por el chat de ventas: doc **STRING — Diagnóstico interno · Contenido v1** (https://claude.ai/artifact/WYN5ej93ei18XQiFZFiUkh); pantallas en el lienzo https://claude.ai/artifact/26vGEiTv2SjJGe5T5xRJXJ. Precios internos (boceto, fundador, mínimo de Empresa) en `app/lib/interno/precios-interno.js`, nunca en el JS público.
+- **Reglas de los textos (5 nov):** los textos de nivel no prometen resultados (se garantizan tiempos y funcionamiento, nunca ventas). **El mínimo de Empresa ($80,000) nunca va por escrito** al prospecto: solo en la pantalla de Carlos.
+- **Estado (5 nov):** probada por Carlos en producción, sin ajustes por ahora.
+- **Lo que falta:** versión 2 (historial con etapas, calculadora; requiere el domicilio y el aviso con datos de prospectos; la cuenta de intentos del TOTP pasa a la base con la primera tabla) → objeciones a la mano (cuando exista el manual de ventas). La precarga desde `/diagnostico` va en un lote aparte.
 
 ### SEO (en producción desde el lote 18)
 
@@ -447,12 +464,13 @@ Página interna solo para Carlos, para usar durante la llamada o la visita: dato
 
 **Formulario de diagnóstico (28 oct):** nombre · WhatsApp · giro · "¿Qué te pasa hoy?" con las frases de los niveles como opciones (más "Otra cosa"). Llega a stringwebmx@gmail.com por el mismo servicio de correo de Boaz. Al enviar: "Listo. Te respondemos en un día hábil." Al lado, un botón de WhatsApp más chico. Si el giro es Gimnasio, el correo dice "ofrécele Boaz". No guarda nada en base de datos. Texto completo en **STRING — Textos del sitio**.
 
-### Estado (4 nov)
+### Estado (5 nov)
 
 - **En producción** en www.stringwebs.com, en `main`: **lotes 0 a 18** (sin 15). Portada de siete salas, /sistemas y cinco niveles, /productos, /boaz, /gym/registro y /gym/gracias, /nosotros, /tu-negocio con diez giros y /tu-negocio/empresas, /diagnostico, legales, 404 y `/interno` (privada). Precios con IVA y SEO al día.
-- **Commits de referencia:** lote 13 `f97bd84` · lote 14 `17d1efa` · lote 16 `4fca720` · lote 17 `4cbc6c4` · lote 18 PR #12 (anotar el SHA del merge).
+- **Commits de referencia:** lote 13 `f97bd84` · lote 14 `17d1efa` · lote 16 `4fca720` · lote 17 `4cbc6c4` · lote 18 `72df117` · docs KB ed. 11 `dccc6e7` · lote 19 `c26730f` · lote 20 `22e77ed` · arreglo de formularios `fdd7c25`.
+- **Formularios en producción probados (5 nov):** `/diagnostico` envía el correo y `/gym/registro` registra en Boaz. Las claves de Turnstile (widget "STRING GYM Landings", dominio `stringwebs.com`) y las SMTP están en Vercel (Production y Preview); sin clave, el formulario ya no finge un envío.
 - `/saas` y `/gym/empezar` dan **301 a `/boaz`**.
-- **Pendiente fuera del código:** el dominio sin www redirige con **307** (temporal): cambiar a **308** en Vercel → Domains. Search Console sin verificar.
+- **Fuera del código (5 nov):** dominio sin www con 308 ✅ · Prueba de resultados enriquecidos sin errores ✅ · Search Console: descartado por ahora (opcional).
 - **Métricas (local, celular):** rendimiento 96–98, accesibilidad 100, CLS 0. LCP simulado 2.5–2.8 s (real ~66 ms): es la simulación de Lighthouse contando el JS de hidratación. Se ataca en el lote 19.
 - **Pruebas del repo:** 122 Vitest, 104 e2e de siempre, 10 e2e de /interno (contra build de producción).
 
@@ -478,6 +496,31 @@ Página interna solo para Carlos, para usar durante la llamada o la visita: dato
 ---
 
 ## Parte 9 · Decisiones
+
+### Ediciones 14 y 15 (6 nov) · Chat de ventas
+
+| # | Decisión | Por qué |
+|---|---|---|
+| 1 | **Boaz primero:** 5 fundadores antes del 20 dic; STRING en paralelo, sin salir a buscarlo | Boaz es el activo; STRING da ingreso si llega |
+| 2 | **Dos guías de ventas** (STRING y Boaz) reemplazan al Plan de Ventas; las decisiones viven en los KB | Un lugar para decidir y otro para estudiar |
+| 3 | **Programa Fundadores y Escala "En desarrollo" en /boaz** (antes: solo en visita / fuera del sitio) | Que el dueño lo vea antes de la visita, sin vender lo que no existe |
+| 4 | **Formas de pago: contado → meses con tarjeta (Mercado Pago) → plan mensual** (aprobado 6 nov). Plan mensual solo Responde y Organiza, para clientes sin tarjeta; reemplaza al financiamiento propio de 6 meses | Cobrar completo casi siempre; el plan mensual solo para quien no compraría de otra forma |
+| 5 | **Nicho de STRING:** barberías y estéticas (alternativa: clínicas) | **Propuesta, se decide cuando toque** |
+| 6 | **Visión de Boaz** vive en KB Boaz, Parte 15 | `Vision-Boaz.md` se perdió |
+| 7 | **Contratos:** uno de prestación de servicios para sistemas + anexo de plan mensual. Boaz va con términos aceptados al registrarse y el acuerdo simple de fundadores, sin contrato firmado | Menos papeles; el riesgo está en el plan mensual |
+| 8 | **Sitio:** formas de pago en preguntas frecuentes y fila "Pago" de los niveles, publicadas después de la cuenta de Mercado Pago; mantenimiento igual salvo **Automatiza y Controla "Desde $3,500 al mes"** | Dar confianza sin prometer lo que aún no se puede cobrar; que el cliente de Automatiza no espere $2,100 |
+
+### Edición 12 (5 nov) · Lotes 19, 20 y formularios
+
+| # | Decisión | Por qué |
+|---|---|---|
+| 1 | **Sala 6: "la obra de izquierda a derecha"** (camino A), dibujo quieto con la paleta de `diseno.md` | El dibujo anterior no se entendía y le faltaba Entrega |
+| 2 | **Diagnóstico versión 1 sin guardar datos**, construido antes de probar en papel | Carlos lo necesita ya en llamadas y visitas; sin datos no depende del domicilio |
+| 3 | **La N decide el nivel** (lo que el dueño quiere resolver primero), después de gimnasio y Empresa por giro | Presentar un solo nivel |
+| 4 | **Continuidad por nivel:** Responde/Organiza → Cuida; Automatiza/Controla → Mejora; Empresa → Impulsa | Impulsa encima de Controla encarece la entrada |
+| 5 | **Textos sin promesas de resultado; mínimo de Empresa nunca por escrito** | Se garantizan tiempos, nunca ventas; Empresa no tiene precio público |
+| 6 | **Precios internos fuera del JS público** (`precios-interno.js`) | Boceto, fundador y mínimo no se publican |
+| 7 | **Sin clave de Turnstile, el formulario no finge enviar** | Así se descubrió que nunca habían enviado en producción |
 
 ### Edición 11 (4 nov) · Lotes 14 a 18
 
@@ -582,7 +625,7 @@ STRING es la casa · dos líneas (productos y a la medida) · la agencia es labo
 
 - **Domicilio del responsable para el aviso de privacidad** (el sitio publicado aún dice "[domicilio por confirmar]"): bloquea vender con tranquilidad, el aviso de datos de prospectos de `/interno` y el Perfil de Negocio de Google.
 - **Régimen fiscal con un contador:** confirma si se cobra IVA y cuánto queda de cada venta (persona física, RESICO o actividad empresarial).
-- **Revisión legal del contrato de pagos a plazos**, del aviso de privacidad y de los términos.
+- **Revisión legal del contrato de sistemas (y su anexo de plan mensual)**, del aviso de privacidad y de los términos.
 - **Lineamientos de publicaciones de Instagram:** en exploración (Parte 12).
 - **Facebook y TikTok:** ¿se mantienen activos? Solo así vuelven al JSON-LD.
 - Revisión de la plantilla de contrato para el equipo por proyecto.
@@ -593,7 +636,6 @@ STRING es la casa · dos líneas (productos y a la medida) · la agencia es labo
 - Constituir STRING como empresa o seguir como persona física.
 - Respaldos de producción de Boaz, antes del primer cliente de pago.
 - **El sistema de diseño STRING · Identidad 2026 aún tiene `boaz-azul` en `#1E44FF`**: corregir a `#2979FF`.
-- **KB Boaz** todavía dice "nombre interno hasta el IMPI": se actualiza en el chat de Boaz.
 
 ---
 
@@ -602,10 +644,11 @@ STRING es la casa · dos líneas (productos y a la medida) · la agencia es labo
 ### Estado al 4 de noviembre de 2026
 
 - **Marca:** cerrada.
-- **Sitio:** en producción con la identidad nueva, lotes 0 a 18 (sin 15): precios con IVA, SEO y `/interno` (cimientos). Ver Parte 7.
+- **Sitio:** en producción con la identidad nueva, lotes 0 a 20 (sin 15) y el arreglo de formularios: precios con IVA, SEO, sala 6 nueva y la herramienta de diagnóstico. Ver Parte 7.
 - **Boaz:** en producción con Evolution GYM. Cero clientes de pago. Sale con su nombre en el sitio.
 - **A la medida:** sin proyectos entregados todavía.
-- **Ventas:** plan aprobado (ed. 10); **se sale a vender ya**.
+- **Ventas:** **Boaz va primero** (5 fundadores antes del 20 dic); STRING se atiende si llega solo. Carlos estudia con las dos guías de ventas (6 nov) y usa el diagnóstico interno en el celular.
+- **Herramienta de diagnóstico:** probada por Carlos en producción (5 nov); por ahora sin ajustes.
 
 ### La situación
 
@@ -628,37 +671,93 @@ STRING es la casa · dos líneas (productos y a la medida) · la agencia es labo
 | lote 14 | **Limpieza:** 30 archivos sin uso de `public/` (36 MB), código y dependencias muertas (`gsap`, `react-hot-toast`). PR #9, `17d1efa` | ✅ |
 | lote 16 | **Cimientos de `/interno`:** Supabase propio, login con contraseña + TOTP, `exigirCarlos()`, `proxy.js`, noindex y sin caché, medición fuera. PR #10, `4fca720` | ✅ |
 | lote 17 | **Precios con IVA incluido** en todo el sitio, etiqueta "IVA incluido", fuente única `precios.js`. PR #11, `4cbc6c4` | ✅ |
-| lote 18 | **SEO:** titles y descripciones por ruta, JSON-LD, sitemap con lastmod fijo, head sin duplicados, 404 con título, favicon, og:image de /boaz. PR #12 | ✅ |
-| lote 19 | **Rendimiento:** diferir Medicion y el audio de Cuerdas, `salas.css` solo en la portada, quitar `lazy` a la imagen de la primera pantalla de /sistemas, `react-icons` por SVG. Medido con PageSpeed en producción antes y después | ⏳ Siguiente de dev |
-| lote 20 | **Enlaces a los giros** desde la portada y los niveles (copy y diseño por aprobar) | ⏳ |
-| /interno | Contenido del diagnóstico → prueba en papel → aviso → flujo → calculadora e historial | ⏳ Empieza en el chat de ventas |
+| lote 18 | **SEO:** titles y descripciones por ruta, JSON-LD, sitemap con lastmod fijo, head sin duplicados, 404 con título, favicon, og:image de /boaz. PR #12, `72df117` | ✅ |
+| lote 19 | **Sala 6:** dibujo nuevo, la obra de izquierda a derecha, con etiquetas en HTML. PR #14, `c26730f` | ✅ |
+| lote 20 | **/interno/diagnostico versión 1** (guía sin guardar). PR #16, `22e77ed` | ✅ |
+| arreglo | **Formularios:** claves de Turnstile y SMTP en Vercel; sin clave ya no finge enviar. PR #15, `fdd7c25` | ✅ |
+| lote 21 | **Rendimiento:** diferir Medicion y el audio de Cuerdas, `salas.css` solo en la portada, quitar `lazy` a la imagen de la primera pantalla de /sistemas, `react-icons` por SVG. Medido con PageSpeed en producción antes y después | ⏳ Siguiente de dev |
+| lote 22 | **Enlaces a los giros** desde la portada y los niveles (copy y diseño por aprobar) | ⏳ |
+| /interno | Ajustes tras las primeras llamadas → versión 2 (historial, calculadora; requiere domicilio y aviso) | ⏳ Observaciones de Carlos |
 | después | "¿Qué nivel eres?" y muestra viva de Boaz | ⏳ Tras salir a vender |
 
 ### Cómo se trabaja cada pieza
 
 **Texto → diseño → construcción → revisión.** El texto va a STRING — Textos del sitio; el diseño se dibuja en un lienzo y Carlos elige con el ojo (dos o tres caminos cuando hay decisiones grandes); Claude Code construye por lotes con el Método de trabajo, empezando en modo plan; nada pasa a `main` sin visto bueno de Carlos. **Los puntos de control acordados en un plan se respetan** (diffs y capturas antes de cada commit; también antes de un push encadenado).
 
-### Siguiente paso (4 nov)
+### Siguiente paso (5 nov)
 
-1. **Carlos (fuera del código):** domicilio del aviso; dominio sin www a 308 en Vercel; Search Console por DNS y envío del sitemap; Prueba de resultados enriquecidos en producción.
-2. **Ventas (Plan de Ventas):** lista de 100 prospectos, guion de diagnóstico SPIN, manual de objeciones, plantilla de propuesta, mensajes en frío, demo de Boaz, contrato. **Contenido de la herramienta de diagnóstico:** preguntas por giro, reglas para sugerir nivel, plantilla del resumen.
-3. **Dev:** lote 19 (rendimiento).
-4. **Planeación:** régimen fiscal con contador, persona física o empresa, cuándo activar respaldos de Boaz.
+**El desarrollo queda en pausa. Carlos planifica sus ventas y sale a vender.** Lo siguiente de dev se toma de la lista de abajo cuando haga falta.
 
 ### Retomar el desarrollo (para un chat nuevo de dev)
 
-**Dónde quedó (4 nov):** `main` con lotes 0 a 18 (lote 18 = PR #12). Rama de trabajo nueva siempre desde `origin/main` tras `git fetch`, sin upstream hasta el push; `gh` en **stringm3x**. Claude Code empieza en modo plan; un bloque = un commit; diff y capturas antes de cada commit o push; PR a main sin fusionar hasta el OK de Carlos; al fusionar, merge commit (no squash) y verificación en producción. Si dos sesiones de Claude Code trabajan a la vez, la segunda usa un worktree aparte. Docs del repo: `CLAUDE.md`, `docs/calidad.md`, `docs/movimiento-salas.md`, `docs/textos.md`, `docs/estado.md`, `reportes/`. Textos fuente: doc **STRING — Textos del sitio** (Claude Code no lo puede abrir: pasarle los textos en el prompt).
+**Dónde quedó (5 nov):** `main` en `fdd7c25`, con lotes 0 a 20 y el arreglo de formularios; sin PR abiertos. Producción probada: sitio, `/diagnostico`, `/gym/registro` y `/interno` (entrar + diagnóstico). Variables de Vercel completas en Production y Preview: Turnstile, SMTP y las 4 de `/interno` (`NEXT_PUBLIC_SUPABASE_URL`, clave anon, `INTERNO_USUARIO_ID`, `INTERNO_SECRETO`, este último distinto por entorno).
 
-**Pendiente de dev, en orden:**
+**Cómo se trabaja:** rama nueva siempre desde `origin/main` tras `git fetch`, sin upstream hasta el push; `gh` en **stringm3x**. Claude Code empieza en modo plan; un bloque = un commit; diff y capturas antes de cada commit o push; PR a main sin fusionar hasta el OK de Carlos; al fusionar, merge commit (no squash) y verificación en producción. Si dos sesiones trabajan a la vez, la segunda usa un worktree aparte. Claude Code no puede abrir los docs de Claude: los textos van dentro del prompt. Lo que se dibuja (salas, pantallas) pasa antes por un lienzo y Carlos elige con el ojo.
 
-- [ ] **Domicilio del aviso:** una línea en `app/(sitio)/aviso-de-privacidad/page.jsx` (`TODO(domicilio)`) y en `docs/textos.md`. Bloquea vender con tranquilidad.
-- [ ] **Lote 19 · Rendimiento:** LCP simulado 2.5–2.8 s (real ~66 ms). Hallazgos y archivos en `docs/estado.md`.
-- [ ] **Lote 20 · Enlaces a los giros** (copy por aprobar).
-- [ ] **`/interno` · flujo del diagnóstico** (cuando el contenido esté probado y el aviso cubra los prospectos). La cuenta de intentos del TOTP pasa a la base con la primera tabla.
+**Docs del repo:** `CLAUDE.md`, `docs/calidad.md`, `docs/movimiento-salas.md`, `docs/textos.md`, `docs/estado.md`, `reportes/`, `app/lib/precios.js` (precios públicos) y `app/lib/interno/precios-interno.js` (los que no se publican).
+
+### Pendientes confirmados (5 nov)
+
+**Bloquea vender con tranquilidad**
+
+- [ ] **Domicilio del aviso de privacidad.** Después: el aviso con los datos de prospectos y el Perfil de Negocio de Google.
+
+**Dev (sitio y herramienta)**
+
+- [ ] **Lote 21 · Rendimiento:** LCP simulado 2.5–2.8 s (real ~66 ms). Diferir medición y audio de las cuerdas, `salas.css` solo en la portada, imagen de /sistemas sin `lazy`, `react-icons` por SVG. Medir con PageSpeed en producción antes y después.
+- [ ] **Lote 22 · Enlaces a los giros** desde la portada y los niveles (copy y diseño por aprobar).
+- [ ] **Lote de formas de pago** (textos en la Parte 7) + **"Desde $3,500 al mes"** en Automatiza y Controla: se construye ya; **se fusiona después de la cuenta de Mercado Pago**. Prompt entregado al chat de dev (6 nov).
+- [ ] **Redirect 301 de `/privacidad` a `/aviso-de-privacidad`** (Boaz enlaza ahí y da 404): PR aparte, se puede fusionar ya.
+- [ ] **Texto de `/terminos`** sobre Boaz, cuando existan los Términos de Boaz.
+- [ ] **Diagnóstico versión 2:** historial con etapas y calculadora (requiere domicilio y aviso; la cuenta de intentos del TOTP pasa a la base con la primera tabla).
+- [ ] **Objeciones a la mano** en el diagnóstico: ya se puede, las objeciones están en las dos guías de ventas.
 - [ ] **"¿Qué nivel eres?"** y **muestra viva de Boaz.**
-- [ ] **Animar salas 2, 3, 6 y 7** (hoy dibujo quieto).
-- [ ] **Deuda:** `npm audit` con 27 avisos previos (next, vite, eslint; ninguno de `@supabase`); e2e inestable en `refinar.spec.js` (subpíxel, usar tolerancia); `componentes.spec.js` sobrescribe las capturas del lote 6.
-- [ ] **Fuera del repo:** `boaz-azul` en STRING · Identidad 2026 a `#2979FF`; revisión legal del aviso y términos; cifras de Evolution al recontar socios.
+- [ ] **Animar las salas 2, 3, 6 y 7.**
+- [ ] Precarga de `/diagnostico` hacia la herramienta interna.
+
+**Deuda técnica**
+
+- [ ] `npm audit`: 27 avisos previos (next, vite, eslint; ninguno de `@supabase`).
+- [ ] e2e inestable en `refinar.spec.js` (subpíxel: usar tolerancia).
+- [ ] `componentes.spec.js` reescribe las capturas del lote 6.
+- [ ] Borrar las 11 ramas remotas viejas ya fusionadas (`lote-4` a `lote-13`).
+- [ ] Copia del KB en el repo (`docs/kb/`) a la edición 15.
+- [ ] Opcional: la barra al 88 % deja ver textos detrás ("AJAMOS"); lote propio de la barra.
+
+**Ventas (chat de ventas)**
+
+- [ ] Lista de 100 prospectos.
+- [x] Manual de objeciones: en las dos guías de ventas (6 nov).
+- [x] Guía de ventas · STRING (6 nov).
+- [x] Formas de pago aprobadas (6 nov).
+- [ ] **Crear cuenta de vendedor en Mercado Pago** (INE, cuenta bancaria a su nombre, RFC): links de pago para anticipos, meses con tarjeta y Boaz.
+- [ ] Contrato de sistemas + anexo de plan mensual (borrador).
+- [ ] Elegir el nicho cuando toque (propuesto: barberías y estéticas).
+- [ ] Borrar el doc viejo Plan de Ventas — STRING y Boaz.
+- [x] Sección 7 de la Guía de ventas · STRING con las formas de pago aprobadas (6 nov).
+- [ ] Plantilla de propuesta con su continuidad.
+- [ ] Mensajes en frío y demo de Boaz.
+- [ ] WhatsApp Business: bienvenida, ausencia, respuestas rápidas y catálogo.
+- [ ] Instagram: las 3 publicaciones premium (faltan foto original de Carlos y capturas reales de Boaz).
+
+**Configuración y cuentas**
+
+- [ ] Plan de Supabase de `/interno`: gratuito (se pausa tras una semana sin uso) o de pago.
+- [ ] Marcar como sensibles en Vercel `SMTP_PASSWORD` y `TURNSTILE_SECRET_KEY` (guardar copia antes).
+- [ ] Search Console (opcional, descartado por ahora).
+- [ ] Facebook y TikTok: ¿siguen activos? Si sí, vuelven al JSON-LD.
+
+**Negocio y legal**
+
+- [ ] Régimen fiscal con un contador; persona física o empresa.
+- [ ] Revisión legal del aviso, los términos y el contrato a plazos.
+- [ ] Respaldos de Boaz antes del primer cliente de pago.
+- [ ] Cifras de Evolution cuando se recuenten los socios.
+
+**Documentos fuera del repo**
+
+- [ ] `boaz-azul` a `#2979FF` en STRING · Identidad 2026.
+- [ ] `movimiento-salas.md` del proyecto: la sala 6 ya no crece con el scroll (lote 19).
 
 ## Parte 11 · El fundador
 
@@ -672,7 +771,7 @@ STRING es la casa · dos líneas (productos y a la medida) · la agencia es labo
 
 ## Parte 12 · Ventas y redes
 
-> **Fuente de verdad de ventas: Plan de Ventas — STRING y Boaz** (https://claude.ai/artifact/1xMBhaDVu2fLzVTTKYcgfz). Esto es el resumen.
+> **Las decisiones de ventas viven en este KB (STRING) y en el KB Boaz.** Para estudiar: Guía de ventas · STRING (https://claude.ai/artifact/NUrHAUfXquxbBepBJevdj5) y Guía de ventas · Boaz (https://claude.ai/artifact/affc137e-7f26-4a04-9834-d39b5b1fe282). El Plan de Ventas se retiró el 6 nov.
 
 ### Cómo se vende
 
