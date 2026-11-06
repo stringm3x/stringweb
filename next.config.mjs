@@ -39,6 +39,8 @@ const nextConfig = {
       r301("/quote", "/diagnostico"),
       r301("/Us", "/nosotros"),
       r301("/privacy-policy", "/aviso-de-privacidad"),
+      // Boaz (string-gym-saas) enlaza a /privacidad.
+      r301("/privacidad", "/aviso-de-privacidad"),
       r301("/terms", "/terminos"),
       // /saas se volvió la página de Boaz (lote 9b).
       r301("/saas", "/boaz"),
