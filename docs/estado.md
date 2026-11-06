@@ -32,7 +32,7 @@ vender el 8 nov.
 | 21 | /boaz: Escala "Próximamente" (tercera columna, no se contrata, botón a WhatsApp) y Programa Fundadores (Pro a $799 fijo 12 meses, cinco lugares, "Quiero ser fundador" a WhatsApp). `BOAZ_ESCALA` y `BOAZ_FUNDADOR` en `precios.js`, aparte de `BOAZ`; /interno toma el fundador de ahí. Lugares (0–5) y estado de Escala a mano en `app/lib/boaz-lanzamiento.js`. El "Registra tu gimnasio" del pie de Planes pasa a secundario. Banco en `/muestrario/boaz` (404 en producción). Nada cambia en /gym/registro, /productos ni el JSON-LD | `lote-21-boaz-fundadores` | ✅ Fusionado a main (PR #17, merge c1c7d28, visto bueno de Carlos, 6 nov). En producción: deploy de Vercel en Production del SHA c1c7d28 y verificado en www.stringwebs.com (/boaz, /gym/registro, /productos, JSON-LD y /muestrario/boaz con 404) |
 | — | Arreglo: `/privacidad` daba 404 y Boaz (`string-gym-saas`, `lib/constants.ts`) enlaza ahí. Redirect 301 a `/aviso-de-privacidad` en `next.config.mjs`; fuera del sitemap; prueba e2e del 301 (`e2e/seo.spec.js`) y del sitemap (`app/lib/seo.test.js`). El repo de Boaz no se toca | `arreglo-privacidad-redirect` | ✅ Fusionado (PR #18, 5db1417), verificado en producción (6 nov: `/privacidad` da 301 a `/aviso-de-privacidad`, que da 200) |
 
-Producción sirve `main` con el lote 21 (c1c7d28: deploy de Vercel en Production y verificación en www.stringwebs.com, 6 nov). Nada se fusiona a `main` sin el visto bueno de Carlos.
+Producción sirve `main` con el lote 21 (c1c7d28) y el arreglo de /privacidad (5db1417, PR #18): deploy de Vercel en Production y verificación en www.stringwebs.com, 6 nov. Nada se fusiona a `main` sin el visto bueno de Carlos.
 
 ## Arreglos del KB Parte 7
 
