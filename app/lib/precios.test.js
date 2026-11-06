@@ -58,6 +58,15 @@ describe("precios", () => {
     expect(continuidadNivel("otro")).toBeNull();
   });
 
+  // "$3,500" es Mejora y también el boceto, que no se publica: lo público no
+  // toca los precios de /interno y nadie escribe esa cifra a mano.
+  it("lo público no importa precios-interno ni escribe el $3,500 a mano", () => {
+    const importan = FUENTES.filter(({ texto }) => /precios-interno|lib\/interno|\bBOCETO\b/.test(sinComentarios(texto)));
+    expect(importan.map(({ ruta }) => ruta)).toEqual([]);
+    const conCifra = FUENTES.filter(({ texto }) => /3,?500/.test(sinComentarios(texto))).map(({ ruta }) => ruta);
+    expect(conCifra).toEqual(["lib/precios.js"]);
+  });
+
   // Lote 21 (6 nov): Escala y el Pro fundador viven aparte de BOAZ, para que
   // /productos, /gym/registro y el JSON-LD, que leen BOAZ, no los arrastren.
   it("Escala y el Pro fundador están aparte de BOAZ", () => {
