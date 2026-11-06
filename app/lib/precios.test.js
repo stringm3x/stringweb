@@ -1,7 +1,7 @@
 import { describe, expect, it } from "vitest";
 import fs from "fs";
 import path from "path";
-import { BOAZ, BOAZ_ESCALA, BOAZ_FUNDADOR, CONTINUIDAD, CONTINUIDAD_DESDE, DESDE, IVA, SE_COTIZA, precioNivel } from "./precios";
+import { BOAZ, BOAZ_ESCALA, BOAZ_FUNDADOR, CONTINUIDAD, CONTINUIDAD_DESDE, DESDE, IVA, SE_COTIZA, continuidadNivel, precioNivel } from "./precios";
 
 // Lote 17: precios con IVA incluido (decisión del 4 nov). precios.js es la
 // fuente única; ningún archivo público de app/ guarda los precios viejos, ni
@@ -46,6 +46,16 @@ describe("precios", () => {
       starter: { mes: "$799", anual: "$7,990" },
       pro: { mes: "$1,299", anual: "$12,990" },
     });
+  });
+
+  it("continuidad por nivel (6 nov): Mejora en Automatiza y Controla, Cuida en Responde y Organiza, Empresa sin cifra", () => {
+    expect(CONTINUIDAD.mejora).toBe("$3,500");
+    expect(continuidadNivel("responde")).toBe(CONTINUIDAD_DESDE);
+    expect(continuidadNivel("organiza")).toBe(CONTINUIDAD_DESDE);
+    expect(continuidadNivel("automatiza")).toBe(CONTINUIDAD.mejora);
+    expect(continuidadNivel("controla")).toBe(CONTINUIDAD.mejora);
+    expect(continuidadNivel("empresa")).toBeNull();
+    expect(continuidadNivel("otro")).toBeNull();
   });
 
   // Lote 21 (6 nov): Escala y el Pro fundador viven aparte de BOAZ, para que

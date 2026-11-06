@@ -28,6 +28,19 @@ export const CONTINUIDAD = {
   impulsa: "$5,800",
 };
 
+// El "Después" de la ficha de cada nivel (decisión del 6 nov): Automatiza y
+// Controla van con Mejora ("Desde $3,500 al mes"); Responde y Organiza, con
+// el "desde" de siempre (Cuida, $2,100). Empresa no publica cifra: null, y la
+// ficha dice "Según su propuesta". /sistemas y las preguntas frecuentes siguen
+// con CONTINUIDAD_DESDE.
+const CONTINUIDAD_POR_NIVEL = {
+  responde: CONTINUIDAD_DESDE,
+  organiza: CONTINUIDAD_DESDE,
+  automatiza: CONTINUIDAD.mejora,
+  controla: CONTINUIDAD.mejora,
+};
+export const continuidadNivel = (slug) => CONTINUIDAD_POR_NIVEL[slug] ?? null;
+
 // Planes de Boaz que se contratan: los que salen en /productos, /gym/registro
 // y el JSON-LD. Solo Starter y Pro; Escala y el Pro fundador van aparte para
 // que nada que lea BOAZ los arrastre.
