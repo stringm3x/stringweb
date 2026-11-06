@@ -1,7 +1,7 @@
 import { describe, expect, it } from "vitest";
 import fs from "fs";
 import path from "path";
-import { BOAZ, CONTINUIDAD, CONTINUIDAD_DESDE, DESDE, IVA, SE_COTIZA, precioNivel } from "./precios";
+import { BOAZ, BOAZ_ESCALA, BOAZ_FUNDADOR, CONTINUIDAD, CONTINUIDAD_DESDE, DESDE, IVA, SE_COTIZA, precioNivel } from "./precios";
 
 // Lote 17: precios con IVA incluido (decisión del 4 nov). precios.js es la
 // fuente única; ningún archivo público de app/ guarda los precios viejos, ni
@@ -48,6 +48,16 @@ describe("precios", () => {
     });
   });
 
+  // Lote 21 (6 nov): Escala y el Pro fundador viven aparte de BOAZ, para que
+  // /productos, /gym/registro y el JSON-LD, que leen BOAZ, no los arrastren.
+  it("Escala y el Pro fundador están aparte de BOAZ", () => {
+    expect(BOAZ_ESCALA).toEqual({ mes: "$1,999", anual: "$19,990" });
+    expect(BOAZ_FUNDADOR).toEqual({ mes: "$799", meses: 12 });
+    expect(Object.keys(BOAZ)).toEqual(["starter", "pro"]);
+    expect(Object.values(BOAZ)).not.toContain(BOAZ_ESCALA);
+    expect(Object.values(BOAZ)).not.toContain(BOAZ_FUNDADOR);
+  });
+
   it("ningún archivo de app/ fuera de /interno guarda un precio viejo", () => {
     expect(FUENTES.length).toBeGreaterThan(50);
     const hallados = FUENTES.flatMap(({ ruta, texto }) => [
@@ -80,6 +90,8 @@ describe("precios", () => {
         ...[...texto.matchAll(/["']?(?:price|lowPrice|highPrice)["']?\s*:\s*["']?([\d,.]+)/g)].map((m) => m[1]),
       ].map((c) => c.replace(/,/g, "").replace(/\.0+$/, ""));
       cifras.forEach((c) => expect(validos.has(c), `${ruta}: ${c}`).toBe(true));
+      // Escala nunca entra al JSON-LD (el fundador se prueba por sus offers en jsonld.test.js).
+      expect(texto, ruta).not.toMatch(/1,?999|19,?990|BOAZ_ESCALA|BOAZ_FUNDADOR/);
     });
   });
 });

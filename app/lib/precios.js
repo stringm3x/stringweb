@@ -28,8 +28,18 @@ export const CONTINUIDAD = {
   impulsa: "$5,800",
 };
 
-// Planes de Boaz que salen en el sitio. Escala y Pro fundador no aparecen.
+// Planes de Boaz que se contratan: los que salen en /productos, /gym/registro
+// y el JSON-LD. Solo Starter y Pro; Escala y el Pro fundador van aparte para
+// que nada que lea BOAZ los arrastre.
 export const BOAZ = {
   starter: { mes: "$799", anual: "$7,990" },
   pro: { mes: "$1,299", anual: "$12,990" },
 };
+
+// Escala (lote 21, decisión del 6 nov): sale SOLO en /boaz, como
+// "Próximamente"; todavía no se puede contratar.
+export const BOAZ_ESCALA = { mes: "$1,999", anual: "$19,990" };
+
+// Pro fundador: $799 al mes, fijo 12 meses. Público desde el lote 21, solo en
+// la sección de fundadores de /boaz. /interno también lo toma de aquí.
+export const BOAZ_FUNDADOR = { mes: "$799", meses: 12 };

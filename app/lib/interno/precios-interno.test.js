@@ -23,7 +23,7 @@ const PRIVADO = /^app\/(\(interno\)\/|lib\/interno\/|muestrario\/diagnostico\/)/
 const SIN_PRECIOS = /7,500|80,000|799 fijo/;
 
 describe("precios internos", () => {
-  it("tiene el boceto, el precio fundador y el mínimo de Empresa", () => {
+  it("tiene el boceto, el precio fundador (de precios.js) y el mínimo de Empresa", () => {
     expect(BOCETO).toEqual({ chico: "$3,500", empresaDesde: "$7,500" });
     expect(BOAZ_FUNDADOR).toEqual({ mes: "$799", meses: 12 });
     expect(EMPRESA_MINIMO).toBe("$80,000");
@@ -33,11 +33,14 @@ describe("precios internos", () => {
     expect(DESDE).toBe(publicos.DESDE);
     expect(CONTINUIDAD).toBe(publicos.CONTINUIDAD);
     expect(BOAZ).toBe(publicos.BOAZ);
+    // Lote 21: el Pro fundador es público y vive en precios.js; /interno lo
+    // toma de ahí, el mismo objeto.
+    expect(BOAZ_FUNDADOR).toBe(publicos.BOAZ_FUNDADOR);
   });
 
   it("precios.js no trae los precios internos", () => {
     const texto = fs.readFileSync(path.join(RAIZ, "app/lib/precios.js"), "utf8");
-    expect(texto).not.toMatch(/7,500|80,000|BOCETO|FUNDADOR|EMPRESA_MINIMO/);
+    expect(texto).not.toMatch(/7,500|80,000|BOCETO|EMPRESA_MINIMO/);
   });
 
   it("ningún archivo público importa precios-interno.js", () => {
