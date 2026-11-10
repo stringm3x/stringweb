@@ -1,6 +1,6 @@
 # Estado · stringwebs.com
 
-Última actualización: 6 nov 2026 (lote 22). Meta del KB: sitio rehecho del 1 al 7 nov; salir a
+Última actualización: 10 nov 2026 (lote 23). Meta del KB: sitio rehecho del 1 al 7 nov; salir a
 vender el 8 nov.
 
 ## Lotes
@@ -32,6 +32,7 @@ vender el 8 nov.
 | 21 | /boaz: Escala "Próximamente" (tercera columna, no se contrata, botón a WhatsApp) y Programa Fundadores (Pro a $799 fijo 12 meses, cinco lugares, "Quiero ser fundador" a WhatsApp). `BOAZ_ESCALA` y `BOAZ_FUNDADOR` en `precios.js`, aparte de `BOAZ`; /interno toma el fundador de ahí. Lugares (0–5) y estado de Escala a mano en `app/lib/boaz-lanzamiento.js`. El "Registra tu gimnasio" del pie de Planes pasa a secundario. Banco en `/muestrario/boaz` (404 en producción). Nada cambia en /gym/registro, /productos ni el JSON-LD | `lote-21-boaz-fundadores` | ✅ Fusionado a main (PR #17, merge c1c7d28, visto bueno de Carlos, 6 nov). En producción: deploy de Vercel en Production del SHA c1c7d28 y verificado en www.stringwebs.com (/boaz, /gym/registro, /productos, JSON-LD y /muestrario/boaz con 404) |
 | — | Arreglo: `/privacidad` daba 404 y Boaz (`string-gym-saas`, `lib/constants.ts`) enlaza ahí. Redirect 301 a `/aviso-de-privacidad` en `next.config.mjs`; fuera del sitemap; prueba e2e del 301 (`e2e/seo.spec.js`) y del sitemap (`app/lib/seo.test.js`). El repo de Boaz no se toca | `arreglo-privacidad-redirect` | ✅ Fusionado (PR #18, 5db1417), verificado en producción (6 nov: `/privacidad` da 301 a `/aviso-de-privacidad`, que da 200) |
 | 22 | Formas de pago y continuidad por nivel (decisión del 6 nov): preguntas "¿Cómo se paga?" y "¿Me hacen descuento?" con los textos nuevos; en la ficha de nivel, línea "También a meses con tarjeta (o en plan mensual)" bajo "Pago" y "Después" por nivel con `continuidadNivel()` de `precios.js` (Mejora $3,500 en Automatiza y Controla, $2,100 en Responde y Organiza, "Según su propuesta" en Empresa); KB ed. 15 en `docs/kb/`; `e2e/pagos.spec.js`. `lastmod` de `/` y de los niveles: `LOTE_22` en `app/sitemap.js` | `pagos-continuidad` | ✅ Fusionado sin la cuenta de Mercado Pago, por decisión de Carlos (PR #19, 6 nov); abrirla es pendiente |
+| 23 | Aviso de privacidad en /gym/registro (lote legal de Boaz): casilla obligatoria «Acepto el aviso de privacidad» (`CasillaBoaz`, G · Casilla) con enlace en otra pestaña; reemplaza «Al enviar aceptas…». Envía `acepta_aviso: true`; el SaaS lo exige y guarda versión y fecha. Sale ANTES del lanzamiento del SaaS a main. Comentario del 301 de /privacidad al día; e2e `registro-aviso.spec.js` | `lote-23-aviso-registro` | ⏳ PR abierto, espera el visto bueno de Carlos |
 
 Producción sirve `main` con el lote 21 (c1c7d28) y el arreglo de /privacidad (5db1417, PR #18): deploy de Vercel en Production y verificación en www.stringwebs.com, 6 nov. Nada se fusiona a `main` sin el visto bueno de Carlos.
 

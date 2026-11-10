@@ -39,4 +39,8 @@ export const solicitudSchema = z.object({
   miembros_aprox: z.string().optional(),
 
   como_entero: z.string().max(300).optional(),
+
+  // Casilla obligatoria (lote 23). El SaaS la vuelve a exigir y guarda la
+  // versión vigente del aviso y la fecha.
+  acepta_aviso: z.literal(true, { error: "Acepta el aviso de privacidad." }),
 });

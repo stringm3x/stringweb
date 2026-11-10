@@ -10,6 +10,7 @@ import { solicitudSchema } from "../../lib/validations/solicitud-schema";
 import { TurnstileWidget } from "../components/TurnstileWidget";
 import { BotonBoaz } from "@/app/components/boaz/BotonBoaz";
 import { CampoBoaz } from "@/app/components/boaz/CampoBoaz";
+import { CasillaBoaz } from "@/app/components/boaz/CasillaBoaz";
 import { BOAZ, IVA } from "@/app/lib/precios";
 
 const ENDPOINT = "https://app.gym.stringwebs.com/api/solicitudes";
@@ -58,6 +59,7 @@ export function RegistroForm({ initialPlan = "" }) {
       ciudad: "",
       miembros_aprox: "",
       como_entero: "",
+      acepta_aviso: false,
     },
   });
 
@@ -80,6 +82,7 @@ export function RegistroForm({ initialPlan = "" }) {
         ciudad: data.ciudad || undefined,
         miembros_aprox: data.miembros_aprox ? Number(data.miembros_aprox) : undefined,
         como_entero: data.como_entero || undefined,
+        acepta_aviso: true,
         turnstile_token: token,
       };
 
@@ -149,6 +152,20 @@ export function RegistroForm({ initialPlan = "" }) {
       </div>
       <CampoBoaz id="como_entero" etiqueta="¿Cómo supiste de Boaz?" opcional="(opcional)" {...campo("como_entero")} />
 
+      <CasillaBoaz
+        id="acepta_aviso"
+        etiqueta={
+          <>
+            Acepto el{" "}
+            {/* En otra pestaña: lo que ya escribieron se queda. */}
+            <Link href="/aviso-de-privacidad" target="_blank" rel="noopener" className={ENLACE}>
+              aviso de privacidad
+            </Link>
+          </>
+        }
+        {...campo("acepta_aviso")}
+      />
+
       <TurnstileWidget onVerify={setToken} onExpire={() => setToken("")} />
 
       {aviso && (
@@ -163,13 +180,6 @@ export function RegistroForm({ initialPlan = "" }) {
           Registrar mi gimnasio
         </BotonBoaz>
       </div>
-      <p className="text-[13px] text-texto-suave">
-        Al enviar aceptas nuestro{" "}
-        <Link href="/aviso-de-privacidad" className={ENLACE}>
-          aviso de privacidad
-        </Link>
-        .
-      </p>
       <p className="text-[15px] text-texto-suave">
         ¿Tienes dudas?{" "}
         <Link href="/boaz#planes" className={ENLACE}>
