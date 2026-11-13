@@ -677,7 +677,7 @@ Etiquetas de los campos (ejemplo entre paréntesis):
 - ¿Cuántos socios tienes hoy? \[selector por rangos de hoy, sin texto de ayuda\]
 - ¿Cómo supiste de Boaz? (opcional)
 
-Casilla obligatoria, antes de la verificación (lote 23, 10 nov): Acepto el **aviso de privacidad** \[enlace a /aviso-de-privacidad, en otra pestaña\]. Si no se marca: Acepta el aviso de privacidad.
+Casilla obligatoria, antes de la verificación (lote 23, 10 nov): Acepto el **aviso de privacidad** \[enlace a /boaz/aviso-de-privacidad desde el lote 24 (antes /aviso-de-privacidad), en otra pestaña\]. Si no se marca: Acepta el aviso de privacidad.
 Botón: Registrar mi gimnasio \[cargando: "Registrando"\]
 Debajo: ¿Tienes dudas? Ver planes \[→ /boaz#planes\] \[la línea "Al enviar aceptas…" sale: la reemplaza la casilla\]
 Error del envío: No pudimos registrar tu gimnasio. Revisa tu conexión e intenta de nuevo; lo que escribiste se queda.
