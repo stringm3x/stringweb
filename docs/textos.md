@@ -1250,6 +1250,8 @@ mismo título y la misma descripción. Los precios salen de `app/lib/precios.js`
 | /diagnostico | Solicitar diagnóstico · STRING | Cuatro preguntas para saber qué necesita tu negocio. Te respondemos en un día hábil. |
 | /aviso-de-privacidad | Aviso de privacidad · STRING | Cómo usa STRING los datos que dejas en el formulario: quién es el responsable, para qué los usamos y cómo ejercer tus derechos. |
 | /terminos | Términos · STRING | Las condiciones para usar stringwebs.com: qué dice el sitio, qué garantizamos y qué es de STRING. |
+| /boaz/terminos | Términos de Boaz · STRING | Al aceptarlos en el producto, el gimnasio contrata Boaz en estas condiciones. |
+| /boaz/aviso-de-privacidad | Aviso de privacidad de Boaz · STRING | Boaz trata dos grupos de datos con papeles distintos: los del gimnasio y su equipo, y los de los socios de cada gimnasio. \[por aprobar: su primera frase, recortada a 160\] |
 | 404 | Esta sala no existe · STRING | \[sin descripción propia\] |
 
 \[Reglas: ningún título pasa de 60 caracteres ni descripción de 160. Las descripciones de los giros no llevan la cita del
@@ -1272,3 +1274,11 @@ Texto alternativo: Boaz, el sistema para gimnasios, con la lámina de la columna
   incluido. Sin reseñas ni calificaciones.
 - **Migas** en niveles y giros: Inicio › Sistemas › \[nivel\] e Inicio › Tu negocio › \[giro\].
 
+## Términos y Aviso de privacidad de Boaz · lote 24 (aprobados el 11–12 nov)
+
+El texto de /boaz/terminos y /boaz/aviso-de-privacidad no se copia aquí: vive, palabra por palabra, en
+`app/lib/legal-boaz/boaz-terminos-aviso-2026-11-12.md`, y las páginas lo leen de ese archivo. Una prueba
+(`app/lib/legal-boaz/documento.test.js`) comprueba que lo publicado sea idéntico. Título de cada página: el de su
+sección ("Términos de Boaz", "Aviso de privacidad de Boaz"). Versión de los dos: `2026-11-12` (Carlos, 12 nov: el
+único cambio al texto aprobado, porque `2026-11` ya era la versión del aviso anterior en Boaz). Para cambiarlos, se
+cambia ese archivo y su versión, y Boaz sube la misma versión en `lib/legal.ts`.

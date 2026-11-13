@@ -14,6 +14,7 @@ const LOTE_17 = "2026-11-04"; // /tu-negocio: los precios con IVA de las tarjeta
 const LOTE_18 = "2026-11-04"; // títulos, descripciones y JSON-LD
 const LOTE_21 = "2026-11-06"; // /boaz: Escala próximamente y Programa Fundadores
 const LOTE_22 = "2026-11-06"; // portada y fichas de nivel: formas de pago y continuidad por nivel
+const LOTE_24 = "2026-11-12"; // Términos y Aviso de Boaz
 
 const ROUTES = [
   { path: "/", priority: 1.0, changeFrequency: "weekly", lastmod: LOTE_22 },
@@ -26,6 +27,8 @@ const ROUTES = [
   { path: "/diagnostico", priority: 0.8, changeFrequency: "monthly", lastmod: LOTE_13 },
   { path: "/productos", priority: 0.9, changeFrequency: "weekly", lastmod: LOTE_18 },
   { path: "/boaz", priority: 0.9, changeFrequency: "weekly", lastmod: LOTE_21 },
+  { path: "/boaz/terminos", priority: 0.3, changeFrequency: "yearly", lastmod: LOTE_24 },
+  { path: "/boaz/aviso-de-privacidad", priority: 0.3, changeFrequency: "yearly", lastmod: LOTE_24 },
   // index, follow desde el lote 18: se queda.
   { path: "/gym/registro", priority: 0.8, changeFrequency: "monthly", lastmod: LOTE_18 },
   { path: "/aviso-de-privacidad", priority: 0.3, changeFrequency: "yearly", lastmod: LOTE_13 },
