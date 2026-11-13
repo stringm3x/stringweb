@@ -253,7 +253,7 @@ Carlos Avilés (STRING) usa tu nombre, tu WhatsApp, el giro de tu negocio y lo q
 
 **Lo que es de STRING.** El diseño, los textos, el arte y el logo de este sitio son de STRING. No se copian sin permiso. El arte de cada cliente en la galería se muestra con su permiso.
 
-**Productos.** Boaz tiene sus propios términos dentro del producto.
+**Productos.** Boaz tiene sus propios términos: **Términos de Boaz** \[enlace a /boaz/terminos\]. \[Lote 24, 12 nov: antes decía "Boaz tiene sus propios términos dentro del producto." La fecha de /terminos pasa al 12 de noviembre de 2026; la del aviso no cambia.\]
 
 **Ley aplicable.** Estos términos se rigen por las leyes de México, y cualquier diferencia se atiende en la Ciudad de México.
 

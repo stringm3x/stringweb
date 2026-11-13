@@ -2,7 +2,8 @@
 // El texto sale de docs/textos.md, palabra por palabra.
 export const FECHA_LEGALES = "7 de noviembre de 2026";
 
-export function PaginaLegal({ titulo, apartados }) {
+// `fecha`: la de la página, si cambió después que las demás (lote 24, /terminos).
+export function PaginaLegal({ titulo, apartados, fecha = FECHA_LEGALES }) {
   return (
     <div data-theme="noche" className="bg-fondo px-4 pb-space-8 pt-32 text-texto sm:px-6 lg:px-24 lg:pt-40">
       <article className="mx-auto max-w-[680px]">
@@ -17,7 +18,7 @@ export function PaginaLegal({ titulo, apartados }) {
           ))}
           <p>
             <strong className="font-semibold text-texto">Última actualización:</strong>{" "}
-            {FECHA_LEGALES}.
+            {fecha}.
           </p>
         </div>
       </article>
