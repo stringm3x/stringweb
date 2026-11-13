@@ -158,7 +158,7 @@ export function RegistroForm({ initialPlan = "" }) {
           <>
             Acepto el{" "}
             {/* En otra pestaña: lo que ya escribieron se queda. */}
-            <Link href="/aviso-de-privacidad" target="_blank" rel="noopener" className={ENLACE}>
+            <Link href="/boaz/aviso-de-privacidad" target="_blank" rel="noopener" className={ENLACE}>
               aviso de privacidad
             </Link>
           </>

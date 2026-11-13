@@ -40,7 +40,7 @@ test("sin marcar el aviso no se envía y dice por qué", async ({ page }) => {
 
 test("el enlace del aviso abre en otra pestaña y la línea vieja ya no está", async ({ page }) => {
   const enlace = page.getByRole("link", { name: "aviso de privacidad", exact: true });
-  await expect(enlace).toHaveAttribute("href", "/aviso-de-privacidad");
+  await expect(enlace).toHaveAttribute("href", "/boaz/aviso-de-privacidad");
   await expect(enlace).toHaveAttribute("target", "_blank");
   await expect(page.getByText("Al enviar aceptas")).toHaveCount(0);
 });

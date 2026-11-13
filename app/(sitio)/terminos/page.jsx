@@ -1,4 +1,6 @@
+import Link from "next/link";
 import { PaginaLegal } from "../../components/ui/PaginaLegal";
+import { ENLACE } from "../../components/salas/estilos";
 import { CORREO } from "../../lib/contacto";
 import { metadatosPagina } from "../../lib/compartir";
 
@@ -35,7 +37,16 @@ const APARTADOS = [
   },
   {
     entrada: "Productos.",
-    texto: "Boaz tiene sus propios términos dentro del producto.",
+    // Lote 24 (docs/textos.md § Términos): enlaza a los términos de Boaz.
+    texto: (
+      <>
+        Boaz tiene sus propios términos:{" "}
+        <Link href="/boaz/terminos" className={`underline ${ENLACE}`}>
+          Términos de Boaz
+        </Link>
+        .
+      </>
+    ),
   },
   {
     entrada: "Ley aplicable.",
@@ -49,5 +60,5 @@ const APARTADOS = [
 ];
 
 export default function TerminosPage() {
-  return <PaginaLegal titulo="Términos" apartados={APARTADOS} />;
+  return <PaginaLegal titulo="Términos" apartados={APARTADOS} fecha="12 de noviembre de 2026" />;
 }

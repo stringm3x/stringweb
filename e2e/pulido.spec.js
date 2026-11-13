@@ -49,6 +49,8 @@ const RUTAS = [
   "/gym/gracias",
   "/aviso-de-privacidad",
   "/terminos",
+  "/boaz/terminos",
+  "/boaz/aviso-de-privacidad",
 ];
 
 // Rutas con su propio opengraph-image.jsx: su imagen no es la de la portada.

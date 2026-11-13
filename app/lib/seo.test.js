@@ -114,7 +114,7 @@ describe("SEO (lote 18)", () => {
     [...NIVELES.map((n) => `/sistemas/${n.slug}`), ...GIROS.map((g) => `/tu-negocio/${g.slug}`)].forEach((r) =>
       expect(rutas).toContain(r),
     );
-    ["/", "/sistemas", "/tu-negocio", "/tu-negocio/empresas", "/boaz", "/gym/registro", "/productos", "/nosotros", "/diagnostico", "/aviso-de-privacidad", "/terminos"].forEach((r) =>
+    ["/", "/sistemas", "/tu-negocio", "/tu-negocio/empresas", "/boaz", "/gym/registro", "/productos", "/nosotros", "/diagnostico", "/aviso-de-privacidad", "/terminos", "/boaz/terminos", "/boaz/aviso-de-privacidad"].forEach((r) =>
       expect(rutas).toContain(r),
     );
     // /privacidad es solo un redirect: no va al sitemap.
