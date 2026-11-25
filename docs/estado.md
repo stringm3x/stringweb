@@ -1,6 +1,6 @@
 # Estado · stringwebs.com
 
-Última actualización: 12 nov 2026 (lote 24). Meta del KB: sitio rehecho del 1 al 7 nov; salir a
+Última actualización: 25 nov 2026 (lote 25). Meta del KB: sitio rehecho del 1 al 7 nov; salir a
 vender el 8 nov.
 
 ## Lotes
@@ -33,7 +33,9 @@ vender el 8 nov.
 | — | Arreglo: `/privacidad` daba 404 y Boaz (`string-gym-saas`, `lib/constants.ts`) enlaza ahí. Redirect 301 a `/aviso-de-privacidad` en `next.config.mjs`; fuera del sitemap; prueba e2e del 301 (`e2e/seo.spec.js`) y del sitemap (`app/lib/seo.test.js`). El repo de Boaz no se toca | `arreglo-privacidad-redirect` | ✅ Fusionado (PR #18, 5db1417), verificado en producción (6 nov: `/privacidad` da 301 a `/aviso-de-privacidad`, que da 200) |
 | 22 | Formas de pago y continuidad por nivel (decisión del 6 nov): preguntas "¿Cómo se paga?" y "¿Me hacen descuento?" con los textos nuevos; en la ficha de nivel, línea "También a meses con tarjeta (o en plan mensual)" bajo "Pago" y "Después" por nivel con `continuidadNivel()` de `precios.js` (Mejora $3,500 en Automatiza y Controla, $2,100 en Responde y Organiza, "Según su propuesta" en Empresa); KB ed. 15 en `docs/kb/`; `e2e/pagos.spec.js`. `lastmod` de `/` y de los niveles: `LOTE_22` en `app/sitemap.js` | `pagos-continuidad` | ✅ Fusionado sin la cuenta de Mercado Pago, por decisión de Carlos (PR #19, 6 nov); abrirla es pendiente |
 | 23 | Aviso de privacidad en /gym/registro (lote legal de Boaz): casilla obligatoria «Acepto el aviso de privacidad» (`CasillaBoaz`, G · Casilla) con enlace en otra pestaña; reemplaza «Al enviar aceptas…». Envía `acepta_aviso: true`; el SaaS lo exige y guarda versión y fecha. Sale ANTES del lanzamiento del SaaS a main. Comentario del 301 de /privacidad al día; e2e `registro-aviso.spec.js` | `lote-23-aviso-registro` | ✅ Fusionado a main (PR #20, bc463e0) |
-| 24 | Términos y Aviso de privacidad de Boaz (texto aprobado por Carlos, 11–12 nov, versión `2026-11-12`): `/boaz/terminos` y `/boaz/aviso-de-privacidad` leen `app/lib/legal-boaz/boaz-terminos-aviso-2026-11-12.md` al compilar y lo pintan con `ui/DocumentoLegal.jsx` (estilo de `PaginaLegal`: noche, 680 px); prueba palabra por palabra (`app/lib/legal-boaz/documento.test.js`); sitemap con `LOTE_24`. /terminos: «Productos.» enlaza a /boaz/terminos y su fecha pasa al 12 nov (`PaginaLegal` acepta `fecha`). La casilla de /gym/registro enlaza a /boaz/aviso-de-privacidad; la versión la guarda el SaaS (`lib/legal.ts`, su propio PR después de este). Descripción de /boaz/aviso-de-privacidad por aprobar | `lote-24-legales-boaz` | ⏳ PR abierto, espera el visto bueno de Carlos |
+| 24 | Términos y Aviso de privacidad de Boaz (texto aprobado por Carlos, 11–12 nov, versión `2026-11-12`): `/boaz/terminos` y `/boaz/aviso-de-privacidad` leen `app/lib/legal-boaz/boaz-terminos-aviso-2026-11-12.md` al compilar y lo pintan con `ui/DocumentoLegal.jsx` (estilo de `PaginaLegal`: noche, 680 px); prueba palabra por palabra (`app/lib/legal-boaz/documento.test.js`); sitemap con `LOTE_24`. /terminos: «Productos.» enlaza a /boaz/terminos y su fecha pasa al 12 nov (`PaginaLegal` acepta `fecha`). La casilla de /gym/registro enlaza a /boaz/aviso-de-privacidad; la versión la guarda el SaaS (`lib/legal.ts`, su propio PR después de este). Descripción de /boaz/aviso-de-privacidad por aprobar | `lote-24-legales-boaz` | ✅ Fusionado a main (PR #21, 72b656f) |
+| — | Arreglo de `e2e/pagos.spec.js`: "Mercado Pago" se permite solo en `/boaz/terminos` y `/boaz/aviso-de-privacidad` (proveedor real del aviso, lote 24); en el resto del sitio sigue prohibido. Solo la prueba | `arreglo-prueba-mercado-pago` | ✅ Fusionado a main (PR #22, merge ffc21e8, visto bueno de Carlos, 25 nov); `pagos.spec.js` 8/8 en main |
+| 25 | /interno para los nichos nuevos (chat de ventas del 25 nov): llamada de 20 minutos por tramos para academias, desarrolladoras, B2B y tiendas (clínicas en pausa); tipo de dueño; guion común con dueño y negocio; campo bajo cada pregunta; reloj discreto; objeciones; calculadora de "su número" (deudas aparte, frase con las horas tal cual); prioridad → pantalla de ejemplo; nivel solo para Carlos; cierre y resumen para WhatsApp con "Copiar". Notas solo en la pestaña (sessionStorage), borradas al terminar, al salir y al cerrar. Gimnasio, atajo a la herramienta del lote 20 (Boaz Pro); giros viejos ocultos. Arreglo de seguridad: precios internos y textos de /interno fuera del JS público | `lote-25-interno-nichos` | ⏳ PR abierto, espera el visto bueno de Carlos |
 
 Producción sirve `main` con el lote 21 (c1c7d28) y el arreglo de /privacidad (5db1417, PR #18): deploy de Vercel en Production y verificación en www.stringwebs.com, 6 nov. Nada se fusiona a `main` sin el visto bueno de Carlos.
 
@@ -145,6 +147,32 @@ Producción sirve `main` con el lote 21 (c1c7d28) y el arreglo de /privacidad (5
   /tu-negocio) y la portada no enlaza a ningún giro; /productos y /tu-negocio solo reciben enlaces de la barra y el
   pie. Enlazar desde la portada y desde cada nivel hacia sus giros; los textos de los enlaces no están en
   `docs/textos.md` y se aprueban antes.
+
+## Decisiones tomadas en el lote 25
+
+- No se guarda nada en el servidor ni en la base de datos. Las notas de la llamada viven en `sessionStorage`, solo en
+  `llamada/useLlamada.js` (`sin-guardar.test.js` lo revisa): sobreviven a una recarga y se borran con "Terminar
+  llamada" (con confirmación), con "Salir" y al cerrar la pestaña. Nada en localStorage, cookies ni Supabase.
+- Contenido por nicho en `app/lib/interno/llamada/nichos/*.js` (guion común en `guion.js`). Clínicas, "en pausa" y sin
+  ficha: para agregarla, su archivo y una línea en `nichos/index.js`. Solo se importan en el servidor de /interno y en
+  el banco (`nichos-solo-interno.test.js`).
+- Giros del lote 20 ocultos, sin borrar. Gimnasio queda como atajo "Gimnasio → Boaz Pro" (`Diagnostico` con
+  `giroFijo`): Boaz va primero.
+- La cuenta: solo lo capturado; "él lo dijo" con casilla; las deudas (lo que le deben hoy, monto atrasado, cartera
+  vencida) van aparte, ni al mes ni ×12. Horas en la frase tal cual: tuyas a la semana (academias), de tu equipo a la
+  semana con horas × personas (desarrolladoras y B2B), tuyas al día (tiendas). El ×4 solo en el desglose.
+- Nivel: reglas de la ficha; si quedan dos, el más chico; Controla de caso típico en desarrolladoras, B2B y tiendas. En
+  Empresa, la nota del boceto y el mínimo, solo en "Solo para ti"; nunca en el resumen ni en lo que se copia
+  (`llamada/resumen.test.js`). Ningún "Desde" en la sugerencia.
+- Números en las fichas: ningún "$" salvo el filtro (criterio del prospecto); las cifras que no son dinero (minutos,
+  filtros, "4 horas hábiles") van como texto. La única cifra de STRING en pantalla es "Desde $9,500", de `precios.js`.
+- Seguridad: los componentes de cliente de Next se sirven en `.next/static` sin sesión. Desde el lote 25, el guion,
+  las fichas, `precios-interno.js` y el contenido de la herramienta del lote 20 (`contenido.js` sin funciones,
+  `ofertas.js`) se leen en el servidor después de `exigirCarlos()` y llegan por props. Lo vigilan
+  `app/lib/interno/cliente-sin-contenido.test.js` (grafo de imports) y `e2e/interno.spec.js` (revisa `.next/static`
+  en el build de producción: ni `$80,000`, ni `$7,500`, ni `BOCETO`, ni los textos). Antes del lote 25, `$80,000`,
+  `$7,500` y los textos del lote 20 sí estaban en el JS público.
+- `formatoDia` pasa a `app/lib/interno/fechas.js` (con `formatoHora`); `diagnostico/resumen.js` lo re-exporta.
 
 ## Decisiones tomadas en el lote 21
 

@@ -1225,13 +1225,37 @@ datos? (solo si ya tiene sistema) · Fecha y hora de la presentación de la prop
 
 ### Textos de pantalla (TODO(textos): propuestos, por aprobar)
 
+Viven en `app/lib/interno/llamada/guion.js` (`TEXTOS`) y en cada ficha (`cuenta.campos`). Por aprobar:
+
 - Aviso arriba: "Nada se guarda fuera de esta pestaña. Se borra al terminar la llamada o al cerrar la pestaña."
 - Inicio: "Inicio de la llamada" · "Nicho" (Academias · Desarrolladoras · B2B · Distribuidoras y proveedores · Tiendas ·
   Con local y en línea · Clínicas · en pausa) · "Filtro" · "Gimnasio → Boaz Pro" · "Negocio" · "Nombre del dueño" ·
   "Tipo de dueño" · "Empezar llamada"
 - En el atajo de gimnasio: "Cambiar de nicho"
 - "Terminar llamada". Confirmación: "¿Terminar la llamada? Se borra todo lo que anotaste." · "Cancelar" · "Sí, terminar"
-- Las etiquetas de los campos de la calculadora están en cada ficha (`cuenta.campos`).
+- Tramos: "Tramos" · "Tramo N, [nombre], minuto A a B" (lector de pantalla) · "A–B min" · "Recuerda" · "Situación" ·
+  "Problema" · "Implicación" · "Elige el tipo de dueño para ver sus preguntas."
+- Reloj: "Min N · [tramo]"; pasado el minuto 20, "Min N". Objeciones: "Objeciones" · "Cerrar"
+- Navegación: "Anterior" · "Siguiente"
+- Su número: "Su número" · "Al mes" · "Al año" · "Hoy te deben" · "Horas al mes" · "$X al mes" · "Para decir" · "Captura
+  sus cifras para armar la frase."
+- Etiquetas de la calculadora (por ficha): academias "Colegiatura al mes" · "Alumnos que se van al mes" · "Lo que le
+  deben hoy" · "Porcentaje sin cobrar" · "Facturación al mes" · "Él lo dijo: se pierden interesados por no contestar" ·
+  "Interesados que no inscriben al mes" · "Horas a la semana en cobrar y confirmar"; desarrolladoras "Monto atrasado" ·
+  "Horas a la semana por vendedor" · "Vendedores" · "Apartado doble: lo que él cuente"; B2B "Él lo dijo: se pierden
+  cotizaciones por falta de seguimiento" · "Cotizaciones que cree que se pierden al mes" · "Venta promedio" · "Cartera
+  vencida" · "Horas a la semana por persona en capturar" · "Personas que capturan" · "Errores de precio: lo que él
+  cuente"; tiendas "Pedidos cancelados a la semana" · "Ticket promedio" · "Apartados sin recoger: lo que él cuente" ·
+  "Horas al día cuadrando" · "Días que abre al mes"
+- Prioridad: "Lo más urgente" · "Pantalla de ejemplo"
+- Nivel: "Solo para ti" · "Nivel sugerido. No se enseña." · "Lo que quiere o tiene" · "Nivel sugerido" · "Caso típico" ·
+  "Marca lo que quiere para sugerir un nivel." · Empresa: "Mapa de procesos antes de cotizar · boceto desde $7,500" y
+  "Se cotiza · nunca menos de $80,000" (cifras de `precios-interno.js`)
+- Cierre: "Su problema, con sus palabras" · "Preguntas de cierre" · "Fecha" · "Hora" · "Algo que noté"
+- Resumen: "Resumen para WhatsApp" · "Copiar" → "Copiado" · "Volver a armar el resumen". El armado: "[dueño], gracias
+  por tu tiempo." (sin nombre: "Gracias por tu tiempo.") · "Lo que entendí: [problema]; te está costando [número], y lo
+  que más quieres es [prioridad]." · "Algo que noté: [nota]." · "Nos vemos [el día] a las [hora] para la propuesta."
+  (sin hora: "Nos vemos [el día] para la propuesta."; sin fecha, no sale). Lo que falta no sale.
 
 ### Prioridades en el resumen (aprobadas el 25 nov)
 
