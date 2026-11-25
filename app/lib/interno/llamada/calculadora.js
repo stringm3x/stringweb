@@ -69,10 +69,11 @@ const HORAS = new Intl.NumberFormat("es-MX", { maximumFractionDigits: 1 });
 export const pesos = (n) => PESOS.format(n);
 export const horas = (n) => HORAS.format(n);
 
-// "O sea, más o menos $X al mes y unas Y horas tuyas a la semana. ¿Así lo
-// ves?", con ", y hoy te deben unos $Z" si hay deuda. Lo que falta no sale;
-// sin nada capturado, null.
-export function fraseNumero(resultado, textos) {
+// El cuerpo de "su número": "más o menos $X al mes y unas Y horas tuyas a la
+// semana", con ", y hoy te deben unos $Z" si hay deuda. Lo que falta no sale;
+// sin nada capturado, null. Lo usan la frase, el "Te digo lo que escuché" y
+// el resumen.
+export function cuerpoNumero(resultado, textos) {
   const partes = [];
   if (resultado.alMes > 0) partes.push(llenar(textos.dinero, { monto: pesos(resultado.alMes) }));
   if (resultado.horas.frase > 0) {
@@ -80,10 +81,15 @@ export function fraseNumero(resultado, textos) {
   }
   const conDeuda = resultado.deuda > 0;
   if (!partes.length && !conDeuda) return null;
-  let cuerpo = partes.join(textos.y);
-  if (conDeuda) {
-    const monto = pesos(resultado.deuda);
-    cuerpo = partes.length ? cuerpo + llenar(textos.deuda, { monto }) : llenar(textos.deudaSola, { monto });
-  }
-  return `${textos.inicio}${cuerpo}${textos.cierre}`;
+  const cuerpo = partes.join(textos.y);
+  if (!conDeuda) return cuerpo;
+  const monto = pesos(resultado.deuda);
+  return partes.length ? cuerpo + llenar(textos.deuda, { monto }) : llenar(textos.deudaSola, { monto });
+}
+
+// "O sea, más o menos $X al mes y unas Y horas tuyas a la semana. ¿Así lo
+// ves?" (aprobada el 25 nov, también con datos incompletos).
+export function fraseNumero(resultado, textos) {
+  const cuerpo = cuerpoNumero(resultado, textos);
+  return cuerpo ? `${textos.inicio}${cuerpo}${textos.cierre}` : null;
 }

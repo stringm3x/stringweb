@@ -12,7 +12,7 @@ import { useCallback, useEffect, useState } from "react";
 const CLAVE = "interno-llamada";
 
 export const LLAMADA_VACIA = {
-  pantalla: "inicio", // "inicio" | "llamada" | "nivel"
+  pantalla: "inicio", // "inicio" | "llamada" | "nivel" | "resumen"
   tramo: 0,
   nicho: "",
   negocio: "",
@@ -24,6 +24,8 @@ export const LLAMADA_VACIA = {
   cuenta: {}, // { [nicho]: { [campo]: lo capturado } }
   prioridad: {}, // { [nicho]: id de la prioridad }
   reglas: {}, // { [nicho]: índices de las reglas de nivel marcadas }
+  cita: { dia: "", hora: "" }, // la presentación de la propuesta
+  editado: null, // { texto, base }: el resumen editado a mano y de qué versión salió
 };
 
 export function hayDatosLlamada(l) {
@@ -35,7 +37,10 @@ export function hayDatosLlamada(l) {
     Object.values(l.notas).some((v) => String(v ?? "").trim()) ||
     Object.values(l.cuenta).some((c) => Object.values(c).some((v) => v === true || String(v ?? "").trim())) ||
     Object.values(l.prioridad).some(Boolean) ||
-    Object.values(l.reglas).some((r) => r.length > 0)
+    Object.values(l.reglas).some((r) => r.length > 0) ||
+    !!l.cita.dia ||
+    !!l.cita.hora ||
+    !!l.editado
   );
 }
 

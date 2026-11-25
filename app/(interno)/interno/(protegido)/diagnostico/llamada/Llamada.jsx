@@ -9,6 +9,8 @@ import { BarraAcciones } from "../piezas";
 import { usePantallaEncendida } from "../usePantallaEncendida";
 import { Inicio } from "./Inicio";
 import { NivelNicho } from "./NivelNicho";
+import { armarResumenLlamada } from "@/app/lib/interno/llamada/resumen";
+import { ResumenLlamada } from "./ResumenLlamada";
 import { Objeciones } from "./Objeciones";
 import { Reloj, tramoDelMinuto, useMinuto } from "./Reloj";
 import { Tramo } from "./Tramo";
@@ -30,6 +32,7 @@ export function Llamada({ contenido }) {
   const { llamada, cambiar, terminar, lista } = useLlamada();
   const [gimnasio, setGimnasio] = useState(false);
   const [confirmando, setConfirmando] = useState(false);
+  const [copiado, setCopiado] = useState(false);
   const { setHayDatos } = useCaptura();
   const titulo = useRef(null);
   const hay = hayDatosLlamada(llamada);
@@ -76,7 +79,10 @@ export function Llamada({ contenido }) {
   const ultimo = guion.TRAMOS.length - 1;
   const enLlamada = llamada.pantalla === "llamada" && tramo && nicho;
   const enNivel = llamada.pantalla === "nivel" && nicho;
-  const enCurso = enLlamada || enNivel;
+  const enResumen = llamada.pantalla === "resumen" && nicho;
+  const enCurso = enLlamada || enNivel || enResumen;
+  const generado = enResumen ? armarResumenLlamada(llamada, nicho, T) : "";
+  const resumen = llamada.editado ? llamada.editado.texto : generado;
 
   const empezar = () => cambiar({ pantalla: "llamada", tramo: 0, inicio: llamada.inicio ?? Date.now() });
   const irATramo = (i) => cambiar({ tramo: i });
@@ -85,6 +91,15 @@ export function Llamada({ contenido }) {
   // Lo del nicho se guarda bajo su id: cambiar de nicho no mezcla nada.
   const porNicho = (campo, valor) => cambiar({ [campo]: { ...llamada[campo], [nicho.id]: valor } });
   const capturar = (campo, valor) => porNicho("cuenta", { ...(llamada.cuenta[nicho.id] ?? {}), [campo]: valor });
+  const copiar = () => {
+    navigator.clipboard?.writeText(resumen).then(
+      () => {
+        setCopiado(true);
+        setTimeout(() => setCopiado(false), 2000);
+      },
+      () => {},
+    );
+  };
   const terminarConfirmado = () => {
     setConfirmando(false);
     terminar();
@@ -143,6 +158,7 @@ export function Llamada({ contenido }) {
             onTipo={(tipo) => cambiar({ tipo })}
             onCuenta={capturar}
             onPrioridad={(id) => porNicho("prioridad", id)}
+            onCita={(parcial) => cambiar({ cita: { ...llamada.cita, ...parcial } })}
             tituloRef={titulo}
           />
           <Boton variante="texto" onClick={() => setConfirmando(true)} flecha={false} className="self-start">
@@ -164,6 +180,22 @@ export function Llamada({ contenido }) {
           <Boton variante="texto" onClick={() => setConfirmando(true)} flecha={false} className="self-start">
             {T.terminar}
           </Boton>
+        </>
+      )}
+
+      {enResumen && (
+        <>
+          <Boton variante="texto" onClick={() => cambiar({ pantalla: "nivel" })} flecha={false} className="-mt-space-2 self-start">
+            {T.navegacion.anterior}
+          </Boton>
+          <ResumenLlamada
+            texto={resumen}
+            onEditar={(texto) => cambiar({ editado: { texto, base: llamada.editado?.base ?? generado } })}
+            puedeRehacer={!!llamada.editado && llamada.editado.base !== generado}
+            onRehacer={() => cambiar({ editado: null })}
+            textos={T.resumen}
+            tituloRef={titulo}
+          />
         </>
       )}
 
@@ -192,9 +224,18 @@ export function Llamada({ contenido }) {
             <Boton variante="secundario" onClick={() => cambiar({ pantalla: "llamada", tramo: ultimo })} className={COMPACTO}>
               {T.navegacion.anterior}
             </Boton>
-            {/* El resumen llega en el bloque 4. */}
-            <Boton disabled className={COMPACTO}>
+            <Boton onClick={() => cambiar({ pantalla: "resumen" })} className={COMPACTO}>
               {T.navegacion.siguiente}
+            </Boton>
+          </div>
+        )}
+        {enResumen && (
+          <div className="grid grid-cols-2 gap-space-2">
+            <Boton onClick={copiar} className={COMPACTO}>
+              <span aria-live="polite">{copiado ? T.resumen.copiado : T.resumen.copiar}</span>
+            </Boton>
+            <Boton variante="secundario" onClick={() => setConfirmando(true)} className={COMPACTO}>
+              {T.terminar}
             </Boton>
           </div>
         )}

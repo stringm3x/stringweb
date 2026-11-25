@@ -52,12 +52,28 @@ export const DESARROLLADORAS = {
     ],
     horas: { frase: ["horas", "vendedores"], unidad: "equipoSemana", mes: ["horas", "vendedores"], porSemana: true },
   },
+  // resumen: cómo se dice en el resumen, tras "lo que más quieres es…" (aprobado el 25 nov).
   prioridades: [
-    { id: "disponible", nombre: "saber qué está disponible", pantalla: "Mapa de lotes en vivo" },
-    { id: "cobrar", nombre: "cobrar", pantalla: "Cobranza de mensualidades" },
-    { id: "llamadas", nombre: "que los compradores dejen de llamar", pantalla: "Portal del comprador" },
-    { id: "comisiones", nombre: "las comisiones", pantalla: "Comisiones de vendedores y brokers" },
-    { id: "saber", nombre: "saber cómo va", pantalla: "Panel del director" },
+    {
+      id: "disponible", nombre: "saber qué está disponible", pantalla: "Mapa de lotes en vivo",
+      resumen: "saber en todo momento qué lote está disponible",
+    },
+    {
+      id: "cobrar", nombre: "cobrar", pantalla: "Cobranza de mensualidades",
+      resumen: "cobrar a tiempo las mensualidades",
+    },
+    {
+      id: "llamadas", nombre: "que los compradores dejen de llamar", pantalla: "Portal del comprador",
+      resumen: "que tus compradores dejen de llamarte para preguntar",
+    },
+    {
+      id: "comisiones", nombre: "las comisiones", pantalla: "Comisiones de vendedores y brokers",
+      resumen: "tener claras las comisiones",
+    },
+    {
+      id: "saber", nombre: "saber cómo va", pantalla: "Panel del director",
+      resumen: "saber cómo va el desarrollo",
+    },
   ],
   niveles: {
     porDefecto: "controla",

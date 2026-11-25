@@ -59,12 +59,28 @@ export const TIENDAS = {
     ],
     horas: { frase: ["horasDia"], unidad: "tuyasDia", mes: ["horasDia", "dias"], porSemana: false },
   },
+  // resumen: cómo se dice en el resumen, tras "lo que más quieres es…" (aprobado el 25 nov).
   prioridades: [
-    { id: "inventario", nombre: "el inventario", pantalla: "Un solo inventario por talla" },
-    { id: "corte", nombre: "el corte", pantalla: "Punto de venta y corte" },
-    { id: "apartados", nombre: "los apartados", pantalla: "Apartados con link y fecha límite" },
-    { id: "pedidos", nombre: "los pedidos", pantalla: "Pedidos con envío o recoger en tienda" },
-    { id: "saber", nombre: "saber qué vende", pantalla: "Panel por canal" },
+    {
+      id: "inventario", nombre: "el inventario", pantalla: "Un solo inventario por talla",
+      resumen: "no vender lo que ya no tienes",
+    },
+    {
+      id: "corte", nombre: "el corte", pantalla: "Punto de venta y corte",
+      resumen: "que te cuadre el corte",
+    },
+    {
+      id: "apartados", nombre: "los apartados", pantalla: "Apartados con link y fecha límite",
+      resumen: "que los apartados no te detengan piezas",
+    },
+    {
+      id: "pedidos", nombre: "los pedidos", pantalla: "Pedidos con envío o recoger en tienda",
+      resumen: "que cada pedido salga a tiempo",
+    },
+    {
+      id: "saber", nombre: "saber qué vende", pantalla: "Panel por canal",
+      resumen: "saber qué se vende más y por qué canal",
+    },
   ],
   niveles: {
     porDefecto: "controla",

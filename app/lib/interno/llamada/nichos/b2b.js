@@ -65,12 +65,28 @@ export const B2B = {
     ],
     horas: { frase: ["horas", "personas"], unidad: "equipoSemana", mes: ["horas", "personas"], porSemana: true },
   },
+  // resumen: cómo se dice en el resumen, tras "lo que más quieres es…" (aprobado el 25 nov).
   prioridades: [
-    { id: "cotizar", nombre: "cotizar y dar seguimiento", pantalla: "Cotizador con precio por cliente" },
-    { id: "pedidos", nombre: "los pedidos", pantalla: "Portal de pedidos con “Repetir pedido”" },
-    { id: "entregas", nombre: "las entregas", pantalla: "Entregas en el mapa con foto y firma" },
-    { id: "cobranza", nombre: "la cobranza", pantalla: "Cuentas por cobrar" },
-    { id: "saber", nombre: "saber cómo va", pantalla: "Panel de ventas y margen" },
+    {
+      id: "cotizar", nombre: "cotizar y dar seguimiento", pantalla: "Cotizador con precio por cliente",
+      resumen: "que ninguna cotización se quede sin seguimiento",
+    },
+    {
+      id: "pedidos", nombre: "los pedidos", pantalla: "Portal de pedidos con “Repetir pedido”",
+      resumen: "que tus clientes repitan su pedido sin esperar a nadie",
+    },
+    {
+      id: "entregas", nombre: "las entregas", pantalla: "Entregas en el mapa con foto y firma",
+      resumen: "saber dónde va cada entrega",
+    },
+    {
+      id: "cobranza", nombre: "la cobranza", pantalla: "Cuentas por cobrar",
+      resumen: "cobrar a tiempo tu cartera",
+    },
+    {
+      id: "saber", nombre: "saber cómo va", pantalla: "Panel de ventas y margen",
+      resumen: "saber cuánto vendes y cuánto ganas",
+    },
   ],
   niveles: {
     porDefecto: "controla",

@@ -70,11 +70,24 @@ export const ACADEMIAS = {
     ],
     horas: { frase: ["horas"], unidad: "tuyasSemana", mes: ["horas"], porSemana: true },
   },
+  // resumen: cómo se dice en el resumen, tras "lo que más quieres es…" (aprobado el 25 nov).
   prioridades: [
-    { id: "cobrar", nombre: "cobrar", pantalla: "Colegiaturas con estado de cuenta" },
-    { id: "contestar", nombre: "contestar a tiempo", pantalla: "Seguimiento de interesados" },
-    { id: "bajas", nombre: "las bajas", pantalla: "Alumnos en riesgo" },
-    { id: "saber", nombre: "saber cómo va", pantalla: "Panel de la dueña" },
+    {
+      id: "cobrar", nombre: "cobrar", pantalla: "Colegiaturas con estado de cuenta",
+      resumen: "cobrar a tiempo las colegiaturas",
+    },
+    {
+      id: "contestar", nombre: "contestar a tiempo", pantalla: "Seguimiento de interesados",
+      resumen: "que nadie se quede sin respuesta",
+    },
+    {
+      id: "bajas", nombre: "las bajas", pantalla: "Alumnos en riesgo",
+      resumen: "saber a tiempo quién se te va",
+    },
+    {
+      id: "saber", nombre: "saber cómo va", pantalla: "Panel de la dueña",
+      resumen: "saber cómo va tu academia",
+    },
   ],
   niveles: {
     porDefecto: null,

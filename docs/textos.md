@@ -1233,6 +1233,23 @@ datos? (solo si ya tiene sistema) · Fecha y hora de la presentación de la prop
 - "Terminar llamada". Confirmación: "¿Terminar la llamada? Se borra todo lo que anotaste." · "Cancelar" · "Sí, terminar"
 - Las etiquetas de los campos de la calculadora están en cada ficha (`cuenta.campos`).
 
+### Prioridades en el resumen (aprobadas el 25 nov)
+
+En el resumen, después de "lo que más quieres es…". En el guion ("lo más urgente es [prioridad]") va la etiqueta.
+Viven en cada ficha (`prioridades[].resumen`).
+
+- Academias: cobrar → cobrar a tiempo las colegiaturas · contestar a tiempo → que nadie se quede sin respuesta · las
+  bajas → saber a tiempo quién se te va · saber cómo va → saber cómo va tu academia
+- Desarrolladoras: saber qué está disponible → saber en todo momento qué lote está disponible · cobrar → cobrar a
+  tiempo las mensualidades · que los compradores dejen de llamar → que tus compradores dejen de llamarte para
+  preguntar · las comisiones → tener claras las comisiones · saber cómo va → saber cómo va el desarrollo
+- B2B: cotizar y dar seguimiento → que ninguna cotización se quede sin seguimiento · los pedidos → que tus clientes
+  repitan su pedido sin esperar a nadie · las entregas → saber dónde va cada entrega · la cobranza → cobrar a tiempo tu
+  cartera · saber cómo va → saber cuánto vendes y cuánto ganas
+- Tiendas: el inventario → no vender lo que ya no tienes · el corte → que te cuadre el corte · los apartados → que los
+  apartados no te detengan piezas · los pedidos → que cada pedido salga a tiempo · saber qué vende → saber qué se
+  vende más y por qué canal
+
 ## Por confirmar antes del brief
 
 - [x] **Foto de Carlos** en la sala 3: foto real (falta que la mande).

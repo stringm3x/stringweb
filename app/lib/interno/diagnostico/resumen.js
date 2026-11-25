@@ -1,5 +1,6 @@
 import { CIERRES, COMUNES, LINEA_NIVEL, N_OPCIONES, giroPorId } from "./contenido";
 import { NOMBRES, OFERTAS, conBoceto } from "./nivel";
+import { formatoDia } from "../fechas";
 
 // El resumen para WhatsApp y los datos para la propuesta (lote 20,
 // docs/textos.md § Interno). Puro: recibe el estado de la herramienta y
@@ -14,21 +15,9 @@ import { NOMBRES, OFERTAS, conBoceto } from "./nivel";
 //   siguiente: { tipo, dia },    // "Llamada" | … ; "AAAA-MM-DD"
 // }
 
-const DIAS = ["domingo", "lunes", "martes", "miércoles", "jueves", "viernes", "sábado"];
-const MESES = [
-  "enero", "febrero", "marzo", "abril", "mayo", "junio",
-  "julio", "agosto", "septiembre", "octubre", "noviembre", "diciembre",
-];
-
-// "2026-11-12" → "el jueves 12 de noviembre". En hora local: new Date(texto)
-// lo leería en UTC y en México se correría un día.
-export function formatoDia(iso) {
-  const m = /^(\d{4})-(\d{2})-(\d{2})$/.exec(iso || "");
-  if (!m) return null;
-  const fecha = new Date(Number(m[1]), Number(m[2]) - 1, Number(m[3]));
-  if (fecha.getMonth() !== Number(m[2]) - 1) return null;
-  return `el ${DIAS[fecha.getDay()]} ${fecha.getDate()} de ${MESES[fecha.getMonth()]}`;
-}
+// formatoDia vive en app/lib/interno/fechas.js desde el lote 25 (lo usa
+// también la llamada, sin arrastrar precios al cliente).
+export { formatoDia };
 
 export const digitos = (numero) => String(numero || "").replace(/\D/g, "");
 export const whatsappCompleto = (numero) => digitos(numero).length === 10;

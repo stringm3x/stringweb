@@ -3,6 +3,7 @@
 import { llenar } from "@/app/lib/interno/llamada/llenar";
 import { Elecciones } from "../piezas";
 import { Calculadora } from "./Calculadora";
+import { Cierre } from "./Cierre";
 import { Pregunta } from "./Pregunta";
 import { Prioridad } from "./Prioridad";
 import { Recordatorios } from "./Recordatorios";
@@ -26,7 +27,7 @@ function Bloque({ titulo, children }) {
   );
 }
 
-export function Tramo({ tramo, nicho, llamada, guion, onNota, onTipo, onCuenta, onPrioridad, tituloRef }) {
+export function Tramo({ tramo, nicho, llamada, guion, onNota, onTipo, onCuenta, onPrioridad, onCita, tituloRef }) {
   const T = guion.TEXTOS.tramos;
   const valores = { dueño: llamada.dueno, negocio: llamada.negocio };
   const nota = (id) => llamada.notas[id];
@@ -49,7 +50,13 @@ export function Tramo({ tramo, nicho, llamada, guion, onNota, onTipo, onCuenta, 
 
       <Recordatorios titulo={T.recordatorios} lista={guion.RECORDATORIOS} />
 
-      {tramo.frases.map((f) =>
+      {/* El tramo 5 tiene su propio orden (Cierre.jsx). */}
+      {tramo.id === "siguiente" && (
+        <Cierre tramo={tramo} nicho={nicho} llamada={llamada} guion={guion} onNota={onNota} onCita={onCita} />
+      )}
+
+      {tramo.id !== "siguiente" &&
+        tramo.frases.map((f) =>
         f.id ? (
           <div key={f.id} className="flex flex-col gap-space-4">
             <Pregunta
@@ -112,8 +119,6 @@ export function Tramo({ tramo, nicho, llamada, guion, onNota, onTipo, onCuenta, 
 
       {tramo.soloSiAyuda && <p className="text-pequeno text-texto-suave">{tramo.soloSiAyuda}</p>}
 
-      {tramo.siDecideConAlguien && <Frase>{llenar(tramo.siDecideConAlguien, valores)}</Frase>}
-      {tramo.despedida && <Frase>{llenar(tramo.despedida, valores)}</Frase>}
     </div>
   );
 }

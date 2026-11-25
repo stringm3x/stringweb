@@ -345,6 +345,95 @@ test("nivel en desarrolladoras: Controla de caso típico; Empresa con su nota y 
   await sinFallasAxe(page, "nivel empresa");
 });
 
+const TEXTO_MARIANA =
+  "Mariana, gracias por tu tiempo. " +
+  "Lo que entendí: te escriben unos 15 papás al mes y se inscriben 5; se te van unos 4 alumnos al mes sin darte cuenta; " +
+  "te está costando más o menos $3,600 al mes y unas 6 horas tuyas a la semana, y lo que más quieres es que nadie se quede sin respuesta. " +
+  "Algo que noté: casi todo pasa por tu WhatsApp personal, así que mientras das clase nadie contesta. " +
+  "Nos vemos el jueves 26 de noviembre a las 5 pm para la propuesta.";
+
+async function llamadaMariana(page) {
+  await empezarLlamada(page, "Academias", { tipo: "Con uno que no se adapta" });
+  await tramo(page, 3).click();
+  await page.getByLabel("Colegiatura al mes").fill("900");
+  await page.getByLabel("Alumnos que se van al mes").fill("4");
+  await page.getByLabel("Horas a la semana en cobrar y confirmar").fill("6");
+  await tramo(page, 4).click();
+  await elegir(page, "contestar a tiempo");
+  await tramo(page, 5).click();
+  await page
+    .getByLabel("Su problema, con sus palabras")
+    .fill("Te escriben unos 15 papás al mes y se inscriben 5; se te van unos 4 alumnos al mes sin darte cuenta.");
+  await page.getByLabel("Fecha").fill("2026-11-26");
+  await page.getByLabel("Hora").fill("17:00");
+  await page.getByLabel("Algo que noté").fill("casi todo pasa por tu WhatsApp personal, así que mientras das clase nadie contesta");
+}
+
+test("cierre: lo que escuché se llena solo, preguntas de cierre y la cita, con axe", async ({ page }) => {
+  await empezarLlamada(page, "Academias", { tipo: "Sin sistema" });
+  await tramo(page, 5).click();
+  // Sin datos: las pistas entre corchetes.
+  await expect(page.getByText("Te digo lo que escuché: [problema], te está costando [número] y lo más urgente es [prioridad].", { exact: false })).toBeVisible();
+  await expect(page.getByText("¿Te queda el [día] a las [hora]?", { exact: false })).toBeVisible();
+  // Sin sistema, no se pregunta por exportar.
+  await expect(page.getByLabel("¿Alguien más decide esto contigo?")).toBeVisible();
+  await expect(page.getByLabel("¿Para cuándo te gustaría tenerlo funcionando?")).toBeVisible();
+  await expect(page.getByLabel("¿Te deja exportar tus datos?")).toHaveCount(0);
+  await expect(page.getByText("¿Puede estar [él/ella] también?")).toHaveCount(0);
+  await page.getByLabel("¿Alguien más decide esto contigo?").fill("Mi socio, Pedro");
+  await expect(page.getByText("¿Puede estar [él/ella] también?")).toBeVisible();
+  await sinFallasAxe(page, "cierre");
+
+  await tramo(page, 2).click();
+  await elegir(page, "Con varios que no se hablan");
+  await tramo(page, 5).click();
+  await expect(page.getByLabel("¿Te deja exportar tus datos?")).toBeVisible();
+});
+
+test("resumen, caso Mariana: el texto con sus palabras, copiar, editar y volver a armar", async ({ page }) => {
+  await llamadaMariana(page);
+  await expect(
+    page.getByText(
+      "Te digo lo que escuché: te escriben unos 15 papás al mes y se inscriben 5; se te van unos 4 alumnos al mes sin darte cuenta, te está costando más o menos $3,600 al mes y unas 6 horas tuyas a la semana y lo más urgente es contestar a tiempo. ¿Lo dije bien?",
+    ),
+  ).toBeVisible();
+  await expect(page.getByText("¿Te queda el jueves 26 de noviembre a las 5 pm?", { exact: false })).toBeVisible();
+
+  await siguiente(page);
+  await expect(page.getByRole("heading", { level: 2, name: "Solo para ti" })).toBeVisible();
+  await siguiente(page);
+  await expect(page.getByRole("heading", { level: 2, name: "Resumen para WhatsApp" })).toBeFocused();
+  const texto = page.getByRole("textbox", { name: "Resumen para WhatsApp" });
+  await expect(texto).toHaveValue(TEXTO_MARIANA);
+  // Nada de WhatsApp automático: solo copiar.
+  await expect(page.getByRole("link", { name: /WhatsApp/ })).toHaveCount(0);
+  await sinFallasAxe(page, "resumen");
+
+  await boton(page, "Copiar").click();
+  await expect(boton(page, "Copiado")).toBeVisible();
+  expect(await page.evaluate(() => navigator.clipboard.readText())).toBe(TEXTO_MARIANA);
+
+  // Editado a mano: se queda, aun tras recargar; si cambia lo anotado, se puede volver a armar.
+  await texto.fill(`${TEXTO_MARIANA} Un abrazo.`);
+  await page.reload();
+  await expect(texto).toHaveValue(`${TEXTO_MARIANA} Un abrazo.`);
+  await expect(boton(page, "Volver a armar el resumen")).toHaveCount(0);
+  await boton(page, "Anterior").click();
+  await boton(page, "Anterior").click();
+  await page.getByLabel("Hora").fill("17:30");
+  await siguiente(page);
+  await siguiente(page);
+  await expect(texto).toHaveValue(`${TEXTO_MARIANA} Un abrazo.`);
+  await boton(page, "Volver a armar el resumen").click();
+  await expect(texto).toHaveValue(TEXTO_MARIANA.replace("a las 5 pm", "a las 5:30 pm"));
+
+  // Terminar desde el resumen borra todo.
+  await boton(page, "Terminar llamada").click();
+  await page.getByRole("dialog").getByRole("button", { name: "Sí, terminar" }).click();
+  await expect(page.getByRole("heading", { level: 2, name: "Inicio de la llamada" })).toBeVisible();
+  await expect.poll(() => guardado(page)).toBeNull();
+});
+
 test("atajo a gimnasio: sus 3 preguntas y la N, Boaz Pro con fundador y recordatorio", async ({ page }) => {
   await gimnasio(page);
   await expect(page.getByText("Nada de esto se guarda. Al cerrar la página, se borra.")).toBeVisible();

@@ -40,6 +40,8 @@ describe("nichos", () => {
     expect([...n.problema, ...n.implicacion].every(noVacio)).toBe(true);
     expect(n.prioridades.length).toBeGreaterThan(0);
     expect(n.prioridades.every((p) => noVacio(p.id) && noVacio(p.nombre) && noVacio(p.pantalla))).toBe(true);
+    // Cada prioridad trae su frase para el resumen (aprobadas el 25 nov).
+    expect(n.prioridades.filter((p) => !noVacio(p.resumen)).map((p) => p.id)).toEqual([]);
     expect(n.objeciones.length).toBeGreaterThan(0);
     expect(n.objeciones.every((o) => noVacio(o.dice) && noVacio(o.respuesta))).toBe(true);
   });
