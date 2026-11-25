@@ -78,12 +78,18 @@ test("/sistemas sigue en el desde de siempre", async ({ page }) => {
   expect(cuerpo).not.toContain(MEJORA);
 });
 
+const LEGALES_BOAZ = ["/boaz/terminos", "/boaz/aviso-de-privacidad"];
+
 test("ninguna página pública trae lo que no se publica de los pagos", async ({ page, request }) => {
   test.setTimeout(120_000);
   const fallas = [];
   for (const ruta of await rutasPublicas(request)) {
     const html = (await (await request.get(ruta)).text()).replaceAll(COMISION_HOTELES, "");
-    for (const re of [/sin intereses/i, /comisi[oó]n/i, /mercado\s*pago/i, /\$\s?2,?900\b/, /\$\s?3,?700\b/]) {
+    // "Mercado Pago" solo en los legales de Boaz: es un proveedor real del aviso
+    // (lote 24). En el resto del sitio sigue prohibido.
+    const prohibidos = [/sin intereses/i, /comisi[oó]n/i, /\$\s?2,?900\b/, /\$\s?3,?700\b/];
+    if (!LEGALES_BOAZ.includes(ruta)) prohibidos.push(/mercado\s*pago/i);
+    for (const re of prohibidos) {
       if (re.test(html)) fallas.push(`${ruta}: ${re}`);
     }
     await page.goto(ruta);
