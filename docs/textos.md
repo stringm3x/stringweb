@@ -1186,6 +1186,94 @@ Carlos · Boaz by STRING
 
 "¿Seguro? Se borra todo lo del diagnóstico." · "Cancelar" · "Sí, borrar"
 
+## Interno · lote 25 · la llamada con los nichos nuevos (25 nov)
+
+Guía para la llamada de diagnóstico de 20 minutos, por tramos. El guion común y las fichas de academias,
+desarrolladoras, B2B y tiendas los aprobó Carlos en el chat de ventas (25 nov). Son literales del prompt del lote 25 y
+viven en el código: `app/lib/interno/llamada/guion.js` y `app/lib/interno/llamada/nichos/*.js`. Clínicas aparece
+"en pausa", sin ficha. Los giros del lote 20 quedan ocultos. Gimnasio queda como atajo, "Gimnasio → Boaz Pro", que abre
+la herramienta del lote 20 con el giro fijo y sus textos de arriba.
+
+Las notas viven solo en la pestaña: se borran al terminar la llamada, al salir o al cerrar la pestaña. El único precio en
+pantalla es la respuesta fija "Desde $9,500; con lo que me cuentes te digo el nivel exacto en la propuesta.", que sale de
+`app/lib/precios.js`.
+
+### Guion común
+
+Los tramos y sus minutos: Apertura 0–2 · Su negocio 2–8 · Lo que le cuesta 8–13 · Cómo se vería 13–17 · Siguiente paso
+17–20. Las frases son literales del prompt; "[dueño]" y "[negocio]" se llenan solos y las demás pistas entre corchetes
+se quedan tal cual.
+
+Recordatorios fijos: Aguanta el silencio · Anota sus palabras tal cual · Ni precios ni niveles salvo que pregunte · Si
+pregunta el precio: "Desde $9,500; con lo que me cuentes te digo el nivel exacto en la propuesta."
+
+Tipo de dueño: Sin sistema · Con uno que no se adapta · Con varios que no se hablan.
+
+Cierre: ¿Alguien más decide esto contigo? · ¿Para cuándo te gustaría tenerlo funcionando? · ¿Te deja exportar tus
+datos? (solo si ya tiene sistema) · Fecha y hora de la presentación de la propuesta (15 min).
+
+### La cuenta (aprobado el 25 nov)
+
+- Las deudas (lo que le deben hoy, el monto atrasado, la cartera vencida) van aparte: no se suman al mes ni se
+  multiplican ×12. La frase agrega ", y hoy te deben unos $Z".
+- La frase: "O sea, más o menos $X al mes y unas Y horas tuyas a la semana. ¿Así lo ves?". En desarrolladoras y B2B
+  dice "unas Y horas de tu equipo a la semana" (horas × personas, sin ×4). En tiendas, "unas Y horas tuyas al día".
+- Hora en el resumen: "a las 5 pm" / "a las 5:30 pm".
+- Con datos incompletos (aprobado el 25 nov): lo que falta no sale. Solo horas: "O sea, unas Y horas tuyas a la
+  semana. ¿Así lo ves?"; solo dinero: "O sea, más o menos $X al mes. ¿Así lo ves?"; solo deuda: "O sea, hoy te deben
+  unos $Z. ¿Así lo ves?". Sin cifras no hay frase; sale "Captura sus cifras para armar la frase." (TODO(textos)).
+
+### Textos de pantalla (TODO(textos): propuestos, por aprobar)
+
+Viven en `app/lib/interno/llamada/guion.js` (`TEXTOS`) y en cada ficha (`cuenta.campos`). Por aprobar:
+
+- Aviso arriba: "Nada se guarda fuera de esta pestaña. Se borra al terminar la llamada o al cerrar la pestaña."
+- Inicio: "Inicio de la llamada" · "Nicho" (Academias · Desarrolladoras · B2B · Distribuidoras y proveedores · Tiendas ·
+  Con local y en línea · Clínicas · en pausa) · "Filtro" · "Gimnasio → Boaz Pro" · "Negocio" · "Nombre del dueño" ·
+  "Tipo de dueño" · "Empezar llamada"
+- En el atajo de gimnasio: "Cambiar de nicho"
+- "Terminar llamada". Confirmación: "¿Terminar la llamada? Se borra todo lo que anotaste." · "Cancelar" · "Sí, terminar"
+- Tramos: "Tramos" · "Tramo N, [nombre], minuto A a B" (lector de pantalla) · "A–B min" · "Recuerda" · "Situación" ·
+  "Problema" · "Implicación" · "Elige el tipo de dueño para ver sus preguntas."
+- Reloj: "Min N · [tramo]"; pasado el minuto 20, "Min N". Objeciones: "Objeciones" · "Cerrar"
+- Navegación: "Anterior" · "Siguiente"
+- Su número: "Su número" · "Al mes" · "Al año" · "Hoy te deben" · "Horas al mes" · "$X al mes" · "Para decir" · "Captura
+  sus cifras para armar la frase."
+- Etiquetas de la calculadora (por ficha): academias "Colegiatura al mes" · "Alumnos que se van al mes" · "Lo que le
+  deben hoy" · "Porcentaje sin cobrar" · "Facturación al mes" · "Él lo dijo: se pierden interesados por no contestar" ·
+  "Interesados que no inscriben al mes" · "Horas a la semana en cobrar y confirmar"; desarrolladoras "Monto atrasado" ·
+  "Horas a la semana por vendedor" · "Vendedores" · "Apartado doble: lo que él cuente"; B2B "Él lo dijo: se pierden
+  cotizaciones por falta de seguimiento" · "Cotizaciones que cree que se pierden al mes" · "Venta promedio" · "Cartera
+  vencida" · "Horas a la semana por persona en capturar" · "Personas que capturan" · "Errores de precio: lo que él
+  cuente"; tiendas "Pedidos cancelados a la semana" · "Ticket promedio" · "Apartados sin recoger: lo que él cuente" ·
+  "Horas al día cuadrando" · "Días que abre al mes"
+- Prioridad: "Lo más urgente" · "Pantalla de ejemplo"
+- Nivel: "Solo para ti" · "Nivel sugerido. No se enseña." · "Lo que quiere o tiene" · "Nivel sugerido" · "Caso típico" ·
+  "Marca lo que quiere para sugerir un nivel." · Empresa: "Mapa de procesos antes de cotizar · boceto desde $7,500" y
+  "Se cotiza · nunca menos de $80,000" (cifras de `precios-interno.js`)
+- Cierre: "Su problema, con sus palabras" · "Preguntas de cierre" · "Fecha" · "Hora" · "Algo que noté"
+- Resumen: "Resumen para WhatsApp" · "Copiar" → "Copiado" · "Volver a armar el resumen". El armado: "[dueño], gracias
+  por tu tiempo." (sin nombre: "Gracias por tu tiempo.") · "Lo que entendí: [problema]; te está costando [número], y lo
+  que más quieres es [prioridad]." · "Algo que noté: [nota]." · "Nos vemos [el día] a las [hora] para la propuesta."
+  (sin hora: "Nos vemos [el día] para la propuesta."; sin fecha, no sale). Lo que falta no sale.
+
+### Prioridades en el resumen (aprobadas el 25 nov)
+
+En el resumen, después de "lo que más quieres es…". En el guion ("lo más urgente es [prioridad]") va la etiqueta.
+Viven en cada ficha (`prioridades[].resumen`).
+
+- Academias: cobrar → cobrar a tiempo las colegiaturas · contestar a tiempo → que nadie se quede sin respuesta · las
+  bajas → saber a tiempo quién se te va · saber cómo va → saber cómo va tu academia
+- Desarrolladoras: saber qué está disponible → saber en todo momento qué lote está disponible · cobrar → cobrar a
+  tiempo las mensualidades · que los compradores dejen de llamar → que tus compradores dejen de llamarte para
+  preguntar · las comisiones → tener claras las comisiones · saber cómo va → saber cómo va el desarrollo
+- B2B: cotizar y dar seguimiento → que ninguna cotización se quede sin seguimiento · los pedidos → que tus clientes
+  repitan su pedido sin esperar a nadie · las entregas → saber dónde va cada entrega · la cobranza → cobrar a tiempo tu
+  cartera · saber cómo va → saber cuánto vendes y cuánto ganas
+- Tiendas: el inventario → no vender lo que ya no tienes · el corte → que te cuadre el corte · los apartados → que los
+  apartados no te detengan piezas · los pedidos → que cada pedido salga a tiempo · saber qué vende → saber qué se
+  vende más y por qué canal
+
 ## Por confirmar antes del brief
 
 - [x] **Foto de Carlos** en la sala 3: foto real (falta que la mande).

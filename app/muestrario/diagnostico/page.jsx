@@ -1,9 +1,15 @@
 import { notFound } from "next/navigation";
+import { CONTENIDO_DIAGNOSTICO } from "@/app/lib/interno/diagnostico/contenido";
+import { OFERTAS } from "@/app/lib/interno/diagnostico/ofertas";
+import { GUION } from "@/app/lib/interno/llamada/guion";
+import { BOCETO, EMPRESA_MINIMO } from "@/app/lib/interno/precios-interno";
+import { NICHOS } from "@/app/lib/interno/llamada/nichos";
 import { Banco } from "./Banco";
 
 // Banco de pruebas de /interno/diagnostico (lote 20), solo en desarrollo:
 // monta el mismo componente sin exigirCarlos() para las pruebas en navegador
 // y las capturas. En producción da 404, no se indexa y no va en el sitemap.
+// Lote 25: el guion y las fichas llegan como props, igual que en /interno.
 export const metadata = {
   title: "Muestrario · Diagnóstico",
   robots: { index: false, follow: false },
@@ -11,5 +17,15 @@ export const metadata = {
 
 export default function MuestrarioDiagnostico() {
   if (process.env.NODE_ENV !== "development") notFound();
-  return <Banco />;
+  return (
+    <Banco
+      textosConfirmar={CONTENIDO_DIAGNOSTICO.TEXTOS.confirmar}
+      contenido={{
+        guion: GUION,
+        nichos: NICHOS,
+        empresa: { boceto: BOCETO.empresaDesde, minimo: EMPRESA_MINIMO },
+        diagnostico: { contenido: CONTENIDO_DIAGNOSTICO, ofertas: OFERTAS },
+      }}
+    />
+  );
 }

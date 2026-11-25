@@ -2,24 +2,28 @@
 
 import { useState } from "react";
 import { IvaIncluido } from "@/app/components/ui/IvaIncluido";
-import { SIGUIENTES, TEXTOS } from "@/app/lib/interno/diagnostico/contenido";
-import { NOMBRES, OFERTAS, ORDEN, conBoceto, nivelSiguiente } from "@/app/lib/interno/diagnostico/nivel";
+import { ORDEN, conBoceto, nivelSiguiente } from "@/app/lib/interno/diagnostico/nivel";
+import { llenar } from "@/app/lib/interno/llamada/llenar";
+import { useDiagnostico } from "./contexto";
 import { Elecciones, Interruptor } from "./piezas";
 
-const T = TEXTOS.nivel;
 const MONO = "font-mono text-cifra text-texto";
 
 // Paso 4: el nivel en una tarjeta con borde de acento y el siguiente paso.
 export function PasoNivel({ nivel, sugerido, gimnasio, boceto, fundador, siguiente, onCambiar }) {
   const [cambiando, setCambiando] = useState(false);
-  const oferta = OFERTAS[nivel];
+  // Textos y precios por props desde el servidor (lote 25).
+  const { contenido, ofertas } = useDiagnostico();
+  const { NOMBRES, SIGUIENTES } = contenido;
+  const T = contenido.TEXTOS.nivel;
+  const oferta = ofertas[nivel];
   const crece = nivelSiguiente(nivel);
 
   return (
     <div className="flex flex-col gap-space-6">
       <section aria-label={NOMBRES[nivel]} className="flex flex-col gap-space-4 rounded-md border-2 border-acento p-space-4">
         <div aria-live="polite" aria-atomic="true" className="flex flex-col gap-space-2">
-          <p className="text-[28px] font-semibold leading-[1.15] tracking-[-0.03em] text-texto">{T.eso(NOMBRES[nivel])}</p>
+          <p className="text-[28px] font-semibold leading-[1.15] tracking-[-0.03em] text-texto">{llenar(T.eso, { nivel: NOMBRES[nivel] })}</p>
           {nivel === sugerido.nivel && <p className="text-cuerpo text-texto-suave">{sugerido.razon}</p>}
         </div>
 
@@ -29,7 +33,7 @@ export function PasoNivel({ nivel, sugerido, gimnasio, boceto, fundador, siguien
               {oferta.mes} al mes <IvaIncluido />
             </p>
           )}
-          {nivel === "empresa" && <p className={MONO}>{T.empresaPrecio(oferta.minimo)}</p>}
+          {nivel === "empresa" && <p className={MONO}>{llenar(T.empresaPrecio, { minimo: oferta.minimo })}</p>}
           {oferta.desde && (
             <p className={MONO}>
               Desde {oferta.desde} <IvaIncluido />
@@ -40,19 +44,19 @@ export function PasoNivel({ nivel, sugerido, gimnasio, boceto, fundador, siguien
               Continuidad: {oferta.continuidad.nombre}, desde {oferta.continuidad.desde} al mes
             </p>
           )}
-          {crece && <p className="font-mono text-cifra text-texto-suave">{T.cuandoCrezca(NOMBRES[crece])}</p>}
+          {crece && <p className="font-mono text-cifra text-texto-suave">{llenar(T.cuandoCrezca, { nivel: NOMBRES[crece] })}</p>}
         </div>
 
-        {conBoceto(nivel) && (
+        {conBoceto(nivel, ofertas) && (
           <Interruptor encendido={boceto} onCambiar={(v) => onCambiar({ boceto: v })}>
-            {T.boceto(oferta.boceto)}
+            {llenar(T.boceto, { precio: oferta.boceto })}
           </Interruptor>
         )}
 
         {gimnasio && (
           <>
             <Interruptor encendido={fundador} onCambiar={(v) => onCambiar({ fundador: v })}>
-              {T.fundador(oferta.fundador)}
+              {llenar(T.fundador, oferta.fundador)}
             </Interruptor>
             <p className="text-cuerpo text-texto">{T.recordatorioGym}</p>
           </>

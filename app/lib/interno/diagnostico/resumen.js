@@ -1,5 +1,7 @@
-import { CIERRES, COMUNES, LINEA_NIVEL, N_OPCIONES, giroPorId } from "./contenido";
-import { NOMBRES, OFERTAS, conBoceto } from "./nivel";
+import { formatoDia } from "../fechas";
+import { llenar } from "../llamada/llenar";
+import { giroPorId } from "./flujo";
+import { conBoceto } from "./nivel";
 
 // El resumen para WhatsApp y los datos para la propuesta (lote 20,
 // docs/textos.md § Interno). Puro: recibe el estado de la herramienta y
@@ -13,22 +15,13 @@ import { NOMBRES, OFERTAS, conBoceto } from "./nivel";
 //   boceto, fundador,            // interruptores del paso 4
 //   siguiente: { tipo, dia },    // "Llamada" | … ; "AAAA-MM-DD"
 // }
+//
+// Lote 25: los textos y los precios llegan en `c` = { contenido, ofertas }
+// (CONTENIDO_DIAGNOSTICO y ofertas.js, por props desde el servidor); este
+// archivo no los importa, así que no van en el JS del cliente.
 
-const DIAS = ["domingo", "lunes", "martes", "miércoles", "jueves", "viernes", "sábado"];
-const MESES = [
-  "enero", "febrero", "marzo", "abril", "mayo", "junio",
-  "julio", "agosto", "septiembre", "octubre", "noviembre", "diciembre",
-];
-
-// "2026-11-12" → "el jueves 12 de noviembre". En hora local: new Date(texto)
-// lo leería en UTC y en México se correría un día.
-export function formatoDia(iso) {
-  const m = /^(\d{4})-(\d{2})-(\d{2})$/.exec(iso || "");
-  if (!m) return null;
-  const fecha = new Date(Number(m[1]), Number(m[2]) - 1, Number(m[3]));
-  if (fecha.getMonth() !== Number(m[2]) - 1) return null;
-  return `el ${DIAS[fecha.getDay()]} ${fecha.getDate()} de ${MESES[fecha.getMonth()]}`;
-}
+// formatoDia vive en app/lib/interno/fechas.js desde el lote 25.
+export { formatoDia };
 
 export const digitos = (numero) => String(numero || "").replace(/\D/g, "");
 export const whatsappCompleto = (numero) => digitos(numero).length === 10;
@@ -52,20 +45,20 @@ function conNota(frase, nota) {
 
 function problemaDe(pregunta, r) {
   if (!r) return null;
-  if (typeof pregunta.problema === "function") {
+  if (pregunta.problemaConDicho) {
     const dijo = limpio(r.valor);
-    return dijo ? conNota(pregunta.problema(dijo), r.nota) : null;
+    return dijo ? conNota(llenar(pregunta.problema, { dijo }), r.nota) : null;
   }
   return pregunta.problemaCon?.includes(r.valor) ? conNota(pregunta.problema, r.nota) : null;
 }
 
 // Las P con problema, en sus palabras: la del giro, P1 y P2. Máximo 3.
-export function problemas({ prospecto, respuestas = {} }) {
-  const giro = giroPorId(prospecto?.giro);
+export function problemas({ prospecto, respuestas = {} }, { contenido }) {
+  const giro = giroPorId(contenido, prospecto?.giro);
   const lista = [
     giro && problemaDe(giro, respuestas.pGiro),
-    problemaDe(COMUNES.p1, respuestas.p1),
-    problemaDe(COMUNES.p2, respuestas.p2),
+    problemaDe(contenido.COMUNES.p1, respuestas.p1),
+    problemaDe(contenido.COMUNES.p2, respuestas.p2),
   ];
   return lista.filter(Boolean).slice(0, 3);
 }
@@ -75,11 +68,11 @@ export function loQueLeCuesta({ respuestas = {} }) {
   return [respuestas.iGiro?.valor, respuestas.i?.valor].map(limpio).filter(Boolean).join("; ");
 }
 
-function lineaCierre(siguiente) {
+function lineaCierre(siguiente, CIERRES) {
   const cierre = CIERRES[siguiente?.tipo];
   if (!cierre) return CIERRES.ninguno;
   const dia = formatoDia(siguiente.dia);
-  return dia ? cierre.conDia(dia) : cierre.sinDia;
+  return dia ? llenar(cierre.conDia, { dia }) : cierre.sinDia;
 }
 
 const parrafos = (...bloques) =>
@@ -88,108 +81,102 @@ const parrafos = (...bloques) =>
     .filter(Boolean)
     .join("\n\n");
 
-function resumenGeneral(estado) {
+function resumenGeneral(estado, c) {
+  const { contenido, ofertas } = c;
+  const T = contenido.RESUMEN.general;
   const { prospecto = {}, respuestas = {}, nivel, boceto, siguiente } = estado;
   const nombre = limpio(prospecto.nombre);
-  const negocio = limpio(prospecto.negocio) || "tu negocio";
-  const oferta = OFERTAS[nivel];
-  const lista = problemas(estado).map((p) => `- ${p}`);
+  const negocio = limpio(prospecto.negocio) || T.tuNegocio;
+  const oferta = ofertas[nivel];
+  const lista = problemas(estado, c).map((p) => `- ${p}`);
   const cuesta = loQueLeCuesta(estado);
-  if (cuesta) lista.push(`- Me comentaste que esto te cuesta ${conPunto(cuesta)}`);
+  if (cuesta) lista.push(llenar(T.teCuesta, { cuesta: conPunto(cuesta) }));
 
-  const urge = N_OPCIONES.find((o) => o.texto === respuestas.n?.valor)?.resumen;
-  const sugiero = urge
-    ? `Lo que más te urge es ${urge}. Para eso te sugiero ${NOMBRES[nivel]}: ${LINEA_NIVEL[nivel]}`
-    : `Para lo que me contaste te sugiero ${NOMBRES[nivel]}: ${LINEA_NIVEL[nivel]}`;
+  const urge = contenido.N_OPCIONES.find((o) => o.texto === respuestas.n?.valor)?.resumen;
+  const datosNivel = { nivel: contenido.NOMBRES[nivel], linea: contenido.LINEA_NIVEL[nivel] };
+  const sugiero = urge ? llenar(T.urge, { urge, ...datosNivel }) : llenar(T.sugiero, datosNivel);
   const precio =
     nivel === "empresa"
-      ? "Por el tamaño, lo cotizo a tu medida después de mapear tus procesos. El cuidado mensual va incluido en la cotización."
-      : `Arranca desde ${oferta.desde} con IVA incluido, y su cuidado mensual desde ${oferta.continuidad.desde}.`;
+      ? T.precioEmpresa
+      : llenar(T.precio, { desde: oferta.desde, continuidad: oferta.continuidad.desde });
 
   let textoBoceto = null;
-  if (boceto && conBoceto(nivel)) {
-    textoBoceto =
-      nivel === "empresa"
-        ? `Para empezar, el primer paso es el boceto: el mapa de tus procesos y la primera pantalla. Cuesta ${oferta.boceto} con IVA incluido y se descuenta completo si decides seguir en los 30 días siguientes.`
-        : `Para empezar sin arriesgar, el primer paso es el boceto: el mapa de cómo funciona tu negocio y la primera pantalla de tu sistema. Cuesta ${oferta.boceto} con IVA incluido y se descuenta completo si decides seguir en los 30 días siguientes.`;
+  if (boceto && conBoceto(nivel, ofertas)) {
+    textoBoceto = llenar(nivel === "empresa" ? T.bocetoEmpresa : T.boceto, { boceto: oferta.boceto });
   }
 
   return parrafos(
-    `Hola${nombre ? `, ${nombre}` : ""}. Soy Carlos, de STRING. Gracias por el tiempo de hoy.`,
-    lista.length ? [`Te dejo por escrito lo que platicamos de ${negocio}:`, ...lista] : null,
+    nombre ? llenar(T.holaCon, { nombre }) : T.holaSin,
+    lista.length ? [llenar(T.teDejo, { negocio }), ...lista] : null,
     [sugiero, precio],
     textoBoceto,
-    lineaCierre(siguiente),
-    "Carlos · STRING",
+    lineaCierre(siguiente, contenido.CIERRES),
+    T.firma,
   );
 }
 
-function resumenGimnasio(estado) {
+function resumenGimnasio(estado, c) {
+  const T = c.contenido.RESUMEN.gimnasio;
   const { prospecto = {}, respuestas = {}, fundador, siguiente } = estado;
   const nombre = limpio(prospecto.nombre);
-  const gimnasio = limpio(prospecto.negocio) || "tu gimnasio";
-  const { mes, fundador: precioFundador } = OFERTAS.boaz;
+  const gimnasio = limpio(prospecto.negocio) || T.tuGimnasio;
+  const { mes, fundador: precioFundador } = c.ofertas.boaz;
   // El problema principal: la P de gimnasio; si no lo es, la nota que haya.
-  const principal = problemas(estado)[0] || limpio(respuestas.pGiro?.nota);
+  const principal = problemas(estado, c)[0] || limpio(respuestas.pGiro?.nota);
   const dia = formatoDia(siguiente?.dia);
 
   return parrafos(
-    `Hola${nombre ? `, ${nombre}` : ""}. Soy Carlos, el creador de Boaz. Gracias por el tiempo de hoy.`,
-    principal
-      ? [
-          `Me quedo con lo que me contaste de ${gimnasio}: ${conPunto(minuscula(principal))}`,
-          "Eso es justo lo que Boaz resuelve: sabes cuánto entra, quién se te vence y quién dejó de venir.",
-        ]
-      : null,
+    nombre ? llenar(T.holaCon, { nombre }) : T.holaSin,
+    principal ? [llenar(T.meQuedo, { gimnasio, principal: conPunto(minuscula(principal)) }), T.loResuelve] : null,
+    [T.prueba, dia ? llenar(T.diaCon, { dia }) : T.diaSin],
     [
-      "Te propongo probarlo 14 días con Pro completo, sin tarjeta. Yo te ayudo a cargar a tus socios para que lo veas con tus propios datos.",
-      dia ? `¿Te queda bien ${dia} para dejarlo listo juntos?` : "¿Qué día te queda bien para dejarlo listo juntos?",
+      llenar(T.proCuesta, { mes }),
+      fundador ? llenar(T.fundador, { mes: precioFundador.mes, meses: precioFundador.meses }) : null,
     ],
-    [
-      `Pro cuesta ${mes} al mes, IVA incluido.`,
-      fundador
-        ? `Como eres de los primeros 5 gimnasios, te queda en ${precioFundador.mes} al mes, fijo por ${precioFundador.meses} meses.`
-        : null,
-    ],
-    "Si prefieres empezar por tu cuenta: stringwebs.com/gym/registro",
-    "Carlos · Boaz by STRING",
+    T.registro,
+    T.firma,
   );
 }
 
-export function armarResumen(estado) {
-  return estado?.prospecto?.giro === "gimnasio" ? resumenGimnasio(estado) : resumenGeneral(estado);
+export function armarResumen(estado, c) {
+  return estado?.prospecto?.giro === "gimnasio" ? resumenGimnasio(estado, c) : resumenGeneral(estado, c);
 }
 
 // Datos para la propuesta, para copiar. Empresa no lleva su mínimo.
-export function datosPropuesta(estado) {
+export function datosPropuesta(estado, c) {
+  const { contenido, ofertas } = c;
+  const T = contenido.RESUMEN.datos;
   const { prospecto = {}, nivel, boceto, fundador, siguiente } = estado;
-  const giro = giroPorId(prospecto.giro);
-  const oferta = OFERTAS[nivel];
+  const giro = giroPorId(contenido, prospecto.giro);
+  const oferta = ofertas[nivel];
   const negocio = [limpio(prospecto.negocio), giro?.nombre].filter(Boolean).join(" · ");
+  const nombreNivel = contenido.NOMBRES[nivel];
 
   let lineaNivel = null;
   if (nivel === "boaz") {
-    lineaNivel = `Nivel: ${NOMBRES.boaz} · ${oferta.mes} al mes, IVA incluido${
-      fundador ? ` · precio fundador ${oferta.fundador.mes} fijo ${oferta.fundador.meses} meses` : ""
-    }`;
+    lineaNivel =
+      llenar(T.nivelBoaz, { nivel: nombreNivel, mes: oferta.mes }) +
+      (fundador ? llenar(T.fundador, { mes: oferta.fundador.mes, meses: oferta.fundador.meses }) : "");
   } else if (oferta) {
-    lineaNivel = `Nivel: ${NOMBRES[nivel]} · ${oferta.desde ? `desde ${oferta.desde}, IVA incluido` : "se cotiza"}`;
+    lineaNivel = oferta.desde
+      ? llenar(T.nivelDesde, { nivel: nombreNivel, desde: oferta.desde })
+      : llenar(T.nivelCotiza, { nivel: nombreNivel });
   }
 
-  const lista = problemas(estado);
+  const lista = problemas(estado, c);
   const cuesta = loQueLeCuesta(estado);
   const dia = formatoDia(siguiente?.dia);
 
   return [
-    negocio && `Negocio: ${negocio}`,
-    limpio(prospecto.nombre) && `Dueño: ${limpio(prospecto.nombre)}`,
+    negocio && llenar(T.negocio, { negocio }),
+    limpio(prospecto.nombre) && llenar(T.dueno, { nombre: limpio(prospecto.nombre) }),
     lineaNivel,
-    oferta?.continuidad && `Continuidad: ${oferta.continuidad.nombre}, desde ${oferta.continuidad.desde} al mes`,
-    conBoceto(nivel) && `Boceto: ${boceto ? `sí, ${oferta.boceto}` : "no"}`,
-    lista.length && `Problemas:\n${lista.map((p) => `- ${p}`).join("\n")}`,
-    cuesta && `Le cuesta: ${cuesta}`,
-    siguiente?.tipo && `Siguiente paso: ${siguiente.tipo}${dia ? `, ${dia}` : ""}`,
-    prospecto.origen && `Cómo nos conoció: ${prospecto.origen}`,
+    oferta?.continuidad && llenar(T.continuidad, oferta.continuidad),
+    conBoceto(nivel, ofertas) && (boceto ? llenar(T.bocetoSi, { boceto: oferta.boceto }) : T.bocetoNo),
+    lista.length && `${T.problemas}\n${lista.map((p) => `- ${p}`).join("\n")}`,
+    cuesta && llenar(T.cuesta, { cuesta }),
+    siguiente?.tipo && (dia ? llenar(T.siguienteDia, { tipo: siguiente.tipo, dia }) : llenar(T.siguiente, { tipo: siguiente.tipo })),
+    prospecto.origen && llenar(T.origen, { origen: prospecto.origen }),
   ]
     .filter(Boolean)
     .join("\n");

@@ -1,6 +1,11 @@
 import { describe, expect, it } from "vitest";
-import { N, RAZONES } from "./contenido";
-import { OFERTAS, conBoceto, nivelSiguiente, sugerirNivel } from "./nivel";
+import { CONTENIDO_DIAGNOSTICO, N, RAZONES } from "./contenido";
+import { conBoceto as conBocetoEn, nivelSiguiente, sugerirNivel as sugerir } from "./nivel";
+import { OFERTAS } from "./ofertas";
+
+// Lote 25: el contenido y las ofertas llegan como argumento.
+const sugerirNivel = (args) => sugerir(args, CONTENIDO_DIAGNOSTICO);
+const conBoceto = (nivel) => conBocetoEn(nivel, OFERTAS);
 
 const r = (valores) => Object.fromEntries(Object.entries(valores).map(([id, valor]) => [id, { valor }]));
 const nivel = (giro, valores = {}) => sugerirNivel({ giro, respuestas: r(valores) });

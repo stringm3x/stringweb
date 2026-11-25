@@ -1,3 +1,4 @@
+import { TEXTOS } from "@/app/lib/interno/diagnostico/contenido";
 import { exigirCarlos } from "@/app/lib/interno/exigirCarlos";
 import { salir } from "../acciones";
 import { BarraInterna } from "./BarraInterna";
@@ -12,7 +13,7 @@ export default async function ProtegidoLayout({ children }) {
 
   return (
     <Captura>
-      <BarraInterna salir={salir} />
+      <BarraInterna salir={salir} textosConfirmar={TEXTOS.confirmar} />
       <main className="mx-auto w-full max-w-[640px] px-4 py-space-5">{children}</main>
     </Captura>
   );

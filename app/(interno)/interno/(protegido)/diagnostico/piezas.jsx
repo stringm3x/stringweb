@@ -1,7 +1,8 @@
 "use client";
 
 import { FiCheck } from "react-icons/fi";
-import { PASOS, TEXTOS } from "@/app/lib/interno/diagnostico/contenido";
+import { llenar } from "@/app/lib/interno/llamada/llenar";
+import { useDiagnostico } from "./contexto";
 
 // Piezas de la herramienta de diagnóstico (lote 20), con los estados de
 // docs/calidad.md § 3. Los colores cambian de golpe; solo se anima el
@@ -11,6 +12,9 @@ import { PASOS, TEXTOS } from "@/app/lib/interno/diagnostico/contenido";
 // lenguaje que ui/Opciones: elegida = acento con texto negro y palomita.
 const PILDORA =
   "group/opcion flex min-h-[56px] w-full cursor-pointer items-center gap-3 rounded-pill border border-borde px-5 py-3 text-[17px] font-medium leading-[1.3] text-texto transition-transform duration-rapido hover:border-texto active:scale-[.98] motion-reduce:active:scale-100 has-[:checked]:border-acento has-[:checked]:bg-acento has-[:checked]:text-sobre-acento has-[:focus-visible]:outline has-[:focus-visible]:outline-2 has-[:focus-visible]:outline-offset-[3px] has-[:focus-visible]:outline-[rgb(var(--foco))]";
+
+const APAGADA =
+  "flex min-h-[56px] w-full cursor-not-allowed items-center gap-3 rounded-pill border border-dashed border-borde px-5 py-3 text-[17px] font-medium leading-[1.3] text-texto-suave";
 
 export function Elecciones({
   nombre,
@@ -23,6 +27,7 @@ export function Elecciones({
   grande = false,
   legendaRef,
   describedBy,
+  deshabilitadas = [],
 }) {
   const elegidas = varias ? (Array.isArray(valor) ? valor : []) : [valor];
   return (
@@ -41,13 +46,16 @@ export function Elecciones({
       <div className="flex flex-col gap-space-2">
         {opciones.map((opcion) => {
           const marcada = elegidas.includes(opcion);
+          // Deshabilitada (lote 25: Clínicas, "en pausa"): se ve, no se elige.
+          const apagada = deshabilitadas.includes(opcion);
           return (
-            <label key={opcion} className={PILDORA}>
+            <label key={opcion} className={apagada ? APAGADA : PILDORA}>
               <input
                 type={varias ? "checkbox" : "radio"}
                 name={nombre}
                 value={opcion}
                 checked={marcada}
+                disabled={apagada}
                 onChange={() => {
                   if (!varias) return onCambiar(opcion);
                   onCambiar(marcada ? elegidas.filter((o) => o !== opcion) : [...elegidas, opcion]);
@@ -92,6 +100,7 @@ export function Interruptor({ encendido, onCambiar, children }) {
 
 // "PASO N DE 5" con la barra de cinco segmentos.
 export function BarraPasos({ paso }) {
+  const { PASOS } = useDiagnostico().contenido;
   return (
     <div className="flex flex-col gap-space-2">
       <p className="font-mono text-etiqueta uppercase text-texto-suave">
@@ -115,6 +124,7 @@ const PUNTO = {
 };
 
 export function Puntos({ estados, actual, onIr }) {
+  const { TEXTOS } = useDiagnostico().contenido;
   return (
     <ol aria-label="Preguntas" className="flex flex-wrap gap-1.5">
       {estados.map((estado, i) => {
@@ -124,7 +134,7 @@ export function Puntos({ estados, actual, onIr }) {
             <button
               type="button"
               aria-current={esActual ? "step" : undefined}
-              aria-label={TEXTOS.punto(i + 1, TEXTOS.estados[estado])}
+              aria-label={llenar(TEXTOS.punto, { n: i + 1, estado: TEXTOS.estados[estado] })}
               onClick={() => onIr(i)}
               className={`flex h-9 w-9 items-center justify-center rounded-full border-2 font-mono text-[13px] font-medium transition-transform duration-rapido active:scale-[.94] motion-reduce:active:scale-100 ${
                 PUNTO[estado]
@@ -176,6 +186,7 @@ export function Abierta({ id, pregunta, valor, onCambiar, corto = false, ayuda, 
 
 // Nota opcional por pregunta.
 export function Nota({ id, valor, onCambiar }) {
+  const { TEXTOS } = useDiagnostico().contenido;
   return (
     <div className="flex flex-col gap-space-2">
       <label htmlFor={id} className="text-[14px] font-medium text-texto">
