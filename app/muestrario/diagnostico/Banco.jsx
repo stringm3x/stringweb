@@ -3,11 +3,11 @@
 import { useState } from "react";
 import { BarraInterna } from "@/app/(interno)/interno/(protegido)/BarraInterna";
 import { Captura } from "@/app/(interno)/interno/(protegido)/Captura";
-import { Diagnostico } from "@/app/(interno)/interno/(protegido)/diagnostico/Diagnostico";
+import { Llamada } from "@/app/(interno)/interno/(protegido)/diagnostico/llamada/Llamada";
 
 // La misma barra y la misma herramienta de /interno, sin sesión. "Salir"
 // no cierra nada aquí: solo avisa que se habría salido (texto de ejemplo).
-export function Banco() {
+export function Banco({ contenido }) {
   const [salio, setSalio] = useState(false);
   return (
     <div data-theme="noche" className="min-h-screen bg-fondo text-texto">
@@ -19,7 +19,7 @@ export function Banco() {
               Muestrario: aquí se habría cerrado la sesión
             </p>
           )}
-          <Diagnostico />
+          <Llamada contenido={contenido} />
         </main>
       </Captura>
     </div>

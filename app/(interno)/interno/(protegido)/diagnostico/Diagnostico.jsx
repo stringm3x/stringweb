@@ -33,9 +33,9 @@ const VACIO = {
 
 const tieneValor = (r) => (Array.isArray(r?.valor) ? r.valor.length > 0 : !!String(r?.valor ?? "").trim());
 
-function hayDatos(e) {
+function hayDatos(e, giroFijo) {
   return (
-    Object.values(e.prospecto).some((v) => v.trim()) ||
+    Object.entries(e.prospecto).some(([campo, v]) => v.trim() && !(giroFijo && campo === "giro")) ||
     Object.values(e.respuestas).some((r) => tieneValor(r) || r?.nota?.trim()) ||
     !!e.siguiente.tipo ||
     !!e.siguiente.dia
@@ -46,8 +46,13 @@ const GIRO_NOMBRES = GIROS.map((g) => g.nombre);
 const T = TEXTOS;
 const COMPACTO = "w-full !px-3";
 
-export function Diagnostico() {
-  const [e, setE] = useState(VACIO);
+// giroFijo (lote 25): el atajo "Gimnasio → Boaz Pro" de la llamada entra con
+// el giro ya puesto y sin la lista de giros (los giros viejos quedan
+// ocultos). onVolver regresa al inicio de la llamada desde el paso 1.
+const vacioCon = (giroFijo) => (giroFijo ? { ...VACIO, prospecto: { ...VACIO.prospecto, giro: giroFijo } } : VACIO);
+
+export function Diagnostico({ giroFijo, onVolver, textoVolver }) {
+  const [e, setE] = useState(() => vacioCon(giroFijo));
   const [confirmando, setConfirmando] = useState(false);
   const [copiado, setCopiado] = useState(null); // "resumen" | "datos"
   const { setHayDatos } = useCaptura();
@@ -69,7 +74,7 @@ export function Diagnostico() {
   };
   const generado = giro ? armarResumen(estadoResumen) : "";
   const resumen = e.editado ? e.editado.texto : generado;
-  const hay = hayDatos(e);
+  const hay = hayDatos(e, giroFijo);
 
   usePantallaEncendida();
 
@@ -140,7 +145,7 @@ export function Diagnostico() {
   const borrarTodo = () => {
     setConfirmando(false);
     setCopiado(null);
-    setE(VACIO);
+    setE(vacioCon(giroFijo));
   };
   const nuevoDiagnostico = () => (hay ? setConfirmando(true) : borrarTodo());
 
@@ -175,6 +180,12 @@ export function Diagnostico() {
         {tituloPaso}
       </div>
 
+      {e.paso === 1 && onVolver && (
+        <Boton variante="texto" onClick={onVolver} flecha={false} className="-mt-space-3 self-start">
+          {textoVolver}
+        </Boton>
+      )}
+
       {e.paso === 1 && (
         <div className="flex flex-col gap-space-5">
           <Campo
@@ -208,13 +219,15 @@ export function Diagnostico() {
               </p>
             )}
           </div>
-          <Elecciones
-            nombre="giro"
-            legenda={T.prospecto.giro}
-            opciones={GIRO_NOMBRES}
-            valor={GIROS.find((g) => g.id === giro)?.nombre}
-            onCambiar={(nombre) => cambiarProspecto("giro", GIROS.find((g) => g.nombre === nombre).id)}
-          />
+          {!giroFijo && (
+            <Elecciones
+              nombre="giro"
+              legenda={T.prospecto.giro}
+              opciones={GIRO_NOMBRES}
+              valor={GIROS.find((g) => g.id === giro)?.nombre}
+              onCambiar={(nombre) => cambiarProspecto("giro", GIROS.find((g) => g.nombre === nombre).id)}
+            />
+          )}
           <Elecciones
             nombre="origen"
             legenda={T.prospecto.origen}

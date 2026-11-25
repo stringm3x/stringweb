@@ -1,9 +1,12 @@
 import { test, expect } from "@playwright/test";
 import AxeBuilder from "@axe-core/playwright";
 
-// /interno/diagnostico (lote 20), probado en su banco /muestrario/diagnostico:
-// el mismo componente y la misma barra, sin sesión (solo en desarrollo). A
-// 390 px. Nada de esto toca la red: la herramienta no guarda nada.
+// /interno/diagnostico, probado en su banco /muestrario/diagnostico: el mismo
+// componente y la misma barra, sin sesión (solo en desarrollo). A 390 px.
+// Nada de esto toca la red. Lote 25: la llamada con los nichos nuevos (las
+// notas viven solo en la pestaña, en sessionStorage) y el atajo a Boaz, que
+// es la herramienta del lote 20 con el giro fijo. Los giros viejos quedan
+// ocultos; su lógica la cubren las pruebas de Vitest.
 const BANCO = "/muestrario/diagnostico";
 
 test.use({ viewport: { width: 390, height: 844 }, locale: "es-MX", permissions: ["clipboard-read", "clipboard-write"] });
@@ -27,104 +30,135 @@ const boton = (page, nombre) => page.getByRole("button", { name: nombre, exact: 
 const siguiente = (page) => boton(page, "Siguiente").click();
 const saltar = (page) => boton(page, "Saltar").click();
 const resumen = (page) => page.getByRole("textbox", { name: "Resumen para WhatsApp" });
+const guardado = (page) => page.evaluate(() => window.sessionStorage.getItem("interno-llamada"));
+const nicho = (page, texto) => page.getByRole("radio", { name: texto, exact: true });
+const gimnasio = (page) => boton(page, "Gimnasio → Boaz Pro").click();
 
 async function sinFallasAxe(page, donde) {
   const { violations } = await new AxeBuilder({ page }).withTags(["wcag2a", "wcag2aa", "wcag21a", "wcag21aa"]).analyze();
   expect(violations.map((v) => `${donde} · ${v.id}: ${v.nodes.map((n) => n.target).join(" | ")}`)).toEqual([]);
 }
 
-test("recorrido completo de un giro, con axe en cada paso", async ({ page }) => {
-  await expect(page.getByText("Nada de esto se guarda. Al cerrar la página, se borra.")).toBeVisible();
-  await expect(page.getByText("Paso 1 de 5")).toBeVisible();
-  await expect(boton(page, "Empezar preguntas")).toBeDisabled();
-  await page.getByLabel("Nombre del dueño").fill("Luis");
-  await page.getByLabel("Negocio").fill("Barbería Don Luis");
-  await page.getByLabel("Su WhatsApp").fill("55 4552");
-  await expect(page.getByText("El número lleva 10 dígitos.", { exact: false })).toBeVisible();
-  await page.getByLabel("Su WhatsApp").fill("55 4552 4847");
-  await expect(page.getByText("El número lleva 10 dígitos.", { exact: false })).toHaveCount(0);
-  await elegir(page, "Barbería o estética");
-  await elegir(page, "Visita");
-  await sinFallasAxe(page, "paso 1");
-  await boton(page, "Empezar preguntas").click();
 
-  // Paso 2: S1 (varias), S2, P1, P2, S y P del giro.
-  await expect(page.getByText("Paso 2 de 5")).toBeVisible();
-  await expect(page.getByRole("list", { name: "Preguntas" }).getByRole("button")).toHaveCount(9);
-  await elegir(page, "Instagram");
-  await elegir(page, "WhatsApp");
-  await sinFallasAxe(page, "pregunta");
-  await siguiente(page);
-  await elegir(page, "Cuaderno");
-  await siguiente(page);
-  await elegir(page, "Sí");
-  await page.getByLabel("Nota").fill("sobre todo en la noche");
-  await siguiente(page);
-  await elegir(page, "No");
-  await siguiente(page);
-  await page.getByLabel("¿Cómo te agendan hoy: WhatsApp, teléfono o llegan sin cita?").fill("Por WhatsApp");
-  await siguiente(page);
-  await elegir(page, "A veces");
-  await siguiente(page);
+test("inicio de la llamada: nicho, filtro, clínicas en pausa y tipo de dueño, con axe", async ({ page }) => {
+  await expect(
+    page.getByText("Nada se guarda fuera de esta pestaña. Se borra al terminar la llamada o al cerrar la pestaña."),
+  ).toBeVisible();
+  await expect(page.getByRole("heading", { level: 2, name: "Inicio de la llamada" })).toBeVisible();
+  for (const n of ["Academias", "Desarrolladoras", "B2B · Distribuidoras y proveedores", "Tiendas · Con local y en línea"]) {
+    await expect(nicho(page, n)).toBeEnabled();
+  }
+  await expect(nicho(page, "Clínicas · en pausa")).toBeDisabled();
+  // Los giros viejos ya no se ven.
+  for (const viejo of ["Barbería o estética", "Restaurante", "Empresa mediana o grande", "Gimnasio"]) {
+    await expect(page.getByRole("radio", { name: viejo })).toHaveCount(0);
+  }
+  await expect(boton(page, "Empezar llamada")).toBeDisabled();
+  await sinFallasAxe(page, "inicio");
 
-  // Paso 3: I del giro, I común, N.
-  await expect(page.getByText("Paso 3 de 5")).toBeVisible();
-  await page.getByLabel(/¿Cuántas citas se te caen/).fill("unas 5 a la semana, a $250");
-  await siguiente(page);
-  await saltar(page);
-  await elegir(page, "Que el seguimiento siga aunque yo no esté");
-  await siguiente(page);
+  await elegir(page, "Academias");
+  await expect(page.getByText("3+ maestros, 80+ alumnos, colegiatura de $800+.")).toBeVisible();
+  await elegir(page, "B2B · Distribuidoras y proveedores");
+  await expect(page.getByText("10+ empleados, vende a otras empresas", { exact: false })).toBeVisible();
+  await expect(page.getByText("3+ maestros", { exact: false })).toHaveCount(0);
 
-  // Paso 4: nivel, boceto y siguiente paso.
-  await expect(page.getByText("Paso 4 de 5")).toBeVisible();
-  await expect(page.getByText("Eso que me cuentas es Automatiza")).toBeVisible();
-  await expect(page.getByText("Quiere que el seguimiento siga aunque no esté.")).toBeVisible();
-  await expect(page.getByText("Cuando crezca: Controla")).toBeVisible();
-  const boceto = page.getByRole("switch", { name: "Ofrecer boceto · $3,500" });
-  await expect(boceto).not.toBeChecked();
-  await boceto.check({ force: true });
-  await elegir(page, "Demo");
-  await page.getByLabel("¿Qué día?").fill("2026-11-12");
-  await sinFallasAxe(page, "nivel");
-  await siguiente(page);
+  await page.getByLabel("Negocio").fill("Academia Sol");
+  await page.getByLabel("Nombre del dueño").fill("Mariana");
+  await elegir(page, "Con uno que no se adapta");
+  await expect(page.getByRole("radio", { name: "Con uno que no se adapta" })).toBeChecked();
+  // El tipo de dueño se puede quitar.
+  await elegir(page, "Con uno que no se adapta");
+  await expect(page.getByRole("radio", { name: "Con uno que no se adapta" })).not.toBeChecked();
+  await sinFallasAxe(page, "inicio con nicho");
 
-  // Paso 5: resumen, WhatsApp, copiar y datos.
-  await expect(page.getByText("Paso 5 de 5")).toBeVisible();
-  const texto = await resumen(page).inputValue();
-  expect(texto).toContain("Hola, Luis. Soy Carlos, de STRING.");
-  expect(texto).toContain("- Te dejan plantado sin avisar.");
-  expect(texto).toContain("- Se te quedan mensajes sin contestar, o contestas tarde: sobre todo en la noche");
-  expect(texto).toContain("- Me comentaste que esto te cuesta unas 5 a la semana, a $250.");
-  expect(texto).toContain("Para eso te sugiero Automatiza:");
-  expect(texto).toContain("Cuesta $3,500 con IVA incluido");
-  expect(texto).toContain("Quedamos el jueves 12 de noviembre para mostrarte cómo funcionaría.");
-  const whatsapp = page.getByRole("link", { name: "Abrir en WhatsApp" });
-  const href = await whatsapp.getAttribute("href");
-  expect(href.startsWith("https://wa.me/525545524847?text=")).toBe(true);
-  expect(new URL(href).searchParams.get("text")).toBe(texto);
-  await expect(page.getByText("Siguiente paso: Demo, el jueves 12 de noviembre")).toBeVisible();
-  await sinFallasAxe(page, "resumen");
-
-  await boton(page, "Copiar").click();
-  await expect(boton(page, "Copiado")).toBeVisible();
-  expect(await page.evaluate(() => navigator.clipboard.readText())).toBe(texto);
-  await expect(boton(page, "Copiar")).toBeVisible({ timeout: 4000 });
-
-  // Editado a mano: se respeta; al cambiar una respuesta, se puede rehacer.
-  await resumen(page).fill(`${texto}\nPD`);
-  await expect(boton(page, "Volver a armar el resumen")).toHaveCount(0);
-  await boton(page, "Anterior").click();
-  await page.getByRole("switch", { name: "Ofrecer boceto · $3,500" }).uncheck({ force: true });
-  await siguiente(page);
-  await expect(resumen(page)).toHaveValue(`${texto}\nPD`);
-  await boton(page, "Volver a armar el resumen").click();
-  await expect(resumen(page)).not.toHaveValue(/boceto/);
+  await elegir(page, "Academias");
+  await boton(page, "Empezar llamada").click();
+  await expect(page.getByRole("heading", { level: 2, name: "Apertura" })).toBeFocused();
+  await expect(page.getByText("Gracias por el espacio, Mariana.", { exact: false })).toBeVisible();
+  await expect(page.getByText("cómo funciona tu Academia Sol,", { exact: false })).toBeVisible();
+  await sinFallasAxe(page, "apertura");
 });
 
-test("gimnasio: sus 3 preguntas y la N, Boaz Pro con fundador y recordatorio", async ({ page }) => {
+test("las notas viven en la pestaña: recargar las conserva, nada en localStorage ni cookies", async ({ page }) => {
+  expect(await guardado(page)).toBeNull();
+  await elegir(page, "Desarrolladoras");
+  await page.getByLabel("Negocio").fill("Lomas del Valle");
+  await elegir(page, "Con varios que no se hablan");
+  await expect.poll(() => guardado(page)).toContain("Lomas del Valle");
+
+  await page.reload();
+  await expect(page.getByLabel("Negocio")).toHaveValue("Lomas del Valle");
+  await expect(nicho(page, "Desarrolladoras")).toBeChecked();
+  await expect(page.getByRole("radio", { name: "Con varios que no se hablan" })).toBeChecked();
+
+  // La llamada empezada también sigue tras recargar.
+  await boton(page, "Empezar llamada").click();
+  await page.reload();
+  await expect(page.getByRole("heading", { level: 2, name: "Apertura" })).toBeVisible();
+
+  expect(await page.evaluate(() => window.localStorage.length)).toBe(0);
+  expect(await page.context().cookies()).toEqual([]);
+
+  // Otra pestaña no ve nada: sessionStorage es por pestaña.
+  const otra = await page.context().newPage();
+  await otra.goto(BANCO);
+  await expect(otra.getByLabel("Negocio")).toHaveValue("");
+  expect(await guardado(otra)).toBeNull();
+});
+
+test("Terminar llamada pide confirmación y borra todo", async ({ page }) => {
+  await elegir(page, "Tiendas · Con local y en línea");
+  await page.getByLabel("Negocio").fill("Moda Rosa");
+  await boton(page, "Empezar llamada").click();
+
+  // Cancelar (o Esc): se queda todo y el foco regresa.
+  await boton(page, "Terminar llamada").click();
+  const dialogo = page.getByRole("dialog", { name: "¿Terminar la llamada? Se borra todo lo que anotaste." });
+  await expect(dialogo).toBeVisible();
+  await expect(dialogo.getByRole("button", { name: "Cancelar" })).toBeFocused();
+  await sinFallasAxe(page, "terminar llamada");
+  await dialogo.getByRole("button", { name: "Cancelar" }).click();
+  await expect(dialogo).toBeHidden();
+  await expect(boton(page, "Terminar llamada")).toBeFocused();
+  await boton(page, "Terminar llamada").click();
+  await page.keyboard.press("Escape");
+  await expect(dialogo).toBeHidden();
+  expect(await guardado(page)).toContain("Moda Rosa");
+
+  // Sí, terminar: inicio vacío y nada en la pestaña.
+  await boton(page, "Terminar llamada").click();
+  await dialogo.getByRole("button", { name: "Sí, terminar" }).click();
+  await expect(page.getByRole("heading", { level: 2, name: "Inicio de la llamada" })).toBeVisible();
+  await expect(page.getByLabel("Negocio")).toHaveValue("");
+  await expect(nicho(page, "Tiendas · Con local y en línea")).not.toBeChecked();
+  await expect.poll(() => guardado(page)).toBeNull();
+  await page.reload();
+  await expect(page.getByLabel("Negocio")).toHaveValue("");
+});
+
+test("Salir: sin notas sale directo; con notas pregunta y las borra", async ({ page }) => {
+  await boton(page, "Salir").click();
+  await expect(page.getByRole("dialog")).toHaveCount(0);
+  await expect(page.getByRole("status")).toHaveText("Muestrario: aquí se habría cerrado la sesión");
+
+  await page.goto(BANCO);
+  await page.getByLabel("Negocio").fill("Distribuidora Norte");
+  await expect.poll(() => guardado(page)).toContain("Distribuidora Norte");
+  await boton(page, "Salir").click();
+  const dialogo = page.getByRole("dialog", { name: "¿Seguro? Se borra todo lo del diagnóstico." });
+  await expect(dialogo).toBeVisible();
+  await expect(page.getByRole("status")).toHaveCount(0);
+  await dialogo.getByRole("button", { name: "Sí, borrar" }).click();
+  await expect(page.getByRole("status")).toHaveText("Muestrario: aquí se habría cerrado la sesión");
+  expect(await guardado(page)).toBeNull();
+});
+
+test("atajo a gimnasio: sus 3 preguntas y la N, Boaz Pro con fundador y recordatorio", async ({ page }) => {
+  await gimnasio(page);
+  await expect(page.getByText("Nada de esto se guarda. Al cerrar la página, se borra.")).toBeVisible();
+  await expect(page.getByRole("radio", { name: "Barbería o estética" })).toHaveCount(0);
   await page.getByLabel("Nombre del dueño").fill("Ana");
   await page.getByLabel("Negocio").fill("Gym Fuerza");
-  await elegir(page, "Gimnasio");
   await boton(page, "Empezar preguntas").click();
   await expect(page.getByRole("list", { name: "Preguntas" }).getByRole("button")).toHaveCount(4);
   await page.getByLabel("¿Cuántos socios activos tienes y cómo les cobras?").fill("120, en efectivo");
@@ -154,123 +188,33 @@ test("gimnasio: sus 3 preguntas y la N, Boaz Pro con fundador y recordatorio", a
   await sinFallasAxe(page, "resumen gimnasio");
 });
 
-test("visita rápida: la P del giro, S2 y la N; en gimnasio, la P y la N", async ({ page }) => {
-  await elegir(page, "Clínica o consultorio");
+test("atajo a gimnasio: visita rápida, Nuevo diagnóstico con confirmación y volver a los nichos", async ({ page }) => {
+  await gimnasio(page);
   await boton(page, "Visita rápida · 3 preguntas").click();
   const puntos = page.getByRole("list", { name: "Preguntas" }).getByRole("button");
-  await expect(puntos).toHaveCount(3);
-  await expect(page.getByText("¿Hay pacientes que ya no regresan a su siguiente cita?")).toBeVisible();
-  await elegir(page, "Sí");
-  await siguiente(page);
-  await expect(page.getByText("¿Dónde apuntas a tus clientes y lo que te pagan?")).toBeVisible();
-  await elegir(page, "Cuaderno");
-  await siguiente(page);
-  await expect(page.getByText("Si pudieras resolver una sola cosa este mes, ¿cuál sería?")).toBeVisible();
-  await saltar(page);
-  await expect(page.getByText("Eso que me cuentas es Automatiza")).toBeVisible();
-  await expect(page.getByText("Por lo que marcó: se le caen citas, pacientes o pedidos.")).toBeVisible();
-  await siguiente(page);
-  const texto = await resumen(page).inputValue();
-  expect(texto).toContain("- Hay pacientes que ya no regresan a su siguiente cita.");
-  expect(texto).toContain("Para lo que me contaste te sugiero Automatiza:");
-  expect(texto).not.toContain("Me comentaste");
-
-  // Gimnasio: la P y la N.
-  await page.goto(BANCO);
-  await elegir(page, "Gimnasio");
-  await boton(page, "Visita rápida · 3 preguntas").click();
   await expect(puntos).toHaveCount(2);
   await expect(page.getByText("¿Sabes quién se te vence esta semana y quién dejó de venir?")).toBeVisible();
-});
-
-test("saltar y volver por los puntos; saltada cuenta como No sé", async ({ page }) => {
-  await elegir(page, "Restaurante");
-  await boton(page, "Empezar preguntas").click();
-  const punto = (n) => page.getByRole("list", { name: "Preguntas" }).getByRole("button").nth(n - 1);
-
-  await expect(punto(1)).toHaveAttribute("aria-current", "step");
-  await expect(punto(1)).toHaveAccessibleName("Pregunta 1, sin contestar");
-  await saltar(page);
-  await expect(punto(1)).toHaveAccessibleName("Pregunta 1, saltada");
-  await expect(punto(2)).toHaveAttribute("aria-current", "step");
-  await saltar(page);
-  await elegir(page, "No");
+  await elegir(page, "A veces");
   await siguiente(page);
-  await expect(punto(3)).toHaveAccessibleName("Pregunta 3, contestada");
-
-  // Regresar por el punto 2 (saltada) y contestarla.
-  await punto(2).click();
-  await expect(punto(2)).toHaveAttribute("aria-current", "step");
-  await expect(page.getByText("¿Dónde apuntas a tus clientes y lo que te pagan?")).toBeFocused();
-  await elegir(page, "Excel");
-  await expect(punto(2)).toHaveAccessibleName("Pregunta 2, contestada");
-
-  // Al último punto (la N) con el teclado, y se salta.
-  await punto(9).focus();
-  await page.keyboard.press("Enter");
-  await expect(page.getByText("Paso 3 de 5")).toBeVisible();
   await saltar(page);
-  // N saltada y S2 = Excel → Organiza por descarte.
-  await expect(page.getByText("Eso que me cuentas es Organiza")).toBeVisible();
-  await expect(
-    page.getByText("Por lo que marcó: apunta a sus clientes en cuaderno, Excel, WhatsApp o en la cabeza."),
-  ).toBeVisible();
-
-  // Todo saltado → Responde, y la razón pide volver a preguntar.
-  await page.goto(BANCO);
-  await elegir(page, "Restaurante");
-  await boton(page, "Visita rápida · 3 preguntas").click();
-  for (let i = 0; i < 3; i++) await saltar(page);
-  await expect(page.getByText("Eso que me cuentas es Responde")).toBeVisible();
-  await expect(page.getByText(/^No marcó nada: se sugiere lo más chico\./)).toBeVisible();
-});
-
-test("diálogo de confirmación: Nuevo diagnóstico y Salir", async ({ page }) => {
-  // Sin datos, Salir no pregunta.
-  await boton(page, "Salir").click();
-  await expect(page.getByRole("dialog")).toHaveCount(0);
-  await expect(page.getByRole("status")).toHaveText("Muestrario: aquí se habría cerrado la sesión");
-
-  await page.goto(BANCO);
-  await page.getByLabel("Negocio").fill("Tienda Sol");
-  await elegir(page, "Tienda en línea");
-  await boton(page, "Visita rápida · 3 preguntas").click();
-  for (let i = 0; i < 3; i++) await saltar(page);
+  await expect(page.getByText("Eso que me cuentas es Boaz Pro")).toBeVisible();
   await siguiente(page);
 
-  // Nuevo diagnóstico → Cancelar: se queda todo y el foco regresa.
   await boton(page, "Nuevo diagnóstico").click();
   const dialogo = page.getByRole("dialog", { name: "¿Seguro? Se borra todo lo del diagnóstico." });
   await expect(dialogo).toBeVisible();
-  await expect(dialogo.getByRole("button", { name: "Cancelar" })).toBeFocused();
-  await sinFallasAxe(page, "diálogo");
-  await dialogo.getByRole("button", { name: "Cancelar" }).click();
-  await expect(dialogo).toBeHidden();
-  await expect(boton(page, "Nuevo diagnóstico")).toBeFocused();
-  await expect(page.getByText("Paso 5 de 5")).toBeVisible();
-
-  // Esc también cancela.
-  await boton(page, "Nuevo diagnóstico").click();
-  await page.keyboard.press("Escape");
-  await expect(dialogo).toBeHidden();
-  await expect(page.getByText("Paso 5 de 5")).toBeVisible();
-
-  // Sí, borrar: vuelve al paso 1 vacío.
-  await boton(page, "Nuevo diagnóstico").click();
   await dialogo.getByRole("button", { name: "Sí, borrar" }).click();
+  // Vuelve al paso 1 del gimnasio, sin la lista de giros.
   await expect(page.getByText("Paso 1 de 5")).toBeVisible();
-  await expect(page.getByLabel("Negocio")).toHaveValue("");
+  await expect(boton(page, "Empezar preguntas")).toBeEnabled();
 
-  // Con datos, Salir pregunta; Sí, borrar sale.
-  await page.getByLabel("Negocio").fill("Tienda Sol");
-  await boton(page, "Salir").click();
-  await expect(dialogo).toBeVisible();
-  await expect(page.getByRole("status")).toHaveCount(0);
-  await dialogo.getByRole("button", { name: "Sí, borrar" }).click();
-  await expect(page.getByRole("status")).toHaveText("Muestrario: aquí se habría cerrado la sesión");
+  // "Cambiar de nicho" regresa al inicio de la llamada. El atajo no usa la pestaña.
+  expect(await guardado(page)).toBeNull();
+  await boton(page, "Cambiar de nicho").click();
+  await expect(page.getByRole("heading", { level: 2, name: "Inicio de la llamada" })).toBeVisible();
 });
 
-test("con datos, cerrar la pestaña dispara beforeunload", async ({ page }) => {
+test("con notas, cerrar la pestaña dispara beforeunload", async ({ page }) => {
   const dialogos = [];
   page.on("dialog", (d) => {
     dialogos.push(d.type());
@@ -281,7 +225,7 @@ test("con datos, cerrar la pestaña dispara beforeunload", async ({ page }) => {
   await expect.poll(() => dialogos).toEqual(["beforeunload"]);
 });
 
-test("sin datos no hay beforeunload", async ({ page }) => {
+test("sin notas no hay beforeunload", async ({ page }) => {
   const dialogos = [];
   page.on("dialog", (d) => {
     dialogos.push(d.type());
@@ -290,7 +234,6 @@ test("sin datos no hay beforeunload", async ({ page }) => {
   // Hubo interacción (el navegador la exige para preguntar), pero no quedan datos.
   await page.getByLabel("Negocio").fill("x");
   await page.getByLabel("Negocio").fill("");
-  // Sin aviso, la pestaña se cierra sola.
   const cerrada = page.waitForEvent("close", { timeout: 5000 });
   await page.close({ runBeforeUnload: true });
   await cerrada;
@@ -320,8 +263,8 @@ test("Wake Lock: se pide al cargar y al volver a la pestaña; sin soporte, nada 
     delete Navigator.prototype.wakeLock;
   });
   await sinCandado.goto(BANCO);
-  await elegir(sinCandado, "Gimnasio");
-  await expect(boton(sinCandado, "Empezar preguntas")).toBeEnabled();
+  await elegir(sinCandado, "Academias");
+  await expect(boton(sinCandado, "Empezar llamada")).toBeEnabled();
   expect(fallas).toEqual([]);
   await ctx.close();
 });

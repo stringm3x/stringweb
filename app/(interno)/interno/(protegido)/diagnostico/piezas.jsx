@@ -12,6 +12,9 @@ import { PASOS, TEXTOS } from "@/app/lib/interno/diagnostico/contenido";
 const PILDORA =
   "group/opcion flex min-h-[56px] w-full cursor-pointer items-center gap-3 rounded-pill border border-borde px-5 py-3 text-[17px] font-medium leading-[1.3] text-texto transition-transform duration-rapido hover:border-texto active:scale-[.98] motion-reduce:active:scale-100 has-[:checked]:border-acento has-[:checked]:bg-acento has-[:checked]:text-sobre-acento has-[:focus-visible]:outline has-[:focus-visible]:outline-2 has-[:focus-visible]:outline-offset-[3px] has-[:focus-visible]:outline-[rgb(var(--foco))]";
 
+const APAGADA =
+  "flex min-h-[56px] w-full cursor-not-allowed items-center gap-3 rounded-pill border border-dashed border-borde px-5 py-3 text-[17px] font-medium leading-[1.3] text-texto-suave";
+
 export function Elecciones({
   nombre,
   legenda,
@@ -23,6 +26,7 @@ export function Elecciones({
   grande = false,
   legendaRef,
   describedBy,
+  deshabilitadas = [],
 }) {
   const elegidas = varias ? (Array.isArray(valor) ? valor : []) : [valor];
   return (
@@ -41,13 +45,16 @@ export function Elecciones({
       <div className="flex flex-col gap-space-2">
         {opciones.map((opcion) => {
           const marcada = elegidas.includes(opcion);
+          // Deshabilitada (lote 25: Clínicas, "en pausa"): se ve, no se elige.
+          const apagada = deshabilitadas.includes(opcion);
           return (
-            <label key={opcion} className={PILDORA}>
+            <label key={opcion} className={apagada ? APAGADA : PILDORA}>
               <input
                 type={varias ? "checkbox" : "radio"}
                 name={nombre}
                 value={opcion}
                 checked={marcada}
+                disabled={apagada}
                 onChange={() => {
                   if (!varias) return onCambiar(opcion);
                   onCambiar(marcada ? elegidas.filter((o) => o !== opcion) : [...elegidas, opcion]);

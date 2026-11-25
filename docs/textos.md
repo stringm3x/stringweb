@@ -1186,6 +1186,50 @@ Carlos · Boaz by STRING
 
 "¿Seguro? Se borra todo lo del diagnóstico." · "Cancelar" · "Sí, borrar"
 
+## Interno · lote 25 · la llamada con los nichos nuevos (25 nov)
+
+Guía para la llamada de diagnóstico de 20 minutos, por tramos. El guion común y las fichas de academias,
+desarrolladoras, B2B y tiendas los aprobó Carlos en el chat de ventas (25 nov). Son literales del prompt del lote 25 y
+viven en el código: `app/lib/interno/llamada/guion.js` y `app/lib/interno/llamada/nichos/*.js`. Clínicas aparece
+"en pausa", sin ficha. Los giros del lote 20 quedan ocultos. Gimnasio queda como atajo, "Gimnasio → Boaz Pro", que abre
+la herramienta del lote 20 con el giro fijo y sus textos de arriba.
+
+Las notas viven solo en la pestaña: se borran al terminar la llamada, al salir o al cerrar la pestaña. El único precio en
+pantalla es la respuesta fija "Desde $9,500; con lo que me cuentes te digo el nivel exacto en la propuesta.", que sale de
+`app/lib/precios.js`.
+
+### Guion común
+
+Los tramos y sus minutos: Apertura 0–2 · Su negocio 2–8 · Lo que le cuesta 8–13 · Cómo se vería 13–17 · Siguiente paso
+17–20. Las frases son literales del prompt; "[dueño]" y "[negocio]" se llenan solos y las demás pistas entre corchetes
+se quedan tal cual.
+
+Recordatorios fijos: Aguanta el silencio · Anota sus palabras tal cual · Ni precios ni niveles salvo que pregunte · Si
+pregunta el precio: "Desde $9,500; con lo que me cuentes te digo el nivel exacto en la propuesta."
+
+Tipo de dueño: Sin sistema · Con uno que no se adapta · Con varios que no se hablan.
+
+Cierre: ¿Alguien más decide esto contigo? · ¿Para cuándo te gustaría tenerlo funcionando? · ¿Te deja exportar tus
+datos? (solo si ya tiene sistema) · Fecha y hora de la presentación de la propuesta (15 min).
+
+### La cuenta (aprobado el 25 nov)
+
+- Las deudas (lo que le deben hoy, el monto atrasado, la cartera vencida) van aparte: no se suman al mes ni se
+  multiplican ×12. La frase agrega ", y hoy te deben unos $Z".
+- La frase: "O sea, más o menos $X al mes y unas Y horas tuyas a la semana. ¿Así lo ves?". En desarrolladoras y B2B
+  dice "unas Y horas de tu equipo a la semana" (horas × personas, sin ×4). En tiendas, "unas Y horas tuyas al día".
+- Hora en el resumen: "a las 5 pm" / "a las 5:30 pm".
+
+### Textos de pantalla (TODO(textos): propuestos, por aprobar)
+
+- Aviso arriba: "Nada se guarda fuera de esta pestaña. Se borra al terminar la llamada o al cerrar la pestaña."
+- Inicio: "Inicio de la llamada" · "Nicho" (Academias · Desarrolladoras · B2B · Distribuidoras y proveedores · Tiendas ·
+  Con local y en línea · Clínicas · en pausa) · "Filtro" · "Gimnasio → Boaz Pro" · "Negocio" · "Nombre del dueño" ·
+  "Tipo de dueño" · "Empezar llamada"
+- En el atajo de gimnasio: "Cambiar de nicho"
+- "Terminar llamada". Confirmación: "¿Terminar la llamada? Se borra todo lo que anotaste." · "Cancelar" · "Sí, terminar"
+- Las etiquetas de los campos de la calculadora están en cada ficha (`cuenta.campos`).
+
 ## Por confirmar antes del brief
 
 - [x] **Foto de Carlos** en la sala 3: foto real (falta que la mande).

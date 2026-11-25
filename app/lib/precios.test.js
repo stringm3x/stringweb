@@ -60,8 +60,13 @@ describe("precios", () => {
 
   // "$3,500" es Mejora y también el boceto, que no se publica: lo público no
   // toca los precios de /interno y nadie escribe esa cifra a mano.
+  // Única excepción: el banco de /interno/diagnostico (solo en desarrollo, 404
+  // en producción), que desde el lote 25 pasa el guion y las fichas como props.
   it("lo público no importa precios-interno ni escribe el $3,500 a mano", () => {
-    const importan = FUENTES.filter(({ texto }) => /precios-interno|lib\/interno|\bBOCETO\b/.test(sinComentarios(texto)));
+    const BANCO = path.join("muestrario", "diagnostico", "page.jsx");
+    const importan = FUENTES.filter(
+      ({ ruta, texto }) => ruta !== BANCO && /precios-interno|lib\/interno|\bBOCETO\b/.test(sinComentarios(texto)),
+    );
     expect(importan.map(({ ruta }) => ruta)).toEqual([]);
     const conCifra = FUENTES.filter(({ texto }) => /3,?500/.test(sinComentarios(texto))).map(({ ruta }) => ruta);
     expect(conCifra).toEqual(["lib/precios.js"]);
