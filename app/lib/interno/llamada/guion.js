@@ -11,6 +11,8 @@ import { precioNivel } from "@/app/lib/precios";
 // queda tal cual.
 
 // Los tramos, con sus minutos. El reloj marca el tramo; no corta nada.
+// Cada frase es { texto } o, si es una pregunta cuya respuesta se anota,
+// { texto, id }: debajo lleva un campo para lo que dijo, tal cual.
 export const TRAMOS = [
   {
     id: "apertura",
@@ -18,8 +20,11 @@ export const TRAMOS = [
     desde: 0,
     hasta: 2,
     frases: [
-      "Gracias por el espacio, [dueño]. La idea de hoy es sencilla: que me cuentes cómo funciona tu [negocio], ver qué te está costando y, al final, decirte cuál sería el siguiente paso. Son 20 minutos. ¿Te late si voy anotando?",
-      "Te había dejado dos preguntas. ¿Alcanzaste a pensarlas?",
+      {
+        texto:
+          "Gracias por el espacio, [dueño]. La idea de hoy es sencilla: que me cuentes cómo funciona tu [negocio], ver qué te está costando y, al final, decirte cuál sería el siguiente paso. Son 20 minutos. ¿Te late si voy anotando?",
+      },
+      { texto: "Te había dejado dos preguntas. ¿Alcanzaste a pensarlas?" },
     ],
     // Las dos preguntas que Carlos dejó antes de la llamada, con campo.
     preguntas: [
@@ -33,8 +38,13 @@ export const TRAMOS = [
     desde: 2,
     hasta: 8,
     frases: [
-      "Para entenderlo bien, cuéntame cómo es un día normal: desde que [alguien te pregunta] hasta que [ya es cliente y paga].",
-      "¿Usas algún sistema hoy, o va todo entre WhatsApp, Excel y libreta?",
+      {
+        id: "dia",
+        texto:
+          "Para entenderlo bien, cuéntame cómo es un día normal: desde que [alguien te pregunta] hasta que [ya es cliente y paga].",
+      },
+      // Su respuesta define el tipo de dueño (el selector va debajo).
+      { id: "sistemas", texto: "¿Usas algún sistema hoy, o va todo entre WhatsApp, Excel y libreta?", tipoDueno: true },
     ],
   },
   {
@@ -42,7 +52,7 @@ export const TRAMOS = [
     nombre: "Lo que le cuesta",
     desde: 8,
     hasta: 13,
-    frases: ["Eso que me cuentas, ¿cada cuánto pasa?… Hagamos la cuenta juntos."],
+    frases: [{ texto: "Eso que me cuentas, ¿cada cuánto pasa?… Hagamos la cuenta juntos." }],
   },
   {
     id: "veria",
@@ -50,8 +60,8 @@ export const TRAMOS = [
     desde: 13,
     hasta: 17,
     frases: [
-      "Si pudieras resolver una sola cosa este mes, ¿cuál sería?",
-      "¿Y cómo sería tu semana si eso ya estuviera resuelto?",
+      { id: "resolver", texto: "Si pudieras resolver una sola cosa este mes, ¿cuál sería?" },
+      { id: "semana", texto: "¿Y cómo sería tu semana si eso ya estuviera resuelto?" },
     ],
     soloSiAyuda: "Solo si ayuda: “¿Quieres ver cómo se vería eso? Es una pantalla de ejemplo.”",
   },
@@ -61,8 +71,14 @@ export const TRAMOS = [
     desde: 17,
     hasta: 20,
     frases: [
-      "Te digo lo que escuché: [problema], te está costando [número] y lo más urgente es [prioridad]. ¿Lo dije bien?",
-      "Lo que sigue: hoy te mando un resumen por escrito, y en dos días hábiles te presento una propuesta hecha para tu [negocio]. Son 15 minutos. ¿Te queda el [día] a las [hora]?",
+      {
+        texto:
+          "Te digo lo que escuché: [problema], te está costando [número] y lo más urgente es [prioridad]. ¿Lo dije bien?",
+      },
+      {
+        texto:
+          "Lo que sigue: hoy te mando un resumen por escrito, y en dos días hábiles te presento una propuesta hecha para tu [negocio]. Son 15 minutos. ¿Te queda el [día] a las [hora]?",
+      },
     ],
     siDecideConAlguien: "¿Puede estar [él/ella] también?",
     despedida: "Gracias, [dueño]. Me llevo tarea.",
@@ -107,6 +123,20 @@ export const TEXTOS = {
     filtro: "Filtro",
     empezar: "Empezar llamada",
   },
+  tramos: {
+    lista: "Tramos",
+    // Plantillas: se llenan con llenar() (sin funciones: viajan como props).
+    punto: "Tramo [n], [nombre], minuto [desde] a [hasta]",
+    minutos: "[desde]–[hasta] min",
+    situacion: "Situación",
+    problema: "Problema",
+    implicacion: "Implicación",
+    eligeTipo: "Elige el tipo de dueño para ver sus preguntas.",
+    recordatorios: "Recuerda",
+  },
+  reloj: { conTramo: "Min [minuto] · [tramo]", sinTramo: "Min [minuto]" },
+  objeciones: { abrir: "Objeciones", titulo: "Objeciones", cerrar: "Cerrar" },
+  navegacion: { anterior: "Anterior", siguiente: "Siguiente" },
   gimnasio: { volver: "Cambiar de nicho" },
   terminar: "Terminar llamada",
   confirmar: {

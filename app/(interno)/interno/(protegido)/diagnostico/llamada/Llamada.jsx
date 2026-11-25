@@ -2,13 +2,16 @@
 
 import { useEffect, useRef, useState } from "react";
 import { Boton } from "@/app/components/ui/Boton";
-import { llenar } from "@/app/lib/interno/llamada/llenar";
 import { useCaptura } from "../../Captura";
 import { Confirmar } from "../Confirmar";
 import { Diagnostico } from "../Diagnostico";
 import { BarraAcciones } from "../piezas";
 import { usePantallaEncendida } from "../usePantallaEncendida";
 import { Inicio } from "./Inicio";
+import { Objeciones } from "./Objeciones";
+import { Reloj, tramoDelMinuto, useMinuto } from "./Reloj";
+import { Tramo } from "./Tramo";
+import { Tramos } from "./Tramos";
 import { hayDatosLlamada, useLlamada } from "./useLlamada";
 
 // La llamada de diagnóstico con los nichos nuevos (lote 25). `contenido`
@@ -27,6 +30,7 @@ export function Llamada({ contenido }) {
   const { setHayDatos } = useCaptura();
   const titulo = useRef(null);
   const hay = hayDatosLlamada(llamada);
+  const minuto = useMinuto(llamada.inicio);
 
   usePantallaEncendida();
 
@@ -64,10 +68,15 @@ export function Llamada({ contenido }) {
   if (!lista) return null;
 
   const nicho = nichos.find((n) => n.id === llamada.nicho && !n.enPausa);
-  const valores = { dueño: llamada.dueno, negocio: llamada.negocio };
   const tramo = guion.TRAMOS[llamada.tramo];
+  const delReloj = tramoDelMinuto(guion.TRAMOS, minuto);
+  const ultimo = guion.TRAMOS.length - 1;
+  const enLlamada = llamada.pantalla === "llamada" && tramo && nicho;
 
   const empezar = () => cambiar({ pantalla: "llamada", tramo: 0, inicio: llamada.inicio ?? Date.now() });
+  const irATramo = (i) => cambiar({ tramo: i });
+  const anteriorTramo = () => (llamada.tramo > 0 ? irATramo(llamada.tramo - 1) : cambiar({ pantalla: "inicio" }));
+  const notar = (id, valor) => cambiar({ notas: { ...llamada.notas, [id]: valor } });
   const terminarConfirmado = () => {
     setConfirmando(false);
     terminar();
@@ -76,9 +85,20 @@ export function Llamada({ contenido }) {
   return (
     <div className="flex flex-col gap-space-5 pb-[220px]">
       <h1 className="sr-only">Diagnóstico</h1>
-      <p className="sticky top-0 z-10 -mx-4 -mt-space-5 border-b border-borde bg-fondo px-4 py-3 text-pequeno text-texto-suave">
-        {T.aviso}
-      </p>
+      {enLlamada ? (
+        <>
+          {/* En la llamada, arriba fijos: el reloj y las objeciones. */}
+          <div className="sticky top-0 z-10 -mx-4 -mt-space-5 flex min-h-[60px] items-center justify-between gap-space-3 border-b border-borde bg-fondo px-4 py-2">
+            <Reloj minuto={minuto} tramo={delReloj} textos={T.reloj} />
+            <Objeciones objeciones={nicho.objeciones} textos={T.objeciones} />
+          </div>
+          <p className="-mt-space-2 text-pequeno text-texto-suave">{T.aviso}</p>
+        </>
+      ) : (
+        <p className="sticky top-0 z-10 -mx-4 -mt-space-5 border-b border-borde bg-fondo px-4 py-3 text-pequeno text-texto-suave">
+          {T.aviso}
+        </p>
+      )}
 
       {llamada.pantalla === "inicio" && (
         <>
@@ -96,21 +116,29 @@ export function Llamada({ contenido }) {
         </>
       )}
 
-      {/* La guía por tramos llega en el bloque 2; por ahora, la apertura. */}
-      {llamada.pantalla === "llamada" && tramo && (
-        <section aria-labelledby="titulo-tramo" className="flex flex-col gap-space-4">
-          <p className="font-mono text-etiqueta uppercase text-texto-suave">
-            {nicho?.nombre} · {tramo.desde}–{tramo.hasta} min
-          </p>
-          <h2 ref={titulo} tabIndex={-1} id="titulo-tramo" className="text-subtitulo focus:outline-none">
-            {tramo.nombre}
-          </h2>
-          {tramo.frases.map((frase) => (
-            <p key={frase} className="text-cuerpo text-texto">
-              {llenar(frase, valores)}
-            </p>
-          ))}
-        </section>
+      {enLlamada && (
+        <>
+          <Tramos
+            tramos={guion.TRAMOS}
+            actual={llamada.tramo}
+            delReloj={delReloj?.id}
+            onIr={irATramo}
+            textos={T.tramos}
+          />
+          <Tramo
+            key={tramo.id}
+            tramo={tramo}
+            nicho={nicho}
+            llamada={llamada}
+            guion={guion}
+            onNota={notar}
+            onTipo={(tipo) => cambiar({ tipo })}
+            tituloRef={titulo}
+          />
+          <Boton variante="texto" onClick={() => setConfirmando(true)} flecha={false} className="self-start">
+            {T.terminar}
+          </Boton>
+        </>
       )}
 
       <BarraAcciones>
@@ -119,10 +147,16 @@ export function Llamada({ contenido }) {
             {T.inicio.empezar}
           </Boton>
         )}
-        {llamada.pantalla === "llamada" && (
-          <Boton variante="secundario" onClick={() => setConfirmando(true)} className={COMPACTO}>
-            {T.terminar}
-          </Boton>
+        {enLlamada && (
+          <div className="grid grid-cols-2 gap-space-2">
+            <Boton variante="secundario" onClick={anteriorTramo} className={COMPACTO}>
+              {T.navegacion.anterior}
+            </Boton>
+            {/* Después del último tramo vienen el nivel y el resumen (bloques 3 y 4). */}
+            <Boton onClick={() => irATramo(llamada.tramo + 1)} disabled={llamada.tramo === ultimo} className={COMPACTO}>
+              {T.navegacion.siguiente}
+            </Boton>
+          </div>
         )}
       </BarraAcciones>
 

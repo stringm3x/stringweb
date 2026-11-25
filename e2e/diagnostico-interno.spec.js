@@ -153,6 +153,114 @@ test("Salir: sin notas sale directo; con notas pregunta y las borra", async ({ p
   expect(await guardado(page)).toBeNull();
 });
 
+async function empezarLlamada(page, n = "Academias", { negocio = "Academia Sol", dueno = "Mariana", tipo } = {}) {
+  await elegir(page, n);
+  await page.getByLabel("Negocio").fill(negocio);
+  await page.getByLabel("Nombre del dueño").fill(dueno);
+  if (tipo) await elegir(page, tipo);
+  await boton(page, "Empezar llamada").click();
+}
+const tramo = (page, n) => page.getByRole("list", { name: "Tramos" }).getByRole("button").nth(n - 1);
+
+test("guía por tramos: frases, preguntas con campo, Situación según el tipo de dueño, con axe", async ({ page }) => {
+  await empezarLlamada(page);
+  await expect(page.getByRole("list", { name: "Tramos" }).getByRole("button")).toHaveCount(5);
+  await expect(tramo(page, 1)).toHaveAccessibleName("Tramo 1, Apertura, minuto 0 a 2");
+  await expect(tramo(page, 1)).toHaveAttribute("aria-current", "step");
+  await expect(page.getByText("Aguanta el silencio")).toBeVisible();
+  await expect(page.getByText("Si pregunta el precio: “Desde $9,500;", { exact: false })).toBeVisible();
+  await page.getByLabel("¿Qué es lo que más tiempo te quita hoy?").fill("Cobrar colegiaturas");
+  await sinFallasAxe(page, "tramo 1");
+
+  // Tramo 2: sin tipo, solo las de todos; el tipo cambia las demás.
+  await siguiente(page);
+  await expect(page.getByRole("heading", { level: 2, name: "Su negocio" })).toBeFocused();
+  await expect(page.getByText("ACADEMIAS · 2–8 MIN", { exact: false })).toBeVisible();
+  await expect(page.getByText("desde que [alguien te pregunta] hasta que [ya es cliente y paga].", { exact: false })).toBeVisible();
+  await expect(page.getByLabel("¿Cuántos alumnos y maestros tienes, y en cuántos grupos?")).toBeVisible();
+  await expect(page.getByText("Elige el tipo de dueño para ver sus preguntas.")).toBeVisible();
+  await elegir(page, "Sin sistema");
+  await expect(page.getByLabel("¿Cómo sabes quién te debe?")).toBeVisible();
+  await page.getByLabel("¿Cómo sabes quién te debe?").fill("En una libreta");
+  await elegir(page, "Con uno que no se adapta");
+  await expect(page.getByLabel("¿Cómo sabes quién te debe?")).toHaveCount(0);
+  await expect(page.getByLabel("¿Qué usas y cuánto pagas al mes?")).toBeVisible();
+  await sinFallasAxe(page, "tramo 2");
+
+  // Tramo 3: problema e implicación.
+  await siguiente(page);
+  await expect(page.getByLabel("¿Se te quedan papás sin contestar, sobre todo cuando das clase?")).toBeVisible();
+  await expect(page.getByLabel("¿Cuántas horas a la semana se te van en cobrar y confirmar?")).toBeVisible();
+  await sinFallasAxe(page, "tramo 3");
+
+  // Tramo 4 y 5 por los puntos; Siguiente se apaga en el último.
+  await tramo(page, 4).click();
+  await expect(page.getByLabel("¿Y cómo sería tu semana si eso ya estuviera resuelto?")).toBeVisible();
+  await expect(page.getByText("Solo si ayuda:", { exact: false })).toBeVisible();
+  await tramo(page, 5).click();
+  await expect(page.getByRole("heading", { level: 2, name: "Siguiente paso" })).toBeFocused();
+  await expect(page.getByText("Gracias, Mariana. Me llevo tarea.")).toBeVisible();
+  await expect(page.getByText("hecha para tu Academia Sol.", { exact: false })).toBeVisible();
+  await expect(boton(page, "Siguiente")).toBeDisabled();
+  await sinFallasAxe(page, "tramo 5");
+
+  // Las notas siguen al volver y tras recargar; la del otro tipo no se pierde.
+  await page.reload();
+  await expect(page.getByRole("heading", { level: 2, name: "Siguiente paso" })).toBeVisible();
+  await tramo(page, 1).click();
+  await expect(page.getByLabel("¿Qué es lo que más tiempo te quita hoy?")).toHaveValue("Cobrar colegiaturas");
+  await tramo(page, 2).click();
+  await elegir(page, "Sin sistema");
+  await expect(page.getByLabel("¿Cómo sabes quién te debe?")).toHaveValue("En una libreta");
+
+  // Anterior desde el primer tramo vuelve al inicio, con los datos.
+  await tramo(page, 1).click();
+  await boton(page, "Anterior").click();
+  await expect(page.getByRole("heading", { level: 2, name: "Inicio de la llamada" })).toBeVisible();
+  await expect(page.getByLabel("Negocio")).toHaveValue("Academia Sol");
+});
+
+test("el reloj marca el minuto y el tramo, y no cambia de pantalla solo", async ({ page }) => {
+  await page.clock.install({ time: new Date("2026-11-26T17:00:00") });
+  await page.goto(BANCO);
+  await empezarLlamada(page, "B2B · Distribuidoras y proveedores", { negocio: "Distribuidora Norte", dueno: "Jorge" });
+  await expect(page.getByText("Min 0 · Apertura")).toBeVisible();
+  await expect(tramo(page, 1)).toHaveClass(/bg-acento/);
+
+  await page.clock.fastForward("09:05");
+  await expect(page.getByText("Min 9 · Lo que le cuesta")).toBeVisible();
+  await expect(tramo(page, 3)).toHaveClass(/bg-acento/);
+  // Sigue en la Apertura: el reloj no corta nada.
+  await expect(page.getByRole("heading", { level: 2, name: "Apertura" })).toBeVisible();
+
+  // Pasado el minuto 20, solo el minuto. Recargar no reinicia el reloj.
+  await page.clock.fastForward("14:00");
+  await expect(page.getByText("Min 23", { exact: true })).toBeVisible();
+  await page.reload();
+  await expect(page.getByText("Min 23", { exact: true })).toBeVisible();
+});
+
+test("objeciones del nicho: se abren y se cierran, con axe", async ({ page }) => {
+  await empezarLlamada(page, "Tiendas · Con local y en línea", { negocio: "Moda Rosa", dueno: "Rosa" });
+  await boton(page, "Objeciones").click();
+  const dialogo = page.getByRole("dialog", { name: "Objeciones" });
+  await expect(dialogo).toBeVisible();
+  const pregunta = dialogo.getByText("“Hay plataformas mucho más baratas”");
+  const respuesta = dialogo.getByText("Sí, y si te funcionan, úsalas.", { exact: false });
+  await expect(respuesta).toBeHidden();
+  await pregunta.click();
+  await expect(respuesta).toBeVisible();
+  await expect(dialogo.getByText("Si solo quiere lo básico barato, no es tu cliente.")).toBeVisible();
+  await sinFallasAxe(page, "objeciones");
+  await pregunta.click();
+  await expect(respuesta).toBeHidden();
+  // Las de otro nicho no salen.
+  await expect(dialogo.getByText("“Mi CRM ya maneja prospectos”")).toHaveCount(0);
+  await page.keyboard.press("Escape");
+  await expect(dialogo).toBeHidden();
+  await expect(boton(page, "Objeciones")).toBeFocused();
+});
+
 test("atajo a gimnasio: sus 3 preguntas y la N, Boaz Pro con fundador y recordatorio", async ({ page }) => {
   await gimnasio(page);
   await expect(page.getByText("Nada de esto se guarda. Al cerrar la página, se borra.")).toBeVisible();

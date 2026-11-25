@@ -61,7 +61,8 @@ Producción sirve `main` con el lote 21 (c1c7d28) y el arreglo de /privacidad (5
   (228 KB) de la página. El arreglo es de JS, no de imágenes (`reportes/lote-13-reporte.md`).
 - e2e `registro-aviso.spec.js` › «con el aviso marcado se envía…» falla en local también sin los cambios del lote 24
   (comprobado el 12 nov): el Turnstile falso no llega a dar el token y sale «Completa la verificación de seguridad».
-  Revisar en un lote propio.
+  Revisar en un lote propio. Lote 25 (25 nov): es inestable, no un fallo fijo: falló con la suite completa y pasó al
+  correrla sola.
 - La vibración al tocar una cuerda (sala 4) redibuja la ruta con JS en cada fotograma (`Cuerdas.jsx`), no con `transform`.
 - Los dibujos de `public/arte/giros/`, `productos/`, `niveles/chica/` y `sala6-obra.svg` salen de `scripts/dibujos/` (`giros.mjs`, `dibujar.mjs`, `sala6.mjs`)
   y después pasan por svgo con `scripts/dibujos/svgo.config.mjs`; si cambia uno, se corren los dos pasos.
