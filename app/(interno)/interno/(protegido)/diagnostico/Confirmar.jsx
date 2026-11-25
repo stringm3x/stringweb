@@ -2,14 +2,13 @@
 
 import { useEffect, useId, useRef } from "react";
 import { Boton } from "@/app/components/ui/Boton";
-import { TEXTOS } from "@/app/lib/interno/diagnostico/contenido";
 
 // El diálogo de "¿Seguro?" (lote 20): un <dialog> nativo con showModal(),
 // que atrapa el foco, cierra con Esc (= Cancelar) y devuelve el foco al
 // botón que lo abrió. El foco empieza en "Cancelar", el primero.
-// `textos` (lote 25): la pregunta y los botones de otra confirmación, como
-// "Terminar llamada". Sin él, los del diagnóstico.
-export function Confirmar({ abierto, onCancelar, onConfirmar, textos = TEXTOS.confirmar }) {
+// `textos` (lote 25): la pregunta y los botones ({ pregunta, cancelar, borrar }),
+// por props desde el servidor: el del diagnóstico o el de "Terminar llamada".
+export function Confirmar({ abierto, onCancelar, onConfirmar, textos }) {
   const dialogo = useRef(null);
   const titulo = useId();
 

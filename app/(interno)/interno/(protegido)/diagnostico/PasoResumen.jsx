@@ -1,9 +1,7 @@
 "use client";
 
 import { Boton } from "@/app/components/ui/Boton";
-import { TEXTOS } from "@/app/lib/interno/diagnostico/contenido";
-
-const T = TEXTOS.resumen;
+import { useDiagnostico } from "./contexto";
 
 // Que el resumen se lea completo sin desplazarse dentro del campo: una fila
 // por renglón más las que ocupa el texto largo (≈ 40 caracteres a 390 px).
@@ -13,6 +11,7 @@ const filas = (texto) =>
 // Paso 5: el resumen editable y los datos para la propuesta. Los botones de
 // enviar, copiar y empezar de nuevo van en la barra inferior.
 export function PasoResumen({ texto, onEditar, puedeRehacer, onRehacer, datos, copiado, onCopiarDatos, tituloId }) {
+  const T = useDiagnostico().contenido.TEXTOS.resumen;
   return (
     <div className="flex flex-col gap-space-6">
       <div className="flex flex-col gap-space-3">

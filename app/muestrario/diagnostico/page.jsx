@@ -1,4 +1,6 @@
 import { notFound } from "next/navigation";
+import { CONTENIDO_DIAGNOSTICO } from "@/app/lib/interno/diagnostico/contenido";
+import { OFERTAS } from "@/app/lib/interno/diagnostico/ofertas";
 import { GUION } from "@/app/lib/interno/llamada/guion";
 import { BOCETO, EMPRESA_MINIMO } from "@/app/lib/interno/precios-interno";
 import { NICHOS } from "@/app/lib/interno/llamada/nichos";
@@ -15,5 +17,15 @@ export const metadata = {
 
 export default function MuestrarioDiagnostico() {
   if (process.env.NODE_ENV !== "development") notFound();
-  return <Banco contenido={{ guion: GUION, nichos: NICHOS, empresa: { boceto: BOCETO.empresaDesde, minimo: EMPRESA_MINIMO } }} />;
+  return (
+    <Banco
+      textosConfirmar={CONTENIDO_DIAGNOSTICO.TEXTOS.confirmar}
+      contenido={{
+        guion: GUION,
+        nichos: NICHOS,
+        empresa: { boceto: BOCETO.empresaDesde, minimo: EMPRESA_MINIMO },
+        diagnostico: { contenido: CONTENIDO_DIAGNOSTICO, ofertas: OFERTAS },
+      }}
+    />
+  );
 }

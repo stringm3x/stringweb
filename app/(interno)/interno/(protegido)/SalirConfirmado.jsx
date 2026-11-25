@@ -10,7 +10,7 @@ import { borrarLlamada } from "./diagnostico/llamada/useLlamada";
 // antes pregunta (lote 20); sin datos, sale directo. `accion` es la server
 // action salir(). Al salir de verdad, se borran las notas de la llamada que
 // haya en la pestaña (lote 25).
-export function SalirConfirmado({ accion }) {
+export function SalirConfirmado({ accion, textosConfirmar }) {
   const { hayDatos, setHayDatos } = useCaptura();
   const [preguntando, setPreguntando] = useState(false);
   const formulario = useRef(null);
@@ -33,6 +33,7 @@ export function SalirConfirmado({ accion }) {
       </Boton>
       <Confirmar
         abierto={preguntando}
+        textos={textosConfirmar}
         onCancelar={() => setPreguntando(false)}
         onConfirmar={() => {
           setPreguntando(false);

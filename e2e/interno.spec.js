@@ -1,3 +1,5 @@
+import fs from "node:fs";
+import path from "node:path";
 import { test, expect } from "@playwright/test";
 import AxeBuilder from "@axe-core/playwright";
 
@@ -93,4 +95,41 @@ test("las páginas públicas no pasan por el proxy de /interno", async ({ reques
     expect(res.status(), ruta).toBe(200);
     expect(res.headers()["x-robots-tag"], ruta).toBeUndefined();
   }
+});
+
+// Lote 25: los precios internos y los textos de /interno se leen en el
+// servidor después de exigirCarlos() y llegan como props. En el build, ningún
+// archivo estático de JS (que se baja sin sesión) los trae. El webServer de
+// este config arma el build antes de las pruebas.
+test("ningún archivo de .next/static trae precios internos ni textos de /interno", () => {
+  const ESTATICO = path.resolve(".next/static");
+  expect(fs.existsSync(ESTATICO)).toBe(true);
+  const archivos = fs
+    .readdirSync(ESTATICO, { recursive: true })
+    .map((f) => path.join(ESTATICO, f))
+    .filter((f) => fs.statSync(f).isFile() && /\.(js|css|json|txt|map)$/.test(f));
+  expect(archivos.length).toBeGreaterThan(10);
+
+  const PROHIBIDOS = [
+    // Precios que no se publican (precios-interno.js).
+    "$80,000",
+    "$7,500",
+    "BOCETO",
+    "EMPRESA_MINIMO",
+    // Textos de la herramienta del lote 20.
+    "nunca menos de",
+    "Te dejan plantado",
+    "Soy Carlos, el creador de Boaz",
+    "Pro se paga con",
+    // El guion y las fichas del lote 25.
+    "Aguanta el silencio",
+    "Colegiaturas con estado de cuenta",
+    "Mapa de procesos antes de cotizar",
+    "gracias por tu tiempo",
+  ];
+  const hallados = archivos.flatMap((f) => {
+    const texto = fs.readFileSync(f, "utf8");
+    return PROHIBIDOS.filter((p) => texto.includes(p)).map((p) => `${path.relative(ESTATICO, f)}: ${p}`);
+  });
+  expect(hallados).toEqual([]);
 });

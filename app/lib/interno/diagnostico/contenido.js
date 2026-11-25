@@ -1,6 +1,11 @@
 // Contenido de la herramienta de diagnóstico de /interno (lote 20): giros,
 // preguntas, opciones y textos. Literal de docs/textos.md § Interno.
 // Textos finales aprobados por ventas (5 nov).
+//
+// Lote 25: solo datos, sin funciones. Lo lee el servidor de /interno después
+// de exigirCarlos() y llega a la herramienta como props (CONTENIDO_DIAGNOSTICO):
+// no va en ningún archivo estático de JS. Lo que antes era una función ahora
+// es una plantilla con "[clave]" que se llena con llenar().
 
 export const AVISO = "Nada de esto se guarda. Al cerrar la página, se borra.";
 
@@ -14,7 +19,7 @@ export const PASOS = [
 
 export const ORIGENES = ["Visita", "Formulario", "WhatsApp", "Recomendación"];
 
-const SI_AVECES_NO = ["Sí", "A veces", "No"];
+export const SI_AVECES_NO = ["Sí", "A veces", "No"];
 
 // Por giro: S (texto corto opcional), P (Sí / A veces / No; en Empresa,
 // texto), I (texto, tal cual) y la frase del problema en sus palabras.
@@ -64,7 +69,8 @@ export const GIROS = [
     pTexto: true,
     i: "¿Cuántas personas y cuántas horas a la semana se van en eso?",
     // La P de Empresa es abierta: la frase lleva lo que dijo.
-    problema: (dijo) => `Hoy ${dijo} se hace a mano, entre Excel, papel y correo.`,
+    problema: "Hoy [dijo] se hace a mano, entre Excel, papel y correo.",
+    problemaConDicho: true,
   },
   {
     id: "gimnasio",
@@ -77,8 +83,6 @@ export const GIROS = [
     problemaCon: ["A veces", "No"],
   },
 ];
-
-export const giroPorId = (id) => GIROS.find((g) => g.id === id);
 
 // Las respuestas de la N, con la forma que toman en el resumen.
 export const N_OPCIONES = [
@@ -129,23 +133,6 @@ export const COMUNES = {
   },
 };
 
-// Las preguntas del flujo, en orden, para un giro. Cada una con su id, el
-// paso en el que va (2 o 3) y lo que hace falta para mostrarla.
-export function preguntasDelFlujo(giroId, rapida = false) {
-  const giro = giroPorId(giroId);
-  if (!giro) return [];
-  const sGiro = { id: "sGiro", paso: 2, texto: giro.s, tipo: "texto", opcional: true, corto: true };
-  const pGiro = giro.pTexto
-    ? { id: "pGiro", paso: 2, texto: giro.p, tipo: "texto", ayuda: COMUNES.i.ayuda }
-    : { id: "pGiro", paso: 2, texto: giro.p, tipo: "una", opciones: SI_AVECES_NO };
-  const iGiro = { id: "iGiro", paso: 3, texto: giro.i, tipo: "texto", ayuda: COMUNES.i.ayuda };
-  const c = (id, paso) => ({ id, paso, ...COMUNES[id] });
-
-  if (giro.id === "gimnasio") return rapida ? [pGiro, c("n", 3)] : [sGiro, pGiro, iGiro, c("n", 3)];
-  if (rapida) return [pGiro, c("s2", 2), c("n", 3)];
-  return [c("s1", 2), c("s2", 2), c("p1", 2), c("p2", 2), sGiro, pGiro, iGiro, c("i", 3), c("n", 3)];
-}
-
 // Paso 4: siguiente paso.
 export const SIGUIENTES = ["Llamada", "Demo", "Propuesta", "Visita"];
 
@@ -163,15 +150,15 @@ export const TEXTOS = {
   },
   navegacion: { anterior: "Anterior", saltar: "Saltar", siguiente: "Siguiente" },
   nota: "Nota",
-  punto: (n, estado) => `Pregunta ${n}, ${estado}`,
+  punto: "Pregunta [n], [estado]",
   estados: { contestada: "contestada", saltada: "saltada", pendiente: "sin contestar" },
   nivel: {
-    eso: (nivel) => `Eso que me cuentas es ${nivel}`,
+    eso: "Eso que me cuentas es [nivel]",
     cambiar: "Cambiar nivel",
-    cuandoCrezca: (nivel) => `Cuando crezca: ${nivel}`,
-    boceto: (precio) => `Ofrecer boceto · ${precio}`,
-    fundador: ({ mes, meses }) => `Ofrecer precio fundador · ${mes} fijo ${meses} meses`,
-    empresaPrecio: (minimo) => `Se cotiza · nunca menos de ${minimo}`,
+    cuandoCrezca: "Cuando crezca: [nivel]",
+    boceto: "Ofrecer boceto · [precio]",
+    fundador: "Ofrecer precio fundador · [mes] fijo [meses] meses",
+    empresaPrecio: "Se cotiza · nunca menos de [minimo]",
     recordatorioGym: "Pro se paga con 2 o 3 socios que no se van",
     siguiente: "Siguiente paso",
     dia: "¿Qué día?",
@@ -222,20 +209,103 @@ const DUDA = "Cualquier duda, aquí estoy.";
 export const CIERRES = {
   ninguno: `En 2 días hábiles te mando la propuesta por escrito, con lo que incluye y lo que no. ${DUDA}`,
   Llamada: {
-    conDia: (dia) => `Quedamos en hablar ${dia}. ${DUDA}`,
+    conDia: `Quedamos en hablar [dia]. ${DUDA}`,
     sinDia: `¿Qué día te acomoda para seguir platicando? ${DUDA}`,
   },
   Demo: {
-    conDia: (dia) => `Quedamos ${dia} para mostrarte cómo funcionaría. ${DUDA}`,
+    conDia: `Quedamos [dia] para mostrarte cómo funcionaría. ${DUDA}`,
     sinDia: `Me gustaría mostrarte cómo funcionaría en tu negocio. ¿Qué día te acomoda para verlo juntos? ${DUDA}`,
   },
   Propuesta: {
-    conDia: (dia) =>
-      `Quedamos ${dia} para revisar tu propuesta: te la mando antes por escrito, con lo que incluye y lo que no. ${DUDA}`,
+    conDia: `Quedamos [dia] para revisar tu propuesta: te la mando antes por escrito, con lo que incluye y lo que no. ${DUDA}`,
     sinDia: `En 2 días hábiles te mando la propuesta por escrito, con lo que incluye y lo que no, y la revisamos juntos cuando te acomode. ${DUDA}`,
   },
   Visita: {
-    conDia: (dia) => `Paso a verte ${dia}. ${DUDA}`,
+    conDia: `Paso a verte [dia]. ${DUDA}`,
     sinDia: `Me paso a verte para seguir platicando. ¿Qué día y a qué hora te acomoda? ${DUDA}`,
   },
+};
+
+// Nombres de los niveles (antes en nivel.js).
+export const NOMBRES = {
+  responde: "Responde",
+  organiza: "Organiza",
+  automatiza: "Automatiza",
+  controla: "Controla",
+  empresa: "Empresa",
+  boaz: "Boaz Pro",
+};
+
+// Los textos del resumen para WhatsApp y de los datos para la propuesta
+// (antes escritos en resumen.js). Mismas palabras; plantillas con "[clave]".
+export const RESUMEN = {
+  general: {
+    holaCon: "Hola, [nombre]. Soy Carlos, de STRING. Gracias por el tiempo de hoy.",
+    holaSin: "Hola. Soy Carlos, de STRING. Gracias por el tiempo de hoy.",
+    tuNegocio: "tu negocio",
+    teDejo: "Te dejo por escrito lo que platicamos de [negocio]:",
+    teCuesta: "- Me comentaste que esto te cuesta [cuesta]",
+    urge: "Lo que más te urge es [urge]. Para eso te sugiero [nivel]: [linea]",
+    sugiero: "Para lo que me contaste te sugiero [nivel]: [linea]",
+    precioEmpresa:
+      "Por el tamaño, lo cotizo a tu medida después de mapear tus procesos. El cuidado mensual va incluido en la cotización.",
+    precio: "Arranca desde [desde] con IVA incluido, y su cuidado mensual desde [continuidad].",
+    bocetoEmpresa:
+      "Para empezar, el primer paso es el boceto: el mapa de tus procesos y la primera pantalla. Cuesta [boceto] con IVA incluido y se descuenta completo si decides seguir en los 30 días siguientes.",
+    boceto:
+      "Para empezar sin arriesgar, el primer paso es el boceto: el mapa de cómo funciona tu negocio y la primera pantalla de tu sistema. Cuesta [boceto] con IVA incluido y se descuenta completo si decides seguir en los 30 días siguientes.",
+    firma: "Carlos · STRING",
+  },
+  gimnasio: {
+    holaCon: "Hola, [nombre]. Soy Carlos, el creador de Boaz. Gracias por el tiempo de hoy.",
+    holaSin: "Hola. Soy Carlos, el creador de Boaz. Gracias por el tiempo de hoy.",
+    tuGimnasio: "tu gimnasio",
+    meQuedo: "Me quedo con lo que me contaste de [gimnasio]: [principal]",
+    loResuelve: "Eso es justo lo que Boaz resuelve: sabes cuánto entra, quién se te vence y quién dejó de venir.",
+    prueba:
+      "Te propongo probarlo 14 días con Pro completo, sin tarjeta. Yo te ayudo a cargar a tus socios para que lo veas con tus propios datos.",
+    diaCon: "¿Te queda bien [dia] para dejarlo listo juntos?",
+    diaSin: "¿Qué día te queda bien para dejarlo listo juntos?",
+    proCuesta: "Pro cuesta [mes] al mes, IVA incluido.",
+    fundador: "Como eres de los primeros 5 gimnasios, te queda en [mes] al mes, fijo por [meses] meses.",
+    registro: "Si prefieres empezar por tu cuenta: stringwebs.com/gym/registro",
+    firma: "Carlos · Boaz by STRING",
+  },
+  datos: {
+    negocio: "Negocio: [negocio]",
+    dueno: "Dueño: [nombre]",
+    nivelBoaz: "Nivel: [nivel] · [mes] al mes, IVA incluido",
+    fundador: " · precio fundador [mes] fijo [meses] meses",
+    nivelDesde: "Nivel: [nivel] · desde [desde], IVA incluido",
+    nivelCotiza: "Nivel: [nivel] · se cotiza",
+    continuidad: "Continuidad: [nombre], desde [desde] al mes",
+    bocetoSi: "Boceto: sí, [boceto]",
+    bocetoNo: "Boceto: no",
+    problemas: "Problemas:",
+    cuesta: "Le cuesta: [cuesta]",
+    siguiente: "Siguiente paso: [tipo]",
+    siguienteDia: "Siguiente paso: [tipo], [dia]",
+    origen: "Cómo nos conoció: [origen]",
+  },
+};
+
+// Todo junto, para pasarlo como props desde el servidor.
+export const CONTENIDO_DIAGNOSTICO = {
+  AVISO,
+  PASOS,
+  ORIGENES,
+  SI_AVECES_NO,
+  GIROS,
+  N_OPCIONES,
+  N,
+  S2_OPCIONES,
+  S2_SIN_SISTEMA,
+  COMUNES,
+  SIGUIENTES,
+  TEXTOS,
+  LINEA_NIVEL,
+  RAZONES,
+  CIERRES,
+  NOMBRES,
+  RESUMEN,
 };

@@ -1,7 +1,8 @@
 "use client";
 
 import { FiCheck } from "react-icons/fi";
-import { PASOS, TEXTOS } from "@/app/lib/interno/diagnostico/contenido";
+import { llenar } from "@/app/lib/interno/llamada/llenar";
+import { useDiagnostico } from "./contexto";
 
 // Piezas de la herramienta de diagnóstico (lote 20), con los estados de
 // docs/calidad.md § 3. Los colores cambian de golpe; solo se anima el
@@ -99,6 +100,7 @@ export function Interruptor({ encendido, onCambiar, children }) {
 
 // "PASO N DE 5" con la barra de cinco segmentos.
 export function BarraPasos({ paso }) {
+  const { PASOS } = useDiagnostico().contenido;
   return (
     <div className="flex flex-col gap-space-2">
       <p className="font-mono text-etiqueta uppercase text-texto-suave">
@@ -122,6 +124,7 @@ const PUNTO = {
 };
 
 export function Puntos({ estados, actual, onIr }) {
+  const { TEXTOS } = useDiagnostico().contenido;
   return (
     <ol aria-label="Preguntas" className="flex flex-wrap gap-1.5">
       {estados.map((estado, i) => {
@@ -131,7 +134,7 @@ export function Puntos({ estados, actual, onIr }) {
             <button
               type="button"
               aria-current={esActual ? "step" : undefined}
-              aria-label={TEXTOS.punto(i + 1, TEXTOS.estados[estado])}
+              aria-label={llenar(TEXTOS.punto, { n: i + 1, estado: TEXTOS.estados[estado] })}
               onClick={() => onIr(i)}
               className={`flex h-9 w-9 items-center justify-center rounded-full border-2 font-mono text-[13px] font-medium transition-transform duration-rapido active:scale-[.94] motion-reduce:active:scale-100 ${
                 PUNTO[estado]
@@ -183,6 +186,7 @@ export function Abierta({ id, pregunta, valor, onCambiar, corto = false, ayuda, 
 
 // Nota opcional por pregunta.
 export function Nota({ id, valor, onCambiar }) {
+  const { TEXTOS } = useDiagnostico().contenido;
   return (
     <div className="flex flex-col gap-space-2">
       <label htmlFor={id} className="text-[14px] font-medium text-texto">

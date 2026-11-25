@@ -23,11 +23,13 @@ import { hayDatosLlamada, useLlamada } from "./useLlamada";
 // "Gimnasio → Boaz Pro" monta la herramienta del lote 20 con el giro fijo.
 // `contenido.empresa` trae la nota de Empresa (boceto y mínimo) de
 // precios-interno.js, ya leída en el servidor: solo la ve Carlos.
+// `contenido.diagnostico` = { contenido, ofertas } de la herramienta del lote
+// 20, también leídos en el servidor (lote 25).
 
 const COMPACTO = "w-full !px-3";
 
 export function Llamada({ contenido }) {
-  const { guion, nichos, empresa } = contenido;
+  const { guion, nichos, empresa, diagnostico } = contenido;
   const T = guion.TEXTOS;
   const { llamada, cambiar, terminar, lista } = useLlamada();
   const [gimnasio, setGimnasio] = useState(false);
@@ -67,7 +69,12 @@ export function Llamada({ contenido }) {
   }, [pantalla]);
 
   if (gimnasio) {
-    return <Diagnostico giroFijo="gimnasio" onVolver={() => setGimnasio(false)} textoVolver={T.gimnasio.volver} />;
+    return <Diagnostico
+        diagnostico={diagnostico}
+        giroFijo="gimnasio"
+        onVolver={() => setGimnasio(false)}
+        textoVolver={T.gimnasio.volver}
+      />;
   }
 
   // Hasta leer la pestaña no se pinta nada: así no parpadea el inicio vacío.

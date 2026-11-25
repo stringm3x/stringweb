@@ -1,6 +1,14 @@
 import { describe, expect, it } from "vitest";
-import { N } from "./contenido";
-import { armarResumen, datosPropuesta, enlaceWhatsApp, formatoDia, problemas } from "./resumen";
+import { CONTENIDO_DIAGNOSTICO, N } from "./contenido";
+import { OFERTAS } from "./ofertas";
+import { armarResumen as armar, datosPropuesta as datos, enlaceWhatsApp, formatoDia, problemas as listaProblemas } from "./resumen";
+
+// Lote 25: el contenido y las ofertas llegan como argumento (props en la
+// herramienta); aquí, los mismos que lee el servidor.
+const C = { contenido: CONTENIDO_DIAGNOSTICO, ofertas: OFERTAS };
+const armarResumen = (estado) => armar(estado, C);
+const datosPropuesta = (estado) => datos(estado, C);
+const problemas = (estado) => listaProblemas(estado, C);
 
 const r = (valores) =>
   Object.fromEntries(

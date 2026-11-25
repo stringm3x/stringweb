@@ -7,12 +7,12 @@ import { Llamada } from "@/app/(interno)/interno/(protegido)/diagnostico/llamada
 
 // La misma barra y la misma herramienta de /interno, sin sesión. "Salir"
 // no cierra nada aquí: solo avisa que se habría salido (texto de ejemplo).
-export function Banco({ contenido }) {
+export function Banco({ contenido, textosConfirmar }) {
   const [salio, setSalio] = useState(false);
   return (
     <div data-theme="noche" className="min-h-screen bg-fondo text-texto">
       <Captura>
-        <BarraInterna salir={() => setSalio(true)} />
+        <BarraInterna salir={() => setSalio(true)} textosConfirmar={textosConfirmar} />
         <main className="mx-auto w-full max-w-[640px] px-4 py-space-5">
           {salio && (
             <p role="status" className="mb-space-3 font-mono text-etiqueta uppercase text-texto-suave">

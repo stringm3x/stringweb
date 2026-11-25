@@ -3,11 +3,12 @@
 import { useEffect, useMemo, useRef, useState } from "react";
 import { Boton } from "@/app/components/ui/Boton";
 import { Campo } from "@/app/components/ui/Campo";
-import { AVISO, GIROS, ORIGENES, PASOS, TEXTOS, preguntasDelFlujo } from "@/app/lib/interno/diagnostico/contenido";
+import { preguntasDelFlujo } from "@/app/lib/interno/diagnostico/flujo";
 import { conBoceto, sugerirNivel } from "@/app/lib/interno/diagnostico/nivel";
 import { armarResumen, datosPropuesta, digitos, enlaceWhatsApp } from "@/app/lib/interno/diagnostico/resumen";
 import { useCaptura } from "../Captura";
 import { Confirmar } from "./Confirmar";
+import { ContextoDiagnostico } from "./contexto";
 import { PasoNivel } from "./PasoNivel";
 import { PasoResumen } from "./PasoResumen";
 import { Abierta, BarraAcciones, BarraPasos, Elecciones, Nota, Puntos } from "./piezas";
@@ -16,6 +17,10 @@ import { usePantallaEncendida } from "./usePantallaEncendida";
 // La herramienta de diagnóstico (lote 20, docs/textos.md § Interno). Todo
 // vive en este estado: no se guarda nada, no se manda nada al servidor y,
 // una vez cargada, funciona sin señal.
+//
+// Lote 25: `diagnostico` = { contenido, ofertas } llega por props desde el
+// servidor (CONTENIDO_DIAGNOSTICO y ofertas.js, después de exigirCarlos()):
+// los textos, el boceto y el mínimo de Empresa no van en el JS del cliente.
 
 const VACIO = {
   paso: 1,
@@ -42,8 +47,6 @@ function hayDatos(e, giroFijo) {
   );
 }
 
-const GIRO_NOMBRES = GIROS.map((g) => g.nombre);
-const T = TEXTOS;
 const COMPACTO = "w-full !px-3";
 
 // giroFijo (lote 25): el atajo "Gimnasio → Boaz Pro" de la llamada entra con
@@ -51,7 +54,10 @@ const COMPACTO = "w-full !px-3";
 // ocultos). onVolver regresa al inicio de la llamada desde el paso 1.
 const vacioCon = (giroFijo) => (giroFijo ? { ...VACIO, prospecto: { ...VACIO.prospecto, giro: giroFijo } } : VACIO);
 
-export function Diagnostico({ giroFijo, onVolver, textoVolver }) {
+export function Diagnostico({ diagnostico, giroFijo, onVolver, textoVolver }) {
+  const { contenido, ofertas } = diagnostico;
+  const { AVISO, GIROS, ORIGENES, PASOS, TEXTOS: T } = contenido;
+  const GIRO_NOMBRES = GIROS.map((g) => g.nombre);
   const [e, setE] = useState(() => vacioCon(giroFijo));
   const [confirmando, setConfirmando] = useState(false);
   const [copiado, setCopiado] = useState(null); // "resumen" | "datos"
@@ -61,18 +67,18 @@ export function Diagnostico({ giroFijo, onVolver, textoVolver }) {
 
   const giro = e.prospecto.giro;
   const gimnasio = giro === "gimnasio";
-  const flujo = useMemo(() => preguntasDelFlujo(giro, e.rapida), [giro, e.rapida]);
-  const sugerido = useMemo(() => sugerirNivel({ giro, respuestas: e.respuestas }), [giro, e.respuestas]);
+  const flujo = useMemo(() => preguntasDelFlujo(contenido, giro, e.rapida), [contenido, giro, e.rapida]);
+  const sugerido = useMemo(() => sugerirNivel({ giro, respuestas: e.respuestas }, contenido), [giro, e.respuestas, contenido]);
   const nivel = gimnasio ? "boaz" : e.nivelElegido || sugerido.nivel;
   const estadoResumen = {
     prospecto: e.prospecto,
     respuestas: e.respuestas,
     nivel,
-    boceto: e.boceto && conBoceto(nivel),
+    boceto: e.boceto && conBoceto(nivel, ofertas),
     fundador: gimnasio && e.fundador,
     siguiente: e.siguiente,
   };
-  const generado = giro ? armarResumen(estadoResumen) : "";
+  const generado = giro ? armarResumen(estadoResumen, diagnostico) : "";
   const resumen = e.editado ? e.editado.texto : generado;
   const hay = hayDatos(e, giroFijo);
 
@@ -138,7 +144,7 @@ export function Diagnostico({ giroFijo, onVolver, textoVolver }) {
       return { ...prev, dejadas: dejar(prev), paso: 1 };
     });
   const empezar = (rapida) => {
-    const nuevo = preguntasDelFlujo(giro, rapida);
+    const nuevo = preguntasDelFlujo(contenido, giro, rapida);
     setE((prev) => ({ ...prev, rapida, actual: 0, paso: nuevo[0].paso, editado: null }));
   };
 
@@ -171,193 +177,200 @@ export function Diagnostico({ giroFijo, onVolver, textoVolver }) {
   );
 
   return (
-    <div className="flex flex-col gap-space-5 pb-[220px]">
-      <h1 className="sr-only">Diagnóstico</h1>
-      <p className="sticky top-0 z-10 -mx-4 -mt-space-5 border-b border-borde bg-fondo px-4 py-3 text-pequeno text-texto-suave">{AVISO}</p>
+    <ContextoDiagnostico.Provider value={diagnostico}>
+      <div className="flex flex-col gap-space-5 pb-[220px]">
+        <h1 className="sr-only">Diagnóstico</h1>
+        <p className="sticky top-0 z-10 -mx-4 -mt-space-5 border-b border-borde bg-fondo px-4 py-3 text-pequeno text-texto-suave">{AVISO}</p>
 
-      <div className="flex flex-col gap-space-4">
-        <BarraPasos paso={e.paso} />
-        {tituloPaso}
-      </div>
-
-      {e.paso === 1 && onVolver && (
-        <Boton variante="texto" onClick={onVolver} flecha={false} className="-mt-space-3 self-start">
-          {textoVolver}
-        </Boton>
-      )}
-
-      {e.paso === 1 && (
-        <div className="flex flex-col gap-space-5">
-          <Campo
-            id="nombre"
-            etiqueta={T.prospecto.nombre}
-            autoComplete="off"
-            value={e.prospecto.nombre}
-            onChange={(ev) => cambiarProspecto("nombre", ev.target.value)}
-          />
-          <Campo
-            id="negocio"
-            etiqueta={T.prospecto.negocio}
-            autoComplete="off"
-            value={e.prospecto.negocio}
-            onChange={(ev) => cambiarProspecto("negocio", ev.target.value)}
-          />
-          <div className="flex flex-col gap-space-2">
-            <Campo
-              id="whatsapp"
-              etiqueta={T.prospecto.whatsapp}
-              type="tel"
-              inputMode="tel"
-              autoComplete="off"
-              value={e.prospecto.whatsapp}
-              onChange={(ev) => cambiarProspecto("whatsapp", ev.target.value)}
-              aria-describedby={whatsappIncompleto ? "whatsapp-aviso" : undefined}
-            />
-            {whatsappIncompleto && (
-              <p id="whatsapp-aviso" className="text-pequeno text-texto-suave">
-                {T.prospecto.whatsappAviso}
-              </p>
-            )}
-          </div>
-          {!giroFijo && (
-            <Elecciones
-              nombre="giro"
-              legenda={T.prospecto.giro}
-              opciones={GIRO_NOMBRES}
-              valor={GIROS.find((g) => g.id === giro)?.nombre}
-              onCambiar={(nombre) => cambiarProspecto("giro", GIROS.find((g) => g.nombre === nombre).id)}
-            />
-          )}
-          <Elecciones
-            nombre="origen"
-            legenda={T.prospecto.origen}
-            opciones={ORIGENES}
-            valor={e.prospecto.origen}
-            permiteVacio
-            onCambiar={(origen) => cambiarProspecto("origen", origen)}
-          />
+        <div className="flex flex-col gap-space-4">
+          <BarraPasos paso={e.paso} />
+          {tituloPaso}
         </div>
-      )}
 
-      {(e.paso === 2 || e.paso === 3) && pregunta && (
-        <div className="flex flex-col gap-space-5">
-          <Puntos estados={estados} actual={e.actual} onIr={irAPregunta} />
-          {pregunta.tipo === "texto" ? (
-            <Abierta
-              key={pregunta.id}
-              id={`r-${pregunta.id}`}
-              pregunta={pregunta.texto}
-              valor={e.respuestas[pregunta.id]?.valor}
-              onCambiar={(valor) => responder(pregunta.id, { valor })}
-              corto={pregunta.corto}
-              ayuda={pregunta.ayuda}
-              etiquetaRef={titulo}
-            />
-          ) : (
-            <Elecciones
-              key={pregunta.id}
-              nombre={`r-${pregunta.id}`}
-              legenda={pregunta.texto}
-              opciones={pregunta.opciones}
-              valor={e.respuestas[pregunta.id]?.valor}
-              varias={pregunta.tipo === "varias"}
-              permiteVacio
-              grande
-              legendaRef={titulo}
-              onCambiar={(valor) => responder(pregunta.id, { valor })}
-            />
-          )}
-          <Nota
-            id={`nota-${pregunta.id}`}
-            valor={e.respuestas[pregunta.id]?.nota}
-            onCambiar={(nota) => responder(pregunta.id, { nota })}
-          />
-        </div>
-      )}
+        {e.paso === 1 && onVolver && (
+          <Boton variante="texto" onClick={onVolver} flecha={false} className="-mt-space-3 self-start">
+            {textoVolver}
+          </Boton>
+        )}
 
-      {e.paso === 4 && (
-        <PasoNivel
-          nivel={nivel}
-          sugerido={sugerido}
-          gimnasio={gimnasio}
-          boceto={e.boceto}
-          fundador={e.fundador}
-          siguiente={e.siguiente}
-          onCambiar={(parcial) => cambiar(parcial)}
-        />
-      )}
-
-      {e.paso === 5 && (
-        <Boton variante="texto" onClick={regresar} flecha={false} className="-mt-space-3 self-start">
-          {T.navegacion.anterior}
-        </Boton>
-      )}
-
-      {e.paso === 5 && (
-        <PasoResumen
-          tituloId="titulo-paso"
-          texto={resumen}
-          onEditar={(texto) => cambiar({ editado: { texto, base: e.editado?.base ?? generado } })}
-          puedeRehacer={!!e.editado && e.editado.base !== generado}
-          onRehacer={() => cambiar({ editado: null })}
-          datos={datosPropuesta(estadoResumen)}
-          copiado={copiado === "datos"}
-          onCopiarDatos={() => copiar("datos", datosPropuesta(estadoResumen))}
-        />
-      )}
-
-      <BarraAcciones>
         {e.paso === 1 && (
-          <>
-            <Boton onClick={() => empezar(false)} disabled={!giro} className="w-full">
-              {T.prospecto.empezar}
-            </Boton>
-            <Boton variante="secundario" onClick={() => empezar(true)} disabled={!giro} className="w-full">
-              {T.prospecto.rapida}
-            </Boton>
-          </>
-        )}
-        {(e.paso === 2 || e.paso === 3) && (
-          <div className="grid grid-cols-3 gap-space-2">
-            <Boton variante="secundario" onClick={regresar} className={COMPACTO}>
-              {T.navegacion.anterior}
-            </Boton>
-            <Boton variante="secundario" onClick={saltar} className={COMPACTO}>
-              {T.navegacion.saltar}
-            </Boton>
-            <Boton onClick={avanzar} className={COMPACTO}>
-              {T.navegacion.siguiente}
-            </Boton>
+          <div className="flex flex-col gap-space-5">
+            <Campo
+              id="nombre"
+              etiqueta={T.prospecto.nombre}
+              autoComplete="off"
+              value={e.prospecto.nombre}
+              onChange={(ev) => cambiarProspecto("nombre", ev.target.value)}
+            />
+            <Campo
+              id="negocio"
+              etiqueta={T.prospecto.negocio}
+              autoComplete="off"
+              value={e.prospecto.negocio}
+              onChange={(ev) => cambiarProspecto("negocio", ev.target.value)}
+            />
+            <div className="flex flex-col gap-space-2">
+              <Campo
+                id="whatsapp"
+                etiqueta={T.prospecto.whatsapp}
+                type="tel"
+                inputMode="tel"
+                autoComplete="off"
+                value={e.prospecto.whatsapp}
+                onChange={(ev) => cambiarProspecto("whatsapp", ev.target.value)}
+                aria-describedby={whatsappIncompleto ? "whatsapp-aviso" : undefined}
+              />
+              {whatsappIncompleto && (
+                <p id="whatsapp-aviso" className="text-pequeno text-texto-suave">
+                  {T.prospecto.whatsappAviso}
+                </p>
+              )}
+            </div>
+            {!giroFijo && (
+              <Elecciones
+                nombre="giro"
+                legenda={T.prospecto.giro}
+                opciones={GIRO_NOMBRES}
+                valor={GIROS.find((g) => g.id === giro)?.nombre}
+                onCambiar={(nombre) => cambiarProspecto("giro", GIROS.find((g) => g.nombre === nombre).id)}
+              />
+            )}
+            <Elecciones
+              nombre="origen"
+              legenda={T.prospecto.origen}
+              opciones={ORIGENES}
+              valor={e.prospecto.origen}
+              permiteVacio
+              onCambiar={(origen) => cambiarProspecto("origen", origen)}
+            />
           </div>
         )}
+
+        {(e.paso === 2 || e.paso === 3) && pregunta && (
+          <div className="flex flex-col gap-space-5">
+            <Puntos estados={estados} actual={e.actual} onIr={irAPregunta} />
+            {pregunta.tipo === "texto" ? (
+              <Abierta
+                key={pregunta.id}
+                id={`r-${pregunta.id}`}
+                pregunta={pregunta.texto}
+                valor={e.respuestas[pregunta.id]?.valor}
+                onCambiar={(valor) => responder(pregunta.id, { valor })}
+                corto={pregunta.corto}
+                ayuda={pregunta.ayuda}
+                etiquetaRef={titulo}
+              />
+            ) : (
+              <Elecciones
+                key={pregunta.id}
+                nombre={`r-${pregunta.id}`}
+                legenda={pregunta.texto}
+                opciones={pregunta.opciones}
+                valor={e.respuestas[pregunta.id]?.valor}
+                varias={pregunta.tipo === "varias"}
+                permiteVacio
+                grande
+                legendaRef={titulo}
+                onCambiar={(valor) => responder(pregunta.id, { valor })}
+              />
+            )}
+            <Nota
+              id={`nota-${pregunta.id}`}
+              valor={e.respuestas[pregunta.id]?.nota}
+              onCambiar={(nota) => responder(pregunta.id, { nota })}
+            />
+          </div>
+        )}
+
         {e.paso === 4 && (
-          <div className="grid grid-cols-2 gap-space-2">
-            <Boton variante="secundario" onClick={regresar} className={COMPACTO}>
-              {T.navegacion.anterior}
-            </Boton>
-            <Boton onClick={() => cambiar({ paso: 5 })} className={COMPACTO}>
-              {T.navegacion.siguiente}
-            </Boton>
-          </div>
+          <PasoNivel
+            nivel={nivel}
+            sugerido={sugerido}
+            gimnasio={gimnasio}
+            boceto={e.boceto}
+            fundador={e.fundador}
+            siguiente={e.siguiente}
+            onCambiar={(parcial) => cambiar(parcial)}
+          />
         )}
+
         {e.paso === 5 && (
-          <>
-            <Boton href={enlaceWhatsApp(e.prospecto.whatsapp, resumen)} className="w-full">
-              {T.resumen.abrir}
-            </Boton>
-            <div className="grid grid-cols-2 gap-space-2">
-              <Boton variante="secundario" onClick={() => copiar("resumen", resumen)} className={COMPACTO}>
-                <span aria-live="polite">{copiado === "resumen" ? T.resumen.copiado : T.resumen.copiar}</span>
+          <Boton variante="texto" onClick={regresar} flecha={false} className="-mt-space-3 self-start">
+            {T.navegacion.anterior}
+          </Boton>
+        )}
+
+        {e.paso === 5 && (
+          <PasoResumen
+            tituloId="titulo-paso"
+            texto={resumen}
+            onEditar={(texto) => cambiar({ editado: { texto, base: e.editado?.base ?? generado } })}
+            puedeRehacer={!!e.editado && e.editado.base !== generado}
+            onRehacer={() => cambiar({ editado: null })}
+            datos={datosPropuesta(estadoResumen, diagnostico)}
+            copiado={copiado === "datos"}
+            onCopiarDatos={() => copiar("datos", datosPropuesta(estadoResumen, diagnostico))}
+          />
+        )}
+
+        <BarraAcciones>
+          {e.paso === 1 && (
+            <>
+              <Boton onClick={() => empezar(false)} disabled={!giro} className="w-full">
+                {T.prospecto.empezar}
               </Boton>
-              <Boton variante="secundario" onClick={nuevoDiagnostico} className={COMPACTO}>
-                {T.resumen.nuevo}
+              <Boton variante="secundario" onClick={() => empezar(true)} disabled={!giro} className="w-full">
+                {T.prospecto.rapida}
+              </Boton>
+            </>
+          )}
+          {(e.paso === 2 || e.paso === 3) && (
+            <div className="grid grid-cols-3 gap-space-2">
+              <Boton variante="secundario" onClick={regresar} className={COMPACTO}>
+                {T.navegacion.anterior}
+              </Boton>
+              <Boton variante="secundario" onClick={saltar} className={COMPACTO}>
+                {T.navegacion.saltar}
+              </Boton>
+              <Boton onClick={avanzar} className={COMPACTO}>
+                {T.navegacion.siguiente}
               </Boton>
             </div>
-          </>
-        )}
-      </BarraAcciones>
+          )}
+          {e.paso === 4 && (
+            <div className="grid grid-cols-2 gap-space-2">
+              <Boton variante="secundario" onClick={regresar} className={COMPACTO}>
+                {T.navegacion.anterior}
+              </Boton>
+              <Boton onClick={() => cambiar({ paso: 5 })} className={COMPACTO}>
+                {T.navegacion.siguiente}
+              </Boton>
+            </div>
+          )}
+          {e.paso === 5 && (
+            <>
+              <Boton href={enlaceWhatsApp(e.prospecto.whatsapp, resumen)} className="w-full">
+                {T.resumen.abrir}
+              </Boton>
+              <div className="grid grid-cols-2 gap-space-2">
+                <Boton variante="secundario" onClick={() => copiar("resumen", resumen)} className={COMPACTO}>
+                  <span aria-live="polite">{copiado === "resumen" ? T.resumen.copiado : T.resumen.copiar}</span>
+                </Boton>
+                <Boton variante="secundario" onClick={nuevoDiagnostico} className={COMPACTO}>
+                  {T.resumen.nuevo}
+                </Boton>
+              </div>
+            </>
+          )}
+        </BarraAcciones>
 
-      <Confirmar abierto={confirmando} onCancelar={() => setConfirmando(false)} onConfirmar={borrarTodo} />
-    </div>
+        <Confirmar
+          abierto={confirmando}
+          textos={T.confirmar}
+          onCancelar={() => setConfirmando(false)}
+          onConfirmar={borrarTodo}
+        />
+      </div>
+    </ContextoDiagnostico.Provider>
   );
 }
