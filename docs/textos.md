@@ -1219,6 +1219,9 @@ datos? (solo si ya tiene sistema) · Fecha y hora de la presentación de la prop
 - La frase: "O sea, más o menos $X al mes y unas Y horas tuyas a la semana. ¿Así lo ves?". En desarrolladoras y B2B
   dice "unas Y horas de tu equipo a la semana" (horas × personas, sin ×4). En tiendas, "unas Y horas tuyas al día".
 - Hora en el resumen: "a las 5 pm" / "a las 5:30 pm".
+- Con datos incompletos (aprobado el 25 nov): lo que falta no sale. Solo horas: "O sea, unas Y horas tuyas a la
+  semana. ¿Así lo ves?"; solo dinero: "O sea, más o menos $X al mes. ¿Así lo ves?"; solo deuda: "O sea, hoy te deben
+  unos $Z. ¿Así lo ves?". Sin cifras no hay frase; sale "Captura sus cifras para armar la frase." (TODO(textos)).
 
 ### Textos de pantalla (TODO(textos): propuestos, por aprobar)
 

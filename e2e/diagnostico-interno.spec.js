@@ -201,7 +201,6 @@ test("guía por tramos: frases, preguntas con campo, Situación según el tipo d
   await expect(page.getByRole("heading", { level: 2, name: "Siguiente paso" })).toBeFocused();
   await expect(page.getByText("Gracias, Mariana. Me llevo tarea.")).toBeVisible();
   await expect(page.getByText("hecha para tu Academia Sol.", { exact: false })).toBeVisible();
-  await expect(boton(page, "Siguiente")).toBeDisabled();
   await sinFallasAxe(page, "tramo 5");
 
   // Las notas siguen al volver y tras recargar; la del otro tipo no se pierde.
@@ -259,6 +258,91 @@ test("objeciones del nicho: se abren y se cierran, con axe", async ({ page }) =>
   await page.keyboard.press("Escape");
   await expect(dialogo).toBeHidden();
   await expect(boton(page, "Objeciones")).toBeFocused();
+});
+
+test("calculadora, caso Mariana: 120 alumnos, $900, 4 bajas al mes, 6 h a la semana, con axe", async ({ page }) => {
+  await empezarLlamada(page);
+  await tramo(page, 2).click();
+  await page.getByLabel("¿Cuántos alumnos y maestros tienes, y en cuántos grupos?").fill("120 alumnos, 6 maestros, 10 grupos");
+  await tramo(page, 3).click();
+  await expect(page.getByText("Captura sus cifras para armar la frase.")).toBeVisible();
+  await page.getByLabel("Colegiatura al mes").fill("900");
+  await page.getByLabel("Alumnos que se van al mes").fill("4");
+  await page.getByLabel("Horas a la semana en cobrar y confirmar").fill("6");
+  const desglose = page.getByRole("definition");
+  await expect(page.getByText("“O sea, más o menos $3,600 al mes y unas 6 horas tuyas a la semana. ¿Así lo ves?”")).toBeVisible();
+  await expect(desglose.filter({ hasText: "$3,600 al mes" })).toHaveCount(1);
+  await expect(desglose.filter({ hasText: "$43,200" })).toHaveCount(1);
+  await expect(desglose.filter({ hasText: /^24$/ })).toHaveCount(1);
+  await sinFallasAxe(page, "calculadora");
+
+  // "Él lo dijo": los interesados solo cuentan con la casilla.
+  await page.getByLabel("Interesados que no inscriben al mes").fill("2");
+  await expect(page.getByText("más o menos $3,600 al mes", { exact: false })).toBeVisible();
+  await page.getByRole("switch", { name: /Él lo dijo/ }).check({ force: true });
+  await expect(page.getByText("más o menos $5,400 al mes", { exact: false })).toBeVisible();
+  await page.getByRole("switch", { name: /Él lo dijo/ }).uncheck({ force: true });
+
+  // La deuda va aparte: no cambia el mes ni el año.
+  await page.getByLabel("Lo que le deben hoy").fill("18,000");
+  await expect(
+    page.getByText("“O sea, más o menos $3,600 al mes y unas 6 horas tuyas a la semana, y hoy te deben unos $18,000. ¿Así lo ves?”"),
+  ).toBeVisible();
+  await expect(desglose.filter({ hasText: "$43,200" })).toHaveCount(1);
+  await page.getByLabel("Lo que le deben hoy").fill("");
+
+  // Tras recargar, las cifras siguen.
+  await page.reload();
+  await expect(page.getByLabel("Colegiatura al mes")).toHaveValue("900");
+  await expect(page.getByText("más o menos $3,600 al mes", { exact: false })).toBeVisible();
+});
+
+test("prioridad → pantalla de ejemplo, y nivel solo para ti (si quedan dos, el más chico)", async ({ page }) => {
+  await empezarLlamada(page);
+  await tramo(page, 4).click();
+  await elegir(page, "las bajas");
+  await expect(page.getByText("Alumnos en riesgo")).toBeVisible();
+  await elegir(page, "cobrar");
+  await expect(page.getByText("Colegiaturas con estado de cuenta")).toBeVisible();
+  await expect(page.getByText("Alumnos en riesgo")).toHaveCount(0);
+  await sinFallasAxe(page, "prioridad");
+
+  await tramo(page, 5).click();
+  await siguiente(page);
+  await expect(page.getByRole("heading", { level: 2, name: "Solo para ti" })).toBeFocused();
+  await expect(page.getByText("Marca lo que quiere para sugerir un nivel.")).toBeVisible();
+  await elegir(page, "Tiene varias sedes, quiere panel de sus números o tienda de uniformes");
+  const sugerido = page.getByRole("region", { name: "Nivel sugerido" });
+  await expect(sugerido.getByText("Controla", { exact: true })).toBeVisible();
+  // Con paréntesis: por su nombre, no con la expresión de elegir().
+  await page.getByRole("checkbox", { name: /^Quiere que el sistema cobre, recuerde y avise solo/ }).check({ force: true });
+  await expect(sugerido.getByText("Automatiza", { exact: true })).toBeVisible();
+  // Organiza + Automatiza (sin Controla) → Organiza, el más chico.
+  await elegir(page, "Tiene varias sedes, quiere panel de sus números o tienda de uniformes");
+  await elegir(page, "Quiere en un solo lugar interesados, alumnos y cobros");
+  await expect(sugerido.getByText("Organiza", { exact: true })).toBeVisible();
+  await expect(sugerido.getByText("Automatiza", { exact: true })).toHaveCount(0);
+  // Ningún "Desde" ni precio en la sugerencia de una academia.
+  await expect(sugerido).not.toContainText("$");
+  await sinFallasAxe(page, "nivel");
+
+  await boton(page, "Anterior").click();
+  await expect(page.getByRole("heading", { level: 2, name: "Siguiente paso" })).toBeVisible();
+});
+
+test("nivel en desarrolladoras: Controla de caso típico; Empresa con su nota y su mínimo", async ({ page }) => {
+  await empezarLlamada(page, "Desarrolladoras", { negocio: "Lomas del Valle", dueno: "Ricardo" });
+  await tramo(page, 5).click();
+  await siguiente(page);
+  const sugerido = page.getByRole("region", { name: "Nivel sugerido" });
+  await expect(sugerido.getByText("Controla", { exact: true })).toBeVisible();
+  await expect(sugerido.getByText("Caso típico")).toBeVisible();
+  await expect(sugerido).not.toContainText("$");
+  await elegir(page, "Tiene varios desarrollos, equipo grande o necesita conectarse con sus sistemas");
+  await expect(sugerido.getByText("Empresa", { exact: true })).toBeVisible();
+  await expect(sugerido.getByText("Mapa de procesos antes de cotizar · boceto desde $7,500")).toBeVisible();
+  await expect(sugerido.getByText("Se cotiza · nunca menos de $80,000")).toBeVisible();
+  await sinFallasAxe(page, "nivel empresa");
 });
 
 test("atajo a gimnasio: sus 3 preguntas y la N, Boaz Pro con fundador y recordatorio", async ({ page }) => {

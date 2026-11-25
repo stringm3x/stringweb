@@ -1,5 +1,6 @@
 import { notFound } from "next/navigation";
 import { GUION } from "@/app/lib/interno/llamada/guion";
+import { BOCETO, EMPRESA_MINIMO } from "@/app/lib/interno/precios-interno";
 import { NICHOS } from "@/app/lib/interno/llamada/nichos";
 import { Banco } from "./Banco";
 
@@ -14,5 +15,5 @@ export const metadata = {
 
 export default function MuestrarioDiagnostico() {
   if (process.env.NODE_ENV !== "development") notFound();
-  return <Banco contenido={{ guion: GUION, nichos: NICHOS }} />;
+  return <Banco contenido={{ guion: GUION, nichos: NICHOS, empresa: { boceto: BOCETO.empresaDesde, minimo: EMPRESA_MINIMO } }} />;
 }

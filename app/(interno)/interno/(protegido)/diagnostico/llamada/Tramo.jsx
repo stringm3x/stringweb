@@ -2,7 +2,9 @@
 
 import { llenar } from "@/app/lib/interno/llamada/llenar";
 import { Elecciones } from "../piezas";
+import { Calculadora } from "./Calculadora";
 import { Pregunta } from "./Pregunta";
+import { Prioridad } from "./Prioridad";
 import { Recordatorios } from "./Recordatorios";
 
 // Un tramo de la guía (lote 25): las frases del guion común y, según el
@@ -24,7 +26,7 @@ function Bloque({ titulo, children }) {
   );
 }
 
-export function Tramo({ tramo, nicho, llamada, guion, onNota, onTipo, tituloRef }) {
+export function Tramo({ tramo, nicho, llamada, guion, onNota, onTipo, onCuenta, onPrioridad, tituloRef }) {
   const T = guion.TEXTOS.tramos;
   const valores = { dueño: llamada.dueno, negocio: llamada.negocio };
   const nota = (id) => llamada.notas[id];
@@ -56,6 +58,14 @@ export function Tramo({ tramo, nicho, llamada, guion, onNota, onTipo, tituloRef 
               valor={nota(`g-${f.id}`)}
               onCambiar={(v) => onNota(`g-${f.id}`, v)}
             />
+            {f.id === "resolver" && (
+              <Prioridad
+                nicho={nicho}
+                valor={llamada.prioridad[nicho.id] ?? ""}
+                onCambiar={onPrioridad}
+                textos={guion.TEXTOS.prioridad}
+              />
+            )}
             {f.tipoDueno && (
               <Elecciones
                 nombre="tipo-tramo"
@@ -91,6 +101,12 @@ export function Tramo({ tramo, nicho, llamada, guion, onNota, onTipo, tituloRef 
         <>
           <Bloque titulo={T.problema}>{preguntas(nicho.problema, "prob")}</Bloque>
           <Bloque titulo={T.implicacion}>{preguntas(nicho.implicacion, "imp")}</Bloque>
+          <Calculadora
+            nicho={nicho}
+            entradas={llamada.cuenta[nicho.id] ?? {}}
+            onCambiar={onCuenta}
+            textos={guion.TEXTOS.cuenta}
+          />
         </>
       )}
 

@@ -8,6 +8,7 @@ import { Diagnostico } from "../Diagnostico";
 import { BarraAcciones } from "../piezas";
 import { usePantallaEncendida } from "../usePantallaEncendida";
 import { Inicio } from "./Inicio";
+import { NivelNicho } from "./NivelNicho";
 import { Objeciones } from "./Objeciones";
 import { Reloj, tramoDelMinuto, useMinuto } from "./Reloj";
 import { Tramo } from "./Tramo";
@@ -18,11 +19,13 @@ import { hayDatosLlamada, useLlamada } from "./useLlamada";
 // (guion y fichas) llega como props desde el servidor, después de
 // exigirCarlos(). Las notas viven solo en esta pestaña (useLlamada).
 // "Gimnasio → Boaz Pro" monta la herramienta del lote 20 con el giro fijo.
+// `contenido.empresa` trae la nota de Empresa (boceto y mínimo) de
+// precios-interno.js, ya leída en el servidor: solo la ve Carlos.
 
 const COMPACTO = "w-full !px-3";
 
 export function Llamada({ contenido }) {
-  const { guion, nichos } = contenido;
+  const { guion, nichos, empresa } = contenido;
   const T = guion.TEXTOS;
   const { llamada, cambiar, terminar, lista } = useLlamada();
   const [gimnasio, setGimnasio] = useState(false);
@@ -72,11 +75,16 @@ export function Llamada({ contenido }) {
   const delReloj = tramoDelMinuto(guion.TRAMOS, minuto);
   const ultimo = guion.TRAMOS.length - 1;
   const enLlamada = llamada.pantalla === "llamada" && tramo && nicho;
+  const enNivel = llamada.pantalla === "nivel" && nicho;
+  const enCurso = enLlamada || enNivel;
 
   const empezar = () => cambiar({ pantalla: "llamada", tramo: 0, inicio: llamada.inicio ?? Date.now() });
   const irATramo = (i) => cambiar({ tramo: i });
   const anteriorTramo = () => (llamada.tramo > 0 ? irATramo(llamada.tramo - 1) : cambiar({ pantalla: "inicio" }));
   const notar = (id, valor) => cambiar({ notas: { ...llamada.notas, [id]: valor } });
+  // Lo del nicho se guarda bajo su id: cambiar de nicho no mezcla nada.
+  const porNicho = (campo, valor) => cambiar({ [campo]: { ...llamada[campo], [nicho.id]: valor } });
+  const capturar = (campo, valor) => porNicho("cuenta", { ...(llamada.cuenta[nicho.id] ?? {}), [campo]: valor });
   const terminarConfirmado = () => {
     setConfirmando(false);
     terminar();
@@ -85,7 +93,7 @@ export function Llamada({ contenido }) {
   return (
     <div className="flex flex-col gap-space-5 pb-[220px]">
       <h1 className="sr-only">Diagnóstico</h1>
-      {enLlamada ? (
+      {enCurso ? (
         <>
           {/* En la llamada, arriba fijos: el reloj y las objeciones. */}
           <div className="sticky top-0 z-10 -mx-4 -mt-space-5 flex min-h-[60px] items-center justify-between gap-space-3 border-b border-borde bg-fondo px-4 py-2">
@@ -133,6 +141,24 @@ export function Llamada({ contenido }) {
             guion={guion}
             onNota={notar}
             onTipo={(tipo) => cambiar({ tipo })}
+            onCuenta={capturar}
+            onPrioridad={(id) => porNicho("prioridad", id)}
+            tituloRef={titulo}
+          />
+          <Boton variante="texto" onClick={() => setConfirmando(true)} flecha={false} className="self-start">
+            {T.terminar}
+          </Boton>
+        </>
+      )}
+
+      {enNivel && (
+        <>
+          <NivelNicho
+            nicho={nicho}
+            marcadas={llamada.reglas[nicho.id] ?? []}
+            onCambiar={(marcadas) => porNicho("reglas", marcadas)}
+            empresa={empresa}
+            textos={T.nivel}
             tituloRef={titulo}
           />
           <Boton variante="texto" onClick={() => setConfirmando(true)} flecha={false} className="self-start">
@@ -152,8 +178,22 @@ export function Llamada({ contenido }) {
             <Boton variante="secundario" onClick={anteriorTramo} className={COMPACTO}>
               {T.navegacion.anterior}
             </Boton>
-            {/* Después del último tramo vienen el nivel y el resumen (bloques 3 y 4). */}
-            <Boton onClick={() => irATramo(llamada.tramo + 1)} disabled={llamada.tramo === ultimo} className={COMPACTO}>
+            {/* Después del último tramo, el nivel (solo para Carlos). */}
+            <Boton
+              onClick={() => (llamada.tramo === ultimo ? cambiar({ pantalla: "nivel" }) : irATramo(llamada.tramo + 1))}
+              className={COMPACTO}
+            >
+              {T.navegacion.siguiente}
+            </Boton>
+          </div>
+        )}
+        {enNivel && (
+          <div className="grid grid-cols-2 gap-space-2">
+            <Boton variante="secundario" onClick={() => cambiar({ pantalla: "llamada", tramo: ultimo })} className={COMPACTO}>
+              {T.navegacion.anterior}
+            </Boton>
+            {/* El resumen llega en el bloque 4. */}
+            <Boton disabled className={COMPACTO}>
               {T.navegacion.siguiente}
             </Boton>
           </div>
