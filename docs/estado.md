@@ -158,7 +158,7 @@ Producción sirve `main` con el lote 25 (merge d75796b, PR #23): deploy de Verce
   el banco (`nichos-solo-interno.test.js`).
 - Giros del lote 20 ocultos, sin borrar. Gimnasio queda como atajo "Gimnasio → Boaz Pro" (`Diagnostico` con
   `giroFijo`): Boaz va primero.
-- La cuenta: solo lo capturado; "él lo dijo" con casilla; las deudas (lo que le deben hoy, monto atrasado, cartera
+- La cuenta: solo lo capturado; "Lo dijo" con casilla; las deudas (lo que le deben hoy, monto atrasado, cartera
   vencida) van aparte, ni al mes ni ×12. Horas en la frase tal cual: tuyas a la semana (academias), de tu equipo a la
   semana con horas × personas (desarrolladoras y B2B), tuyas al día (tiendas). El ×4 solo en el desglose.
 - Nivel: reglas de la ficha; si quedan dos, el más chico; Controla de caso típico en desarrolladoras, B2B y tiendas. En

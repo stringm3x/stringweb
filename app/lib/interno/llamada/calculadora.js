@@ -3,11 +3,11 @@ import { llenar } from "./llenar";
 // La calculadora de "su número" (lote 25). Pura y sin contenido: la usan los
 // componentes de cliente con la `cuenta` de la ficha y los textos del guion,
 // que llegan como props. Solo cuenta lo que Carlos capturó: un campo vacío no
-// suma, y una partida "él lo dijo" solo cuenta con la casilla marcada.
+// suma, y una partida "lo dijo" solo cuenta con la casilla marcada.
 //
 // - "mes": se suma al mes y se multiplica ×12 para el año.
 // - "deuda": va aparte ("hoy te deben"); ni al mes ni ×12 (decisión del 25 nov).
-// - "texto": lo que él cuente, sin monto.
+// - "texto": lo que cuente, sin monto.
 // Horas: la frase lleva las que Carlos capturó (× personas en desarrolladoras
 // y B2B, sin ×4); el desglose, las del mes.
 
