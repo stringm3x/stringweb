@@ -143,8 +143,9 @@ canonical, Open Graph ni redirect; `noindex` en la metadata y `X-Robots-Tag: noi
 Cache-Control con `no-store` (`private` cuando Next lo permite) desde `proxy.js`. `public/robots.txt` no la menciona. Sin Header
 ni Footer del sitio y sin medición (Analytics y Speed Insights la descartan).
 Supabase: proyecto propio de STRING, nunca la base de Boaz. Solo se usa en `app/(interno)/` y
-`app/lib/interno/`; única excepción, `scripts/interno/enrolar-totp.mjs` (alta del TOTP, se corre a
-mano; nada lo importa). Cada página, server action y route handler de `/interno` llama a
+`app/lib/interno/`; dos excepciones, `scripts/interno/enrolar-totp.mjs` (alta del TOTP) y
+`scripts/interno/cambiar-contrasena.mjs` (cambio de contraseña sin tocar el TOTP): se corren a mano y nada
+los importa. Cada página, server action y route handler de `/interno` llama a
 `exigirCarlos()`, salvo estas tres acciones de la entrada:
 - "Entrar" (contraseña): si el usuario que inicia sesión no es `INTERNO_USUARIO_ID`, cierra la sesión
   de inmediato y responde el error genérico. Si es Carlos, la cuenta de códigos fallidos empieza en 0.

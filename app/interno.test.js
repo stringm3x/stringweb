@@ -46,15 +46,16 @@ describe("/interno fuera de lo público", () => {
 });
 
 describe("Supabase solo en app/(interno)/ y app/lib/interno/", () => {
-  it("ningún otro archivo importa @supabase (excepción: el script del TOTP)", () => {
-    const permitidos = /^(app\/\(interno\)\/|app\/lib\/interno\/|scripts\/interno\/enrolar-totp\.mjs$)/;
+  it("ningún otro archivo importa @supabase (excepción: los scripts del TOTP y de la contraseña)", () => {
+    const permitidos = /^(app\/\(interno\)\/|app\/lib\/interno\/|scripts\/interno\/(enrolar-totp|cambiar-contrasena)\.mjs$)/;
     const fuera = CODIGO.filter((f) => !permitidos.test(rel(f)) && IMPORTA_SUPABASE.test(fs.readFileSync(f, "utf8")));
     expect(fuera.map(rel)).toEqual([]);
   });
 
-  it("nadie importa el script del TOTP", () => {
+  it("nadie importa los scripts del TOTP ni de la contraseña", () => {
     const quien = CODIGO.filter(
-      (f) => /(from\s+|import\s*\(\s*|require\s*\(\s*)["'][^"']*enrolar-totp/.test(fs.readFileSync(f, "utf8"))
+      (f) =>
+        /(from\s+|import\s*\(\s*|require\s*\(\s*)["'][^"']*(enrolar-totp|cambiar-contrasena)/.test(fs.readFileSync(f, "utf8"))
     );
     expect(quien.map(rel)).toEqual([]);
   });
