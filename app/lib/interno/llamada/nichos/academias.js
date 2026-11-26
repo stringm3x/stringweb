@@ -4,7 +4,7 @@
 //
 // cuenta: los campos que Carlos captura (TODO(textos): etiquetas propuestas)
 // y cómo se arma "su número". tipo de partida: "mes" (suma al mes y ×12),
-// "deuda" (aparte: "hoy te deben") o "texto" (lo que él cuente, sin monto).
+// "deuda" (aparte: "hoy te deben") o "texto" (lo que cuente, sin monto).
 
 export const ACADEMIAS = {
   id: "academias",
@@ -43,7 +43,7 @@ export const ACADEMIAS = {
       { id: "deuda", etiqueta: "Lo que le deben hoy", tipo: "pesos" },
       { id: "sinCobrar", etiqueta: "Porcentaje sin cobrar", tipo: "porcentaje" },
       { id: "facturacion", etiqueta: "Facturación al mes", tipo: "pesos" },
-      { id: "dijoInteresados", etiqueta: "Él lo dijo: se pierden interesados por no contestar", tipo: "casilla" },
+      { id: "dijoInteresados", etiqueta: "Lo dijo: se pierden interesados por no contestar", tipo: "casilla" },
       { id: "interesados", etiqueta: "Interesados que no inscriben al mes", tipo: "numero" },
       { id: "horas", etiqueta: "Horas a la semana en cobrar y confirmar", tipo: "numero" },
     ],

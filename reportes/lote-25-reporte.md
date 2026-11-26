@@ -61,9 +61,11 @@ tipo, reloj y objeciones · 15–20 calculadora de Mariana, deuda, prioridad, ni
 y resumen de Mariana. En las capturas de página completa, la barra fija sale a media página: es la captura, no el
 celular.
 
-## Por aprobar
+## Textos aprobados (25 nov)
 
-- Los textos de pantalla propuestos: `docs/textos.md` § Interno · lote 25 › Textos de pantalla (TODO(textos)).
+- Carlos aprobó todos los textos de pantalla (`docs/textos.md` § Interno · lote 25 › Textos de pantalla), con dos
+  cambios para no dar por hecho el género de quien decide: "Él lo dijo: …" → "Lo dijo: …" (academias y B2B) y "…: lo
+  que él cuente" → "…: lo que cuente" (desarrolladoras, B2B y tiendas).
 
 ## Pendiente después del merge
 

@@ -44,7 +44,7 @@ export const DESARROLLADORAS = {
       { id: "atrasado", etiqueta: "Monto atrasado", tipo: "pesos" },
       { id: "horas", etiqueta: "Horas a la semana por vendedor", tipo: "numero" },
       { id: "vendedores", etiqueta: "Vendedores", tipo: "numero" },
-      { id: "apartadoDoble", etiqueta: "Apartado doble: lo que él cuente", tipo: "texto" },
+      { id: "apartadoDoble", etiqueta: "Apartado doble: lo que cuente", tipo: "texto" },
     ],
     partidas: [
       { id: "cobranza", nombre: "Cobranza", tipo: "deuda", factores: ["atrasado"] },

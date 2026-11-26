@@ -47,7 +47,7 @@ describe("calculadora", () => {
     expect(conDeuda.alMes).toBe(0);
   });
 
-  it("él lo dijo: los interesados y las cotizaciones solo cuentan con la casilla", () => {
+  it("lo dijo: los interesados y las cotizaciones solo cuentan con la casilla", () => {
     const academia = { colegiatura: "900", interesados: "3" };
     expect(calcular(cuenta("academias"), academia).alMes).toBe(0);
     expect(calcular(cuenta("academias"), { ...academia, dijoInteresados: true }).alMes).toBe(2700);

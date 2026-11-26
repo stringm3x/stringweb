@@ -276,12 +276,12 @@ test("calculadora, caso Mariana: 120 alumnos, $900, 4 bajas al mes, 6 h a la sem
   await expect(desglose.filter({ hasText: /^24$/ })).toHaveCount(1);
   await sinFallasAxe(page, "calculadora");
 
-  // "Él lo dijo": los interesados solo cuentan con la casilla.
+  // "Lo dijo": los interesados solo cuentan con la casilla.
   await page.getByLabel("Interesados que no inscriben al mes").fill("2");
   await expect(page.getByText("más o menos $3,600 al mes", { exact: false })).toBeVisible();
-  await page.getByRole("switch", { name: /Él lo dijo/ }).check({ force: true });
+  await page.getByRole("switch", { name: /Lo dijo/ }).check({ force: true });
   await expect(page.getByText("más o menos $5,400 al mes", { exact: false })).toBeVisible();
-  await page.getByRole("switch", { name: /Él lo dijo/ }).uncheck({ force: true });
+  await page.getByRole("switch", { name: /Lo dijo/ }).uncheck({ force: true });
 
   // La deuda va aparte: no cambia el mes ni el año.
   await page.getByLabel("Lo que le deben hoy").fill("18,000");

@@ -42,7 +42,7 @@ export const B2B = {
     campos: [
       {
         id: "dijoCotizaciones",
-        etiqueta: "Él lo dijo: se pierden cotizaciones por falta de seguimiento",
+        etiqueta: "Lo dijo: se pierden cotizaciones por falta de seguimiento",
         tipo: "casilla",
       },
       { id: "cotizaciones", etiqueta: "Cotizaciones que cree que se pierden al mes", tipo: "numero" },
@@ -50,7 +50,7 @@ export const B2B = {
       { id: "cartera", etiqueta: "Cartera vencida", tipo: "pesos" },
       { id: "horas", etiqueta: "Horas a la semana por persona en capturar", tipo: "numero" },
       { id: "personas", etiqueta: "Personas que capturan", tipo: "numero" },
-      { id: "erroresPrecio", etiqueta: "Errores de precio: lo que él cuente", tipo: "texto" },
+      { id: "erroresPrecio", etiqueta: "Errores de precio: lo que cuente", tipo: "texto" },
     ],
     partidas: [
       {

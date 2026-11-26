@@ -43,7 +43,7 @@ export const TIENDAS = {
     campos: [
       { id: "cancelados", etiqueta: "Pedidos cancelados a la semana", tipo: "numero" },
       { id: "ticket", etiqueta: "Ticket promedio", tipo: "pesos" },
-      { id: "apartados", etiqueta: "Apartados sin recoger: lo que él cuente", tipo: "texto" },
+      { id: "apartados", etiqueta: "Apartados sin recoger: lo que cuente", tipo: "texto" },
       { id: "horasDia", etiqueta: "Horas al día cuadrando", tipo: "numero" },
       { id: "dias", etiqueta: "Días que abre al mes", tipo: "numero" },
     ],

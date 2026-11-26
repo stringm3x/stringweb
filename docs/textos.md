@@ -1221,11 +1221,13 @@ datos? (solo si ya tiene sistema) · Fecha y hora de la presentación de la prop
 - Hora en el resumen: "a las 5 pm" / "a las 5:30 pm".
 - Con datos incompletos (aprobado el 25 nov): lo que falta no sale. Solo horas: "O sea, unas Y horas tuyas a la
   semana. ¿Así lo ves?"; solo dinero: "O sea, más o menos $X al mes. ¿Así lo ves?"; solo deuda: "O sea, hoy te deben
-  unos $Z. ¿Así lo ves?". Sin cifras no hay frase; sale "Captura sus cifras para armar la frase." (TODO(textos)).
+  unos $Z. ¿Así lo ves?". Sin cifras no hay frase; sale "Captura sus cifras para armar la frase.".
 
-### Textos de pantalla (TODO(textos): propuestos, por aprobar)
+### Textos de pantalla (aprobados el 25 nov)
 
-Viven en `app/lib/interno/llamada/guion.js` (`TEXTOS`) y en cada ficha (`cuenta.campos`). Por aprobar:
+Viven en `app/lib/interno/llamada/guion.js` (`TEXTOS`) y en cada ficha (`cuenta.campos`). Carlos los aprobó todos el
+25 nov, con dos cambios para no dar por hecho el género de quien decide: "Él lo dijo: …" pasa a "Lo dijo: …" y "…: lo
+que él cuente" pasa a "…: lo que cuente".
 
 - Aviso arriba: "Nada se guarda fuera de esta pestaña. Se borra al terminar la llamada o al cerrar la pestaña."
 - Inicio: "Inicio de la llamada" · "Nicho" (Academias · Desarrolladoras · B2B · Distribuidoras y proveedores · Tiendas ·
@@ -1240,12 +1242,12 @@ Viven en `app/lib/interno/llamada/guion.js` (`TEXTOS`) y en cada ficha (`cuenta.
 - Su número: "Su número" · "Al mes" · "Al año" · "Hoy te deben" · "Horas al mes" · "$X al mes" · "Para decir" · "Captura
   sus cifras para armar la frase."
 - Etiquetas de la calculadora (por ficha): academias "Colegiatura al mes" · "Alumnos que se van al mes" · "Lo que le
-  deben hoy" · "Porcentaje sin cobrar" · "Facturación al mes" · "Él lo dijo: se pierden interesados por no contestar" ·
+  deben hoy" · "Porcentaje sin cobrar" · "Facturación al mes" · "Lo dijo: se pierden interesados por no contestar" ·
   "Interesados que no inscriben al mes" · "Horas a la semana en cobrar y confirmar"; desarrolladoras "Monto atrasado" ·
-  "Horas a la semana por vendedor" · "Vendedores" · "Apartado doble: lo que él cuente"; B2B "Él lo dijo: se pierden
+  "Horas a la semana por vendedor" · "Vendedores" · "Apartado doble: lo que cuente"; B2B "Lo dijo: se pierden
   cotizaciones por falta de seguimiento" · "Cotizaciones que cree que se pierden al mes" · "Venta promedio" · "Cartera
-  vencida" · "Horas a la semana por persona en capturar" · "Personas que capturan" · "Errores de precio: lo que él
-  cuente"; tiendas "Pedidos cancelados a la semana" · "Ticket promedio" · "Apartados sin recoger: lo que él cuente" ·
+  vencida" · "Horas a la semana por persona en capturar" · "Personas que capturan" · "Errores de precio: lo que
+  cuente"; tiendas "Pedidos cancelados a la semana" · "Ticket promedio" · "Apartados sin recoger: lo que cuente" ·
   "Horas al día cuadrando" · "Días que abre al mes"
 - Prioridad: "Lo más urgente" · "Pantalla de ejemplo"
 - Nivel: "Solo para ti" · "Nivel sugerido. No se enseña." · "Lo que quiere o tiene" · "Nivel sugerido" · "Caso típico" ·
