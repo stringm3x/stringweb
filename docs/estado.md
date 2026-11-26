@@ -123,6 +123,11 @@ Producción sirve `main` con el lote 25 (merge d75796b, PR #23): deploy de Verce
   y muestra en pantalla el URI `otpauth://` para la app de códigos; luego pide el primer código y lo
   verifica. No escribe nada a disco ni a logs. El URI es secreto: no se comparte, no se captura y no se
   pega en ningún lado. Si ya hay un factor verificado, no crea otro. Nada del sitio importa el script.
+- **Cambio de contraseña** (a mano, en la Mac de Carlos, sin tocar el TOTP):
+  `node scripts/interno/cambiar-contrasena.mjs`, con `SUPABASE_SERVICE_ROLE_KEY` exportada solo en esa terminal
+  (`read -rs`, nunca en `.env.local` ni en el repo; `unset` al terminar). Usa `auth.admin.updateUserById` con
+  `INTERNO_USUARIO_ID`, pide la contraseña nueva dos veces, oculta (mínimo 12 caracteres), y no la escribe a disco,
+  a logs ni a la pantalla. Al final confirma que los factores verificados siguen iguales. Nada del sitio lo importa.
 
 ## Pendientes para después del lanzamiento
 
